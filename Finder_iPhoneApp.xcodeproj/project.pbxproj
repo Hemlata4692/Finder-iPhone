@@ -1,0 +1,542 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4EA5F7D5D38B1DF63EF3322F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B3CDDBB308E1E7466EFB6FFC /* libPods.a */; };
+		B7A8DD6A1CAE2BF2007F56B6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B7A8DD691CAE2BF2007F56B6 /* main.m */; };
+		B7A8DD6D1CAE2BF2007F56B6 /* FinderAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B7A8DD6C1CAE2BF2007F56B6 /* FinderAppDelegate.m */; };
+		B7A8DD751CAE2BF2007F56B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7A8DD741CAE2BF2007F56B6 /* Assets.xcassets */; };
+		B7A8DDBE1CAE5AC2007F56B6 /* MozTopAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7A8DDBD1CAE5AC2007F56B6 /* MozTopAlertView.m */; };
+		B7A8DDC11CAE5B50007F56B6 /* BSKeyboardControls.m in Sources */ = {isa = PBXBuildFile; fileRef = B7A8DDC01CAE5B50007F56B6 /* BSKeyboardControls.m */; };
+		B7A8DDC41CAE5B69007F56B6 /* MMMaterialDesignSpinner.m in Sources */ = {isa = PBXBuildFile; fileRef = B7A8DDC31CAE5B69007F56B6 /* MMMaterialDesignSpinner.m */; };
+		B7A8DDCB1CAE5BD4007F56B6 /* UserDefaultManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B7A8DDCA1CAE5BD4007F56B6 /* UserDefaultManager.m */; };
+		B7A8DDCE1CAE5C32007F56B6 /* NullValueChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = B7A8DDCD1CAE5C32007F56B6 /* NullValueChecker.m */; };
+		B7A8DDDC1CAE5FC8007F56B6 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7A8DDDB1CAE5FC8007F56B6 /* LoginViewController.m */; };
+		B7A8DDDF1CAE60BB007F56B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7A8DDDD1CAE60BB007F56B6 /* Main.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		3BC11A7BA5B0C8C8355243E8 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		B3CDDBB308E1E7466EFB6FFC /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B7A8DD651CAE2BF2007F56B6 /* Finder_iPhoneApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Finder_iPhoneApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B7A8DD691CAE2BF2007F56B6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = main.m; path = "Supporting Files/main.m"; sourceTree = "<group>"; };
+		B7A8DD6B1CAE2BF2007F56B6 /* FinderAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FinderAppDelegate.h; sourceTree = "<group>"; };
+		B7A8DD6C1CAE2BF2007F56B6 /* FinderAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FinderAppDelegate.m; sourceTree = "<group>"; };
+		B7A8DD741CAE2BF2007F56B6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B7A8DD791CAE2BF2007F56B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "Supporting Files/Info.plist"; sourceTree = "<group>"; };
+		B7A8DD851CAE31BB007F56B6 /* Finder-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Finder-Prefix.pch"; path = "Supporting Files/Finder-Prefix.pch"; sourceTree = "<group>"; };
+		B7A8DDBC1CAE5AC2007F56B6 /* MozTopAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MozTopAlertView.h; sourceTree = "<group>"; };
+		B7A8DDBD1CAE5AC2007F56B6 /* MozTopAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MozTopAlertView.m; sourceTree = "<group>"; };
+		B7A8DDBF1CAE5B50007F56B6 /* BSKeyboardControls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSKeyboardControls.h; sourceTree = "<group>"; };
+		B7A8DDC01CAE5B50007F56B6 /* BSKeyboardControls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSKeyboardControls.m; sourceTree = "<group>"; };
+		B7A8DDC21CAE5B69007F56B6 /* MMMaterialDesignSpinner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMMaterialDesignSpinner.h; sourceTree = "<group>"; };
+		B7A8DDC31CAE5B69007F56B6 /* MMMaterialDesignSpinner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMMaterialDesignSpinner.m; sourceTree = "<group>"; };
+		B7A8DDC91CAE5BD4007F56B6 /* UserDefaultManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserDefaultManager.h; sourceTree = "<group>"; };
+		B7A8DDCA1CAE5BD4007F56B6 /* UserDefaultManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserDefaultManager.m; sourceTree = "<group>"; };
+		B7A8DDCC1CAE5C32007F56B6 /* NullValueChecker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NullValueChecker.h; sourceTree = "<group>"; };
+		B7A8DDCD1CAE5C32007F56B6 /* NullValueChecker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NullValueChecker.m; sourceTree = "<group>"; };
+		B7A8DDCF1CAE5C3A007F56B6 /* GAI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAI.h; sourceTree = "<group>"; };
+		B7A8DDD01CAE5C3A007F56B6 /* GAIDictionaryBuilder.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAIDictionaryBuilder.h; sourceTree = "<group>"; };
+		B7A8DDD11CAE5C3A007F56B6 /* GAIEcommerceFields.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceFields.h; sourceTree = "<group>"; };
+		B7A8DDD21CAE5C3A007F56B6 /* GAIEcommerceProduct.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceProduct.h; sourceTree = "<group>"; };
+		B7A8DDD31CAE5C3A007F56B6 /* GAIEcommerceProductAction.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAIEcommerceProductAction.h; sourceTree = "<group>"; };
+		B7A8DDD41CAE5C3A007F56B6 /* GAIEcommercePromotion.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAIEcommercePromotion.h; sourceTree = "<group>"; };
+		B7A8DDD51CAE5C3A007F56B6 /* GAIFields.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAIFields.h; sourceTree = "<group>"; };
+		B7A8DDD61CAE5C3A007F56B6 /* GAILogger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAILogger.h; sourceTree = "<group>"; };
+		B7A8DDD71CAE5C3A007F56B6 /* GAITrackedViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAITrackedViewController.h; sourceTree = "<group>"; };
+		B7A8DDD81CAE5C3A007F56B6 /* GAITracker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GAITracker.h; sourceTree = "<group>"; };
+		B7A8DDDA1CAE5FC8007F56B6 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		B7A8DDDB1CAE5FC8007F56B6 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		B7A8DDDE1CAE60BB007F56B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		C05F8A8FD36EE5AC5DD42364 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B7A8DD621CAE2BF2007F56B6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4EA5F7D5D38B1DF63EF3322F /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		28552D1F9668D4BE3E623A4F /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B3CDDBB308E1E7466EFB6FFC /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		589A5FC10A15A4B4361E0559 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C05F8A8FD36EE5AC5DD42364 /* Pods.debug.xcconfig */,
+				3BC11A7BA5B0C8C8355243E8 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		B7A8DD5C1CAE2BF2007F56B6 = {
+			isa = PBXGroup;
+			children = (
+				B7A8DD671CAE2BF2007F56B6 /* FinderApp */,
+				B7A8DD661CAE2BF2007F56B6 /* Products */,
+				589A5FC10A15A4B4361E0559 /* Pods */,
+				28552D1F9668D4BE3E623A4F /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		B7A8DD661CAE2BF2007F56B6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B7A8DD651CAE2BF2007F56B6 /* Finder_iPhoneApp.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B7A8DD671CAE2BF2007F56B6 /* FinderApp */ = {
+			isa = PBXGroup;
+			children = (
+				B7A8DDE01CAE7284007F56B6 /* AppDelegate */,
+				B7A8DD7F1CAE2CE3007F56B6 /* Classes */,
+				B7A8DD681CAE2BF2007F56B6 /* Supporting Files */,
+				B7A8DDDD1CAE60BB007F56B6 /* Main.storyboard */,
+			);
+			path = FinderApp;
+			sourceTree = "<group>";
+		};
+		B7A8DD681CAE2BF2007F56B6 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				B7A8DD741CAE2BF2007F56B6 /* Assets.xcassets */,
+				B7A8DD791CAE2BF2007F56B6 /* Info.plist */,
+				B7A8DD691CAE2BF2007F56B6 /* main.m */,
+				B7A8DD851CAE31BB007F56B6 /* Finder-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B7A8DD7F1CAE2CE3007F56B6 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				B7A8DDD91CAE5CBD007F56B6 /* SupportingClasses */,
+				B7A8DD811CAE2D1E007F56B6 /* Model */,
+				B7A8DD801CAE2CE9007F56B6 /* Views */,
+				B7A8DD821CAE2D27007F56B6 /* Controllers */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		B7A8DD801CAE2CE9007F56B6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B7A8DDB61CAE5943007F56B6 /* AlertView */,
+				B7A8DDB51CAE58F7007F56B6 /* MMMaterialDesignSpinner */,
+				B7A8DDB31CAE58AD007F56B6 /* BSKeyboardControls */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		B7A8DD811CAE2D1E007F56B6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		B7A8DD821CAE2D27007F56B6 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B7A8DDB11CAE586F007F56B6 /* ChangePasswordViewController */,
+				B7A8DD841CAE2FE1007F56B6 /* LoginViewController */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		B7A8DD841CAE2FE1007F56B6 /* LoginViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B7A8DDDA1CAE5FC8007F56B6 /* LoginViewController.h */,
+				B7A8DDDB1CAE5FC8007F56B6 /* LoginViewController.m */,
+			);
+			path = LoginViewController;
+			sourceTree = "<group>";
+		};
+		B7A8DDB11CAE586F007F56B6 /* ChangePasswordViewController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ChangePasswordViewController;
+			path = Classes/Controllers/ChangePasswordViewController;
+			sourceTree = "<group>";
+		};
+		B7A8DDB31CAE58AD007F56B6 /* BSKeyboardControls */ = {
+			isa = PBXGroup;
+			children = (
+				B7A8DDBF1CAE5B50007F56B6 /* BSKeyboardControls.h */,
+				B7A8DDC01CAE5B50007F56B6 /* BSKeyboardControls.m */,
+			);
+			path = BSKeyboardControls;
+			sourceTree = "<group>";
+		};
+		B7A8DDB51CAE58F7007F56B6 /* MMMaterialDesignSpinner */ = {
+			isa = PBXGroup;
+			children = (
+				B7A8DDC21CAE5B69007F56B6 /* MMMaterialDesignSpinner.h */,
+				B7A8DDC31CAE5B69007F56B6 /* MMMaterialDesignSpinner.m */,
+			);
+			path = MMMaterialDesignSpinner;
+			sourceTree = "<group>";
+		};
+		B7A8DDB61CAE5943007F56B6 /* AlertView */ = {
+			isa = PBXGroup;
+			children = (
+				B7A8DDBC1CAE5AC2007F56B6 /* MozTopAlertView.h */,
+				B7A8DDBD1CAE5AC2007F56B6 /* MozTopAlertView.m */,
+			);
+			path = AlertView;
+			sourceTree = "<group>";
+		};
+		B7A8DDBA1CAE5965007F56B6 /* GoogleAnalytics */ = {
+			isa = PBXGroup;
+			children = (
+				B7A8DDCF1CAE5C3A007F56B6 /* GAI.h */,
+				B7A8DDD01CAE5C3A007F56B6 /* GAIDictionaryBuilder.h */,
+				B7A8DDD11CAE5C3A007F56B6 /* GAIEcommerceFields.h */,
+				B7A8DDD21CAE5C3A007F56B6 /* GAIEcommerceProduct.h */,
+				B7A8DDD31CAE5C3A007F56B6 /* GAIEcommerceProductAction.h */,
+				B7A8DDD41CAE5C3A007F56B6 /* GAIEcommercePromotion.h */,
+				B7A8DDD51CAE5C3A007F56B6 /* GAIFields.h */,
+				B7A8DDD61CAE5C3A007F56B6 /* GAILogger.h */,
+				B7A8DDD71CAE5C3A007F56B6 /* GAITrackedViewController.h */,
+				B7A8DDD81CAE5C3A007F56B6 /* GAITracker.h */,
+			);
+			path = GoogleAnalytics;
+			sourceTree = "<group>";
+		};
+		B7A8DDBB1CAE5994007F56B6 /* NullHandler */ = {
+			isa = PBXGroup;
+			children = (
+				B7A8DDCC1CAE5C32007F56B6 /* NullValueChecker.h */,
+				B7A8DDCD1CAE5C32007F56B6 /* NullValueChecker.m */,
+			);
+			path = NullHandler;
+			sourceTree = "<group>";
+		};
+		B7A8DDC81CAE5BAB007F56B6 /* DefaultManager */ = {
+			isa = PBXGroup;
+			children = (
+				B7A8DDC91CAE5BD4007F56B6 /* UserDefaultManager.h */,
+				B7A8DDCA1CAE5BD4007F56B6 /* UserDefaultManager.m */,
+			);
+			path = DefaultManager;
+			sourceTree = "<group>";
+		};
+		B7A8DDD91CAE5CBD007F56B6 /* SupportingClasses */ = {
+			isa = PBXGroup;
+			children = (
+				B7A8DDC81CAE5BAB007F56B6 /* DefaultManager */,
+				B7A8DDBB1CAE5994007F56B6 /* NullHandler */,
+				B7A8DDBA1CAE5965007F56B6 /* GoogleAnalytics */,
+			);
+			path = SupportingClasses;
+			sourceTree = "<group>";
+		};
+		B7A8DDE01CAE7284007F56B6 /* AppDelegate */ = {
+			isa = PBXGroup;
+			children = (
+				B7A8DD6B1CAE2BF2007F56B6 /* FinderAppDelegate.h */,
+				B7A8DD6C1CAE2BF2007F56B6 /* FinderAppDelegate.m */,
+			);
+			name = AppDelegate;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B7A8DD641CAE2BF2007F56B6 /* Finder_iPhoneApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B7A8DD7C1CAE2BF2007F56B6 /* Build configuration list for PBXNativeTarget "Finder_iPhoneApp" */;
+			buildPhases = (
+				4D7D651A331B7D1A6273BF77 /* Check Pods Manifest.lock */,
+				B7A8DD611CAE2BF2007F56B6 /* Sources */,
+				B7A8DD621CAE2BF2007F56B6 /* Frameworks */,
+				B7A8DD631CAE2BF2007F56B6 /* Resources */,
+				8C1AA7DA22E4D3D74422F1F7 /* Embed Pods Frameworks */,
+				30CBA52A152489E254111AFE /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Finder_iPhoneApp;
+			productName = FinderApp;
+			productReference = B7A8DD651CAE2BF2007F56B6 /* Finder_iPhoneApp.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B7A8DD5D1CAE2BF2007F56B6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = Ranosys;
+				TargetAttributes = {
+					B7A8DD641CAE2BF2007F56B6 = {
+						CreatedOnToolsVersion = 7.2;
+					};
+				};
+			};
+			buildConfigurationList = B7A8DD601CAE2BF2007F56B6 /* Build configuration list for PBXProject "Finder_iPhoneApp" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B7A8DD5C1CAE2BF2007F56B6;
+			productRefGroup = B7A8DD661CAE2BF2007F56B6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B7A8DD641CAE2BF2007F56B6 /* Finder_iPhoneApp */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B7A8DD631CAE2BF2007F56B6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B7A8DDDF1CAE60BB007F56B6 /* Main.storyboard in Resources */,
+				B7A8DD751CAE2BF2007F56B6 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		30CBA52A152489E254111AFE /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4D7D651A331B7D1A6273BF77 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		8C1AA7DA22E4D3D74422F1F7 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B7A8DD611CAE2BF2007F56B6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B7A8DDDC1CAE5FC8007F56B6 /* LoginViewController.m in Sources */,
+				B7A8DD6D1CAE2BF2007F56B6 /* FinderAppDelegate.m in Sources */,
+				B7A8DDCE1CAE5C32007F56B6 /* NullValueChecker.m in Sources */,
+				B7A8DDC11CAE5B50007F56B6 /* BSKeyboardControls.m in Sources */,
+				B7A8DDBE1CAE5AC2007F56B6 /* MozTopAlertView.m in Sources */,
+				B7A8DDCB1CAE5BD4007F56B6 /* UserDefaultManager.m in Sources */,
+				B7A8DDC41CAE5B69007F56B6 /* MMMaterialDesignSpinner.m in Sources */,
+				B7A8DD6A1CAE2BF2007F56B6 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		B7A8DDDD1CAE60BB007F56B6 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B7A8DDDE1CAE60BB007F56B6 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		B7A8DD7A1CAE2BF2007F56B6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREFIX_HEADER = "";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		B7A8DD7B1CAE2BF2007F56B6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_PREFIX_HEADER = "";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B7A8DD7D1CAE2BF2007F56B6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C05F8A8FD36EE5AC5DD42364 /* Pods.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = "/Users/Ranosys/Documents/FinderApp/Finder_iPhoneApp/FinderApp/Supporting Files/Finder-Prefix.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/FinderApp/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Ranosys.FinderApp;
+				PRODUCT_NAME = Finder_iPhoneApp;
+			};
+			name = Debug;
+		};
+		B7A8DD7E1CAE2BF2007F56B6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3BC11A7BA5B0C8C8355243E8 /* Pods.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = "/Users/Ranosys/Documents/FinderApp/Finder_iPhoneApp/FinderApp/Supporting Files/Finder-Prefix.pch";
+				INFOPLIST_FILE = "$(SRCROOT)/FinderApp/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Ranosys.FinderApp;
+				PRODUCT_NAME = Finder_iPhoneApp;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B7A8DD601CAE2BF2007F56B6 /* Build configuration list for PBXProject "Finder_iPhoneApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B7A8DD7A1CAE2BF2007F56B6 /* Debug */,
+				B7A8DD7B1CAE2BF2007F56B6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B7A8DD7C1CAE2BF2007F56B6 /* Build configuration list for PBXNativeTarget "Finder_iPhoneApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B7A8DD7D1CAE2BF2007F56B6 /* Debug */,
+				B7A8DD7E1CAE2BF2007F56B6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B7A8DD5D1CAE2BF2007F56B6 /* Project object */;
+}

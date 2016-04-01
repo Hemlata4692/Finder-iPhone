@@ -1,0 +1,18 @@
+//
+//  Finder-Prefix.pch
+//  FinderApp
+//
+//  Created by Hema on 01/04/16.
+//  Copyright © 2016 Ranosys. All rights reserved.
+//
+
+#ifndef Finder_Prefix_pch
+#define Finder_Prefix_pch
+
+#import "FinderAppDelegate.h"
+#import <UIImageView+AFNetworking.h>
+
+// Include any system framework and library headers here that should be included in all compilation units.
+// You will also need to set the Prefix Header build setting of one or more of your targets to reference this file.
+#define myDelegate ((FinderAppDelegate *)[[UIApplication sharedApplication] delegate])
+#endif /* Finder_Prefix_pch */
