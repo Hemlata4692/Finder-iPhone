@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		4EA5F7D5D38B1DF63EF3322F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B3CDDBB308E1E7466EFB6FFC /* libPods.a */; };
+		B771FB6D1CBE200C006CBA32 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B771FB671CBE200C006CBA32 /* Roboto-Black.ttf */; };
+		B771FB6E1CBE200C006CBA32 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B771FB681CBE200C006CBA32 /* Roboto-Bold.ttf */; };
+		B771FB6F1CBE200C006CBA32 /* Roboto-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B771FB691CBE200C006CBA32 /* Roboto-Italic.ttf */; };
+		B771FB701CBE200C006CBA32 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B771FB6A1CBE200C006CBA32 /* Roboto-Light.ttf */; };
+		B771FB711CBE200C006CBA32 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B771FB6B1CBE200C006CBA32 /* Roboto-Medium.ttf */; };
+		B771FB721CBE200C006CBA32 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B771FB6C1CBE200C006CBA32 /* Roboto-Regular.ttf */; };
 		B7A8DD6A1CAE2BF2007F56B6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B7A8DD691CAE2BF2007F56B6 /* main.m */; };
 		B7A8DD6D1CAE2BF2007F56B6 /* FinderAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B7A8DD6C1CAE2BF2007F56B6 /* FinderAppDelegate.m */; };
 		B7A8DD751CAE2BF2007F56B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7A8DD741CAE2BF2007F56B6 /* Assets.xcassets */; };
@@ -18,11 +24,23 @@
 		B7A8DDCE1CAE5C32007F56B6 /* NullValueChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = B7A8DDCD1CAE5C32007F56B6 /* NullValueChecker.m */; };
 		B7A8DDDC1CAE5FC8007F56B6 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7A8DDDB1CAE5FC8007F56B6 /* LoginViewController.m */; };
 		B7A8DDDF1CAE60BB007F56B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7A8DDDD1CAE60BB007F56B6 /* Main.storyboard */; };
+		B7DCE4531CBB9E5D0063FF72 /* Webservice.m in Sources */ = {isa = PBXBuildFile; fileRef = B7DCE4521CBB9E5D0063FF72 /* Webservice.m */; };
+		B7F9C6291CBE3C4F003ACFBE /* FAImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7F9C6221CBE3C4F003ACFBE /* FAImageView.m */; };
+		B7F9C62A1CBE3C4F003ACFBE /* UIFont+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = B7F9C6241CBE3C4F003ACFBE /* UIFont+FontAwesome.m */; };
+		B7F9C62B1CBE3C4F003ACFBE /* NSString+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = B7F9C6261CBE3C4F003ACFBE /* NSString+FontAwesome.m */; };
+		B7F9C62C1CBE3C4F003ACFBE /* UIImage+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = B7F9C6281CBE3C4F003ACFBE /* UIImage+FontAwesome.m */; };
+		B7F9C62E1CBE4195003ACFBE /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B7F9C62D1CBE4195003ACFBE /* FontAwesome.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3BC11A7BA5B0C8C8355243E8 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		B3CDDBB308E1E7466EFB6FFC /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B771FB671CBE200C006CBA32 /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
+		B771FB681CBE200C006CBA32 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
+		B771FB691CBE200C006CBA32 /* Roboto-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Italic.ttf"; sourceTree = "<group>"; };
+		B771FB6A1CBE200C006CBA32 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
+		B771FB6B1CBE200C006CBA32 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		B771FB6C1CBE200C006CBA32 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		B7A8DD651CAE2BF2007F56B6 /* Finder_iPhoneApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Finder_iPhoneApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7A8DD691CAE2BF2007F56B6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = main.m; path = "Supporting Files/main.m"; sourceTree = "<group>"; };
 		B7A8DD6B1CAE2BF2007F56B6 /* FinderAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FinderAppDelegate.h; sourceTree = "<group>"; };
@@ -53,6 +71,17 @@
 		B7A8DDDA1CAE5FC8007F56B6 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		B7A8DDDB1CAE5FC8007F56B6 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		B7A8DDDE1CAE60BB007F56B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B7DCE4511CBB9E5D0063FF72 /* Webservice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Webservice.h; sourceTree = SOURCE_ROOT; };
+		B7DCE4521CBB9E5D0063FF72 /* Webservice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Webservice.m; sourceTree = SOURCE_ROOT; };
+		B7F9C6211CBE3C4F003ACFBE /* FAImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAImageView.h; sourceTree = "<group>"; };
+		B7F9C6221CBE3C4F003ACFBE /* FAImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FAImageView.m; sourceTree = "<group>"; };
+		B7F9C6231CBE3C4F003ACFBE /* UIFont+FontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+FontAwesome.h"; sourceTree = "<group>"; };
+		B7F9C6241CBE3C4F003ACFBE /* UIFont+FontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+FontAwesome.m"; sourceTree = "<group>"; };
+		B7F9C6251CBE3C4F003ACFBE /* NSString+FontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+FontAwesome.h"; sourceTree = "<group>"; };
+		B7F9C6261CBE3C4F003ACFBE /* NSString+FontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+FontAwesome.m"; sourceTree = "<group>"; };
+		B7F9C6271CBE3C4F003ACFBE /* UIImage+FontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+FontAwesome.h"; sourceTree = "<group>"; };
+		B7F9C6281CBE3C4F003ACFBE /* UIImage+FontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+FontAwesome.m"; sourceTree = "<group>"; };
+		B7F9C62D1CBE4195003ACFBE /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
 		C05F8A8FD36EE5AC5DD42364 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -83,6 +112,20 @@
 				3BC11A7BA5B0C8C8355243E8 /* Pods.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		B771FB661CBE2001006CBA32 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				B7F9C62D1CBE4195003ACFBE /* FontAwesome.ttf */,
+				B771FB671CBE200C006CBA32 /* Roboto-Black.ttf */,
+				B771FB681CBE200C006CBA32 /* Roboto-Bold.ttf */,
+				B771FB691CBE200C006CBA32 /* Roboto-Italic.ttf */,
+				B771FB6A1CBE200C006CBA32 /* Roboto-Light.ttf */,
+				B771FB6B1CBE200C006CBA32 /* Roboto-Medium.ttf */,
+				B771FB6C1CBE200C006CBA32 /* Roboto-Regular.ttf */,
+			);
+			name = Font;
 			sourceTree = "<group>";
 		};
 		B7A8DD5C1CAE2BF2007F56B6 = {
@@ -117,6 +160,7 @@
 		B7A8DD681CAE2BF2007F56B6 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				B771FB661CBE2001006CBA32 /* Font */,
 				B7A8DD741CAE2BF2007F56B6 /* Assets.xcassets */,
 				B7A8DD791CAE2BF2007F56B6 /* Info.plist */,
 				B7A8DD691CAE2BF2007F56B6 /* main.m */,
@@ -149,6 +193,7 @@
 		B7A8DD811CAE2D1E007F56B6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				B7DCE4501CBB9DC50063FF72 /* Webservice */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -244,6 +289,7 @@
 		B7A8DDD91CAE5CBD007F56B6 /* SupportingClasses */ = {
 			isa = PBXGroup;
 			children = (
+				B7F9C6201CBE3C33003ACFBE /* FontAwesome */,
 				B7A8DDC81CAE5BAB007F56B6 /* DefaultManager */,
 				B7A8DDBB1CAE5994007F56B6 /* NullHandler */,
 				B7A8DDBA1CAE5965007F56B6 /* GoogleAnalytics */,
@@ -258,6 +304,30 @@
 				B7A8DD6C1CAE2BF2007F56B6 /* FinderAppDelegate.m */,
 			);
 			name = AppDelegate;
+			sourceTree = "<group>";
+		};
+		B7DCE4501CBB9DC50063FF72 /* Webservice */ = {
+			isa = PBXGroup;
+			children = (
+				B7DCE4511CBB9E5D0063FF72 /* Webservice.h */,
+				B7DCE4521CBB9E5D0063FF72 /* Webservice.m */,
+			);
+			name = Webservice;
+			sourceTree = "<group>";
+		};
+		B7F9C6201CBE3C33003ACFBE /* FontAwesome */ = {
+			isa = PBXGroup;
+			children = (
+				B7F9C6211CBE3C4F003ACFBE /* FAImageView.h */,
+				B7F9C6221CBE3C4F003ACFBE /* FAImageView.m */,
+				B7F9C6231CBE3C4F003ACFBE /* UIFont+FontAwesome.h */,
+				B7F9C6241CBE3C4F003ACFBE /* UIFont+FontAwesome.m */,
+				B7F9C6251CBE3C4F003ACFBE /* NSString+FontAwesome.h */,
+				B7F9C6261CBE3C4F003ACFBE /* NSString+FontAwesome.m */,
+				B7F9C6271CBE3C4F003ACFBE /* UIImage+FontAwesome.h */,
+				B7F9C6281CBE3C4F003ACFBE /* UIImage+FontAwesome.m */,
+			);
+			name = FontAwesome;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -294,6 +364,7 @@
 				TargetAttributes = {
 					B7A8DD641CAE2BF2007F56B6 = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = T7GN63HCDX;
 					};
 				};
 			};
@@ -322,6 +393,13 @@
 			files = (
 				B7A8DDDF1CAE60BB007F56B6 /* Main.storyboard in Resources */,
 				B7A8DD751CAE2BF2007F56B6 /* Assets.xcassets in Resources */,
+				B771FB721CBE200C006CBA32 /* Roboto-Regular.ttf in Resources */,
+				B771FB701CBE200C006CBA32 /* Roboto-Light.ttf in Resources */,
+				B771FB711CBE200C006CBA32 /* Roboto-Medium.ttf in Resources */,
+				B7F9C62E1CBE4195003ACFBE /* FontAwesome.ttf in Resources */,
+				B771FB6F1CBE200C006CBA32 /* Roboto-Italic.ttf in Resources */,
+				B771FB6E1CBE200C006CBA32 /* Roboto-Bold.ttf in Resources */,
+				B771FB6D1CBE200C006CBA32 /* Roboto-Black.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -383,9 +461,14 @@
 				B7A8DDDC1CAE5FC8007F56B6 /* LoginViewController.m in Sources */,
 				B7A8DD6D1CAE2BF2007F56B6 /* FinderAppDelegate.m in Sources */,
 				B7A8DDCE1CAE5C32007F56B6 /* NullValueChecker.m in Sources */,
+				B7DCE4531CBB9E5D0063FF72 /* Webservice.m in Sources */,
+				B7F9C62A1CBE3C4F003ACFBE /* UIFont+FontAwesome.m in Sources */,
 				B7A8DDC11CAE5B50007F56B6 /* BSKeyboardControls.m in Sources */,
 				B7A8DDBE1CAE5AC2007F56B6 /* MozTopAlertView.m in Sources */,
 				B7A8DDCB1CAE5BD4007F56B6 /* UserDefaultManager.m in Sources */,
+				B7F9C62B1CBE3C4F003ACFBE /* NSString+FontAwesome.m in Sources */,
+				B7F9C62C1CBE3C4F003ACFBE /* UIImage+FontAwesome.m in Sources */,
+				B7F9C6291CBE3C4F003ACFBE /* FAImageView.m in Sources */,
 				B7A8DDC41CAE5B69007F56B6 /* MMMaterialDesignSpinner.m in Sources */,
 				B7A8DD6A1CAE2BF2007F56B6 /* main.m in Sources */,
 			);
@@ -492,11 +575,12 @@
 			baseConfigurationReference = C05F8A8FD36EE5AC5DD42364 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PREFIX_HEADER = "/Users/Ranosys/Documents/FinderApp/Finder_iPhoneApp/FinderApp/Supporting Files/Finder-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/FinderApp/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Ranosys.FinderApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ranosys.finder;
 				PRODUCT_NAME = Finder_iPhoneApp;
 			};
 			name = Debug;
@@ -506,11 +590,12 @@
 			baseConfigurationReference = 3BC11A7BA5B0C8C8355243E8 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PREFIX_HEADER = "/Users/Ranosys/Documents/FinderApp/Finder_iPhoneApp/FinderApp/Supporting Files/Finder-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/FinderApp/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = Ranosys.FinderApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ranosys.finder;
 				PRODUCT_NAME = Finder_iPhoneApp;
 			};
 			name = Release;

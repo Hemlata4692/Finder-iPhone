@@ -7,13 +7,46 @@
 //
 
 #import "FinderAppDelegate.h"
+#import "MMMaterialDesignSpinner.h"
 
 @interface FinderAppDelegate ()
-
+{
+    UIView *loaderView;
+    UIImageView *logoImage;
+}
+@property (nonatomic, strong) MMMaterialDesignSpinner *spinnerView;
 @end
 
 @implementation FinderAppDelegate
 
+#pragma mark - Global indicator view
+- (void)showIndicator
+{
+    logoImage=[[UIImageView alloc]initWithFrame:CGRectMake(3, 3, 50, 50)];
+    logoImage.backgroundColor=[UIColor whiteColor];
+    logoImage.layer.cornerRadius=25.0f;
+    logoImage.clipsToBounds=YES;
+    logoImage.center = CGPointMake(CGRectGetMidX(self.window.bounds), CGRectGetMidY(self.window.bounds));
+    loaderView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.window.bounds.size.width, self.window.bounds.size.height)];
+    loaderView.backgroundColor=[UIColor colorWithRed:63.0/255.0 green:63.0/255.0 blue:63.0/255.0 alpha:0.3];
+    [loaderView addSubview:logoImage];
+    MMMaterialDesignSpinner *spinnerView = [[MMMaterialDesignSpinner alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    self.spinnerView = spinnerView;
+    self.spinnerView.bounds = CGRectMake(0, 0, 40, 40);
+    self.spinnerView.tintColor = [UIColor colorWithRed:13.0/255.0 green:213.0/255.0 blue:178.0/255.0 alpha:1.0];
+    self.spinnerView.center = CGPointMake(CGRectGetMidX(self.window.bounds), CGRectGetMidY(self.window.bounds));
+    self.spinnerView.lineWidth=3.0f;
+    [self.window addSubview:loaderView];
+    [self.window addSubview:self.spinnerView];
+    [self.spinnerView startAnimating];
+}
+- (void)stopIndicator
+{
+    [loaderView removeFromSuperview];
+    [self.spinnerView removeFromSuperview];
+    [self.spinnerView stopAnimating];
+}
+#pragma mark - end
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
