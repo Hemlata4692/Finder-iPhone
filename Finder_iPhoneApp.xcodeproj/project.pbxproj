@@ -25,10 +25,6 @@
 		B7A8DDDC1CAE5FC8007F56B6 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7A8DDDB1CAE5FC8007F56B6 /* LoginViewController.m */; };
 		B7A8DDDF1CAE60BB007F56B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7A8DDDD1CAE60BB007F56B6 /* Main.storyboard */; };
 		B7DCE4531CBB9E5D0063FF72 /* Webservice.m in Sources */ = {isa = PBXBuildFile; fileRef = B7DCE4521CBB9E5D0063FF72 /* Webservice.m */; };
-		B7F9C6291CBE3C4F003ACFBE /* FAImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7F9C6221CBE3C4F003ACFBE /* FAImageView.m */; };
-		B7F9C62A1CBE3C4F003ACFBE /* UIFont+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = B7F9C6241CBE3C4F003ACFBE /* UIFont+FontAwesome.m */; };
-		B7F9C62B1CBE3C4F003ACFBE /* NSString+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = B7F9C6261CBE3C4F003ACFBE /* NSString+FontAwesome.m */; };
-		B7F9C62C1CBE3C4F003ACFBE /* UIImage+FontAwesome.m in Sources */ = {isa = PBXBuildFile; fileRef = B7F9C6281CBE3C4F003ACFBE /* UIImage+FontAwesome.m */; };
 		B7F9C62E1CBE4195003ACFBE /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B7F9C62D1CBE4195003ACFBE /* FontAwesome.ttf */; };
 /* End PBXBuildFile section */
 
@@ -73,14 +69,6 @@
 		B7A8DDDE1CAE60BB007F56B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B7DCE4511CBB9E5D0063FF72 /* Webservice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Webservice.h; sourceTree = SOURCE_ROOT; };
 		B7DCE4521CBB9E5D0063FF72 /* Webservice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Webservice.m; sourceTree = SOURCE_ROOT; };
-		B7F9C6211CBE3C4F003ACFBE /* FAImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FAImageView.h; sourceTree = "<group>"; };
-		B7F9C6221CBE3C4F003ACFBE /* FAImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FAImageView.m; sourceTree = "<group>"; };
-		B7F9C6231CBE3C4F003ACFBE /* UIFont+FontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIFont+FontAwesome.h"; sourceTree = "<group>"; };
-		B7F9C6241CBE3C4F003ACFBE /* UIFont+FontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIFont+FontAwesome.m"; sourceTree = "<group>"; };
-		B7F9C6251CBE3C4F003ACFBE /* NSString+FontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+FontAwesome.h"; sourceTree = "<group>"; };
-		B7F9C6261CBE3C4F003ACFBE /* NSString+FontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+FontAwesome.m"; sourceTree = "<group>"; };
-		B7F9C6271CBE3C4F003ACFBE /* UIImage+FontAwesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+FontAwesome.h"; sourceTree = "<group>"; };
-		B7F9C6281CBE3C4F003ACFBE /* UIImage+FontAwesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+FontAwesome.m"; sourceTree = "<group>"; };
 		B7F9C62D1CBE4195003ACFBE /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
 		C05F8A8FD36EE5AC5DD42364 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -289,7 +277,6 @@
 		B7A8DDD91CAE5CBD007F56B6 /* SupportingClasses */ = {
 			isa = PBXGroup;
 			children = (
-				B7F9C6201CBE3C33003ACFBE /* FontAwesome */,
 				B7A8DDC81CAE5BAB007F56B6 /* DefaultManager */,
 				B7A8DDBB1CAE5994007F56B6 /* NullHandler */,
 				B7A8DDBA1CAE5965007F56B6 /* GoogleAnalytics */,
@@ -313,21 +300,6 @@
 				B7DCE4521CBB9E5D0063FF72 /* Webservice.m */,
 			);
 			name = Webservice;
-			sourceTree = "<group>";
-		};
-		B7F9C6201CBE3C33003ACFBE /* FontAwesome */ = {
-			isa = PBXGroup;
-			children = (
-				B7F9C6211CBE3C4F003ACFBE /* FAImageView.h */,
-				B7F9C6221CBE3C4F003ACFBE /* FAImageView.m */,
-				B7F9C6231CBE3C4F003ACFBE /* UIFont+FontAwesome.h */,
-				B7F9C6241CBE3C4F003ACFBE /* UIFont+FontAwesome.m */,
-				B7F9C6251CBE3C4F003ACFBE /* NSString+FontAwesome.h */,
-				B7F9C6261CBE3C4F003ACFBE /* NSString+FontAwesome.m */,
-				B7F9C6271CBE3C4F003ACFBE /* UIImage+FontAwesome.h */,
-				B7F9C6281CBE3C4F003ACFBE /* UIImage+FontAwesome.m */,
-			);
-			name = FontAwesome;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -462,13 +434,9 @@
 				B7A8DD6D1CAE2BF2007F56B6 /* FinderAppDelegate.m in Sources */,
 				B7A8DDCE1CAE5C32007F56B6 /* NullValueChecker.m in Sources */,
 				B7DCE4531CBB9E5D0063FF72 /* Webservice.m in Sources */,
-				B7F9C62A1CBE3C4F003ACFBE /* UIFont+FontAwesome.m in Sources */,
 				B7A8DDC11CAE5B50007F56B6 /* BSKeyboardControls.m in Sources */,
 				B7A8DDBE1CAE5AC2007F56B6 /* MozTopAlertView.m in Sources */,
 				B7A8DDCB1CAE5BD4007F56B6 /* UserDefaultManager.m in Sources */,
-				B7F9C62B1CBE3C4F003ACFBE /* NSString+FontAwesome.m in Sources */,
-				B7F9C62C1CBE3C4F003ACFBE /* UIImage+FontAwesome.m in Sources */,
-				B7F9C6291CBE3C4F003ACFBE /* FAImageView.m in Sources */,
 				B7A8DDC41CAE5B69007F56B6 /* MMMaterialDesignSpinner.m in Sources */,
 				B7A8DD6A1CAE2BF2007F56B6 /* main.m in Sources */,
 			);
