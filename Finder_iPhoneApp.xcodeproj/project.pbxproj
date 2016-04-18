@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		4EA5F7D5D38B1DF63EF3322F /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B3CDDBB308E1E7466EFB6FFC /* libPods.a */; };
+		5D15B45B1CBF62A6001C6AB8 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D15B45A1CBF62A6001C6AB8 /* HomeViewController.m */; };
+		5D15B45E1CBF62CD001C6AB8 /* MatchesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D15B45D1CBF62CD001C6AB8 /* MatchesViewController.m */; };
+		5D15B4611CBF62DF001C6AB8 /* MessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D15B4601CBF62DF001C6AB8 /* MessagesViewController.m */; };
+		5D15B4641CBF62EF001C6AB8 /* CalendarViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D15B4631CBF62EF001C6AB8 /* CalendarViewController.m */; };
+		5D15B4671CBF6305001C6AB8 /* MoreViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D15B4661CBF6305001C6AB8 /* MoreViewController.m */; };
+		5D15B46A1CBFA3EB001C6AB8 /* MoreTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D15B4691CBFA3EB001C6AB8 /* MoreTableViewCell.m */; };
 		B771FB6D1CBE200C006CBA32 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B771FB671CBE200C006CBA32 /* Roboto-Black.ttf */; };
 		B771FB6E1CBE200C006CBA32 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B771FB681CBE200C006CBA32 /* Roboto-Bold.ttf */; };
 		B771FB6F1CBE200C006CBA32 /* Roboto-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B771FB691CBE200C006CBA32 /* Roboto-Italic.ttf */; };
@@ -30,6 +36,18 @@
 
 /* Begin PBXFileReference section */
 		3BC11A7BA5B0C8C8355243E8 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		5D15B4591CBF62A6001C6AB8 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		5D15B45A1CBF62A6001C6AB8 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		5D15B45C1CBF62CD001C6AB8 /* MatchesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchesViewController.h; sourceTree = "<group>"; };
+		5D15B45D1CBF62CD001C6AB8 /* MatchesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchesViewController.m; sourceTree = "<group>"; };
+		5D15B45F1CBF62DF001C6AB8 /* MessagesViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesViewController.h; sourceTree = "<group>"; };
+		5D15B4601CBF62DF001C6AB8 /* MessagesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesViewController.m; sourceTree = "<group>"; };
+		5D15B4621CBF62EF001C6AB8 /* CalendarViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarViewController.h; sourceTree = "<group>"; };
+		5D15B4631CBF62EF001C6AB8 /* CalendarViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarViewController.m; sourceTree = "<group>"; };
+		5D15B4651CBF6305001C6AB8 /* MoreViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreViewController.h; sourceTree = "<group>"; };
+		5D15B4661CBF6305001C6AB8 /* MoreViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreViewController.m; sourceTree = "<group>"; };
+		5D15B4681CBFA3EB001C6AB8 /* MoreTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreTableViewCell.h; sourceTree = "<group>"; };
+		5D15B4691CBFA3EB001C6AB8 /* MoreTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreTableViewCell.m; sourceTree = "<group>"; };
 		B3CDDBB308E1E7466EFB6FFC /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B771FB671CBE200C006CBA32 /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
 		B771FB681CBE200C006CBA32 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
@@ -100,6 +118,53 @@
 				3BC11A7BA5B0C8C8355243E8 /* Pods.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		5D15B4541CBF6222001C6AB8 /* HomeViewController */ = {
+			isa = PBXGroup;
+			children = (
+				5D15B4591CBF62A6001C6AB8 /* HomeViewController.h */,
+				5D15B45A1CBF62A6001C6AB8 /* HomeViewController.m */,
+			);
+			name = HomeViewController;
+			sourceTree = "<group>";
+		};
+		5D15B4551CBF623B001C6AB8 /* MatchesViewController */ = {
+			isa = PBXGroup;
+			children = (
+				5D15B45C1CBF62CD001C6AB8 /* MatchesViewController.h */,
+				5D15B45D1CBF62CD001C6AB8 /* MatchesViewController.m */,
+			);
+			name = MatchesViewController;
+			sourceTree = "<group>";
+		};
+		5D15B4561CBF625A001C6AB8 /* MessagesViewController */ = {
+			isa = PBXGroup;
+			children = (
+				5D15B45F1CBF62DF001C6AB8 /* MessagesViewController.h */,
+				5D15B4601CBF62DF001C6AB8 /* MessagesViewController.m */,
+			);
+			name = MessagesViewController;
+			sourceTree = "<group>";
+		};
+		5D15B4571CBF6276001C6AB8 /* CalendarViewController */ = {
+			isa = PBXGroup;
+			children = (
+				5D15B4621CBF62EF001C6AB8 /* CalendarViewController.h */,
+				5D15B4631CBF62EF001C6AB8 /* CalendarViewController.m */,
+			);
+			name = CalendarViewController;
+			sourceTree = "<group>";
+		};
+		5D15B4581CBF6287001C6AB8 /* MoreViewController */ = {
+			isa = PBXGroup;
+			children = (
+				5D15B4651CBF6305001C6AB8 /* MoreViewController.h */,
+				5D15B4661CBF6305001C6AB8 /* MoreViewController.m */,
+				5D15B4681CBFA3EB001C6AB8 /* MoreTableViewCell.h */,
+				5D15B4691CBFA3EB001C6AB8 /* MoreTableViewCell.m */,
+			);
+			name = MoreViewController;
 			sourceTree = "<group>";
 		};
 		B771FB661CBE2001006CBA32 /* Font */ = {
@@ -189,6 +254,11 @@
 		B7A8DD821CAE2D27007F56B6 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				5D15B4581CBF6287001C6AB8 /* MoreViewController */,
+				5D15B4571CBF6276001C6AB8 /* CalendarViewController */,
+				5D15B4561CBF625A001C6AB8 /* MessagesViewController */,
+				5D15B4551CBF623B001C6AB8 /* MatchesViewController */,
+				5D15B4541CBF6222001C6AB8 /* HomeViewController */,
 				B7A8DDB11CAE586F007F56B6 /* ChangePasswordViewController */,
 				B7A8DD841CAE2FE1007F56B6 /* LoginViewController */,
 			);
@@ -431,8 +501,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				B7A8DDDC1CAE5FC8007F56B6 /* LoginViewController.m in Sources */,
+				5D15B45E1CBF62CD001C6AB8 /* MatchesViewController.m in Sources */,
+				5D15B4611CBF62DF001C6AB8 /* MessagesViewController.m in Sources */,
 				B7A8DD6D1CAE2BF2007F56B6 /* FinderAppDelegate.m in Sources */,
 				B7A8DDCE1CAE5C32007F56B6 /* NullValueChecker.m in Sources */,
+				5D15B4671CBF6305001C6AB8 /* MoreViewController.m in Sources */,
+				5D15B45B1CBF62A6001C6AB8 /* HomeViewController.m in Sources */,
+				5D15B46A1CBFA3EB001C6AB8 /* MoreTableViewCell.m in Sources */,
+				5D15B4641CBF62EF001C6AB8 /* CalendarViewController.m in Sources */,
 				B7DCE4531CBB9E5D0063FF72 /* Webservice.m in Sources */,
 				B7A8DDC11CAE5B50007F56B6 /* BSKeyboardControls.m in Sources */,
 				B7A8DDBE1CAE5AC2007F56B6 /* MozTopAlertView.m in Sources */,
@@ -544,7 +620,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				GCC_PREFIX_HEADER = "/Users/Ranosys/Documents/FinderApp/Finder_iPhoneApp/FinderApp/Supporting Files/Finder-Prefix.pch";
+				GCC_PREFIX_HEADER = "/Users/sugandhasingh/Documents/finder-iPhone-app/FinderApp/Supporting Files/Finder-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/FinderApp/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -559,7 +635,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				GCC_PREFIX_HEADER = "/Users/Ranosys/Documents/FinderApp/Finder_iPhoneApp/FinderApp/Supporting Files/Finder-Prefix.pch";
+				GCC_PREFIX_HEADER = "/Users/sugandhasingh/Documents/finder-iPhone-app/FinderApp/Supporting Files/Finder-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/FinderApp/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

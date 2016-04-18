@@ -7,7 +7,7 @@
 //
 
 #import "LoginViewController.h"
-
+#import "HomeViewController.h"
 
 @interface LoginViewController ()
 @property (weak, nonatomic) IBOutlet UIScrollView *loginScrollView;
@@ -48,6 +48,11 @@
 
 - (IBAction)forgotPasswordButtonClicked:(id)sender
 {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    HomeViewController * homeView = [storyboard instantiateViewControllerWithIdentifier:@"tabBar"];
+    [myDelegate.window setRootViewController:homeView];
+    [myDelegate.window makeKeyAndVisible];
+
 }
 #pragma mark - end
 @end
