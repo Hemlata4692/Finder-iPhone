@@ -9,6 +9,7 @@
 #import "LoginViewController.h"
 #import "HomeViewController.h"
 
+
 @interface LoginViewController ()<UITextFieldDelegate,BSKeyboardControlsDelegate>
 {
     NSArray *textFieldArray;
@@ -153,6 +154,13 @@
          [UserDefaultManager setValue:[responseObject objectForKey:@"userImage"] key:@"userImage"];
          [UserDefaultManager setValue:[responseObject objectForKey:@"userName"] key:@"userName"];
          [UserDefaultManager setValue:[responseObject objectForKey:@"unReadMessegaes"] key:@"unReadMessegaes"];
+         
+         
+         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+         HomeViewController * homeView = [storyboard instantiateViewControllerWithIdentifier:@"tabBar"];
+         [myDelegate.window setRootViewController:homeView];
+         [myDelegate.window makeKeyAndVisible];
+
      } failure:^(NSError *error) {
          
      }] ;
