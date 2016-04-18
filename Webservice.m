@@ -43,22 +43,16 @@
     [manager.requestSerializer setValue:@"parse-application-id-removed" forHTTPHeaderField:@"X-Parse-Application-Id"];
     [manager.requestSerializer setValue:@"parse-rest-api-key-removed" forHTTPHeaderField:@"X-Parse-REST-API-Key"];
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    ////    [self.requestSerializer setValue:[NSString stringWithFormat:@"Token token=101010"] forHTTPHeaderField:@"Authorization"];
     [manager.requestSerializer setValue:@"OH)-<8v^H\"}n#5AzSUhb>Q.w?;BOwyP2:c.a;dzwPQ:Hc:R6[:*Q^J!7+6pJxKs" forHTTPHeaderField:@"acess_token_key"];
     manager.securityPolicy.allowInvalidCertificates = YES;
     
     [manager POST:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        //[myDelegate stopIndicator];
         success(responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-      //  [myDelegate stopIndicator];
         failure(error);
-        // if(error.code==-1005)
-        dispatch_async(dispatch_get_main_queue(), ^{
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert" message:error.localizedDescription delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-            [alert show];
-        });
-        
+        SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
+        [alert showWarning:nil title:@"Alert" subTitle:error.localizedDescription closeButtonTitle:@"Ok" duration:0.0f];
+       
     }];
 }
 
@@ -83,10 +77,9 @@
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
       //  [myDelegate stopIndicator];
         failure(error);
-        dispatch_async(dispatch_get_main_queue(), ^{
-            UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Alert" message:error.localizedDescription delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-            [alert show];
-        });
+        SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
+        [alert showWarning:nil title:@"Alert" subTitle:error.localizedDescription closeButtonTitle:@"Ok" duration:0.0f];
+
     }];
 }
 
@@ -98,10 +91,8 @@
         case 0:
         {
             msg = responseObject[@"message"];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Alert" message:msg delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-                [alert show];
-            });
+            SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
+            [alert showWarning:nil title:@"Alert" subTitle:msg closeButtonTitle:@"Ok" duration:0.0f];
             return NO;
         }
         case 1:
@@ -111,31 +102,24 @@
         case 2:
         {
             msg = responseObject[@"message"];
-            dispatch_async(dispatch_get_main_queue(), ^{
-                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Alert" message:msg delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-                alert.tag=1;
-                [alert show];
-            });
-            
+            SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
+            [alert addButton:@"Ok" actionBlock:^(void) {
+                [self logoutUser];
+                }];
+            [alert showWarning:nil title:@"Alert" subTitle:msg closeButtonTitle:@"Cancel" duration:0.0f];
         }
             return NO;
             break;
         default: {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Alert" message:responseObject[@"message"] delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-                [alert show];
-            });
-            
+            SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
+            [alert showWarning:nil title:@"Alert" subTitle:msg closeButtonTitle:@"Ok" duration:0.0f];
         }
             return NO;
             break;
     }
 }
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+- (void)logoutUser
 {
-    
-    if (alertView.tag==1 && buttonIndex==0)
-    {
 //        
 //        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
 //        
@@ -144,16 +128,15 @@
 //        myDelegate.window.rootViewController = myDelegate.navigationController;
 //        [UserDefaultManager removeValue:@"userId"];
 //        [UserDefaultManager removeValue:@"username"];
-    }
 }
 
 #pragma mark - end
 
 #pragma mark- Login
 //Login
-- (void)userLogin:(NSString *)email password:(NSString *)password conferenceId:(NSString *)conferenceId success:(void (^)(id))success failure:(void (^)(NSError *))failure {
+- (void)userLogin:(NSString *)email password:(NSString *)password success:(void (^)(id))success failure:(void (^)(NSError *))failure {
     
-    NSDictionary *requestDict = @{@"email":email,@"password":password,@"confrenceId":conferenceId};
+    NSDictionary *requestDict = @{@"email":email,@"password":password,@"confrenceId":@"1"};
     NSLog(@"request login %@",requestDict);
     [self post:kUrlLogin parameters:requestDict success:^(id responseObject)
      {
@@ -178,14 +161,14 @@
 
 #pragma mark- Forgot password
 //Forgot Password
--(void)forgotPassword:(NSString *)email conferenceId:(NSString *)conferenceId success:(void (^)(id))success failure:(void (^)(NSError *))failure
+-(void)forgotPassword:(NSString *)email success:(void (^)(id))success failure:(void (^)(NSError *))failure
 {
-    NSDictionary *requestDict = @{@"email_id":email,@"confrenceId":conferenceId};
-     NSLog(@"request login %@",requestDict);
+    NSDictionary *requestDict = @{@"email":email,@"confrenceId":@"1"};
+     NSLog(@"request forgotPassword %@",requestDict);
     [self post:kUrlForgotPassword parameters:requestDict success:^(id responseObject)
      {
          responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
-          NSLog(@"login response %@",responseObject);
+          NSLog(@"forgot password response %@",responseObject);
          if([self isStatusOK:responseObject])
          {
              success(responseObject);

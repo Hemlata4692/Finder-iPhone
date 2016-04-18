@@ -7,6 +7,11 @@
     <customFonts key="customFonts">
         <mutableArray key="Roboto-Regular.ttf">
             <string>Roboto-Regular</string>
+            <string>Roboto-Regular</string>
+            <string>Roboto-Regular</string>
+            <string>Roboto-Regular</string>
+            <string>Roboto-Regular</string>
+            <string>Roboto-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -19,53 +24,56 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dHS-yB-nhB">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Br-YJ-2br">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="mlc-cD-mYg">
                                                 <rect key="frame" x="25" y="154" width="270" height="93"/>
                                                 <subviews>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="rohit.mittal@ranosys.com" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VWn-1I-dQa">
-                                                        <rect key="frame" x="39" y="1" width="230" height="45"/>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="rohit.mittal@ranosys.com" placeholder=" Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="VWn-1I-dQa">
+                                                        <rect key="frame" x="41" y="1" width="228" height="45"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <color key="textColor" red="0.55294117649999996" green="0.64705882349999999" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress"/>
                                                         <connections>
                                                             <outlet property="delegate" destination="BYZ-38-t0r" id="fDO-Mn-QCC"/>
                                                         </connections>
                                                     </textField>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="c1h5yeZ9tx" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PEc-gf-Esr">
-                                                        <rect key="frame" x="39" y="47" width="230" height="45"/>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="ukXuF7uRNg" placeholder=" Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="PEc-gf-Esr">
+                                                        <rect key="frame" x="41" y="47" width="228" height="45"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <color key="textColor" red="0.55294117649999996" green="0.64705882349999999" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
                                                         <connections>
                                                             <outlet property="delegate" destination="BYZ-38-t0r" id="Gx0-ue-7gG"/>
                                                         </connections>
                                                     </textField>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="email_icon" translatesAutoresizingMaskIntoConstraints="NO" id="nHW-3w-wdb">
-                                                        <rect key="frame" x="9" y="15" width="17" height="17"/>
+                                                        <rect key="frame" x="12" y="15" width="17" height="17"/>
                                                     </imageView>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="lock_icon" translatesAutoresizingMaskIntoConstraints="NO" id="NIC-Bf-in4">
-                                                        <rect key="frame" x="9" y="61" width="17" height="17"/>
+                                                        <rect key="frame" x="12" y="61" width="17" height="17"/>
                                                     </imageView>
                                                 </subviews>
-                                                <color key="backgroundColor" red="0.55294117647058827" green="0.6470588235294118" blue="0.68235294117647061" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" red="0.73725490199999999" green="0.81176470590000005" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kLD-pG-CPo">
-                                                <rect key="frame" x="86" y="319" width="149" height="30"/>
-                                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
-                                                <state key="normal" title="FORGOT PASSWORD">
+                                                <rect key="frame" x="81" y="323" width="159" height="26"/>
+                                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="16"/>
+                                                <state key="normal" title="FORGOT PASSWORD?">
                                                     <color key="titleColor" red="0.074509803921568626" green="0.32549019607843138" blue="0.51372549019607838" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="forgotPasswordButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="rL8-gE-g3v"/>
+                                                    <segue destination="b7c-2U-25a" kind="show" id="aHf-Eb-ELy"/>
                                                 </connections>
                                             </button>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="f2n-Ix-rIA">
@@ -74,13 +82,21 @@
                                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="m6t-cG-kqr">
                                                 <rect key="frame" x="25" y="266" width="270" height="45"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                <state key="normal" title="Sign in" backgroundImage="btn">
+                                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
+                                                <state key="normal" title="SIGN IN" backgroundImage="btn">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
                                                     <action selector="signInButtonclicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dXE-da-gaH"/>
                                                 </connections>
                                             </button>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oM0-ZO-hOr">
+                                                <rect key="frame" x="80" y="348" width="160" height="1"/>
+                                                <color key="backgroundColor" red="0.074509803920000006" green="0.32549019610000002" blue="0.51372549020000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
@@ -91,7 +107,7 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="DcW-UQ-KdW"/>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="emailField" destination="VWn-1I-dQa" id="FKI-wb-01M"/>
@@ -106,7 +122,67 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="182" y="282"/>
+            <point key="canvasLocation" x="110" y="287"/>
+        </scene>
+        <!--Forgot Password View Controller-->
+        <scene sceneID="KVK-EY-4RV">
+            <objects>
+                <viewController storyboardIdentifier="ForgotPasswordViewController" id="b7c-2U-25a" customClass="ForgotPasswordViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="OhI-Q6-LYl"/>
+                        <viewControllerLayoutGuide type="bottom" id="jEq-3m-NLm"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="trH-Oj-Voc">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="vtI-dJ-MZj">
+                                <rect key="frame" x="75" y="31" width="170" height="70"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8gc-Jt-8VY">
+                                <rect key="frame" x="25" y="132" width="270" height="47"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder=" Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yU0-Lm-Fua">
+                                        <rect key="frame" x="41" y="1" width="228" height="45"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="textColor" red="0.55294117649999996" green="0.64705882349999999" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="done"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="b7c-2U-25a" id="jc9-9D-BO2"/>
+                                        </connections>
+                                    </textField>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="email_icon" translatesAutoresizingMaskIntoConstraints="NO" id="uSO-n8-WTW">
+                                        <rect key="frame" x="12" y="15" width="17" height="17"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.73725490196078436" green="0.81176470588235294" blue="0.83529411764705885" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O6x-NG-2AX">
+                                <rect key="frame" x="25" y="198" width="270" height="45"/>
+                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="18"/>
+                                <state key="normal" title="SUBMIT" backgroundImage="btn">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="submitButtonAction:" destination="b7c-2U-25a" eventType="touchUpInside" id="ncG-Yg-8Kn"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="emailField" destination="yU0-Lm-Fua" id="iQ0-xE-JH2"/>
+                        <outlet property="logoImage" destination="vtI-dJ-MZj" id="3Fd-sV-1Ph"/>
+                        <outlet property="textFieldContainerView" destination="8gc-Jt-8VY" id="k3o-IX-ofY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="LYA-bi-xeS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="480" y="287"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="g8Y-PZ-OHD">

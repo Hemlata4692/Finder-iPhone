@@ -33,7 +33,7 @@
     MMMaterialDesignSpinner *spinnerView = [[MMMaterialDesignSpinner alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
     self.spinnerView = spinnerView;
     self.spinnerView.bounds = CGRectMake(0, 0, 40, 40);
-    self.spinnerView.tintColor = [UIColor colorWithRed:13.0/255.0 green:213.0/255.0 blue:178.0/255.0 alpha:1.0];
+    self.spinnerView.tintColor = [UIColor colorWithRed:36.0/255.0 green:108.0/255.0 blue:164.0/255.0 alpha:1.0];
     self.spinnerView.center = CGPointMake(CGRectGetMidX(self.window.bounds), CGRectGetMidY(self.window.bounds));
     self.spinnerView.lineWidth=3.0f;
     [self.window addSubview:loaderView];
@@ -50,6 +50,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:36.0/255.0 green:108.0/255.0 blue:164.0/255.0 alpha:1.0]];
+    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, [UIFont fontWithName:@"Roboto-Regular" size:18.0], NSFontAttributeName, nil]];
     return YES;
 }
 

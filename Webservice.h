@@ -18,11 +18,11 @@
 + (id)sharedManager;
 
 //Login screen method
-- (void)userLogin:(NSString *)email password:(NSString *)password conferenceId:(NSString *)conferenceId success:(void (^)(id))success failure:(void (^)(NSError *))failure;
+- (void)userLogin:(NSString *)email password:(NSString *)password success:(void (^)(id))success failure:(void (^)(NSError *))failure;
 //end
 
 //Forgot password method
--(void)forgotPassword:(NSString *)email conferenceId:(NSString *)conferenceId success:(void (^)(id))success failure:(void (^)(NSError *))failure;
+-(void)forgotPassword:(NSString *)email success:(void (^)(id))success failure:(void (^)(NSError *))failure;
 //end
 
 //Change password

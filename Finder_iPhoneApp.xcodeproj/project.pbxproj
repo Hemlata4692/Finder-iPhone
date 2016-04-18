@@ -14,10 +14,22 @@
 		B771FB701CBE200C006CBA32 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B771FB6A1CBE200C006CBA32 /* Roboto-Light.ttf */; };
 		B771FB711CBE200C006CBA32 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B771FB6B1CBE200C006CBA32 /* Roboto-Medium.ttf */; };
 		B771FB721CBE200C006CBA32 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B771FB6C1CBE200C006CBA32 /* Roboto-Regular.ttf */; };
+		B776959B1CBF537D00794005 /* UITextField+Validations.m in Sources */ = {isa = PBXBuildFile; fileRef = B776959A1CBF537D00794005 /* UITextField+Validations.m */; };
+		B776959F1CBF590100794005 /* UITextField+Padding.m in Sources */ = {isa = PBXBuildFile; fileRef = B776959E1CBF590100794005 /* UITextField+Padding.m */; };
+		B77695A31CBF594E00794005 /* UIView+RoundedCorner.m in Sources */ = {isa = PBXBuildFile; fileRef = B77695A21CBF594E00794005 /* UIView+RoundedCorner.m */; };
+		B77695A71CBF615400794005 /* ForgotPasswordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B77695A61CBF615400794005 /* ForgotPasswordViewController.m */; };
+		B77695AD1CBF70E400794005 /* GlobalBackViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B77695AC1CBF70E400794005 /* GlobalBackViewController.m */; };
+		B77695C51CBFB4F300794005 /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = B77695B51CBFB4F300794005 /* UIImage+ImageEffects.m */; };
+		B77695C61CBFB4F300794005 /* SCLAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B77695B71CBFB4F300794005 /* SCLAlertView.m */; };
+		B77695C71CBFB4F300794005 /* SCLButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B77695B91CBFB4F300794005 /* SCLButton.m */; };
+		B77695C81CBFB4F300794005 /* SCLAlertViewResponder.m in Sources */ = {isa = PBXBuildFile; fileRef = B77695BB1CBFB4F300794005 /* SCLAlertViewResponder.m */; };
+		B77695C91CBFB4F300794005 /* SCLAlertViewStyleKit.m in Sources */ = {isa = PBXBuildFile; fileRef = B77695BD1CBFB4F300794005 /* SCLAlertViewStyleKit.m */; };
+		B77695CA1CBFB4F300794005 /* SCLTimerDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = B77695C01CBFB4F300794005 /* SCLTimerDisplay.m */; };
+		B77695CB1CBFB4F300794005 /* SCLTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = B77695C21CBFB4F300794005 /* SCLTextView.m */; };
+		B77695CC1CBFB4F300794005 /* SCLSwitchView.m in Sources */ = {isa = PBXBuildFile; fileRef = B77695C41CBFB4F300794005 /* SCLSwitchView.m */; };
 		B7A8DD6A1CAE2BF2007F56B6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B7A8DD691CAE2BF2007F56B6 /* main.m */; };
 		B7A8DD6D1CAE2BF2007F56B6 /* FinderAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B7A8DD6C1CAE2BF2007F56B6 /* FinderAppDelegate.m */; };
 		B7A8DD751CAE2BF2007F56B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7A8DD741CAE2BF2007F56B6 /* Assets.xcassets */; };
-		B7A8DDBE1CAE5AC2007F56B6 /* MozTopAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7A8DDBD1CAE5AC2007F56B6 /* MozTopAlertView.m */; };
 		B7A8DDC11CAE5B50007F56B6 /* BSKeyboardControls.m in Sources */ = {isa = PBXBuildFile; fileRef = B7A8DDC01CAE5B50007F56B6 /* BSKeyboardControls.m */; };
 		B7A8DDC41CAE5B69007F56B6 /* MMMaterialDesignSpinner.m in Sources */ = {isa = PBXBuildFile; fileRef = B7A8DDC31CAE5B69007F56B6 /* MMMaterialDesignSpinner.m */; };
 		B7A8DDCB1CAE5BD4007F56B6 /* UserDefaultManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B7A8DDCA1CAE5BD4007F56B6 /* UserDefaultManager.m */; };
@@ -37,6 +49,33 @@
 		B771FB6A1CBE200C006CBA32 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Light.ttf"; sourceTree = "<group>"; };
 		B771FB6B1CBE200C006CBA32 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		B771FB6C1CBE200C006CBA32 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		B77695991CBF537D00794005 /* UITextField+Validations.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+Validations.h"; sourceTree = "<group>"; };
+		B776959A1CBF537D00794005 /* UITextField+Validations.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Validations.m"; sourceTree = "<group>"; };
+		B776959D1CBF590100794005 /* UITextField+Padding.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+Padding.h"; sourceTree = "<group>"; };
+		B776959E1CBF590100794005 /* UITextField+Padding.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Padding.m"; sourceTree = "<group>"; };
+		B77695A11CBF594E00794005 /* UIView+RoundedCorner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+RoundedCorner.h"; sourceTree = "<group>"; };
+		B77695A21CBF594E00794005 /* UIView+RoundedCorner.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+RoundedCorner.m"; sourceTree = "<group>"; };
+		B77695A51CBF615400794005 /* ForgotPasswordViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForgotPasswordViewController.h; sourceTree = "<group>"; };
+		B77695A61CBF615400794005 /* ForgotPasswordViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForgotPasswordViewController.m; sourceTree = "<group>"; };
+		B77695AB1CBF70E400794005 /* GlobalBackViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalBackViewController.h; sourceTree = "<group>"; };
+		B77695AC1CBF70E400794005 /* GlobalBackViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalBackViewController.m; sourceTree = "<group>"; };
+		B77695B41CBFB4F300794005 /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+ImageEffects.h"; sourceTree = "<group>"; };
+		B77695B51CBFB4F300794005 /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		B77695B61CBFB4F300794005 /* SCLAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCLAlertView.h; sourceTree = "<group>"; };
+		B77695B71CBFB4F300794005 /* SCLAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCLAlertView.m; sourceTree = "<group>"; };
+		B77695B81CBFB4F300794005 /* SCLButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCLButton.h; sourceTree = "<group>"; };
+		B77695B91CBFB4F300794005 /* SCLButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCLButton.m; sourceTree = "<group>"; };
+		B77695BA1CBFB4F300794005 /* SCLAlertViewResponder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCLAlertViewResponder.h; sourceTree = "<group>"; };
+		B77695BB1CBFB4F300794005 /* SCLAlertViewResponder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCLAlertViewResponder.m; sourceTree = "<group>"; };
+		B77695BC1CBFB4F300794005 /* SCLAlertViewStyleKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCLAlertViewStyleKit.h; sourceTree = "<group>"; };
+		B77695BD1CBFB4F300794005 /* SCLAlertViewStyleKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCLAlertViewStyleKit.m; sourceTree = "<group>"; };
+		B77695BE1CBFB4F300794005 /* SCLMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCLMacros.h; sourceTree = "<group>"; };
+		B77695BF1CBFB4F300794005 /* SCLTimerDisplay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCLTimerDisplay.h; sourceTree = "<group>"; };
+		B77695C01CBFB4F300794005 /* SCLTimerDisplay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCLTimerDisplay.m; sourceTree = "<group>"; };
+		B77695C11CBFB4F300794005 /* SCLTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCLTextView.h; sourceTree = "<group>"; };
+		B77695C21CBFB4F300794005 /* SCLTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCLTextView.m; sourceTree = "<group>"; };
+		B77695C31CBFB4F300794005 /* SCLSwitchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCLSwitchView.h; sourceTree = "<group>"; };
+		B77695C41CBFB4F300794005 /* SCLSwitchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCLSwitchView.m; sourceTree = "<group>"; };
 		B7A8DD651CAE2BF2007F56B6 /* Finder_iPhoneApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Finder_iPhoneApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7A8DD691CAE2BF2007F56B6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = main.m; path = "Supporting Files/main.m"; sourceTree = "<group>"; };
 		B7A8DD6B1CAE2BF2007F56B6 /* FinderAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FinderAppDelegate.h; sourceTree = "<group>"; };
@@ -44,8 +83,6 @@
 		B7A8DD741CAE2BF2007F56B6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B7A8DD791CAE2BF2007F56B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "Supporting Files/Info.plist"; sourceTree = "<group>"; };
 		B7A8DD851CAE31BB007F56B6 /* Finder-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "Finder-Prefix.pch"; path = "Supporting Files/Finder-Prefix.pch"; sourceTree = "<group>"; };
-		B7A8DDBC1CAE5AC2007F56B6 /* MozTopAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MozTopAlertView.h; sourceTree = "<group>"; };
-		B7A8DDBD1CAE5AC2007F56B6 /* MozTopAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MozTopAlertView.m; sourceTree = "<group>"; };
 		B7A8DDBF1CAE5B50007F56B6 /* BSKeyboardControls.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BSKeyboardControls.h; sourceTree = "<group>"; };
 		B7A8DDC01CAE5B50007F56B6 /* BSKeyboardControls.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BSKeyboardControls.m; sourceTree = "<group>"; };
 		B7A8DDC21CAE5B69007F56B6 /* MMMaterialDesignSpinner.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMMaterialDesignSpinner.h; sourceTree = "<group>"; };
@@ -116,6 +153,68 @@
 			name = Font;
 			sourceTree = "<group>";
 		};
+		B77695981CBF534E00794005 /* ValidationCategory */ = {
+			isa = PBXGroup;
+			children = (
+				B77695991CBF537D00794005 /* UITextField+Validations.h */,
+				B776959A1CBF537D00794005 /* UITextField+Validations.m */,
+			);
+			name = ValidationCategory;
+			sourceTree = "<group>";
+		};
+		B776959C1CBF58F400794005 /* PaddingCategory */ = {
+			isa = PBXGroup;
+			children = (
+				B776959D1CBF590100794005 /* UITextField+Padding.h */,
+				B776959E1CBF590100794005 /* UITextField+Padding.m */,
+			);
+			name = PaddingCategory;
+			sourceTree = "<group>";
+		};
+		B77695A01CBF593C00794005 /* CornderRadius */ = {
+			isa = PBXGroup;
+			children = (
+				B77695A11CBF594E00794005 /* UIView+RoundedCorner.h */,
+				B77695A21CBF594E00794005 /* UIView+RoundedCorner.m */,
+			);
+			name = CornderRadius;
+			sourceTree = "<group>";
+		};
+		B77695A41CBF613000794005 /* ForgotPasswordViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B77695A51CBF615400794005 /* ForgotPasswordViewController.h */,
+				B77695A61CBF615400794005 /* ForgotPasswordViewController.m */,
+			);
+			name = ForgotPasswordViewController;
+			sourceTree = "<group>";
+		};
+		B77695A81CBF704D00794005 /* LoginModule */ = {
+			isa = PBXGroup;
+			children = (
+				B77695A41CBF613000794005 /* ForgotPasswordViewController */,
+				B7A8DD841CAE2FE1007F56B6 /* LoginViewController */,
+			);
+			name = LoginModule;
+			sourceTree = "<group>";
+		};
+		B77695A91CBF70C500794005 /* GlobalViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B77695AA1CBF70D500794005 /* GlobalBackViewController */,
+			);
+			name = GlobalViewController;
+			sourceTree = "<group>";
+		};
+		B77695AA1CBF70D500794005 /* GlobalBackViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B77695AB1CBF70E400794005 /* GlobalBackViewController.h */,
+				B77695AC1CBF70E400794005 /* GlobalBackViewController.m */,
+			);
+			name = GlobalBackViewController;
+			sourceTree = "<group>";
+		};
 		B7A8DD5C1CAE2BF2007F56B6 = {
 			isa = PBXGroup;
 			children = (
@@ -171,6 +270,9 @@
 		B7A8DD801CAE2CE9007F56B6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B77695A01CBF593C00794005 /* CornderRadius */,
+				B776959C1CBF58F400794005 /* PaddingCategory */,
+				B77695981CBF534E00794005 /* ValidationCategory */,
 				B7A8DDB61CAE5943007F56B6 /* AlertView */,
 				B7A8DDB51CAE58F7007F56B6 /* MMMaterialDesignSpinner */,
 				B7A8DDB31CAE58AD007F56B6 /* BSKeyboardControls */,
@@ -189,8 +291,9 @@
 		B7A8DD821CAE2D27007F56B6 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				B77695A91CBF70C500794005 /* GlobalViewController */,
+				B77695A81CBF704D00794005 /* LoginModule */,
 				B7A8DDB11CAE586F007F56B6 /* ChangePasswordViewController */,
-				B7A8DD841CAE2FE1007F56B6 /* LoginViewController */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -233,8 +336,23 @@
 		B7A8DDB61CAE5943007F56B6 /* AlertView */ = {
 			isa = PBXGroup;
 			children = (
-				B7A8DDBC1CAE5AC2007F56B6 /* MozTopAlertView.h */,
-				B7A8DDBD1CAE5AC2007F56B6 /* MozTopAlertView.m */,
+				B77695B41CBFB4F300794005 /* UIImage+ImageEffects.h */,
+				B77695B51CBFB4F300794005 /* UIImage+ImageEffects.m */,
+				B77695B61CBFB4F300794005 /* SCLAlertView.h */,
+				B77695B71CBFB4F300794005 /* SCLAlertView.m */,
+				B77695B81CBFB4F300794005 /* SCLButton.h */,
+				B77695B91CBFB4F300794005 /* SCLButton.m */,
+				B77695BA1CBFB4F300794005 /* SCLAlertViewResponder.h */,
+				B77695BB1CBFB4F300794005 /* SCLAlertViewResponder.m */,
+				B77695BC1CBFB4F300794005 /* SCLAlertViewStyleKit.h */,
+				B77695BD1CBFB4F300794005 /* SCLAlertViewStyleKit.m */,
+				B77695BE1CBFB4F300794005 /* SCLMacros.h */,
+				B77695BF1CBFB4F300794005 /* SCLTimerDisplay.h */,
+				B77695C01CBFB4F300794005 /* SCLTimerDisplay.m */,
+				B77695C11CBFB4F300794005 /* SCLTextView.h */,
+				B77695C21CBFB4F300794005 /* SCLTextView.m */,
+				B77695C31CBFB4F300794005 /* SCLSwitchView.h */,
+				B77695C41CBFB4F300794005 /* SCLSwitchView.m */,
 			);
 			path = AlertView;
 			sourceTree = "<group>";
@@ -430,15 +548,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B776959B1CBF537D00794005 /* UITextField+Validations.m in Sources */,
 				B7A8DDDC1CAE5FC8007F56B6 /* LoginViewController.m in Sources */,
+				B77695C51CBFB4F300794005 /* UIImage+ImageEffects.m in Sources */,
 				B7A8DD6D1CAE2BF2007F56B6 /* FinderAppDelegate.m in Sources */,
+				B77695C71CBFB4F300794005 /* SCLButton.m in Sources */,
+				B77695CC1CBFB4F300794005 /* SCLSwitchView.m in Sources */,
+				B77695C91CBFB4F300794005 /* SCLAlertViewStyleKit.m in Sources */,
+				B776959F1CBF590100794005 /* UITextField+Padding.m in Sources */,
+				B77695C61CBFB4F300794005 /* SCLAlertView.m in Sources */,
 				B7A8DDCE1CAE5C32007F56B6 /* NullValueChecker.m in Sources */,
 				B7DCE4531CBB9E5D0063FF72 /* Webservice.m in Sources */,
 				B7A8DDC11CAE5B50007F56B6 /* BSKeyboardControls.m in Sources */,
-				B7A8DDBE1CAE5AC2007F56B6 /* MozTopAlertView.m in Sources */,
 				B7A8DDCB1CAE5BD4007F56B6 /* UserDefaultManager.m in Sources */,
 				B7A8DDC41CAE5B69007F56B6 /* MMMaterialDesignSpinner.m in Sources */,
+				B77695CA1CBFB4F300794005 /* SCLTimerDisplay.m in Sources */,
+				B77695CB1CBFB4F300794005 /* SCLTextView.m in Sources */,
+				B77695C81CBFB4F300794005 /* SCLAlertViewResponder.m in Sources */,
+				B77695AD1CBF70E400794005 /* GlobalBackViewController.m in Sources */,
+				B77695A71CBF615400794005 /* ForgotPasswordViewController.m in Sources */,
 				B7A8DD6A1CAE2BF2007F56B6 /* main.m in Sources */,
+				B77695A31CBF594E00794005 /* UIView+RoundedCorner.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
