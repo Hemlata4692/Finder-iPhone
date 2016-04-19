@@ -8,14 +8,19 @@
 
 #import "SettingsViewController.h"
 #import "SettingsViewCell.h"
+#import "ConferenceService.h"
 
 @interface SettingsViewController ()
 @property (weak, nonatomic) IBOutlet UITableView *settingsTableView;
-
+@property (nonatomic, strong) NSString *proximityAlert;
+@property (nonatomic, strong) NSString *preconferenceMatch;
+@property (nonatomic, strong) NSString *request;
+@property (nonatomic, strong) NSString *message;
+@property (nonatomic, strong) NSString *requestAccepted;
 @end
 
 @implementation SettingsViewController
-@synthesize settingsTableView;
+@synthesize settingsTableView,proximityAlert,preconferenceMatch,request,message,requestAccepted;
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title=@"MY SETTINGS";
@@ -132,6 +137,7 @@
             defaultSwitch.tag = 10;
              [settingsCell.settingsContainerView  addSubview:defaultSwitch];
         }
+        defaultSwitch.switchTag=(int)indexPath.row;
        [defaultSwitch addTarget:self action:@selector(switchViewChanged:) forControlEvents:UIControlEventValueChanged];
         return settingsCell;
     }
@@ -140,7 +146,17 @@
 }
 - (void)switchViewChanged:(RESwitch *)switchView
 {
-    NSLog(@"Value: %i", switchView.on);
+    if (switchView.switchTag==0) {
+    NSLog(@"Value 0: %i", switchView.on);
+        if (switchView.on==0) {
+            
+        }
+    }
+    else if (switchView.switchTag==1)
+    {
+    NSLog(@"Value 1: %i", switchView.on);
+    }
+
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -150,4 +166,19 @@
 //    }
 }
 #pragma mark - end
+
+#pragma mark - Webservice
+-(void)getConferenceDetail
+{
+    [[ConferenceService sharedManager] getConferenceDetail:^(id conferenceArray) {
+        [myDelegate stopIndicator];
+
+    }
+                                                   failure:^(NSError *error)
+     {
+         
+     }] ;
+    
+}
+
 @end

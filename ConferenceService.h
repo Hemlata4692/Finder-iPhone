@@ -19,4 +19,7 @@
 -(void)getMatchesDetails:(void (^)(id data))success failure:(void (^)(NSError *error))failure;
 //end
 
+//Settings
+-(void)changeSettings:(NSString *)proximitAlert preConferenceMatch:(NSString *)preConferenceMatch newRequest:(NSString *)newRequest newMessage:(NSString *)newMessage success:(void (^)(id))success failure:(void (^)(NSError *))failure;
+//end
 @end

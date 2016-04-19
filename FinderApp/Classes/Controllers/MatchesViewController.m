@@ -65,17 +65,17 @@
 }
 #pragma mark - end
 #pragma mark - Webservice
--(void)getMatchesDetails
-{
-    [[ConferenceService sharedManager] getMatchesDetails:^(id matchesArray)
-     {
-         [myDelegate stopIndicator];
-     }
-                                                 failure:^(NSError *error)
-     {
-         
-     }] ;
-}
+//-(void)getMatchesDetails
+//{
+//    [[ConferenceService sharedManager] getMatchesDetails:^(id matchesArray)
+//     {
+//         [myDelegate stopIndicator];
+//     }
+//                                                 failure:^(NSError *error)
+//     {
+//         
+//     }] ;
+//}
 #pragma mark - end
 #pragma mark - Segment control
 

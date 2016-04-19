@@ -105,4 +105,29 @@
 
 }
 #pragma mark- end
+-(void)changeSettings:(NSString *)proximitAlert preConferenceMatch:(NSString *)preConferenceMatch newRequest:(NSString *)newRequest newMessage:(NSString *)newMessage success:(void (^)(id))success failure:(void (^)(NSError *))failure
+{
+    NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":@"1",@"proximitAlert":proximitAlert,@"preConferenceMatch":preConferenceMatch,@"newRequest":newRequest,@"newmessage":newMessage};
+    NSLog(@"settings request %@",requestDict);
+    [[Webservice sharedManager] post:kUrlMatcheslist parameters:requestDict success:^(id responseObject)
+     {
+         responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
+         NSLog(@"settings response %@",responseObject);
+         if([[Webservice sharedManager] isStatusOK:responseObject])
+         {
+             
+             success(responseObject);
+         }
+         else
+         {
+             [myDelegate stopIndicator];
+             failure(nil);
+         }
+     } failure:^(NSError *error)
+     {
+         [myDelegate stopIndicator];
+         failure(error);
+     }];
+
+}
 @end
