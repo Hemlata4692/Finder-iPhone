@@ -39,7 +39,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-     self.navigationItem.title = @"HOME";
+    self.navigationItem.title=@"HOME";
+
     [self setTabBarImages];
     conferenceDetailArray=[[NSMutableArray alloc]init];
     [myDelegate showIndicator];
