@@ -143,17 +143,12 @@
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
     [self.keyboardControls setActiveField:textField];
-//    self.view.frame=CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y-64, self.view.frame.size.width, self.view.frame.size.height);
 
     if([[UIScreen mainScreen] bounds].size.height<=568)
     {
-        if (textField==passwordTextField)
+        if ((textField==passwordTextField) || (textField==confirmPasswordTextField))
         {
             self.view.frame=CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y-64, self.view.frame.size.width, self.view.frame.size.height);
-        }
-        else if (textField==confirmPasswordTextField)
-        {
-//            self.view.frame=CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y-120, self.view.frame.size.width, self.view.frame.size.height);
         }
     }
 }
@@ -161,21 +156,14 @@
 {
     if([[UIScreen mainScreen] bounds].size.height<=568)
     {
-        //         self.view.frame=CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y-64, self.view.frame.size.width, self.view.frame.size.height);
-        if (textField==passwordTextField)
+            if ((textField==passwordTextField) || (textField==confirmPasswordTextField))
         {
             self.view.frame=CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y+64, self.view.frame.size.width, self.view.frame.size.height);
         }
-        else if (textField==confirmPasswordTextField)
-        {
-//            self.view.frame=CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y+120, self.view.frame.size.width, self.view.frame.size.height);
-        }
     }
 }
-
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    //    [loginScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
     [textField resignFirstResponder];
     return YES;
 }
