@@ -9,6 +9,7 @@
 #import "MoreViewController.h"
 #import "MoreTableViewCell.h"
 #import "UserService.h"
+#import "SettingsViewController.h"
 
 @interface MoreViewController ()<UITextFieldDelegate,BSKeyboardControlsDelegate>
 {
@@ -45,7 +46,7 @@
     [self setCornerRadius];
     [self addborder];
 
-    screenArray = [NSMutableArray arrayWithObjects:@"MY PROFILE",@"PENDING APPOINTMENTS",@"PROXIMITY ALERTS",@"SETTINGS",@"CHANGE PASSWORD",@"LOGOUT", nil];
+    moreOptionsArray = [NSMutableArray arrayWithObjects:@"MY PROFILE",@"PENDING APPOINTMENTS",@"PROXIMITY ALERTS",@"SETTINGS",@"CHANGE PASSWORD",@"LOGOUT", nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -93,11 +94,10 @@
     {
         cell = [[MoreTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     }
-    cell.containerView.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    cell.containerView.layer.shadowColor = [[UIColor lightGrayColor] CGColor];
-    cell.containerView.layer.shadowOffset = CGSizeMake(0, 1.0f);
-    cell.containerView.layer.shadowOpacity = 1.0f;
-    cell.containerView.layer.shadowRadius = 1.0f;
+    cell.containerView.layer.shadowColor = [UIColor lightGrayColor].CGColor;
+    cell.containerView.layer.shadowOffset = CGSizeMake(0, 1);
+    cell.containerView.layer.shadowOpacity = 1;
+    cell.containerView.layer.shadowRadius = 1.0;
     
     if(indexPath.row == 5)
     {
@@ -128,6 +128,7 @@
     }
 }
 #pragma mark - end
+
 #pragma mark - Keyboard controls delegate
 - (void)keyboardControls:(BSKeyboardControls *)keyboardControls selectedField:(UIView *)field inDirection:(BSKeyboardControlsDirection)direction
 {
