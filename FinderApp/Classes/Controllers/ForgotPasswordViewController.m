@@ -7,6 +7,7 @@
 //
 
 #import "ForgotPasswordViewController.h"
+#import "UserService.h"
 
 @interface ForgotPasswordViewController ()<UITextFieldDelegate>
 
@@ -91,7 +92,7 @@
 #pragma mark - Webservice
 -(void)forgotPassword
 {
-    [[Webservice sharedManager] forgotPassword:emailField.text success:^(id responseObject)
+    [[UserService sharedManager] forgotPassword:emailField.text success:^(id responseObject)
      {
          [myDelegate stopIndicator];
          SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];

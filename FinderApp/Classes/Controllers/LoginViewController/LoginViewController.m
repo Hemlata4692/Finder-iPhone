@@ -8,6 +8,7 @@
 
 #import "LoginViewController.h"
 #import "HomeViewController.h"
+#import "UserService.h"
 
 
 @interface LoginViewController ()<UITextFieldDelegate,BSKeyboardControlsDelegate>
@@ -146,7 +147,7 @@
 #pragma mark - Webservice
 -(void)loginUser
 {
-    [[Webservice sharedManager] userLogin:emailField.text password:passwordField.text success:^(id responseObject)
+    [[UserService sharedManager] userLogin:emailField.text password:passwordField.text success:^(id responseObject)
      {
          [myDelegate stopIndicator];
          [UserDefaultManager setValue:[responseObject objectForKey:@"userId"] key:@"userId"];
@@ -154,15 +155,15 @@
          [UserDefaultManager setValue:[responseObject objectForKey:@"userImage"] key:@"userImage"];
          [UserDefaultManager setValue:[responseObject objectForKey:@"userName"] key:@"userName"];
          [UserDefaultManager setValue:[responseObject objectForKey:@"unReadMessegaes"] key:@"unReadMessegaes"];
-         
-         
-         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        //  [myDelegate locationUpdate];
+         myDelegate.isLocation=@"1";
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
          HomeViewController * homeView = [storyboard instantiateViewControllerWithIdentifier:@"tabBar"];
          [myDelegate.window setRootViewController:homeView];
          [myDelegate.window makeKeyAndVisible];
 
      } failure:^(NSError *error) {
-         
+        
      }] ;
 }
 @end

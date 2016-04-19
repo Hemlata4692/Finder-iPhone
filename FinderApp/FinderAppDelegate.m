@@ -8,16 +8,22 @@
 
 #import "FinderAppDelegate.h"
 #import "MMMaterialDesignSpinner.h"
+#import "UserService.h"
+#import <CoreLocation/CoreLocation.h>
 
-@interface FinderAppDelegate ()
+@interface FinderAppDelegate ()<CLLocationManagerDelegate>
 {
     UIView *loaderView;
     UIImageView *logoImage;
+    CLLocationManager *locationManager;
+    NSTimer *timer;
+    NSString *latitude, *longitude;
 }
 @property (nonatomic, strong) MMMaterialDesignSpinner *spinnerView;
 @end
 
 @implementation FinderAppDelegate
+@synthesize isLocation;
 
 #pragma mark - Global indicator view
 - (void)showIndicator
@@ -53,17 +59,102 @@
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:36.0/255.0 green:108.0/255.0 blue:164.0/255.0 alpha:1.0]];
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, [UIFont fontWithName:@"Roboto-Regular" size:18.0], NSFontAttributeName, nil]];
+    
+    locationManager = [[CLLocationManager alloc] init];
+    locationManager.delegate = self;
+   // [locationManager requestWhenInUseAuthorization];
+    [locationManager requestAlwaysAuthorization];
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    if ([locationManager respondsToSelector:@selector(setAllowsBackgroundLocationUpdates:)]) {
+        locationManager.allowsBackgroundLocationUpdates = YES;
+    }
+    locationManager.pausesLocationUpdatesAutomatically = NO;
+    [locationManager startUpdatingLocation];
+    isLocation=@"0";
+    //permission for local notification
+    if ([application respondsToSelector:@selector(registerUserNotificationSettings:)])
+    {
+        [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
+    }
+    
+    UILocalNotification *localNotiInfo = [launchOptions objectForKey: UIApplicationLaunchOptionsLocalNotificationKey];
+   
+    //Accept local notification when app is not open
+    if (localNotiInfo)
+    {
+        [self application:application didReceiveLocalNotification:localNotiInfo];
+    }
+    
+
     return YES;
 }
+-(void)locationUpdate
+{
+    [[UserService sharedManager] locationUpdate:latitude longitude:longitude success:^(id responseObject)
+     {
+         NSLog(@"webservice did fire");
+         [self startTrackingBg];
+         
+     } failure:^(NSError *error) {
+         
+     }] ;
+    
+}
+- (void) startTrackingBg
+{
+    if ([isLocation isEqualToString:@"2"])
+    {
+        isLocation=@"0";
+      
+        timer = [NSTimer scheduledTimerWithTimeInterval:5
+                                                 target: self
+                                               selector: @selector(locationUpdate)
+                                               userInfo: nil
+                                                repeats: YES];
+         NSLog(@"Timer did fire");
+    }
+}
+
+-(void)locationManager:(CLLocationManager *)manager
+   didUpdateToLocation:(CLLocation *)newLocation
+          fromLocation:(CLLocation *)oldLocation
+{
+    NSLog(@"location updating1111");
+    CLLocationCoordinate2D cordinates = newLocation.coordinate;
+    NSLog(@"***************************My Loaction---->%f, %f*************************** ", cordinates.latitude, cordinates.longitude);
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+{
+    NSLog(@"location updating2222");
+    CLLocation *newLocation = (CLLocation *)[locations lastObject];
+    CLLocationCoordinate2D cordinates = newLocation.coordinate;
+       NSLog(@"***************************My Loaction---->%f, %f*************************** ", cordinates.latitude, cordinates.longitude);
+  
+    latitude=[NSString stringWithFormat:@"%f",cordinates.latitude];
+    longitude=[NSString stringWithFormat:@"%f",cordinates.longitude];
+    if ([isLocation isEqualToString:@"1"])
+    {
+        isLocation=@"2";
+        [ self locationUpdate];
+    }
+}
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
 }
 
-- (void)applicationDidEnterBackground:(UIApplication *)application {
-    // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
-    // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
+- (void)applicationDidEnterBackground:(UIApplication *)application
+{
+    [timer invalidate];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+        NSTimer* t = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(startTrackingBg) userInfo:nil repeats:YES];
+        [[NSRunLoop currentRunLoop] addTimer:t forMode:NSDefaultRunLoopMode];
+        [[NSRunLoop currentRunLoop] run];
+    });
+    
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
