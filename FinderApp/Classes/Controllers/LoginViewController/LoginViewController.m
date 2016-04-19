@@ -146,6 +146,12 @@
 #pragma mark - Webservice
 -(void)loginUser
 {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    HomeViewController * homeView = [storyboard instantiateViewControllerWithIdentifier:@"tabBar"];
+    [myDelegate.window setRootViewController:homeView];
+    [myDelegate.window makeKeyAndVisible];
+
+    
     [[Webservice sharedManager] userLogin:emailField.text password:passwordField.text success:^(id responseObject)
      {
          [myDelegate stopIndicator];
