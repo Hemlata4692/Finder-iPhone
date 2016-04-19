@@ -43,6 +43,10 @@
 		B7A8DDDC1CAE5FC8007F56B6 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7A8DDDB1CAE5FC8007F56B6 /* LoginViewController.m */; };
 		B7A8DDDF1CAE60BB007F56B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7A8DDDD1CAE60BB007F56B6 /* Main.storyboard */; };
 		B7DCE4531CBB9E5D0063FF72 /* Webservice.m in Sources */ = {isa = PBXBuildFile; fileRef = B7DCE4521CBB9E5D0063FF72 /* Webservice.m */; };
+		B7E024C01CC4D5B100707552 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7E024BF1CC4D5B100707552 /* CoreLocation.framework */; };
+		B7E024C41CC5089E00707552 /* ConferenceDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B7E024C31CC5089E00707552 /* ConferenceDataModel.m */; };
+		B7EAC1701CC5D58F001C4EEC /* UserService.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAC16F1CC5D58F001C4EEC /* UserService.m */; };
+		B7EAC1761CC5DBE9001C4EEC /* ConferenceService.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAC1751CC5DBE9001C4EEC /* ConferenceService.m */; };
 		B7F9C62E1CBE4195003ACFBE /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B7F9C62D1CBE4195003ACFBE /* FontAwesome.ttf */; };
 /* End PBXBuildFile section */
 
@@ -124,6 +128,13 @@
 		B7A8DDDE1CAE60BB007F56B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		B7DCE4511CBB9E5D0063FF72 /* Webservice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Webservice.h; sourceTree = SOURCE_ROOT; };
 		B7DCE4521CBB9E5D0063FF72 /* Webservice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Webservice.m; sourceTree = SOURCE_ROOT; };
+		B7E024BF1CC4D5B100707552 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		B7E024C21CC5089E00707552 /* ConferenceDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConferenceDataModel.h; sourceTree = SOURCE_ROOT; };
+		B7E024C31CC5089E00707552 /* ConferenceDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConferenceDataModel.m; sourceTree = SOURCE_ROOT; };
+		B7EAC16E1CC5D58F001C4EEC /* UserService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserService.h; sourceTree = SOURCE_ROOT; };
+		B7EAC16F1CC5D58F001C4EEC /* UserService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserService.m; sourceTree = SOURCE_ROOT; };
+		B7EAC1741CC5DBE9001C4EEC /* ConferenceService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConferenceService.h; sourceTree = SOURCE_ROOT; };
+		B7EAC1751CC5DBE9001C4EEC /* ConferenceService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConferenceService.m; sourceTree = SOURCE_ROOT; };
 		B7F9C62D1CBE4195003ACFBE /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
 		C05F8A8FD36EE5AC5DD42364 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -133,6 +144,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7E024C01CC4D5B100707552 /* CoreLocation.framework in Frameworks */,
 				4EA5F7D5D38B1DF63EF3322F /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -143,6 +155,7 @@
 		28552D1F9668D4BE3E623A4F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B7E024BF1CC4D5B100707552 /* CoreLocation.framework */,
 				B3CDDBB308E1E7466EFB6FFC /* libPods.a */,
 			);
 			name = Frameworks;
@@ -160,10 +173,8 @@
 		5D32EC111CC4A32400C50969 /* MoreViewController */ = {
 			isa = PBXGroup;
 			children = (
-				5D32EBFF1CC4A31F00C50969 /* MoreViewController.h */,
-				5D32EC001CC4A31F00C50969 /* MoreViewController.m */,
-				5D32EC011CC4A31F00C50969 /* MoreTableViewCell.h */,
-				5D32EC021CC4A31F00C50969 /* MoreTableViewCell.m */,
+				B7E024BD1CC4B8B600707552 /* MoreViewController */,
+				B7E024BE1CC4B8C200707552 /* MoreViewCell */,
 			);
 			name = MoreViewController;
 			sourceTree = "<group>";
@@ -349,6 +360,7 @@
 			isa = PBXGroup;
 			children = (
 				B7DCE4501CBB9DC50063FF72 /* Webservice */,
+				B7EAC1771CC5DDF8001C4EEC /* DataModel */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -484,10 +496,73 @@
 		B7DCE4501CBB9DC50063FF72 /* Webservice */ = {
 			isa = PBXGroup;
 			children = (
+				B7EAC1731CC5DBD1001C4EEC /* ConferenceServiceModule */,
+				B7EAC1721CC5DBB6001C4EEC /* UserServiceModule */,
+				B7EAC1711CC5DBA4001C4EEC /* GlobalService */,
+			);
+			name = Webservice;
+			sourceTree = "<group>";
+		};
+		B7E024BD1CC4B8B600707552 /* MoreViewController */ = {
+			isa = PBXGroup;
+			children = (
+				5D32EBFF1CC4A31F00C50969 /* MoreViewController.h */,
+				5D32EC001CC4A31F00C50969 /* MoreViewController.m */,
+			);
+			name = MoreViewController;
+			sourceTree = "<group>";
+		};
+		B7E024BE1CC4B8C200707552 /* MoreViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				5D32EC011CC4A31F00C50969 /* MoreTableViewCell.h */,
+				5D32EC021CC4A31F00C50969 /* MoreTableViewCell.m */,
+			);
+			name = MoreViewCell;
+			sourceTree = "<group>";
+		};
+		B7E024C11CC5087A00707552 /* ConferenceModel */ = {
+			isa = PBXGroup;
+			children = (
+				B7E024C21CC5089E00707552 /* ConferenceDataModel.h */,
+				B7E024C31CC5089E00707552 /* ConferenceDataModel.m */,
+			);
+			name = ConferenceModel;
+			sourceTree = "<group>";
+		};
+		B7EAC1711CC5DBA4001C4EEC /* GlobalService */ = {
+			isa = PBXGroup;
+			children = (
 				B7DCE4511CBB9E5D0063FF72 /* Webservice.h */,
 				B7DCE4521CBB9E5D0063FF72 /* Webservice.m */,
 			);
-			name = Webservice;
+			name = GlobalService;
+			sourceTree = "<group>";
+		};
+		B7EAC1721CC5DBB6001C4EEC /* UserServiceModule */ = {
+			isa = PBXGroup;
+			children = (
+				B7EAC16E1CC5D58F001C4EEC /* UserService.h */,
+				B7EAC16F1CC5D58F001C4EEC /* UserService.m */,
+			);
+			name = UserServiceModule;
+			sourceTree = "<group>";
+		};
+		B7EAC1731CC5DBD1001C4EEC /* ConferenceServiceModule */ = {
+			isa = PBXGroup;
+			children = (
+				B7EAC1741CC5DBE9001C4EEC /* ConferenceService.h */,
+				B7EAC1751CC5DBE9001C4EEC /* ConferenceService.m */,
+			);
+			name = ConferenceServiceModule;
+			sourceTree = "<group>";
+		};
+		B7EAC1771CC5DDF8001C4EEC /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				B7E024C11CC5087A00707552 /* ConferenceModel */,
+			);
+			name = DataModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -525,6 +600,11 @@
 					B7A8DD641CAE2BF2007F56B6 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = T7GN63HCDX;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -629,6 +709,7 @@
 				5D32EC0F1CC4A31F00C50969 /* MatchesViewController.m in Sources */,
 				B77695CC1CBFB4F300794005 /* SCLSwitchView.m in Sources */,
 				B77695C91CBFB4F300794005 /* SCLAlertViewStyleKit.m in Sources */,
+				B7E024C41CC5089E00707552 /* ConferenceDataModel.m in Sources */,
 				B776959F1CBF590100794005 /* UITextField+Padding.m in Sources */,
 				B77695C61CBFB4F300794005 /* SCLAlertView.m in Sources */,
 				5D32EC0B1CC4A31F00C50969 /* MoreViewController.m in Sources */,
@@ -640,9 +721,11 @@
 				B77695CA1CBFB4F300794005 /* SCLTimerDisplay.m in Sources */,
 				B77695CB1CBFB4F300794005 /* SCLTextView.m in Sources */,
 				B77695C81CBFB4F300794005 /* SCLAlertViewResponder.m in Sources */,
+				B7EAC1761CC5DBE9001C4EEC /* ConferenceService.m in Sources */,
 				B77695AD1CBF70E400794005 /* GlobalBackViewController.m in Sources */,
 				5D32EC101CC4A31F00C50969 /* HomeViewController.m in Sources */,
 				B77695A71CBF615400794005 /* ForgotPasswordViewController.m in Sources */,
+				B7EAC1701CC5D58F001C4EEC /* UserService.m in Sources */,
 				B7A8DD6A1CAE2BF2007F56B6 /* main.m in Sources */,
 				B77695A31CBF594E00794005 /* UIView+RoundedCorner.m in Sources */,
 			);
@@ -688,7 +771,7 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREFIX_HEADER = "";
+				GCC_PREFIX_HEADER = "/Users/Ranosys/Documents/FinderApp/Finder_iPhoneApp/FinderApp/Supporting Files/Finder-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
@@ -730,7 +813,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREFIX_HEADER = "";
+				GCC_PREFIX_HEADER = "/Users/Ranosys/Documents/FinderApp/Finder_iPhoneApp/FinderApp/Supporting Files/Finder-Prefix.pch";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;

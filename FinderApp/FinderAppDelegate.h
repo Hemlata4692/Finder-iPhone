@@ -12,7 +12,10 @@
 
 @property (strong, nonatomic) UIWindow *window;
 @property (nonatomic,retain) UINavigationController *navigationController;
+@property (nonatomic, strong) NSString *isLocation;
 -(void)showIndicator;
 -(void)stopIndicator;
+-(void)startTrackingBg;
+-(void)locationUpdate;
 @end
 

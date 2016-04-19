@@ -9,24 +9,18 @@
 #import <Foundation/Foundation.h>
 #import "AFNetworking.h"
 //client link
-//#define BASE_URL                                  @"http://52.74.174.129/admin/api/"
+//#define BASE_URL                                  @""
 
 //testing link
 #define BASE_URL                                @"http://ranosys.net/client/finder/admin/api/"
+
 @interface Webservice : NSObject
 @property(nonatomic,retain)AFHTTPRequestOperationManager *manager;
 + (id)sharedManager;
 
-//Login screen method
-- (void)userLogin:(NSString *)email password:(NSString *)password success:(void (^)(id))success failure:(void (^)(NSError *))failure;
-//end
+- (void)post:(NSString *)path parameters:(NSDictionary *)parameters success:(void (^)(id))success failure:(void (^)(NSError *))failure;
 
-//Forgot password method
--(void)forgotPassword:(NSString *)email success:(void (^)(id))success failure:(void (^)(NSError *))failure;
-//end
+- (void)postImage:(NSString *)path parameters:(NSDictionary *)parameters image:(UIImage *)image success:(void (^)(id))success failure:(void (^)(NSError *))failure;
 
-//Change password
--(void)changePassword:(NSString *)oldPassword newPassword:(NSString *)newPassword success:(void (^)(id))success failure:(void (^)(NSError *))failure;
-//end
-
+- (BOOL)isStatusOK:(id)responseObject;
 @end

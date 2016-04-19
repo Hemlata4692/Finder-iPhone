@@ -7,19 +7,44 @@
 //
 
 #import "HomeViewController.h"
+#import "ConferenceService.h"
+#import "ConferenceDataModel.h"
 
 @interface HomeViewController ()
+{
+    NSMutableArray *conferenceDetailArray;
+}
+@property (weak, nonatomic) IBOutlet UIScrollView *homeScrollView;
+@property (weak, nonatomic) IBOutlet UIView *mainContainerView;
+@property (weak, nonatomic) IBOutlet UILabel *conferenceTitleLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *conferenceImageView;
+@property (weak, nonatomic) IBOutlet UILabel *conferenceDescription;
+@property (weak, nonatomic) IBOutlet UILabel *descriptionHeadingLabel;
+@property (weak, nonatomic) IBOutlet UILabel *conferenceOrganiserHeading;
+@property (weak, nonatomic) IBOutlet UILabel *conferenceVenueHeading;
+@property (weak, nonatomic) IBOutlet UIImageView *conferenceOrganiserImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *conferenceVenueImageView;
+@property (weak, nonatomic) IBOutlet UILabel *conferenceOrganiserName;
+@property (weak, nonatomic) IBOutlet UILabel *conferenceVenue;
+@property (weak, nonatomic) IBOutlet UILabel *conferenceDateHeading;
+@property (weak, nonatomic) IBOutlet UIImageView *conferenceDateImageView;
+@property (weak, nonatomic) IBOutlet UILabel *conferenceDate;
 
 @end
 
 @implementation HomeViewController
-
+@synthesize homeScrollView,mainContainerView,conferenceTitleLabel,conferenceImageView,conferenceDateHeading,conferenceDateImageView,conferenceDate;
+@synthesize conferenceDescription,descriptionHeadingLabel,conferenceVenueHeading,conferenceOrganiserImageView,conferenceOrganiserName,conferenceVenue;
+#pragma mark - View life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationItem.title=@"HOME";
 
     [self setTabBarImages];
+    conferenceDetailArray=[[NSMutableArray alloc]init];
+    [myDelegate showIndicator];
+    [self performSelector:@selector(getConferenceDetail) withObject:nil afterDelay:.1];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -30,6 +55,8 @@
 {
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
 }
+#pragma mark - end
+
 #pragma mark - Set tabbar images
 -(void)setTabBarImages
 {
@@ -75,14 +102,38 @@
 
 #pragma mark - end
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - Webservice
+-(void)getConferenceDetail
+{
+    [[ConferenceService sharedManager] getConferenceDetail:^(id conferenceArray) {
+        [myDelegate stopIndicator];
+        conferenceDetailArray=[conferenceArray mutableCopy];
+        [self displayConferenceDetail];
+    }
+                                                   failure:^(NSError *error)
+     {
+         
+     }] ;
+    
 }
-*/
 
+-(void)displayConferenceDetail
+{
+    __weak UIImageView *weakRef = conferenceImageView;
+    NSURLRequest *imageRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:[[conferenceDetailArray objectAtIndex:0]conferenceImage]]
+                                                  cachePolicy:NSURLRequestReturnCacheDataElseLoad
+                                              timeoutInterval:60];
+    [conferenceImageView setImageWithURLRequest:imageRequest placeholderImage:[UIImage imageNamed:@"placeholder.png"] success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+        weakRef.contentMode = UIViewContentModeScaleAspectFit;
+        weakRef.clipsToBounds = YES;
+        weakRef.image = image;
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+    }];
+    conferenceTitleLabel.text=[[conferenceDetailArray objectAtIndex:0]conferenceName];
+    conferenceDescription.text=[[conferenceDetailArray objectAtIndex:0]conferenceDescription];
+    conferenceOrganiserName.text=[[conferenceDetailArray objectAtIndex:0]conferenceOrganiserName];
+    conferenceVenue.text=[[conferenceDetailArray objectAtIndex:0]conferenceVenue];
+    conferenceDate.text=[[conferenceDetailArray objectAtIndex:0]conferenceDate];
+}
+#pragma mark - end
 @end
