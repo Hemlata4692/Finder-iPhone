@@ -7,20 +7,28 @@
 //
 
 #import "MatchesViewController.h"
+#import "MatchesTableViewCell.h"
+#import "ConferenceService.h"
 
 @interface MatchesViewController ()
+@property (weak, nonatomic) IBOutlet UITableView *matchesTableView;
 
 @end
 
 @implementation MatchesViewController
 
-- (void)viewDidLoad {
+#pragma mark - View lifecycle
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationItem.title=@"MATCHES";
-
+    
+//    [myDelegate showIndicator];
+//    [self performSelector:@selector(getMatchesDetails) withObject:nil afterDelay:.1];
+    
+    
 }
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -29,14 +37,66 @@
 {
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
 }
-/*
-#pragma mark - Navigation
+#pragma mark - end
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - Table view methods
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 6;
 }
-*/
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *simpleTableIdentifier = @"matchesCell";
+    MatchesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+    if (cell == nil)
+    {
+        cell = [[MatchesTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
+    }
+    cell.containerView.layer.shadowColor = [[UIColor lightGrayColor] CGColor];
+    cell.containerView.layer.shadowOffset = CGSizeMake(0, 1.0f);
+    cell.containerView.layer.shadowOpacity = 1.0f;
+    cell.containerView.layer.shadowRadius = 1.0f;
+
+    return cell;
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+}
+#pragma mark - end
+#pragma mark - Webservice
+-(void)getMatchesDetails
+{
+    [[ConferenceService sharedManager] getMatchesDetails:^(id matchesArray)
+     {
+         [myDelegate stopIndicator];
+     }
+                                                 failure:^(NSError *error)
+     {
+         
+     }] ;
+}
+#pragma mark - end
+#pragma mark - Segment control
+
+- (IBAction)matchesSegmentAction:(UISegmentedControl *)sender
+{
+    UISegmentedControl *segmentedControl = (UISegmentedControl *) sender;
+    NSInteger selectedSegment = segmentedControl.selectedSegmentIndex;
+    
+    if (selectedSegment == 0)
+    {
+        _matchesTableView.hidden=NO;
+    }
+    else if(selectedSegment == 1)
+    {
+        _matchesTableView.hidden=YES;
+    }
+    else
+    {
+        
+    }
+}
+#pragma mark - end
 
 @end

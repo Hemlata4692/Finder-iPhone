@@ -91,11 +91,14 @@
 #pragma mark- Change password
 -(void)changePassword:(NSString *)oldPassword newPassword:(NSString *)newPassword success:(void (^)(id))success failure:(void (^)(NSError *))failure
 {
-    NSDictionary *requestDict = @{@"user_id":[UserDefaultManager getValue:@"userId"],@"oldPassword":oldPassword,@"newPassword":newPassword};
+    NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":@"1",@"oldPassword":oldPassword,@"newPassword":newPassword};
+    NSLog(@"request changePassword %@",requestDict);
+
     [[Webservice sharedManager] post:kUrlChangePassword parameters:requestDict success:^(id responseObject)
      {
          responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
-         
+         NSLog(@"changePassword response %@",responseObject);
+
          if([[Webservice sharedManager] isStatusOK:responseObject])
          {
              success(responseObject);

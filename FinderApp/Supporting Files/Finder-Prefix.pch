@@ -17,6 +17,7 @@
 #import "BSKeyboardControls.h"
 #import "UITextField+Validations.h"
 #import "UITextField+Padding.h"
+#import "UITextField+Border.h"
 #import "UIView+RoundedCorner.h"
 #import "GlobalBackViewController.h"
 #import "SCLAlertView.h"

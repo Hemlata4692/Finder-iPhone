@@ -10,6 +10,7 @@
 #import "ConferenceDataModel.h"
 
 #define kUrlConferenceDetail            @"getconferencedetails"
+#define kUrlMatcheslist                 @"Matcheslist"
 
 @implementation ConferenceService
 #pragma mark - Singleton instance
@@ -67,5 +68,41 @@
 
 }
 #pragma mark- end
+#pragma mark- Matches detail
+-(void)getMatchesDetails:(void (^)(id data))success failure:(void (^)(NSError *error))failure
+{
+    NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":@"1"};
+    NSLog(@"Matcheslist request %@",requestDict);
+    [[Webservice sharedManager] post:kUrlMatcheslist parameters:requestDict success:^(id responseObject)
+     {
+         responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
+         NSLog(@"Matcheslist response %@",responseObject);
+         if([[Webservice sharedManager] isStatusOK:responseObject])
+         {
+             NSMutableArray *matchesArray = [NSMutableArray new];
+//             ConferenceDataModel *conferenceDetail = [[ConferenceDataModel alloc]init];
+//             NSDictionary * conferenceDict =[responseObject objectForKey:@"getConfrenceDetails"];
+//             conferenceDetail.conferenceName =[conferenceDict objectForKey:@"confrenceName"];
+//             conferenceDetail.conferenceDate =[conferenceDict objectForKey:@"confrenceDate"];
+//             conferenceDetail.conferenceDescription =[conferenceDict objectForKey:@"description"];
+//             conferenceDetail.conferenceOrganiserName =[conferenceDict objectForKey:@"organiserName"];
+//             conferenceDetail.conferenceImage=[conferenceDict objectForKey:@"imageUrl"];
+//             conferenceDetail.conferenceVenue=[conferenceDict objectForKey:@"venue"];
+//             [conferenceArray addObject:conferenceDetail];
+             success(matchesArray);
+         }
+         else
+         {
+             [myDelegate stopIndicator];
+             failure(nil);
+         }
+     } failure:^(NSError *error)
+     {
+         [myDelegate stopIndicator];
+         failure(error);
+     }];
+    
 
+}
+#pragma mark- end
 @end

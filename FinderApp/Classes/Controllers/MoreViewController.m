@@ -8,6 +8,8 @@
 
 #import "MoreViewController.h"
 #import "MoreTableViewCell.h"
+#import "UserService.h"
+
 @interface MoreViewController ()<UITextFieldDelegate,BSKeyboardControlsDelegate>
 {
     NSMutableArray *screenArray;
@@ -44,7 +46,9 @@
     [self.keyboardControls setDelegate:self];
     
     [self addPadding];
-    
+    [self setCornerRadius];
+    [self addborder];
+
     screenArray = [NSMutableArray arrayWithObjects:@"MY PROFILE",@"PENDING APPOINTMENTS",@"PROXIMITY ALERTS",@"SETTINGS",@"CHANGE PASSWORD",@"LOGOUT", nil];
 }
 
@@ -58,7 +62,19 @@
 }
 #pragma mark - end
 #pragma mark - Corner radius, border and textfield padding
+-(void) setCornerRadius
+{
+    [oldPasswordTextField setCornerRadius:2.0f];
+    [passwordTextField setCornerRadius:2.0f];
+    [confirmPasswordTextField setCornerRadius:2.0f];
+}
 
+-(void)addborder
+{
+    [oldPasswordTextField addBorder:oldPasswordTextField];
+    [passwordTextField addBorder:passwordTextField];
+    [confirmPasswordTextField addBorder:confirmPasswordTextField];
+}
 -(void)addPadding
 {
     [oldPasswordTextField addTextFieldPaddingWithoutImages:oldPasswordTextField];
@@ -82,16 +98,10 @@
         cell = [[MoreTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     }
     cell.containerView.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    
     cell.containerView.layer.shadowColor = [[UIColor lightGrayColor] CGColor];
     cell.containerView.layer.shadowOffset = CGSizeMake(0, 1.0f);
     cell.containerView.layer.shadowOpacity = 1.0f;
     cell.containerView.layer.shadowRadius = 1.0f;
-    //  cell.containerView.layer.masksToBounds = NO;
-    //    cell.containerView.layer.masksToBounds = NO;
-    //    cell.containerView.layer.shadowOffset = CGSizeMake(0, 3.0);
-    //    cell.containerView.layer.shadowRadius = 1.0;
-    //    cell.containerView.layer.shadowOpacity = 0.5;
     
     if(indexPath.row == 5)
     {
@@ -108,18 +118,14 @@
     {
         changePwdContainerView.hidden = NO;
     }
+    else if (indexPath.row == 5)
+    {
+        [UserDefaultManager removeValue:@"userId"];
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                myDelegate.navigationController = [storyboard instantiateViewControllerWithIdentifier:@"mainNavController"];
+        myDelegate.window.rootViewController = myDelegate.navigationController;
+    }
 }
-#pragma mark - end
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 #pragma mark - end
 #pragma mark - Keyboard controls delegate
 - (void)keyboardControls:(BSKeyboardControls *)keyboardControls selectedField:(UIView *)field inDirection:(BSKeyboardControlsDirection)direction
@@ -131,10 +137,6 @@
 - (void)keyboardControlsDonePressed:(BSKeyboardControls *)keyboardControls
 {
     [keyboardControls.activeField resignFirstResponder];
-//    [UIView animateWithDuration:0.3 animations:^{
-//        self.view.frame=CGRectMake(self.view.frame.origin.x, 64, self.view.frame.size.width, self.view.frame.size.height);
-//    }];
-
 }
 #pragma mark - end
 
@@ -144,21 +146,25 @@
 {
     [self.keyboardControls setActiveField:textField];
 
-    if([[UIScreen mainScreen] bounds].size.height<=568)
+    if([[UIScreen mainScreen] bounds].size.height<568)
     {
         if ((textField==passwordTextField) || (textField==confirmPasswordTextField))
         {
-            self.view.frame=CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y-64, self.view.frame.size.width, self.view.frame.size.height);
+                [UIView animateWithDuration:0.3 animations:^{
+                    self.view.frame=CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y-64, self.view.frame.size.width, self.view.frame.size.height);
+                }];
         }
     }
 }
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
-    if([[UIScreen mainScreen] bounds].size.height<=568)
+    if([[UIScreen mainScreen] bounds].size.height<568)
     {
             if ((textField==passwordTextField) || (textField==confirmPasswordTextField))
         {
-            self.view.frame=CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y+64, self.view.frame.size.width, self.view.frame.size.height);
+            [UIView animateWithDuration:0.3 animations:^{
+                self.view.frame=CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y+64, self.view.frame.size.width, self.view.frame.size.height);
+            }];
         }
     }
 }
@@ -180,7 +186,23 @@
     }
     else
     {
-        if ((oldPasswordTextField.text.length < 6) || (passwordTextField.text.length < 6) || (confirmPasswordTextField.text.length < 6))
+        if ([oldPasswordTextField.text isEqualToString:passwordTextField.text])
+        {
+            SCLAlertView *alert = [[SCLAlertView alloc] init];
+            [alert showWarning:self title:@"Alert" subTitle:@"Old password and new password are same. Please try a different one" closeButtonTitle:@"Done" duration:0.0f];
+            return NO;
+        }
+        
+        //Password confirmation for new password entered
+        else if (![passwordTextField.text isEqualToString:confirmPasswordTextField.text])
+        {
+            SCLAlertView *alert = [[SCLAlertView alloc] init];
+            [alert showWarning:self title:@"Alert" subTitle:@"Passwords do not match" closeButtonTitle:@"Done" duration:0.0f];
+            
+            return NO;
+        }
+
+       else if ((oldPasswordTextField.text.length < 6) || (passwordTextField.text.length < 6) || (confirmPasswordTextField.text.length < 6))
         {
             SCLAlertView *alert = [[SCLAlertView alloc] init];
             [alert showWarning:self title:@"Alert" subTitle:@"Your password must be atleast 6 characters long." closeButtonTitle:@"Done" duration:0.0f];
@@ -197,11 +219,34 @@
 
 - (IBAction)saveButtonAction:(id)sender
 {
+    if([self performValidationsForChangePassword])
+    {
+        [myDelegate showIndicator];
+        [self performSelector:@selector(changePassword) withObject:nil afterDelay:.1];
+    }
 }
-
 - (IBAction)cancelButtonAction:(id)sender
 {
     changePwdContainerView.hidden = YES;
+}
+#pragma mark - end
+#pragma mark - Webservice
+-(void)changePassword
+{
+    [[UserService sharedManager] changePassword:oldPasswordTextField.text newPassword:confirmPasswordTextField.text success:^(id responseObject)
+     {
+         [myDelegate stopIndicator];
+         SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
+         [alert addButton:@"Ok" actionBlock:^(void)
+          {
+             changePwdContainerView.hidden = YES;
+         }];
+         [alert showWarning:nil title:@"Alert" subTitle:@"Your password has been changed successfully." closeButtonTitle:nil duration:0.0f];
+
+     } failure:^(NSError *error) {
+         
+     }] ;
+
 }
 #pragma mark - end
 

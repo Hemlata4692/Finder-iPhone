@@ -14,6 +14,8 @@
 		5D32EC0E1CC4A31F00C50969 /* MessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D32EC061CC4A31F00C50969 /* MessagesViewController.m */; };
 		5D32EC0F1CC4A31F00C50969 /* MatchesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D32EC081CC4A31F00C50969 /* MatchesViewController.m */; };
 		5D32EC101CC4A31F00C50969 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D32EC0A1CC4A31F00C50969 /* HomeViewController.m */; };
+		5D9361971CC5F40B0004F030 /* UITextField+Border.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D9361961CC5F40B0004F030 /* UITextField+Border.m */; };
+		5D93619D1CC606190004F030 /* MatchesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D93619C1CC606190004F030 /* MatchesTableViewCell.m */; };
 		B771FB6D1CBE200C006CBA32 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B771FB671CBE200C006CBA32 /* Roboto-Black.ttf */; };
 		B771FB6E1CBE200C006CBA32 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B771FB681CBE200C006CBA32 /* Roboto-Bold.ttf */; };
 		B771FB6F1CBE200C006CBA32 /* Roboto-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B771FB691CBE200C006CBA32 /* Roboto-Italic.ttf */; };
@@ -64,6 +66,10 @@
 		5D32EC081CC4A31F00C50969 /* MatchesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchesViewController.m; sourceTree = "<group>"; };
 		5D32EC091CC4A31F00C50969 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		5D32EC0A1CC4A31F00C50969 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		5D9361951CC5F40B0004F030 /* UITextField+Border.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+Border.h"; sourceTree = "<group>"; };
+		5D9361961CC5F40B0004F030 /* UITextField+Border.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Border.m"; sourceTree = "<group>"; };
+		5D93619B1CC606190004F030 /* MatchesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchesTableViewCell.h; sourceTree = "<group>"; };
+		5D93619C1CC606190004F030 /* MatchesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchesTableViewCell.m; sourceTree = "<group>"; };
 		B3CDDBB308E1E7466EFB6FFC /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B771FB671CBE200C006CBA32 /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
 		B771FB681CBE200C006CBA32 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
@@ -200,8 +206,8 @@
 		5D32EC141CC4A35C00C50969 /* MatchesViewController */ = {
 			isa = PBXGroup;
 			children = (
-				5D32EC071CC4A31F00C50969 /* MatchesViewController.h */,
-				5D32EC081CC4A31F00C50969 /* MatchesViewController.m */,
+				5D9361991CC605A70004F030 /* MatchesViewController */,
+				5D93619A1CC605B50004F030 /* MatchesViewCell */,
 			);
 			name = MatchesViewController;
 			sourceTree = "<group>";
@@ -213,6 +219,33 @@
 				5D32EC0A1CC4A31F00C50969 /* HomeViewController.m */,
 			);
 			name = HomeViewController;
+			sourceTree = "<group>";
+		};
+		5D9361981CC5F4190004F030 /* TextFieldBorderCategory */ = {
+			isa = PBXGroup;
+			children = (
+				5D9361951CC5F40B0004F030 /* UITextField+Border.h */,
+				5D9361961CC5F40B0004F030 /* UITextField+Border.m */,
+			);
+			name = TextFieldBorderCategory;
+			sourceTree = "<group>";
+		};
+		5D9361991CC605A70004F030 /* MatchesViewController */ = {
+			isa = PBXGroup;
+			children = (
+				5D32EC071CC4A31F00C50969 /* MatchesViewController.h */,
+				5D32EC081CC4A31F00C50969 /* MatchesViewController.m */,
+			);
+			name = MatchesViewController;
+			sourceTree = "<group>";
+		};
+		5D93619A1CC605B50004F030 /* MatchesViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				5D93619B1CC606190004F030 /* MatchesTableViewCell.h */,
+				5D93619C1CC606190004F030 /* MatchesTableViewCell.m */,
+			);
+			name = MatchesViewCell;
 			sourceTree = "<group>";
 		};
 		B771FB661CBE2001006CBA32 /* Font */ = {
@@ -346,6 +379,7 @@
 		B7A8DD801CAE2CE9007F56B6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				5D9361981CC5F4190004F030 /* TextFieldBorderCategory */,
 				B77695A01CBF593C00794005 /* CornderRadius */,
 				B776959C1CBF58F400794005 /* PaddingCategory */,
 				B77695981CBF534E00794005 /* ValidationCategory */,
@@ -714,6 +748,7 @@
 				B77695C61CBFB4F300794005 /* SCLAlertView.m in Sources */,
 				5D32EC0B1CC4A31F00C50969 /* MoreViewController.m in Sources */,
 				B7A8DDCE1CAE5C32007F56B6 /* NullValueChecker.m in Sources */,
+				5D9361971CC5F40B0004F030 /* UITextField+Border.m in Sources */,
 				B7DCE4531CBB9E5D0063FF72 /* Webservice.m in Sources */,
 				B7A8DDC11CAE5B50007F56B6 /* BSKeyboardControls.m in Sources */,
 				B7A8DDCB1CAE5BD4007F56B6 /* UserDefaultManager.m in Sources */,
@@ -722,6 +757,7 @@
 				B77695CB1CBFB4F300794005 /* SCLTextView.m in Sources */,
 				B77695C81CBFB4F300794005 /* SCLAlertViewResponder.m in Sources */,
 				B7EAC1761CC5DBE9001C4EEC /* ConferenceService.m in Sources */,
+				5D93619D1CC606190004F030 /* MatchesTableViewCell.m in Sources */,
 				B77695AD1CBF70E400794005 /* GlobalBackViewController.m in Sources */,
 				5D32EC101CC4A31F00C50969 /* HomeViewController.m in Sources */,
 				B77695A71CBF615400794005 /* ForgotPasswordViewController.m in Sources */,

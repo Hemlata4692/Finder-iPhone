@@ -14,4 +14,9 @@
 //Conference detail
 -(void)getConferenceDetail:(void (^)(id data))success failure:(void (^)(NSError *error))failure;
 //end
+
+//Matches detail
+-(void)getMatchesDetails:(void (^)(id data))success failure:(void (^)(NSError *error))failure;
+//end
+
 @end
