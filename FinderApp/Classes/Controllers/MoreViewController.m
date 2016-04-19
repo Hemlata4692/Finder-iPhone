@@ -12,7 +12,7 @@
 
 @interface MoreViewController ()<UITextFieldDelegate,BSKeyboardControlsDelegate>
 {
-    NSMutableArray *screenArray;
+    NSMutableArray *moreOptionsArray;
     NSArray *textFieldArray;
 }
 @property (weak, nonatomic) IBOutlet UITableView *moreTableView;
@@ -24,10 +24,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *confirmPasswordTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (nonatomic, strong) BSKeyboardControls *keyboardControls;
-
-- (IBAction)saveButtonAction:(id)sender;
-
-- (IBAction)cancelButtonAction:(id)sender;
 
 @end
 
@@ -108,13 +104,18 @@
         cell.rightArrowIcon.hidden=YES;
     }
     
-    cell.screenNameLabel.text = [screenArray objectAtIndex:indexPath.row];
+    cell.screenNameLabel.text = [moreOptionsArray objectAtIndex:indexPath.row];
     
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 4)
+    if (indexPath.row==3) {
+        UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        SettingsViewController *settingsView =[storyboard instantiateViewControllerWithIdentifier:@"SettingsViewController"];
+        [self.navigationController pushViewController:settingsView animated:YES];
+    }
+    else if (indexPath.row == 4)
     {
         changePwdContainerView.hidden = NO;
     }

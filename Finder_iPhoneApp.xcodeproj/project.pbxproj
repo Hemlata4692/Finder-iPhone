@@ -49,6 +49,10 @@
 		B7E024C41CC5089E00707552 /* ConferenceDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B7E024C31CC5089E00707552 /* ConferenceDataModel.m */; };
 		B7EAC1701CC5D58F001C4EEC /* UserService.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAC16F1CC5D58F001C4EEC /* UserService.m */; };
 		B7EAC1761CC5DBE9001C4EEC /* ConferenceService.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAC1751CC5DBE9001C4EEC /* ConferenceService.m */; };
+		B7EAC1801CC5ED06001C4EEC /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAC17F1CC5ED06001C4EEC /* SettingsViewController.m */; };
+		B7EAC1861CC62681001C4EEC /* RESwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAC1851CC62681001C4EEC /* RESwitch.m */; };
+		B7EAC18B1CC63328001C4EEC /* SettingsViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAC18A1CC63328001C4EEC /* SettingsViewCell.m */; };
+		B7EAC18D1CC639E7001C4EEC /* RESwitch.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B7EAC18C1CC639E7001C4EEC /* RESwitch.bundle */; };
 		B7F9C62E1CBE4195003ACFBE /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B7F9C62D1CBE4195003ACFBE /* FontAwesome.ttf */; };
 /* End PBXBuildFile section */
 
@@ -141,6 +145,13 @@
 		B7EAC16F1CC5D58F001C4EEC /* UserService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserService.m; sourceTree = SOURCE_ROOT; };
 		B7EAC1741CC5DBE9001C4EEC /* ConferenceService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConferenceService.h; sourceTree = SOURCE_ROOT; };
 		B7EAC1751CC5DBE9001C4EEC /* ConferenceService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConferenceService.m; sourceTree = SOURCE_ROOT; };
+		B7EAC17E1CC5ED06001C4EEC /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
+		B7EAC17F1CC5ED06001C4EEC /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
+		B7EAC1841CC62681001C4EEC /* RESwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RESwitch.h; sourceTree = "<group>"; };
+		B7EAC1851CC62681001C4EEC /* RESwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RESwitch.m; sourceTree = "<group>"; };
+		B7EAC1891CC63328001C4EEC /* SettingsViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewCell.h; sourceTree = "<group>"; };
+		B7EAC18A1CC63328001C4EEC /* SettingsViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewCell.m; sourceTree = "<group>"; };
+		B7EAC18C1CC639E7001C4EEC /* RESwitch.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = RESwitch.bundle; sourceTree = "<group>"; };
 		B7F9C62D1CBE4195003ACFBE /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
 		C05F8A8FD36EE5AC5DD42364 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -176,13 +187,13 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		5D32EC111CC4A32400C50969 /* MoreViewController */ = {
+		5D32EC111CC4A32400C50969 /* MoreView */ = {
 			isa = PBXGroup;
 			children = (
 				B7E024BD1CC4B8B600707552 /* MoreViewController */,
 				B7E024BE1CC4B8C200707552 /* MoreViewCell */,
 			);
-			name = MoreViewController;
+			name = MoreView;
 			sourceTree = "<group>";
 		};
 		5D32EC121CC4A33600C50969 /* CalendarViewController */ = {
@@ -402,13 +413,13 @@
 		B7A8DD821CAE2D27007F56B6 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				5D32EC151CC4A36D00C50969 /* HomeViewController */,
-				5D32EC141CC4A35C00C50969 /* MatchesViewController */,
-				5D32EC131CC4A34600C50969 /* MessagesViewController */,
-				5D32EC121CC4A33600C50969 /* CalendarViewController */,
-				5D32EC111CC4A32400C50969 /* MoreViewController */,
 				B77695A91CBF70C500794005 /* GlobalViewController */,
 				B77695A81CBF704D00794005 /* LoginModule */,
+				B7EAC17C1CC5ECC7001C4EEC /* ConferenceDetailModule */,
+				B7EAC17B1CC5ECAB001C4EEC /* CalenderScheduleModule */,
+				B7EAC17A1CC5EC9E001C4EEC /* MessageModule */,
+				B7EAC1791CC5EC89001C4EEC /* MatchesModule */,
+				B7EAC1781CC5EC7A001C4EEC /* MoreModule */,
 				B7A8DDB11CAE586F007F56B6 /* ChangePasswordViewController */,
 			);
 			path = Controllers;
@@ -599,6 +610,84 @@
 			name = DataModel;
 			sourceTree = "<group>";
 		};
+		B7EAC1781CC5EC7A001C4EEC /* MoreModule */ = {
+			isa = PBXGroup;
+			children = (
+				B7EAC17D1CC5ECE8001C4EEC /* SettingsView */,
+				5D32EC111CC4A32400C50969 /* MoreView */,
+			);
+			name = MoreModule;
+			sourceTree = "<group>";
+		};
+		B7EAC1791CC5EC89001C4EEC /* MatchesModule */ = {
+			isa = PBXGroup;
+			children = (
+				5D32EC141CC4A35C00C50969 /* MatchesViewController */,
+			);
+			name = MatchesModule;
+			sourceTree = "<group>";
+		};
+		B7EAC17A1CC5EC9E001C4EEC /* MessageModule */ = {
+			isa = PBXGroup;
+			children = (
+				5D32EC131CC4A34600C50969 /* MessagesViewController */,
+			);
+			name = MessageModule;
+			sourceTree = "<group>";
+		};
+		B7EAC17B1CC5ECAB001C4EEC /* CalenderScheduleModule */ = {
+			isa = PBXGroup;
+			children = (
+				5D32EC121CC4A33600C50969 /* CalendarViewController */,
+			);
+			name = CalenderScheduleModule;
+			sourceTree = "<group>";
+		};
+		B7EAC17C1CC5ECC7001C4EEC /* ConferenceDetailModule */ = {
+			isa = PBXGroup;
+			children = (
+				5D32EC151CC4A36D00C50969 /* HomeViewController */,
+			);
+			name = ConferenceDetailModule;
+			sourceTree = "<group>";
+		};
+		B7EAC17D1CC5ECE8001C4EEC /* SettingsView */ = {
+			isa = PBXGroup;
+			children = (
+				B7EAC1881CC63307001C4EEC /* SettingsViewCell */,
+				B7EAC1871CC632EA001C4EEC /* SettingViewController */,
+			);
+			name = SettingsView;
+			sourceTree = "<group>";
+		};
+		B7EAC1831CC6266C001C4EEC /* RESwitch */ = {
+			isa = PBXGroup;
+			children = (
+				B7EAC18C1CC639E7001C4EEC /* RESwitch.bundle */,
+				B7EAC1841CC62681001C4EEC /* RESwitch.h */,
+				B7EAC1851CC62681001C4EEC /* RESwitch.m */,
+			);
+			name = RESwitch;
+			sourceTree = "<group>";
+		};
+		B7EAC1871CC632EA001C4EEC /* SettingViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B7EAC17E1CC5ED06001C4EEC /* SettingsViewController.h */,
+				B7EAC17F1CC5ED06001C4EEC /* SettingsViewController.m */,
+			);
+			name = SettingViewController;
+			sourceTree = "<group>";
+		};
+		B7EAC1881CC63307001C4EEC /* SettingsViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				B7EAC1891CC63328001C4EEC /* SettingsViewCell.h */,
+				B7EAC18A1CC63328001C4EEC /* SettingsViewCell.m */,
+			);
+			name = SettingsViewCell;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -667,6 +756,7 @@
 			files = (
 				B7A8DDDF1CAE60BB007F56B6 /* Main.storyboard in Resources */,
 				B7A8DD751CAE2BF2007F56B6 /* Assets.xcassets in Resources */,
+				B7EAC18D1CC639E7001C4EEC /* RESwitch.bundle in Resources */,
 				B771FB721CBE200C006CBA32 /* Roboto-Regular.ttf in Resources */,
 				B771FB701CBE200C006CBA32 /* Roboto-Light.ttf in Resources */,
 				B771FB711CBE200C006CBA32 /* Roboto-Medium.ttf in Resources */,
@@ -740,12 +830,14 @@
 				5D32EC0D1CC4A31F00C50969 /* CalendarViewController.m in Sources */,
 				5D32EC0C1CC4A31F00C50969 /* MoreTableViewCell.m in Sources */,
 				B77695C71CBFB4F300794005 /* SCLButton.m in Sources */,
+				B7EAC18B1CC63328001C4EEC /* SettingsViewCell.m in Sources */,
 				5D32EC0F1CC4A31F00C50969 /* MatchesViewController.m in Sources */,
 				B77695CC1CBFB4F300794005 /* SCLSwitchView.m in Sources */,
 				B77695C91CBFB4F300794005 /* SCLAlertViewStyleKit.m in Sources */,
 				B7E024C41CC5089E00707552 /* ConferenceDataModel.m in Sources */,
 				B776959F1CBF590100794005 /* UITextField+Padding.m in Sources */,
 				B77695C61CBFB4F300794005 /* SCLAlertView.m in Sources */,
+				B7EAC1861CC62681001C4EEC /* RESwitch.m in Sources */,
 				5D32EC0B1CC4A31F00C50969 /* MoreViewController.m in Sources */,
 				B7A8DDCE1CAE5C32007F56B6 /* NullValueChecker.m in Sources */,
 				5D9361971CC5F40B0004F030 /* UITextField+Border.m in Sources */,
@@ -759,6 +851,7 @@
 				B7EAC1761CC5DBE9001C4EEC /* ConferenceService.m in Sources */,
 				5D93619D1CC606190004F030 /* MatchesTableViewCell.m in Sources */,
 				B77695AD1CBF70E400794005 /* GlobalBackViewController.m in Sources */,
+				B7EAC1801CC5ED06001C4EEC /* SettingsViewController.m in Sources */,
 				5D32EC101CC4A31F00C50969 /* HomeViewController.m in Sources */,
 				B77695A71CBF615400794005 /* ForgotPasswordViewController.m in Sources */,
 				B7EAC1701CC5D58F001C4EEC /* UserService.m in Sources */,
@@ -869,7 +962,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				GCC_PREFIX_HEADER = "/Users/sugandhasingh/Documents/finder-iPhone-app/FinderApp/Supporting Files/Finder-Prefix.pch";
+				GCC_PREFIX_HEADER = "/Users/Ranosys/Documents/FinderApp/Finder_iPhoneApp/FinderApp/Supporting Files/Finder-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/FinderApp/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -884,7 +977,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				GCC_PREFIX_HEADER = "/Users/sugandhasingh/Documents/finder-iPhone-app/FinderApp/Supporting Files/Finder-Prefix.pch";
+				GCC_PREFIX_HEADER = "/Users/Ranosys/Documents/FinderApp/Finder_iPhoneApp/FinderApp/Supporting Files/Finder-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/FinderApp/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
