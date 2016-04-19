@@ -10,6 +10,8 @@
 #import "MMMaterialDesignSpinner.h"
 #import "UserService.h"
 #import <CoreLocation/CoreLocation.h>
+#import "HomeViewController.h"
+#import "LoginViewController.h"
 
 @interface FinderAppDelegate ()<CLLocationManagerDelegate>
 {
@@ -71,6 +73,24 @@
     locationManager.pausesLocationUpdatesAutomatically = NO;
     [locationManager startUpdatingLocation];
     isLocation=@"0";
+    
+    NSLog(@"userId %@",[[NSUserDefaults standardUserDefaults] objectForKey:@"userId"]);
+    UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"userId"]!=nil)
+    {
+        isLocation=@"1";
+        HomeViewController * objView=[storyboard instantiateViewControllerWithIdentifier:@"tabBar"];
+        self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+        [self.window setRootViewController:objView];
+        [self.window makeKeyAndVisible];
+    }
+    else
+    {
+        LoginViewController * loginView = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+        [self.navigationController setViewControllers: [NSArray arrayWithObject:loginView]
+                                             animated: YES];
+    }
+    
     //permission for local notification
     if ([application respondsToSelector:@selector(registerUserNotificationSettings:)])
     {
@@ -84,8 +104,6 @@
     {
         [self application:application didReceiveLocalNotification:localNotiInfo];
     }
-    
-
     return YES;
 }
 -(void)locationUpdate

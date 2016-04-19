@@ -8,9 +8,11 @@
 
 #import "MoreViewController.h"
 #import "MoreTableViewCell.h"
+#import "SettingsViewController.h"
+
 @interface MoreViewController ()<UITextFieldDelegate,BSKeyboardControlsDelegate>
 {
-    NSMutableArray *screenArray;
+    NSMutableArray *moreOptionsArray;
     NSArray *textFieldArray;
 }
 @property (weak, nonatomic) IBOutlet UITableView *moreTableView;
@@ -22,10 +24,6 @@
 @property (weak, nonatomic) IBOutlet UITextField *confirmPasswordTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
 @property (nonatomic, strong) BSKeyboardControls *keyboardControls;
-
-- (IBAction)saveButtonAction:(id)sender;
-
-- (IBAction)cancelButtonAction:(id)sender;
 
 @end
 
@@ -45,7 +43,7 @@
     
     [self addPadding];
     
-    screenArray = [NSMutableArray arrayWithObjects:@"MY PROFILE",@"PENDING APPOINTMENTS",@"PROXIMITY ALERTS",@"SETTINGS",@"CHANGE PASSWORD",@"LOGOUT", nil];
+    moreOptionsArray = [NSMutableArray arrayWithObjects:@"MY PROFILE",@"PENDING APPOINTMENTS",@"PROXIMITY ALERTS",@"SETTINGS",@"CHANGE PASSWORD",@"LOGOUT", nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -81,46 +79,34 @@
     {
         cell = [[MoreTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     }
-    cell.containerView.layer.borderColor = [UIColor lightGrayColor].CGColor;
-    
-    cell.containerView.layer.shadowColor = [[UIColor lightGrayColor] CGColor];
-    cell.containerView.layer.shadowOffset = CGSizeMake(0, 1.0f);
-    cell.containerView.layer.shadowOpacity = 1.0f;
-    cell.containerView.layer.shadowRadius = 1.0f;
-    //  cell.containerView.layer.masksToBounds = NO;
-    //    cell.containerView.layer.masksToBounds = NO;
-    //    cell.containerView.layer.shadowOffset = CGSizeMake(0, 3.0);
-    //    cell.containerView.layer.shadowRadius = 1.0;
-    //    cell.containerView.layer.shadowOpacity = 0.5;
+    cell.containerView.layer.shadowColor = [UIColor lightGrayColor].CGColor;
+    cell.containerView.layer.shadowOffset = CGSizeMake(0, 1);
+    cell.containerView.layer.shadowOpacity = 1;
+    cell.containerView.layer.shadowRadius = 1.0;
     
     if(indexPath.row == 5)
     {
         cell.rightArrowIcon.hidden=YES;
     }
     
-    cell.screenNameLabel.text = [screenArray objectAtIndex:indexPath.row];
+    cell.screenNameLabel.text = [moreOptionsArray objectAtIndex:indexPath.row];
     
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row == 4)
+    if (indexPath.row==3) {
+        UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        SettingsViewController *settingsView =[storyboard instantiateViewControllerWithIdentifier:@"SettingsViewController"];
+        [self.navigationController pushViewController:settingsView animated:YES];
+    }
+    else if (indexPath.row == 4)
     {
         changePwdContainerView.hidden = NO;
     }
 }
 #pragma mark - end
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
-#pragma mark - end
 #pragma mark - Keyboard controls delegate
 - (void)keyboardControls:(BSKeyboardControls *)keyboardControls selectedField:(UIView *)field inDirection:(BSKeyboardControlsDirection)direction
 {
