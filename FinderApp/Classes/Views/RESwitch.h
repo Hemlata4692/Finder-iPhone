@@ -62,6 +62,7 @@ typedef enum _RESwitchLabel {
 @property (strong, nonatomic) UIFont *font UI_APPEARANCE_SELECTOR;
 @property (nonatomic, getter=isOn) BOOL on;
 @property(nonatomic,assign) int switchTag;
+@property(nonatomic,assign) int sectionTag;
 - (CGFloat)cornerRadius;
 - (void)setCornerRadius:(CGFloat)radius UI_APPEARANCE_SELECTOR;
 - (void)setTextOffset:(CGSize)offset forLabel:(RESwitchLabel)label UI_APPEARANCE_SELECTOR;

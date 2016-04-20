@@ -26,7 +26,7 @@
 #import "RESwitch.h"
 
 @implementation RESwitch
-@synthesize switchTag;
+@synthesize switchTag,sectionTag;
 + (void)initialize
 {
     [super initialize];

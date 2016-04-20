@@ -20,6 +20,6 @@
 //end
 
 //Settings
--(void)changeSettings:(NSString *)proximitAlert preConferenceMatch:(NSString *)preConferenceMatch newRequest:(NSString *)newRequest newMessage:(NSString *)newMessage success:(void (^)(id))success failure:(void (^)(NSError *))failure;
+-(void)changeSettings:(NSString *)switchIdentifire switchStatus:(NSString *)switchStatus success:(void (^)(id))success failure:(void (^)(NSError *))failur;
 //end
 @end

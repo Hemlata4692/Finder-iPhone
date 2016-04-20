@@ -13,7 +13,7 @@
 //settingsCell
 @property (weak, nonatomic) IBOutlet UIView *settingsContainerView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
-@property (weak, nonatomic) IBOutlet UISwitch *settingsSwitch;
+
 //proximityCell
 @property (weak, nonatomic) IBOutlet UIView *proximityRadiusView;
 @property (weak, nonatomic) IBOutlet UISlider *sliderView;

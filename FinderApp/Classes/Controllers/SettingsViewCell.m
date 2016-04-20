@@ -10,7 +10,7 @@
 
 @implementation SettingsViewCell
 @synthesize proximityRadiusView,sliderView;
-@synthesize settingsSwitch,settingsContainerView,nameLabel;
+@synthesize settingsContainerView,nameLabel;
 
 - (void)awakeFromNib {
     [super awakeFromNib];

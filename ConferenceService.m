@@ -105,9 +105,10 @@
 
 }
 #pragma mark- end
--(void)changeSettings:(NSString *)proximitAlert preConferenceMatch:(NSString *)preConferenceMatch newRequest:(NSString *)newRequest newMessage:(NSString *)newMessage success:(void (^)(id))success failure:(void (^)(NSError *))failure
+//{userId:"20",conferenceId:"2",switchIdentifire:"preConferenceMatch/newRequest/requestAccept", switchStatus:"true/false"} true to on false for off
+-(void)changeSettings:(NSString *)switchIdentifire switchStatus:(NSString *)switchStatus success:(void (^)(id))success failure:(void (^)(NSError *))failure
 {
-    NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":@"1",@"proximitAlert":proximitAlert,@"preConferenceMatch":preConferenceMatch,@"newRequest":newRequest,@"newmessage":newMessage};
+    NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":@"1",@"switchIdentifire":switchIdentifire,@"switchStatus":switchStatus};
     NSLog(@"settings request %@",requestDict);
     [[Webservice sharedManager] post:kUrlMatcheslist parameters:requestDict success:^(id responseObject)
      {

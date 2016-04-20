@@ -11,20 +11,23 @@
 #import "ConferenceService.h"
 
 @interface SettingsViewController ()
+{
+    NSMutableArray *settingsSection1Array, *settingsSection2Array;
+}
 @property (weak, nonatomic) IBOutlet UITableView *settingsTableView;
-@property (nonatomic, strong) NSString *proximityAlert;
-@property (nonatomic, strong) NSString *preconferenceMatch;
-@property (nonatomic, strong) NSString *request;
-@property (nonatomic, strong) NSString *message;
-@property (nonatomic, strong) NSString *requestAccepted;
+@property (nonatomic, strong) NSString *switchIdentifire;
+@property (nonatomic, strong) NSString *switchStatus;
+
 @end
 
 @implementation SettingsViewController
-@synthesize settingsTableView,proximityAlert,preconferenceMatch,request,message,requestAccepted;
+@synthesize settingsTableView,switchIdentifire,switchStatus;
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title=@"MY SETTINGS";
     // Do any additional setup after loading the view.
+     settingsSection1Array = [NSMutableArray arrayWithObjects:@"Pre-Conference Match",@"Proximity Alert", nil];
+    settingsSection2Array = [NSMutableArray arrayWithObjects:@"New Request",@"New Message",@"Request Accepted", nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -115,7 +118,7 @@
         proximityCell.proximityRadiusView.layer.shadowOffset = CGSizeMake(0, 1);
         proximityCell.proximityRadiusView.layer.shadowOpacity = 1;
         proximityCell.proximityRadiusView.layer.shadowRadius = 1.0;
-
+       // proximityCell.proximityLabel.text=[settingsSection1Array objectAtIndex:indexPath.row];
         return proximityCell;
     }
     else
@@ -130,14 +133,24 @@
         settingsCell.settingsContainerView.layer.shadowOffset = CGSizeMake(0, 1);
         settingsCell.settingsContainerView.layer.shadowOpacity = 1;
         settingsCell.settingsContainerView.layer.shadowRadius = 1.0;
+        
+        if (indexPath.section==0) {
+            settingsCell.nameLabel.text=[settingsSection1Array objectAtIndex:indexPath.row];
+        }
+        else
+        {
+            settingsCell.nameLabel.text=[settingsSection2Array objectAtIndex:indexPath.row];
+        }
+        
         RESwitch *defaultSwitch = [settingsCell viewWithTag:10];
         if (!defaultSwitch)
         {
-            defaultSwitch = [[RESwitch alloc] initWithFrame:CGRectMake(settingsCell.nameLabel.frame.size.width+70, settingsCell.settingsContainerView.frame.size.height/2-5, 75, 28)];
+            defaultSwitch = [[RESwitch alloc] initWithFrame:CGRectMake(settingsTableView.frame.size.width-85, settingsCell.nameLabel.frame.origin.y+settingsCell.nameLabel.frame.size.height/2-12, 70, 25)];
             defaultSwitch.tag = 10;
              [settingsCell.settingsContainerView  addSubview:defaultSwitch];
         }
         defaultSwitch.switchTag=(int)indexPath.row;
+        defaultSwitch.sectionTag=(int)indexPath.section;
        [defaultSwitch addTarget:self action:@selector(switchViewChanged:) forControlEvents:UIControlEventValueChanged];
         return settingsCell;
     }
@@ -146,16 +159,87 @@
 }
 - (void)switchViewChanged:(RESwitch *)switchView
 {
-    if (switchView.switchTag==0) {
+    if (switchView.sectionTag==0) {
+
+    if ( switchView.switchTag==0) {
     NSLog(@"Value 0: %i", switchView.on);
         if (switchView.on==0) {
-            
+            switchStatus=@"False";
+            switchIdentifire=@"preConferenceMatch";
+            [self changeSettings];
+        }
+        else
+        {
+            switchStatus=@"True";
+            switchIdentifire=@"preConferenceMatch";
+            [self changeSettings];
         }
     }
     else if (switchView.switchTag==1)
     {
     NSLog(@"Value 1: %i", switchView.on);
+        if (switchView.on==0) {
+            switchStatus=@"False";
+            switchIdentifire=@"proximityAlert";
+            [self changeSettings];
+        }
+        else
+        {
+            switchStatus=@"True";
+            switchIdentifire=@"proximityAlert";
+            [self changeSettings];
+        }
     }
+    }
+    else
+    {
+    if (switchView.switchTag==0)
+    {
+        NSLog(@"Value 1: %i", switchView.on);
+        if (switchView.on==0) {
+            switchStatus=@"False";
+            switchIdentifire=@"newRequest";
+            [self changeSettings];
+        }
+        else
+        {
+            switchStatus=@"True";
+            switchIdentifire=@"newRequest";
+            [self changeSettings];
+        }
+    }
+        if (switchView.switchTag==1)
+        {
+            NSLog(@"Value 1: %i", switchView.on);
+            if (switchView.on==0) {
+                switchStatus=@"False";
+                switchIdentifire=@"newMessage";
+                [self changeSettings];
+            }
+            else
+            {
+                switchStatus=@"True";
+                switchIdentifire=@"newMessage";
+                [self changeSettings];
+            }
+        }
+        if (switchView.switchTag==2)
+        {
+            NSLog(@"Value 1: %i", switchView.on);
+            if (switchView.on==0) {
+                switchStatus=@"False";
+                switchIdentifire=@"requestAccepted";
+                [self changeSettings];
+            }
+            else
+            {
+                switchStatus=@"True";
+                switchIdentifire=@"requestAccepted";
+                [self changeSettings];
+            }
+        }
+    }
+
 
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -168,9 +252,9 @@
 #pragma mark - end
 
 #pragma mark - Webservice
--(void)getConferenceDetail
+-(void)changeSettings
 {
-    [[ConferenceService sharedManager] getConferenceDetail:^(id conferenceArray) {
+    [[ConferenceService sharedManager] changeSettings:switchIdentifire switchStatus:switchStatus success:^(id responseObject) {
         [myDelegate stopIndicator];
 
     }
