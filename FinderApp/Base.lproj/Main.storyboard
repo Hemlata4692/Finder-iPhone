@@ -799,7 +799,7 @@
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bZb-vj-y9E">
-                                                            <rect key="frame" x="48" y="10" width="215" height="30"/>
+                                                            <rect key="frame" x="48" y="8" width="215" height="30"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="bZb-vj-y9E" secondAttribute="height" multiplier="43:6" id="QDr-U1-X9q"/>
                                                             </constraints>
@@ -833,11 +833,11 @@
                                                         <constraint firstItem="iXb-Gg-WZJ" firstAttribute="top" secondItem="bsV-cK-Frw" secondAttribute="top" constant="15" id="Ama-TI-3BS"/>
                                                         <constraint firstItem="ULp-da-jNw" firstAttribute="top" secondItem="bsV-cK-Frw" secondAttribute="top" constant="8" id="B7C-aM-HoS"/>
                                                         <constraint firstAttribute="trailing" secondItem="iXb-Gg-WZJ" secondAttribute="trailing" constant="10" id="EHL-Pn-Mk3"/>
-                                                        <constraint firstItem="bZb-vj-y9E" firstAttribute="top" secondItem="bsV-cK-Frw" secondAttribute="top" constant="10" id="IRP-IS-MdQ"/>
+                                                        <constraint firstItem="bZb-vj-y9E" firstAttribute="top" secondItem="bsV-cK-Frw" secondAttribute="top" constant="8" id="IRP-IS-MdQ"/>
                                                         <constraint firstAttribute="width" secondItem="bsV-cK-Frw" secondAttribute="height" multiplier="31:5" id="JGv-0G-Aio"/>
                                                         <constraint firstAttribute="trailing" secondItem="q3z-Ik-leC" secondAttribute="trailing" id="Vjg-e8-HkU"/>
                                                         <constraint firstAttribute="bottom" secondItem="iXb-Gg-WZJ" secondAttribute="bottom" constant="15" id="Z8e-FW-UPV"/>
-                                                        <constraint firstAttribute="bottom" secondItem="bZb-vj-y9E" secondAttribute="bottom" constant="10" id="j0b-Kq-S8S"/>
+                                                        <constraint firstAttribute="bottom" secondItem="bZb-vj-y9E" secondAttribute="bottom" constant="12" id="j0b-Kq-S8S"/>
                                                         <constraint firstItem="q3z-Ik-leC" firstAttribute="leading" secondItem="bsV-cK-Frw" secondAttribute="leading" id="qqk-oo-Sy7"/>
                                                     </constraints>
                                                 </view>
@@ -951,7 +951,6 @@
                                             <constraint firstItem="v3D-GX-AUY" firstAttribute="leading" secondItem="JTH-7F-78w" secondAttribute="leading" constant="10" id="DZv-na-CVh"/>
                                             <constraint firstItem="qaM-3M-Yzi" firstAttribute="leading" secondItem="JTH-7F-78w" secondAttribute="leading" constant="10" id="FVf-A8-dgQ"/>
                                             <constraint firstItem="xOe-un-FEy" firstAttribute="baseline" secondItem="aAj-zF-KJS" secondAttribute="firstBaseline" id="FfP-4h-hKT"/>
-                                            <constraint firstAttribute="width" secondItem="JTH-7F-78w" secondAttribute="height" multiplier="56:47" id="Uhk-xa-iNJ"/>
                                             <constraint firstItem="v3D-GX-AUY" firstAttribute="top" secondItem="rwu-dd-hKY" secondAttribute="bottom" constant="10" id="WXM-5B-AKJ"/>
                                             <constraint firstAttribute="bottom" secondItem="aAj-zF-KJS" secondAttribute="bottom" id="Xy9-Kk-Y9A"/>
                                             <constraint firstItem="xOe-un-FEy" firstAttribute="trailing" secondItem="fhH-LA-OVX" secondAttribute="trailing" id="ZUD-dd-ybr"/>
@@ -962,6 +961,7 @@
                                             <constraint firstItem="xOe-un-FEy" firstAttribute="width" secondItem="aAj-zF-KJS" secondAttribute="width" id="hKy-Zf-UXD"/>
                                             <constraint firstAttribute="trailing" secondItem="rwu-dd-hKY" secondAttribute="trailing" constant="10" id="hpn-PP-KFY"/>
                                             <constraint firstItem="qaM-3M-Yzi" firstAttribute="height" secondItem="v3D-GX-AUY" secondAttribute="height" id="kzk-93-gpw"/>
+                                            <constraint firstAttribute="width" secondItem="JTH-7F-78w" secondAttribute="height" multiplier="56:47" id="myd-rA-3Ph"/>
                                             <constraint firstAttribute="trailing" secondItem="v3D-GX-AUY" secondAttribute="trailing" constant="10" id="nZT-xH-RFD"/>
                                             <constraint firstItem="xOe-un-FEy" firstAttribute="top" secondItem="aAj-zF-KJS" secondAttribute="top" id="pEM-Xe-ma1"/>
                                             <constraint firstItem="fhH-LA-OVX" firstAttribute="leading" secondItem="JTH-7F-78w" secondAttribute="leading" id="qbO-Zi-pEK"/>
@@ -996,8 +996,8 @@
                     <navigationItem key="navigationItem" id="PFD-M5-fsD"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
+                        <outlet property="changePasswordView" destination="JTH-7F-78w" id="EvB-xO-7Vn"/>
                         <outlet property="changePwdContainerView" destination="5Ev-SZ-J8C" id="vzS-Jc-gLn"/>
-                        <outlet property="changePwdView" destination="JTH-7F-78w" id="xxO-gL-pg0"/>
                         <outlet property="confirmPasswordTextField" destination="qaM-3M-Yzi" id="dHg-Hd-jpM"/>
                         <outlet property="moreTableView" destination="agH-w7-T7Q" id="yYn-Mb-p01"/>
                         <outlet property="oldPasswordTextField" destination="rwu-dd-hKY" id="hYP-Vx-iK0"/>

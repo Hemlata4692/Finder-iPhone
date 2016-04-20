@@ -21,7 +21,7 @@
 
 //Change password view
 @property (weak, nonatomic) IBOutlet UIView *changePwdContainerView;
-@property (weak, nonatomic) IBOutlet UIView *changePwdView;
+@property (weak, nonatomic) IBOutlet UIView *changePasswordView;
 @property (weak, nonatomic) IBOutlet UITextField *oldPasswordTextField;
 @property (weak, nonatomic) IBOutlet UITextField *confirmPasswordTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
@@ -29,7 +29,7 @@
 @end
 
 @implementation MoreViewController
-@synthesize changePwdContainerView,changePwdView,oldPasswordTextField,confirmPasswordTextField,passwordTextField,keyboardControls;
+@synthesize changePwdContainerView,changePasswordView,oldPasswordTextField,confirmPasswordTextField,passwordTextField,keyboardControls;
 
 #pragma mark - View life cycle
 - (void)viewDidLoad
@@ -139,9 +139,9 @@
     UIView *view;
     view = field.superview.superview.superview;
 }
-- (void)keyboardControlsDonePressed:(BSKeyboardControls *)keyboardControls
+- (void)keyboardControlsDonePressed:(BSKeyboardControls *)keyboard
 {
-    [keyboardControls.activeField resignFirstResponder];
+    [keyboard.activeField resignFirstResponder];
 }
 
 #pragma mark - end
@@ -185,7 +185,7 @@
 {
     if ([oldPasswordTextField isEmpty] || [passwordTextField isEmpty] || [confirmPasswordTextField isEmpty])
     {
-        SCLAlertView *alert = [[SCLAlertView alloc] init];
+        SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
         [alert showWarning:self title:@"Alert" subTitle:@"All fields are required." closeButtonTitle:@"Done" duration:0.0f];
         return NO;
     }
@@ -193,7 +193,7 @@
     {
         if ([oldPasswordTextField.text isEqualToString:passwordTextField.text])
         {
-            SCLAlertView *alert = [[SCLAlertView alloc] init];
+            SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
             [alert showWarning:self title:@"Alert" subTitle:@"Old password and new password are same. Please try a different one" closeButtonTitle:@"Done" duration:0.0f];
             return NO;
         }
@@ -201,7 +201,7 @@
         //Password confirmation for new password entered
         else if (![passwordTextField.text isEqualToString:confirmPasswordTextField.text])
         {
-            SCLAlertView *alert = [[SCLAlertView alloc] init];
+            SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
             [alert showWarning:self title:@"Alert" subTitle:@"Passwords do not match" closeButtonTitle:@"Done" duration:0.0f];
             
             return NO;
@@ -209,7 +209,7 @@
 
        else if ((oldPasswordTextField.text.length < 6) || (passwordTextField.text.length < 6) || (confirmPasswordTextField.text.length < 6))
         {
-            SCLAlertView *alert = [[SCLAlertView alloc] init];
+            SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
             [alert showWarning:self title:@"Alert" subTitle:@"Your password must be atleast 6 characters long." closeButtonTitle:@"Done" duration:0.0f];
             return NO;
         }
