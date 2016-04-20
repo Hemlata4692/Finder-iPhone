@@ -11,6 +11,9 @@
 #import "ConferenceService.h"
 
 @interface MatchesViewController ()
+{
+    NSInteger selectedSegment;
+}
 @property (weak, nonatomic) IBOutlet UITableView *matchesTableView;
 
 @end
@@ -43,22 +46,39 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 6;
+    return 10;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *simpleTableIdentifier = @"matchesCell";
-    MatchesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
-    if (cell == nil)
+    if (selectedSegment == 2)
     {
-        cell = [[MatchesTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
+        NSString *simpleTableIdentifier = @"contactsCell";
+        MatchesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+        if (cell == nil)
+        {
+            cell = [[MatchesTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
+        }
+        cell.contactsContainerView.layer.shadowColor = [[UIColor lightGrayColor] CGColor];
+        cell.contactsContainerView.layer.shadowOffset = CGSizeMake(0, 1.0f);
+        cell.contactsContainerView.layer.shadowOpacity = 1.0f;
+        cell.contactsContainerView.layer.shadowRadius = 1.0f;
+        return cell;
     }
-    cell.containerView.layer.shadowColor = [[UIColor lightGrayColor] CGColor];
-    cell.containerView.layer.shadowOffset = CGSizeMake(0, 1.0f);
-    cell.containerView.layer.shadowOpacity = 1.0f;
-    cell.containerView.layer.shadowRadius = 1.0f;
+    else
+    {
+        NSString *simpleTableIdentifier = @"matchesCell";
+        MatchesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+        if (cell == nil)
+        {
+            cell = [[MatchesTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
+        }
+        cell.containerView.layer.shadowColor = [[UIColor lightGrayColor] CGColor];
+        cell.containerView.layer.shadowOffset = CGSizeMake(0, 1.0f);
+        cell.containerView.layer.shadowOpacity = 1.0f;
+        cell.containerView.layer.shadowRadius = 1.0f;
+        return cell;
 
-    return cell;
+    }
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -82,20 +102,19 @@
 - (IBAction)matchesSegmentAction:(UISegmentedControl *)sender
 {
     UISegmentedControl *segmentedControl = (UISegmentedControl *) sender;
-    NSInteger selectedSegment = segmentedControl.selectedSegmentIndex;
+     selectedSegment = segmentedControl.selectedSegmentIndex;
     
     if (selectedSegment == 0)
     {
-        _matchesTableView.hidden=NO;
     }
     else if(selectedSegment == 1)
     {
-        _matchesTableView.hidden=YES;
     }
     else
     {
         
     }
+    [self.matchesTableView reloadData];
 }
 #pragma mark - end
 
