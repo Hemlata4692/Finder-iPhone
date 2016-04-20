@@ -17,6 +17,7 @@
     NSArray *textFieldArray;
 }
 @property (weak, nonatomic) IBOutlet UITableView *moreTableView;
+@property (nonatomic, strong) BSKeyboardControls *keyboardControls;
 
 //Change password view
 @property (weak, nonatomic) IBOutlet UIView *changePwdContainerView;
@@ -24,18 +25,17 @@
 @property (weak, nonatomic) IBOutlet UITextField *oldPasswordTextField;
 @property (weak, nonatomic) IBOutlet UITextField *confirmPasswordTextField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordTextField;
-@property (nonatomic, strong) BSKeyboardControls *keyboardControls;
 
 @end
 
 @implementation MoreViewController
-@synthesize changePwdContainerView,changePwdView,oldPasswordTextField,confirmPasswordTextField,passwordTextField;
+@synthesize changePwdContainerView,changePwdView,oldPasswordTextField,confirmPasswordTextField,passwordTextField,keyboardControls;
 
 #pragma mark - View life cycle
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     self.navigationItem.title=@"MORE";
-    // Do any additional setup after loading the view.
     
     changePwdContainerView.hidden = YES;
     textFieldArray = @[oldPasswordTextField,passwordTextField,confirmPasswordTextField];
@@ -49,7 +49,8 @@
     moreOptionsArray = [NSMutableArray arrayWithObjects:@"MY PROFILE",@"PENDING APPOINTMENTS",@"PROXIMITY ALERTS",@"SETTINGS",@"CHANGE PASSWORD",@"LOGOUT", nil];
 }
 
-- (void)didReceiveMemoryWarning {
+- (void)didReceiveMemoryWarning
+{
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
@@ -65,7 +66,6 @@
     [passwordTextField setCornerRadius:2.0f];
     [confirmPasswordTextField setCornerRadius:2.0f];
 }
-
 -(void)addborder
 {
     [oldPasswordTextField addBorder:oldPasswordTextField];
@@ -79,7 +79,6 @@
     [confirmPasswordTextField addTextFieldPaddingWithoutImages:confirmPasswordTextField];
 }
 #pragma mark - end
-
 #pragma mark - Table view methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -110,7 +109,8 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row==3) {
+    if (indexPath.row==3)
+    {
         UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         SettingsViewController *settingsView =[storyboard instantiateViewControllerWithIdentifier:@"SettingsViewController"];
         [self.navigationController pushViewController:settingsView animated:YES];
@@ -118,6 +118,9 @@
     else if (indexPath.row == 4)
     {
         changePwdContainerView.hidden = NO;
+        oldPasswordTextField.text=@"";
+        passwordTextField.text=@"";
+        confirmPasswordTextField.text=@"";
     }
     else if (indexPath.row == 5)
     {
@@ -127,21 +130,21 @@
         myDelegate.window.rootViewController = myDelegate.navigationController;
     }
 }
-#pragma mark - end
 
+#pragma mark - end
 #pragma mark - Keyboard controls delegate
+
 - (void)keyboardControls:(BSKeyboardControls *)keyboardControls selectedField:(UIView *)field inDirection:(BSKeyboardControlsDirection)direction
 {
     UIView *view;
     view = field.superview.superview.superview;
 }
-
 - (void)keyboardControlsDonePressed:(BSKeyboardControls *)keyboardControls
 {
     [keyboardControls.activeField resignFirstResponder];
 }
-#pragma mark - end
 
+#pragma mark - end
 #pragma mark - Textfield delegates
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField
@@ -221,6 +224,8 @@
 
 - (IBAction)saveButtonAction:(id)sender
 {
+    [keyboardControls.activeField resignFirstResponder];
+
     if([self performValidationsForChangePassword])
     {
         [myDelegate showIndicator];
@@ -229,23 +234,29 @@
 }
 - (IBAction)cancelButtonAction:(id)sender
 {
+    [keyboardControls.activeField resignFirstResponder];
+
     changePwdContainerView.hidden = YES;
 }
+
 #pragma mark - end
 #pragma mark - Webservice
+
 -(void)changePassword
 {
     [[UserService sharedManager] changePassword:oldPasswordTextField.text newPassword:confirmPasswordTextField.text success:^(id responseObject)
      {
          [myDelegate stopIndicator];
+         changePwdContainerView.hidden=YES;
          SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
          [alert addButton:@"Ok" actionBlock:^(void)
           {
              changePwdContainerView.hidden = YES;
          }];
-         [alert showWarning:nil title:@"Alert" subTitle:@"Your password has been changed successfully." closeButtonTitle:nil duration:0.0f];
+         [alert showSuccess:nil title:@"Success" subTitle:@"Your password has been changed successfully." closeButtonTitle:nil duration:0.0f];
 
-     } failure:^(NSError *error) {
+     } failure:^(NSError *error)
+    {
          
      }] ;
 
