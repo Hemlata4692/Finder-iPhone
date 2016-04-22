@@ -987,7 +987,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/FinderApp/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ranosys.finder;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ranosys.finderApp;
 				PRODUCT_NAME = Finder_iPhoneApp;
 			};
 			name = Debug;
@@ -1002,7 +1002,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/FinderApp/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ranosys.finder;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ranosys.finderApp;
 				PRODUCT_NAME = Finder_iPhoneApp;
 			};
 			name = Release;
