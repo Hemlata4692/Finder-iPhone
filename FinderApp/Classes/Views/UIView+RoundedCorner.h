@@ -18,4 +18,5 @@
 - (void)setViewBorder: (UIView *)view color:(UIColor *)color;
 
 -(void)setBottomBorder: (UIView *)view color:(UIColor *)color;
+-(void)addShadow: (UIView *)view color:(UIColor *)color;
 @end

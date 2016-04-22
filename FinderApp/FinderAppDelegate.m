@@ -91,6 +91,17 @@
                                              animated: YES];
     }
     
+    if ([UserDefaultManager getValue:@"switchStatusDict"]==NULL) {
+        NSMutableDictionary *switchDict=[[NSMutableDictionary alloc]init];
+        [switchDict setObject:@"True" forKey:@"00"];
+        [switchDict setObject:@"True" forKey:@"01"];
+        [switchDict setObject:@"0" forKey:@"02"];
+        [switchDict setObject:@"True" forKey:@"10"];
+        [switchDict setObject:@"True" forKey:@"11"];
+        [switchDict setObject:@"True" forKey:@"12"];
+        [UserDefaultManager setValue:switchDict key:@"switchStatusDict"];
+    }
+    
     //permission for local notification
     if ([application respondsToSelector:@selector(registerUserNotificationSettings:)])
     {

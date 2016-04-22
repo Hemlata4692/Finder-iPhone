@@ -11,6 +11,7 @@
 
 #define kUrlConferenceDetail            @"getconferencedetails"
 #define kUrlMatcheslist                 @"Matcheslist"
+#define kUrlChangeSettings              @"settings"
 
 @implementation ConferenceService
 #pragma mark - Singleton instance
@@ -105,19 +106,20 @@
 
 }
 #pragma mark- end
-//{userId:"20",conferenceId:"2",switchIdentifire:"preConferenceMatch/newRequest/requestAccept", switchStatus:"true/false"} true to on false for off
+
+#pragma mark- Settings
 -(void)changeSettings:(NSString *)switchIdentifire switchStatus:(NSString *)switchStatus success:(void (^)(id))success failure:(void (^)(NSError *))failure
 {
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":@"1",@"switchIdentifire":switchIdentifire,@"switchStatus":switchStatus};
     NSLog(@"settings request %@",requestDict);
-    [[Webservice sharedManager] post:kUrlMatcheslist parameters:requestDict success:^(id responseObject)
+    [[Webservice sharedManager] post:kUrlChangeSettings parameters:requestDict success:^(id responseObject)
      {
          responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
          NSLog(@"settings response %@",responseObject);
-         if([[Webservice sharedManager] isStatusOK:responseObject])
+         NSNumber *number = responseObject[@"isSuccess"];
+         if (number.integerValue!=0)
          {
-             
-             success(responseObject);
+              success(responseObject);
          }
          else
          {
@@ -131,4 +133,5 @@
      }];
 
 }
+#pragma mark- end
 @end

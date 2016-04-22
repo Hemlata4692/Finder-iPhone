@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "RESwitch.h"
+#import "NYSliderPopover.h"
 
 @interface SettingsViewCell : UITableViewCell
 //settingsCell
@@ -16,6 +16,6 @@
 
 //proximityCell
 @property (weak, nonatomic) IBOutlet UIView *proximityRadiusView;
-@property (weak, nonatomic) IBOutlet UISlider *sliderView;
+@property (weak, nonatomic) IBOutlet NYSliderPopover *sliderView;
 
 @end

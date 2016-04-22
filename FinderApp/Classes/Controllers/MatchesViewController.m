@@ -53,30 +53,24 @@
     if (selectedSegment == 2)
     {
         NSString *simpleTableIdentifier = @"contactsCell";
-        MatchesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
-        if (cell == nil)
+        MatchesTableViewCell *contactsCell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+        if (contactsCell == nil)
         {
-            cell = [[MatchesTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
+            contactsCell = [[MatchesTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
         }
-        cell.contactsContainerView.layer.shadowColor = [[UIColor lightGrayColor] CGColor];
-        cell.contactsContainerView.layer.shadowOffset = CGSizeMake(0, 1.0f);
-        cell.contactsContainerView.layer.shadowOpacity = 1.0f;
-        cell.contactsContainerView.layer.shadowRadius = 1.0f;
-        return cell;
+        [contactsCell.contactsContainerView addShadow:contactsCell.contactsContainerView color:[UIColor lightGrayColor]];
+        return contactsCell;
     }
     else
     {
         NSString *simpleTableIdentifier = @"matchesCell";
-        MatchesTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
-        if (cell == nil)
+        MatchesTableViewCell *matchesCell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+        if (matchesCell == nil)
         {
-            cell = [[MatchesTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
+            matchesCell = [[MatchesTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
         }
-        cell.containerView.layer.shadowColor = [[UIColor lightGrayColor] CGColor];
-        cell.containerView.layer.shadowOffset = CGSizeMake(0, 1.0f);
-        cell.containerView.layer.shadowOpacity = 1.0f;
-        cell.containerView.layer.shadowRadius = 1.0f;
-        return cell;
+        [matchesCell.containerView addShadow:matchesCell.containerView color:[UIColor lightGrayColor]];
+        return matchesCell;
 
     }
 }

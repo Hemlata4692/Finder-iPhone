@@ -35,6 +35,8 @@
 		B77695CA1CBFB4F300794005 /* SCLTimerDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = B77695C01CBFB4F300794005 /* SCLTimerDisplay.m */; };
 		B77695CB1CBFB4F300794005 /* SCLTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = B77695C21CBFB4F300794005 /* SCLTextView.m */; };
 		B77695CC1CBFB4F300794005 /* SCLSwitchView.m in Sources */ = {isa = PBXBuildFile; fileRef = B77695C41CBFB4F300794005 /* SCLSwitchView.m */; };
+		B78E18081CC76431003CA378 /* NYPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = B78E18051CC76431003CA378 /* NYPopover.m */; };
+		B78E18091CC76431003CA378 /* NYSliderPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = B78E18071CC76431003CA378 /* NYSliderPopover.m */; };
 		B7A8DD6A1CAE2BF2007F56B6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B7A8DD691CAE2BF2007F56B6 /* main.m */; };
 		B7A8DD6D1CAE2BF2007F56B6 /* FinderAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B7A8DD6C1CAE2BF2007F56B6 /* FinderAppDelegate.m */; };
 		B7A8DD751CAE2BF2007F56B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7A8DD741CAE2BF2007F56B6 /* Assets.xcassets */; };
@@ -108,6 +110,10 @@
 		B77695C21CBFB4F300794005 /* SCLTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCLTextView.m; sourceTree = "<group>"; };
 		B77695C31CBFB4F300794005 /* SCLSwitchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCLSwitchView.h; sourceTree = "<group>"; };
 		B77695C41CBFB4F300794005 /* SCLSwitchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCLSwitchView.m; sourceTree = "<group>"; };
+		B78E18041CC76431003CA378 /* NYPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYPopover.h; sourceTree = "<group>"; };
+		B78E18051CC76431003CA378 /* NYPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NYPopover.m; sourceTree = "<group>"; };
+		B78E18061CC76431003CA378 /* NYSliderPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYSliderPopover.h; sourceTree = "<group>"; };
+		B78E18071CC76431003CA378 /* NYSliderPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NYSliderPopover.m; sourceTree = "<group>"; };
 		B7A8DD651CAE2BF2007F56B6 /* Finder_iPhoneApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Finder_iPhoneApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7A8DD691CAE2BF2007F56B6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = main.m; path = "Supporting Files/main.m"; sourceTree = "<group>"; };
 		B7A8DD6B1CAE2BF2007F56B6 /* FinderAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FinderAppDelegate.h; sourceTree = "<group>"; };
@@ -335,6 +341,17 @@
 			name = GlobalBackViewController;
 			sourceTree = "<group>";
 		};
+		B78E18031CC7641D003CA378 /* NYSliderPopover */ = {
+			isa = PBXGroup;
+			children = (
+				B78E18041CC76431003CA378 /* NYPopover.h */,
+				B78E18051CC76431003CA378 /* NYPopover.m */,
+				B78E18061CC76431003CA378 /* NYSliderPopover.h */,
+				B78E18071CC76431003CA378 /* NYSliderPopover.m */,
+			);
+			name = NYSliderPopover;
+			sourceTree = "<group>";
+		};
 		B7A8DD5C1CAE2BF2007F56B6 = {
 			isa = PBXGroup;
 			children = (
@@ -390,6 +407,7 @@
 		B7A8DD801CAE2CE9007F56B6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B78E18031CC7641D003CA378 /* NYSliderPopover */,
 				5D9361981CC5F4190004F030 /* TextFieldBorderCategory */,
 				B7EAC1831CC6266C001C4EEC /* RESwitch */,
 				B77695A01CBF593C00794005 /* CornderRadius */,
@@ -834,7 +852,9 @@
 				B7EAC18B1CC63328001C4EEC /* SettingsViewCell.m in Sources */,
 				5D32EC0F1CC4A31F00C50969 /* MatchesViewController.m in Sources */,
 				B77695CC1CBFB4F300794005 /* SCLSwitchView.m in Sources */,
+				B78E18091CC76431003CA378 /* NYSliderPopover.m in Sources */,
 				B77695C91CBFB4F300794005 /* SCLAlertViewStyleKit.m in Sources */,
+				B78E18081CC76431003CA378 /* NYPopover.m in Sources */,
 				B7E024C41CC5089E00707552 /* ConferenceDataModel.m in Sources */,
 				B776959F1CBF590100794005 /* UITextField+Padding.m in Sources */,
 				B77695C61CBFB4F300794005 /* SCLAlertView.m in Sources */,

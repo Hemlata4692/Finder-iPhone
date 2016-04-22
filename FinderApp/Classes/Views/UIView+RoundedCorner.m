@@ -41,4 +41,12 @@
     
     [view.layer addSublayer:bottomBorder];
 }
+-(void)addShadow: (UIView *)view color:(UIColor *)color
+{
+    view.layer.shadowColor =color.CGColor;
+    view.layer.shadowOffset = CGSizeMake(0, 1);
+    view.layer.shadowOpacity = 1;
+    view.layer.shadowRadius = 1.0;
+
+}
 @end

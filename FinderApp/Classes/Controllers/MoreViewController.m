@@ -85,6 +85,15 @@
 {
     return 6;
 }
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
+{
+    return 0;
+}
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 60;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *simpleTableIdentifier = @"moreCell";
@@ -93,10 +102,7 @@
     {
         cell = [[MoreTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     }
-    cell.containerView.layer.shadowColor = [UIColor lightGrayColor].CGColor;
-    cell.containerView.layer.shadowOffset = CGSizeMake(0, 1);
-    cell.containerView.layer.shadowOpacity = 1;
-    cell.containerView.layer.shadowRadius = 1.0;
+    [cell.containerView addShadow:cell.containerView color:[UIColor lightGrayColor]];
     
     if(indexPath.row == 5)
     {
@@ -124,10 +130,11 @@
     }
     else if (indexPath.row == 5)
     {
-        [UserDefaultManager removeValue:@"userId"];
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
                 myDelegate.navigationController = [storyboard instantiateViewControllerWithIdentifier:@"mainNavController"];
         myDelegate.window.rootViewController = myDelegate.navigationController;
+        [UserDefaultManager removeValue:@"userId"];
+        [UserDefaultManager removeValue:@"switchStatusDict"];
     }
 }
 
