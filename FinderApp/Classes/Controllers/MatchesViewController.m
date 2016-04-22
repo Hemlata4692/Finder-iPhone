@@ -77,7 +77,6 @@
         cell.containerView.layer.shadowOpacity = 1.0f;
         cell.containerView.layer.shadowRadius = 1.0f;
         return cell;
-
     }
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

@@ -16,6 +16,7 @@
     NSMutableArray *moreOptionsArray;
     NSArray *textFieldArray;
 }
+
 @property (weak, nonatomic) IBOutlet UITableView *moreTableView;
 @property (nonatomic, strong) BSKeyboardControls *keyboardControls;
 

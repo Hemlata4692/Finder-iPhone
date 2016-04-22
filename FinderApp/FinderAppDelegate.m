@@ -73,7 +73,8 @@
     locationManager.pausesLocationUpdatesAutomatically = NO;
     [locationManager startUpdatingLocation];
     isLocation=@"0";
-    
+    self.deviceToken = @"";
+
     NSLog(@"userId %@",[[NSUserDefaults standardUserDefaults] objectForKey:@"userId"]);
     UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"userId"]!=nil)
@@ -172,9 +173,7 @@
         [[NSRunLoop currentRunLoop] addTimer:t forMode:NSDefaultRunLoopMode];
         [[NSRunLoop currentRunLoop] run];
     });
-    
 }
-
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
@@ -185,6 +184,70 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+#pragma mark - Push notification methods
+-(void)registerDeviceForNotification
+{
+    
+    if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerUserNotificationSettings:)])
+    {
+        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
+        [[UIApplication sharedApplication] registerForRemoteNotifications];
+    }
+    else
+    {
+        
+        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
+        [[UIApplication sharedApplication] registerForRemoteNotifications];
+    }
+}
+
+- (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken1
+{
+    NSString *token = [[deviceToken1 description] stringByTrimmingCharactersInSet: [NSCharacterSet characterSetWithCharactersInString:@"<>"]];
+    token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
+    NSLog(@"content---%@", token);
+    NSLog(@"didRegisterForRemoteNotificationsWithDeviceToken");
+    self.deviceToken = token;
+    //    [[WebService sharedManager] registerDeviceForPushNotification:^(id responseObject) {
+    //
+    //    } failure:^(NSError *error) {
+    //
+    //    }] ;
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
+{
+    
+    [UIApplication sharedApplication].applicationIconBadgeNumber=0;
+    if (application.applicationState == UIApplicationStateActive)
+    {
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Alert" message:[[userInfo objectForKey:@"aps"] objectForKey:@"alert"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        
+        [alert show];
+        
+        NSLog(@"push notification user info is active state --------------------->>>%@",userInfo);
+    }
+    
+}
+
+
+//-(NSString *)getNotificationMessage : (NSDictionary *)userInfo
+//{
+//    NSLog(@"Notification response  %@", userInfo);
+//    NSDictionary *tempDict=[userInfo objectForKey:@"aps"];
+//    threadId = [tempDict objectForKey:@"threadid"];
+//    groupId = [tempDict objectForKey:@"groupId"];
+//    notificationRole = [[tempDict objectForKey:@"role"] intValue];
+//    NSLog(@"%@", threadId);
+//    NSLog(@"%@", groupId);
+//    return [tempDict objectForKey:@"alert"];
+//}
+- (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err
+{
+    NSString *str = [NSString stringWithFormat: @"Error: %@", err];
+    NSLog(@"did failtoRegister and testing : %@",str);
+    
 }
 
 @end
