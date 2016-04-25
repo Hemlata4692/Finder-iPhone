@@ -16,6 +16,9 @@
 		5D32EC101CC4A31F00C50969 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D32EC0A1CC4A31F00C50969 /* HomeViewController.m */; };
 		5D9361971CC5F40B0004F030 /* UITextField+Border.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D9361961CC5F40B0004F030 /* UITextField+Border.m */; };
 		5D93619D1CC606190004F030 /* MatchesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D93619C1CC606190004F030 /* MatchesTableViewCell.m */; };
+		B7414F921CCA4715009FE9CE /* MyAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = B7414F8E1CCA4715009FE9CE /* MyAlert.m */; };
+		B7414F931CCA4715009FE9CE /* CustomAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = B7414F901CCA4715009FE9CE /* CustomAlert.m */; };
+		B7414F941CCA4715009FE9CE /* CustomAlert.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7414F911CCA4715009FE9CE /* CustomAlert.xib */; };
 		B771FB6D1CBE200C006CBA32 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B771FB671CBE200C006CBA32 /* Roboto-Black.ttf */; };
 		B771FB6E1CBE200C006CBA32 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B771FB681CBE200C006CBA32 /* Roboto-Bold.ttf */; };
 		B771FB6F1CBE200C006CBA32 /* Roboto-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B771FB691CBE200C006CBA32 /* Roboto-Italic.ttf */; };
@@ -77,6 +80,11 @@
 		5D93619B1CC606190004F030 /* MatchesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchesTableViewCell.h; sourceTree = "<group>"; };
 		5D93619C1CC606190004F030 /* MatchesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchesTableViewCell.m; sourceTree = "<group>"; };
 		B3CDDBB308E1E7466EFB6FFC /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B7414F8D1CCA4715009FE9CE /* MyAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAlert.h; sourceTree = "<group>"; };
+		B7414F8E1CCA4715009FE9CE /* MyAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAlert.m; sourceTree = "<group>"; };
+		B7414F8F1CCA4715009FE9CE /* CustomAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAlert.h; sourceTree = "<group>"; };
+		B7414F901CCA4715009FE9CE /* CustomAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAlert.m; sourceTree = "<group>"; };
+		B7414F911CCA4715009FE9CE /* CustomAlert.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomAlert.xib; sourceTree = "<group>"; };
 		B771FB671CBE200C006CBA32 /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
 		B771FB681CBE200C006CBA32 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		B771FB691CBE200C006CBA32 /* Roboto-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Italic.ttf"; sourceTree = "<group>"; };
@@ -265,6 +273,18 @@
 			name = MatchesViewCell;
 			sourceTree = "<group>";
 		};
+		B7414F841CCA4673009FE9CE /* CustomAlert */ = {
+			isa = PBXGroup;
+			children = (
+				B7414F8D1CCA4715009FE9CE /* MyAlert.h */,
+				B7414F8E1CCA4715009FE9CE /* MyAlert.m */,
+				B7414F8F1CCA4715009FE9CE /* CustomAlert.h */,
+				B7414F901CCA4715009FE9CE /* CustomAlert.m */,
+				B7414F911CCA4715009FE9CE /* CustomAlert.xib */,
+			);
+			name = CustomAlert;
+			sourceTree = "<group>";
+		};
 		B771FB661CBE2001006CBA32 /* Font */ = {
 			isa = PBXGroup;
 			children = (
@@ -407,6 +427,7 @@
 		B7A8DD801CAE2CE9007F56B6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B7414F841CCA4673009FE9CE /* CustomAlert */,
 				B78E18031CC7641D003CA378 /* NYSliderPopover */,
 				5D9361981CC5F4190004F030 /* TextFieldBorderCategory */,
 				B7EAC1831CC6266C001C4EEC /* RESwitch */,
@@ -776,6 +797,7 @@
 				B7A8DDDF1CAE60BB007F56B6 /* Main.storyboard in Resources */,
 				B7A8DD751CAE2BF2007F56B6 /* Assets.xcassets in Resources */,
 				B7EAC18D1CC639E7001C4EEC /* RESwitch.bundle in Resources */,
+				B7414F941CCA4715009FE9CE /* CustomAlert.xib in Resources */,
 				B771FB721CBE200C006CBA32 /* Roboto-Regular.ttf in Resources */,
 				B771FB701CBE200C006CBA32 /* Roboto-Light.ttf in Resources */,
 				B771FB711CBE200C006CBA32 /* Roboto-Medium.ttf in Resources */,
@@ -861,6 +883,7 @@
 				B7EAC1861CC62681001C4EEC /* RESwitch.m in Sources */,
 				5D32EC0B1CC4A31F00C50969 /* MoreViewController.m in Sources */,
 				B7A8DDCE1CAE5C32007F56B6 /* NullValueChecker.m in Sources */,
+				B7414F931CCA4715009FE9CE /* CustomAlert.m in Sources */,
 				5D9361971CC5F40B0004F030 /* UITextField+Border.m in Sources */,
 				B7DCE4531CBB9E5D0063FF72 /* Webservice.m in Sources */,
 				B7A8DDC11CAE5B50007F56B6 /* BSKeyboardControls.m in Sources */,
@@ -871,6 +894,7 @@
 				B77695C81CBFB4F300794005 /* SCLAlertViewResponder.m in Sources */,
 				B7EAC1761CC5DBE9001C4EEC /* ConferenceService.m in Sources */,
 				5D93619D1CC606190004F030 /* MatchesTableViewCell.m in Sources */,
+				B7414F921CCA4715009FE9CE /* MyAlert.m in Sources */,
 				B77695AD1CBF70E400794005 /* GlobalBackViewController.m in Sources */,
 				B7EAC1801CC5ED06001C4EEC /* SettingsViewController.m in Sources */,
 				5D32EC101CC4A31F00C50969 /* HomeViewController.m in Sources */,

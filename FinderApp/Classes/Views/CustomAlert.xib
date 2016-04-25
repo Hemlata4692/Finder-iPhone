@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CustomAlert">
+            <connections>
+                <outlet property="acceptBtnAction" destination="oXD-jy-mmA" id="1UB-sZ-37i"/>
+                <outlet property="backView" destination="GR1-uk-vx3" id="loR-sd-THX"/>
+                <outlet property="declineBtnAction" destination="29g-Xq-hMG" id="Ifm-iK-FiV"/>
+                <outlet property="mainView" destination="iN0-l3-epB" id="r9X-wU-bMO"/>
+                <outlet property="messageLabel" destination="dRs-uK-JAP" id="shs-GR-PaT"/>
+                <outlet property="myAlertBackView" destination="ceM-Jw-BxG" id="6ok-CM-dWA"/>
+                <outlet property="title" destination="Bzl-Is-q8B" id="q1I-Po-tGf"/>
+                <outlet property="viewBtnAction" destination="Izn-7o-g4A" id="nVk-ar-7dB"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GR1-uk-vx3">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ceM-Jw-BxG">
+                            <rect key="frame" x="0.0" y="20" width="320" height="200"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="New Meeting Request" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bzl-Is-q8B">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="18"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dRs-uK-JAP">
+                                    <rect key="frame" x="27" y="51" width="254" height="25"/>
+                                    <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Izn-7o-g4A">
+                                    <rect key="frame" x="15" y="150" width="85" height="40"/>
+                                    <color key="backgroundColor" red="0.16078431369999999" green="0.46666666670000001" blue="0.85490196080000003" alpha="1" colorSpace="calibratedRGB"/>
+                                    <state key="normal" title="Button">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="29g-Xq-hMG">
+                                    <rect key="frame" x="222" y="150" width="85" height="40"/>
+                                    <color key="backgroundColor" red="0.85098039219999999" green="0.086274509799999996" blue="0.086274509799999996" alpha="1" colorSpace="calibratedRGB"/>
+                                    <state key="normal" title="Button">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oXD-jy-mmA">
+                                    <rect key="frame" x="118" y="150" width="85" height="40"/>
+                                    <color key="backgroundColor" red="0.19836726059430884" green="0.54676573426573427" blue="0.14665160699227545" alpha="1" colorSpace="calibratedRGB"/>
+                                    <state key="normal" title="Button">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.62497189748201443" colorSpace="calibratedWhite"/>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.39620733733958785" colorSpace="calibratedWhite"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="GR1-uk-vx3" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="gcY-bu-PXA"/>
+                <constraint firstAttribute="bottom" secondItem="GR1-uk-vx3" secondAttribute="bottom" id="qb6-Og-a15"/>
+                <constraint firstItem="GR1-uk-vx3" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="uD6-vz-E2w"/>
+                <constraint firstAttribute="trailing" secondItem="GR1-uk-vx3" secondAttribute="trailing" id="xFU-gR-mc8"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="84" y="331"/>
+        </view>
+    </objects>
+</document>

@@ -12,14 +12,16 @@
 #import <CoreLocation/CoreLocation.h>
 #import "HomeViewController.h"
 #import "LoginViewController.h"
+#import "MyAlert.h"
 
-@interface FinderAppDelegate ()<CLLocationManagerDelegate>
+@interface FinderAppDelegate ()<CLLocationManagerDelegate,MyAlertDelegate>
 {
     UIView *loaderView;
     UIImageView *logoImage;
     CLLocationManager *locationManager;
     NSTimer *timer;
     NSString *latitude, *longitude;
+    MyAlert* alert;
 }
 @property (nonatomic, strong) MMMaterialDesignSpinner *spinnerView;
 @end
@@ -38,10 +40,8 @@
     loaderView=[[UIView alloc]initWithFrame:CGRectMake(0, 0, self.window.bounds.size.width, self.window.bounds.size.height)];
     loaderView.backgroundColor=[UIColor colorWithRed:63.0/255.0 green:63.0/255.0 blue:63.0/255.0 alpha:0.3];
     [loaderView addSubview:logoImage];
-    MMMaterialDesignSpinner *spinnerView = [[MMMaterialDesignSpinner alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
-    self.spinnerView = spinnerView;
-    self.spinnerView.bounds = CGRectMake(0, 0, 40, 40);
-    self.spinnerView.tintColor = [UIColor colorWithRed:36.0/255.0 green:108.0/255.0 blue:164.0/255.0 alpha:1.0];
+    self.spinnerView = [[MMMaterialDesignSpinner alloc] initWithFrame:CGRectMake(0, 0, 40, 40)];
+    self.spinnerView.tintColor = [UIColor colorWithRed:237.0/255.0 green:120.0/255.0 blue:0.0/255.0 alpha:1.0];
     self.spinnerView.center = CGPointMake(CGRectGetMidX(self.window.bounds), CGRectGetMidY(self.window.bounds));
     self.spinnerView.lineWidth=3.0f;
     [self.window addSubview:loaderView];
@@ -59,12 +59,11 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
-    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:36.0/255.0 green:108.0/255.0 blue:164.0/255.0 alpha:1.0]];
+    [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:237.0/255.0 green:120.0/255.0 blue:0.0/255.0 alpha:1.0]];
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, [UIFont fontWithName:@"Roboto-Regular" size:18.0], NSFontAttributeName, nil]];
     
     locationManager = [[CLLocationManager alloc] init];
     locationManager.delegate = self;
-   // [locationManager requestWhenInUseAuthorization];
     [locationManager requestAlwaysAuthorization];
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     if ([locationManager respondsToSelector:@selector(setAllowsBackgroundLocationUpdates:)]) {
@@ -233,15 +232,29 @@
     [UIApplication sharedApplication].applicationIconBadgeNumber=0;
     if (application.applicationState == UIApplicationStateActive)
     {
-        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Alert" message:[[userInfo objectForKey:@"aps"] objectForKey:@"alert"] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        
-        [alert show];
+       alert = [[MyAlert alloc] initWithTitle:@"New Meeting Request" myView:self.window delegate:self message:@"this is text vaklfkldsfkl lfj fjg gjr jthik rthjrtkhj rtjhhjrtihrtkhj tjhtjh hjrtjhkrth rthjrtjhkrththjrth g 5 hguhg ghghu g ghrhg rgr ghrgjr ghr g hema" viewBtnText:@"View" acceptBtnText:@"Accept" declineBtnText:@"Decline"];
         
         NSLog(@"push notification user info is active state --------------------->>>%@",userInfo);
     }
     
 }
 
+- (void)myAlertDelegateAction:(CustomAlert *)myAlert option:(int)option{
+    
+    if (option == 0) {
+        
+        NSLog(@"left");
+    }
+    else if(option == 1){
+        
+        NSLog(@"right");
+    }
+    else
+    {
+        NSLog(@"decline");
+    }
+    [alert dismissAlertView:self.window];
+}
 
 //-(NSString *)getNotificationMessage : (NSDictionary *)userInfo
 //{
