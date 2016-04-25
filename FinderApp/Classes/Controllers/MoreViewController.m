@@ -10,6 +10,7 @@
 #import "MoreTableViewCell.h"
 #import "UserService.h"
 #import "SettingsViewController.h"
+#import "PendingAppointmentViewController.h"
 
 @interface MoreViewController ()<UITextFieldDelegate,BSKeyboardControlsDelegate>
 {
@@ -116,7 +117,13 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row==3)
+    if (indexPath.row==1)
+    {
+        UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        PendingAppointmentViewController *settingsView =[storyboard instantiateViewControllerWithIdentifier:@"PendingAppointmentViewController"];
+        [self.navigationController pushViewController:settingsView animated:YES];
+    }
+   else if (indexPath.row==3)
     {
         UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         SettingsViewController *settingsView =[storyboard instantiateViewControllerWithIdentifier:@"SettingsViewController"];

@@ -19,6 +19,9 @@
 		B7414F921CCA4715009FE9CE /* MyAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = B7414F8E1CCA4715009FE9CE /* MyAlert.m */; };
 		B7414F931CCA4715009FE9CE /* CustomAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = B7414F901CCA4715009FE9CE /* CustomAlert.m */; };
 		B7414F941CCA4715009FE9CE /* CustomAlert.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7414F911CCA4715009FE9CE /* CustomAlert.xib */; };
+		B762DB6D1CCDFAEB002875A1 /* PendingAppointmentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B762DB6C1CCDFAEB002875A1 /* PendingAppointmentCell.m */; };
+		B762DB721CCE13C1002875A1 /* PendingAppointmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B762DB711CCE13C1002875A1 /* PendingAppointmentViewController.m */; };
+		B762DB761CCE3E27002875A1 /* MyButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B762DB751CCE3E27002875A1 /* MyButton.m */; };
 		B771FB6D1CBE200C006CBA32 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B771FB671CBE200C006CBA32 /* Roboto-Black.ttf */; };
 		B771FB6E1CBE200C006CBA32 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B771FB681CBE200C006CBA32 /* Roboto-Bold.ttf */; };
 		B771FB6F1CBE200C006CBA32 /* Roboto-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B771FB691CBE200C006CBA32 /* Roboto-Italic.ttf */; };
@@ -85,6 +88,12 @@
 		B7414F8F1CCA4715009FE9CE /* CustomAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAlert.h; sourceTree = "<group>"; };
 		B7414F901CCA4715009FE9CE /* CustomAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAlert.m; sourceTree = "<group>"; };
 		B7414F911CCA4715009FE9CE /* CustomAlert.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomAlert.xib; sourceTree = "<group>"; };
+		B762DB6B1CCDFAEB002875A1 /* PendingAppointmentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PendingAppointmentCell.h; sourceTree = "<group>"; };
+		B762DB6C1CCDFAEB002875A1 /* PendingAppointmentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PendingAppointmentCell.m; sourceTree = "<group>"; };
+		B762DB701CCE13C1002875A1 /* PendingAppointmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PendingAppointmentViewController.h; sourceTree = "<group>"; };
+		B762DB711CCE13C1002875A1 /* PendingAppointmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PendingAppointmentViewController.m; sourceTree = "<group>"; };
+		B762DB741CCE3E27002875A1 /* MyButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyButton.h; sourceTree = "<group>"; };
+		B762DB751CCE3E27002875A1 /* MyButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyButton.m; sourceTree = "<group>"; };
 		B771FB671CBE200C006CBA32 /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
 		B771FB681CBE200C006CBA32 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
 		B771FB691CBE200C006CBA32 /* Roboto-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Italic.ttf"; sourceTree = "<group>"; };
@@ -285,6 +294,42 @@
 			name = CustomAlert;
 			sourceTree = "<group>";
 		};
+		B762DB6A1CCDFACE002875A1 /* PendingAppointment */ = {
+			isa = PBXGroup;
+			children = (
+				B762DB6F1CCE139D002875A1 /* PendingAppointmentViewcontroller */,
+				B762DB6E1CCE138F002875A1 /* PendingAppointmentCell */,
+			);
+			name = PendingAppointment;
+			sourceTree = "<group>";
+		};
+		B762DB6E1CCE138F002875A1 /* PendingAppointmentCell */ = {
+			isa = PBXGroup;
+			children = (
+				B762DB6B1CCDFAEB002875A1 /* PendingAppointmentCell.h */,
+				B762DB6C1CCDFAEB002875A1 /* PendingAppointmentCell.m */,
+			);
+			name = PendingAppointmentCell;
+			sourceTree = "<group>";
+		};
+		B762DB6F1CCE139D002875A1 /* PendingAppointmentViewcontroller */ = {
+			isa = PBXGroup;
+			children = (
+				B762DB701CCE13C1002875A1 /* PendingAppointmentViewController.h */,
+				B762DB711CCE13C1002875A1 /* PendingAppointmentViewController.m */,
+			);
+			name = PendingAppointmentViewcontroller;
+			sourceTree = "<group>";
+		};
+		B762DB731CCE3E1E002875A1 /* ButtonTag */ = {
+			isa = PBXGroup;
+			children = (
+				B762DB741CCE3E27002875A1 /* MyButton.h */,
+				B762DB751CCE3E27002875A1 /* MyButton.m */,
+			);
+			name = ButtonTag;
+			sourceTree = "<group>";
+		};
 		B771FB661CBE2001006CBA32 /* Font */ = {
 			isa = PBXGroup;
 			children = (
@@ -427,6 +472,7 @@
 		B7A8DD801CAE2CE9007F56B6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B762DB731CCE3E1E002875A1 /* ButtonTag */,
 				B7414F841CCA4673009FE9CE /* CustomAlert */,
 				B78E18031CC7641D003CA378 /* NYSliderPopover */,
 				5D9361981CC5F4190004F030 /* TextFieldBorderCategory */,
@@ -653,6 +699,7 @@
 		B7EAC1781CC5EC7A001C4EEC /* MoreModule */ = {
 			isa = PBXGroup;
 			children = (
+				B762DB6A1CCDFACE002875A1 /* PendingAppointment */,
 				B7EAC17D1CC5ECE8001C4EEC /* SettingsView */,
 				5D32EC111CC4A32400C50969 /* MoreView */,
 			);
@@ -864,6 +911,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B776959B1CBF537D00794005 /* UITextField+Validations.m in Sources */,
+				B762DB6D1CCDFAEB002875A1 /* PendingAppointmentCell.m in Sources */,
 				5D32EC0E1CC4A31F00C50969 /* MessagesViewController.m in Sources */,
 				B7A8DDDC1CAE5FC8007F56B6 /* LoginViewController.m in Sources */,
 				B77695C51CBFB4F300794005 /* UIImage+ImageEffects.m in Sources */,
@@ -871,6 +919,7 @@
 				5D32EC0D1CC4A31F00C50969 /* CalendarViewController.m in Sources */,
 				5D32EC0C1CC4A31F00C50969 /* MoreTableViewCell.m in Sources */,
 				B77695C71CBFB4F300794005 /* SCLButton.m in Sources */,
+				B762DB761CCE3E27002875A1 /* MyButton.m in Sources */,
 				B7EAC18B1CC63328001C4EEC /* SettingsViewCell.m in Sources */,
 				5D32EC0F1CC4A31F00C50969 /* MatchesViewController.m in Sources */,
 				B77695CC1CBFB4F300794005 /* SCLSwitchView.m in Sources */,
@@ -891,6 +940,7 @@
 				B7A8DDC41CAE5B69007F56B6 /* MMMaterialDesignSpinner.m in Sources */,
 				B77695CA1CBFB4F300794005 /* SCLTimerDisplay.m in Sources */,
 				B77695CB1CBFB4F300794005 /* SCLTextView.m in Sources */,
+				B762DB721CCE13C1002875A1 /* PendingAppointmentViewController.m in Sources */,
 				B77695C81CBFB4F300794005 /* SCLAlertViewResponder.m in Sources */,
 				B7EAC1761CC5DBE9001C4EEC /* ConferenceService.m in Sources */,
 				5D93619D1CC606190004F030 /* MatchesTableViewCell.m in Sources */,

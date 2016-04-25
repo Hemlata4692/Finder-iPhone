@@ -71,7 +71,7 @@
     [[[self tabBarController] tabBar] setBackgroundColor:[UIColor whiteColor]];
     
     [[UITabBarItem appearance] setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor colorWithRed:63.0/255.0 green:63.0/255.0 blue:63.0/255.0 alpha:1.0] } forState:UIControlStateNormal];
-    [[UITabBarItem appearance] setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor colorWithRed:45/255.0 green:113/255.0 blue:166/255.0 alpha:1.0] } forState:UIControlStateSelected];
+    [[UITabBarItem appearance] setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor colorWithRed:237.0/255.0 green:120.0/255.0 blue:0.0/255.0 alpha:1.0] } forState:UIControlStateSelected];
     
     tabBar.clipsToBounds=YES;
     [tabBarItem1 setImage:[[UIImage imageNamed:@"email_icon.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];

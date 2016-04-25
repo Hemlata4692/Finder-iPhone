@@ -25,7 +25,11 @@
 
 @implementation SettingsViewController
 @synthesize settingsTableView,switchIdentifire,switchStatus;
-- (void)viewDidLoad {
+
+#pragma mark - View life cycle
+
+- (void)viewDidLoad
+{
     [super viewDidLoad];
     self.navigationItem.title=@"MY SETTINGS";
     // Do any additional setup after loading the view.
@@ -38,8 +42,9 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+#pragma mark - end
 
-#pragma mark - Table view methods
+#pragma mark - Table view delegate methods
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
     return 2;
@@ -123,7 +128,7 @@
         proximityCell.sliderView.maximumValue=500;
         //proximityCell.sliderView.popover.textLabel.text = [NSString stringWithFormat:@"%.2f", proximityCell.sliderView.value];
         [proximityCell.sliderView setValue:[[[UserDefaultManager getValue:@"switchStatusDict"] objectForKey:@"02"] intValue]];
-      //  proximityCell.sliderView.value=[[[UserDefaultManager getValue:@"switchStatusDict"] objectForKey:@"02"] intValue];
+        //  proximityCell.sliderView.value=[[[UserDefaultManager getValue:@"switchStatusDict"] objectForKey:@"02"] intValue];
         proximityCell.sliderView.popover.textLabel.text=[NSString stringWithFormat:@"%.2f", proximityCell.sliderView.value];
         [proximityCell.sliderView showPopover];
         [proximityCell.sliderView addTarget:self action:@selector(sliderValueChanged:) forControlEvents:UIControlEventValueChanged];
@@ -172,6 +177,16 @@
         return settingsCell;
     }
 }
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    //    if (indexPath.row == 4)
+    //    {
+    //        changePwdContainerView.hidden = NO;
+    //    }
+}
+#pragma mark - end
+
+#pragma mark - IBActions
 
 - (IBAction)sliderValueChanged:(NYSliderPopover *)slider
 {
@@ -265,16 +280,8 @@
             }
         }
     }
-    
-    
 }
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    //    if (indexPath.row == 4)
-    //    {
-    //        changePwdContainerView.hidden = NO;
-    //    }
-}
+
 #pragma mark - end
 
 #pragma mark - Webservice
