@@ -15,21 +15,38 @@
     int btnTag;
 }
 @property (weak, nonatomic) IBOutlet UITableView *pendingAppointmentTable;
+@property (weak, nonatomic) IBOutlet UIView *meetingDetailContainerView;
+@property (weak, nonatomic) IBOutlet UIView *mettingDetailView;
+@property (weak, nonatomic) IBOutlet UILabel *meetingAgendaLabel;
+@property (weak, nonatomic) IBOutlet UILabel *meetingDetailLabel;
 
 @end
 
 @implementation PendingAppointmentViewController
+@synthesize pendingAppointmentTable,meetingDetailContainerView,mettingDetailView,meetingAgendaLabel,meetingDetailLabel;
 
+#pragma mark - View life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title=@"PENDING APPOINTMENT";
     // Do any additional setup after loading the view.
+    meetingDetailContainerView.hidden=YES;
+}
+
+-(void)setMeedingDetailViewFrame
+{
+    mettingDetailView.translatesAutoresizingMaskIntoConstraints = YES;
+    meetingAgendaLabel.translatesAutoresizingMaskIntoConstraints = YES;
+    meetingDetailLabel.translatesAutoresizingMaskIntoConstraints = YES;
+    mettingDetailView.frame = CGRectMake(0, 0, mettingDetailView.frame.size.width, 180);
+    meetingAgendaLabel.frame = CGRectMake(0, 0, mettingDetailView.frame.size.width, 45);
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+#pragma mark - end
 
 #pragma mark - Table view methods
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -72,16 +89,33 @@
         }
     [pendingCell.pendingViewContainer addShadow:pendingCell.pendingViewContainer color:[UIColor lightGrayColor]];
     
-    [pendingCell.meetingTitle addTarget:self action:@selector(meetingDetail:) forControlEvents:UIControlEventValueChanged];
+    [pendingCell.meetingTitle addTarget:self action:@selector(meetingDetail:) forControlEvents:UIControlEventTouchUpInside];
     pendingCell.meetingTitle.Tag=(int)indexPath.row;
     return pendingCell;
 }
 #pragma mark - end
 
 #pragma mark - IBActions
+
 - (IBAction)meetingDetail:(MyButton *)sender
 {
     btnTag=[sender Tag];
+}
+#pragma mark - end
+
+#pragma mark <ARSPopoverDelegate>
+
+- (void)popoverPresentationController:(UIPopoverPresentationController *)popoverPresentationController willRepositionPopoverToRect:(inout CGRect *)rect inView:(inout UIView *__autoreleasing *)view {
+    // delegate for you to use.
+}
+
+- (void)popoverPresentationControllerDidDismissPopover:(UIPopoverPresentationController *)popoverPresentationController {
+    // delegate for you to use.
+}
+
+- (BOOL)popoverPresentationControllerShouldDismissPopover:(UIPopoverPresentationController *)popoverPresentationController {
+    // delegate for you to use.
+    return YES;
 }
 #pragma mark - end
 @end

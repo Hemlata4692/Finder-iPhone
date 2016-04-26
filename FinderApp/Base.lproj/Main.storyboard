@@ -45,6 +45,8 @@
             <string>Roboto-Regular</string>
             <string>Roboto-Regular</string>
             <string>Roboto-Regular</string>
+            <string>Roboto-Regular</string>
+            <string>Roboto-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -1282,19 +1284,57 @@
                                     <outlet property="delegate" destination="KQZ-B2-d8W" id="q4p-HU-wNB"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yfb-pd-RQ8">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9ff-s6-4ix">
+                                        <rect key="frame" x="40" y="119" width="240" height="180"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="MEETING AGENDA" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3c8-Ti-Id8">
+                                                <rect key="frame" x="0.0" y="0.0" width="240" height="45"/>
+                                                <color key="backgroundColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.47058823529999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
+                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="f efurfgufgrug gh rgrhfgr grgrh rghrg grfhgrfr grhg rgrhg rgqhg " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="7" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HDz-MH-Ze8">
+                                                <rect key="frame" x="0.0" y="47" width="240" height="52"/>
+                                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
+                                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" red="0.73333333329999995" green="0.81176470590000005" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Yfb-pd-RQ8" secondAttribute="height" multiplier="10:13" id="7zP-Cr-wx9"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.92549019607843142" green="0.93725490196078431" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="Ph3-1o-Q67" firstAttribute="centerX" secondItem="fAk-cY-qtl" secondAttribute="centerX" id="6PG-1w-0ew"/>
+                            <constraint firstItem="Yfb-pd-RQ8" firstAttribute="top" secondItem="XUo-Px-204" secondAttribute="bottom" id="IYa-4L-fV0"/>
                             <constraint firstItem="hrs-Fq-YB7" firstAttribute="top" secondItem="Ph3-1o-Q67" secondAttribute="bottom" constant="6" id="JO2-8M-6WK"/>
                             <constraint firstItem="Ph3-1o-Q67" firstAttribute="leading" secondItem="fAk-cY-qtl" secondAttribute="leading" constant="5" id="PTb-PP-M29"/>
                             <constraint firstItem="Ph3-1o-Q67" firstAttribute="top" secondItem="XUo-Px-204" secondAttribute="bottom" constant="5" id="YAV-sa-e46"/>
+                            <constraint firstAttribute="trailing" secondItem="Yfb-pd-RQ8" secondAttribute="trailing" id="YYr-Hb-m5P"/>
+                            <constraint firstItem="Yfb-pd-RQ8" firstAttribute="leading" secondItem="fAk-cY-qtl" secondAttribute="leading" id="c7s-yP-Gc8"/>
+                            <constraint firstItem="Ph3-1o-Q67" firstAttribute="centerY" secondItem="fAk-cY-qtl" secondAttribute="centerY" id="n2v-7y-5g4"/>
                             <constraint firstAttribute="trailing" secondItem="Ph3-1o-Q67" secondAttribute="trailing" constant="5" id="nze-pn-H7R"/>
+                            <constraint firstItem="hrs-Fq-YB7" firstAttribute="top" secondItem="Yfb-pd-RQ8" secondAttribute="bottom" id="yzT-tg-Uoo"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
+                        <outlet property="meetingAgendaLabel" destination="3c8-Ti-Id8" id="abf-i6-B3N"/>
+                        <outlet property="meetingDetailContainerView" destination="Yfb-pd-RQ8" id="Mjb-1B-lDr"/>
+                        <outlet property="meetingDetailLabel" destination="HDz-MH-Ze8" id="kdC-p9-MPA"/>
+                        <outlet property="mettingDetailView" destination="9ff-s6-4ix" id="0sm-F7-KoY"/>
                         <outlet property="pendingAppointmentTable" destination="Ph3-1o-Q67" id="y4Z-lC-4Kb"/>
                     </connections>
                 </viewController>
