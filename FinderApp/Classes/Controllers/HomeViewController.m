@@ -13,6 +13,8 @@
 @interface HomeViewController ()
 {
     NSMutableArray *conferenceDetailArray;
+    CGSize size;
+    CGRect textRect;
 }
 @property (weak, nonatomic) IBOutlet UIScrollView *homeScrollView;
 @property (weak, nonatomic) IBOutlet UIView *mainContainerView;
@@ -29,12 +31,13 @@
 @property (weak, nonatomic) IBOutlet UILabel *conferenceDateHeading;
 @property (weak, nonatomic) IBOutlet UIImageView *conferenceDateImageView;
 @property (weak, nonatomic) IBOutlet UILabel *conferenceDate;
+@property (weak, nonatomic) IBOutlet UIView *bottomContainerView;
 
 @end
 
 @implementation HomeViewController
-@synthesize homeScrollView,mainContainerView,conferenceTitleLabel,conferenceImageView,conferenceDateHeading,conferenceDateImageView,conferenceDate;
-@synthesize conferenceDescription,descriptionHeadingLabel,conferenceVenueHeading,conferenceOrganiserImageView,conferenceOrganiserName,conferenceVenue;
+@synthesize homeScrollView,mainContainerView,conferenceTitleLabel,conferenceImageView,conferenceDateHeading,conferenceDateImageView,conferenceDate,conferenceOrganiserHeading;
+@synthesize conferenceDescription,descriptionHeadingLabel,conferenceVenueHeading,conferenceOrganiserImageView,conferenceOrganiserName,conferenceVenue,bottomContainerView;
 #pragma mark - View life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -53,8 +56,15 @@
 }
 -(void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:YES];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
 }
+-(void)viewDidAppear:(BOOL)animated
+{
+    [super viewDidAppear:YES];
+    NSLog(@"%f",bottomContainerView.frame.origin.y);
+}
+
 #pragma mark - end
 
 #pragma mark - Set tabbar images
@@ -119,6 +129,33 @@
 
 -(void)displayConferenceDetail
 {
+    conferenceTitleLabel.translatesAutoresizingMaskIntoConstraints = YES;
+    conferenceDescription.translatesAutoresizingMaskIntoConstraints = YES;
+    conferenceVenue.translatesAutoresizingMaskIntoConstraints = YES;
+    mainContainerView.translatesAutoresizingMaskIntoConstraints=YES;
+  
+    size = CGSizeMake(conferenceTitleLabel.frame.size.width,200);
+     textRect=[self setDynamicHeight:size textString:[[conferenceDetailArray objectAtIndex:0]conferenceName]];
+    conferenceTitleLabel.numberOfLines = 0;
+    conferenceTitleLabel.frame = CGRectMake(8, conferenceTitleLabel.frame.origin.y, mainContainerView.frame.size.width-16, textRect.size.height);
+    conferenceTitleLabel.text = [[conferenceDetailArray objectAtIndex:0]conferenceName];
+    
+    size = CGSizeMake(conferenceDescription.frame.size.width,180);
+   textRect=[self setDynamicHeight:size textString:[[conferenceDetailArray objectAtIndex:0]conferenceDescription]];
+    conferenceDescription.numberOfLines = 0;
+    conferenceDescription.frame = CGRectMake(8, descriptionHeadingLabel.frame.origin.y+descriptionHeadingLabel.frame.size.height, mainContainerView.frame.size.width-16, textRect.size.height);
+    conferenceDescription.text=[[conferenceDetailArray objectAtIndex:0]conferenceDescription];
+   
+    conferenceOrganiserName.text=[[conferenceDetailArray objectAtIndex:0]conferenceOrganiserName];
+   
+    size = CGSizeMake(conferenceVenue.frame.size.width,60);
+    textRect=[self setDynamicHeight:size textString:[[conferenceDetailArray objectAtIndex:0]conferenceVenue]];
+    conferenceVenue.numberOfLines = 0;
+    conferenceVenue.frame = CGRectMake(conferenceVenue.frame.origin.x, conferenceVenueHeading.frame.origin.y+conferenceVenueHeading.frame.size.height+5, conferenceVenue.frame.size.width, textRect.size.height);
+
+    conferenceVenue.text=[[conferenceDetailArray objectAtIndex:0]conferenceVenue];
+    conferenceDate.text=[[conferenceDetailArray objectAtIndex:0]conferenceDate];
+    
     __weak UIImageView *weakRef = conferenceImageView;
     NSURLRequest *imageRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:[[conferenceDetailArray objectAtIndex:0]conferenceImage]]
                                                   cachePolicy:NSURLRequestReturnCacheDataElseLoad
@@ -129,11 +166,18 @@
         weakRef.image = image;
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
     }];
-    conferenceTitleLabel.text=[[conferenceDetailArray objectAtIndex:0]conferenceName];
-    conferenceDescription.text=[[conferenceDetailArray objectAtIndex:0]conferenceDescription];
-    conferenceOrganiserName.text=[[conferenceDetailArray objectAtIndex:0]conferenceOrganiserName];
-    conferenceVenue.text=[[conferenceDetailArray objectAtIndex:0]conferenceVenue];
-    conferenceDate.text=[[conferenceDetailArray objectAtIndex:0]conferenceDate];
+     mainContainerView.frame = CGRectMake(mainContainerView.frame.origin.x, mainContainerView.frame.origin.y, mainContainerView.frame.size.width, bottomContainerView.frame.origin.y+bottomContainerView.frame.size.height);
+    [homeScrollView setContentOffset:CGPointMake(0, 5) animated:NO];
 }
 #pragma mark - end
+
+-(CGRect)setDynamicHeight:(CGSize)rectSize textString:(NSString *)textString
+{
+    CGRect textHeight = [textString
+                       boundingRectWithSize:rectSize
+                       options:NSStringDrawingUsesLineFragmentOrigin
+                       attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Roboto-Regular" size:15]}
+                       context:nil];
+    return textHeight;
+}
 @end

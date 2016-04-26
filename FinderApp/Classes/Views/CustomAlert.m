@@ -50,7 +50,7 @@
             CGRect textRect = [messageText
                                boundingRectWithSize:size
                                options:NSStringDrawingUsesLineFragmentOrigin
-                               attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Helvetica Neue" size:14]}
+                               attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Roboto-Regular" size:14]}
                                context:nil];
             messageLabel.numberOfLines = 0;
             

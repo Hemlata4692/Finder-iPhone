@@ -16,6 +16,7 @@
 		5D32EC101CC4A31F00C50969 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D32EC0A1CC4A31F00C50969 /* HomeViewController.m */; };
 		5D9361971CC5F40B0004F030 /* UITextField+Border.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D9361961CC5F40B0004F030 /* UITextField+Border.m */; };
 		5D93619D1CC606190004F030 /* MatchesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D93619C1CC606190004F030 /* MatchesTableViewCell.m */; };
+		B736EBAA1CCF93E000CE7B6E /* MessagesViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B736EBA91CCF93E000CE7B6E /* MessagesViewCell.m */; };
 		B7414F921CCA4715009FE9CE /* MyAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = B7414F8E1CCA4715009FE9CE /* MyAlert.m */; };
 		B7414F931CCA4715009FE9CE /* CustomAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = B7414F901CCA4715009FE9CE /* CustomAlert.m */; };
 		B7414F941CCA4715009FE9CE /* CustomAlert.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7414F911CCA4715009FE9CE /* CustomAlert.xib */; };
@@ -61,7 +62,6 @@
 		B7EAC1861CC62681001C4EEC /* RESwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAC1851CC62681001C4EEC /* RESwitch.m */; };
 		B7EAC18B1CC63328001C4EEC /* SettingsViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAC18A1CC63328001C4EEC /* SettingsViewCell.m */; };
 		B7EAC18D1CC639E7001C4EEC /* RESwitch.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B7EAC18C1CC639E7001C4EEC /* RESwitch.bundle */; };
-		B7F9C62E1CBE4195003ACFBE /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B7F9C62D1CBE4195003ACFBE /* FontAwesome.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -83,6 +83,8 @@
 		5D93619B1CC606190004F030 /* MatchesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchesTableViewCell.h; sourceTree = "<group>"; };
 		5D93619C1CC606190004F030 /* MatchesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchesTableViewCell.m; sourceTree = "<group>"; };
 		B3CDDBB308E1E7466EFB6FFC /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B736EBA81CCF93E000CE7B6E /* MessagesViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesViewCell.h; sourceTree = "<group>"; };
+		B736EBA91CCF93E000CE7B6E /* MessagesViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesViewCell.m; sourceTree = "<group>"; };
 		B7414F8D1CCA4715009FE9CE /* MyAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAlert.h; sourceTree = "<group>"; };
 		B7414F8E1CCA4715009FE9CE /* MyAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAlert.m; sourceTree = "<group>"; };
 		B7414F8F1CCA4715009FE9CE /* CustomAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAlert.h; sourceTree = "<group>"; };
@@ -175,7 +177,6 @@
 		B7EAC1891CC63328001C4EEC /* SettingsViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewCell.h; sourceTree = "<group>"; };
 		B7EAC18A1CC63328001C4EEC /* SettingsViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewCell.m; sourceTree = "<group>"; };
 		B7EAC18C1CC639E7001C4EEC /* RESwitch.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = RESwitch.bundle; sourceTree = "<group>"; };
-		B7F9C62D1CBE4195003ACFBE /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = FontAwesome.ttf; sourceTree = "<group>"; };
 		C05F8A8FD36EE5AC5DD42364 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -228,13 +229,13 @@
 			name = CalendarViewController;
 			sourceTree = "<group>";
 		};
-		5D32EC131CC4A34600C50969 /* MessagesViewController */ = {
+		5D32EC131CC4A34600C50969 /* MessagesView */ = {
 			isa = PBXGroup;
 			children = (
-				5D32EC051CC4A31F00C50969 /* MessagesViewController.h */,
-				5D32EC061CC4A31F00C50969 /* MessagesViewController.m */,
+				B736EBA71CCF93B700CE7B6E /* MessagesViewCell */,
+				B736EBA61CCF93A600CE7B6E /* MessagesViewController */,
 			);
-			name = MessagesViewController;
+			name = MessagesView;
 			sourceTree = "<group>";
 		};
 		5D32EC141CC4A35C00C50969 /* MatchesViewController */ = {
@@ -280,6 +281,24 @@
 				5D93619C1CC606190004F030 /* MatchesTableViewCell.m */,
 			);
 			name = MatchesViewCell;
+			sourceTree = "<group>";
+		};
+		B736EBA61CCF93A600CE7B6E /* MessagesViewController */ = {
+			isa = PBXGroup;
+			children = (
+				5D32EC051CC4A31F00C50969 /* MessagesViewController.h */,
+				5D32EC061CC4A31F00C50969 /* MessagesViewController.m */,
+			);
+			name = MessagesViewController;
+			sourceTree = "<group>";
+		};
+		B736EBA71CCF93B700CE7B6E /* MessagesViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				B736EBA81CCF93E000CE7B6E /* MessagesViewCell.h */,
+				B736EBA91CCF93E000CE7B6E /* MessagesViewCell.m */,
+			);
+			name = MessagesViewCell;
 			sourceTree = "<group>";
 		};
 		B7414F841CCA4673009FE9CE /* CustomAlert */ = {
@@ -333,7 +352,6 @@
 		B771FB661CBE2001006CBA32 /* Font */ = {
 			isa = PBXGroup;
 			children = (
-				B7F9C62D1CBE4195003ACFBE /* FontAwesome.ttf */,
 				B771FB671CBE200C006CBA32 /* Roboto-Black.ttf */,
 				B771FB681CBE200C006CBA32 /* Roboto-Bold.ttf */,
 				B771FB691CBE200C006CBA32 /* Roboto-Italic.ttf */,
@@ -717,7 +735,7 @@
 		B7EAC17A1CC5EC9E001C4EEC /* MessageModule */ = {
 			isa = PBXGroup;
 			children = (
-				5D32EC131CC4A34600C50969 /* MessagesViewController */,
+				5D32EC131CC4A34600C50969 /* MessagesView */,
 			);
 			name = MessageModule;
 			sourceTree = "<group>";
@@ -848,7 +866,6 @@
 				B771FB721CBE200C006CBA32 /* Roboto-Regular.ttf in Resources */,
 				B771FB701CBE200C006CBA32 /* Roboto-Light.ttf in Resources */,
 				B771FB711CBE200C006CBA32 /* Roboto-Medium.ttf in Resources */,
-				B7F9C62E1CBE4195003ACFBE /* FontAwesome.ttf in Resources */,
 				B771FB6F1CBE200C006CBA32 /* Roboto-Italic.ttf in Resources */,
 				B771FB6E1CBE200C006CBA32 /* Roboto-Bold.ttf in Resources */,
 				B771FB6D1CBE200C006CBA32 /* Roboto-Black.ttf in Resources */,
@@ -911,6 +928,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B776959B1CBF537D00794005 /* UITextField+Validations.m in Sources */,
+				B736EBAA1CCF93E000CE7B6E /* MessagesViewCell.m in Sources */,
 				B762DB6D1CCDFAEB002875A1 /* PendingAppointmentCell.m in Sources */,
 				5D32EC0E1CC4A31F00C50969 /* MessagesViewController.m in Sources */,
 				B7A8DDDC1CAE5FC8007F56B6 /* LoginViewController.m in Sources */,

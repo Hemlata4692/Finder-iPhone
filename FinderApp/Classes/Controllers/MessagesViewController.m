@@ -7,8 +7,10 @@
 //
 
 #import "MessagesViewController.h"
+#import "MessagesViewCell.h"
 
 @interface MessagesViewController ()
+@property (weak, nonatomic) IBOutlet UITableView *messagesTableView;
 
 @end
 
@@ -29,14 +31,23 @@
 {
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
 }
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+#pragma mark - Table view methods
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 6;
 }
-*/
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSString *simpleTableIdentifier = @"messagesCell";
+     MessagesViewCell *messagesCell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+    if (messagesCell == nil)
+    {
+        messagesCell = [[MessagesViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
+    }
+   [messagesCell.messageViewContainer addShadow:messagesCell.messageViewContainer color:[UIColor lightGrayColor]];
+    return messagesCell;
+}
+#pragma mark - end
 
 @end
