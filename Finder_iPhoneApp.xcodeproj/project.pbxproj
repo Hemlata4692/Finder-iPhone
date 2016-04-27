@@ -16,6 +16,7 @@
 		5D32EC101CC4A31F00C50969 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D32EC0A1CC4A31F00C50969 /* HomeViewController.m */; };
 		5D9361971CC5F40B0004F030 /* UITextField+Border.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D9361961CC5F40B0004F030 /* UITextField+Border.m */; };
 		5D93619D1CC606190004F030 /* MatchesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D93619C1CC606190004F030 /* MatchesTableViewCell.m */; };
+		5DF7EE601CCE323A009E1CD2 /* CalendarTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5DF7EE5F1CCE323A009E1CD2 /* CalendarTableViewCell.m */; };
 		B7414F921CCA4715009FE9CE /* MyAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = B7414F8E1CCA4715009FE9CE /* MyAlert.m */; };
 		B7414F931CCA4715009FE9CE /* CustomAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = B7414F901CCA4715009FE9CE /* CustomAlert.m */; };
 		B7414F941CCA4715009FE9CE /* CustomAlert.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7414F911CCA4715009FE9CE /* CustomAlert.xib */; };
@@ -79,6 +80,8 @@
 		5D9361961CC5F40B0004F030 /* UITextField+Border.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Border.m"; sourceTree = "<group>"; };
 		5D93619B1CC606190004F030 /* MatchesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchesTableViewCell.h; sourceTree = "<group>"; };
 		5D93619C1CC606190004F030 /* MatchesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchesTableViewCell.m; sourceTree = "<group>"; };
+		5DF7EE5E1CCE323A009E1CD2 /* CalendarTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarTableViewCell.h; sourceTree = "<group>"; };
+		5DF7EE5F1CCE323A009E1CD2 /* CalendarTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarTableViewCell.m; sourceTree = "<group>"; };
 		B3CDDBB308E1E7466EFB6FFC /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7414F8D1CCA4715009FE9CE /* MyAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAlert.h; sourceTree = "<group>"; };
 		B7414F8E1CCA4715009FE9CE /* MyAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAlert.m; sourceTree = "<group>"; };
@@ -271,6 +274,15 @@
 				5D93619C1CC606190004F030 /* MatchesTableViewCell.m */,
 			);
 			name = MatchesViewCell;
+			sourceTree = "<group>";
+		};
+		5DF7EE611CCE3255009E1CD2 /* CalendarTableCell */ = {
+			isa = PBXGroup;
+			children = (
+				5DF7EE5E1CCE323A009E1CD2 /* CalendarTableViewCell.h */,
+				5DF7EE5F1CCE323A009E1CD2 /* CalendarTableViewCell.m */,
+			);
+			name = CalendarTableCell;
 			sourceTree = "<group>";
 		};
 		B7414F841CCA4673009FE9CE /* CustomAlert */ = {
@@ -679,6 +691,7 @@
 			isa = PBXGroup;
 			children = (
 				5D32EC121CC4A33600C50969 /* CalendarViewController */,
+				5DF7EE611CCE3255009E1CD2 /* CalendarTableCell */,
 			);
 			name = CalenderScheduleModule;
 			sourceTree = "<group>";
@@ -886,6 +899,7 @@
 				B7414F931CCA4715009FE9CE /* CustomAlert.m in Sources */,
 				5D9361971CC5F40B0004F030 /* UITextField+Border.m in Sources */,
 				B7DCE4531CBB9E5D0063FF72 /* Webservice.m in Sources */,
+				5DF7EE601CCE323A009E1CD2 /* CalendarTableViewCell.m in Sources */,
 				B7A8DDC11CAE5B50007F56B6 /* BSKeyboardControls.m in Sources */,
 				B7A8DDCB1CAE5BD4007F56B6 /* UserDefaultManager.m in Sources */,
 				B7A8DDC41CAE5B69007F56B6 /* MMMaterialDesignSpinner.m in Sources */,
