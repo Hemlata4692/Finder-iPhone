@@ -53,6 +53,8 @@
 		B7A8DDCE1CAE5C32007F56B6 /* NullValueChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = B7A8DDCD1CAE5C32007F56B6 /* NullValueChecker.m */; };
 		B7A8DDDC1CAE5FC8007F56B6 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7A8DDDB1CAE5FC8007F56B6 /* LoginViewController.m */; };
 		B7A8DDDF1CAE60BB007F56B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7A8DDDD1CAE60BB007F56B6 /* Main.storyboard */; };
+		B7C018BF1CD07044006773CB /* PersonalMessageViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B7C018BE1CD07044006773CB /* PersonalMessageViewCell.m */; };
+		B7C018C41CD0708B006773CB /* PersonalMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7C018C31CD0708B006773CB /* PersonalMessageViewController.m */; };
 		B7DCE4531CBB9E5D0063FF72 /* Webservice.m in Sources */ = {isa = PBXBuildFile; fileRef = B7DCE4521CBB9E5D0063FF72 /* Webservice.m */; };
 		B7E024C01CC4D5B100707552 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7E024BF1CC4D5B100707552 /* CoreLocation.framework */; };
 		B7E024C41CC5089E00707552 /* ConferenceDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B7E024C31CC5089E00707552 /* ConferenceDataModel.m */; };
@@ -161,6 +163,10 @@
 		B7A8DDDA1CAE5FC8007F56B6 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		B7A8DDDB1CAE5FC8007F56B6 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		B7A8DDDE1CAE60BB007F56B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B7C018BD1CD07044006773CB /* PersonalMessageViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalMessageViewCell.h; sourceTree = "<group>"; };
+		B7C018BE1CD07044006773CB /* PersonalMessageViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalMessageViewCell.m; sourceTree = "<group>"; };
+		B7C018C21CD0708B006773CB /* PersonalMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalMessageViewController.h; sourceTree = "<group>"; };
+		B7C018C31CD0708B006773CB /* PersonalMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalMessageViewController.m; sourceTree = "<group>"; };
 		B7DCE4511CBB9E5D0063FF72 /* Webservice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Webservice.h; sourceTree = SOURCE_ROOT; };
 		B7DCE4521CBB9E5D0063FF72 /* Webservice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Webservice.m; sourceTree = SOURCE_ROOT; };
 		B7E024BF1CC4D5B100707552 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -642,6 +648,33 @@
 			name = AppDelegate;
 			sourceTree = "<group>";
 		};
+		B7C018BC1CD0701F006773CB /* PersonalMessageView */ = {
+			isa = PBXGroup;
+			children = (
+				B7C018C11CD0705C006773CB /* PersonalMessageViewController */,
+				B7C018C01CD07052006773CB /* PersonalMessageViewCell */,
+			);
+			name = PersonalMessageView;
+			sourceTree = "<group>";
+		};
+		B7C018C01CD07052006773CB /* PersonalMessageViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				B7C018BD1CD07044006773CB /* PersonalMessageViewCell.h */,
+				B7C018BE1CD07044006773CB /* PersonalMessageViewCell.m */,
+			);
+			name = PersonalMessageViewCell;
+			sourceTree = "<group>";
+		};
+		B7C018C11CD0705C006773CB /* PersonalMessageViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B7C018C21CD0708B006773CB /* PersonalMessageViewController.h */,
+				B7C018C31CD0708B006773CB /* PersonalMessageViewController.m */,
+			);
+			name = PersonalMessageViewController;
+			sourceTree = "<group>";
+		};
 		B7DCE4501CBB9DC50063FF72 /* Webservice */ = {
 			isa = PBXGroup;
 			children = (
@@ -735,6 +768,7 @@
 		B7EAC17A1CC5EC9E001C4EEC /* MessageModule */ = {
 			isa = PBXGroup;
 			children = (
+				B7C018BC1CD0701F006773CB /* PersonalMessageView */,
 				5D32EC131CC4A34600C50969 /* MessagesView */,
 			);
 			name = MessageModule;
@@ -955,6 +989,7 @@
 				B7DCE4531CBB9E5D0063FF72 /* Webservice.m in Sources */,
 				B7A8DDC11CAE5B50007F56B6 /* BSKeyboardControls.m in Sources */,
 				B7A8DDCB1CAE5BD4007F56B6 /* UserDefaultManager.m in Sources */,
+				B7C018BF1CD07044006773CB /* PersonalMessageViewCell.m in Sources */,
 				B7A8DDC41CAE5B69007F56B6 /* MMMaterialDesignSpinner.m in Sources */,
 				B77695CA1CBFB4F300794005 /* SCLTimerDisplay.m in Sources */,
 				B77695CB1CBFB4F300794005 /* SCLTextView.m in Sources */,
@@ -962,6 +997,7 @@
 				B77695C81CBFB4F300794005 /* SCLAlertViewResponder.m in Sources */,
 				B7EAC1761CC5DBE9001C4EEC /* ConferenceService.m in Sources */,
 				5D93619D1CC606190004F030 /* MatchesTableViewCell.m in Sources */,
+				B7C018C41CD0708B006773CB /* PersonalMessageViewController.m in Sources */,
 				B7414F921CCA4715009FE9CE /* MyAlert.m in Sources */,
 				B77695AD1CBF70E400794005 /* GlobalBackViewController.m in Sources */,
 				B7EAC1801CC5ED06001C4EEC /* SettingsViewController.m in Sources */,

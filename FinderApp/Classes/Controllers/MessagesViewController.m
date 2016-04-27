@@ -46,6 +46,8 @@
         messagesCell = [[MessagesViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     }
    [messagesCell.messageViewContainer addShadow:messagesCell.messageViewContainer color:[UIColor lightGrayColor]];
+    [messagesCell.userImage setCornerRadius:messagesCell.userImage.frame.size.width/2];
+    [messagesCell.messageCountLabel setCornerRadius:messagesCell.messageCountLabel.frame.size.width/2];
     return messagesCell;
 }
 #pragma mark - end
