@@ -84,6 +84,8 @@
 		5D9361961CC5F40B0004F030 /* UITextField+Border.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Border.m"; sourceTree = "<group>"; };
 		5D93619B1CC606190004F030 /* MatchesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchesTableViewCell.h; sourceTree = "<group>"; };
 		5D93619C1CC606190004F030 /* MatchesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchesTableViewCell.m; sourceTree = "<group>"; };
+		5DF7EE5E1CCE323A009E1CD2 /* CalendarTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarTableViewCell.h; sourceTree = "<group>"; };
+		5DF7EE5F1CCE323A009E1CD2 /* CalendarTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarTableViewCell.m; sourceTree = "<group>"; };
 		B3CDDBB308E1E7466EFB6FFC /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B736EBA81CCF93E000CE7B6E /* MessagesViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesViewCell.h; sourceTree = "<group>"; };
 		B736EBA91CCF93E000CE7B6E /* MessagesViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesViewCell.m; sourceTree = "<group>"; };
@@ -778,6 +780,7 @@
 			isa = PBXGroup;
 			children = (
 				5D32EC121CC4A33600C50969 /* CalendarViewController */,
+				5DF7EE611CCE3255009E1CD2 /* CalendarTableCell */,
 			);
 			name = CalenderScheduleModule;
 			sourceTree = "<group>";
@@ -987,6 +990,7 @@
 				B7414F931CCA4715009FE9CE /* CustomAlert.m in Sources */,
 				5D9361971CC5F40B0004F030 /* UITextField+Border.m in Sources */,
 				B7DCE4531CBB9E5D0063FF72 /* Webservice.m in Sources */,
+				5DF7EE601CCE323A009E1CD2 /* CalendarTableViewCell.m in Sources */,
 				B7A8DDC11CAE5B50007F56B6 /* BSKeyboardControls.m in Sources */,
 				B7A8DDCB1CAE5BD4007F56B6 /* UserDefaultManager.m in Sources */,
 				B7C018BF1CD07044006773CB /* PersonalMessageViewCell.m in Sources */,
