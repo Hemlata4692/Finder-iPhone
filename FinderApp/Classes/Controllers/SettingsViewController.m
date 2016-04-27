@@ -27,7 +27,6 @@
 @synthesize settingsTableView,switchIdentifire,switchStatus;
 
 #pragma mark - View life cycle
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -187,7 +186,7 @@
 #pragma mark - end
 
 #pragma mark - IBActions
-
+//slider value
 - (IBAction)sliderValueChanged:(NYSliderPopover *)slider
 {
     [slider setValue:((int)((slider.value + 2.5) / 50) * 50)];
@@ -196,8 +195,7 @@
     [tempDict setObject:[NSString stringWithFormat:@"%.2f", slider.value] forKey:@"02"];
     [UserDefaultManager setValue:tempDict key:@"switchStatusDict"];
 }
-
-
+//switch value
 - (void)switchViewChanged:(RESwitch *)switchView
 {
     if (switchView.sectionTag==0) {
@@ -302,5 +300,5 @@
      }] ;
     
 }
-
+#pragma mark - end
 @end

@@ -36,48 +36,6 @@
     [meetingDetailContainerView addGestureRecognizer:tapGesture];
 }
 
--(void)setMeetingDetail:(int)btnTag
-{
-    NSString *messageText=@"Support for custom background views WYPopoverController is for the presentation of content in popover on iPhone / iPad devices. Very customizable.";
-    [mettingDetailView addShadow:mettingDetailView color:[UIColor lightGrayColor]];
-    [mettingDetailView setCornerRadius:2.0f];
-    mettingDetailView.translatesAutoresizingMaskIntoConstraints = YES;
-    meetingAgendaLabel.translatesAutoresizingMaskIntoConstraints = YES;
-    meetingDetailLabel.translatesAutoresizingMaskIntoConstraints = YES;
-    mettingDetailView.frame = CGRectMake(self.view.frame.origin.x+self.view.frame.size.width/2-mettingDetailView.frame.size.width/2, self.view.frame.size.height/2-mettingDetailView.frame.size.height/2, mettingDetailView.frame.size.width, 180);
-    meetingAgendaLabel.frame = CGRectMake(0, 0, mettingDetailView.frame.size.width, 45);
-    
-    if ([messageText isEqualToString:@""]) {
-        
-        meetingDetailLabel.frame = CGRectMake(0, meetingAgendaLabel.frame.origin.y + meetingAgendaLabel.frame.size.height + 5, mettingDetailView.frame.size.width, 0);
-        meetingDetailLabel.text = messageText;
-        meetingDetailLabel.hidden = YES;
-    }
-    else{
-        
-        CGSize size = CGSizeMake(meetingAgendaLabel.frame.size.width,180);
-        CGRect textRect = [messageText
-                           boundingRectWithSize:size
-                           options:NSStringDrawingUsesLineFragmentOrigin
-                           attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Roboto-Regular" size:14]}
-                           context:nil];
-        meetingDetailLabel.numberOfLines = 0;
-        
-        if (textRect.size.height < 26) {
-            textRect.size.height = 25;
-        }
-        meetingDetailLabel.frame = CGRectMake(0, meetingAgendaLabel.frame.origin.y + meetingAgendaLabel.frame.size.height + 5, mettingDetailView.frame.size.width, textRect.size.height);
-        meetingDetailLabel.text = messageText;
-        meetingDetailLabel.hidden = NO;
-    }
-    float alertViewHeight = meetingDetailLabel.frame.origin.y + meetingDetailLabel.frame.size.height + 10;
-   
-    mettingDetailView.frame = CGRectMake((self.view.frame.origin.x+self.view.frame.size.width/2-mettingDetailView.frame.size.width/2), (self.view.frame.size.height/2-mettingDetailView.frame.size.height/2), mettingDetailView.frame.size.width, alertViewHeight);
-}
--(void) meetingDetailContainerViewTapped:(UITapGestureRecognizer *)sender
-{
-    meetingDetailContainerView.hidden=YES;
-}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -141,19 +99,48 @@
 }
 #pragma mark - end
 
-#pragma mark <ARSPopoverDelegate>
-
-- (void)popoverPresentationController:(UIPopoverPresentationController *)popoverPresentationController willRepositionPopoverToRect:(inout CGRect *)rect inView:(inout UIView *__autoreleasing *)view {
-    // delegate for you to use.
+#pragma mark - Show popover
+-(void)setMeetingDetail:(int)btnTag
+{
+    NSString *messageText=@"Support for custom background views WYPopoverController is for the presentation of content in popover on iPhone / iPad devices. Very customizable.";
+    [mettingDetailView addShadow:mettingDetailView color:[UIColor lightGrayColor]];
+    [mettingDetailView setCornerRadius:2.0f];
+    mettingDetailView.translatesAutoresizingMaskIntoConstraints = YES;
+    meetingAgendaLabel.translatesAutoresizingMaskIntoConstraints = YES;
+    meetingDetailLabel.translatesAutoresizingMaskIntoConstraints = YES;
+    mettingDetailView.frame = CGRectMake(self.view.frame.origin.x+self.view.frame.size.width/2-mettingDetailView.frame.size.width/2, self.view.frame.size.height/2-mettingDetailView.frame.size.height/2, mettingDetailView.frame.size.width, 180);
+    meetingAgendaLabel.frame = CGRectMake(0, 0, mettingDetailView.frame.size.width, 45);
+    
+    if ([messageText isEqualToString:@""]) {
+        
+        meetingDetailLabel.frame = CGRectMake(0, meetingAgendaLabel.frame.origin.y + meetingAgendaLabel.frame.size.height + 5, mettingDetailView.frame.size.width, 0);
+        meetingDetailLabel.text = messageText;
+        meetingDetailLabel.hidden = YES;
+    }
+    else{
+        
+        CGSize size = CGSizeMake(meetingAgendaLabel.frame.size.width,180);
+        CGRect textRect = [messageText
+                           boundingRectWithSize:size
+                           options:NSStringDrawingUsesLineFragmentOrigin
+                           attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Roboto-Regular" size:14]}
+                           context:nil];
+        meetingDetailLabel.numberOfLines = 0;
+        
+        if (textRect.size.height < 26) {
+            textRect.size.height = 25;
+        }
+        meetingDetailLabel.frame = CGRectMake(0, meetingAgendaLabel.frame.origin.y + meetingAgendaLabel.frame.size.height + 5, mettingDetailView.frame.size.width, textRect.size.height);
+        meetingDetailLabel.text = messageText;
+        meetingDetailLabel.hidden = NO;
+    }
+    float alertViewHeight = meetingDetailLabel.frame.origin.y + meetingDetailLabel.frame.size.height + 10;
+    
+    mettingDetailView.frame = CGRectMake((self.view.frame.origin.x+self.view.frame.size.width/2-mettingDetailView.frame.size.width/2), (self.view.frame.size.height/2-mettingDetailView.frame.size.height/2), mettingDetailView.frame.size.width, alertViewHeight);
 }
-
-- (void)popoverPresentationControllerDidDismissPopover:(UIPopoverPresentationController *)popoverPresentationController {
-    // delegate for you to use.
-}
-
-- (BOOL)popoverPresentationControllerShouldDismissPopover:(UIPopoverPresentationController *)popoverPresentationController {
-    // delegate for you to use.
-    return YES;
+-(void) meetingDetailContainerViewTapped:(UITapGestureRecognizer *)sender
+{
+    meetingDetailContainerView.hidden=YES;
 }
 #pragma mark - end
 @end

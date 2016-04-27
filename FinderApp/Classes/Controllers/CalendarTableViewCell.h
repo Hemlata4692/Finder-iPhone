@@ -10,9 +10,7 @@
 
 @interface CalendarTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIView *containerView;
-
 @property (weak, nonatomic) IBOutlet UILabel *eventTimeLabel;
-
 @property (weak, nonatomic) IBOutlet UILabel *eventNameLabel;
 
 @end

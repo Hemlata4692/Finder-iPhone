@@ -126,7 +126,7 @@
      }] ;
     
 }
-
+//Display data
 -(void)displayConferenceDetail
 {
     conferenceTitleLabel.translatesAutoresizingMaskIntoConstraints = YES;
@@ -169,15 +169,16 @@
      mainContainerView.frame = CGRectMake(mainContainerView.frame.origin.x, mainContainerView.frame.origin.y, mainContainerView.frame.size.width, bottomContainerView.frame.origin.y+bottomContainerView.frame.size.height);
     [homeScrollView setContentOffset:CGPointMake(0, 5) animated:NO];
 }
-#pragma mark - end
-
 -(CGRect)setDynamicHeight:(CGSize)rectSize textString:(NSString *)textString
 {
     CGRect textHeight = [textString
-                       boundingRectWithSize:rectSize
-                       options:NSStringDrawingUsesLineFragmentOrigin
-                       attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Roboto-Regular" size:15]}
-                       context:nil];
+                         boundingRectWithSize:rectSize
+                         options:NSStringDrawingUsesLineFragmentOrigin
+                         attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Roboto-Regular" size:15]}
+                         context:nil];
     return textHeight;
 }
+#pragma mark - end
+
+
 @end

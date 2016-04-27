@@ -7,6 +7,7 @@
 //
 
 #import "MessagesViewController.h"
+#import "PersonalMessageViewController.h"
 #import "MessagesViewCell.h"
 
 @interface MessagesViewController ()
@@ -15,11 +16,10 @@
 @end
 
 @implementation MessagesViewController
-
+#pragma mark - View life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title=@"MESSAGE";
-
     // Do any additional setup after loading the view.
 }
 
@@ -31,7 +31,9 @@
 {
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
 }
-#pragma mark - Table view methods
+#pragma mark - end
+
+#pragma mark - Table view delegate methods
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return 6;
@@ -49,6 +51,12 @@
     [messagesCell.userImage setCornerRadius:messagesCell.userImage.frame.size.width/2];
     [messagesCell.messageCountLabel setCornerRadius:messagesCell.messageCountLabel.frame.size.width/2];
     return messagesCell;
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    PersonalMessageViewController *msgView =[storyboard instantiateViewControllerWithIdentifier:@"PersonalMessageViewController"];
+    [self.navigationController pushViewController:msgView animated:YES];
 }
 #pragma mark - end
 

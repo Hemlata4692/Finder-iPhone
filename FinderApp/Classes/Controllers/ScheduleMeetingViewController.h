@@ -1,5 +1,5 @@
 //
-//  PersonalMessageViewController.h
+//  ScheduleMeetingViewController.h
 //  Finder_iPhoneApp
 //
 //  Created by Hema on 27/04/16.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PersonalMessageViewController : GlobalBackViewController
+@interface ScheduleMeetingViewController : UIViewController
 
 @end

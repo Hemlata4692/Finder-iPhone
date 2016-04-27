@@ -55,6 +55,9 @@
 		B7A8DDDF1CAE60BB007F56B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7A8DDDD1CAE60BB007F56B6 /* Main.storyboard */; };
 		B7C018BF1CD07044006773CB /* PersonalMessageViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B7C018BE1CD07044006773CB /* PersonalMessageViewCell.m */; };
 		B7C018C41CD0708B006773CB /* PersonalMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7C018C31CD0708B006773CB /* PersonalMessageViewController.m */; };
+		B7C018C81CD08630006773CB /* CalendarTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B7C018C71CD08630006773CB /* CalendarTableViewCell.m */; };
+		B7C018CD1CD0B7E0006773CB /* NewMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7C018CC1CD0B7E0006773CB /* NewMessageViewController.m */; };
+		B7C018D11CD0C7A4006773CB /* ScheduleMeetingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7C018D01CD0C7A4006773CB /* ScheduleMeetingViewController.m */; };
 		B7DCE4531CBB9E5D0063FF72 /* Webservice.m in Sources */ = {isa = PBXBuildFile; fileRef = B7DCE4521CBB9E5D0063FF72 /* Webservice.m */; };
 		B7E024C01CC4D5B100707552 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7E024BF1CC4D5B100707552 /* CoreLocation.framework */; };
 		B7E024C41CC5089E00707552 /* ConferenceDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B7E024C31CC5089E00707552 /* ConferenceDataModel.m */; };
@@ -84,8 +87,6 @@
 		5D9361961CC5F40B0004F030 /* UITextField+Border.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Border.m"; sourceTree = "<group>"; };
 		5D93619B1CC606190004F030 /* MatchesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchesTableViewCell.h; sourceTree = "<group>"; };
 		5D93619C1CC606190004F030 /* MatchesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchesTableViewCell.m; sourceTree = "<group>"; };
-		5DF7EE5E1CCE323A009E1CD2 /* CalendarTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarTableViewCell.h; sourceTree = "<group>"; };
-		5DF7EE5F1CCE323A009E1CD2 /* CalendarTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarTableViewCell.m; sourceTree = "<group>"; };
 		B3CDDBB308E1E7466EFB6FFC /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B736EBA81CCF93E000CE7B6E /* MessagesViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesViewCell.h; sourceTree = "<group>"; };
 		B736EBA91CCF93E000CE7B6E /* MessagesViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesViewCell.m; sourceTree = "<group>"; };
@@ -169,6 +170,12 @@
 		B7C018BE1CD07044006773CB /* PersonalMessageViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalMessageViewCell.m; sourceTree = "<group>"; };
 		B7C018C21CD0708B006773CB /* PersonalMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalMessageViewController.h; sourceTree = "<group>"; };
 		B7C018C31CD0708B006773CB /* PersonalMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalMessageViewController.m; sourceTree = "<group>"; };
+		B7C018C61CD08630006773CB /* CalendarTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalendarTableViewCell.h; sourceTree = "<group>"; };
+		B7C018C71CD08630006773CB /* CalendarTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalendarTableViewCell.m; sourceTree = "<group>"; };
+		B7C018CB1CD0B7E0006773CB /* NewMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewMessageViewController.h; sourceTree = "<group>"; };
+		B7C018CC1CD0B7E0006773CB /* NewMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewMessageViewController.m; sourceTree = "<group>"; };
+		B7C018CF1CD0C7A4006773CB /* ScheduleMeetingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleMeetingViewController.h; sourceTree = "<group>"; };
+		B7C018D01CD0C7A4006773CB /* ScheduleMeetingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleMeetingViewController.m; sourceTree = "<group>"; };
 		B7DCE4511CBB9E5D0063FF72 /* Webservice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Webservice.h; sourceTree = SOURCE_ROOT; };
 		B7DCE4521CBB9E5D0063FF72 /* Webservice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Webservice.m; sourceTree = SOURCE_ROOT; };
 		B7E024BF1CC4D5B100707552 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
@@ -532,7 +539,6 @@
 				B7EAC17A1CC5EC9E001C4EEC /* MessageModule */,
 				B7EAC1791CC5EC89001C4EEC /* MatchesModule */,
 				B7EAC1781CC5EC7A001C4EEC /* MoreModule */,
-				B7A8DDB11CAE586F007F56B6 /* ChangePasswordViewController */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -544,14 +550,6 @@
 				B7A8DDDB1CAE5FC8007F56B6 /* LoginViewController.m */,
 			);
 			path = LoginViewController;
-			sourceTree = "<group>";
-		};
-		B7A8DDB11CAE586F007F56B6 /* ChangePasswordViewController */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = ChangePasswordViewController;
-			path = Classes/Controllers/ChangePasswordViewController;
 			sourceTree = "<group>";
 		};
 		B7A8DDB31CAE58AD007F56B6 /* BSKeyboardControls */ = {
@@ -677,6 +675,41 @@
 			name = PersonalMessageViewController;
 			sourceTree = "<group>";
 		};
+		B7C018C51CD085F8006773CB /* CalenderViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				B7C018C61CD08630006773CB /* CalendarTableViewCell.h */,
+				B7C018C71CD08630006773CB /* CalendarTableViewCell.m */,
+			);
+			name = CalenderViewCell;
+			sourceTree = "<group>";
+		};
+		B7C018C91CD0B7A4006773CB /* NewMessageView */ = {
+			isa = PBXGroup;
+			children = (
+				B7C018CA1CD0B7BC006773CB /* NewMessageViewController */,
+			);
+			name = NewMessageView;
+			sourceTree = "<group>";
+		};
+		B7C018CA1CD0B7BC006773CB /* NewMessageViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B7C018CB1CD0B7E0006773CB /* NewMessageViewController.h */,
+				B7C018CC1CD0B7E0006773CB /* NewMessageViewController.m */,
+			);
+			name = NewMessageViewController;
+			sourceTree = "<group>";
+		};
+		B7C018CE1CD0C787006773CB /* ScheduleMeetingView */ = {
+			isa = PBXGroup;
+			children = (
+				B7C018CF1CD0C7A4006773CB /* ScheduleMeetingViewController.h */,
+				B7C018D01CD0C7A4006773CB /* ScheduleMeetingViewController.m */,
+			);
+			name = ScheduleMeetingView;
+			sourceTree = "<group>";
+		};
 		B7DCE4501CBB9DC50063FF72 /* Webservice */ = {
 			isa = PBXGroup;
 			children = (
@@ -770,6 +803,7 @@
 		B7EAC17A1CC5EC9E001C4EEC /* MessageModule */ = {
 			isa = PBXGroup;
 			children = (
+				B7C018C91CD0B7A4006773CB /* NewMessageView */,
 				B7C018BC1CD0701F006773CB /* PersonalMessageView */,
 				5D32EC131CC4A34600C50969 /* MessagesView */,
 			);
@@ -779,8 +813,9 @@
 		B7EAC17B1CC5ECAB001C4EEC /* CalenderScheduleModule */ = {
 			isa = PBXGroup;
 			children = (
+				B7C018CE1CD0C787006773CB /* ScheduleMeetingView */,
+				B7C018C51CD085F8006773CB /* CalenderViewCell */,
 				5D32EC121CC4A33600C50969 /* CalendarViewController */,
-				5DF7EE611CCE3255009E1CD2 /* CalendarTableCell */,
 			);
 			name = CalenderScheduleModule;
 			sourceTree = "<group>";
@@ -864,7 +899,6 @@
 				TargetAttributes = {
 					B7A8DD641CAE2BF2007F56B6 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = T7GN63HCDX;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -979,10 +1013,13 @@
 				5D32EC0F1CC4A31F00C50969 /* MatchesViewController.m in Sources */,
 				B77695CC1CBFB4F300794005 /* SCLSwitchView.m in Sources */,
 				B78E18091CC76431003CA378 /* NYSliderPopover.m in Sources */,
+				B7C018D11CD0C7A4006773CB /* ScheduleMeetingViewController.m in Sources */,
 				B77695C91CBFB4F300794005 /* SCLAlertViewStyleKit.m in Sources */,
+				B7C018CD1CD0B7E0006773CB /* NewMessageViewController.m in Sources */,
 				B78E18081CC76431003CA378 /* NYPopover.m in Sources */,
 				B7E024C41CC5089E00707552 /* ConferenceDataModel.m in Sources */,
 				B776959F1CBF590100794005 /* UITextField+Padding.m in Sources */,
+				B7C018C81CD08630006773CB /* CalendarTableViewCell.m in Sources */,
 				B77695C61CBFB4F300794005 /* SCLAlertView.m in Sources */,
 				B7EAC1861CC62681001C4EEC /* RESwitch.m in Sources */,
 				5D32EC0B1CC4A31F00C50969 /* MoreViewController.m in Sources */,
@@ -990,7 +1027,6 @@
 				B7414F931CCA4715009FE9CE /* CustomAlert.m in Sources */,
 				5D9361971CC5F40B0004F030 /* UITextField+Border.m in Sources */,
 				B7DCE4531CBB9E5D0063FF72 /* Webservice.m in Sources */,
-				5DF7EE601CCE323A009E1CD2 /* CalendarTableViewCell.m in Sources */,
 				B7A8DDC11CAE5B50007F56B6 /* BSKeyboardControls.m in Sources */,
 				B7A8DDCB1CAE5BD4007F56B6 /* UserDefaultManager.m in Sources */,
 				B7C018BF1CD07044006773CB /* PersonalMessageViewCell.m in Sources */,

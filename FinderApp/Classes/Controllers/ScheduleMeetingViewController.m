@@ -1,47 +1,42 @@
 //
-//  CalendarViewController.m
+//  ScheduleMeetingViewController.m
 //  Finder_iPhoneApp
 //
-//  Created by Monika on 14/04/16.
+//  Created by Hema on 27/04/16.
 //  Copyright © 2016 Ranosys. All rights reserved.
 //
 
-#import "CalendarViewController.h"
-#import "CalendarTableViewCell.h"
 #import "ScheduleMeetingViewController.h"
 
-@interface CalendarViewController ()<UITextFieldDelegate,BSKeyboardControlsDelegate,UITextViewDelegate>
+@interface ScheduleMeetingViewController ()<UITextFieldDelegate,BSKeyboardControlsDelegate,UITextViewDelegate>
 {
+    NSArray *textFieldArray;
     int selectedPicker;
     BOOL isDatePicker;
-    NSArray *textFieldArray;
 }
-@property (weak, nonatomic) IBOutlet UITableView *calendarTableView;
+@property (nonatomic, strong) BSKeyboardControls *keyboardControls;
+@property (weak, nonatomic) IBOutlet UIView *scheduleMeetingContainerView;
+@property (weak, nonatomic) IBOutlet UIView *scheduleMeetingView;
+@property (weak, nonatomic) IBOutlet UITextField *contactNameTextField;
+@property (weak, nonatomic) IBOutlet UITextField *venueTextField;
+@property (weak, nonatomic) IBOutlet UITextField *dateTextField;
+@property (weak, nonatomic) IBOutlet UITextField *timeTextField;
+@property (weak, nonatomic) IBOutlet UITextView *meetingAgendaTextField;
+@property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
 @property (weak, nonatomic) IBOutlet UIToolbar *pickerToolbar;
-@property (nonatomic, strong) BSKeyboardControls *keyboardControls;
-
-//Schedule meeting view
-@property (weak, nonatomic) IBOutlet UIView *scheduleMtgCtnrView;
-@property (weak, nonatomic) IBOutlet UIView *scheduleMeetingView;
-@property (weak, nonatomic) IBOutlet UITextField *contactNameText;
-@property (weak, nonatomic) IBOutlet UITextField *venueText;
-@property (weak, nonatomic) IBOutlet UITextField *dateText;
-@property (weak, nonatomic) IBOutlet UITextField *timeText;
-@property (weak, nonatomic) IBOutlet UITextView *meetingAgendaText;
-@property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
 @end
 
-@implementation CalendarViewController
-@synthesize pickerView,pickerToolbar,datePicker,contactNameText,venueText,dateText,timeText,meetingAgendaText,keyboardControls,scheduleMtgCtnrView,scheduleMeetingView;
-
-#pragma mark - View lifecycle
+@implementation ScheduleMeetingViewController
+@synthesize pickerView,pickerToolbar,datePicker,contactNameTextField,venueTextField,dateTextField,timeTextField,meetingAgendaTextField,keyboardControls,scheduleMeetingContainerView,scheduleMeetingView;
+#pragma mark - View life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title=@"CALENDAR";
-    textFieldArray = @[venueText,meetingAgendaText];
+    // Do any additional setup after loading the view.
+    textFieldArray = @[venueTextField,meetingAgendaTextField];
     [self setKeyboardControls:[[BSKeyboardControls alloc] initWithFields:textFieldArray]];
     [self.keyboardControls setDelegate:self];
+    [self addborder];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -56,92 +51,23 @@
     pickerView.backgroundColor=[UIColor redColor];
     datePicker.backgroundColor=[UIColor blueColor];
     selectedPicker=0;
-    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+}
+-(void)addborder
+{
+    [contactNameTextField setTextBorder:contactNameTextField color:[UIColor lightGrayColor]];
+    [venueTextField setTextBorder:venueTextField color:[UIColor lightGrayColor]];
+    [dateTextField setTextBorder:dateTextField color:[UIColor lightGrayColor]];
+    [timeTextField setTextBorder:timeTextField color:[UIColor lightGrayColor]];
+    [meetingAgendaTextField setTextViewBorder:meetingAgendaTextField color:[UIColor lightGrayColor]];
 }
 #pragma mark - end
-
-#pragma mark - Table view delegate methods
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
-    return 3;
-}
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return 45;
-}
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-{
-    if (section==0)
-    {
-        return 0;
-    }
-    else{
-        return 0;
-    }
-}
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    UIView * headerView;
-    headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 60.0)];
-    headerView.backgroundColor = [UIColor clearColor];
-    UILabel * dateLabel = [[UILabel alloc] init];
-    dateLabel.font = [UIFont fontWithName:@"Roboto-Regular" size:18.0];
-    dateLabel.text=@"THURSDAY 25th FEBRUARY";
-    float width =  [dateLabel.text boundingRectWithSize:dateLabel.frame.size options:NSStringDrawingUsesLineFragmentOrigin attributes:@{ NSFontAttributeName:dateLabel.font } context:nil]
-    .size.width;
-    dateLabel.frame = CGRectMake(15, 0, width,40.0);
-    dateLabel.textColor=[UIColor colorWithRed:(40.0/255.0) green:(40.0/255.0) blue:(40.0/255.0) alpha:1];
-    [headerView addSubview:dateLabel];
-    return headerView;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    if (section==0)
-    {
-        return 2;
-    }
-    else if (section==1)
-    {
-        return 3;
-    }
-    else
-    {
-        return 4;
-    }
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSString *simpleTableIdentifier = @"calendarCell";
-    CalendarTableViewCell *calendarCell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
-    if (calendarCell == nil)
-    {
-        calendarCell = [[CalendarTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
-    }
-    [calendarCell.containerView addShadow:calendarCell.containerView color:[UIColor lightGrayColor]];
-    return calendarCell;
-}
-#pragma mark - end
-
 #pragma mark - IBActions
-
-- (IBAction)addButtonAction:(id)sender
-{
-    UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    ScheduleMeetingViewController *scheduleMeeting =[storyboard instantiateViewControllerWithIdentifier:@"ScheduleMeetingViewController"];
-    scheduleMeeting.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.1f];
-    [scheduleMeeting setModalPresentationStyle:UIModalPresentationOverCurrentContext];
-    
-    [self presentViewController:scheduleMeeting animated: NO completion:nil];
-}
 - (IBAction)saveButtonAction:(id)sender
 {
-    
 }
 - (IBAction)cancelButtonAction:(id)sender
 {
-    scheduleMtgCtnrView.hidden=YES;
+    [self.presentingViewController dismissViewControllerAnimated:NO completion:nil];
 }
 //Load picker
 - (IBAction)contactNameButtonAction:(id)sender
@@ -151,10 +77,11 @@
     selectedPicker=0;
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];
-    [pickerView reloadAllComponents];
     [pickerView setNeedsLayout];
-    pickerView.frame = CGRectMake(pickerView.frame.origin.x, self.view.frame.size.height-pickerView.frame.size.height, self.view.bounds.size.width, pickerView.frame.size.height);
+    [pickerView reloadAllComponents];
+    pickerView.frame = CGRectMake(pickerView.frame.origin.x, self.view.frame.size.height-(pickerView.frame.size.height+44), self.view.frame.size.width, pickerView.frame.size.height);
     pickerToolbar.frame = CGRectMake(pickerToolbar.frame.origin.x, pickerView.frame.origin.y-44, self.view.frame.size.width, 44);
+    
     [UIView commitAnimations];
 }
 //Load date picker
@@ -169,15 +96,18 @@
     datePicker.datePickerMode = UIDatePickerModeDate;
     if([[UIScreen mainScreen] bounds].size.height<568)
     {
-        self.view.frame=CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y-70, self.view.frame.size.width, self.view.frame.size.height);
-        datePicker.frame = CGRectMake(datePicker.frame.origin.x, self.view.frame.size.height-datePicker.frame.size.height+70, self.view.frame.size.width, datePicker.frame.size.height);
+        NSLog(@"height y %f %f",self.view.frame.size.height,self.view.frame.origin.y);
+        self.view.frame=CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y-134, self.view.frame.size.width, self.view.frame.size.height);
+         NSLog(@"height y %f %f",self.view.frame.size.height,self.view.frame.origin.y);
+//        datePicker.frame = CGRectMake(datePicker.frame.origin.x, 318, self.view.frame.size.width, datePicker.frame.size.height);
+        NSLog(@"height y %f %f",datePicker.frame.size.height,datePicker.frame.origin.y);
     }
     else
     {
-    datePicker.frame = CGRectMake(datePicker.frame.origin.x, self.view.frame.size.height-datePicker.frame.size.height, self.view.frame.size.width, datePicker.frame.size.height);
+        datePicker.frame = CGRectMake(datePicker.frame.origin.x, self.view.frame.size.height-(datePicker.frame.size.height+44), self.view.frame.size.width, datePicker.frame.size.height);
     }
     pickerToolbar.frame = CGRectMake(pickerToolbar.frame.origin.x, datePicker.frame.origin.y-44, self.view.frame.size.width, 44);
-
+    
     [UIView commitAnimations];
 }
 //Load time picker
@@ -196,10 +126,10 @@
     }
     else
     {
-    datePicker.frame = CGRectMake(datePicker.frame.origin.x, self.view.frame.size.height-datePicker.frame.size.height, self.view.frame.size.width, datePicker.frame.size.height);
+        datePicker.frame = CGRectMake(datePicker.frame.origin.x, self.view.frame.size.height-(datePicker.frame.size.height+44), self.view.frame.size.width, datePicker.frame.size.height);
     }
     pickerToolbar.frame = CGRectMake(pickerToolbar.frame.origin.x, datePicker.frame.origin.y-44, self.view.frame.size.width, 44);
-     datePicker.datePickerMode = UIDatePickerModeTime;
+    datePicker.datePickerMode = UIDatePickerModeTime;
     [UIView commitAnimations];
 }
 #pragma mark - end
@@ -213,31 +143,31 @@
     }
     else
     {
-    if (isDatePicker==false)
-    {
-        NSDateFormatter * tf = [[NSDateFormatter alloc] init];
-        [tf setDateFormat:@"hh:mm a"]; // from here u can change format..
-        timeText.text=[tf stringFromDate:datePicker.date];
-    }
-    else
-    {
-        NSDateFormatter * df = [[NSDateFormatter alloc] init];
-        [df setDateFormat:@"M-d-yyyy"]; // from here u can change format..
-        dateText.text=[df stringFromDate:datePicker.date];
-    }
+        if (isDatePicker==false)
+        {
+            NSDateFormatter * tf = [[NSDateFormatter alloc] init];
+            [tf setDateFormat:@"hh:mm a"]; // from here u can change format..
+            timeTextField.text=[tf stringFromDate:datePicker.date];
+        }
+        else
+        {
+            NSDateFormatter * df = [[NSDateFormatter alloc] init];
+            [df setDateFormat:@"M-d-yyyy"]; // from here u can change format..
+            dateTextField.text=[df stringFromDate:datePicker.date];
+        }
     }
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];
-    self.view.frame=CGRectMake(self.view.frame.origin.x, 64, self.view.frame.size.width, self.view.frame.size.height);
-     [UIView commitAnimations];
+    self.view.frame=CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height);
+    [UIView commitAnimations];
 }
 - (IBAction)toolbarCancelAction:(id)sender
 {
     [self hidePickerWithAnimation];
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];
-        self.view.frame=CGRectMake(self.view.frame.origin.x, 64, self.view.frame.size.width, self.view.frame.size.height);
-     [UIView commitAnimations];
+    self.view.frame=CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height);
+    [UIView commitAnimations];
 }
 //Hide picker
 -(void)hidePickerWithAnimation
@@ -246,7 +176,7 @@
     {
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.3];
-        self.view.frame=CGRectMake(self.view.frame.origin.x, 64, self.view.frame.size.width, self.view.frame.size.height);
+        self.view.frame=CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height);
         pickerToolbar.frame = CGRectMake(pickerToolbar.frame.origin.x, 1000, self.view.frame.size.width, 44);
         datePicker.frame = CGRectMake(datePicker.frame.origin.x, 1000, self.view.frame.size.width, datePicker.frame.size.height);
         [UIView commitAnimations];
@@ -255,7 +185,8 @@
     {
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.3];
-        self.view.frame=CGRectMake(self.view.frame.origin.x, 64, self.view.frame.size.width, self.view.frame.size.height);
+        self.view.frame=CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height);
+        NSLog(@"height y %f %f",self.view.frame.size.height,self.view.frame.origin.y);
         pickerView.frame = CGRectMake(pickerView.frame.origin.x, 1000, self.view.frame.size.width, pickerView.frame.size.height);
         pickerToolbar.frame = CGRectMake(pickerToolbar.frame.origin.x, 1000, self.view.frame.size.width, 44);
         [UIView commitAnimations];
@@ -308,11 +239,11 @@
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
-     [self hidePickerWithAnimation];
+    [self hidePickerWithAnimation];
     [self.keyboardControls setActiveField:textField];
     if([[UIScreen mainScreen] bounds].size.height<568)
     {
-        if (textField==venueText)
+        if (textField==venueTextField)
         {
             [UIView animateWithDuration:0.3 animations:^{
                 self.view.frame=CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y-64, self.view.frame.size.width, self.view.frame.size.height);
@@ -324,14 +255,14 @@
 {
     if([[UIScreen mainScreen] bounds].size.height<568)
     {
-        if (textField==venueText)
+        if (textField==venueTextField)
         {
             [UIView animateWithDuration:0.3 animations:^{
                 self.view.frame=CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y+64, self.view.frame.size.width, self.view.frame.size.height);
             }];
         }
     }
-     [textField resignFirstResponder];
+    [textField resignFirstResponder];
 }
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
@@ -345,7 +276,7 @@
 {
     [self hidePickerWithAnimation];
     [self.keyboardControls setActiveField:textView];
-    if (textView==meetingAgendaText)
+    if (textView==meetingAgendaTextField)
     {
         if([[UIScreen mainScreen] bounds].size.height<568)
         {
@@ -369,7 +300,7 @@
 }
 -(void)textViewDidEndEditing:(UITextView *)textView
 {
-    if (textView==meetingAgendaText)
+    if (textView==meetingAgendaTextField)
     {
         if([[UIScreen mainScreen] bounds].size.height<568)
         {

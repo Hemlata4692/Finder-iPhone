@@ -9,8 +9,12 @@
 #import "MessagesViewCell.h"
 
 @implementation MessagesViewCell
+//messgeCell
 @synthesize messageViewContainer,userImage,userNameLabel,dateLabel,messageLabel,messageCountLabel;
+//newMessageCell
+@synthesize messageContainerView,userImageView,nameLabel,comapnyNameLabel;
 
+#pragma mark - Laod nib
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
@@ -21,5 +25,5 @@
 
     // Configure the view for the selected state
 }
-
+#pragma mark - end
 @end

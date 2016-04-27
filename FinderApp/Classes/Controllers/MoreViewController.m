@@ -81,7 +81,7 @@
     [confirmPasswordTextField addTextFieldPaddingWithoutImages:confirmPasswordTextField];
 }
 #pragma mark - end
-#pragma mark - Table view methods
+#pragma mark - Table view delegate methods
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -250,13 +250,11 @@
 - (IBAction)cancelButtonAction:(id)sender
 {
     [keyboardControls.activeField resignFirstResponder];
-
     changePwdContainerView.hidden = YES;
 }
 
 #pragma mark - end
 #pragma mark - Webservice
-
 -(void)changePassword
 {
     [[UserService sharedManager] changePassword:oldPasswordTextField.text newPassword:confirmPasswordTextField.text success:^(id responseObject)

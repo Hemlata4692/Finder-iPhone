@@ -10,19 +10,21 @@
 
 @implementation UIView (RoundedCorner)
 
-
-
 - (void)setCornerRadius:(CGFloat)radius {
     self.layer.cornerRadius = radius;
     self.layer.masksToBounds = YES;
-
 }
 
-- (void)setTextBorder:(UILabel *)textLabel color:(UIColor *)color
+- (void)setTextBorder:(UITextField *)textField color:(UIColor *)color
 {
-    textLabel.shadowColor = color;
-    textLabel.shadowOffset = CGSizeMake(0.0, 1.0);
+    textField.layer.borderWidth = 1.0f;
+    textField.layer.borderColor = color.CGColor;
+}
 
+- (void)setTextViewBorder:(UITextView *)textView color:(UIColor *)color
+{
+    textView.layer.borderWidth = 1.0f;
+    textView.layer.borderColor = color.CGColor;
 }
 
 - (void)setViewBorder: (UIView *)view  color:(UIColor *)color {

@@ -11,7 +11,7 @@
 @implementation PendingAppointmentCell
 @synthesize pendingViewContainer,userImageView,userName,meetingTitle,cancelButton,timeLabel;
 
-
+#pragma mark - Load nib
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
@@ -22,5 +22,5 @@
 
     // Configure the view for the selected state
 }
-
+#pragma mark - ends
 @end

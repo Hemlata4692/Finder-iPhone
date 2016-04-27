@@ -10,6 +10,7 @@
 #import "PersonalMessageViewCell.h"
 
 @interface PersonalMessageViewController ()
+
 @property (weak, nonatomic) IBOutlet UITableView *personalMessageTableView;
 @property (weak, nonatomic) IBOutlet UIView *messageView;
 @property (weak, nonatomic) IBOutlet UITextView *sendMessageTextView;
@@ -37,18 +38,29 @@
 }
 #pragma mark - end
 
-#pragma mark - Table view delegates
+#pragma mark - Table view delegate methods
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return 3;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    PersonalMessageViewCell *cell=[personalMessageTableView dequeueReusableCellWithIdentifier:@"cell"];
-    if (cell == nil)
-    {
-        cell=[[PersonalMessageViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
-    }
-    return cell;
+        NSString *simpleTableIdentifier = @"meCell";
+        PersonalMessageViewCell *meCell=[personalMessageTableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+        if (meCell == nil)
+        {
+            meCell=[[PersonalMessageViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:simpleTableIdentifier];
+        }
+        return meCell;
+
+//        NSString *simpleTableIdentifier = @"otherUserCell";
+//        PersonalMessageViewCell *otherCell=[personalMessageTableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+//        if (otherCell == nil)
+//        {
+//            otherCell=[[PersonalMessageViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:simpleTableIdentifier];
+//        }
+//        return otherCell;
+    
 }
+#pragma mark - end
 @end
