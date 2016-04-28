@@ -44,6 +44,7 @@
 		B77695CC1CBFB4F300794005 /* SCLSwitchView.m in Sources */ = {isa = PBXBuildFile; fileRef = B77695C41CBFB4F300794005 /* SCLSwitchView.m */; };
 		B78E18081CC76431003CA378 /* NYPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = B78E18051CC76431003CA378 /* NYPopover.m */; };
 		B78E18091CC76431003CA378 /* NYSliderPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = B78E18071CC76431003CA378 /* NYSliderPopover.m */; };
+		B7A82A911CD1CA2F0030DB38 /* UIPlaceHolderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7A82A901CD1CA2F0030DB38 /* UIPlaceHolderTextView.m */; };
 		B7A8DD6A1CAE2BF2007F56B6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B7A8DD691CAE2BF2007F56B6 /* main.m */; };
 		B7A8DD6D1CAE2BF2007F56B6 /* FinderAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B7A8DD6C1CAE2BF2007F56B6 /* FinderAppDelegate.m */; };
 		B7A8DD751CAE2BF2007F56B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B7A8DD741CAE2BF2007F56B6 /* Assets.xcassets */; };
@@ -138,6 +139,8 @@
 		B78E18051CC76431003CA378 /* NYPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NYPopover.m; sourceTree = "<group>"; };
 		B78E18061CC76431003CA378 /* NYSliderPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYSliderPopover.h; sourceTree = "<group>"; };
 		B78E18071CC76431003CA378 /* NYSliderPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NYSliderPopover.m; sourceTree = "<group>"; };
+		B7A82A8F1CD1CA2F0030DB38 /* UIPlaceHolderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPlaceHolderTextView.h; sourceTree = "<group>"; };
+		B7A82A901CD1CA2F0030DB38 /* UIPlaceHolderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPlaceHolderTextView.m; sourceTree = "<group>"; };
 		B7A8DD651CAE2BF2007F56B6 /* Finder_iPhoneApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Finder_iPhoneApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B7A8DD691CAE2BF2007F56B6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = main.m; path = "Supporting Files/main.m"; sourceTree = "<group>"; };
 		B7A8DD6B1CAE2BF2007F56B6 /* FinderAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FinderAppDelegate.h; sourceTree = "<group>"; };
@@ -391,6 +394,8 @@
 			children = (
 				B776959D1CBF590100794005 /* UITextField+Padding.h */,
 				B776959E1CBF590100794005 /* UITextField+Padding.m */,
+				B7A82A8F1CD1CA2F0030DB38 /* UIPlaceHolderTextView.h */,
+				B7A82A901CD1CA2F0030DB38 /* UIPlaceHolderTextView.m */,
 			);
 			name = PaddingCategory;
 			sourceTree = "<group>";
@@ -1015,6 +1020,7 @@
 				B78E18091CC76431003CA378 /* NYSliderPopover.m in Sources */,
 				B7C018D11CD0C7A4006773CB /* ScheduleMeetingViewController.m in Sources */,
 				B77695C91CBFB4F300794005 /* SCLAlertViewStyleKit.m in Sources */,
+				B7A82A911CD1CA2F0030DB38 /* UIPlaceHolderTextView.m in Sources */,
 				B7C018CD1CD0B7E0006773CB /* NewMessageViewController.m in Sources */,
 				B78E18081CC76431003CA378 /* NYPopover.m in Sources */,
 				B7E024C41CC5089E00707552 /* ConferenceDataModel.m in Sources */,

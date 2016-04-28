@@ -7,6 +7,7 @@
 //
 
 #import "ScheduleMeetingViewController.h"
+#import "UIPlaceHolderTextView.h"
 
 @interface ScheduleMeetingViewController ()<UITextFieldDelegate,BSKeyboardControlsDelegate,UITextViewDelegate>
 {
@@ -15,20 +16,20 @@
     BOOL isDatePicker;
 }
 @property (nonatomic, strong) BSKeyboardControls *keyboardControls;
-@property (weak, nonatomic) IBOutlet UIView *scheduleMeetingContainerView;
+@property (weak, nonatomic) IBOutlet UIScrollView *scheduleMeetingScrollView;
 @property (weak, nonatomic) IBOutlet UIView *scheduleMeetingView;
 @property (weak, nonatomic) IBOutlet UITextField *contactNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *venueTextField;
 @property (weak, nonatomic) IBOutlet UITextField *dateTextField;
 @property (weak, nonatomic) IBOutlet UITextField *timeTextField;
-@property (weak, nonatomic) IBOutlet UITextView *meetingAgendaTextField;
+@property (weak, nonatomic) IBOutlet UIPlaceHolderTextView *meetingAgendaTextField;
 @property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
 @property (weak, nonatomic) IBOutlet UIToolbar *pickerToolbar;
 @end
 
 @implementation ScheduleMeetingViewController
-@synthesize pickerView,pickerToolbar,datePicker,contactNameTextField,venueTextField,dateTextField,timeTextField,meetingAgendaTextField,keyboardControls,scheduleMeetingContainerView,scheduleMeetingView;
+@synthesize pickerView,pickerToolbar,datePicker,contactNameTextField,venueTextField,dateTextField,timeTextField,meetingAgendaTextField,keyboardControls,scheduleMeetingScrollView,scheduleMeetingView;
 #pragma mark - View life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -59,14 +60,29 @@
     [dateTextField setTextBorder:dateTextField color:[UIColor lightGrayColor]];
     [timeTextField setTextBorder:timeTextField color:[UIColor lightGrayColor]];
     [meetingAgendaTextField setTextViewBorder:meetingAgendaTextField color:[UIColor lightGrayColor]];
+    [contactNameTextField addTextFieldPaddingWithoutImages:contactNameTextField];
+    [venueTextField addTextFieldPaddingWithoutImages:venueTextField];
+    [timeTextField addTextFieldPaddingWithoutImages:timeTextField];
+    [dateTextField addTextFieldPaddingWithoutImages:dateTextField];
+    [contactNameTextField setCornerRadius:2.0f];
+    [dateTextField setCornerRadius:2.0f];
+    [venueTextField setCornerRadius:2.0f];
+    [timeTextField setCornerRadius:2.0f];
+    [meetingAgendaTextField setCornerRadius:2.0f];
+    [meetingAgendaTextField setPlaceholder:@"  Meeting Agenda"];
+    [meetingAgendaTextField setFont:[UIFont fontWithName:@"Roboto-Regular" size:14.0]];
 }
 #pragma mark - end
 #pragma mark - IBActions
 - (IBAction)saveButtonAction:(id)sender
 {
+    [keyboardControls.activeField resignFirstResponder];
+    [scheduleMeetingScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
 }
 - (IBAction)cancelButtonAction:(id)sender
 {
+    [keyboardControls.activeField resignFirstResponder];
+    [scheduleMeetingScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
     [self.presentingViewController dismissViewControllerAnimated:NO completion:nil];
 }
 //Load picker
@@ -96,18 +112,10 @@
     datePicker.datePickerMode = UIDatePickerModeDate;
     if([[UIScreen mainScreen] bounds].size.height<568)
     {
-        NSLog(@"height y %f %f",self.view.frame.size.height,self.view.frame.origin.y);
-        self.view.frame=CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y-134, self.view.frame.size.width, self.view.frame.size.height);
-         NSLog(@"height y %f %f",self.view.frame.size.height,self.view.frame.origin.y);
-//        datePicker.frame = CGRectMake(datePicker.frame.origin.x, 318, self.view.frame.size.width, datePicker.frame.size.height);
-        NSLog(@"height y %f %f",datePicker.frame.size.height,datePicker.frame.origin.y);
+         [scheduleMeetingScrollView setContentOffset:CGPointMake(0, scheduleMeetingScrollView.frame.origin.y+50) animated:YES];
     }
-    else
-    {
-        datePicker.frame = CGRectMake(datePicker.frame.origin.x, self.view.frame.size.height-(datePicker.frame.size.height+44), self.view.frame.size.width, datePicker.frame.size.height);
-    }
+     datePicker.frame = CGRectMake(datePicker.frame.origin.x, self.view.frame.size.height-(datePicker.frame.size.height+44), self.view.frame.size.width, datePicker.frame.size.height);
     pickerToolbar.frame = CGRectMake(pickerToolbar.frame.origin.x, datePicker.frame.origin.y-44, self.view.frame.size.width, 44);
-    
     [UIView commitAnimations];
 }
 //Load time picker
@@ -121,13 +129,9 @@
     [UIView setAnimationDuration:0.3];
     if([[UIScreen mainScreen] bounds].size.height<568)
     {
-        self.view.frame=CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y-70, self.view.frame.size.width, self.view.frame.size.height);
-        datePicker.frame = CGRectMake(datePicker.frame.origin.x, self.view.frame.size.height-datePicker.frame.size.height+70, self.view.frame.size.width, datePicker.frame.size.height);
+        [scheduleMeetingScrollView setContentOffset:CGPointMake(0, scheduleMeetingScrollView.frame.origin.y+50) animated:YES];
     }
-    else
-    {
-        datePicker.frame = CGRectMake(datePicker.frame.origin.x, self.view.frame.size.height-(datePicker.frame.size.height+44), self.view.frame.size.width, datePicker.frame.size.height);
-    }
+     datePicker.frame = CGRectMake(datePicker.frame.origin.x, self.view.frame.size.height-(datePicker.frame.size.height+44), self.view.frame.size.width, datePicker.frame.size.height);
     pickerToolbar.frame = CGRectMake(pickerToolbar.frame.origin.x, datePicker.frame.origin.y-44, self.view.frame.size.width, 44);
     datePicker.datePickerMode = UIDatePickerModeTime;
     [UIView commitAnimations];
@@ -158,7 +162,7 @@
     }
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];
-    self.view.frame=CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height);
+    [scheduleMeetingScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
     [UIView commitAnimations];
 }
 - (IBAction)toolbarCancelAction:(id)sender
@@ -166,7 +170,7 @@
     [self hidePickerWithAnimation];
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];
-    self.view.frame=CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height);
+    [scheduleMeetingScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
     [UIView commitAnimations];
 }
 //Hide picker
@@ -176,7 +180,7 @@
     {
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.3];
-        self.view.frame=CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height);
+        [scheduleMeetingScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
         pickerToolbar.frame = CGRectMake(pickerToolbar.frame.origin.x, 1000, self.view.frame.size.width, 44);
         datePicker.frame = CGRectMake(datePicker.frame.origin.x, 1000, self.view.frame.size.width, datePicker.frame.size.height);
         [UIView commitAnimations];
@@ -185,8 +189,7 @@
     {
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.3];
-        self.view.frame=CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, self.view.frame.size.width, self.view.frame.size.height);
-        NSLog(@"height y %f %f",self.view.frame.size.height,self.view.frame.origin.y);
+       [scheduleMeetingScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
         pickerView.frame = CGRectMake(pickerView.frame.origin.x, 1000, self.view.frame.size.width, pickerView.frame.size.height);
         pickerToolbar.frame = CGRectMake(pickerToolbar.frame.origin.x, 1000, self.view.frame.size.width, 44);
         [UIView commitAnimations];
@@ -232,6 +235,7 @@
 - (void)keyboardControlsDonePressed:(BSKeyboardControls *)keyboard
 {
     [keyboard.activeField resignFirstResponder];
+    [scheduleMeetingScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
 }
 
 #pragma mark - end
@@ -246,7 +250,7 @@
         if (textField==venueTextField)
         {
             [UIView animateWithDuration:0.3 animations:^{
-                self.view.frame=CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y-64, self.view.frame.size.width, self.view.frame.size.height);
+                [scheduleMeetingScrollView setContentOffset:CGPointMake(0, scheduleMeetingScrollView.frame.origin.y+30) animated:YES];
             }];
         }
     }
@@ -258,7 +262,7 @@
         if (textField==venueTextField)
         {
             [UIView animateWithDuration:0.3 animations:^{
-                self.view.frame=CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y+64, self.view.frame.size.width, self.view.frame.size.height);
+                [scheduleMeetingScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
             }];
         }
     }
@@ -267,7 +271,7 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     [textField resignFirstResponder];
-    self.view.frame=CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y+64, self.view.frame.size.width, self.view.frame.size.height);
+    [scheduleMeetingScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
     return YES;
 }
 #pragma mark - end
@@ -281,46 +285,20 @@
         if([[UIScreen mainScreen] bounds].size.height<568)
         {
             [UIView animateWithDuration:0.3 animations:^{
-                self.view.frame=CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y-170, self.view.frame.size.width, self.view.frame.size.height);
+                [scheduleMeetingScrollView setContentOffset:CGPointMake(0, scheduleMeetingScrollView.frame.origin.y+(meetingAgendaTextField.frame.origin.y-30)) animated:YES];
             }];
         }
-        else if([[UIScreen mainScreen] bounds].size.height==568)
+        else
         {
             [UIView animateWithDuration:0.3 animations:^{
-                self.view.frame=CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y-140, self.view.frame.size.width, self.view.frame.size.height);
-            }];
-        }
-        else if([[UIScreen mainScreen] bounds].size.height<1136)
-        {
-            [UIView animateWithDuration:0.3 animations:^{
-                self.view.frame=CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y-100, self.view.frame.size.width, self.view.frame.size.height);
+                [scheduleMeetingScrollView setContentOffset:CGPointMake(0, scheduleMeetingScrollView.frame.origin.y+50) animated:YES];
             }];
         }
     }
 }
 -(void)textViewDidEndEditing:(UITextView *)textView
 {
-    if (textView==meetingAgendaTextField)
-    {
-        if([[UIScreen mainScreen] bounds].size.height<568)
-        {
-            [UIView animateWithDuration:0.3 animations:^{
-                self.view.frame=CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y+170, self.view.frame.size.width, self.view.frame.size.height);
-            }];
-        }
-        else if([[UIScreen mainScreen] bounds].size.height==568)
-        {
-            [UIView animateWithDuration:0.3 animations:^{
-                self.view.frame=CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y+140, self.view.frame.size.width, self.view.frame.size.height);
-            }];
-        }
-        else if([[UIScreen mainScreen] bounds].size.height<1136)
-        {
-            [UIView animateWithDuration:0.3 animations:^{
-                self.view.frame=CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y+100, self.view.frame.size.width, self.view.frame.size.height);
-            }];
-        }
-    }
+     [scheduleMeetingScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
 }
 
 #pragma mark - end
