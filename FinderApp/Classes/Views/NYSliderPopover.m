@@ -64,7 +64,7 @@
     CGFloat minimum =  self.minimumValue;
 	CGFloat maximum = self.maximumValue;
 	CGFloat value = self.value;
-//	 [slider setValue:((int)((slider.value + 2.5) / 50) * 50) animated:NO];
+
 	if (minimum < 0.0) {
         
 		value = self.value - minimum;
@@ -73,7 +73,7 @@
     }
 	CGFloat x = self.frame.origin.x;
     CGFloat maxMin = (maximum + minimum) / 2.0;
-    
+   
     x += (((value - minimum) / (maximum - minimum)) * self.frame.size.width) - (self.popover.frame.size.width / 2.0);
 	
 	if (value > maxMin) {

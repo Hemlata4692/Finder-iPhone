@@ -59,11 +59,6 @@
     [super viewWillAppear:YES];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
 }
--(void)viewDidAppear:(BOOL)animated
-{
-    [super viewDidAppear:YES];
-    NSLog(@"%f",bottomContainerView.frame.origin.y);
-}
 
 #pragma mark - end
 
@@ -80,34 +75,34 @@
     
     [[[self tabBarController] tabBar] setBackgroundColor:[UIColor whiteColor]];
     
-    [[UITabBarItem appearance] setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor colorWithRed:63.0/255.0 green:63.0/255.0 blue:63.0/255.0 alpha:1.0] } forState:UIControlStateNormal];
+    [[UITabBarItem appearance] setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor colorWithRed:52.0/255.0 green:52.0/255.0 blue:52.0/255.0 alpha:1.0] } forState:UIControlStateNormal];
     [[UITabBarItem appearance] setTitleTextAttributes:@{ NSForegroundColorAttributeName : [UIColor colorWithRed:237.0/255.0 green:120.0/255.0 blue:0.0/255.0 alpha:1.0] } forState:UIControlStateSelected];
     
     tabBar.clipsToBounds=YES;
-    [tabBarItem1 setImage:[[UIImage imageNamed:@"email_icon.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-    [tabBarItem1 setSelectedImage:[[UIImage imageNamed:@"lock_icon.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-    [tabBarItem1 setTitlePositionAdjustment:UIOffsetMake(0, -5)];
-    tabBarItem1.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
+    [tabBarItem1 setImage:[[UIImage imageNamed:@"home.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    [tabBarItem1 setSelectedImage:[[UIImage imageNamed:@"home_selected.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    [tabBarItem1 setTitlePositionAdjustment:UIOffsetMake(0, -6)];
+    tabBarItem1.imageInsets = UIEdgeInsetsMake(-3, 0, 3, 0);
     
-    [tabBarItem2 setImage:[[UIImage imageNamed:@"email_icon.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-    [tabBarItem2 setSelectedImage:[[UIImage imageNamed:@"lock_icon.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-    [tabBarItem2 setTitlePositionAdjustment:UIOffsetMake(-7, -5)];
-    tabBarItem2.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
+    [tabBarItem2 setImage:[[UIImage imageNamed:@"matches.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    [tabBarItem2 setSelectedImage:[[UIImage imageNamed:@"matches_selected.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    [tabBarItem2 setTitlePositionAdjustment:UIOffsetMake(-7, -6)];
+    tabBarItem2.imageInsets = UIEdgeInsetsMake(-3, 0, 3, 0);
     
-    [tabBarItem3 setImage:[[UIImage imageNamed:@"email_icon.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-    [tabBarItem3 setSelectedImage:[[UIImage imageNamed:@"lock_icon.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-    [tabBarItem3 setTitlePositionAdjustment:UIOffsetMake(0, -5)];
-    tabBarItem3.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
+    [tabBarItem3 setImage:[[UIImage imageNamed:@"message.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    [tabBarItem3 setSelectedImage:[[UIImage imageNamed:@"message_selected.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    [tabBarItem3 setTitlePositionAdjustment:UIOffsetMake(0, -6)];
+    tabBarItem3.imageInsets = UIEdgeInsetsMake(-3, 0, 3, 0);
     
-    [tabBarItem4 setImage:[[UIImage imageNamed:@"email_icon.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-    [tabBarItem4 setSelectedImage:[[UIImage imageNamed:@"lock_icon.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-    [tabBarItem4 setTitlePositionAdjustment:UIOffsetMake(8, -5)];
-    tabBarItem4.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
+    [tabBarItem4 setImage:[[UIImage imageNamed:@"calendar.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    [tabBarItem4 setSelectedImage:[[UIImage imageNamed:@"calendar_selected.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    [tabBarItem4 setTitlePositionAdjustment:UIOffsetMake(8, -6)];
+    tabBarItem4.imageInsets = UIEdgeInsetsMake(-3, 0, 3, 0);
     
-    [tabBarItem5 setImage:[[UIImage imageNamed:@"email_icon.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-    [tabBarItem5 setSelectedImage:[[UIImage imageNamed:@"lock_icon.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-    [tabBarItem5 setTitlePositionAdjustment:UIOffsetMake(2, -5)];
-    tabBarItem5.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
+    [tabBarItem5 setImage:[[UIImage imageNamed:@"more.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    [tabBarItem5 setSelectedImage:[[UIImage imageNamed:@"more_selected.png"] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    [tabBarItem5 setTitlePositionAdjustment:UIOffsetMake(2, -6)];
+    tabBarItem5.imageInsets = UIEdgeInsetsMake(-3, 0, 3, 0);
 }
 
 #pragma mark - end
@@ -132,28 +127,36 @@
     conferenceTitleLabel.translatesAutoresizingMaskIntoConstraints = YES;
     conferenceDescription.translatesAutoresizingMaskIntoConstraints = YES;
     conferenceVenue.translatesAutoresizingMaskIntoConstraints = YES;
+    conferenceOrganiserName.translatesAutoresizingMaskIntoConstraints=YES;
     mainContainerView.translatesAutoresizingMaskIntoConstraints=YES;
-  
-    size = CGSizeMake(conferenceTitleLabel.frame.size.width,200);
-     textRect=[self setDynamicHeight:size textString:[[conferenceDetailArray objectAtIndex:0]conferenceName]];
+   
+    size = CGSizeMake(conferenceTitleLabel.frame.size.width,100);
+     textRect=[self setDynamicHeight:size textString:[[conferenceDetailArray objectAtIndex:0]conferenceName] fontSize:[UIFont fontWithName:@"Roboto-Regular" size:16]];
     conferenceTitleLabel.numberOfLines = 0;
     conferenceTitleLabel.frame = CGRectMake(8, conferenceTitleLabel.frame.origin.y, mainContainerView.frame.size.width-16, textRect.size.height);
     conferenceTitleLabel.text = [[conferenceDetailArray objectAtIndex:0]conferenceName];
-    
-    size = CGSizeMake(conferenceDescription.frame.size.width,180);
-   textRect=[self setDynamicHeight:size textString:[[conferenceDetailArray objectAtIndex:0]conferenceDescription]];
+   
+ 
+    size = CGSizeMake(mainContainerView.frame.size.width-16,250);
+   textRect=[self setDynamicHeight:size textString:[[conferenceDetailArray objectAtIndex:0]conferenceDescription] fontSize:[UIFont fontWithName:@"Roboto-Regular" size:13]];
     conferenceDescription.numberOfLines = 0;
     conferenceDescription.frame = CGRectMake(8, descriptionHeadingLabel.frame.origin.y+descriptionHeadingLabel.frame.size.height, mainContainerView.frame.size.width-16, textRect.size.height);
     conferenceDescription.text=[[conferenceDetailArray objectAtIndex:0]conferenceDescription];
-   
+    conferenceDescription.layer.borderWidth=0.5f;
+    conferenceDescription.layer.borderColor=[UIColor whiteColor].CGColor;
+    
+    size = CGSizeMake(conferenceOrganiserName.frame.size.width,60);
+    textRect=[self setDynamicHeight:size textString:[[conferenceDetailArray objectAtIndex:0]conferenceOrganiserName] fontSize:[UIFont fontWithName:@"Roboto-Regular" size:13]];
+    conferenceOrganiserName.numberOfLines = 2;
+    conferenceOrganiserName.frame = CGRectMake(conferenceOrganiserName.frame.origin.x, conferenceOrganiserHeading.frame.origin.y+conferenceOrganiserHeading.frame.size.height+5, conferenceOrganiserName.frame.size.width, textRect.size.height);
     conferenceOrganiserName.text=[[conferenceDetailArray objectAtIndex:0]conferenceOrganiserName];
    
     size = CGSizeMake(conferenceVenue.frame.size.width,60);
-    textRect=[self setDynamicHeight:size textString:[[conferenceDetailArray objectAtIndex:0]conferenceVenue]];
+    textRect=[self setDynamicHeight:size textString:[[conferenceDetailArray objectAtIndex:0]conferenceVenue] fontSize:[UIFont fontWithName:@"Roboto-Regular" size:13]];
     conferenceVenue.numberOfLines = 0;
     conferenceVenue.frame = CGRectMake(conferenceVenue.frame.origin.x, conferenceVenueHeading.frame.origin.y+conferenceVenueHeading.frame.size.height+5, conferenceVenue.frame.size.width, textRect.size.height);
-
     conferenceVenue.text=[[conferenceDetailArray objectAtIndex:0]conferenceVenue];
+    
     conferenceDate.text=[[conferenceDetailArray objectAtIndex:0]conferenceDate];
     
     __weak UIImageView *weakRef = conferenceImageView;
@@ -166,15 +169,19 @@
         weakRef.image = image;
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
     }];
-     mainContainerView.frame = CGRectMake(mainContainerView.frame.origin.x, mainContainerView.frame.origin.y, mainContainerView.frame.size.width, bottomContainerView.frame.origin.y+bottomContainerView.frame.size.height);
-    [homeScrollView setContentOffset:CGPointMake(0, 5) animated:NO];
+    float dynamicHeight=conferenceTitleLabel.frame.origin.y+conferenceTitleLabel.frame.size.height+7+conferenceImageView.frame.size.height+7+descriptionHeadingLabel.frame.size.height+2+conferenceDescription.frame.size.height+7+bottomContainerView.frame.size.height+30;
+   
+    
+    mainContainerView.frame = CGRectMake(mainContainerView.frame.origin.x, mainContainerView.frame.origin.y, mainContainerView.frame.size.width, dynamicHeight);
+   // [homeScrollView setContentOffset:CGPointMake(0, 50) animated:NO];
+    homeScrollView.contentSize = CGSizeMake(0,mainContainerView.frame.size.height+64);
 }
--(CGRect)setDynamicHeight:(CGSize)rectSize textString:(NSString *)textString
+-(CGRect)setDynamicHeight:(CGSize)rectSize textString:(NSString *)textString fontSize:(UIFont *)fontSize
 {
     CGRect textHeight = [textString
                          boundingRectWithSize:rectSize
                          options:NSStringDrawingUsesLineFragmentOrigin
-                         attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Roboto-Regular" size:15]}
+                         attributes:@{NSFontAttributeName:fontSize}
                          context:nil];
     return textHeight;
 }

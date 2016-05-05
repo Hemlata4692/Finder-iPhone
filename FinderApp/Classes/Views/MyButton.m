@@ -10,4 +10,7 @@
 
 @implementation MyButton
 @synthesize Tag;
+@synthesize sectionTag;
+@synthesize on;
+@synthesize off;
 @end

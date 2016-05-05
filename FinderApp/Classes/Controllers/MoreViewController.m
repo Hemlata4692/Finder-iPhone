@@ -14,7 +14,7 @@
 
 @interface MoreViewController ()<UITextFieldDelegate,BSKeyboardControlsDelegate>
 {
-    NSMutableArray *moreOptionsArray;
+    NSMutableArray *moreOptionsArray, *moreImagesArray;
     NSArray *textFieldArray;
 }
 
@@ -49,6 +49,7 @@
     [self addborder];
 
     moreOptionsArray = [NSMutableArray arrayWithObjects:@"MY PROFILE",@"PENDING APPOINTMENTS",@"PROXIMITY ALERTS",@"SETTINGS",@"CHANGE PASSWORD",@"LOGOUT", nil];
+    moreImagesArray= [NSMutableArray arrayWithObjects:@"my_profile.png",@"pending_appointment.png",@"proximity.png",@"setting.png",@"change_password.png",@"logout.png", nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -70,9 +71,9 @@
 }
 -(void)addborder
 {
-    [oldPasswordTextField addBorder:oldPasswordTextField];
-    [passwordTextField addBorder:passwordTextField];
-    [confirmPasswordTextField addBorder:confirmPasswordTextField];
+    [oldPasswordTextField setTextBorder:oldPasswordTextField color:[UIColor colorWithRed:220.0/255.0 green:220.0/255.0 blue:220.0/255.0 alpha:1.0]];
+   [confirmPasswordTextField setTextBorder:confirmPasswordTextField color:[UIColor colorWithRed:220.0/255.0 green:220.0/255.0 blue:220.0/255.0 alpha:1.0]];
+    [passwordTextField setTextBorder:passwordTextField color:[UIColor colorWithRed:220.0/255.0 green:220.0/255.0 blue:220.0/255.0 alpha:1.0]];
 }
 -(void)addPadding
 {
@@ -85,7 +86,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 6;
+    return moreOptionsArray.count;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
@@ -112,6 +113,7 @@
     }
     
     cell.screenNameLabel.text = [moreOptionsArray objectAtIndex:indexPath.row];
+    cell.iconImageView.image=[UIImage imageNamed:[moreImagesArray objectAtIndex:indexPath.row]];
     
     return cell;
 }
@@ -119,9 +121,9 @@
 {
     if (indexPath.row==1)
     {
-        UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        PendingAppointmentViewController *settingsView =[storyboard instantiateViewControllerWithIdentifier:@"PendingAppointmentViewController"];
-        [self.navigationController pushViewController:settingsView animated:YES];
+//        UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//        PendingAppointmentViewController *settingsView =[storyboard instantiateViewControllerWithIdentifier:@"PendingAppointmentViewController"];
+//        [self.navigationController pushViewController:settingsView animated:YES];
     }
    else if (indexPath.row==3)
     {
@@ -138,11 +140,12 @@
     }
     else if (indexPath.row == 5)
     {
+         [myDelegate.locationManager stopUpdatingLocation];
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
                 myDelegate.navigationController = [storyboard instantiateViewControllerWithIdentifier:@"mainNavController"];
         myDelegate.window.rootViewController = myDelegate.navigationController;
         [UserDefaultManager removeValue:@"userId"];
-        [UserDefaultManager removeValue:@"switchStatusDict"];
+      //  [UserDefaultManager removeValue:@"switchStatusDict"];
     }
 }
 
@@ -206,22 +209,19 @@
     }
     else
     {
-        if ([oldPasswordTextField.text isEqualToString:passwordTextField.text])
+        if (![passwordTextField.text isEqualToString:confirmPasswordTextField.text])
+        {
+            SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
+            [alert showWarning:self title:@"Alert" subTitle:@"Passwords do not match" closeButtonTitle:@"Done" duration:0.0f];
+            return NO;
+        }
+       
+        else if ([oldPasswordTextField.text isEqualToString:passwordTextField.text])
         {
             SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
             [alert showWarning:self title:@"Alert" subTitle:@"Old password and new password are same. Please try a different one" closeButtonTitle:@"Done" duration:0.0f];
             return NO;
         }
-        
-        //Password confirmation for new password entered
-        else if (![passwordTextField.text isEqualToString:confirmPasswordTextField.text])
-        {
-            SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
-            [alert showWarning:self title:@"Alert" subTitle:@"Passwords do not match" closeButtonTitle:@"Done" duration:0.0f];
-            
-            return NO;
-        }
-
        else if ((oldPasswordTextField.text.length < 6) || (passwordTextField.text.length < 6) || (confirmPasswordTextField.text.length < 6))
         {
             SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];

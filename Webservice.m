@@ -101,6 +101,7 @@
             SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
             [alert addButton:@"Ok" actionBlock:^(void) {
                 [self logoutUser];
+//                 [alert hideView];
             }];
             [alert showWarning:nil title:@"Alert" subTitle:msg closeButtonTitle:@"Cancel" duration:0.0f];
         }
@@ -116,14 +117,13 @@
 }
 - (void)logoutUser
 {
-    //
-    //        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    //
-    //        myDelegate.navigationController = [storyboard instantiateViewControllerWithIdentifier:@"mainNavController"];
-    //
-    //        myDelegate.window.rootViewController = myDelegate.navigationController;
-    //        [UserDefaultManager removeValue:@"userId"];
-    //        [UserDefaultManager removeValue:@"username"];
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+            myDelegate.navigationController = [storyboard instantiateViewControllerWithIdentifier:@"mainNavController"];
+    
+            myDelegate.window.rootViewController = myDelegate.navigationController;
+            [UserDefaultManager removeValue:@"userId"];
+            [UserDefaultManager removeValue:@"username"];
 }
 
 #pragma mark - end

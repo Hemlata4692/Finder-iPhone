@@ -37,7 +37,7 @@
     textFieldArray = @[venueTextField,meetingAgendaTextField];
     [self setKeyboardControls:[[BSKeyboardControls alloc] initWithFields:textFieldArray]];
     [self.keyboardControls setDelegate:self];
-    [self addborder];
+    [self addBorderCoenerRadius];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -50,16 +50,17 @@
     pickerToolbar.translatesAutoresizingMaskIntoConstraints=YES;
     datePicker.translatesAutoresizingMaskIntoConstraints=YES;
     pickerView.backgroundColor=[UIColor redColor];
-    datePicker.backgroundColor=[UIColor blueColor];
+    datePicker.backgroundColor=[UIColor purpleColor];
     selectedPicker=0;
 }
--(void)addborder
+//add padding, corner radius and border on text fields
+-(void)addBorderCoenerRadius
 {
-    [contactNameTextField setTextBorder:contactNameTextField color:[UIColor lightGrayColor]];
-    [venueTextField setTextBorder:venueTextField color:[UIColor lightGrayColor]];
-    [dateTextField setTextBorder:dateTextField color:[UIColor lightGrayColor]];
-    [timeTextField setTextBorder:timeTextField color:[UIColor lightGrayColor]];
-    [meetingAgendaTextField setTextViewBorder:meetingAgendaTextField color:[UIColor lightGrayColor]];
+    [contactNameTextField setTextBorder:contactNameTextField color:[UIColor colorWithRed:220.0/255.0 green:220.0/255.0 blue:220.0/255.0 alpha:1.0]];
+    [venueTextField setTextBorder:venueTextField color:[UIColor colorWithRed:220.0/255.0 green:220.0/255.0 blue:220.0/255.0 alpha:1.0]];
+    [dateTextField setTextBorder:dateTextField color:[UIColor colorWithRed:220.0/255.0 green:220.0/255.0 blue:220.0/255.0 alpha:1.0]];
+    [timeTextField setTextBorder:timeTextField color:[UIColor colorWithRed:220.0/255.0 green:220.0/255.0 blue:220.0/255.0 alpha:1.0]];
+    [meetingAgendaTextField setTextViewBorder:meetingAgendaTextField color:[UIColor colorWithRed:220.0/255.0 green:220.0/255.0 blue:220.0/255.0 alpha:1.0]];
     [contactNameTextField addTextFieldPaddingWithoutImages:contactNameTextField];
     [venueTextField addTextFieldPaddingWithoutImages:venueTextField];
     [timeTextField addTextFieldPaddingWithoutImages:timeTextField];
@@ -143,21 +144,22 @@
 {
     [self hidePickerWithAnimation];
     if (selectedPicker==0) {
-        
+         //NSInteger index = [pickerView selectedRowInComponent:0];
+       // contactNameTextField.text=[yourarray objectAtIndex:index];
     }
     else
     {
         if (isDatePicker==false)
         {
-            NSDateFormatter * tf = [[NSDateFormatter alloc] init];
-            [tf setDateFormat:@"hh:mm a"]; // from here u can change format..
-            timeTextField.text=[tf stringFromDate:datePicker.date];
+            NSDateFormatter * timePickerValue = [[NSDateFormatter alloc] init];
+            [timePickerValue setDateFormat:@"hh:mm a"]; // from here u can change format..
+            timeTextField.text=[timePickerValue stringFromDate:datePicker.date];
         }
         else
         {
-            NSDateFormatter * df = [[NSDateFormatter alloc] init];
-            [df setDateFormat:@"M-d-yyyy"]; // from here u can change format..
-            dateTextField.text=[df stringFromDate:datePicker.date];
+            NSDateFormatter * datePickerValue = [[NSDateFormatter alloc] init];
+            [datePickerValue setDateFormat:@"M-d-yyyy"]; // from here u can change format..
+            dateTextField.text=[datePickerValue stringFromDate:datePicker.date];
         }
     }
     [UIView beginAnimations:nil context:NULL];
@@ -203,7 +205,7 @@
     if (!pickerLabel)
     {
         pickerLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0,600,20)];
-        pickerLabel.font = [UIFont fontWithName:@"Helvetica" size:16];
+        pickerLabel.font = [UIFont fontWithName:@"Roboto-Regular" size:15];
         pickerLabel.textAlignment=NSTextAlignmentCenter;
     }
     pickerLabel.text=@"monika";
@@ -222,6 +224,14 @@
     NSString *str;
     str=@"monika";
     return str;
+}
+- (void)pickerView:(UIPickerView *)pickerView1 didSelectRow:(NSInteger)row inComponent:(NSInteger)component
+{
+    if(pickerView1 == pickerView)
+    {
+       // NSString *myText = [yourarray objectAtIndex:row];
+      //  contactNameTextField.text = [yourarray objectAtIndex:row];
+    }
 }
 #pragma mark - end
 

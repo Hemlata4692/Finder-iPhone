@@ -8,14 +8,19 @@
 
 #import <UIKit/UIKit.h>
 #import "NYSliderPopover.h"
+#import "MyButton.h"
+#import "ASValueTrackingSlider.h"
 
 @interface SettingsViewCell : UITableViewCell
 //settingsCell
 @property (weak, nonatomic) IBOutlet UIView *settingsContainerView;
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
+@property (weak, nonatomic) IBOutlet MyButton *switchBtn;
+@property (weak, nonatomic) IBOutlet UIImageView *rightKnob;
+@property (weak, nonatomic) IBOutlet UIImageView *leftKnob;
 
 //proximityCell
 @property (weak, nonatomic) IBOutlet UIView *proximityRadiusView;
-@property (weak, nonatomic) IBOutlet NYSliderPopover *sliderView;
+@property (weak, nonatomic) IBOutlet ASValueTrackingSlider *sliderView;
 
 @end

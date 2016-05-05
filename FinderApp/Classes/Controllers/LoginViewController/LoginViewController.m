@@ -9,12 +9,14 @@
 #import "LoginViewController.h"
 #import "HomeViewController.h"
 #import "UserService.h"
+#import "UIImage+deviceSpecificMedia.h"
 
 
 @interface LoginViewController ()<UITextFieldDelegate,BSKeyboardControlsDelegate>
 {
     NSArray *textFieldArray;
 }
+@property (weak, nonatomic) IBOutlet UIImageView *backgroundImageView;
 @property (weak, nonatomic) IBOutlet UIScrollView *loginScrollView;
 @property (weak, nonatomic) IBOutlet UIView *mainContainerView;
 @property (weak, nonatomic) IBOutlet UIView *textFieldContainerView;
@@ -27,7 +29,7 @@
 @end
 
 @implementation LoginViewController
-@synthesize logoImage,emailIcon,emailField,passwordIcon,passwordField,mainContainerView,textFieldContainerView,loginScrollView;
+@synthesize logoImage,emailIcon,emailField,passwordIcon,passwordField,mainContainerView,textFieldContainerView,loginScrollView,backgroundImageView;
 
 #pragma mark - View life cycle
 - (void)viewDidLoad {
@@ -36,6 +38,8 @@
     textFieldArray = @[emailField,passwordField];
     [self setKeyboardControls:[[BSKeyboardControls alloc] initWithFields:textFieldArray]];
     [self.keyboardControls setDelegate:self];
+    UIImage * tempImg =[UIImage imageNamed:@"bg"];
+    backgroundImageView.image = [UIImage imageNamed:[tempImg imageForDeviceWithName:@"bg"]];
     [self addPadding];
 }
 
@@ -55,6 +59,7 @@
     [emailField addTextFieldPaddingWithoutImages:emailField];
     [passwordField addTextFieldPaddingWithoutImages:passwordField];
     [textFieldContainerView setCornerRadius:2.0f];
+    [textFieldContainerView addShadow:textFieldContainerView color:[UIColor purpleColor]];
 }
 #pragma mark - end
 #pragma mark - Keyboard controls delegate
@@ -76,12 +81,20 @@
 -(void)textFieldDidBeginEditing:(UITextField *)textField
 {
     [self.keyboardControls setActiveField:textField];
-    if (textField==emailField) {
-        [loginScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+    
+    if (textField==emailField)
+    {
+        if([[UIScreen mainScreen] bounds].size.height<568)
+        {
+        [loginScrollView setContentOffset:CGPointMake(0, 25) animated:YES];
+        }
     }
     else if (textField==passwordField)
     {
-        [loginScrollView setContentOffset:CGPointMake(0, textField.frame.origin.y-(textField.frame.size.height-50)) animated:YES];
+        if([[UIScreen mainScreen] bounds].size.height<=568)
+        {
+        [loginScrollView setContentOffset:CGPointMake(0, 70) animated:YES];
+        }
     }
 }
 
@@ -149,6 +162,7 @@
 {
     [[UserService sharedManager] userLogin:emailField.text password:passwordField.text success:^(id responseObject)
      {
+          [myDelegate.locationManager startUpdatingLocation];
          [myDelegate stopIndicator];
          [UserDefaultManager setValue:[responseObject objectForKey:@"userId"] key:@"userId"];
          [UserDefaultManager setValue:[responseObject objectForKey:@"userEmail"] key:@"userEmail"];

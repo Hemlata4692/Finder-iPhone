@@ -12,7 +12,7 @@
 //#define BASE_URL                                  @""
 
 //testing link
-#define BASE_URL                                @"http://ranosys.net/client/finder/admin/api/"
+#define BASE_URL                                @"http://ranosys.net/client/finder/api/"
 
 @interface Webservice : NSObject
 @property(nonatomic,retain)AFHTTPRequestOperationManager *manager;

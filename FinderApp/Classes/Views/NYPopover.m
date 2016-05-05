@@ -48,9 +48,9 @@
     CGContextRef context = UIGraphicsGetCurrentContext();
 
     //// Color Declarations
-    UIColor* gradientColor = [UIColor colorWithRed: 37.0/255.0 green: 107.0/255.0 blue: 164.0/255.0 alpha: 1.0];
-    UIColor* gradientColor2 = [UIColor colorWithRed: 37.0/255.0 green: 107.0/255.0 blue: 164.0/255.0 alpha: 1.0];
-    UIColor* shadowColor2 = [UIColor colorWithRed: 37.0/255.0 green: 107.0/255.0 blue: 164.0/255.0 alpha: 1.0];
+    UIColor* gradientColor = [UIColor colorWithRed: 255.0/255.0 green: 85.0/255.0 blue: 52.0/255.0 alpha: 1.0];
+    UIColor* gradientColor2 = [UIColor colorWithRed: 255.0/255.0 green: 85.0/255.0 blue: 52.0/255.0 alpha: 1.0];
+    UIColor* shadowColor2 = [UIColor colorWithRed: 255.0/255.0 green: 85.0/255.0 blue: 52.0/255.0 alpha: 1.0];
 
     //// Gradient Declarations
     NSArray* gradientColors = [NSArray arrayWithObjects:
@@ -116,12 +116,12 @@
         [bezierPath addClip];
         CGAffineTransform transform = CGAffineTransformMakeTranslation(-round(bezierBorderRect.size.width), 0);
         [bezierNegativePath applyTransform: transform];
-        [[UIColor colorWithRed: 37.0/255.0 green: 107.0/255.0 blue: 164.0/255.0 alpha: 1.0] setFill];
+        [[UIColor colorWithRed: 255.0/255.0 green: 85.0/255.0 blue: 52.0/255.0 alpha: 1.0] setFill];
         [bezierNegativePath fill];
     }
     CGContextRestoreGState(context);
     
-    [[UIColor colorWithRed: 37.0/255.0 green: 107.0/255.0 blue: 164.0/255.0 alpha: 1.0] setStroke];
+    [[UIColor colorWithRed: 255.0/255.0 green: 85.0/255.0 blue: 52.0/255.0 alpha: 1.0] setStroke];
     bezierPath.lineWidth = 1;
     [bezierPath stroke];
     

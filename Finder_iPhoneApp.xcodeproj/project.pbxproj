@@ -14,9 +14,13 @@
 		5D32EC0E1CC4A31F00C50969 /* MessagesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D32EC061CC4A31F00C50969 /* MessagesViewController.m */; };
 		5D32EC0F1CC4A31F00C50969 /* MatchesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D32EC081CC4A31F00C50969 /* MatchesViewController.m */; };
 		5D32EC101CC4A31F00C50969 /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D32EC0A1CC4A31F00C50969 /* HomeViewController.m */; };
-		5D9361971CC5F40B0004F030 /* UITextField+Border.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D9361961CC5F40B0004F030 /* UITextField+Border.m */; };
 		5D93619D1CC606190004F030 /* MatchesTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 5D93619C1CC606190004F030 /* MatchesTableViewCell.m */; };
 		B736EBAA1CCF93E000CE7B6E /* MessagesViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B736EBA91CCF93E000CE7B6E /* MessagesViewCell.m */; };
+		B740CC9E1CD861CB0006B32A /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = B740CC9A1CD861CB0006B32A /* bg.png */; };
+		B740CC9F1CD861CB0006B32A /* bg-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B740CC9B1CD861CB0006B32A /* bg-568h@2x.png */; };
+		B740CCA01CD861CB0006B32A /* bg-667h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B740CC9C1CD861CB0006B32A /* bg-667h@2x.png */; };
+		B740CCA11CD861CB0006B32A /* bg-736h@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B740CC9D1CD861CB0006B32A /* bg-736h@3x.png */; };
+		B740CCA51CD8639F0006B32A /* UIImage+deviceSpecificMedia.m in Sources */ = {isa = PBXBuildFile; fileRef = B740CCA41CD8639F0006B32A /* UIImage+deviceSpecificMedia.m */; };
 		B7414F921CCA4715009FE9CE /* MyAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = B7414F8E1CCA4715009FE9CE /* MyAlert.m */; };
 		B7414F931CCA4715009FE9CE /* CustomAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = B7414F901CCA4715009FE9CE /* CustomAlert.m */; };
 		B7414F941CCA4715009FE9CE /* CustomAlert.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7414F911CCA4715009FE9CE /* CustomAlert.xib */; };
@@ -42,6 +46,8 @@
 		B77695CA1CBFB4F300794005 /* SCLTimerDisplay.m in Sources */ = {isa = PBXBuildFile; fileRef = B77695C01CBFB4F300794005 /* SCLTimerDisplay.m */; };
 		B77695CB1CBFB4F300794005 /* SCLTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = B77695C21CBFB4F300794005 /* SCLTextView.m */; };
 		B77695CC1CBFB4F300794005 /* SCLSwitchView.m in Sources */ = {isa = PBXBuildFile; fileRef = B77695C41CBFB4F300794005 /* SCLSwitchView.m */; };
+		B78405AF1CDB72A700CD7D54 /* ASValuePopUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = B78405AC1CDB72A700CD7D54 /* ASValuePopUpView.m */; };
+		B78405B01CDB72A700CD7D54 /* ASValueTrackingSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = B78405AE1CDB72A700CD7D54 /* ASValueTrackingSlider.m */; };
 		B78E18081CC76431003CA378 /* NYPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = B78E18051CC76431003CA378 /* NYPopover.m */; };
 		B78E18091CC76431003CA378 /* NYSliderPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = B78E18071CC76431003CA378 /* NYSliderPopover.m */; };
 		B7A82A911CD1CA2F0030DB38 /* UIPlaceHolderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7A82A901CD1CA2F0030DB38 /* UIPlaceHolderTextView.m */; };
@@ -84,13 +90,17 @@
 		5D32EC081CC4A31F00C50969 /* MatchesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchesViewController.m; sourceTree = "<group>"; };
 		5D32EC091CC4A31F00C50969 /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		5D32EC0A1CC4A31F00C50969 /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
-		5D9361951CC5F40B0004F030 /* UITextField+Border.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+Border.h"; sourceTree = "<group>"; };
-		5D9361961CC5F40B0004F030 /* UITextField+Border.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+Border.m"; sourceTree = "<group>"; };
 		5D93619B1CC606190004F030 /* MatchesTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MatchesTableViewCell.h; sourceTree = "<group>"; };
 		5D93619C1CC606190004F030 /* MatchesTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MatchesTableViewCell.m; sourceTree = "<group>"; };
 		B3CDDBB308E1E7466EFB6FFC /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B736EBA81CCF93E000CE7B6E /* MessagesViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesViewCell.h; sourceTree = "<group>"; };
 		B736EBA91CCF93E000CE7B6E /* MessagesViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesViewCell.m; sourceTree = "<group>"; };
+		B740CC9A1CD861CB0006B32A /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
+		B740CC9B1CD861CB0006B32A /* bg-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg-568h@2x.png"; sourceTree = "<group>"; };
+		B740CC9C1CD861CB0006B32A /* bg-667h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg-667h@2x.png"; sourceTree = "<group>"; };
+		B740CC9D1CD861CB0006B32A /* bg-736h@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bg-736h@3x.png"; sourceTree = "<group>"; };
+		B740CCA31CD8639F0006B32A /* UIImage+deviceSpecificMedia.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+deviceSpecificMedia.h"; sourceTree = "<group>"; };
+		B740CCA41CD8639F0006B32A /* UIImage+deviceSpecificMedia.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+deviceSpecificMedia.m"; sourceTree = "<group>"; };
 		B7414F8D1CCA4715009FE9CE /* MyAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAlert.h; sourceTree = "<group>"; };
 		B7414F8E1CCA4715009FE9CE /* MyAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAlert.m; sourceTree = "<group>"; };
 		B7414F8F1CCA4715009FE9CE /* CustomAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAlert.h; sourceTree = "<group>"; };
@@ -135,6 +145,10 @@
 		B77695C21CBFB4F300794005 /* SCLTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCLTextView.m; sourceTree = "<group>"; };
 		B77695C31CBFB4F300794005 /* SCLSwitchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SCLSwitchView.h; sourceTree = "<group>"; };
 		B77695C41CBFB4F300794005 /* SCLSwitchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SCLSwitchView.m; sourceTree = "<group>"; };
+		B78405AB1CDB72A700CD7D54 /* ASValuePopUpView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASValuePopUpView.h; sourceTree = "<group>"; };
+		B78405AC1CDB72A700CD7D54 /* ASValuePopUpView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASValuePopUpView.m; sourceTree = "<group>"; };
+		B78405AD1CDB72A700CD7D54 /* ASValueTrackingSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASValueTrackingSlider.h; sourceTree = "<group>"; };
+		B78405AE1CDB72A700CD7D54 /* ASValueTrackingSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASValueTrackingSlider.m; sourceTree = "<group>"; };
 		B78E18041CC76431003CA378 /* NYPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYPopover.h; sourceTree = "<group>"; };
 		B78E18051CC76431003CA378 /* NYPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NYPopover.m; sourceTree = "<group>"; };
 		B78E18061CC76431003CA378 /* NYSliderPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYSliderPopover.h; sourceTree = "<group>"; };
@@ -274,15 +288,6 @@
 			name = HomeViewController;
 			sourceTree = "<group>";
 		};
-		5D9361981CC5F4190004F030 /* TextFieldBorderCategory */ = {
-			isa = PBXGroup;
-			children = (
-				5D9361951CC5F40B0004F030 /* UITextField+Border.h */,
-				5D9361961CC5F40B0004F030 /* UITextField+Border.m */,
-			);
-			name = TextFieldBorderCategory;
-			sourceTree = "<group>";
-		};
 		5D9361991CC605A70004F030 /* MatchesViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -317,6 +322,26 @@
 				B736EBA91CCF93E000CE7B6E /* MessagesViewCell.m */,
 			);
 			name = MessagesViewCell;
+			sourceTree = "<group>";
+		};
+		B740CC991CD861AC0006B32A /* OtherImages */ = {
+			isa = PBXGroup;
+			children = (
+				B740CC9A1CD861CB0006B32A /* bg.png */,
+				B740CC9B1CD861CB0006B32A /* bg-568h@2x.png */,
+				B740CC9C1CD861CB0006B32A /* bg-667h@2x.png */,
+				B740CC9D1CD861CB0006B32A /* bg-736h@3x.png */,
+			);
+			name = OtherImages;
+			sourceTree = "<group>";
+		};
+		B740CCA21CD8638C0006B32A /* UIImageCategory */ = {
+			isa = PBXGroup;
+			children = (
+				B740CCA31CD8639F0006B32A /* UIImage+deviceSpecificMedia.h */,
+				B740CCA41CD8639F0006B32A /* UIImage+deviceSpecificMedia.m */,
+			);
+			name = UIImageCategory;
 			sourceTree = "<group>";
 		};
 		B7414F841CCA4673009FE9CE /* CustomAlert */ = {
@@ -400,13 +425,13 @@
 			name = PaddingCategory;
 			sourceTree = "<group>";
 		};
-		B77695A01CBF593C00794005 /* CornderRadius */ = {
+		B77695A01CBF593C00794005 /* CornderRadiusAndBorder */ = {
 			isa = PBXGroup;
 			children = (
 				B77695A11CBF594E00794005 /* UIView+RoundedCorner.h */,
 				B77695A21CBF594E00794005 /* UIView+RoundedCorner.m */,
 			);
-			name = CornderRadius;
+			name = CornderRadiusAndBorder;
 			sourceTree = "<group>";
 		};
 		B77695A41CBF613000794005 /* ForgotPasswordViewController */ = {
@@ -451,6 +476,10 @@
 				B78E18051CC76431003CA378 /* NYPopover.m */,
 				B78E18061CC76431003CA378 /* NYSliderPopover.h */,
 				B78E18071CC76431003CA378 /* NYSliderPopover.m */,
+				B78405AB1CDB72A700CD7D54 /* ASValuePopUpView.h */,
+				B78405AC1CDB72A700CD7D54 /* ASValuePopUpView.m */,
+				B78405AD1CDB72A700CD7D54 /* ASValueTrackingSlider.h */,
+				B78405AE1CDB72A700CD7D54 /* ASValueTrackingSlider.m */,
 			);
 			name = NYSliderPopover;
 			sourceTree = "<group>";
@@ -476,6 +505,7 @@
 		B7A8DD671CAE2BF2007F56B6 /* FinderApp */ = {
 			isa = PBXGroup;
 			children = (
+				B740CC991CD861AC0006B32A /* OtherImages */,
 				B7A8DDE01CAE7284007F56B6 /* AppDelegate */,
 				B7A8DD7F1CAE2CE3007F56B6 /* Classes */,
 				B7A8DD681CAE2BF2007F56B6 /* Supporting Files */,
@@ -510,12 +540,12 @@
 		B7A8DD801CAE2CE9007F56B6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B740CCA21CD8638C0006B32A /* UIImageCategory */,
 				B762DB731CCE3E1E002875A1 /* ButtonTag */,
 				B7414F841CCA4673009FE9CE /* CustomAlert */,
 				B78E18031CC7641D003CA378 /* NYSliderPopover */,
-				5D9361981CC5F4190004F030 /* TextFieldBorderCategory */,
 				B7EAC1831CC6266C001C4EEC /* RESwitch */,
-				B77695A01CBF593C00794005 /* CornderRadius */,
+				B77695A01CBF593C00794005 /* CornderRadiusAndBorder */,
 				B776959C1CBF58F400794005 /* PaddingCategory */,
 				B77695981CBF534E00794005 /* ValidationCategory */,
 				B7A8DDB61CAE5943007F56B6 /* AlertView */,
@@ -904,6 +934,7 @@
 				TargetAttributes = {
 					B7A8DD641CAE2BF2007F56B6 = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = 6S3AL87NGN;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -938,13 +969,17 @@
 				B7A8DDDF1CAE60BB007F56B6 /* Main.storyboard in Resources */,
 				B7A8DD751CAE2BF2007F56B6 /* Assets.xcassets in Resources */,
 				B7EAC18D1CC639E7001C4EEC /* RESwitch.bundle in Resources */,
+				B740CC9E1CD861CB0006B32A /* bg.png in Resources */,
+				B740CC9F1CD861CB0006B32A /* bg-568h@2x.png in Resources */,
 				B7414F941CCA4715009FE9CE /* CustomAlert.xib in Resources */,
 				B771FB721CBE200C006CBA32 /* Roboto-Regular.ttf in Resources */,
 				B771FB701CBE200C006CBA32 /* Roboto-Light.ttf in Resources */,
+				B740CCA01CD861CB0006B32A /* bg-667h@2x.png in Resources */,
 				B771FB711CBE200C006CBA32 /* Roboto-Medium.ttf in Resources */,
 				B771FB6F1CBE200C006CBA32 /* Roboto-Italic.ttf in Resources */,
 				B771FB6E1CBE200C006CBA32 /* Roboto-Bold.ttf in Resources */,
 				B771FB6D1CBE200C006CBA32 /* Roboto-Black.ttf in Resources */,
+				B740CCA11CD861CB0006B32A /* bg-736h@3x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1021,8 +1056,10 @@
 				B7C018D11CD0C7A4006773CB /* ScheduleMeetingViewController.m in Sources */,
 				B77695C91CBFB4F300794005 /* SCLAlertViewStyleKit.m in Sources */,
 				B7A82A911CD1CA2F0030DB38 /* UIPlaceHolderTextView.m in Sources */,
+				B740CCA51CD8639F0006B32A /* UIImage+deviceSpecificMedia.m in Sources */,
 				B7C018CD1CD0B7E0006773CB /* NewMessageViewController.m in Sources */,
 				B78E18081CC76431003CA378 /* NYPopover.m in Sources */,
+				B78405AF1CDB72A700CD7D54 /* ASValuePopUpView.m in Sources */,
 				B7E024C41CC5089E00707552 /* ConferenceDataModel.m in Sources */,
 				B776959F1CBF590100794005 /* UITextField+Padding.m in Sources */,
 				B7C018C81CD08630006773CB /* CalendarTableViewCell.m in Sources */,
@@ -1031,7 +1068,6 @@
 				5D32EC0B1CC4A31F00C50969 /* MoreViewController.m in Sources */,
 				B7A8DDCE1CAE5C32007F56B6 /* NullValueChecker.m in Sources */,
 				B7414F931CCA4715009FE9CE /* CustomAlert.m in Sources */,
-				5D9361971CC5F40B0004F030 /* UITextField+Border.m in Sources */,
 				B7DCE4531CBB9E5D0063FF72 /* Webservice.m in Sources */,
 				B7A8DDC11CAE5B50007F56B6 /* BSKeyboardControls.m in Sources */,
 				B7A8DDCB1CAE5BD4007F56B6 /* UserDefaultManager.m in Sources */,
@@ -1043,6 +1079,7 @@
 				B77695C81CBFB4F300794005 /* SCLAlertViewResponder.m in Sources */,
 				B7EAC1761CC5DBE9001C4EEC /* ConferenceService.m in Sources */,
 				5D93619D1CC606190004F030 /* MatchesTableViewCell.m in Sources */,
+				B78405B01CDB72A700CD7D54 /* ASValueTrackingSlider.m in Sources */,
 				B7C018C41CD0708B006773CB /* PersonalMessageViewController.m in Sources */,
 				B7414F921CCA4715009FE9CE /* MyAlert.m in Sources */,
 				B77695AD1CBF70E400794005 /* GlobalBackViewController.m in Sources */,
@@ -1086,7 +1123,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Technopreneur's Resource Centre Private Limited";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Technopreneur's Resource Centre Private Limited";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1109,6 +1147,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PROVISIONING_PROFILE = "5e0490cd-4ccb-4009-8f6c-1593e5efc187";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1130,7 +1169,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Technopreneur's Resource Centre Private Limited";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Technopreneur's Resource Centre Private Limited";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1146,6 +1186,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PROVISIONING_PROFILE = "5e0490cd-4ccb-4009-8f6c-1593e5efc187";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1156,13 +1197,15 @@
 			baseConfigurationReference = C05F8A8FD36EE5AC5DD42364 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Technopreneur's Resource Centre Private Limited";
 				GCC_PREFIX_HEADER = "FinderApp/Supporting Files/Finder-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/FinderApp/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ranosys.finderApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.createapp.finderApp;
 				PRODUCT_NAME = Finder_iPhoneApp;
+				PROVISIONING_PROFILE = "5e0490cd-4ccb-4009-8f6c-1593e5efc187";
 			};
 			name = Debug;
 		};
@@ -1171,13 +1214,15 @@
 			baseConfigurationReference = 3BC11A7BA5B0C8C8355243E8 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Technopreneur's Resource Centre Private Limited";
 				GCC_PREFIX_HEADER = "FinderApp/Supporting Files/Finder-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/FinderApp/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ranosys.finderApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.createapp.finderApp;
 				PRODUCT_NAME = Finder_iPhoneApp;
+				PROVISIONING_PROFILE = "5e0490cd-4ccb-4009-8f6c-1593e5efc187";
 			};
 			name = Release;
 		};

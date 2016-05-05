@@ -9,7 +9,6 @@
 #import "FinderAppDelegate.h"
 #import "MMMaterialDesignSpinner.h"
 #import "UserService.h"
-#import <CoreLocation/CoreLocation.h>
 #import "HomeViewController.h"
 #import "LoginViewController.h"
 #import "MyAlert.h"
@@ -18,7 +17,6 @@
 {
     UIView *loaderView;
     UIImageView *logoImage;
-    CLLocationManager *locationManager;
     NSTimer *timer;
     NSString *latitude, *longitude;
     MyAlert* alert;
@@ -27,7 +25,7 @@
 @end
 
 @implementation FinderAppDelegate
-@synthesize isLocation;
+@synthesize isLocation,locationManager;
 
 #pragma mark - Global indicator view
 - (void)showIndicator
@@ -60,7 +58,7 @@
     // Override point for customization after application launch.
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:237.0/255.0 green:120.0/255.0 blue:0.0/255.0 alpha:1.0]];
-    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, [UIFont fontWithName:@"Roboto-Regular" size:18.0], NSFontAttributeName, nil]];
+    [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, [UIFont fontWithName:@"Roboto-Regular" size:19.0], NSFontAttributeName, nil]];
     
     locationManager = [[CLLocationManager alloc] init];
     locationManager.delegate = self;
@@ -119,6 +117,8 @@
 }
 -(void)locationUpdate
 {
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"userId"]!=nil)
+    {
     [[UserService sharedManager] locationUpdate:latitude longitude:longitude success:^(id responseObject)
      {
          NSLog(@"webservice did fire");
@@ -127,7 +127,7 @@
      } failure:^(NSError *error) {
          
      }] ;
-    
+    }
 }
 - (void) startTrackingBg
 {
@@ -135,7 +135,7 @@
     {
         isLocation=@"0";
       
-        timer = [NSTimer scheduledTimerWithTimeInterval:5
+        timer = [NSTimer scheduledTimerWithTimeInterval:3*60
                                                  target: self
                                                selector: @selector(locationUpdate)
                                                userInfo: nil

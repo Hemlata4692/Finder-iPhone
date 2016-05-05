@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 
 @interface FinderAppDelegate : UIResponder <UIApplicationDelegate>
 
@@ -14,7 +15,7 @@
 @property (nonatomic,retain) UINavigationController *navigationController;
 @property (nonatomic, strong) NSString *isLocation;
 @property(nonatomic,retain)NSString * deviceToken;
-
+@property (nonatomic, strong)  CLLocationManager *locationManager;
 -(void)showIndicator;
 -(void)stopIndicator;
 -(void)startTrackingBg;

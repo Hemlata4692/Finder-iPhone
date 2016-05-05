@@ -31,13 +31,13 @@
 {
     [super initialize];
     
-    [[RESwitch appearance] setBackgroundImage:[UIImage imageNamed:@"RESwitch.bundle/Background"]];
-    [[RESwitch appearance] setOverlayImage:[UIImage imageNamed:@"RESwitch.bundle/Overlay"]];
-    [[RESwitch appearance] setKnobImage:[UIImage imageNamed:@"RESwitch.bundle/Knob"]];
-    [[RESwitch appearance] setHighlightedKnobImage:[UIImage imageNamed:@"RESwitch.bundle/Knob_Highlighted"]];
+    [[RESwitch appearance] setBackgroundImage:[UIImage imageNamed:@"switchOn.png"]];
+   // [[RESwitch appearance] setOverlayImage:[UIImage imageNamed:@"switchOff.png"]];
+    [[RESwitch appearance] setKnobImage:[UIImage imageNamed:@"knob.png"]];
+    [[RESwitch appearance] setHighlightedKnobImage:[UIImage imageNamed:@"knob.png"]];
     [[RESwitch appearance] setKnobOffset:CGSizeMake(4, -3)];
-    [[RESwitch appearance] setCornerRadius:14];
-    [[RESwitch appearance] setFont:[UIFont boldSystemFontOfSize:17]];
+  //  [[RESwitch appearance] setCornerRadius:14];
+    [[RESwitch appearance] setFont:[UIFont fontWithName:@"Roboto-Regular" size:12.0]];
     [[RESwitch appearance] setTextOffset:CGSizeMake(0, 0) forLabel:RESwitchLabelOn];
     [[RESwitch appearance] setTextOffset:CGSizeMake(0, 0) forLabel:RESwitchLabelOff];
     [[RESwitch appearance] setTextShadowOffset:CGSizeMake(0, -1)];
@@ -62,16 +62,17 @@
     self.on = YES;
     _knobOffset = CGSizeMake(0, 0);
     _textShadowOffset = CGSizeMake(0, -1);
-    _font = [UIFont boldSystemFontOfSize:17];
+    _font = [UIFont fontWithName:@"Roboto-Regular" size:12.0];
     _onLabelOffset = CGSizeMake(0, 0);
     _offLabelOffset = CGSizeMake(0, 0);
     _onLabelTextColor = [UIColor whiteColor];
-    _offLabelTextColor = [UIColor colorWithRed:139/255.0 green:139/255.0 blue:139/255.0 alpha:1];
-    _onLabelTextShadowColor = [UIColor colorWithRed:0 green:102/255.0 blue:186/255.0 alpha:1];
+    _offLabelTextColor = [UIColor grayColor];
+    _onLabelTextShadowColor = [UIColor whiteColor];
     _offLabelTextShadowColor = [UIColor clearColor];
     
-    _containerView = [[UIView alloc] initWithFrame:self.bounds];
+    _containerView = [[UIView alloc] initWithFrame:frame];
     _containerView.clipsToBounds = YES;
+    _containerView.backgroundColor=[UIColor colorWithPatternImage:[UIImage imageNamed:@"switchOff.png"]];
     [self addSubview:_containerView];
     
     _backgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, frame.size.width * 2, frame.size.height)];
@@ -85,7 +86,7 @@
     [self addSubview:_overlayImageView];
     
     _knobView = [[UIImageView alloc] initWithFrame:CGRectNull];
-    [self addSubview:_knobView];
+    [_containerView addSubview:_knobView];
     
     UIPanGestureRecognizer *panGestureRecognizer = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(panGestureRecognizerDidChange:)];
     [_backgroundView addGestureRecognizer:panGestureRecognizer];
@@ -101,7 +102,7 @@
     _offLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 3, 20, 10)];
     _offLabel.text = NSLocalizedString(@"OFF", @"OFF");
     _offLabel.backgroundColor = [UIColor clearColor];
-    [_backgroundView addSubview:_offLabel];
+    [_containerView addSubview:_offLabel];
 }
 
 - (void)layoutSubviews
@@ -115,14 +116,16 @@
     _backgroundView.frame = frame;
 
     _backgroundImageView.image = _backgroundImage;
+    //_backgroundView.backgroundColor=[UIColor colorWithRed:255.0/255.0 green:85.0/255.0 blue:52.0/255.0 alpha:1.0];
     _overlayImageView.image = _overlayImage;
     _knobView.image = _knobImage;
     
     _backgroundImageView.frame = CGRectMake(0, 0, _backgroundImage.size.width, _backgroundImage.size.height);
     frame = _backgroundView.frame;
+  
     CGRect knobFrame = CGRectMake(0, 0, _knobImage.size.width, _knobImage.size.height);
-    knobFrame.origin.x = frame.origin.x + self.frame.size.width - knobFrame.size.width + _knobOffset.width;
-    knobFrame.origin.y = _knobOffset.height;
+    knobFrame.origin.x = 0;
+    knobFrame.origin.y = 0;
     _knobView.frame = knobFrame;
     
     
@@ -130,13 +133,13 @@
     [_offLabel sizeToFit];
 
     CGRect onFrame = _onLabel.frame;
-    onFrame.origin.x = 15 + _onLabelOffset.width;
-    onFrame.origin.y = 3 + _onLabelOffset.height;
+    onFrame.origin.x = 20 + _onLabelOffset.width;
+    onFrame.origin.y = 4 + _onLabelOffset.height;
     _onLabel.frame = onFrame;
     
     CGRect offFrame = _offLabel.frame;
-    offFrame.origin.x = _backgroundImageView.frame.size.width - offFrame.size.width - 10 + _offLabelOffset.width;
-    offFrame.origin.y = 3 + _offLabelOffset.height;
+    offFrame.origin.x = _backgroundImageView.frame.size.width - offFrame.size.width - 15 + _offLabelOffset.width;
+    offFrame.origin.y = 4 + _offLabelOffset.height;
     _offLabel.frame = offFrame;
     
     _onLabel.shadowOffset = _textShadowOffset;
