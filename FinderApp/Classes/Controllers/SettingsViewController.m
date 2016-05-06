@@ -9,8 +9,6 @@
 #import "SettingsViewController.h"
 #import "SettingsViewCell.h"
 #import "ConferenceService.h"
-#import "RESwitch.h"
-#import "NYSliderPopover.h"
 #import "MyButton.h"
 #import "ASValueTrackingSlider.h"
 
@@ -137,18 +135,12 @@
 //        [proximityCell.sliderView setMaximumTrackImage:sliderMaxTrackImage forState:UIControlStateNormal];
 //     
         [proximityCell.sliderView setValue:[[[UserDefaultManager getValue:@"switchStatusDict"] objectForKey:@"02"] intValue]];
-       // [proximityCell.sliderView setValue:((int)((proximityCell.sliderView.value + 2.5) / 25) * 25)];
         [proximityCell.sliderView setMaxFractionDigitsDisplayed:0];
         proximityCell.sliderView.popUpViewColor = [UIColor colorWithRed:255.0/255.0 green:76.0/255.0 blue:60.0/255.0 alpha:1.0];
         proximityCell.sliderView.font = [UIFont fontWithName:@"Roboto-Regular" size:16];
         proximityCell.sliderView.textColor = [UIColor whiteColor];
-//proximityCell.sliderView.popvi
         proximityCell.sliderView.popUpViewWidthPaddingFactor = 1.7;
         [proximityCell.sliderView showPopUpViewAnimated:YES];
-      
-        
-//        //        proximityCell.sliderView.popover.textLabel.text=[NSString stringWithFormat:@"%.2f", proximityCell.sliderView.value];
-//        // [proximityCell.sliderView showPopover];
         [proximityCell.sliderView addTarget:self action:@selector(sliderValueChanged:) forControlEvents:UIControlEventValueChanged];
         
         
@@ -172,14 +164,6 @@
             settingsCell.nameLabel.text=[settingsSection2Array objectAtIndex:indexPath.row];
         }
         
-      //  RESwitch *defaultSwitch = [settingsCell viewWithTag:10];
-      //  settingsCell.switchBtn=[settingsCell viewWithTag:10];
-//        if (!defaultSwitch)
-//        {
-//            defaultSwitch = [[RESwitch alloc] initWithFrame:CGRectMake(settingsTableView.frame.size.width-85, settingsCell.nameLabel.frame.origin.y+settingsCell.nameLabel.frame.size.height/2-12, 56, 21)];
-//            defaultSwitch.tag = 10;
-//            [settingsCell.settingsContainerView  addSubview:defaultSwitch];
-//        }
         settingsCell.switchBtn.Tag=(int)indexPath.row;
         settingsCell.switchBtn.sectionTag=(int)indexPath.section;
         if ([[[UserDefaultManager getValue:@"switchStatusDict"] objectForKey:[NSString stringWithFormat:@"%d%d", settingsCell.switchBtn.sectionTag,settingsCell.switchBtn.Tag]] isEqualToString: @"False"])

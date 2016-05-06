@@ -212,14 +212,14 @@
         if (![passwordTextField.text isEqualToString:confirmPasswordTextField.text])
         {
             SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
-            [alert showWarning:self title:@"Alert" subTitle:@"Passwords do not match" closeButtonTitle:@"Done" duration:0.0f];
+            [alert showWarning:self title:@"Alert" subTitle:@"Passwords do not match." closeButtonTitle:@"Done" duration:0.0f];
             return NO;
         }
        
         else if ([oldPasswordTextField.text isEqualToString:passwordTextField.text])
         {
             SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
-            [alert showWarning:self title:@"Alert" subTitle:@"Old password and new password are same. Please try a different one" closeButtonTitle:@"Done" duration:0.0f];
+            [alert showWarning:self title:@"Alert" subTitle:@"Your current and new passwords cannot be same." closeButtonTitle:@"Done" duration:0.0f];
             return NO;
         }
        else if ((oldPasswordTextField.text.length < 6) || (passwordTextField.text.length < 6) || (confirmPasswordTextField.text.length < 6))

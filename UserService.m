@@ -120,7 +120,7 @@
 #pragma mark- Location update
 -(void)locationUpdate:(NSString *)latitude longitude:(NSString *)longitude success:(void (^)(id))success failure:(void (^)(NSError *))failure
 {
-    NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":@"1",@"latitude":latitude,@"longitude":longitude};
+    NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":@"",@"latitude":latitude,@"longitude":longitude};
     [[Webservice sharedManager] post:kUrlLocationUpdate parameters:requestDict success:^(id responseObject)
      {
          responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];

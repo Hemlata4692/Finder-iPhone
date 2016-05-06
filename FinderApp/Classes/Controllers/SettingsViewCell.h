@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "NYSliderPopover.h"
 #import "MyButton.h"
 #import "ASValueTrackingSlider.h"
 

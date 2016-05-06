@@ -48,8 +48,6 @@
 		B77695CC1CBFB4F300794005 /* SCLSwitchView.m in Sources */ = {isa = PBXBuildFile; fileRef = B77695C41CBFB4F300794005 /* SCLSwitchView.m */; };
 		B78405AF1CDB72A700CD7D54 /* ASValuePopUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = B78405AC1CDB72A700CD7D54 /* ASValuePopUpView.m */; };
 		B78405B01CDB72A700CD7D54 /* ASValueTrackingSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = B78405AE1CDB72A700CD7D54 /* ASValueTrackingSlider.m */; };
-		B78E18081CC76431003CA378 /* NYPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = B78E18051CC76431003CA378 /* NYPopover.m */; };
-		B78E18091CC76431003CA378 /* NYSliderPopover.m in Sources */ = {isa = PBXBuildFile; fileRef = B78E18071CC76431003CA378 /* NYSliderPopover.m */; };
 		B7A82A911CD1CA2F0030DB38 /* UIPlaceHolderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7A82A901CD1CA2F0030DB38 /* UIPlaceHolderTextView.m */; };
 		B7A8DD6A1CAE2BF2007F56B6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B7A8DD691CAE2BF2007F56B6 /* main.m */; };
 		B7A8DD6D1CAE2BF2007F56B6 /* FinderAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B7A8DD6C1CAE2BF2007F56B6 /* FinderAppDelegate.m */; };
@@ -71,9 +69,7 @@
 		B7EAC1701CC5D58F001C4EEC /* UserService.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAC16F1CC5D58F001C4EEC /* UserService.m */; };
 		B7EAC1761CC5DBE9001C4EEC /* ConferenceService.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAC1751CC5DBE9001C4EEC /* ConferenceService.m */; };
 		B7EAC1801CC5ED06001C4EEC /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAC17F1CC5ED06001C4EEC /* SettingsViewController.m */; };
-		B7EAC1861CC62681001C4EEC /* RESwitch.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAC1851CC62681001C4EEC /* RESwitch.m */; };
 		B7EAC18B1CC63328001C4EEC /* SettingsViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAC18A1CC63328001C4EEC /* SettingsViewCell.m */; };
-		B7EAC18D1CC639E7001C4EEC /* RESwitch.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B7EAC18C1CC639E7001C4EEC /* RESwitch.bundle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -149,10 +145,6 @@
 		B78405AC1CDB72A700CD7D54 /* ASValuePopUpView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASValuePopUpView.m; sourceTree = "<group>"; };
 		B78405AD1CDB72A700CD7D54 /* ASValueTrackingSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASValueTrackingSlider.h; sourceTree = "<group>"; };
 		B78405AE1CDB72A700CD7D54 /* ASValueTrackingSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASValueTrackingSlider.m; sourceTree = "<group>"; };
-		B78E18041CC76431003CA378 /* NYPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYPopover.h; sourceTree = "<group>"; };
-		B78E18051CC76431003CA378 /* NYPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NYPopover.m; sourceTree = "<group>"; };
-		B78E18061CC76431003CA378 /* NYSliderPopover.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NYSliderPopover.h; sourceTree = "<group>"; };
-		B78E18071CC76431003CA378 /* NYSliderPopover.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NYSliderPopover.m; sourceTree = "<group>"; };
 		B7A82A8F1CD1CA2F0030DB38 /* UIPlaceHolderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPlaceHolderTextView.h; sourceTree = "<group>"; };
 		B7A82A901CD1CA2F0030DB38 /* UIPlaceHolderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPlaceHolderTextView.m; sourceTree = "<group>"; };
 		B7A8DD651CAE2BF2007F56B6 /* Finder_iPhoneApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Finder_iPhoneApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -204,11 +196,8 @@
 		B7EAC1751CC5DBE9001C4EEC /* ConferenceService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConferenceService.m; sourceTree = SOURCE_ROOT; };
 		B7EAC17E1CC5ED06001C4EEC /* SettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewController.h; sourceTree = "<group>"; };
 		B7EAC17F1CC5ED06001C4EEC /* SettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewController.m; sourceTree = "<group>"; };
-		B7EAC1841CC62681001C4EEC /* RESwitch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RESwitch.h; sourceTree = "<group>"; };
-		B7EAC1851CC62681001C4EEC /* RESwitch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RESwitch.m; sourceTree = "<group>"; };
 		B7EAC1891CC63328001C4EEC /* SettingsViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsViewCell.h; sourceTree = "<group>"; };
 		B7EAC18A1CC63328001C4EEC /* SettingsViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsViewCell.m; sourceTree = "<group>"; };
-		B7EAC18C1CC639E7001C4EEC /* RESwitch.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = RESwitch.bundle; sourceTree = "<group>"; };
 		C05F8A8FD36EE5AC5DD42364 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -472,10 +461,6 @@
 		B78E18031CC7641D003CA378 /* NYSliderPopover */ = {
 			isa = PBXGroup;
 			children = (
-				B78E18041CC76431003CA378 /* NYPopover.h */,
-				B78E18051CC76431003CA378 /* NYPopover.m */,
-				B78E18061CC76431003CA378 /* NYSliderPopover.h */,
-				B78E18071CC76431003CA378 /* NYSliderPopover.m */,
 				B78405AB1CDB72A700CD7D54 /* ASValuePopUpView.h */,
 				B78405AC1CDB72A700CD7D54 /* ASValuePopUpView.m */,
 				B78405AD1CDB72A700CD7D54 /* ASValueTrackingSlider.h */,
@@ -544,7 +529,6 @@
 				B762DB731CCE3E1E002875A1 /* ButtonTag */,
 				B7414F841CCA4673009FE9CE /* CustomAlert */,
 				B78E18031CC7641D003CA378 /* NYSliderPopover */,
-				B7EAC1831CC6266C001C4EEC /* RESwitch */,
 				B77695A01CBF593C00794005 /* CornderRadiusAndBorder */,
 				B776959C1CBF58F400794005 /* PaddingCategory */,
 				B77695981CBF534E00794005 /* ValidationCategory */,
@@ -872,16 +856,6 @@
 			name = SettingsView;
 			sourceTree = "<group>";
 		};
-		B7EAC1831CC6266C001C4EEC /* RESwitch */ = {
-			isa = PBXGroup;
-			children = (
-				B7EAC18C1CC639E7001C4EEC /* RESwitch.bundle */,
-				B7EAC1841CC62681001C4EEC /* RESwitch.h */,
-				B7EAC1851CC62681001C4EEC /* RESwitch.m */,
-			);
-			name = RESwitch;
-			sourceTree = "<group>";
-		};
 		B7EAC1871CC632EA001C4EEC /* SettingViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -968,7 +942,6 @@
 			files = (
 				B7A8DDDF1CAE60BB007F56B6 /* Main.storyboard in Resources */,
 				B7A8DD751CAE2BF2007F56B6 /* Assets.xcassets in Resources */,
-				B7EAC18D1CC639E7001C4EEC /* RESwitch.bundle in Resources */,
 				B740CC9E1CD861CB0006B32A /* bg.png in Resources */,
 				B740CC9F1CD861CB0006B32A /* bg-568h@2x.png in Resources */,
 				B7414F941CCA4715009FE9CE /* CustomAlert.xib in Resources */,
@@ -1052,19 +1025,16 @@
 				B7EAC18B1CC63328001C4EEC /* SettingsViewCell.m in Sources */,
 				5D32EC0F1CC4A31F00C50969 /* MatchesViewController.m in Sources */,
 				B77695CC1CBFB4F300794005 /* SCLSwitchView.m in Sources */,
-				B78E18091CC76431003CA378 /* NYSliderPopover.m in Sources */,
 				B7C018D11CD0C7A4006773CB /* ScheduleMeetingViewController.m in Sources */,
 				B77695C91CBFB4F300794005 /* SCLAlertViewStyleKit.m in Sources */,
 				B7A82A911CD1CA2F0030DB38 /* UIPlaceHolderTextView.m in Sources */,
 				B740CCA51CD8639F0006B32A /* UIImage+deviceSpecificMedia.m in Sources */,
 				B7C018CD1CD0B7E0006773CB /* NewMessageViewController.m in Sources */,
-				B78E18081CC76431003CA378 /* NYPopover.m in Sources */,
 				B78405AF1CDB72A700CD7D54 /* ASValuePopUpView.m in Sources */,
 				B7E024C41CC5089E00707552 /* ConferenceDataModel.m in Sources */,
 				B776959F1CBF590100794005 /* UITextField+Padding.m in Sources */,
 				B7C018C81CD08630006773CB /* CalendarTableViewCell.m in Sources */,
 				B77695C61CBFB4F300794005 /* SCLAlertView.m in Sources */,
-				B7EAC1861CC62681001C4EEC /* RESwitch.m in Sources */,
 				5D32EC0B1CC4A31F00C50969 /* MoreViewController.m in Sources */,
 				B7A8DDCE1CAE5C32007F56B6 /* NullValueChecker.m in Sources */,
 				B7414F931CCA4715009FE9CE /* CustomAlert.m in Sources */,

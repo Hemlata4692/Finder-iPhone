@@ -112,7 +112,7 @@
     if ([emailField isEmpty] || [passwordField isEmpty])
     {
         SCLAlertView *alert = [[SCLAlertView alloc] init];
-        [alert showWarning:self title:@"Alert" subTitle:@"All fields are required." closeButtonTitle:@"Done" duration:0.0f];
+        [alert showWarning:self title:@"Alert" subTitle:@"Please enter your email and password." closeButtonTitle:@"Done" duration:0.0f];
         return NO;
     }
     else
