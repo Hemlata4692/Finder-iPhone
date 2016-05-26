@@ -10,7 +10,7 @@
 #import "HomeViewController.h"
 #import "UserService.h"
 #import "UIImage+deviceSpecificMedia.h"
-
+#import "ConferenceListViewController.h"
 
 @interface LoginViewController ()<UITextFieldDelegate,BSKeyboardControlsDelegate>
 {
@@ -41,6 +41,7 @@
     UIImage * tempImg =[UIImage imageNamed:@"bg"];
     backgroundImageView.image = [UIImage imageNamed:[tempImg imageForDeviceWithName:@"bg"]];
     [self addPadding];
+   
 }
 
 - (void)didReceiveMemoryWarning {
@@ -162,17 +163,19 @@
 {
     [[UserService sharedManager] userLogin:emailField.text password:passwordField.text success:^(id responseObject)
      {
-          [myDelegate.locationManager startUpdatingLocation];
+         [myDelegate.locationManager startUpdatingLocation];
          [myDelegate stopIndicator];
+         [myDelegate registerDeviceForNotification];
+         [UserDefaultManager setValue:[responseObject objectForKey:@"accesstokenKey"] key:@"accessToken"];
          [UserDefaultManager setValue:[responseObject objectForKey:@"userId"] key:@"userId"];
          [UserDefaultManager setValue:[responseObject objectForKey:@"userEmail"] key:@"userEmail"];
          [UserDefaultManager setValue:[responseObject objectForKey:@"userImage"] key:@"userImage"];
          [UserDefaultManager setValue:[responseObject objectForKey:@"userName"] key:@"userName"];
          [UserDefaultManager setValue:[responseObject objectForKey:@"unReadMessegaes"] key:@"unReadMessegaes"];
-        //  [myDelegate locationUpdate];
+
          myDelegate.isLocation=@"1";
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-         HomeViewController * homeView = [storyboard instantiateViewControllerWithIdentifier:@"tabBar"];
+         ConferenceListViewController * homeView = [storyboard instantiateViewControllerWithIdentifier:@"ConferenceListViewController"];
          [myDelegate.window setRootViewController:homeView];
          [myDelegate.window makeKeyAndVisible];
 

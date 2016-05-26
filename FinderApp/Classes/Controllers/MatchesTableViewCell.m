@@ -9,6 +9,7 @@
 #import "MatchesTableViewCell.h"
 
 @implementation MatchesTableViewCell
+@synthesize scheduleMeetingBtn;
 
 - (void)awakeFromNib {
     [super awakeFromNib];

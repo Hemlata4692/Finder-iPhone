@@ -12,6 +12,8 @@
 #define kUrlForgotPassword              @"forgotpassword"
 #define kUrlChangePassword              @"changepassword"
 #define kUrlLocationUpdate              @"locationupdate"
+#define kUrlLogout                      @"logout"
+#define kUrlRegisterDevice              @"registerdevice"
 
 @implementation UserService
 
@@ -39,7 +41,7 @@
 //Login
 - (void)userLogin:(NSString *)email password:(NSString *)password success:(void (^)(id))success failure:(void (^)(NSError *))failure {
     
-    NSDictionary *requestDict = @{@"email":email,@"password":password,@"conferenceId":@"1"};
+    NSDictionary *requestDict = @{@"email":email,@"password":password};
     NSLog(@"request login %@",requestDict);
     [[Webservice sharedManager] post:kUrlLogin parameters:requestDict success:^(id responseObject)
      {
@@ -66,7 +68,7 @@
 //Forgot Password
 -(void)forgotPassword:(NSString *)email success:(void (^)(id))success failure:(void (^)(NSError *))failure
 {
-    NSDictionary *requestDict = @{@"email":email,@"conferenceId":@"1"};
+    NSDictionary *requestDict = @{@"email":email};
     NSLog(@"request forgotPassword %@",requestDict);
     [[Webservice sharedManager] post:kUrlForgotPassword parameters:requestDict success:^(id responseObject)
      {
@@ -91,7 +93,7 @@
 #pragma mark- Change password
 -(void)changePassword:(NSString *)oldPassword newPassword:(NSString *)newPassword success:(void (^)(id))success failure:(void (^)(NSError *))failure
 {
-    NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":@"1",@"oldPassword":oldPassword,@"newPassword":newPassword};
+    NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"oldPassword":oldPassword,@"newPassword":newPassword};
     NSLog(@"request changePassword %@",requestDict);
 
     [[Webservice sharedManager] post:kUrlChangePassword parameters:requestDict success:^(id responseObject)
@@ -120,15 +122,23 @@
 #pragma mark- Location update
 -(void)locationUpdate:(NSString *)latitude longitude:(NSString *)longitude success:(void (^)(id))success failure:(void (^)(NSError *))failure
 {
-    NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":@"",@"latitude":latitude,@"longitude":longitude};
+    
+    NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"latitude":latitude,@"longitude":longitude};
+     NSLog(@"location %@",requestDict);
     [[Webservice sharedManager] post:kUrlLocationUpdate parameters:requestDict success:^(id responseObject)
      {
          responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
+          NSLog(@"location response%@",responseObject);
          
-         if([[Webservice sharedManager] isStatusOK:responseObject])
+         if ([[responseObject objectForKey:@"isSuccess"] isEqualToString:@"1"])
          {
              success(responseObject);
-         } else
+         }
+//         if([[Webservice sharedManager] isStatusOK:responseObject])
+//         {
+//             success(responseObject);
+//         }
+         else
          {
              [myDelegate stopIndicator];
              failure(nil);
@@ -141,4 +151,57 @@
     
 }
 #pragma mark- end
+
+#pragma mark- Logout
+-(void)logoutUser:(void (^)(id data))success failure:(void (^)(NSError *error))failure
+{
+    NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"]};
+    [[Webservice sharedManager] post:kUrlLogout parameters:requestDict success:^(id responseObject)
+     {
+         responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
+         
+         if([[Webservice sharedManager] isStatusOK:responseObject])
+         {
+             success(responseObject);
+         }
+         else
+         {
+             [myDelegate stopIndicator];
+             failure(nil);
+         }
+     } failure:^(NSError *error)
+     {
+         [myDelegate stopIndicator];
+         failure(error);
+     }];
+
+}
+#pragma mark- end
+#pragma mark- Register device
+-(void)registerDeviceForPushNotification:(NSString *)deviceToken deviceType:(NSString *)deviceType success:(void (^)(id))success failure:(void (^)(NSError *))failure
+{
+    NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"deviceToken":deviceToken,@"deviceType":deviceType};
+    NSLog(@"request for push notification %@",requestDict);
+    [[Webservice sharedManager] post:kUrlRegisterDevice parameters:requestDict success:^(id responseObject)
+     {
+         responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
+         if([[Webservice sharedManager] isStatusOK:responseObject])
+         {
+             NSLog(@"response for push notification %@",responseObject);
+             success(responseObject);
+         }
+         else
+         {
+             [myDelegate stopIndicator];
+             failure(nil);
+         }
+     } failure:^(NSError *error)
+     {
+         [myDelegate stopIndicator];
+         failure(error);
+     }];
+    
+}
+#pragma mark- end
+
 @end

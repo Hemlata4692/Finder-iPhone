@@ -28,5 +28,11 @@
 -(void)locationUpdate:(NSString *)latitude longitude:(NSString *)longitude success:(void (^)(id))success failure:(void (^)(NSError *))failure;
 //end
 
+//Logout
+-(void)logoutUser:(void (^)(id data))success failure:(void (^)(NSError *error))failure;
+//end
 
+//Register Device
+-(void)registerDeviceForPushNotification:(NSString *)deviceToken deviceType:(NSString *)deviceType success:(void (^)(id))success failure:(void (^)(NSError *))failure;
+//end
 @end

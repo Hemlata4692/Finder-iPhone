@@ -11,6 +11,8 @@
 #import "UserService.h"
 #import "SettingsViewController.h"
 #import "PendingAppointmentViewController.h"
+#import "ProximityAlertsViewController.h"
+#import "ConferenceListViewController.h"
 
 @interface MoreViewController ()<UITextFieldDelegate,BSKeyboardControlsDelegate>
 {
@@ -37,19 +39,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.navigationItem.title=@"MORE";
+    self.navigationItem.title=@"More";
     
     changePwdContainerView.hidden = YES;
     textFieldArray = @[oldPasswordTextField,passwordTextField,confirmPasswordTextField];
     [self setKeyboardControls:[[BSKeyboardControls alloc] initWithFields:textFieldArray]];
     [self.keyboardControls setDelegate:self];
     
-    [self addPadding];
-    [self setCornerRadius];
-    [self addborder];
+   // [self addPadding];
+//    [self setCornerRadius];
+//    [self addborder];
 
-    moreOptionsArray = [NSMutableArray arrayWithObjects:@"MY PROFILE",@"PENDING APPOINTMENTS",@"PROXIMITY ALERTS",@"SETTINGS",@"CHANGE PASSWORD",@"LOGOUT", nil];
-    moreImagesArray= [NSMutableArray arrayWithObjects:@"my_profile.png",@"pending_appointment.png",@"proximity.png",@"setting.png",@"change_password.png",@"logout.png", nil];
+    moreOptionsArray = [NSMutableArray arrayWithObjects:@"My Profile",@"Pending Appointments",@"Requested Appointments",@"Proximity alerts",@"Settings",@"Change Password",@"Switch Conference",@"Logout", nil];
+    moreImagesArray= [NSMutableArray arrayWithObjects:@"my_profile.png",@"pending_appointment.png",@"requested_appointment.png",@"proximity.png",@"setting.png",@"change_password.png",@"switch_conference.png",@"logout.png", nil];
 }
 
 - (void)didReceiveMemoryWarning
@@ -63,24 +65,24 @@
 }
 #pragma mark - end
 #pragma mark - Corner radius, border and textfield padding
--(void) setCornerRadius
-{
-    [oldPasswordTextField setCornerRadius:2.0f];
-    [passwordTextField setCornerRadius:2.0f];
-    [confirmPasswordTextField setCornerRadius:2.0f];
-}
--(void)addborder
-{
-    [oldPasswordTextField setTextBorder:oldPasswordTextField color:[UIColor colorWithRed:220.0/255.0 green:220.0/255.0 blue:220.0/255.0 alpha:1.0]];
-   [confirmPasswordTextField setTextBorder:confirmPasswordTextField color:[UIColor colorWithRed:220.0/255.0 green:220.0/255.0 blue:220.0/255.0 alpha:1.0]];
-    [passwordTextField setTextBorder:passwordTextField color:[UIColor colorWithRed:220.0/255.0 green:220.0/255.0 blue:220.0/255.0 alpha:1.0]];
-}
--(void)addPadding
-{
-    [oldPasswordTextField addTextFieldPaddingWithoutImages:oldPasswordTextField];
-    [passwordTextField addTextFieldPaddingWithoutImages:passwordTextField];
-    [confirmPasswordTextField addTextFieldPaddingWithoutImages:confirmPasswordTextField];
-}
+//-(void) setCornerRadius
+//{
+//    [oldPasswordTextField setCornerRadius:2.0f];
+//    [passwordTextField setCornerRadius:2.0f];
+//    [confirmPasswordTextField setCornerRadius:2.0f];
+//}
+//-(void)addborder
+//{
+//    [oldPasswordTextField setTextBorder:oldPasswordTextField color:[UIColor colorWithRed:220.0/255.0 green:220.0/255.0 blue:220.0/255.0 alpha:1.0]];
+//   [confirmPasswordTextField setTextBorder:confirmPasswordTextField color:[UIColor colorWithRed:220.0/255.0 green:220.0/255.0 blue:220.0/255.0 alpha:1.0]];
+//    [passwordTextField setTextBorder:passwordTextField color:[UIColor colorWithRed:220.0/255.0 green:220.0/255.0 blue:220.0/255.0 alpha:1.0]];
+//}
+//-(void)addPadding
+//{
+//    [oldPasswordTextField addTextFieldPaddingWithoutImages:oldPasswordTextField];
+//    [passwordTextField addTextFieldPaddingWithoutImages:passwordTextField];
+//    [confirmPasswordTextField addTextFieldPaddingWithoutImages:confirmPasswordTextField];
+//}
 #pragma mark - end
 #pragma mark - Table view delegate methods
 
@@ -107,10 +109,10 @@
     }
     [cell.containerView addShadow:cell.containerView color:[UIColor lightGrayColor]];
     
-    if(indexPath.row == 5)
-    {
-        cell.rightArrowIcon.hidden=YES;
-    }
+//    if(indexPath.row == 7)
+//    {
+//        cell.rightArrowIcon.hidden=YES;
+//    }
     
     cell.screenNameLabel.text = [moreOptionsArray objectAtIndex:indexPath.row];
     cell.iconImageView.image=[UIImage imageNamed:[moreImagesArray objectAtIndex:indexPath.row]];
@@ -121,30 +123,51 @@
 {
     if (indexPath.row==1)
     {
-//        UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//        PendingAppointmentViewController *settingsView =[storyboard instantiateViewControllerWithIdentifier:@"PendingAppointmentViewController"];
-//        [self.navigationController pushViewController:settingsView animated:YES];
+        UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        PendingAppointmentViewController *settingsView =[storyboard instantiateViewControllerWithIdentifier:@"PendingAppointmentViewController"];
+         settingsView.screenName=@"Pending Appointments";
+        [self.navigationController pushViewController:settingsView animated:YES];
     }
-   else if (indexPath.row==3)
+    else if (indexPath.row==2)
+    {
+        UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        PendingAppointmentViewController *settingsView =[storyboard instantiateViewControllerWithIdentifier:@"PendingAppointmentViewController"];
+        settingsView.screenName=@"Requested Appointments";
+        [self.navigationController pushViewController:settingsView animated:YES];
+    }
+    else if (indexPath.row==3)
+    {
+        UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        ProximityAlertsViewController *settingsView =[storyboard instantiateViewControllerWithIdentifier:@"ProximityAlertsViewController"];
+        [self.navigationController pushViewController:settingsView animated:YES];
+    }
+   else if (indexPath.row==4)
     {
         UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         SettingsViewController *settingsView =[storyboard instantiateViewControllerWithIdentifier:@"SettingsViewController"];
         [self.navigationController pushViewController:settingsView animated:YES];
     }
-    else if (indexPath.row == 4)
+    else if (indexPath.row == 5)
     {
         changePwdContainerView.hidden = NO;
         oldPasswordTextField.text=@"";
         passwordTextField.text=@"";
         confirmPasswordTextField.text=@"";
     }
-    else if (indexPath.row == 5)
+    else if (indexPath.row == 6)
     {
-         [myDelegate.locationManager stopUpdatingLocation];
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-                myDelegate.navigationController = [storyboard instantiateViewControllerWithIdentifier:@"mainNavController"];
-        myDelegate.window.rootViewController = myDelegate.navigationController;
-        [UserDefaultManager removeValue:@"userId"];
+        ConferenceListViewController * homeView = [storyboard instantiateViewControllerWithIdentifier:@"ConferenceListViewController"];
+        [myDelegate.window setRootViewController:homeView];
+        [myDelegate.window makeKeyAndVisible];
+    }
+    else if (indexPath.row == 7)
+    {
+        [myDelegate showIndicator];
+        [self performSelector:@selector(logout) withObject:nil afterDelay:.1];
+        
+      
+
       //  [UserDefaultManager removeValue:@"switchStatusDict"];
     }
 }
@@ -274,6 +297,30 @@
      }] ;
 
 }
+
+-(void)logout
+{
+    [[UserService sharedManager] logoutUser:^(id responseObject)
+     {
+         [myDelegate unregisterDeviceForNotification];
+         [myDelegate stopIndicator];
+         [myDelegate.locationManager stopUpdatingLocation];
+         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+         myDelegate.navigationController = [storyboard instantiateViewControllerWithIdentifier:@"mainNavController"];
+         myDelegate.window.rootViewController = myDelegate.navigationController;
+         [UserDefaultManager removeValue:@"userId"];
+         [UserDefaultManager removeValue:@"accessToken"];
+         [UserDefaultManager removeValue:@"userEmail"];
+         [UserDefaultManager removeValue:@"userName"];
+         [UserDefaultManager removeValue:@"userImage"];
+         [UserDefaultManager removeValue:@"conferenceId"];
+     } failure:^(NSError *error)
+     {
+         
+     }] ;
+    
+}
+
 #pragma mark - end
 
 @end

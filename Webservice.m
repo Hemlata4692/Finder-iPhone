@@ -9,6 +9,7 @@
 #import "Webservice.h"
 
 @implementation Webservice
+//static int count=1;
 @synthesize manager;
 #pragma mark - Singleton instance
 + (id)sharedManager
@@ -25,7 +26,6 @@
     if (self = [super init])
     {
         manager = [[AFHTTPRequestOperationManager manager] initWithBaseURL:[NSURL URLWithString:BASE_URL]];
-        
     }
     return self;
 }
@@ -39,7 +39,9 @@
     [manager.requestSerializer setValue:@"parse-application-id-removed" forHTTPHeaderField:@"X-Parse-Application-Id"];
     [manager.requestSerializer setValue:@"parse-rest-api-key-removed" forHTTPHeaderField:@"X-Parse-REST-API-Key"];
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [manager.requestSerializer setValue:@"OH)-<8v^H\"}n#5AzSUhb>Q.w?;BOwyP2:c.a;dzwPQ:Hc:R6[:*Q^J!7+6pJxKs" forHTTPHeaderField:@"acess_token_key"];
+    if ([UserDefaultManager getValue:@"accessToken"] != NULL) {
+        [manager.requestSerializer setValue:[UserDefaultManager getValue:@"accessToken"] forHTTPHeaderField:@"access-token-key"];
+    }
     manager.securityPolicy.allowInvalidCertificates = YES;
     
     [manager POST:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -61,7 +63,9 @@
     [manager.requestSerializer setValue:@"parse-application-id-removed" forHTTPHeaderField:@"X-Parse-Application-Id"];
     [manager.requestSerializer setValue:@"parse-rest-api-key-removed" forHTTPHeaderField:@"X-Parse-REST-API-Key"];
     [manager.requestSerializer setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
-    [manager.requestSerializer setValue:@"OH)-<8v^H\"}n#5AzSUhb>Q.w?;BOwyP2:c.a;dzwPQ:Hc:R6[:*Q^J!7+6pJxKs" forHTTPHeaderField:@"acess_token_key"];
+    if ([UserDefaultManager getValue:@"accessToken"] != NULL) {
+        [manager.requestSerializer setValue:[UserDefaultManager getValue:@"accessToken"] forHTTPHeaderField:@"access-token-key"];
+    }
     manager.securityPolicy.allowInvalidCertificates = YES;
     
     NSData *imageData = UIImageJPEGRepresentation(image, 0.3);
@@ -89,6 +93,12 @@
             msg = responseObject[@"message"];
             SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
             [alert showWarning:nil title:@"Alert" subTitle:msg closeButtonTitle:@"Ok" duration:0.0f];
+//            if (count==1) {
+//            count++;
+//            msg = responseObject[@"message"];
+//            SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
+//            [alert showWarning:nil title:@"Alert" subTitle:msg closeButtonTitle:@"Ok" duration:0.0f];
+//            }
             return NO;
         }
         case 1:
@@ -101,9 +111,20 @@
             SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
             [alert addButton:@"Ok" actionBlock:^(void) {
                 [self logoutUser];
-//                 [alert hideView];
+                //                 [alert hideView];
             }];
-            [alert showWarning:nil title:@"Alert" subTitle:msg closeButtonTitle:@"Cancel" duration:0.0f];
+            [alert showWarning:nil title:@"Alert" subTitle:msg closeButtonTitle:nil duration:0.0f];
+//            if (count==1) {
+//                count++;
+//                msg = responseObject[@"message"];
+//                SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
+//                [alert addButton:@"Ok" actionBlock:^(void) {
+//                    [self logoutUser];
+//                    //                 [alert hideView];
+//                }];
+//                [alert showWarning:nil title:@"Alert" subTitle:msg closeButtonTitle:nil duration:0.0f];
+//            }
+          
         }
             return NO;
             break;

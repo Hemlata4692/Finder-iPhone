@@ -22,7 +22,7 @@
 #pragma mark - View life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title = @"FORGOT PASSWORD";
+    self.navigationItem.title = @"Forgot Password";
     [self addPadding];
 }
 

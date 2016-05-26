@@ -5,7 +5,7 @@
 //  Created by Hema on 27/04/16.
 //  Copyright © 2016 Ranosys. All rights reserved.
 //
-
+#import <UIKit/UIKit.h>
 #import "PersonalMessageViewController.h"
 #import "PersonalMessageViewCell.h"
 
@@ -51,7 +51,8 @@
         {
             meCell=[[PersonalMessageViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:simpleTableIdentifier];
         }
-        return meCell;
+   
+          return meCell;
 
 //        NSString *simpleTableIdentifier = @"otherUserCell";
 //        PersonalMessageViewCell *otherCell=[personalMessageTableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
@@ -63,4 +64,6 @@
     
 }
 #pragma mark - end
+
+
 @end

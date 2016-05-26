@@ -844,7 +844,7 @@ SCLTimerDisplay *buttonTimer;
             break;
             
         case Info:
-            viewColor = UIColorFromHEX(0x2866BF);
+            viewColor = [UIColor colorWithRed:237.0/255.0 green:120.0/255.0 blue:0.0/255.0 alpha:1.0];
             iconImage = SCLAlertViewStyleKit.imageOfInfo;
             break;
             

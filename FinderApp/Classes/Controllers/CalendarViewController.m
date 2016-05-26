@@ -9,8 +9,13 @@
 #import "CalendarViewController.h"
 #import "CalendarTableViewCell.h"
 #import "ScheduleMeetingViewController.h"
+#import "ConferenceService.h"
+#import "CalendarDataModel.h"
 
 @interface CalendarViewController ()
+{
+    NSMutableArray *calendarDetailsArray;
+}
 
 @property (weak, nonatomic) IBOutlet UITableView *calendarTableView;
 @end
@@ -21,7 +26,8 @@
 #pragma mark - View lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title=@"CALENDAR";
+    self.navigationItem.title=@"Calendar";
+    calendarDetailsArray=[[NSMutableArray alloc]init];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -30,8 +36,28 @@
 }
 -(void)viewWillAppear:(BOOL)animated
 {
+    [super viewWillAppear:YES];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    [myDelegate showIndicator];
+    [self performSelector:@selector(getCalendarDetails) withObject:nil afterDelay:.1];
+    
 }
+#pragma mark - end
+
+#pragma mark - Webservice
+-(void)getCalendarDetails
+{
+    [[ConferenceService sharedManager] getCalendarDetails:[UserDefaultManager getValue:@"conferenceId"] success:^(id calendarDataArray) {
+        [myDelegate stopIndicator];
+        calendarDetailsArray=[calendarDataArray mutableCopy];
+//        [self displayConferenceDetail];
+    }
+                                                   failure:^(NSError *error)
+     {
+         
+     }] ;
+}
+
 #pragma mark - end
 
 #pragma mark - Table view delegate methods
@@ -41,7 +67,7 @@
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
-    return 45;
+    return 40;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
 {
@@ -56,11 +82,11 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView * headerView;
-    headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 60.0)];
+    headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 40.0)];
     headerView.backgroundColor = [UIColor clearColor];
     UILabel * dateLabel = [[UILabel alloc] init];
-    dateLabel.font = [UIFont fontWithName:@"Roboto-Regular" size:18.0];
-    dateLabel.text=@"THURSDAY 25th FEBRUARY";
+    dateLabel.font = [UIFont fontWithName:@"Roboto-Regular" size:16.0];
+    dateLabel.text=@"Thursday 25th Feburary";
     float width =  [dateLabel.text boundingRectWithSize:dateLabel.frame.size options:NSStringDrawingUsesLineFragmentOrigin attributes:@{ NSFontAttributeName:dateLabel.font } context:nil]
     .size.width;
     dateLabel.frame = CGRectMake(15, 0, width,40.0);

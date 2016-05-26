@@ -49,29 +49,29 @@
     pickerView.translatesAutoresizingMaskIntoConstraints=YES;
     pickerToolbar.translatesAutoresizingMaskIntoConstraints=YES;
     datePicker.translatesAutoresizingMaskIntoConstraints=YES;
-    pickerView.backgroundColor=[UIColor redColor];
-    datePicker.backgroundColor=[UIColor purpleColor];
+    pickerView.backgroundColor=[UIColor whiteColor];
+    datePicker.backgroundColor=[UIColor whiteColor];
     selectedPicker=0;
 }
 //add padding, corner radius and border on text fields
 -(void)addBorderCoenerRadius
 {
-    [contactNameTextField setTextBorder:contactNameTextField color:[UIColor colorWithRed:220.0/255.0 green:220.0/255.0 blue:220.0/255.0 alpha:1.0]];
-    [venueTextField setTextBorder:venueTextField color:[UIColor colorWithRed:220.0/255.0 green:220.0/255.0 blue:220.0/255.0 alpha:1.0]];
-    [dateTextField setTextBorder:dateTextField color:[UIColor colorWithRed:220.0/255.0 green:220.0/255.0 blue:220.0/255.0 alpha:1.0]];
-    [timeTextField setTextBorder:timeTextField color:[UIColor colorWithRed:220.0/255.0 green:220.0/255.0 blue:220.0/255.0 alpha:1.0]];
+//    [contactNameTextField setTextBorder:contactNameTextField color:[UIColor colorWithRed:220.0/255.0 green:220.0/255.0 blue:220.0/255.0 alpha:1.0]];
+//    [venueTextField setTextBorder:venueTextField color:[UIColor colorWithRed:220.0/255.0 green:220.0/255.0 blue:220.0/255.0 alpha:1.0]];
+//    [dateTextField setTextBorder:dateTextField color:[UIColor colorWithRed:220.0/255.0 green:220.0/255.0 blue:220.0/255.0 alpha:1.0]];
+//    [timeTextField setTextBorder:timeTextField color:[UIColor colorWithRed:220.0/255.0 green:220.0/255.0 blue:220.0/255.0 alpha:1.0]];
     [meetingAgendaTextField setTextViewBorder:meetingAgendaTextField color:[UIColor colorWithRed:220.0/255.0 green:220.0/255.0 blue:220.0/255.0 alpha:1.0]];
-    [contactNameTextField addTextFieldPaddingWithoutImages:contactNameTextField];
-    [venueTextField addTextFieldPaddingWithoutImages:venueTextField];
-    [timeTextField addTextFieldPaddingWithoutImages:timeTextField];
-    [dateTextField addTextFieldPaddingWithoutImages:dateTextField];
-    [contactNameTextField setCornerRadius:2.0f];
-    [dateTextField setCornerRadius:2.0f];
-    [venueTextField setCornerRadius:2.0f];
-    [timeTextField setCornerRadius:2.0f];
+//    [contactNameTextField addTextFieldPaddingWithoutImages:contactNameTextField];
+//    [venueTextField addTextFieldPaddingWithoutImages:venueTextField];
+//    [timeTextField addTextFieldPaddingWithoutImages:timeTextField];
+//    [dateTextField addTextFieldPaddingWithoutImages:dateTextField];
+//    [contactNameTextField setCornerRadius:2.0f];
+//    [dateTextField setCornerRadius:2.0f];
+//    [venueTextField setCornerRadius:2.0f];
+//    [timeTextField setCornerRadius:2.0f];
     [meetingAgendaTextField setCornerRadius:2.0f];
     [meetingAgendaTextField setPlaceholder:@"  Meeting Agenda"];
-    [meetingAgendaTextField setFont:[UIFont fontWithName:@"Roboto-Regular" size:14.0]];
+    [meetingAgendaTextField setFont:[UIFont fontWithName:@"Roboto-Regular" size:15.0]];
 }
 #pragma mark - end
 #pragma mark - IBActions

@@ -130,14 +130,14 @@ NSString *const SliderFillColorAnim = @"fillColor";
                               value:font
                               range:NSMakeRange(0, [_attributedString length])];
     
-    _textLayer.font = (__bridge CFTypeRef)(font.fontName);
-    _textLayer.fontSize = font.pointSize;
+    _textLayer.font = (__bridge CFTypeRef _Nullable)([UIFont fontWithName:@"Roboto-Regular" size:15.0f]);
+    _textLayer.fontSize = 15.0f;
 }
 
 - (void)setText:(NSString *)string
 {
-    [[_attributedString mutableString] setString:string];
-    _textLayer.string = string;
+    [[_attributedString mutableString] setString:[NSString stringWithFormat:@"%@M",string]];
+    _textLayer.string = [NSString stringWithFormat:@"%@M",string];
 }
 
 // set up an animation, but prevent it from running automatically

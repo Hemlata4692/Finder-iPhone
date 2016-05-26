@@ -11,8 +11,11 @@
 @interface ConferenceService : NSObject
 + (id)sharedManager;
 
+//Conference Listing
+-(void)getConferenceListing:(void (^)(id data))success failure:(void (^)(NSError *error))failure;
+
 //Conference detail
--(void)getConferenceDetail:(void (^)(id data))success failure:(void (^)(NSError *error))failure;
+-(void)getConferenceDetail:(NSString *)conferenceId success:(void (^)(id))success failure:(void (^)(NSError *error))failure;
 //end
 
 //Matches detail
@@ -20,6 +23,12 @@
 //end
 
 //Settings
--(void)changeSettings:(NSString *)switchIdentifire switchStatus:(NSString *)switchStatus success:(void (^)(id))success failure:(void (^)(NSError *))failur;
+-(void)changeSettings:(NSString *)switchIdentifire switchStatus:(NSString *)switchStatus success:(void (^)(id))success failure:(void (^)(NSError *))failure;
+
+-(void)getUserSetting:(void (^)(id data))success failure:(void (^)(NSError *error))failure;
+//end
+
+//Calendar detail
+-(void)getCalendarDetails:(NSString *)conferenceId success:(void (^)(id))success failure:(void (^)(NSError *error))failure;
 //end
 @end

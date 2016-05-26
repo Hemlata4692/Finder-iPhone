@@ -19,7 +19,7 @@
 #pragma mark - View life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.navigationItem.title=@"MESSAGE";
+    self.navigationItem.title=@"Messages";
     // Do any additional setup after loading the view.
 }
 

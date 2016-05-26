@@ -14,11 +14,12 @@
 @property (weak, nonatomic) IBOutlet UILabel *meLabel;
 @property (weak, nonatomic) IBOutlet UILabel *meUserMessageLabel;
 @property (weak, nonatomic) IBOutlet UILabel *meUserDateLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *incomingBubbleImage;
 
 //otherCell
 @property (weak, nonatomic) IBOutlet UIView *otherUserMessageConatinerView;
 @property (weak, nonatomic) IBOutlet UILabel *otherUserName;
 @property (weak, nonatomic) IBOutlet UILabel *otherUserMessageLabel;
 @property (weak, nonatomic) IBOutlet UILabel *otherUserDateLabel;
-
+@property (weak, nonatomic) IBOutlet UIImageView *outgoingBubbleImage;
 @end

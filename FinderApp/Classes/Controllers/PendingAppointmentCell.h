@@ -16,5 +16,7 @@
 @property (weak, nonatomic) IBOutlet MyButton *meetingTitle;
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
 @property (weak, nonatomic) IBOutlet MyButton *cancelButton;
+@property (weak, nonatomic) IBOutlet UILabel *pendingUserName;
+@property (weak, nonatomic) IBOutlet MyButton *acceptButton;
 
 @end

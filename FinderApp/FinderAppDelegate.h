@@ -20,5 +20,7 @@
 -(void)stopIndicator;
 -(void)startTrackingBg;
 -(void)locationUpdate;
+-(void)registerDeviceForNotification;
+-(void)unregisterDeviceForNotification;
 @end
 

@@ -24,11 +24,12 @@
 
 @implementation PendingAppointmentViewController
 @synthesize pendingAppointmentTable,meetingDetailContainerView,mettingDetailView,meetingAgendaLabel,meetingDetailLabel;
-
+@synthesize screenName;
 #pragma mark - View life cycle
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    self.navigationItem.title=@"PENDING APPOINTMENT";
+   
     // Do any additional setup after loading the view.
     meetingDetailContainerView.hidden=YES;
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(meetingDetailContainerViewTapped:)];
@@ -40,6 +41,17 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+-(void)viewWillAppear:(BOOL)animated
+{
+    [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    if ([screenName isEqualToString:@"Pending Appointments"]) {
+         self.navigationItem.title=screenName;
+    }
+    else{
+        self.navigationItem.title=screenName;
+    }
+}
+
 #pragma mark - end
 
 #pragma mark - Table view methods
@@ -81,6 +93,16 @@
         {
             pendingCell = [[PendingAppointmentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
         }
+    if ([screenName isEqualToString:@"Pending Appointments"]) {
+        pendingCell.userName.hidden=YES;
+        pendingCell.pendingUserName.hidden=NO;
+    }
+    else{
+         pendingCell.userName.hidden=NO;
+        pendingCell.acceptButton.hidden=YES;
+        pendingCell.pendingUserName.hidden=YES;
+    }
+
     [pendingCell.pendingViewContainer addShadow:pendingCell.pendingViewContainer color:[UIColor lightGrayColor]];
     
     [pendingCell.meetingTitle addTarget:self action:@selector(meetingDetail:) forControlEvents:UIControlEventTouchUpInside];
@@ -113,7 +135,7 @@
     
     if ([messageText isEqualToString:@""]) {
         
-        meetingDetailLabel.frame = CGRectMake(0, meetingAgendaLabel.frame.origin.y + meetingAgendaLabel.frame.size.height + 5, mettingDetailView.frame.size.width, 0);
+        meetingDetailLabel.frame = CGRectMake(1, meetingAgendaLabel.frame.origin.y + meetingAgendaLabel.frame.size.height + 5, mettingDetailView.frame.size.width, 0);
         meetingDetailLabel.text = messageText;
         meetingDetailLabel.hidden = YES;
     }
@@ -130,7 +152,7 @@
         if (textRect.size.height < 26) {
             textRect.size.height = 25;
         }
-        meetingDetailLabel.frame = CGRectMake(0, meetingAgendaLabel.frame.origin.y + meetingAgendaLabel.frame.size.height + 5, mettingDetailView.frame.size.width, textRect.size.height);
+        meetingDetailLabel.frame = CGRectMake(1, meetingAgendaLabel.frame.origin.y + meetingAgendaLabel.frame.size.height + 5, mettingDetailView.frame.size.width, textRect.size.height);
         meetingDetailLabel.text = messageText;
         meetingDetailLabel.hidden = NO;
     }

@@ -9,9 +9,11 @@
 #import "FinderAppDelegate.h"
 #import "MMMaterialDesignSpinner.h"
 #import "UserService.h"
-#import "HomeViewController.h"
+#import "ConferenceListViewController.h"
 #import "LoginViewController.h"
+#import "HomeViewController.h"
 #import "MyAlert.h"
+#import "UserService.h"
 
 @interface FinderAppDelegate ()<CLLocationManagerDelegate,MyAlertDelegate>
 {
@@ -59,7 +61,8 @@
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:237.0/255.0 green:120.0/255.0 blue:0.0/255.0 alpha:1.0]];
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, [UIFont fontWithName:@"Roboto-Regular" size:19.0], NSFontAttributeName, nil]];
-    
+    // _window.backgroundColor = [UIColor redColor];
+
     locationManager = [[CLLocationManager alloc] init];
     locationManager.delegate = self;
     [locationManager requestAlwaysAuthorization];
@@ -74,13 +77,22 @@
 
     NSLog(@"userId %@",[[NSUserDefaults standardUserDefaults] objectForKey:@"userId"]);
     UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"userId"]!=nil)
+    //conferenceId
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"userId"]!=nil && [[NSUserDefaults standardUserDefaults] objectForKey:@"conferenceId"]!=nil)
     {
         isLocation=@"1";
         HomeViewController * objView=[storyboard instantiateViewControllerWithIdentifier:@"tabBar"];
         self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
         [self.window setRootViewController:objView];
         [self.window makeKeyAndVisible];
+    }
+    else if ([[NSUserDefaults standardUserDefaults] objectForKey:@"userId"]!=nil && [[NSUserDefaults standardUserDefaults] objectForKey:@"conferenceId"]==nil)
+    {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        ConferenceListViewController * homeView = [storyboard instantiateViewControllerWithIdentifier:@"ConferenceListViewController"];
+        [myDelegate.window setRootViewController:homeView];
+        [myDelegate.window makeKeyAndVisible];
+
     }
     else
     {
@@ -91,12 +103,14 @@
     
     if ([UserDefaultManager getValue:@"switchStatusDict"]==NULL) {
         NSMutableDictionary *switchDict=[[NSMutableDictionary alloc]init];
-        [switchDict setObject:@"True" forKey:@"00"];
-        [switchDict setObject:@"True" forKey:@"01"];
-        [switchDict setObject:@"0" forKey:@"02"];
-        [switchDict setObject:@"True" forKey:@"10"];
-        [switchDict setObject:@"True" forKey:@"11"];
-        [switchDict setObject:@"True" forKey:@"12"];
+        [switchDict setObject:@"true" forKey:@"00"];
+        [switchDict setObject:@"true" forKey:@"01"];
+        [switchDict setObject:@"25" forKey:@"02"];
+        [switchDict setObject:@"true" forKey:@"10"];
+        [switchDict setObject:@"true" forKey:@"11"];
+        [switchDict setObject:@"true" forKey:@"12"];
+        [switchDict setObject:@"true" forKey:@"13"];
+        [switchDict setObject:@"true" forKey:@"14"];
         [UserDefaultManager setValue:switchDict key:@"switchStatusDict"];
     }
     
@@ -113,6 +127,18 @@
     {
         [self application:application didReceiveLocalNotification:localNotiInfo];
     }
+    
+    //Accept push notification when app is not open
+    application.applicationIconBadgeNumber = 0;
+    NSDictionary *remoteNotifiInfo = [launchOptions objectForKey: UIApplicationLaunchOptionsRemoteNotificationKey];
+    [[UIApplication sharedApplication] setApplicationIconBadgeNumber:0];
+    if (remoteNotifiInfo)
+    {
+        [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
+        [self application:application didReceiveRemoteNotification:remoteNotifiInfo];
+    }
+    
+    
     return YES;
 }
 -(void)locationUpdate
@@ -188,9 +214,11 @@
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
 
-- (void)applicationDidBecomeActive:(UIApplication *)application {
-    // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+- (void)applicationDidBecomeActive:(UIApplication *)application
+{
+    application.applicationIconBadgeNumber = 0;
 }
+
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
@@ -216,14 +244,14 @@
 {
     NSString *token = [[deviceToken1 description] stringByTrimmingCharactersInSet: [NSCharacterSet characterSetWithCharactersInString:@"<>"]];
     token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
-    NSLog(@"content---%@", token);
+    NSLog(@"content---.......................%@", token);
     NSLog(@"didRegisterForRemoteNotificationsWithDeviceToken");
     self.deviceToken = token;
-    //    [[WebService sharedManager] registerDeviceForPushNotification:^(id responseObject) {
-    //
-    //    } failure:^(NSError *error) {
-    //
-    //    }] ;
+    [[UserService sharedManager] registerDeviceForPushNotification:token deviceType:@"ios" success:^(id responseObject) {
+      NSLog(@"push notification response is %@",responseObject);
+        } failure:^(NSError *error) {
+    
+        }] ;
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
@@ -273,5 +301,9 @@
     NSLog(@"did failtoRegister and testing : %@",str);
     
 }
-
+-(void)unregisterDeviceForNotification
+{
+    [[UIApplication sharedApplication]  unregisterForRemoteNotifications];
+}
+#pragma mark - end
 @end
