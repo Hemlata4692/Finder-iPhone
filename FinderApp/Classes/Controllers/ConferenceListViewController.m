@@ -69,6 +69,51 @@
     return conferenceListingArray.count;
 }
 
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    PostListingDataModel *postListData;
+//    if (indexPath.section==0) {
+//        postListData=[todayPostData objectAtIndex:indexPath.row];
+//        CGSize size = CGSizeMake(postListingTableView.frame.size.width-70,999);
+//        CGRect textRect = [postListData.postContent
+//                           boundingRectWithSize:size
+//                           options:NSStringDrawingUsesLineFragmentOrigin
+//                           attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Roboto-Regular" size:15.0]}
+//                           context:nil];
+//        textRect.origin.x = 8;
+//        textRect.origin.y = 19;
+//        if ([[todayPostData objectAtIndex:indexPath.row]uploadedPhotoArray].count==0 )
+//        {
+//            return 180+textRect.size.height;
+//        }
+//        else
+//        {
+//            return 286+textRect.size.height;
+//        }
+//    }
+//    else
+//    {
+//        postListData=[yesterdayPostData objectAtIndex:indexPath.row];
+//        CGSize size = CGSizeMake(postListingTableView.frame.size.width-70,999);
+//        CGRect textRect = [postListData.postContent
+//                           boundingRectWithSize:size
+//                           options:NSStringDrawingUsesLineFragmentOrigin
+//                           attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Roboto-Regular" size:16.0]}
+//                           context:nil];
+//        textRect.origin.x = 8;
+//        textRect.origin.y = 19;
+//        if ([[yesterdayPostData objectAtIndex:indexPath.row]uploadedPhotoArray].count==0 )
+//        {
+//            return 180+textRect.size.height;
+//        }
+//        else
+//        {
+//            return 286+textRect.size.height;
+//        }
+//    }
+//}
+
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
      NSString *simpleTableIdentifier = @"conferenceListCell";
@@ -78,7 +123,8 @@
             conferenceCell = [[ConferenceListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
         }
     ConferenceListDataModel *data=[conferenceListingArray objectAtIndex:indexPath.row];
-    [conferenceCell displayConferenceListData:data :(int)indexPath.row];    
+    [conferenceCell displayConferenceListData:data indexPath:(int)indexPath.row rectSize:conferenceListTableView.frame.size];
+
     return conferenceCell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath

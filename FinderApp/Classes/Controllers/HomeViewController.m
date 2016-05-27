@@ -58,7 +58,7 @@
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     [myDelegate showIndicator];
     [self performSelector:@selector(getConferenceDetail) withObject:nil afterDelay:.1];
-
+    
 }
 
 #pragma mark - end
@@ -86,15 +86,21 @@
     
     conferenceTitleLabel.text = [[conferenceDetailArray objectAtIndex:0]conferenceName];
     conferenceOrganiserName.text=[[conferenceDetailArray objectAtIndex:0]conferenceOrganiserName];
+    //    size = CGSizeMake(mainContainerView.frame.size.width-38,50);
+    //    textRect=[self setDynamicHeight:size textString:[[conferenceDetailArray objectAtIndex:0]conferenceVenue] fontSize:[UIFont fontWithName:@"Roboto-Regular" size:13]];
+    //    conferenceVenue.numberOfLines = 0;
+    //    conferenceVenue.frame = CGRectMake(28, conferenceVenue.frame.origin.y+conferenceVenue.frame.size.height, mainContainerView.frame.size.width-38, textRect.size.height);
+    //      conferenceVenue.layer.borderWidth=0.5f;
+    //      conferenceVenue.layer.borderColor=[UIColor whiteColor].CGColor;
     conferenceVenue.text=[[conferenceDetailArray objectAtIndex:0]conferenceVenue];
+    
     conferenceDate.text=[[conferenceDetailArray objectAtIndex:0]conferenceDate];
     size = CGSizeMake(mainContainerView.frame.size.width-16,999);
     textRect=[self setDynamicHeight:size textString:[[conferenceDetailArray objectAtIndex:0]conferenceDescription] fontSize:[UIFont fontWithName:@"Roboto-Regular" size:13]];
     conferenceDescription.numberOfLines = 0;
-    conferenceDescription.frame = CGRectMake(8, descriptionHeadingLabel.frame.origin.y+descriptionHeadingLabel.frame.size.height, mainContainerView.frame.size.width-16, textRect.size.height);
+    conferenceDescription.frame = CGRectMake(8, descriptionHeadingLabel.frame.origin.y+descriptionHeadingLabel.frame.size.height+5, mainContainerView.frame.size.width-16, textRect.size.height);
     conferenceDescription.text=[[conferenceDetailArray objectAtIndex:0]conferenceDescription];
-    //  conferenceDescription.layer.borderWidth=0.5f;
-    //  conferenceDescription.layer.borderColor=[UIColor whiteColor].CGColor;
+    
     __weak UIImageView *weakRef = conferenceImageView;
     NSURLRequest *imageRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:[[conferenceDetailArray objectAtIndex:0]conferenceImage]]
                                                   cachePolicy:NSURLRequestReturnCacheDataElseLoad
@@ -106,7 +112,7 @@
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
     }];
     
-    float dynamicHeight=conferenceImageView.frame.origin.y+conferenceImageView.frame.size.height+8+descriptionHeadingLabel.frame.size.height+2+conferenceDescription.frame.size.height+8+bottomContainerView.frame.size.height+10;
+    float dynamicHeight=conferenceImageView.frame.origin.y+conferenceImageView.frame.size.height+8+descriptionHeadingLabel.frame.size.height+2+conferenceDescription.frame.size.height+8+bottomContainerView.frame.size.height+20;
     mainContainerView.frame = CGRectMake(mainContainerView.frame.origin.x, mainContainerView.frame.origin.y, mainContainerView.frame.size.width, dynamicHeight);
     homeScrollView.contentSize = CGSizeMake(0,mainContainerView.frame.size.height+64);
 }

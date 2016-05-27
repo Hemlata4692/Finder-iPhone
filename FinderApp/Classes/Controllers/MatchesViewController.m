@@ -100,6 +100,51 @@
 {
     return 10;
 }
+
+//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    PostListingDataModel *postListData;
+//    if (indexPath.section==0) {
+//        postListData=[todayPostData objectAtIndex:indexPath.row];
+//        CGSize size = CGSizeMake(postListingTableView.frame.size.width-70,999);
+//        CGRect textRect = [postListData.postContent
+//                           boundingRectWithSize:size
+//                           options:NSStringDrawingUsesLineFragmentOrigin
+//                           attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Roboto-Regular" size:15.0]}
+//                           context:nil];
+//        textRect.origin.x = 8;
+//        textRect.origin.y = 19;
+//        if ([[todayPostData objectAtIndex:indexPath.row]uploadedPhotoArray].count==0 )
+//        {
+//            return 180+textRect.size.height;
+//        }
+//        else
+//        {
+//            return 286+textRect.size.height;
+//        }
+//    }
+//    else
+//    {
+//        postListData=[yesterdayPostData objectAtIndex:indexPath.row];
+//        CGSize size = CGSizeMake(postListingTableView.frame.size.width-70,999);
+//        CGRect textRect = [postListData.postContent
+//                           boundingRectWithSize:size
+//                           options:NSStringDrawingUsesLineFragmentOrigin
+//                           attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Roboto-Regular" size:15.0]}
+//                           context:nil];
+//        textRect.origin.x = 8;
+//        textRect.origin.y = 19;
+//        if ([[yesterdayPostData objectAtIndex:indexPath.row]uploadedPhotoArray].count==0 )
+//        {
+//            return 180+textRect.size.height;
+//        }
+//        else
+//        {
+//            return 286+textRect.size.height;
+//        }
+//    }
+//}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (selectedSegment == 2)
@@ -123,6 +168,21 @@
             matchesCell = [[MatchesTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
         }
         [matchesCell.containerView addShadow:matchesCell.containerView color:[UIColor lightGrayColor]];
+        
+//        CGSize size = CGSizeMake(postListingTableView.frame.size.width-70,999);
+//        CGRect textRect = [postLabel.text
+//                           boundingRectWithSize:size
+//                           options:NSStringDrawingUsesLineFragmentOrigin
+//                           attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Roboto-Regular" size:15.0]}
+//                           context:nil];
+//        postLabel.numberOfLines = 0;
+//        textRect.origin.x = postLabel.frame.origin.x;
+//        textRect.origin.y = 19;
+//        postLabel.frame = textRect;
+//        //dynamic framing of objects
+//        postLabel.frame =CGRectMake(8, postLabel.frame.origin.y, postListingTableView.frame.size.width-70, postLabel.frame.size.height);
+
+        
         return matchesCell;
         
     }

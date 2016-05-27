@@ -123,23 +123,23 @@
 {
     if (indexPath.row==1)
     {
-        UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        PendingAppointmentViewController *settingsView =[storyboard instantiateViewControllerWithIdentifier:@"PendingAppointmentViewController"];
-         settingsView.screenName=@"Pending Appointments";
-        [self.navigationController pushViewController:settingsView animated:YES];
+//        UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//        PendingAppointmentViewController *settingsView =[storyboard instantiateViewControllerWithIdentifier:@"PendingAppointmentViewController"];
+//         settingsView.screenName=@"Pending Appointments";
+//        [self.navigationController pushViewController:settingsView animated:YES];
     }
     else if (indexPath.row==2)
     {
-        UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        PendingAppointmentViewController *settingsView =[storyboard instantiateViewControllerWithIdentifier:@"PendingAppointmentViewController"];
-        settingsView.screenName=@"Requested Appointments";
-        [self.navigationController pushViewController:settingsView animated:YES];
+//        UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//        PendingAppointmentViewController *settingsView =[storyboard instantiateViewControllerWithIdentifier:@"PendingAppointmentViewController"];
+//        settingsView.screenName=@"Requested Appointments";
+//        [self.navigationController pushViewController:settingsView animated:YES];
     }
     else if (indexPath.row==3)
     {
-        UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        ProximityAlertsViewController *settingsView =[storyboard instantiateViewControllerWithIdentifier:@"ProximityAlertsViewController"];
-        [self.navigationController pushViewController:settingsView animated:YES];
+//        UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//        ProximityAlertsViewController *settingsView =[storyboard instantiateViewControllerWithIdentifier:@"ProximityAlertsViewController"];
+//        [self.navigationController pushViewController:settingsView animated:YES];
     }
    else if (indexPath.row==4)
     {
@@ -165,9 +165,6 @@
     {
         [myDelegate showIndicator];
         [self performSelector:@selector(logout) withObject:nil afterDelay:.1];
-        
-      
-
       //  [UserDefaultManager removeValue:@"switchStatusDict"];
     }
 }
@@ -194,25 +191,31 @@
 
     if([[UIScreen mainScreen] bounds].size.height<568)
     {
-        if ((textField==passwordTextField) || (textField==confirmPasswordTextField))
+        if (textField==oldPasswordTextField) {
+            [UIView animateWithDuration:0.3 animations:^{
+                changePasswordView.frame=CGRectMake(changePasswordView.frame.origin.x, changePasswordView.frame.origin.y-10, changePasswordView.frame.size.width, changePasswordView.frame.size.height);
+            }];
+
+        }
+        if (textField==passwordTextField)
         {
                 [UIView animateWithDuration:0.3 animations:^{
-                    self.view.frame=CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y-64, self.view.frame.size.width, self.view.frame.size.height);
+                    changePasswordView.frame=CGRectMake(changePasswordView.frame.origin.x, changePasswordView.frame.origin.y-64, changePasswordView.frame.size.width, changePasswordView.frame.size.height);
                 }];
+        }
+        else if (textField==confirmPasswordTextField)
+        {
+            [UIView animateWithDuration:0.3 animations:^{
+                changePasswordView.frame=CGRectMake(changePasswordView.frame.origin.x, changePasswordView.frame.origin.y-130, changePasswordView.frame.size.width, changePasswordView.frame.size.height);
+            }];
         }
     }
 }
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
-    if([[UIScreen mainScreen] bounds].size.height<568)
-    {
-            if ((textField==passwordTextField) || (textField==confirmPasswordTextField))
-        {
-            [UIView animateWithDuration:0.3 animations:^{
-                self.view.frame=CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y+64, self.view.frame.size.width, self.view.frame.size.height);
-            }];
-        }
-    }
+    [UIView animateWithDuration:0.3 animations:^{
+        changePasswordView.frame=CGRectMake(changePasswordView.frame.origin.x, 64, changePasswordView.frame.size.width, changePasswordView.frame.size.height);
+    }];
 }
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {

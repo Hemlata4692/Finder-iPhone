@@ -15,5 +15,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *conferenceEndDate;
 @property (weak, nonatomic) IBOutlet UILabel *conferenceEndMonth;
 @property (weak, nonatomic) IBOutlet UILabel *conferenceNameLabel;
--(void)displayConferenceListData :(ConferenceListDataModel *)conferenceList :(int)indexPath;
+-(void)displayConferenceListData :(ConferenceListDataModel *)conferenceList indexPath:(int)indexPath rectSize:(CGSize)rectSize;
 @end

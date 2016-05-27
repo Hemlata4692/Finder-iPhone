@@ -20,8 +20,19 @@
 
     // Configure the view for the selected state
 }
--(void)displayConferenceListData :(ConferenceListDataModel *)conferenceList :(int)indexPath
+-(void)displayConferenceListData :(ConferenceListDataModel *)conferenceList indexPath:(int)indexPath rectSize:(CGSize)rectSize
 {
+//    CGSize size = CGSizeMake(rectSize.width-105,300);
+//    CGRect textRect = [conferenceList.conferenceName
+//                       boundingRectWithSize:size
+//                       options:NSStringDrawingUsesLineFragmentOrigin
+//                       attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Roboto-Regular" size:16.0]}
+//                       context:nil];
+//    conferenceNameLabel.numberOfLines = 0;
+//    conferenceNameLabel.frame = textRect;
+//    //dynamic framing of objects
+//    conferenceNameLabel.frame =CGRectMake(97, conferenceNameLabel.frame.origin.y, rectSize.width-105, textRect.size.height);
+    
     conferenceNameLabel.text=conferenceList.conferenceName;
     NSArray *dateStrings = [conferenceList.conferenceDate componentsSeparatedByString:@" - "];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];

@@ -77,11 +77,11 @@
     headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 40.0)];
     headerView.backgroundColor = [UIColor clearColor];
     UILabel * notificationLabel = [[UILabel alloc] init];
-    notificationLabel.font = [UIFont fontWithName:@"Roboto-Regular" size:15.0];
+    notificationLabel.font = [UIFont fontWithName:@"Roboto-Regular" size:17.0];
     notificationLabel.text=@"Notifications";
     float width =  [notificationLabel.text boundingRectWithSize:notificationLabel.frame.size options:NSStringDrawingUsesLineFragmentOrigin attributes:@{ NSFontAttributeName:notificationLabel.font } context:nil]
     .size.width;
-    notificationLabel.frame = CGRectMake(15, 0, width,40.0);
+    notificationLabel.frame = CGRectMake(15, 10, width,30.0);
     notificationLabel.textColor=[UIColor colorWithRed:(51.0/255.0) green:(51.0/255.0) blue:(51.0/255.0) alpha:1];
     [headerView addSubview:notificationLabel];
     return headerView;
