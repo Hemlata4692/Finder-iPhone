@@ -28,8 +28,7 @@
 #pragma mark - end
 
 #pragma mark - Add back button
-- (void)addLeftBarButtonWithImage:(UIImage *)backButton
-{
+- (void)addLeftBarButtonWithImage:(UIImage *)backButton{
     CGRect framing = CGRectMake(0, 0, backButton.size.width, backButton.size.height);
     UIButton *button = [[UIButton alloc] initWithFrame:framing];
     [button setBackgroundImage:backButton forState:UIControlStateNormal];
@@ -39,8 +38,7 @@
     
 }
 //back button action
--(void)backButtonAction :(id)sender
-{
+-(void)backButtonAction :(id)sender{
     [self.navigationController popViewControllerAnimated:YES];
 }
 #pragma mark - end

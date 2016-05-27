@@ -33,18 +33,15 @@
 #pragma mark - end
 
 #pragma mark - IBActions
-- (IBAction)sendMessageBtnAction:(id)sender
-{
+- (IBAction)sendMessageBtnAction:(id)sender{
 }
 #pragma mark - end
 
 #pragma mark - Table view delegate methods
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 3;
 }
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
         NSString *simpleTableIdentifier = @"meCell";
         PersonalMessageViewCell *meCell=[personalMessageTableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
         if (meCell == nil)

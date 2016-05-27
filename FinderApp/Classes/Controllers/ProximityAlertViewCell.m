@@ -10,6 +10,7 @@
 
 @implementation ProximityAlertViewCell
 
+#pragma mark - Load nib
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
@@ -20,5 +21,5 @@
 
     // Configure the view for the selected state
 }
-
+#pragma mark - end
 @end

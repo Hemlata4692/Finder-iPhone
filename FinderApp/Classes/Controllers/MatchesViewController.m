@@ -23,30 +23,24 @@
 @implementation MatchesViewController
 
 #pragma mark - View lifecycle
-- (void)viewDidLoad
-{
+- (void)viewDidLoad{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationItem.title=@"Matches";
     [self setTabBarImages];
-   
-    
-    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
--(void)viewWillAppear:(BOOL)animated
-{
+-(void)viewWillAppear:(BOOL)animated{
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     //    [myDelegate showIndicator];
     //    [self performSelector:@selector(getMatchesDetails) withObject:nil afterDelay:.1];
 }
 #pragma mark - end
 #pragma mark - Set tabbar images
--(void)setTabBarImages
-{
+-(void)setTabBarImages{
     UITabBarController * myTab = (UITabBarController *)self.tabBarController;
     UITabBar *tabBar = myTab.tabBar;
     UITabBarItem *tabBarItem1 = [tabBar.items objectAtIndex:0];
@@ -96,8 +90,7 @@
 #pragma mark - end
 #pragma mark - Table view methods
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return 10;
 }
 
@@ -145,50 +138,41 @@
 //    }
 //}
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (selectedSegment == 2)
-    {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    if (selectedSegment == 2)  {
         NSString *simpleTableIdentifier = @"contactsCell";
         MatchesTableViewCell *contactsCell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
-        if (contactsCell == nil)
-        {
+        if (contactsCell == nil)  {
             contactsCell = [[MatchesTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
         }
         [contactsCell.contactsContainerView addShadow:contactsCell.contactsContainerView color:[UIColor lightGrayColor]];
-         [contactsCell.scheduleMeetingBtn addTarget:self action:@selector(scheduleMeetingBtnAction:) forControlEvents:UIControlEventTouchUpInside];
+        [contactsCell.scheduleMeetingBtn addTarget:self action:@selector(scheduleMeetingBtnAction:) forControlEvents:UIControlEventTouchUpInside];
         return contactsCell;
     }
-    else
-    {
+    else {
         NSString *simpleTableIdentifier = @"matchesCell";
         MatchesTableViewCell *matchesCell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
-        if (matchesCell == nil)
-        {
+        if (matchesCell == nil)  {
             matchesCell = [[MatchesTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
         }
         [matchesCell.containerView addShadow:matchesCell.containerView color:[UIColor lightGrayColor]];
         
-//        CGSize size = CGSizeMake(postListingTableView.frame.size.width-70,999);
-//        CGRect textRect = [postLabel.text
-//                           boundingRectWithSize:size
-//                           options:NSStringDrawingUsesLineFragmentOrigin
-//                           attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Roboto-Regular" size:15.0]}
-//                           context:nil];
-//        postLabel.numberOfLines = 0;
-//        textRect.origin.x = postLabel.frame.origin.x;
-//        textRect.origin.y = 19;
-//        postLabel.frame = textRect;
-//        //dynamic framing of objects
-//        postLabel.frame =CGRectMake(8, postLabel.frame.origin.y, postListingTableView.frame.size.width-70, postLabel.frame.size.height);
-
-        
+        //        CGSize size = CGSizeMake(postListingTableView.frame.size.width-70,999);
+        //        CGRect textRect = [postLabel.text
+        //                           boundingRectWithSize:size
+        //                           options:NSStringDrawingUsesLineFragmentOrigin
+        //                           attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Roboto-Regular" size:15.0]}
+        //                           context:nil];
+        //        postLabel.numberOfLines = 0;
+        //        textRect.origin.x = postLabel.frame.origin.x;
+        //        textRect.origin.y = 19;
+        //        postLabel.frame = textRect;
+        //        //dynamic framing of objects
+        //        postLabel.frame =CGRectMake(8, postLabel.frame.origin.y, postListingTableView.frame.size.width-70, postLabel.frame.size.height);
         return matchesCell;
-        
     }
 }
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
 }
 #pragma mark - end
 #pragma mark - Webservice
@@ -206,19 +190,14 @@
 #pragma mark - end
 #pragma mark - Segment control
 
-- (IBAction)matchesSegmentAction:(UISegmentedControl *)sender
-{
+- (IBAction)matchesSegmentAction:(UISegmentedControl *)sender{
     UISegmentedControl *segmentedControl = (UISegmentedControl *) sender;
     selectedSegment = segmentedControl.selectedSegmentIndex;
-    
-    if (selectedSegment == 0)
-    {
+    if (selectedSegment == 0) {
     }
-    else if(selectedSegment == 1)
-    {
+    else if(selectedSegment == 1) {
     }
-    else
-    {
+    else {
         
     }
     [self.matchesTableView reloadData];
@@ -226,8 +205,7 @@
 #pragma mark - end
 
 #pragma mark - IBActions
-- (IBAction)scheduleMeetingBtnAction:(UIButton *)sender
-{
+- (IBAction)scheduleMeetingBtnAction:(UIButton *)sender{
     UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     ScheduleMeetingViewController *scheduleMeeting =[storyboard instantiateViewControllerWithIdentifier:@"ScheduleMeetingViewController"];
     scheduleMeeting.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.1f];

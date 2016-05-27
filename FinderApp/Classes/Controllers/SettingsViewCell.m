@@ -9,7 +9,9 @@
 #import "SettingsViewCell.h"
 
 @implementation SettingsViewCell
+
 @synthesize proximityRadiusView,sliderView,leftKnob,rightKnob,switchBtn;
+
 @synthesize settingsContainerView,nameLabel;
 #pragma mark - Load nib
 - (void)awakeFromNib {

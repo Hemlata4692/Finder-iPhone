@@ -41,22 +41,19 @@
     UIImage * tempImg =[UIImage imageNamed:@"bg"];
     backgroundImageView.image = [UIImage imageNamed:[tempImg imageForDeviceWithName:@"bg"]];
     [self addPadding];
-   
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
--(void)viewWillAppear:(BOOL)animated
-{
+-(void)viewWillAppear:(BOOL)animated{
     [[self navigationController] setNavigationBarHidden:YES animated:YES];
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
 }
 #pragma mark - end
-#pragma mark - Corner radius, border and textfield padding
--(void)addPadding
-{
+#pragma mark - Corner radius and padding
+-(void)addPadding{
     [emailField addTextFieldPaddingWithoutImages:emailField];
     [passwordField addTextFieldPaddingWithoutImages:passwordField];
     [textFieldContainerView setCornerRadius:2.0f];
@@ -64,14 +61,12 @@
 }
 #pragma mark - end
 #pragma mark - Keyboard controls delegate
-- (void)keyboardControls:(BSKeyboardControls *)keyboardControls selectedField:(UIView *)field inDirection:(BSKeyboardControlsDirection)direction
-{
+- (void)keyboardControls:(BSKeyboardControls *)keyboardControls selectedField:(UIView *)field inDirection:(BSKeyboardControlsDirection)direction{
     UIView *view;
     view = field.superview.superview.superview;
 }
 
-- (void)keyboardControlsDonePressed:(BSKeyboardControls *)keyboardControls
-{
+- (void)keyboardControlsDonePressed:(BSKeyboardControls *)keyboardControls{
     [loginScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
     [keyboardControls.activeField resignFirstResponder];
 }
@@ -79,28 +74,21 @@
 
 #pragma mark - Textfield delegates
 
--(void)textFieldDidBeginEditing:(UITextField *)textField
-{
+-(void)textFieldDidBeginEditing:(UITextField *)textField{
     [self.keyboardControls setActiveField:textField];
-    
-    if (textField==emailField)
-    {
-        if([[UIScreen mainScreen] bounds].size.height<568)
-        {
-        [loginScrollView setContentOffset:CGPointMake(0, 25) animated:YES];
+    if (textField==emailField) {
+        if([[UIScreen mainScreen] bounds].size.height<568)  {
+            [loginScrollView setContentOffset:CGPointMake(0, 25) animated:YES];
         }
     }
-    else if (textField==passwordField)
-    {
-        if([[UIScreen mainScreen] bounds].size.height<=568)
-        {
-        [loginScrollView setContentOffset:CGPointMake(0, 70) animated:YES];
+    else if (textField==passwordField) {
+        if([[UIScreen mainScreen] bounds].size.height<=568){
+            [loginScrollView setContentOffset:CGPointMake(0, 70) animated:YES];
         }
     }
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
+- (BOOL)textFieldShouldReturn:(UITextField *)textField{
     [loginScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
     [textField resignFirstResponder];
     return YES;
@@ -108,31 +96,24 @@
 #pragma mark - end
 
 #pragma mark - Email validation
-- (BOOL)performValidationsForLogin
-{
-    if ([emailField isEmpty] || [passwordField isEmpty])
-    {
+- (BOOL)performValidationsForLogin{
+    if ([emailField isEmpty] || [passwordField isEmpty]) {
         SCLAlertView *alert = [[SCLAlertView alloc] init];
         [alert showWarning:self title:@"Alert" subTitle:@"Please enter your email and password." closeButtonTitle:@"Done" duration:0.0f];
         return NO;
     }
-    else
-    {
-        if ([emailField isValidEmail])
-        {
-            if (passwordField.text.length < 6)
-            {
+    else {
+        if ([emailField isValidEmail]) {
+            if (passwordField.text.length < 6) {
                 SCLAlertView *alert = [[SCLAlertView alloc] init];
                 [alert showWarning:self title:@"Alert" subTitle:@"Your password must be atleast 6 characters long." closeButtonTitle:@"Done" duration:0.0f];
                 return NO;
             }
-            else
-            {
+            else {
                 return YES;
             }
         }
-        else
-        {
+        else {
             SCLAlertView *alert = [[SCLAlertView alloc] init];
             [alert showWarning:self title:@"Alert" subTitle:@"Please enter a valid email address." closeButtonTitle:@"Done" duration:0.0f];
             return NO;
@@ -142,25 +123,21 @@
 #pragma mark - end
 
 #pragma mark - IBActions
-- (IBAction)signInButtonclicked:(id)sender
-{
+- (IBAction)signInButtonclicked:(id)sender{
     [self.keyboardControls.activeField resignFirstResponder];
     [loginScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
-    if([self performValidationsForLogin])
-    {
+    if([self performValidationsForLogin]) {
         [myDelegate showIndicator];
         [self performSelector:@selector(loginUser) withObject:nil afterDelay:.1];
     }
 }
 
-- (IBAction)forgotPasswordButtonClicked:(id)sender
-{
+- (IBAction)forgotPasswordButtonClicked:(id)sender{
     [self.keyboardControls.activeField resignFirstResponder];
 }
 #pragma mark - end
 #pragma mark - Webservice
--(void)loginUser
-{
+-(void)loginUser{
     [[UserService sharedManager] userLogin:emailField.text password:passwordField.text success:^(id responseObject)
      {
          [myDelegate.locationManager startUpdatingLocation];
@@ -172,15 +149,15 @@
          [UserDefaultManager setValue:[responseObject objectForKey:@"userImage"] key:@"userImage"];
          [UserDefaultManager setValue:[responseObject objectForKey:@"userName"] key:@"userName"];
          [UserDefaultManager setValue:[responseObject objectForKey:@"unReadMessegaes"] key:@"unReadMessegaes"];
-
+         
          myDelegate.isLocation=@"1";
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
          ConferenceListViewController * homeView = [storyboard instantiateViewControllerWithIdentifier:@"ConferenceListViewController"];
          [myDelegate.window setRootViewController:homeView];
          [myDelegate.window makeKeyAndVisible];
-
+         
      } failure:^(NSError *error) {
-        
+         
      }] ;
 }
 #pragma mark - end

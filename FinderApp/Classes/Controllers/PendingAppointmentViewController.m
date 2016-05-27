@@ -19,17 +19,16 @@
 @property (weak, nonatomic) IBOutlet UIView *mettingDetailView;
 @property (weak, nonatomic) IBOutlet UILabel *meetingAgendaLabel;
 @property (weak, nonatomic) IBOutlet UILabel *meetingDetailLabel;
-
 @end
 
 @implementation PendingAppointmentViewController
 @synthesize pendingAppointmentTable,meetingDetailContainerView,mettingDetailView,meetingAgendaLabel,meetingDetailLabel;
 @synthesize screenName;
+
 #pragma mark - View life cycle
-- (void)viewDidLoad
-{
+- (void)viewDidLoad{
     [super viewDidLoad];
-   
+    
     // Do any additional setup after loading the view.
     meetingDetailContainerView.hidden=YES;
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(meetingDetailContainerViewTapped:)];
@@ -41,13 +40,12 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
--(void)viewWillAppear:(BOOL)animated
-{
+-(void)viewWillAppear:(BOOL)animated{
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     if ([screenName isEqualToString:@"Pending Appointments"]) {
-         self.navigationItem.title=screenName;
+        self.navigationItem.title=screenName;
     }
-    else{
+    else {
         self.navigationItem.title=screenName;
     }
 }
@@ -59,13 +57,11 @@
     // Return the number of sections.
     return 2;
 }
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 40;
 }
 
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIView * headerView;
     headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 40.0)];
     headerView.backgroundColor = [UIColor clearColor];
@@ -80,31 +76,27 @@
     return headerView;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return 6;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *simpleTableIdentifier = @"pendingCell";
-        PendingAppointmentCell *pendingCell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
-        if (pendingCell == nil)
-        {
-            pendingCell = [[PendingAppointmentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
-        }
+    PendingAppointmentCell *pendingCell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
+    if (pendingCell == nil) {
+        pendingCell = [[PendingAppointmentCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
+    }
     if ([screenName isEqualToString:@"Pending Appointments"]) {
         pendingCell.userName.hidden=YES;
         pendingCell.pendingUserName.hidden=NO;
     }
-    else{
-         pendingCell.userName.hidden=NO;
+    else {
+        pendingCell.userName.hidden=NO;
         pendingCell.acceptButton.hidden=YES;
         pendingCell.pendingUserName.hidden=YES;
     }
-
-    [pendingCell.pendingViewContainer addShadow:pendingCell.pendingViewContainer color:[UIColor lightGrayColor]];
     
+    [pendingCell.pendingViewContainer addShadow:pendingCell.pendingViewContainer color:[UIColor lightGrayColor]];
     [pendingCell.meetingTitle addTarget:self action:@selector(meetingDetail:) forControlEvents:UIControlEventTouchUpInside];
     pendingCell.meetingTitle.Tag=(int)indexPath.row;
     return pendingCell;
@@ -113,17 +105,15 @@
 
 #pragma mark - IBActions
 
-- (IBAction)meetingDetail:(MyButton *)sender
-{
+- (IBAction)meetingDetail:(MyButton *)sender {
     btnTag=[sender Tag];
     [self setMeetingDetail:btnTag];
-     meetingDetailContainerView.hidden=NO;
+    meetingDetailContainerView.hidden=NO;
 }
 #pragma mark - end
 
 #pragma mark - Show popover
--(void)setMeetingDetail:(int)btnTag
-{
+-(void)setMeetingDetail:(int)btnTag {
     NSString *messageText=@"Support for custom background views WYPopoverController is for the presentation of content in popover on iPhone / iPad devices. Very customizable.";
     [mettingDetailView addShadow:mettingDetailView color:[UIColor lightGrayColor]];
     [mettingDetailView setCornerRadius:2.0f];
@@ -134,13 +124,11 @@
     meetingAgendaLabel.frame = CGRectMake(0, 0, mettingDetailView.frame.size.width, 45);
     
     if ([messageText isEqualToString:@""]) {
-        
         meetingDetailLabel.frame = CGRectMake(1, meetingAgendaLabel.frame.origin.y + meetingAgendaLabel.frame.size.height + 5, mettingDetailView.frame.size.width, 0);
         meetingDetailLabel.text = messageText;
         meetingDetailLabel.hidden = YES;
     }
-    else{
-        
+    else {
         CGSize size = CGSizeMake(meetingAgendaLabel.frame.size.width,180);
         CGRect textRect = [messageText
                            boundingRectWithSize:size
@@ -157,11 +145,9 @@
         meetingDetailLabel.hidden = NO;
     }
     float alertViewHeight = meetingDetailLabel.frame.origin.y + meetingDetailLabel.frame.size.height + 10;
-    
     mettingDetailView.frame = CGRectMake((self.view.frame.origin.x+self.view.frame.size.width/2-mettingDetailView.frame.size.width/2), (self.view.frame.size.height/2-mettingDetailView.frame.size.height/2), mettingDetailView.frame.size.width, alertViewHeight);
 }
--(void) meetingDetailContainerViewTapped:(UITapGestureRecognizer *)sender
-{
+-(void) meetingDetailContainerViewTapped:(UITapGestureRecognizer *)sender {
     meetingDetailContainerView.hidden=YES;
 }
 #pragma mark - end

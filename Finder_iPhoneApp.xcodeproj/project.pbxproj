@@ -583,8 +583,8 @@
 		B77695A81CBF704D00794005 /* LoginModule */ = {
 			isa = PBXGroup;
 			children = (
-				B77695A41CBF613000794005 /* ForgotPasswordViewController */,
 				B7A8DD841CAE2FE1007F56B6 /* LoginViewController */,
+				B77695A41CBF613000794005 /* ForgotPasswordViewController */,
 			);
 			name = LoginModule;
 			sourceTree = "<group>";
