@@ -10,6 +10,5 @@
 
 @interface CalendarDataModel : NSObject
 @property(nonatomic,retain)NSString * conferenceDate;
-@property(nonatomic,retain)NSString * eventName;
-@property(nonatomic,retain)NSString * eventTime;
+@property(nonatomic,retain)NSMutableArray * eventArray;
 @end

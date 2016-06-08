@@ -10,6 +10,7 @@
 #import "ConferenceDataModel.h"
 #import "ConferenceListDataModel.h"
 #import "CalendarDataModel.h"
+#import "EventDataModel.h"
 
 #define kUrlConferenceList              @"getconferencelisting"
 #define kUrlConferenceDetail            @"getconferencedetails"
@@ -223,13 +224,22 @@
              {
                  NSArray * calendarDataArray = [responseObject objectForKey:@"calenderDetails"];
                  NSMutableArray *dataArray = [NSMutableArray new];
+                
                  for (int i =0; i<calendarDataArray.count; i++)
                  {
                      CalendarDataModel *calendarDetails = [[CalendarDataModel alloc]init];
+                     calendarDetails.eventArray=[[NSMutableArray alloc]init];
                      NSDictionary * calendarDict =[calendarDataArray objectAtIndex:i];
                      calendarDetails.conferenceDate =[calendarDict objectForKey:@"conferenceDate"];
-                     calendarDetails.eventName =[calendarDict objectForKey:@"event"];
-                     calendarDetails.eventTime =[calendarDict objectForKey:@"eventTime"];
+                     NSMutableArray *tempArray=[calendarDict objectForKey:@"eventArray"];
+                     for (int j=0; j<tempArray.count; j++) {
+                          NSDictionary * eventArrayDict =[tempArray objectAtIndex:j];
+                         EventDataModel *eventDetails = [[EventDataModel alloc]init];
+                         eventDetails.eventName =[eventArrayDict objectForKey:@"event"];
+                         eventDetails.eventTime =[eventArrayDict objectForKey:@"eventTime"];
+                         [calendarDetails.eventArray addObject:eventDetails];
+                     }
+                    
                      [dataArray addObject:calendarDetails];
                  }
                  success(dataArray);

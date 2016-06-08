@@ -13,6 +13,7 @@
 #import "PendingAppointmentViewController.h"
 #import "ProximityAlertsViewController.h"
 #import "ConferenceListViewController.h"
+#import "HomeViewController.h"
 
 @interface MoreViewController ()<UITextFieldDelegate,BSKeyboardControlsDelegate>
 {
@@ -44,8 +45,8 @@
     textFieldArray = @[oldPasswordTextField,passwordTextField,confirmPasswordTextField];
     [self setKeyboardControls:[[BSKeyboardControls alloc] initWithFields:textFieldArray]];
     [self.keyboardControls setDelegate:self];
-    moreOptionsArray = [NSMutableArray arrayWithObjects:@"My Profile",@"Pending Appointments",@"Requested Appointments",@"Proximity alerts",@"Settings",@"Change Password",@"Switch Conference",@"Logout", nil];
-    moreImagesArray= [NSMutableArray arrayWithObjects:@"my_profile.png",@"pending_appointment.png",@"requested_appointment.png",@"proximity.png",@"setting.png",@"change_password.png",@"switch_conference.png",@"logout.png", nil];
+    moreOptionsArray = [NSMutableArray arrayWithObjects:@"My Profile",@"Pending Appointments",@"Requested Appointments",@"Conference",@"Settings",@"Change Password",@"Switch Conference",@"Logout", nil];
+    moreImagesArray= [NSMutableArray arrayWithObjects:@"my_profile.png",@"pending_appointment.png",@"requested_appointment.png",@"conference_icon.png",@"setting.png",@"change_password.png",@"switch_conference.png",@"logout.png", nil];
 }
 
 - (void)didReceiveMemoryWarningn {
@@ -95,9 +96,9 @@
         //        [self.navigationController pushViewController:settingsView animated:YES];
     }
     else if (indexPath.row==3) {
-        //        UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        //        ProximityAlertsViewController *settingsView =[storyboard instantiateViewControllerWithIdentifier:@"ProximityAlertsViewController"];
-        //        [self.navigationController pushViewController:settingsView animated:YES];
+                UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                HomeViewController *settingsView =[storyboard instantiateViewControllerWithIdentifier:@"HomeViewController"];
+                [self.navigationController pushViewController:settingsView animated:YES];
     }
     else if (indexPath.row==4) {
         UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];

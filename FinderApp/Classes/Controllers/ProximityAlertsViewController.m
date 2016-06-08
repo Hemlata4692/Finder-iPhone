@@ -110,6 +110,7 @@
 - (IBAction)scheduleMeeting:(UIButton *)sender{
     UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     ScheduleMeetingViewController *scheduleMeeting =[storyboard instantiateViewControllerWithIdentifier:@"ScheduleMeetingViewController"];
+     scheduleMeeting.screenName=@"Proximity";
     scheduleMeeting.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.1f];
     [scheduleMeeting setModalPresentationStyle:UIModalPresentationOverCurrentContext];
     

@@ -11,10 +11,12 @@
 #import "ScheduleMeetingViewController.h"
 #import "ConferenceService.h"
 #import "CalendarDataModel.h"
+#import "CalendarDataModel.h"
+#import "EventDataModel.h"
 
 @interface CalendarViewController ()
 {
-    NSMutableArray *calendarDetailsArray;
+    NSMutableArray *sectionArray;
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *calendarTableView;
@@ -27,7 +29,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title=@"Calendar";
-    calendarDetailsArray=[[NSMutableArray alloc]init];
+    sectionArray=[[NSMutableArray alloc]init];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -45,10 +47,10 @@
 
 #pragma mark - Webservice
 -(void)getCalendarDetails{
-    [[ConferenceService sharedManager] getCalendarDetails:[UserDefaultManager getValue:@"conferenceId"] success:^(id calendarDataArray) {
+    [[ConferenceService sharedManager] getCalendarDetails:[UserDefaultManager getValue:@"conferenceId"] success:^(id dataArray) {
         [myDelegate stopIndicator];
-        calendarDetailsArray=[calendarDataArray mutableCopy];
-//        [self displayConferenceDetail];
+        sectionArray=[dataArray mutableCopy];
+         [calendarTableView reloadData];
     }
                                                    failure:^(NSError *error)
      {
@@ -61,7 +63,7 @@
 #pragma mark - Table view delegate methods
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
-    return 3;
+    return sectionArray.count;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 40;
@@ -80,25 +82,18 @@
     headerView.backgroundColor = [UIColor clearColor];
     UILabel * dateLabel = [[UILabel alloc] init];
     dateLabel.font = [UIFont fontWithName:@"Roboto-Regular" size:16.0];
-    dateLabel.text=@"Thursday 25th Feburary";
+    dateLabel.text=[[sectionArray objectAtIndex:section]conferenceDate];
     float width =  [dateLabel.text boundingRectWithSize:dateLabel.frame.size options:NSStringDrawingUsesLineFragmentOrigin attributes:@{ NSFontAttributeName:dateLabel.font } context:nil]
     .size.width;
-    dateLabel.frame = CGRectMake(15, 0, width,40.0);
+    dateLabel.frame = CGRectMake(12, 0, width,40.0);
     dateLabel.textColor=[UIColor colorWithRed:(40.0/255.0) green:(40.0/255.0) blue:(40.0/255.0) alpha:1];
     [headerView addSubview:dateLabel];
     return headerView;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    if (section==0) {
-        return 2;
-    }
-    else if (section==1) {
-        return 3;
-    }
-    else {
-        return 4;
-    }
+
+    return [[sectionArray objectAtIndex:section]eventArray].count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -109,6 +104,8 @@
         calendarCell = [[CalendarTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     }
     [calendarCell.containerView addShadow:calendarCell.containerView color:[UIColor lightGrayColor]];
+     EventDataModel *data=[[[sectionArray objectAtIndex:indexPath.section]eventArray] objectAtIndex:indexPath.row];
+    [calendarCell displayData:data indexPath:(int)indexPath.row];
     return calendarCell;
 }
 #pragma mark - end
@@ -118,6 +115,7 @@
 - (IBAction)addButtonAction:(id)sender{
     UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     ScheduleMeetingViewController *scheduleMeeting =[storyboard instantiateViewControllerWithIdentifier:@"ScheduleMeetingViewController"];
+    scheduleMeeting.screenName=@"Calendar";
     scheduleMeeting.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.1f];
     [scheduleMeeting setModalPresentationStyle:UIModalPresentationOverCurrentContext];
     

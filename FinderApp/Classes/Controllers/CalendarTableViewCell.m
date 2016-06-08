@@ -9,7 +9,7 @@
 #import "CalendarTableViewCell.h"
 
 @implementation CalendarTableViewCell
-
+@synthesize eventNameLabel,eventTimeLabel;
 #pragma mark - Load nib
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -20,6 +20,14 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+#pragma mark - end
+
+#pragma mark - Display data
+-(void)displayData :(EventDataModel *)eventDetails indexPath:(int)indexPath
+{
+    eventNameLabel.text=[eventDetails.eventName uppercaseString];
+    eventTimeLabel.text=eventDetails.eventTime;
 }
 #pragma mark - end
 @end

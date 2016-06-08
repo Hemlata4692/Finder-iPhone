@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface ScheduleMeetingViewController : UIViewController
-
+@property(nonatomic,strong) NSString *screenName;
 @end

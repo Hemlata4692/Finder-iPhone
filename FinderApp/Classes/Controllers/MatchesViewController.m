@@ -17,10 +17,12 @@
     NSInteger selectedSegment;
 }
 @property (weak, nonatomic) IBOutlet UITableView *matchesTableView;
+@property (weak, nonatomic) IBOutlet UILabel *noRecordLabel;
 
 @end
 
 @implementation MatchesViewController
+@synthesize noRecordLabel,matchesTableView;
 
 #pragma mark - View lifecycle
 - (void)viewDidLoad{
@@ -28,6 +30,8 @@
     // Do any additional setup after loading the view.
     self.navigationItem.title=@"Matches";
     [self setTabBarImages];
+//    noRecordLabel.hidden=NO;
+//    matchesTableView.hidden=YES;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -64,11 +68,11 @@
     [tabBarItem2 setSelectedImage:[[UIImage imageNamed:[tempImg imageForDeviceWithNameForOtherImages:@"messages_selected"]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     tabBarItem2.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
     
-    tempImg =[UIImage imageNamed:@"conference"];
-    [tabBarItem3 setImage:[[UIImage imageNamed:[tempImg imageForDeviceWithNameForOtherImages:@"conference"]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    tempImg =[UIImage imageNamed:@"proximity_tab"];
+    [tabBarItem3 setImage:[[UIImage imageNamed:[tempImg imageForDeviceWithNameForOtherImages:@"proximity_tab"]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     
-    tempImg =[UIImage imageNamed:@"conference_selected"];
-    [tabBarItem3 setSelectedImage:[[UIImage imageNamed:[tempImg imageForDeviceWithNameForOtherImages:@"conference_selected"]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
+    tempImg =[UIImage imageNamed:@"proximity_selected"];
+    [tabBarItem3 setSelectedImage:[[UIImage imageNamed:[tempImg imageForDeviceWithNameForOtherImages:@"proximity_selected"]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     tabBarItem3.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
     
     tempImg =[UIImage imageNamed:@"calendar"];
@@ -84,7 +88,7 @@
     tempImg =[UIImage imageNamed:@"more_selected"];
     [tabBarItem5 setSelectedImage:[[UIImage imageNamed:[tempImg imageForDeviceWithNameForOtherImages:@"more_selected"]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     tabBarItem5.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
-    myTab.selectedIndex=2;
+   // myTab.selectedIndex=2;
 }
 
 #pragma mark - end
@@ -208,6 +212,7 @@
 - (IBAction)scheduleMeetingBtnAction:(UIButton *)sender{
     UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     ScheduleMeetingViewController *scheduleMeeting =[storyboard instantiateViewControllerWithIdentifier:@"ScheduleMeetingViewController"];
+     scheduleMeeting.screenName=@"Matches";
     scheduleMeeting.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.1f];
     [scheduleMeeting setModalPresentationStyle:UIModalPresentationOverCurrentContext];
     [self presentViewController:scheduleMeeting animated: NO completion:nil];

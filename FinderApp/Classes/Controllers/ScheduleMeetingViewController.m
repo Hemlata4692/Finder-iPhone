@@ -22,6 +22,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *venueTextField;
 @property (weak, nonatomic) IBOutlet UITextField *dateTextField;
 @property (weak, nonatomic) IBOutlet UITextField *timeTextField;
+@property (weak, nonatomic) IBOutlet UIImageView *userImage;
+@property (weak, nonatomic) IBOutlet UIImageView *dropDownImage;
+@property (weak, nonatomic) IBOutlet UIButton *contactButton;
 @property (weak, nonatomic) IBOutlet UIPlaceHolderTextView *meetingAgendaTextField;
 @property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
@@ -30,13 +33,29 @@
 
 @implementation ScheduleMeetingViewController
 @synthesize pickerView,pickerToolbar,datePicker,contactNameTextField,venueTextField,dateTextField,timeTextField,meetingAgendaTextField,keyboardControls,scheduleMeetingScrollView,scheduleMeetingView;
-
+@synthesize screenName;
+@synthesize contactButton;
+@synthesize userImage;
+@synthesize dropDownImage;
 #pragma mark - View life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    textFieldArray = @[venueTextField,meetingAgendaTextField];
-    [self setKeyboardControls:[[BSKeyboardControls alloc] initWithFields:textFieldArray]];
+
+    if (![screenName isEqualToString:@"Calendar"]) {
+        contactButton.hidden=YES;
+        dropDownImage.hidden=YES;
+        userImage.hidden=NO;
+        textFieldArray = @[contactNameTextField,venueTextField,meetingAgendaTextField];
+
+    }
+    else{
+        contactButton.hidden=NO;
+        dropDownImage.hidden=NO;
+        userImage.hidden=YES;
+        textFieldArray = @[venueTextField,meetingAgendaTextField];
+    }
+       [self setKeyboardControls:[[BSKeyboardControls alloc] initWithFields:textFieldArray]];
     [self.keyboardControls setDelegate:self];
     [self addBorderCornerRadius];
 }

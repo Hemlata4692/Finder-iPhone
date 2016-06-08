@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ProximityAlertsViewController : GlobalBackViewController
+@interface ProximityAlertsViewController : UIViewController
 
 @end

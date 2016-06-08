@@ -14,6 +14,7 @@
 #import "HomeViewController.h"
 #import "MyAlert.h"
 #import "UserService.h"
+#import "MatchesViewController.h"
 
 @interface FinderAppDelegate ()<CLLocationManagerDelegate,MyAlertDelegate>
 {
@@ -82,7 +83,7 @@
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"userId"]!=nil && [[NSUserDefaults standardUserDefaults] objectForKey:@"conferenceId"]!=nil)
     {
         isLocation=@"1";
-        HomeViewController * objView=[storyboard instantiateViewControllerWithIdentifier:@"tabBar"];
+        MatchesViewController * objView=[storyboard instantiateViewControllerWithIdentifier:@"tabBar"];
         self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
         [self.window setRootViewController:objView];
         [self.window makeKeyAndVisible];

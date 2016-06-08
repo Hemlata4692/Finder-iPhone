@@ -78,14 +78,9 @@
 -(void)displayConferenceDetail{
     conferenceDescription.translatesAutoresizingMaskIntoConstraints = YES;
     mainContainerView.translatesAutoresizingMaskIntoConstraints=YES;
+ 
     conferenceTitleLabel.text = [[conferenceDetailArray objectAtIndex:0]conferenceName];
     conferenceOrganiserName.text=[[conferenceDetailArray objectAtIndex:0]conferenceOrganiserName];
-    //    size = CGSizeMake(mainContainerView.frame.size.width-38,50);
-    //    textRect=[self setDynamicHeight:size textString:[[conferenceDetailArray objectAtIndex:0]conferenceVenue] fontSize:[UIFont fontWithName:@"Roboto-Regular" size:13]];
-    //    conferenceVenue.numberOfLines = 0;
-    //    conferenceVenue.frame = CGRectMake(28, conferenceVenue.frame.origin.y+conferenceVenue.frame.size.height, mainContainerView.frame.size.width-38, textRect.size.height);
-    //      conferenceVenue.layer.borderWidth=0.5f;
-    //      conferenceVenue.layer.borderColor=[UIColor whiteColor].CGColor;
     conferenceVenue.text=[[conferenceDetailArray objectAtIndex:0]conferenceVenue];
     conferenceDate.text=[[conferenceDetailArray objectAtIndex:0]conferenceDate];
     size = CGSizeMake(mainContainerView.frame.size.width-16,999);
@@ -97,8 +92,8 @@
     NSURLRequest *imageRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:[[conferenceDetailArray objectAtIndex:0]conferenceImage]]
                                                   cachePolicy:NSURLRequestReturnCacheDataElseLoad
                                               timeoutInterval:60];
-    [conferenceImageView setImageWithURLRequest:imageRequest placeholderImage:[UIImage imageNamed:@"placeholder.png"] success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
-        weakRef.contentMode = UIViewContentModeScaleAspectFit;
+    [conferenceImageView setImageWithURLRequest:imageRequest placeholderImage:[UIImage imageNamed:@""] success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+        weakRef.contentMode = UIViewContentModeScaleAspectFill;
         weakRef.clipsToBounds = YES;
         weakRef.image = image;
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {

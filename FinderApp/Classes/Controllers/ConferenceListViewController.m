@@ -10,7 +10,7 @@
 #import "ConferenceService.h"
 #import "ConferenceListCell.h"
 #import "ConferenceListDataModel.h"
-#import "HomeViewController.h"
+#import "MatchesViewController.h"
 
 @interface ConferenceListViewController ()
 {
@@ -79,7 +79,7 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    HomeViewController * homeView = [storyboard instantiateViewControllerWithIdentifier:@"tabBar"];
+    MatchesViewController * homeView = [storyboard instantiateViewControllerWithIdentifier:@"tabBar"];
     [UserDefaultManager setValue:[[conferenceListingArray objectAtIndex:indexPath.row] conferenceId] key:@"conferenceId"];
     [myDelegate.window setRootViewController:homeView];
     [myDelegate.window makeKeyAndVisible];

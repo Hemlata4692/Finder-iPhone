@@ -10,6 +10,5 @@
 
 @implementation CalendarDataModel
 @synthesize conferenceDate;
-@synthesize eventName;
-@synthesize eventTime;
+@synthesize eventArray;
 @end

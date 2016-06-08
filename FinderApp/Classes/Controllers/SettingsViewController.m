@@ -152,7 +152,7 @@
         }
         settingsCell.switchBtn.Tag=(int)indexPath.row;
         settingsCell.switchBtn.sectionTag=(int)indexPath.section;
-        NSLog(@"switch dict %@",[UserDefaultManager getValue:@"switchStatusDict"]);
+
         if ([[[UserDefaultManager getValue:@"switchStatusDict"] objectForKey:[NSString stringWithFormat:@"%d%d", settingsCell.switchBtn.sectionTag,settingsCell.switchBtn.Tag]] isEqualToString: @"false"]) {
             settingsCell.switchBtn.on=0;
             [settingsCell.switchBtn setBackgroundImage:[UIImage imageNamed:@"off.png"] forState:UIControlStateNormal];
