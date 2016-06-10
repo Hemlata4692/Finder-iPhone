@@ -39,8 +39,8 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
-//    [myDelegate showIndicator];
-//    [self performSelector:@selector(getCalendarDetails) withObject:nil afterDelay:.1];
+    [myDelegate showIndicator];
+    [self performSelector:@selector(getCalendarDetails) withObject:nil afterDelay:.1];
     
 }
 #pragma mark - end

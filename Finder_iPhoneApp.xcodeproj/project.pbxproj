@@ -31,6 +31,7 @@
 		B7414F931CCA4715009FE9CE /* CustomAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = B7414F901CCA4715009FE9CE /* CustomAlert.m */; };
 		B7414F941CCA4715009FE9CE /* CustomAlert.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7414F911CCA4715009FE9CE /* CustomAlert.xib */; };
 		B74B44551CFD60DD00275CC9 /* EventDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B74B44541CFD60DD00275CC9 /* EventDataModel.m */; };
+		B74DF9FC1D0A7967002EC69E /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B74DF9FB1D0A7967002EC69E /* EditProfileViewController.m */; };
 		B762DB6D1CCDFAEB002875A1 /* PendingAppointmentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B762DB6C1CCDFAEB002875A1 /* PendingAppointmentCell.m */; };
 		B762DB721CCE13C1002875A1 /* PendingAppointmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B762DB711CCE13C1002875A1 /* PendingAppointmentViewController.m */; };
 		B762DB761CCE3E27002875A1 /* MyButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B762DB751CCE3E27002875A1 /* MyButton.m */; };
@@ -160,6 +161,8 @@
 		B7414F911CCA4715009FE9CE /* CustomAlert.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomAlert.xib; sourceTree = "<group>"; };
 		B74B44531CFD60DD00275CC9 /* EventDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDataModel.h; sourceTree = SOURCE_ROOT; };
 		B74B44541CFD60DD00275CC9 /* EventDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDataModel.m; sourceTree = SOURCE_ROOT; };
+		B74DF9FA1D0A7967002EC69E /* EditProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProfileViewController.h; sourceTree = "<group>"; };
+		B74DF9FB1D0A7967002EC69E /* EditProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditProfileViewController.m; sourceTree = "<group>"; };
 		B762DB6B1CCDFAEB002875A1 /* PendingAppointmentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PendingAppointmentCell.h; sourceTree = "<group>"; };
 		B762DB6C1CCDFAEB002875A1 /* PendingAppointmentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PendingAppointmentCell.m; sourceTree = "<group>"; };
 		B762DB701CCE13C1002875A1 /* PendingAppointmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PendingAppointmentViewController.h; sourceTree = "<group>"; };
@@ -520,6 +523,15 @@
 			name = CustomAlert;
 			sourceTree = "<group>";
 		};
+		B74DF9F91D0A794D002EC69E /* EditProfileView */ = {
+			isa = PBXGroup;
+			children = (
+				B74DF9FA1D0A7967002EC69E /* EditProfileViewController.h */,
+				B74DF9FB1D0A7967002EC69E /* EditProfileViewController.m */,
+			);
+			name = EditProfileView;
+			sourceTree = "<group>";
+		};
 		B762DB6A1CCDFACE002875A1 /* PendingAppointment */ = {
 			isa = PBXGroup;
 			children = (
@@ -726,7 +738,6 @@
 		B7A8DD821CAE2D27007F56B6 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				B7339C251D0822D800D878FD /* MyProfileView */,
 				B77695A91CBF70C500794005 /* GlobalViewController */,
 				B77695A81CBF704D00794005 /* LoginModule */,
 				B7EAC17C1CC5ECC7001C4EEC /* ConferenceDetailModule */,
@@ -981,6 +992,8 @@
 		B7EAC1781CC5EC7A001C4EEC /* MoreModule */ = {
 			isa = PBXGroup;
 			children = (
+				B74DF9F91D0A794D002EC69E /* EditProfileView */,
+				B7339C251D0822D800D878FD /* MyProfileView */,
 				B70C5D781CE5936D0063246A /* ProximityAlerts */,
 				B762DB6A1CCDFACE002875A1 /* PendingAppointment */,
 				B7EAC17D1CC5ECE8001C4EEC /* SettingsView */,
@@ -1413,6 +1426,7 @@
 				B78405AF1CDB72A700CD7D54 /* ASValuePopUpView.m in Sources */,
 				B70C5D721CE58D390063246A /* ConferenceListViewController.m in Sources */,
 				B7E024C41CC5089E00707552 /* ConferenceDataModel.m in Sources */,
+				B74DF9FC1D0A7967002EC69E /* EditProfileViewController.m in Sources */,
 				B776959F1CBF590100794005 /* UITextField+Padding.m in Sources */,
 				B7C018C81CD08630006773CB /* CalendarTableViewCell.m in Sources */,
 				B77695C61CBFB4F300794005 /* SCLAlertView.m in Sources */,

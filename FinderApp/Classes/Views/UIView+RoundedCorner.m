@@ -30,7 +30,7 @@
 - (void)setViewBorder: (UIView *)view  color:(UIColor *)color {
    
     view.layer.borderColor =color.CGColor;
-    view.layer.borderWidth = 1.5f;
+    view.layer.borderWidth = 2.0f;
 }
 
 -(void)setBottomBorder: (UIView *)view color:(UIColor *)color

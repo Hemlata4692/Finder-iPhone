@@ -14,6 +14,7 @@
 #import "ProximityAlertsViewController.h"
 #import "ConferenceListViewController.h"
 #import "HomeViewController.h"
+#import "MyProfileViewController.h"
 
 @interface MoreViewController ()<UITextFieldDelegate,BSKeyboardControlsDelegate>
 {
@@ -83,7 +84,13 @@
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.row==1) {
+    //MyProfileViewController
+    if (indexPath.row==0) {
+        UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        MyProfileViewController *profileView =[storyboard instantiateViewControllerWithIdentifier:@"MyProfileViewController"];
+        [self.navigationController pushViewController:profileView animated:YES];
+    }
+    else if (indexPath.row==1) {
         //        UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         //        PendingAppointmentViewController *settingsView =[storyboard instantiateViewControllerWithIdentifier:@"PendingAppointmentViewController"];
         //         settingsView.screenName=@"Pending Appointments";
@@ -96,9 +103,9 @@
         //        [self.navigationController pushViewController:settingsView animated:YES];
     }
     else if (indexPath.row==3) {
-                UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-                HomeViewController *settingsView =[storyboard instantiateViewControllerWithIdentifier:@"HomeViewController"];
-                [self.navigationController pushViewController:settingsView animated:YES];
+        UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        HomeViewController *settingsView =[storyboard instantiateViewControllerWithIdentifier:@"HomeViewController"];
+        [self.navigationController pushViewController:settingsView animated:YES];
     }
     else if (indexPath.row==4) {
         UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
