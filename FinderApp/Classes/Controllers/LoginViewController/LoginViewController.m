@@ -78,12 +78,15 @@
     [self.keyboardControls setActiveField:textField];
     if (textField==emailField) {
         if([[UIScreen mainScreen] bounds].size.height<568)  {
-            [loginScrollView setContentOffset:CGPointMake(0, 25) animated:YES];
+            [loginScrollView setContentOffset:CGPointMake(0, 45) animated:YES];
         }
     }
     else if (textField==passwordField) {
-        if([[UIScreen mainScreen] bounds].size.height<=568){
-            [loginScrollView setContentOffset:CGPointMake(0, 70) animated:YES];
+        if([[UIScreen mainScreen] bounds].size.height<568){
+            [loginScrollView setContentOffset:CGPointMake(0, 90) animated:YES];
+        }
+        else  if([[UIScreen mainScreen] bounds].size.height==568){
+            [loginScrollView setContentOffset:CGPointMake(0, 75) animated:YES];
         }
     }
 }
