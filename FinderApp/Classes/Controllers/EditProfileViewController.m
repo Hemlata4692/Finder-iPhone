@@ -41,12 +41,40 @@
 @end
 
 @implementation EditProfileViewController
-
+@synthesize editProfileScrollView;
+@synthesize editProfileContainerview;
+@synthesize userInfoView;
+@synthesize userImageView;
+@synthesize userNameView;
+@synthesize emailView;
+@synthesize userNameTextField;
+@synthesize userEmailTextfield;
+@synthesize mobileNumberView;
+@synthesize mobileNumberTextField;
+@synthesize companyNameView;
+@synthesize companyNameTextField;
+@synthesize designationView;
+@synthesize designationTextField;
+@synthesize linkedInView;
+@synthesize linkedInTextField;
+@synthesize aboutCompanyView;
+@synthesize aboutCompanyTextView;
+@synthesize companyAddressView;
+@synthesize companyAddressTextField;
+@synthesize conferenceNameLabel;
+@synthesize bottomView;
+@synthesize professionView;
+@synthesize professionTextField;
+@synthesize interestedInView;
+@synthesize interestedInTextField;
+@synthesize interestedAreaView;
+@synthesize interestedAreaTextField;
 
 #pragma mark - View life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.navigationItem.title=@"Edit Profile";
     [self addShadow];
 }
 
@@ -56,19 +84,19 @@
 }
 -(void)addShadow
 {
-    [self.userImageView setCornerRadius:self.userImageView.frame.size.width/2];
-    [self.userImageView setViewBorder:self.userImageView color:[UIColor whiteColor]];
-    [self.aboutCompanyView addShadow:self.aboutCompanyView color:[UIColor lightGrayColor]];
-    [self.companyAddressView addShadow:self.companyAddressView color:[UIColor lightGrayColor]];
-    [self.bottomView addShadow:self.bottomView color:[UIColor lightGrayColor]];
-    [self.professionView addShadow:self.professionView color:[UIColor lightGrayColor]];
-    [self.interestedInView addShadow:self.interestedInView color:[UIColor lightGrayColor]];
-    [self.mobileNumberView addShadow:self.mobileNumberView color:[UIColor lightGrayColor]];
-    [self.designationView addShadow:self.designationView color:[UIColor lightGrayColor]];
-    [self.companyNameView addShadow:self.companyNameView color:[UIColor lightGrayColor]];
-    [self.linkedInView addShadow:self.linkedInView color:[UIColor lightGrayColor]];
-    [self.interestedAreaView addShadow:self.interestedAreaView color:[UIColor lightGrayColor]];
-    [self.userInfoView addShadow:self.userInfoView color:[UIColor lightGrayColor]];
+    [userImageView setViewBorder:userImageView color:[UIColor whiteColor]];
+    [userImageView addShadowWithCornerRadius:userImageView color:[UIColor redColor]];
+    [aboutCompanyView addShadow:aboutCompanyView color:[UIColor lightGrayColor]];
+    [companyAddressView addShadow:companyAddressView color:[UIColor lightGrayColor]];
+    [bottomView addShadow:bottomView color:[UIColor lightGrayColor]];
+    [professionView addShadow:professionView color:[UIColor lightGrayColor]];
+    [interestedInView addShadow:interestedInView color:[UIColor lightGrayColor]];
+    [mobileNumberView addShadow:mobileNumberView color:[UIColor lightGrayColor]];
+    [designationView addShadow:designationView color:[UIColor lightGrayColor]];
+    [companyNameView addShadow:companyNameView color:[UIColor lightGrayColor]];
+    [linkedInView addShadow:linkedInView color:[UIColor lightGrayColor]];
+    [interestedAreaView addShadow:interestedAreaView color:[UIColor lightGrayColor]];
+    [userInfoView addShadow:userInfoView color:[UIColor lightGrayColor]];
 }
 
 #pragma mark - end
@@ -84,24 +112,24 @@
 #pragma mark - Textfield delegates
 
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
-//    [self.keyboardControls setActiveField:textField];
-//    if (textField==emailField) {
-//        if([[UIScreen mainScreen] bounds].size.height<568)  {
-//            [loginScrollView setContentOffset:CGPointMake(0, 45) animated:YES];
-//        }
-//    }
-//    else if (textField==passwordField) {
-//        if([[UIScreen mainScreen] bounds].size.height<568){
-//            [loginScrollView setContentOffset:CGPointMake(0, 90) animated:YES];
-//        }
-//        else  if([[UIScreen mainScreen] bounds].size.height==568){
-//            [loginScrollView setContentOffset:CGPointMake(0, 75) animated:YES];
-//        }
-//    }
+    //    [self.keyboardControls setActiveField:textField];
+    //    if (textField==emailField) {
+    //        if([[UIScreen mainScreen] bounds].size.height<568)  {
+    //            [loginScrollView setContentOffset:CGPointMake(0, 45) animated:YES];
+    //        }
+    //    }
+    //    else if (textField==passwordField) {
+    //        if([[UIScreen mainScreen] bounds].size.height<568){
+    //            [loginScrollView setContentOffset:CGPointMake(0, 90) animated:YES];
+    //        }
+    //        else  if([[UIScreen mainScreen] bounds].size.height==568){
+    //            [loginScrollView setContentOffset:CGPointMake(0, 75) animated:YES];
+    //        }
+    //    }
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
-  //  [loginScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+    //  [loginScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
     [textField resignFirstResponder];
     return YES;
 }

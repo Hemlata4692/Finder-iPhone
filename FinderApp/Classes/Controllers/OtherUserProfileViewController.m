@@ -1,20 +1,19 @@
 //
-//  MyProfileViewController.m
+//  OtherUserProfileViewController.m
 //  Finder_iPhoneApp
 //
-//  Created by Hema on 08/06/16.
+//  Created by Hema on 13/06/16.
 //  Copyright © 2016 Ranosys. All rights reserved.
 //
 
-#import "MyProfileViewController.h"
-#import "EditProfileViewController.h"
+#import "OtherUserProfileViewController.h"
 
-@interface MyProfileViewController ()
-@property (weak, nonatomic) IBOutlet UIScrollView *myProfileScrollView;
+@interface OtherUserProfileViewController ()
+@property (weak, nonatomic) IBOutlet UIScrollView *otherUserProfileScrollView;
 @property (weak, nonatomic) IBOutlet UIView *mainContainerView;
 @property (weak, nonatomic) IBOutlet UIImageView *profileBackground;
-@property (weak, nonatomic) IBOutlet UIImageView *userProfileImage;
-@property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *otherUserProfileImage;
+@property (weak, nonatomic) IBOutlet UILabel *otherUserNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *companyNameLabel;
 @property (weak, nonatomic) IBOutlet UIView *mobileNumberView;
 @property (weak, nonatomic) IBOutlet UILabel *mobileNumberLabel;
@@ -24,22 +23,22 @@
 @property (weak, nonatomic) IBOutlet UIView *companyAddressView;
 @property (weak, nonatomic) IBOutlet UILabel *comapnyAddressLabel;
 @property (weak, nonatomic) IBOutlet UIView *bottomView;
-@property (weak, nonatomic) IBOutlet UIButton *linkedInButton;
 @property (weak, nonatomic) IBOutlet UIView *professionView;
 @property (weak, nonatomic) IBOutlet UILabel *professionLabel;
 @property (weak, nonatomic) IBOutlet UIView *interestedInView;
 @property (weak, nonatomic) IBOutlet UILabel *interestedInLabel;
-@property (weak, nonatomic) IBOutlet UIView *otherUserView;
-@property (weak, nonatomic) IBOutlet UIButton *editProfileButton;
+@property (weak, nonatomic) IBOutlet UIButton *sendRequestButton;
+@property (weak, nonatomic) IBOutlet UIButton *acceptRequestButton;
+@property (weak, nonatomic) IBOutlet UIButton *cancelRequestButton;
 @property (weak, nonatomic) IBOutlet UICollectionView *interestAreaCollectionView;
 @end
 
-@implementation MyProfileViewController
-@synthesize myProfileScrollView;
+@implementation OtherUserProfileViewController
+@synthesize otherUserProfileScrollView;
 @synthesize mainContainerView;
 @synthesize profileBackground;
-@synthesize userProfileImage;
-@synthesize userNameLabel;
+@synthesize otherUserProfileImage;
+@synthesize otherUserNameLabel;
 @synthesize companyNameLabel;
 @synthesize mobileNumberView;
 @synthesize mobileNumberLabel;
@@ -49,21 +48,20 @@
 @synthesize companyAddressView;
 @synthesize comapnyAddressLabel;
 @synthesize bottomView;
-@synthesize linkedInButton;
 @synthesize professionView;
 @synthesize professionLabel;
 @synthesize interestedInView;
 @synthesize interestedInLabel;
 @synthesize interestAreaCollectionView;
-@synthesize viewName;
-@synthesize otherUserView;
-@synthesize editProfileButton;
+@synthesize sendRequestButton;
+@synthesize acceptRequestButton;
+@synthesize cancelRequestButton;
 
 #pragma mark - View life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
+      self.navigationItem.title=@"User Profile";
     [self addShadow];
 }
 
@@ -71,26 +69,10 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
--(void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:YES];
-    if ([viewName isEqualToString:@"My Profile"]) {
-        self.navigationItem.title=@"My Profile";
-        otherUserView.hidden=YES;
-        linkedInButton.hidden=NO;
-        editProfileButton.hidden=NO;
-    }
-    else {
-        self.navigationItem.title=@"User Profile";
-        otherUserView.hidden=NO;
-        linkedInButton.hidden=YES;
-        editProfileButton.hidden=YES;
-    }
-}
-
 -(void)addShadow
 {
-    [userProfileImage setCornerRadius:userProfileImage.frame.size.width/2];
-    [userProfileImage setViewBorder:userProfileImage color:[UIColor whiteColor]];
+    [otherUserProfileImage setCornerRadius:otherUserProfileImage.frame.size.width/2];
+    [otherUserProfileImage setViewBorder:otherUserProfileImage color:[UIColor whiteColor]];
     [mobileNumberView addShadow:mobileNumberView color:[UIColor lightGrayColor]];
     [aboutCompanyView addShadow:aboutCompanyView color:[UIColor lightGrayColor]];
     [companyAddressView addShadow:companyAddressView color:[UIColor lightGrayColor]];
@@ -98,25 +80,18 @@
     [professionView addShadow:professionView color:[UIColor lightGrayColor]];
     [interestedInView addShadow:interestedInView color:[UIColor lightGrayColor]];
 }
+
+
 #pragma mark - end
 
 #pragma mark - IBActions
-- (IBAction)editProfileButtonAction:(id)sender {
-    UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    EditProfileViewController *editProfile =[storyboard instantiateViewControllerWithIdentifier:@"EditProfileViewController"];
-    [self.navigationController pushViewController:editProfile animated:YES];
+- (IBAction)sendRequestButtonAction:(id)sender {
 }
 
-- (IBAction)linkedInButtonAction:(id)sender {
+- (IBAction)acceptrequestButtonAction:(id)sender {
 }
 
-- (IBAction)otherUserLinkedInButtonAction:(id)sender {
-}
-
-- (IBAction)otherUserEmailButtonAction:(id)sender {
-}
-
-- (IBAction)addUserContactButtonAction:(id)sender {
+- (IBAction)cancelRequestButtonAction:(id)sender {
 }
 #pragma mark - end
 @end

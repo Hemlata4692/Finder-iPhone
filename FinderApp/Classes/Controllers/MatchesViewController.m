@@ -11,6 +11,8 @@
 #import "ConferenceService.h"
 #import "UIImage+deviceSpecificMedia.h"
 #import "ScheduleMeetingViewController.h"
+#import "MyProfileViewController.h"
+#import "OtherUserProfileViewController.h"
 
 @interface MatchesViewController ()
 {
@@ -176,7 +178,14 @@
         return matchesCell;
     }
 }
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+//    UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    MyProfileViewController *profileView =[storyboard instantiateViewControllerWithIdentifier:@"MyProfileViewController"];
+//    profileView.viewName=@"User Profile";
+//    [self.navigationController pushViewController:profileView animated:YES];
+    UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    OtherUserProfileViewController *userProfile =[storyboard instantiateViewControllerWithIdentifier:@"OtherUserProfileViewController"];
+    [self.navigationController pushViewController:userProfile animated:YES];
 }
 #pragma mark - end
 #pragma mark - Webservice

@@ -32,6 +32,7 @@
 		B7414F941CCA4715009FE9CE /* CustomAlert.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7414F911CCA4715009FE9CE /* CustomAlert.xib */; };
 		B74B44551CFD60DD00275CC9 /* EventDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B74B44541CFD60DD00275CC9 /* EventDataModel.m */; };
 		B74DF9FC1D0A7967002EC69E /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B74DF9FB1D0A7967002EC69E /* EditProfileViewController.m */; };
+		B75FCECD1D0E683B00B8CE4C /* OtherUserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B75FCECC1D0E683B00B8CE4C /* OtherUserProfileViewController.m */; };
 		B762DB6D1CCDFAEB002875A1 /* PendingAppointmentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B762DB6C1CCDFAEB002875A1 /* PendingAppointmentCell.m */; };
 		B762DB721CCE13C1002875A1 /* PendingAppointmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B762DB711CCE13C1002875A1 /* PendingAppointmentViewController.m */; };
 		B762DB761CCE3E27002875A1 /* MyButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B762DB751CCE3E27002875A1 /* MyButton.m */; };
@@ -163,6 +164,8 @@
 		B74B44541CFD60DD00275CC9 /* EventDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDataModel.m; sourceTree = SOURCE_ROOT; };
 		B74DF9FA1D0A7967002EC69E /* EditProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProfileViewController.h; sourceTree = "<group>"; };
 		B74DF9FB1D0A7967002EC69E /* EditProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditProfileViewController.m; sourceTree = "<group>"; };
+		B75FCECB1D0E683B00B8CE4C /* OtherUserProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OtherUserProfileViewController.h; sourceTree = "<group>"; };
+		B75FCECC1D0E683B00B8CE4C /* OtherUserProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherUserProfileViewController.m; sourceTree = "<group>"; };
 		B762DB6B1CCDFAEB002875A1 /* PendingAppointmentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PendingAppointmentCell.h; sourceTree = "<group>"; };
 		B762DB6C1CCDFAEB002875A1 /* PendingAppointmentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PendingAppointmentCell.m; sourceTree = "<group>"; };
 		B762DB701CCE13C1002875A1 /* PendingAppointmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PendingAppointmentViewController.h; sourceTree = "<group>"; };
@@ -530,6 +533,15 @@
 				B74DF9FB1D0A7967002EC69E /* EditProfileViewController.m */,
 			);
 			name = EditProfileView;
+			sourceTree = "<group>";
+		};
+		B75FCECA1D0E682100B8CE4C /* OtherUserProfile */ = {
+			isa = PBXGroup;
+			children = (
+				B75FCECB1D0E683B00B8CE4C /* OtherUserProfileViewController.h */,
+				B75FCECC1D0E683B00B8CE4C /* OtherUserProfileViewController.m */,
+			);
+			name = OtherUserProfile;
 			sourceTree = "<group>";
 		};
 		B762DB6A1CCDFACE002875A1 /* PendingAppointment */ = {
@@ -992,6 +1004,7 @@
 		B7EAC1781CC5EC7A001C4EEC /* MoreModule */ = {
 			isa = PBXGroup;
 			children = (
+				B75FCECA1D0E682100B8CE4C /* OtherUserProfile */,
 				B74DF9F91D0A794D002EC69E /* EditProfileView */,
 				B7339C251D0822D800D878FD /* MyProfileView */,
 				B70C5D781CE5936D0063246A /* ProximityAlerts */,
@@ -1402,6 +1415,7 @@
 			files = (
 				B776959B1CBF537D00794005 /* UITextField+Validations.m in Sources */,
 				B736EBAA1CCF93E000CE7B6E /* MessagesViewCell.m in Sources */,
+				B75FCECD1D0E683B00B8CE4C /* OtherUserProfileViewController.m in Sources */,
 				B762DB6D1CCDFAEB002875A1 /* PendingAppointmentCell.m in Sources */,
 				B70C5D771CE590B20063246A /* ConferenceListDataModel.m in Sources */,
 				5D32EC0E1CC4A31F00C50969 /* MessagesViewController.m in Sources */,

@@ -88,6 +88,7 @@
     if (indexPath.row==0) {
         UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         MyProfileViewController *profileView =[storyboard instantiateViewControllerWithIdentifier:@"MyProfileViewController"];
+        profileView.viewName=@"My Profile";
         [self.navigationController pushViewController:profileView animated:YES];
     }
     else if (indexPath.row==1) {

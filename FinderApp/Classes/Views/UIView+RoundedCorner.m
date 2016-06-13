@@ -51,4 +51,13 @@
     view.layer.shadowRadius = 1.0;
 
 }
+-(void)addShadowWithCornerRadius: (UIView *)view color:(UIColor *)color
+{
+    [view.layer setShadowOffset:CGSizeMake(0, 3)];
+    [view.layer setShadowOpacity:0.4];
+    [view.layer setShadowRadius:3.0f];
+    [view.layer setShouldRasterize:YES];
+    [view.layer setCornerRadius:view.frame.size.width/2];
+    
+}
 @end

@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface MyProfileViewController : GlobalBackViewController
-
+@property (nonatomic,strong) NSString *viewName;
 @end
