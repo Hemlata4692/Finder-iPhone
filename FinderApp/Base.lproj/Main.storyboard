@@ -1547,7 +1547,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Ee-wo-Xf8">
                                         <rect key="frame" x="5" y="8" width="310" height="410"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pvm-zi-6pl">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="placeholder.png" translatesAutoresizingMaskIntoConstraints="NO" id="pvm-zi-6pl">
                                                 <rect key="frame" x="0.0" y="0.0" width="310" height="203"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
@@ -3326,6 +3326,7 @@
         <image name="old_password" width="14" height="14"/>
         <image name="on" width="56" height="21"/>
         <image name="organiser_icon" width="10" height="10"/>
+        <image name="placeholder.png" width="1242" height="600"/>
         <image name="plus" width="18" height="18"/>
         <image name="profile_bg" width="414" height="297"/>
         <image name="reject" width="21" height="21"/>
