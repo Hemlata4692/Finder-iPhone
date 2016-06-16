@@ -48,8 +48,10 @@
      {
          responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
          NSLog(@"conference list response %@",responseObject);
-         if([[Webservice sharedManager] isStatusOK:responseObject])
+         NSNumber *number = responseObject[@"isSuccess"];
+         if (number.integerValue==1)
          {
+             [myDelegate stopIndicator];
              id array =[responseObject objectForKey:@"conferenceListing"];
              if (([array isKindOfClass:[NSArray class]]))
              {
@@ -66,11 +68,20 @@
                  }
                  success(dataArray);
              }
-          }
-         else
+
+         }
+        else if(number.integerValue==0)
          {
              [myDelegate stopIndicator];
-             failure(responseObject);
+             success(nil);
+         }
+         else
+         {
+             SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
+             [alert addButton:@"Ok" actionBlock:^(void) {
+                 [self logoutUser];
+             }];
+             [alert showWarning:nil title:@"Alert" subTitle:responseObject[@"message"] closeButtonTitle:nil duration:0.0f];
          }
      } failure:^(NSError *error)
      {
@@ -79,6 +90,17 @@
      }];
     
 }
+- (void)logoutUser
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+    myDelegate.navigationController = [storyboard instantiateViewControllerWithIdentifier:@"mainNavController"];
+    
+    myDelegate.window.rootViewController = myDelegate.navigationController;
+    [UserDefaultManager removeValue:@"userId"];
+    [UserDefaultManager removeValue:@"username"];
+}
+
 #pragma mark- end
 
 #pragma mark- Conference detail

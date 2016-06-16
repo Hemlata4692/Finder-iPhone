@@ -93,12 +93,6 @@
             msg = responseObject[@"message"];
             SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
             [alert showWarning:nil title:@"Alert" subTitle:msg closeButtonTitle:@"Ok" duration:0.0f];
-//            if (count==1) {
-//            count++;
-//            msg = responseObject[@"message"];
-//            SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
-//            [alert showWarning:nil title:@"Alert" subTitle:msg closeButtonTitle:@"Ok" duration:0.0f];
-//            }
             return NO;
         }
         case 1:
@@ -113,18 +107,7 @@
                 [self logoutUser];
                 //                 [alert hideView];
             }];
-            [alert showWarning:nil title:@"Alert" subTitle:msg closeButtonTitle:nil duration:0.0f];
-//            if (count==1) {
-//                count++;
-//                msg = responseObject[@"message"];
-//                SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
-//                [alert addButton:@"Ok" actionBlock:^(void) {
-//                    [self logoutUser];
-//                    //                 [alert hideView];
-//                }];
-//                [alert showWarning:nil title:@"Alert" subTitle:msg closeButtonTitle:nil duration:0.0f];
-//            }
-          
+            [alert showWarning:nil title:@"Alert" subTitle:msg closeButtonTitle:nil duration:0.0f];          
         }
             return NO;
             break;

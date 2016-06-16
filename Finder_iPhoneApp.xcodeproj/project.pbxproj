@@ -31,6 +31,16 @@
 		B7414F931CCA4715009FE9CE /* CustomAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = B7414F901CCA4715009FE9CE /* CustomAlert.m */; };
 		B7414F941CCA4715009FE9CE /* CustomAlert.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7414F911CCA4715009FE9CE /* CustomAlert.xib */; };
 		B74B44551CFD60DD00275CC9 /* EventDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B74B44541CFD60DD00275CC9 /* EventDataModel.m */; };
+		B75F3C7E1D129D600011105A /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B75F3C7D1D129D600011105A /* MapKit.framework */; };
+		B75F3C901D129E520011105A /* Address.m in Sources */ = {isa = PBXBuildFile; fileRef = B75F3C811D129E520011105A /* Address.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B75F3C911D129E520011105A /* MJGeocoder.m in Sources */ = {isa = PBXBuildFile; fileRef = B75F3C841D129E520011105A /* MJGeocoder.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B75F3C921D129E520011105A /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = B75F3C871D129E520011105A /* NSObject+SBJSON.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B75F3C931D129E520011105A /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = B75F3C891D129E520011105A /* NSString+SBJSON.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B75F3C941D129E520011105A /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = B75F3C8B1D129E520011105A /* SBJsonBase.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B75F3C951D129E520011105A /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B75F3C8D1D129E520011105A /* SBJsonParser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B75F3C961D129E520011105A /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = B75F3C8F1D129E520011105A /* SBJsonWriter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B75F3C991D12A0840011105A /* AddressAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = B75F3C981D12A0840011105A /* AddressAnnotation.m */; };
+		B75F3C9D1D12A90D0011105A /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B75F3C9C1D12A90D0011105A /* MapViewController.m */; };
 		B762DB6D1CCDFAEB002875A1 /* PendingAppointmentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B762DB6C1CCDFAEB002875A1 /* PendingAppointmentCell.m */; };
 		B762DB721CCE13C1002875A1 /* PendingAppointmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B762DB711CCE13C1002875A1 /* PendingAppointmentViewController.m */; };
 		B762DB761CCE3E27002875A1 /* MyButton.m in Sources */ = {isa = PBXBuildFile; fileRef = B762DB751CCE3E27002875A1 /* MyButton.m */; };
@@ -161,6 +171,27 @@
 		B7414F911CCA4715009FE9CE /* CustomAlert.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomAlert.xib; sourceTree = "<group>"; };
 		B74B44531CFD60DD00275CC9 /* EventDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDataModel.h; sourceTree = SOURCE_ROOT; };
 		B74B44541CFD60DD00275CC9 /* EventDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDataModel.m; sourceTree = SOURCE_ROOT; };
+		B75F3C7D1D129D600011105A /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		B75F3C801D129E520011105A /* Address.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Address.h; sourceTree = "<group>"; };
+		B75F3C811D129E520011105A /* Address.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Address.m; sourceTree = "<group>"; };
+		B75F3C821D129E520011105A /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
+		B75F3C831D129E520011105A /* MJGeocoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJGeocoder.h; sourceTree = "<group>"; };
+		B75F3C841D129E520011105A /* MJGeocoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJGeocoder.m; sourceTree = "<group>"; };
+		B75F3C851D129E520011105A /* MJGeocodingServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJGeocodingServices.h; sourceTree = "<group>"; };
+		B75F3C861D129E520011105A /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
+		B75F3C871D129E520011105A /* NSObject+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJSON.m"; sourceTree = "<group>"; };
+		B75F3C881D129E520011105A /* NSString+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SBJSON.h"; sourceTree = "<group>"; };
+		B75F3C891D129E520011105A /* NSString+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SBJSON.m"; sourceTree = "<group>"; };
+		B75F3C8A1D129E520011105A /* SBJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonBase.h; sourceTree = "<group>"; };
+		B75F3C8B1D129E520011105A /* SBJsonBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonBase.m; sourceTree = "<group>"; };
+		B75F3C8C1D129E520011105A /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
+		B75F3C8D1D129E520011105A /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonParser.m; sourceTree = "<group>"; };
+		B75F3C8E1D129E520011105A /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
+		B75F3C8F1D129E520011105A /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
+		B75F3C971D12A0840011105A /* AddressAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressAnnotation.h; sourceTree = "<group>"; };
+		B75F3C981D12A0840011105A /* AddressAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressAnnotation.m; sourceTree = "<group>"; };
+		B75F3C9B1D12A90D0011105A /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		B75F3C9C1D12A90D0011105A /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
 		B762DB6B1CCDFAEB002875A1 /* PendingAppointmentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PendingAppointmentCell.h; sourceTree = "<group>"; };
 		B762DB6C1CCDFAEB002875A1 /* PendingAppointmentCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PendingAppointmentCell.m; sourceTree = "<group>"; };
 		B762DB701CCE13C1002875A1 /* PendingAppointmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PendingAppointmentViewController.h; sourceTree = "<group>"; };
@@ -304,6 +335,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B75F3C7E1D129D600011105A /* MapKit.framework in Frameworks */,
 				B7E024C01CC4D5B100707552 /* CoreLocation.framework in Frameworks */,
 				4EA5F7D5D38B1DF63EF3322F /* libPods.a in Frameworks */,
 			);
@@ -315,6 +347,7 @@
 		28552D1F9668D4BE3E623A4F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B75F3C7D1D129D600011105A /* MapKit.framework */,
 				B7E024BF1CC4D5B100707552 /* CoreLocation.framework */,
 				B3CDDBB308E1E7466EFB6FFC /* libPods.a */,
 			);
@@ -521,6 +554,40 @@
 				B7414F911CCA4715009FE9CE /* CustomAlert.xib */,
 			);
 			name = CustomAlert;
+			sourceTree = "<group>";
+		};
+		B75F3C7F1D129E420011105A /* Geocoder */ = {
+			isa = PBXGroup;
+			children = (
+				B75F3C801D129E520011105A /* Address.h */,
+				B75F3C811D129E520011105A /* Address.m */,
+				B75F3C821D129E520011105A /* JSON.h */,
+				B75F3C831D129E520011105A /* MJGeocoder.h */,
+				B75F3C841D129E520011105A /* MJGeocoder.m */,
+				B75F3C851D129E520011105A /* MJGeocodingServices.h */,
+				B75F3C861D129E520011105A /* NSObject+SBJSON.h */,
+				B75F3C871D129E520011105A /* NSObject+SBJSON.m */,
+				B75F3C881D129E520011105A /* NSString+SBJSON.h */,
+				B75F3C891D129E520011105A /* NSString+SBJSON.m */,
+				B75F3C8A1D129E520011105A /* SBJsonBase.h */,
+				B75F3C8B1D129E520011105A /* SBJsonBase.m */,
+				B75F3C8C1D129E520011105A /* SBJsonParser.h */,
+				B75F3C8D1D129E520011105A /* SBJsonParser.m */,
+				B75F3C8E1D129E520011105A /* SBJsonWriter.h */,
+				B75F3C8F1D129E520011105A /* SBJsonWriter.m */,
+				B75F3C971D12A0840011105A /* AddressAnnotation.h */,
+				B75F3C981D12A0840011105A /* AddressAnnotation.m */,
+			);
+			name = Geocoder;
+			sourceTree = "<group>";
+		};
+		B75F3C9A1D12A8F50011105A /* MapViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B75F3C9B1D12A90D0011105A /* MapViewController.h */,
+				B75F3C9C1D12A90D0011105A /* MapViewController.m */,
+			);
+			name = MapViewController;
 			sourceTree = "<group>";
 		};
 		B762DB6A1CCDFACE002875A1 /* PendingAppointment */ = {
@@ -830,6 +897,7 @@
 		B7A8DDD91CAE5CBD007F56B6 /* SupportingClasses */ = {
 			isa = PBXGroup;
 			children = (
+				B75F3C7F1D129E420011105A /* Geocoder */,
 				B7A8DDC81CAE5BAB007F56B6 /* DefaultManager */,
 				B7A8DDBB1CAE5994007F56B6 /* NullHandler */,
 				B7A8DDBA1CAE5965007F56B6 /* GoogleAnalytics */,
@@ -1023,6 +1091,7 @@
 		B7EAC17C1CC5ECC7001C4EEC /* ConferenceDetailModule */ = {
 			isa = PBXGroup;
 			children = (
+				B75F3C9A1D12A8F50011105A /* MapViewController */,
 				B70C5D6F1CE58D100063246A /* ConferenceListingViewController */,
 				5D32EC151CC4A36D00C50969 /* HomeViewController */,
 			);
@@ -1394,15 +1463,20 @@
 				B776959B1CBF537D00794005 /* UITextField+Validations.m in Sources */,
 				B736EBAA1CCF93E000CE7B6E /* MessagesViewCell.m in Sources */,
 				B762DB6D1CCDFAEB002875A1 /* PendingAppointmentCell.m in Sources */,
+				B75F3C901D129E520011105A /* Address.m in Sources */,
 				B70C5D771CE590B20063246A /* ConferenceListDataModel.m in Sources */,
 				5D32EC0E1CC4A31F00C50969 /* MessagesViewController.m in Sources */,
 				B7A8DDDC1CAE5FC8007F56B6 /* LoginViewController.m in Sources */,
+				B75F3C9D1D12A90D0011105A /* MapViewController.m in Sources */,
 				B77695C51CBFB4F300794005 /* UIImage+ImageEffects.m in Sources */,
+				B75F3C911D129E520011105A /* MJGeocoder.m in Sources */,
 				B7A8DD6D1CAE2BF2007F56B6 /* FinderAppDelegate.m in Sources */,
+				B75F3C931D129E520011105A /* NSString+SBJSON.m in Sources */,
 				5D32EC0D1CC4A31F00C50969 /* CalendarViewController.m in Sources */,
 				5D32EC0C1CC4A31F00C50969 /* MoreTableViewCell.m in Sources */,
 				B77695C71CBFB4F300794005 /* SCLButton.m in Sources */,
 				B762DB761CCE3E27002875A1 /* MyButton.m in Sources */,
+				B75F3C991D12A0840011105A /* AddressAnnotation.m in Sources */,
 				B7EAC18B1CC63328001C4EEC /* SettingsViewCell.m in Sources */,
 				B7FFA59D1CF6B5EE00B0614A /* CalendarDataModel.m in Sources */,
 				5D32EC0F1CC4A31F00C50969 /* MatchesViewController.m in Sources */,
@@ -1423,7 +1497,9 @@
 				B71F63F31CF2CB600025EFBE /* ConferenceListCell.m in Sources */,
 				5D32EC0B1CC4A31F00C50969 /* MoreViewController.m in Sources */,
 				B7A8DDCE1CAE5C32007F56B6 /* NullValueChecker.m in Sources */,
+				B75F3C951D129E520011105A /* SBJsonParser.m in Sources */,
 				B7414F931CCA4715009FE9CE /* CustomAlert.m in Sources */,
+				B75F3C921D129E520011105A /* NSObject+SBJSON.m in Sources */,
 				B7DCE4531CBB9E5D0063FF72 /* Webservice.m in Sources */,
 				B7A8DDC11CAE5B50007F56B6 /* BSKeyboardControls.m in Sources */,
 				B7A8DDCB1CAE5BD4007F56B6 /* UserDefaultManager.m in Sources */,
@@ -1435,8 +1511,10 @@
 				B77695C81CBFB4F300794005 /* SCLAlertViewResponder.m in Sources */,
 				B74B44551CFD60DD00275CC9 /* EventDataModel.m in Sources */,
 				B70C5D811CE59C7F0063246A /* ProximityAlertViewCell.m in Sources */,
+				B75F3C961D129E520011105A /* SBJsonWriter.m in Sources */,
 				B7EAC1761CC5DBE9001C4EEC /* ConferenceService.m in Sources */,
 				5D93619D1CC606190004F030 /* MatchesTableViewCell.m in Sources */,
+				B75F3C941D129E520011105A /* SBJsonBase.m in Sources */,
 				B78405B01CDB72A700CD7D54 /* ASValueTrackingSlider.m in Sources */,
 				B7C018C41CD0708B006773CB /* PersonalMessageViewController.m in Sources */,
 				B7414F921CCA4715009FE9CE /* MyAlert.m in Sources */,

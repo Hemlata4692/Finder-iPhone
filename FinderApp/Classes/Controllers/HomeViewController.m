@@ -9,12 +9,18 @@
 #import "HomeViewController.h"
 #import "ConferenceService.h"
 #import "ConferenceDataModel.h"
+#import "MJGeocodingServices.h"
+#import "MapViewController.h"
 
-@interface HomeViewController ()
+@interface HomeViewController ()<MJGeocoderDelegate>
 {
     NSMutableArray *conferenceDetailArray;
     CGSize size;
     CGRect textRect;
+    MJGeocoder *forwardGeocoder;
+    NSString *latitude;
+    NSString *longitude;
+   
 }
 @property (weak, nonatomic) IBOutlet UIScrollView *homeScrollView;
 @property (weak, nonatomic) IBOutlet UIView *mainContainerView;
@@ -32,13 +38,16 @@
 @property (weak, nonatomic) IBOutlet UIImageView *conferenceDateImageView;
 @property (weak, nonatomic) IBOutlet UILabel *conferenceDate;
 @property (weak, nonatomic) IBOutlet UIView *bottomContainerView;
+@property (weak, nonatomic) IBOutlet UIButton *mapButton;
 @property (nonatomic,retain) NSString * conferenceId;
+@property (weak, nonatomic) IBOutlet UIButton *viewMapButton;
+
 @end
 
 @implementation HomeViewController
 @synthesize homeScrollView,mainContainerView,conferenceTitleLabel,conferenceImageView,conferenceDateHeading,conferenceDateImageView,conferenceDate,conferenceOrganiserHeading;
 @synthesize conferenceDescription,descriptionHeadingLabel,conferenceVenueHeading,conferenceOrganiserImageView,conferenceOrganiserName,conferenceVenue,bottomContainerView;
-@synthesize conferenceId;
+@synthesize conferenceId,viewMapButton;
 
 #pragma mark - View life cycle
 - (void)viewDidLoad {
@@ -46,6 +55,9 @@
     // Do any additional setup after loading the view.
     self.navigationItem.title=@"Conference Details";
     conferenceDetailArray=[[NSMutableArray alloc]init];
+    [viewMapButton setViewBorder:viewMapButton color:[UIColor colorWithRed:79.0/255.0 green:206.0/255.0 blue:195.0/255.0 alpha:1.0]];
+    [myDelegate showIndicator];
+    [self performSelector:@selector(getConferenceDetail) withObject:nil afterDelay:.1];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -55,8 +67,6 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
-    [myDelegate showIndicator];
-    [self performSelector:@selector(getConferenceDetail) withObject:nil afterDelay:.1];
 }
 
 #pragma mark - end
@@ -101,6 +111,8 @@
     float dynamicHeight=conferenceImageView.frame.origin.y+conferenceImageView.frame.size.height+8+descriptionHeadingLabel.frame.size.height+2+conferenceDescription.frame.size.height+8+bottomContainerView.frame.size.height+20;
     mainContainerView.frame = CGRectMake(mainContainerView.frame.origin.x, mainContainerView.frame.origin.y, mainContainerView.frame.size.width, dynamicHeight);
     homeScrollView.contentSize = CGSizeMake(0,mainContainerView.frame.size.height+64);
+   
+
 }
 -(CGRect)setDynamicHeight:(CGSize)rectSize textString:(NSString *)textString fontSize:(UIFont *)fontSize{
     CGRect textHeight = [textString
@@ -109,6 +121,45 @@
                          attributes:@{NSFontAttributeName:fontSize}
                          context:nil];
     return textHeight;
+}
+#pragma mark - end
+- (IBAction)mapButtonAction:(id)sender
+{
+    if(!forwardGeocoder)
+    {
+        forwardGeocoder = [[MJGeocoder alloc] init];
+        forwardGeocoder.delegate = self;
+    }
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    NSString *string=[NSString stringWithFormat:@"%@",conferenceVenue.text];
+    [forwardGeocoder findLocationsWithAddress:string title:nil];
+}
+#pragma mark - MJGeocoderDelegate
+//Getting the location of store added
+- (void)geocoder:(MJGeocoder *)geocoder didFindLocations:(NSArray *)locations
+{
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
+    NSArray * displayedResults = [locations mutableCopy] ;
+    Address *address = [displayedResults objectAtIndex:0];
+    latitude=address.latitude;
+    longitude=address.longitude ;
+    NSLog(@"lat lon are %f %f,",[latitude floatValue],[longitude floatValue]);
+    UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    MapViewController *mapView =[storyboard instantiateViewControllerWithIdentifier:@"MapViewController"];
+    mapView.latitude=latitude;
+    mapView.longitude=longitude;
+    [self.navigationController pushViewController:mapView animated:YES];
+    //[myDelegate StopIndicator];
+}
+
+- (void)geocoder:(MJGeocoder *)geocoder didFailWithError:(NSError *)error
+{
+    if([error code] == 1)
+    {
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"You have entered an invalid location." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alertView show];
+    }
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 }
 #pragma mark - end
 
