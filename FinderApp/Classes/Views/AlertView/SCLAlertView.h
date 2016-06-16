@@ -19,7 +19,7 @@ typedef NSAttributedString* (^SCLAttributedFormatBlock)(NSString *value);
 typedef void (^SCLDismissBlock)(void);
 typedef void (^SCLForceHideBlock)(void);
 
-@interface SCLAlertView : UIViewController 
+@interface SCLAlertView : UIViewController
 
 /** Alert Styles
  *
@@ -100,24 +100,24 @@ typedef NS_ENUM(NSInteger, SCLAlertViewBackground)
  * (Default: NO)
  */
 @property BOOL useLargerIcon;
-    
+
 /** Title Label
  *
  * The text displayed as title.
  */
-@property UILabel *labelTitle;
+@property (nonatomic, strong) UILabel *labelTitle;
 
 /** Text view with the body message
  *
  * Holds the textview.
  */
-@property UITextView *viewText;
+@property (nonatomic, strong) UITextView *viewText;
 
 /** Activity Indicator
  *
  * Holds the activityIndicator.
  */
-@property UIActivityIndicatorView *activityIndicatorView;
+@property (nonatomic, strong) UIActivityIndicatorView *activityIndicatorView;
 
 /** Dismiss on tap outside
  *

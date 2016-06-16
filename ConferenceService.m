@@ -48,11 +48,11 @@
      {
          responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
          NSLog(@"conference list response %@",responseObject);
-         if([[Webservice sharedManager] isStatusOK:responseObject])
-         {
+         NSNumber *number = responseObject[@"isSuccess"];
+         if (number.integerValue==1) {
+             [myDelegate stopIndicator];
              id array =[responseObject objectForKey:@"conferenceListing"];
-             if (([array isKindOfClass:[NSArray class]]))
-             {
+             if (([array isKindOfClass:[NSArray class]])) {
                  NSArray * conferenceArray = [responseObject objectForKey:@"conferenceListing"];
                  NSMutableArray *dataArray = [NSMutableArray new];
                  for (int i =0; i<conferenceArray.count; i++)
@@ -66,19 +66,35 @@
                  }
                  success(dataArray);
              }
-          }
-         else
-         {
-             [myDelegate stopIndicator];
-             failure(responseObject);
          }
-     } failure:^(NSError *error)
-     {
+         else if(number.integerValue==0) {
+             [myDelegate stopIndicator];
+             success(nil);
+         }
+         else {
+             SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
+             [alert addButton:@"Ok" actionBlock:^(void) {
+                 [self logoutUser];
+             }];
+             [alert showWarning:nil title:@"Alert" subTitle:responseObject[@"message"] closeButtonTitle:nil duration:0.0f];
+         }
+     } failure:^(NSError *error) {
          [myDelegate stopIndicator];
          failure(error);
      }];
     
 }
+- (void)logoutUser
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+    myDelegate.navigationController = [storyboard instantiateViewControllerWithIdentifier:@"mainNavController"];
+    
+    myDelegate.window.rootViewController = myDelegate.navigationController;
+    [UserDefaultManager removeValue:@"userId"];
+    [UserDefaultManager removeValue:@"username"];
+}
+
 #pragma mark- end
 
 #pragma mark- Conference detail
@@ -86,12 +102,10 @@
 {
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":conferenceId};
     NSLog(@"request home %@",requestDict);
-    [[Webservice sharedManager] post:kUrlConferenceDetail parameters:requestDict success:^(id responseObject)
-     {
+    [[Webservice sharedManager] post:kUrlConferenceDetail parameters:requestDict success:^(id responseObject) {
          responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
          NSLog(@"home response %@",responseObject);
-         if([[Webservice sharedManager] isStatusOK:responseObject])
-         {
+         if([[Webservice sharedManager] isStatusOK:responseObject]) {
              NSMutableArray *conferenceArray = [NSMutableArray new];
              ConferenceDataModel *conferenceDetail = [[ConferenceDataModel alloc]init];
              NSDictionary * conferenceDict =[responseObject objectForKey:@"getConfrenceDetails"];
@@ -104,8 +118,7 @@
              [conferenceArray addObject:conferenceDetail];
              success(conferenceArray);
          }
-         else
-         {
+         else {
              [myDelegate stopIndicator];
              failure(nil);
          }
@@ -126,8 +139,7 @@
      {
          responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
          NSLog(@"Matcheslist response %@",responseObject);
-         if([[Webservice sharedManager] isStatusOK:responseObject])
-         {
+         if([[Webservice sharedManager] isStatusOK:responseObject]) {
              NSMutableArray *matchesArray = [NSMutableArray new];
              //             ConferenceDataModel *conferenceDetail = [[ConferenceDataModel alloc]init];
              //             NSDictionary * conferenceDict =[responseObject objectForKey:@"getConfrenceDetails"];
@@ -140,8 +152,7 @@
              //             [conferenceArray addObject:conferenceDetail];
              success(matchesArray);
          }
-         else
-         {
+         else {
              [myDelegate stopIndicator];
              failure(nil);
          }
@@ -160,22 +171,18 @@
 {
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"switchIdentifire":switchIdentifire,@"switchStatus":switchStatus};
     NSLog(@"settings request %@",requestDict);
-    [[Webservice sharedManager] post:kUrlChangeSettings parameters:requestDict success:^(id responseObject)
-     {
+    [[Webservice sharedManager] post:kUrlChangeSettings parameters:requestDict success:^(id responseObject) {
          responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
          NSLog(@"settings response %@",responseObject);
          NSNumber *number = responseObject[@"isSuccess"];
-         if (number.integerValue!=0)
-         {
+         if (number.integerValue!=0) {
              success(responseObject);
          }
-         else
-         {
+         else {
              [myDelegate stopIndicator];
              failure(nil);
          }
-     } failure:^(NSError *error)
-     {
+     } failure:^(NSError *error) {
          [myDelegate stopIndicator];
          failure(error);
      }];
@@ -190,17 +197,14 @@
      {
          responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
          NSLog(@"user setting response %@",responseObject);
-         if([[Webservice sharedManager] isStatusOK:responseObject])
-         {
+         if([[Webservice sharedManager] isStatusOK:responseObject]) {
              success(responseObject);
          }
-         else
-         {
+         else {
              [myDelegate stopIndicator];
              failure(nil);
          }
-     } failure:^(NSError *error)
-     {
+     } failure:^(NSError *error) {
          [myDelegate stopIndicator];
          failure(error);
      }];
@@ -217,16 +221,13 @@
      {
          responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
          NSLog(@"calendar details response %@",responseObject);
-         if([[Webservice sharedManager] isStatusOK:responseObject])
-         {
+         if([[Webservice sharedManager] isStatusOK:responseObject]) {
              id array =[responseObject objectForKey:@"calenderDetails"];
-             if (([array isKindOfClass:[NSArray class]]))
-             {
+             if (([array isKindOfClass:[NSArray class]])) {
                  NSArray * calendarDataArray = [responseObject objectForKey:@"calenderDetails"];
                  NSMutableArray *dataArray = [NSMutableArray new];
                 
-                 for (int i =0; i<calendarDataArray.count; i++)
-                 {
+                 for (int i =0; i<calendarDataArray.count; i++) {
                      CalendarDataModel *calendarDetails = [[CalendarDataModel alloc]init];
                      calendarDetails.eventArray=[[NSMutableArray alloc]init];
                      NSDictionary * calendarDict =[calendarDataArray objectAtIndex:i];
@@ -239,23 +240,19 @@
                          eventDetails.eventTime =[eventArrayDict objectForKey:@"eventTime"];
                          [calendarDetails.eventArray addObject:eventDetails];
                      }
-                    
                      [dataArray addObject:calendarDetails];
                  }
                  success(dataArray);
              }
-             else
-             {
+             else {
                  success(responseObject);
              }
          }
-         else
-         {
+         else {
              [myDelegate stopIndicator];
              failure(nil);
          }
-     } failure:^(NSError *error)
-     {
+     } failure:^(NSError *error) {
          [myDelegate stopIndicator];
          failure(error);
      }];

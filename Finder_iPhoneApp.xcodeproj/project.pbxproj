@@ -21,6 +21,17 @@
 		B70C5D811CE59C7F0063246A /* ProximityAlertViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B70C5D801CE59C7F0063246A /* ProximityAlertViewCell.m */; };
 		B71F63F31CF2CB600025EFBE /* ConferenceListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B71F63F21CF2CB600025EFBE /* ConferenceListCell.m */; };
 		B7339C281D08232300D878FD /* MyProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7339C271D08232300D878FD /* MyProfileViewController.m */; };
+		B73616EE1D12CE3100194588 /* Address.m in Sources */ = {isa = PBXBuildFile; fileRef = B73616DD1D12CE3100194588 /* Address.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B73616EF1D12CE3100194588 /* MJGeocoder.m in Sources */ = {isa = PBXBuildFile; fileRef = B73616E01D12CE3100194588 /* MJGeocoder.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B73616F01D12CE3100194588 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = B73616E31D12CE3100194588 /* NSObject+SBJSON.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B73616F11D12CE3100194588 /* NSString+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = B73616E51D12CE3100194588 /* NSString+SBJSON.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B73616F21D12CE3100194588 /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = B73616E71D12CE3100194588 /* SBJsonBase.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B73616F31D12CE3100194588 /* SBJsonParser.m in Sources */ = {isa = PBXBuildFile; fileRef = B73616E91D12CE3100194588 /* SBJsonParser.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B73616F41D12CE3100194588 /* SBJsonWriter.m in Sources */ = {isa = PBXBuildFile; fileRef = B73616EB1D12CE3100194588 /* SBJsonWriter.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B73616F51D12CE3100194588 /* AddressAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = B73616ED1D12CE3100194588 /* AddressAnnotation.m */; };
+		B73616F71D12CE4400194588 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B73616F61D12CE4400194588 /* MapKit.framework */; };
+		B73616FB1D12CEE000194588 /* MapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B73616FA1D12CEE000194588 /* MapViewController.m */; };
+		B73616FD1D12CFA300194588 /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = B73616FC1D12CFA300194588 /* placeholder.png */; };
 		B736EBAA1CCF93E000CE7B6E /* MessagesViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B736EBA91CCF93E000CE7B6E /* MessagesViewCell.m */; };
 		B740CC9E1CD861CB0006B32A /* bg.png in Resources */ = {isa = PBXBuildFile; fileRef = B740CC9A1CD861CB0006B32A /* bg.png */; };
 		B740CC9F1CD861CB0006B32A /* bg-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B740CC9B1CD861CB0006B32A /* bg-568h@2x.png */; };
@@ -147,6 +158,28 @@
 		B71F63F21CF2CB600025EFBE /* ConferenceListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConferenceListCell.m; sourceTree = "<group>"; };
 		B7339C261D08232300D878FD /* MyProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyProfileViewController.h; sourceTree = "<group>"; };
 		B7339C271D08232300D878FD /* MyProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyProfileViewController.m; sourceTree = "<group>"; };
+		B73616DC1D12CE3100194588 /* Address.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Address.h; sourceTree = "<group>"; };
+		B73616DD1D12CE3100194588 /* Address.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Address.m; sourceTree = "<group>"; };
+		B73616DE1D12CE3100194588 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
+		B73616DF1D12CE3100194588 /* MJGeocoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJGeocoder.h; sourceTree = "<group>"; };
+		B73616E01D12CE3100194588 /* MJGeocoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJGeocoder.m; sourceTree = "<group>"; };
+		B73616E11D12CE3100194588 /* MJGeocodingServices.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJGeocodingServices.h; sourceTree = "<group>"; };
+		B73616E21D12CE3100194588 /* NSObject+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SBJSON.h"; sourceTree = "<group>"; };
+		B73616E31D12CE3100194588 /* NSObject+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+SBJSON.m"; sourceTree = "<group>"; };
+		B73616E41D12CE3100194588 /* NSString+SBJSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SBJSON.h"; sourceTree = "<group>"; };
+		B73616E51D12CE3100194588 /* NSString+SBJSON.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SBJSON.m"; sourceTree = "<group>"; };
+		B73616E61D12CE3100194588 /* SBJsonBase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonBase.h; sourceTree = "<group>"; };
+		B73616E71D12CE3100194588 /* SBJsonBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonBase.m; sourceTree = "<group>"; };
+		B73616E81D12CE3100194588 /* SBJsonParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonParser.h; sourceTree = "<group>"; };
+		B73616E91D12CE3100194588 /* SBJsonParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonParser.m; sourceTree = "<group>"; };
+		B73616EA1D12CE3100194588 /* SBJsonWriter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SBJsonWriter.h; sourceTree = "<group>"; };
+		B73616EB1D12CE3100194588 /* SBJsonWriter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SBJsonWriter.m; sourceTree = "<group>"; };
+		B73616EC1D12CE3100194588 /* AddressAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddressAnnotation.h; sourceTree = "<group>"; };
+		B73616ED1D12CE3100194588 /* AddressAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddressAnnotation.m; sourceTree = "<group>"; };
+		B73616F61D12CE4400194588 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		B73616F91D12CEE000194588 /* MapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapViewController.h; sourceTree = "<group>"; };
+		B73616FA1D12CEE000194588 /* MapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapViewController.m; sourceTree = "<group>"; };
+		B73616FC1D12CFA300194588 /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
 		B736EBA81CCF93E000CE7B6E /* MessagesViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesViewCell.h; sourceTree = "<group>"; };
 		B736EBA91CCF93E000CE7B6E /* MessagesViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesViewCell.m; sourceTree = "<group>"; };
 		B740CC9A1CD861CB0006B32A /* bg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg.png; sourceTree = "<group>"; };
@@ -308,6 +341,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B73616F71D12CE4400194588 /* MapKit.framework in Frameworks */,
 				B7E024C01CC4D5B100707552 /* CoreLocation.framework in Frameworks */,
 				4EA5F7D5D38B1DF63EF3322F /* libPods.a in Frameworks */,
 			);
@@ -319,6 +353,7 @@
 		28552D1F9668D4BE3E623A4F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B73616F61D12CE4400194588 /* MapKit.framework */,
 				B7E024BF1CC4D5B100707552 /* CoreLocation.framework */,
 				B3CDDBB308E1E7466EFB6FFC /* libPods.a */,
 			);
@@ -478,6 +513,40 @@
 			name = MyProfileView;
 			sourceTree = "<group>";
 		};
+		B73616DB1D12CE0600194588 /* Geocoder */ = {
+			isa = PBXGroup;
+			children = (
+				B73616DC1D12CE3100194588 /* Address.h */,
+				B73616DD1D12CE3100194588 /* Address.m */,
+				B73616DE1D12CE3100194588 /* JSON.h */,
+				B73616DF1D12CE3100194588 /* MJGeocoder.h */,
+				B73616E01D12CE3100194588 /* MJGeocoder.m */,
+				B73616E11D12CE3100194588 /* MJGeocodingServices.h */,
+				B73616E21D12CE3100194588 /* NSObject+SBJSON.h */,
+				B73616E31D12CE3100194588 /* NSObject+SBJSON.m */,
+				B73616E41D12CE3100194588 /* NSString+SBJSON.h */,
+				B73616E51D12CE3100194588 /* NSString+SBJSON.m */,
+				B73616E61D12CE3100194588 /* SBJsonBase.h */,
+				B73616E71D12CE3100194588 /* SBJsonBase.m */,
+				B73616E81D12CE3100194588 /* SBJsonParser.h */,
+				B73616E91D12CE3100194588 /* SBJsonParser.m */,
+				B73616EA1D12CE3100194588 /* SBJsonWriter.h */,
+				B73616EB1D12CE3100194588 /* SBJsonWriter.m */,
+				B73616EC1D12CE3100194588 /* AddressAnnotation.h */,
+				B73616ED1D12CE3100194588 /* AddressAnnotation.m */,
+			);
+			name = Geocoder;
+			sourceTree = "<group>";
+		};
+		B73616F81D12CED300194588 /* MapviewController */ = {
+			isa = PBXGroup;
+			children = (
+				B73616F91D12CEE000194588 /* MapViewController.h */,
+				B73616FA1D12CEE000194588 /* MapViewController.m */,
+			);
+			name = MapviewController;
+			sourceTree = "<group>";
+		};
 		B736EBA61CCF93A600CE7B6E /* MessagesViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -499,6 +568,7 @@
 		B740CC991CD861AC0006B32A /* OtherImages */ = {
 			isa = PBXGroup;
 			children = (
+				B73616FC1D12CFA300194588 /* placeholder.png */,
 				B7FF9C661CF415DA0067AF60 /* TabBarImages */,
 				B7FF9C651CF415C70067AF60 /* BackgroundImages */,
 			);
@@ -850,6 +920,7 @@
 		B7A8DDD91CAE5CBD007F56B6 /* SupportingClasses */ = {
 			isa = PBXGroup;
 			children = (
+				B73616DB1D12CE0600194588 /* Geocoder */,
 				B7A8DDC81CAE5BAB007F56B6 /* DefaultManager */,
 				B7A8DDBB1CAE5994007F56B6 /* NullHandler */,
 				B7A8DDBA1CAE5965007F56B6 /* GoogleAnalytics */,
@@ -1046,6 +1117,7 @@
 		B7EAC17C1CC5ECC7001C4EEC /* ConferenceDetailModule */ = {
 			isa = PBXGroup;
 			children = (
+				B73616F81D12CED300194588 /* MapviewController */,
 				B70C5D6F1CE58D100063246A /* ConferenceListingViewController */,
 				5D32EC151CC4A36D00C50969 /* HomeViewController */,
 			);
@@ -1339,6 +1411,7 @@
 				B7FF9C7A1CF4161D0067AF60 /* matches_selected-667h@2x.png in Resources */,
 				B7FF9C981CF416330067AF60 /* matches-736h@3x.png in Resources */,
 				B7FF9C7C1CF4161D0067AF60 /* more_selected-667h@2x.png in Resources */,
+				B73616FD1D12CFA300194588 /* placeholder.png in Resources */,
 				B7FF9C8D1CF4162D0067AF60 /* conference@2x.png in Resources */,
 				B7E434DC1D06C71600FE41A3 /* proximity_selected-667h@2x.png in Resources */,
 				B7E434D81D06C6BB00FE41A3 /* proximity_tab@2x.png in Resources */,
@@ -1414,10 +1487,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				B776959B1CBF537D00794005 /* UITextField+Validations.m in Sources */,
+				B73616F41D12CE3100194588 /* SBJsonWriter.m in Sources */,
 				B736EBAA1CCF93E000CE7B6E /* MessagesViewCell.m in Sources */,
 				B75FCECD1D0E683B00B8CE4C /* OtherUserProfileViewController.m in Sources */,
 				B762DB6D1CCDFAEB002875A1 /* PendingAppointmentCell.m in Sources */,
 				B70C5D771CE590B20063246A /* ConferenceListDataModel.m in Sources */,
+				B73616F31D12CE3100194588 /* SBJsonParser.m in Sources */,
 				5D32EC0E1CC4A31F00C50969 /* MessagesViewController.m in Sources */,
 				B7A8DDDC1CAE5FC8007F56B6 /* LoginViewController.m in Sources */,
 				B77695C51CBFB4F300794005 /* UIImage+ImageEffects.m in Sources */,
@@ -1429,6 +1504,8 @@
 				B7EAC18B1CC63328001C4EEC /* SettingsViewCell.m in Sources */,
 				B7FFA59D1CF6B5EE00B0614A /* CalendarDataModel.m in Sources */,
 				5D32EC0F1CC4A31F00C50969 /* MatchesViewController.m in Sources */,
+				B73616F11D12CE3100194588 /* NSString+SBJSON.m in Sources */,
+				B73616F51D12CE3100194588 /* AddressAnnotation.m in Sources */,
 				B77695CC1CBFB4F300794005 /* SCLSwitchView.m in Sources */,
 				B7C018D11CD0C7A4006773CB /* ScheduleMeetingViewController.m in Sources */,
 				B77695C91CBFB4F300794005 /* SCLAlertViewStyleKit.m in Sources */,
@@ -1449,6 +1526,7 @@
 				B7A8DDCE1CAE5C32007F56B6 /* NullValueChecker.m in Sources */,
 				B7414F931CCA4715009FE9CE /* CustomAlert.m in Sources */,
 				B7DCE4531CBB9E5D0063FF72 /* Webservice.m in Sources */,
+				B73616FB1D12CEE000194588 /* MapViewController.m in Sources */,
 				B7A8DDC11CAE5B50007F56B6 /* BSKeyboardControls.m in Sources */,
 				B7A8DDCB1CAE5BD4007F56B6 /* UserDefaultManager.m in Sources */,
 				B7C018BF1CD07044006773CB /* PersonalMessageViewCell.m in Sources */,
@@ -1459,15 +1537,19 @@
 				B77695C81CBFB4F300794005 /* SCLAlertViewResponder.m in Sources */,
 				B74B44551CFD60DD00275CC9 /* EventDataModel.m in Sources */,
 				B70C5D811CE59C7F0063246A /* ProximityAlertViewCell.m in Sources */,
+				B73616EF1D12CE3100194588 /* MJGeocoder.m in Sources */,
 				B7EAC1761CC5DBE9001C4EEC /* ConferenceService.m in Sources */,
 				5D93619D1CC606190004F030 /* MatchesTableViewCell.m in Sources */,
 				B78405B01CDB72A700CD7D54 /* ASValueTrackingSlider.m in Sources */,
 				B7C018C41CD0708B006773CB /* PersonalMessageViewController.m in Sources */,
+				B73616F21D12CE3100194588 /* SBJsonBase.m in Sources */,
 				B7414F921CCA4715009FE9CE /* MyAlert.m in Sources */,
 				B77695AD1CBF70E400794005 /* GlobalBackViewController.m in Sources */,
 				B7EAC1801CC5ED06001C4EEC /* SettingsViewController.m in Sources */,
+				B73616EE1D12CE3100194588 /* Address.m in Sources */,
 				5D32EC101CC4A31F00C50969 /* HomeViewController.m in Sources */,
 				B77695A71CBF615400794005 /* ForgotPasswordViewController.m in Sources */,
+				B73616F01D12CE3100194588 /* NSObject+SBJSON.m in Sources */,
 				B7EAC1701CC5D58F001C4EEC /* UserService.m in Sources */,
 				B7A8DD6A1CAE2BF2007F56B6 /* main.m in Sources */,
 				B77695A31CBF594E00794005 /* UIView+RoundedCorner.m in Sources */,
