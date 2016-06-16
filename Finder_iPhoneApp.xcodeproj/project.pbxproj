@@ -57,7 +57,6 @@
 		B77695CC1CBFB4F300794005 /* SCLSwitchView.m in Sources */ = {isa = PBXBuildFile; fileRef = B77695C41CBFB4F300794005 /* SCLSwitchView.m */; };
 		B78405AF1CDB72A700CD7D54 /* ASValuePopUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = B78405AC1CDB72A700CD7D54 /* ASValuePopUpView.m */; };
 		B78405B01CDB72A700CD7D54 /* ASValueTrackingSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = B78405AE1CDB72A700CD7D54 /* ASValueTrackingSlider.m */; };
-		B786A4D71D111A8A002B7217 /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = B786A4D61D111A8A002B7217 /* placeholder.png */; };
 		B7A82A911CD1CA2F0030DB38 /* UIPlaceHolderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7A82A901CD1CA2F0030DB38 /* UIPlaceHolderTextView.m */; };
 		B7A8DD6A1CAE2BF2007F56B6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B7A8DD691CAE2BF2007F56B6 /* main.m */; };
 		B7A8DD6D1CAE2BF2007F56B6 /* FinderAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B7A8DD6C1CAE2BF2007F56B6 /* FinderAppDelegate.m */; };
@@ -210,7 +209,6 @@
 		B78405AC1CDB72A700CD7D54 /* ASValuePopUpView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASValuePopUpView.m; sourceTree = "<group>"; };
 		B78405AD1CDB72A700CD7D54 /* ASValueTrackingSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASValueTrackingSlider.h; sourceTree = "<group>"; };
 		B78405AE1CDB72A700CD7D54 /* ASValueTrackingSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASValueTrackingSlider.m; sourceTree = "<group>"; };
-		B786A4D61D111A8A002B7217 /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
 		B7A82A8F1CD1CA2F0030DB38 /* UIPlaceHolderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPlaceHolderTextView.h; sourceTree = "<group>"; };
 		B7A82A901CD1CA2F0030DB38 /* UIPlaceHolderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPlaceHolderTextView.m; sourceTree = "<group>"; };
 		B7A8DD651CAE2BF2007F56B6 /* Finder_iPhoneApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Finder_iPhoneApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -501,7 +499,6 @@
 		B740CC991CD861AC0006B32A /* OtherImages */ = {
 			isa = PBXGroup;
 			children = (
-				B786A4D61D111A8A002B7217 /* placeholder.png */,
 				B7FF9C661CF415DA0067AF60 /* TabBarImages */,
 				B7FF9C651CF415C70067AF60 /* BackgroundImages */,
 			);
@@ -1342,7 +1339,6 @@
 				B7FF9C7A1CF4161D0067AF60 /* matches_selected-667h@2x.png in Resources */,
 				B7FF9C981CF416330067AF60 /* matches-736h@3x.png in Resources */,
 				B7FF9C7C1CF4161D0067AF60 /* more_selected-667h@2x.png in Resources */,
-				B786A4D71D111A8A002B7217 /* placeholder.png in Resources */,
 				B7FF9C8D1CF4162D0067AF60 /* conference@2x.png in Resources */,
 				B7E434DC1D06C71600FE41A3 /* proximity_selected-667h@2x.png in Resources */,
 				B7E434D81D06C6BB00FE41A3 /* proximity_tab@2x.png in Resources */,
