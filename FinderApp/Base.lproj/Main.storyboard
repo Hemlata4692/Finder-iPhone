@@ -26,6 +26,7 @@
         <mutableArray key="Roboto-Italic.ttf">
             <string>Roboto-Italic</string>
             <string>Roboto-Italic</string>
+            <string>Roboto-Italic</string>
         </mutableArray>
         <mutableArray key="Roboto-Medium.ttf">
             <string>Roboto-Medium</string>
@@ -536,6 +537,16 @@
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="k7k-ZM-jIp" secondAttribute="height" multiplier="320:367" constant="4.359673024523147" id="EQh-HX-pI4"/>
                                 </constraints>
+                                <label key="tableFooterView" hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Under Development." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zVf-Ie-fyb">
+                                    <rect key="frame" x="0.0" y="121" width="320" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="21" id="hth-ec-EBt"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
+                                    <color key="textColor" red="0.23921568630000001" green="0.23921568630000001" blue="0.23921568630000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="calendarCell" rowHeight="70" id="Lb4-kB-dBP" customClass="CalendarTableViewCell">
                                         <rect key="frame" x="0.0" y="50" width="320" height="70"/>
@@ -548,7 +559,7 @@
                                                     <rect key="frame" x="5" y="0.0" width="310" height="66"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="WELCOME SPEECH BY ORGANISER" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="03K-do-08L">
-                                                            <rect key="frame" x="13" y="8" width="292" height="25"/>
+                                                            <rect key="frame" x="62" y="8" width="243" height="25"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="25" id="cuM-GE-PQH"/>
                                                             </constraints>
@@ -557,14 +568,14 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="time_icon" translatesAutoresizingMaskIntoConstraints="NO" id="W7g-Yu-egS">
-                                                            <rect key="frame" x="13" y="39" width="13" height="13"/>
+                                                            <rect key="frame" x="68" y="39" width="13" height="13"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" secondItem="W7g-Yu-egS" secondAttribute="height" multiplier="1:1" id="abJ-9q-UnO"/>
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="09:00 - 09:45" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zaE-UF-y7U">
-                                                            <rect key="frame" x="34" y="36" width="267" height="20"/>
+                                                            <rect key="frame" x="88" y="36" width="123" height="20"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="20" id="flA-3o-h4C"/>
                                                             </constraints>
@@ -572,17 +583,41 @@
                                                             <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="meeting_iconCalendar" translatesAutoresizingMaskIntoConstraints="NO" id="5hC-yI-eTR">
+                                                            <rect key="frame" x="5" y="8" width="50" height="50"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="50" id="OuO-wl-zrJ"/>
+                                                                <constraint firstAttribute="height" constant="50" id="tD4-fS-5Te"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u9K-13-KJ6">
+                                                            <rect key="frame" x="224" y="36" width="79" height="20"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="20" id="0Sv-WL-qwh"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" name="Roboto-Italic" family="Roboto" pointSize="12"/>
+                                                            <state key="normal" title="View Agenda">
+                                                                <color key="titleColor" red="0.30980392159999998" green="0.80784313730000001" blue="0.76470588240000004" alpha="1" colorSpace="calibratedRGB"/>
+                                                            </state>
+                                                        </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstItem="W7g-Yu-egS" firstAttribute="centerY" secondItem="zaE-UF-y7U" secondAttribute="centerY" id="5Zh-1H-xeQ"/>
-                                                        <constraint firstAttribute="trailing" secondItem="zaE-UF-y7U" secondAttribute="trailing" constant="9" id="5p6-m2-wzk"/>
+                                                        <constraint firstAttribute="trailing" secondItem="zaE-UF-y7U" secondAttribute="trailing" constant="99" id="5p6-m2-wzk"/>
                                                         <constraint firstAttribute="width" secondItem="YdY-7M-Psn" secondAttribute="height" multiplier="155:37" constant="33.513513513513487" id="9y1-C9-ZF0"/>
+                                                        <constraint firstAttribute="bottom" secondItem="5hC-yI-eTR" secondAttribute="bottom" constant="8" id="Diy-Hg-9xa"/>
+                                                        <constraint firstItem="u9K-13-KJ6" firstAttribute="top" secondItem="03K-do-08L" secondAttribute="bottom" constant="3" id="Fbk-pZ-3Rt"/>
                                                         <constraint firstItem="zaE-UF-y7U" firstAttribute="top" secondItem="03K-do-08L" secondAttribute="bottom" constant="3" id="Kuj-bW-APy"/>
+                                                        <constraint firstItem="5hC-yI-eTR" firstAttribute="leading" secondItem="YdY-7M-Psn" secondAttribute="leading" constant="5" id="MYx-as-79d"/>
                                                         <constraint firstAttribute="trailing" secondItem="03K-do-08L" secondAttribute="trailing" constant="5" id="Mvx-Nf-zsF"/>
-                                                        <constraint firstItem="zaE-UF-y7U" firstAttribute="leading" secondItem="W7g-Yu-egS" secondAttribute="trailing" constant="8" id="bJ6-GA-LCv"/>
-                                                        <constraint firstItem="03K-do-08L" firstAttribute="leading" secondItem="YdY-7M-Psn" secondAttribute="leading" constant="13" id="cUl-YB-lrl"/>
-                                                        <constraint firstItem="W7g-Yu-egS" firstAttribute="leading" secondItem="YdY-7M-Psn" secondAttribute="leading" constant="13" id="nPE-RF-jX5"/>
+                                                        <constraint firstItem="5hC-yI-eTR" firstAttribute="top" secondItem="YdY-7M-Psn" secondAttribute="top" constant="8" id="PNp-Xq-y2N"/>
+                                                        <constraint firstItem="5hC-yI-eTR" firstAttribute="centerY" secondItem="YdY-7M-Psn" secondAttribute="centerY" id="ZEN-of-A5N"/>
+                                                        <constraint firstItem="zaE-UF-y7U" firstAttribute="leading" secondItem="W7g-Yu-egS" secondAttribute="trailing" constant="7" id="bJ6-GA-LCv"/>
+                                                        <constraint firstItem="W7g-Yu-egS" firstAttribute="leading" secondItem="5hC-yI-eTR" secondAttribute="trailing" constant="13" id="d6L-hc-Aud"/>
+                                                        <constraint firstItem="u9K-13-KJ6" firstAttribute="leading" secondItem="zaE-UF-y7U" secondAttribute="trailing" constant="13" id="ryB-fW-glB"/>
+                                                        <constraint firstItem="03K-do-08L" firstAttribute="leading" secondItem="5hC-yI-eTR" secondAttribute="trailing" constant="7" id="sH7-aB-yKm"/>
+                                                        <constraint firstAttribute="trailing" secondItem="u9K-13-KJ6" secondAttribute="trailing" constant="7" id="xjG-tk-DPE"/>
                                                         <constraint firstItem="03K-do-08L" firstAttribute="top" secondItem="YdY-7M-Psn" secondAttribute="top" constant="8" id="zjD-5b-FcE"/>
                                                     </constraints>
                                                 </view>
@@ -600,6 +635,7 @@
                                             <outlet property="containerView" destination="YdY-7M-Psn" id="RTz-7e-eh0"/>
                                             <outlet property="eventNameLabel" destination="03K-do-08L" id="agN-nI-X1p"/>
                                             <outlet property="eventTimeLabel" destination="zaE-UF-y7U" id="kGe-ik-kMA"/>
+                                            <outlet property="viewAgendaButton" destination="u9K-13-KJ6" id="agK-1M-Q2A"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -608,26 +644,13 @@
                                     <outlet property="delegate" destination="8wU-ta-QEP" id="yqB-zM-tJB"/>
                                 </connections>
                             </tableView>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Under Development." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zVf-Ie-fyb">
-                                <rect key="frame" x="0.0" y="173" width="320" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="hth-ec-EBt"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
-                                <color key="textColor" red="0.23921568630000001" green="0.23921568630000001" blue="0.23921568630000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="k7k-ZM-jIp" firstAttribute="top" secondItem="Ko2-D1-CVR" secondAttribute="bottom" constant="5" id="3J1-xg-p5V"/>
-                            <constraint firstItem="Zmu-nl-YLH" firstAttribute="top" secondItem="zVf-Ie-fyb" secondAttribute="bottom" constant="173" id="4zY-Y1-nAL"/>
                             <constraint firstItem="k7k-ZM-jIp" firstAttribute="leading" secondItem="Qew-q0-NwJ" secondAttribute="leading" id="8bf-uP-j3a"/>
-                            <constraint firstItem="zVf-Ie-fyb" firstAttribute="leading" secondItem="Qew-q0-NwJ" secondAttribute="leading" id="HhQ-bY-mZu"/>
                             <constraint firstItem="Zmu-nl-YLH" firstAttribute="top" secondItem="k7k-ZM-jIp" secondAttribute="bottom" id="Kn6-nW-din"/>
-                            <constraint firstAttribute="trailing" secondItem="zVf-Ie-fyb" secondAttribute="trailing" id="T4C-BZ-MEk"/>
                             <constraint firstAttribute="trailing" secondItem="k7k-ZM-jIp" secondAttribute="trailing" id="bsW-vh-MhU"/>
-                            <constraint firstItem="zVf-Ie-fyb" firstAttribute="top" secondItem="Ko2-D1-CVR" secondAttribute="bottom" constant="173" id="omK-vq-2Jv"/>
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
@@ -2746,6 +2769,9 @@
                                     <constraint firstItem="XO7-yH-t1o" firstAttribute="top" secondItem="Svj-gF-vj6" secondAttribute="top" id="se5-mL-Rtm"/>
                                     <constraint firstAttribute="width" secondItem="Svj-gF-vj6" secondAttribute="height" multiplier="10:13" constant="35.384615384615358" id="xfu-OV-ztY"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="delegate" destination="AC5-23-ob5" id="WxE-N6-UJR"/>
+                                </connections>
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BNI-mo-cen">
                                 <rect key="frame" x="0.0" y="376" width="320" height="40"/>
@@ -4932,6 +4958,7 @@
         <image name="location_popUp" width="14" height="14"/>
         <image name="lock_icon" width="18" height="18"/>
         <image name="logo" width="129" height="129"/>
+        <image name="meeting_iconCalendar" width="50" height="50"/>
         <image name="message" width="35" height="35"/>
         <image name="message_icon" width="21" height="21"/>
         <image name="new_password" width="14" height="14"/>

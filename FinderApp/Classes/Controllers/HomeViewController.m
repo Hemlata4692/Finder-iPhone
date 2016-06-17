@@ -123,6 +123,7 @@
     return textHeight;
 }
 #pragma mark - end
+#pragma mark - IBActions
 - (IBAction)mapButtonAction:(id)sender
 {
     if(!forwardGeocoder)
@@ -134,6 +135,7 @@
     NSString *string=[NSString stringWithFormat:@"%@",conferenceVenue.text];
     [forwardGeocoder findLocationsWithAddress:string title:nil];
 }
+#pragma mark - end
 #pragma mark - MJGeocoderDelegate
 //Getting the location of store added
 - (void)geocoder:(MJGeocoder *)geocoder didFindLocations:(NSArray *)locations

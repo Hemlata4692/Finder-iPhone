@@ -39,8 +39,8 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
-    [myDelegate showIndicator];
-    [self performSelector:@selector(getCalendarDetails) withObject:nil afterDelay:.1];
+//    [myDelegate showIndicator];
+//    [self performSelector:@selector(getCalendarDetails) withObject:nil afterDelay:.1];
     
 }
 #pragma mark - end
@@ -50,6 +50,30 @@
     [[ConferenceService sharedManager] getCalendarDetails:[UserDefaultManager getValue:@"conferenceId"] success:^(id dataArray) {
         [myDelegate stopIndicator];
         sectionArray=[dataArray mutableCopy];
+        for (int i=0; i<=sectionArray.count; i++) {
+            for (int j=0; j<=[[sectionArray objectAtIndex:i]eventArray].count; j++) {
+               EventDataModel *data=[[[sectionArray objectAtIndex:i]eventArray] objectAtIndex:j];
+    
+                NSArray *dateStrings = [data.eventTime componentsSeparatedByString:@" - "];
+                NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+                [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+                NSDate *startDate = [dateFormatter dateFromString:[dateStrings objectAtIndex:0]];
+               // NSDate *endDate = [dateFormatter dateFromString:[dateStrings objectAtIndex:1]];
+                NSTimeInterval notiInterval =[startDate timeIntervalSinceDate:[NSDate date]] -15*60;
+                UILocalNotification *notification = [[UILocalNotification alloc] init];
+                notification.fireDate = [NSDate dateWithTimeIntervalSinceNow:notiInterval];
+                notification.alertBody = [NSString stringWithFormat:@"%@ %@ %@ %@",@"You have calender event for",data.eventName,@"at",startDate];
+                notification.timeZone = [NSTimeZone defaultTimeZone];
+                notification.soundName = UILocalNotificationDefaultSoundName;
+                notification.applicationIconBadgeNumber = 0;
+                NSDictionary *infoDict = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%@ %@ %@ %@",@"You have calender event for",data.eventName,@"at",startDate] forKey:@"Calender"];
+                notification.userInfo = infoDict;
+                NSMutableArray *notifications = [[NSMutableArray alloc] init];
+                [notifications addObject:notification];
+                [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+
+            }
+        }
          [calendarTableView reloadData];
     }
                                                    failure:^(NSError *error)
@@ -63,6 +87,7 @@
 #pragma mark - Table view delegate methods
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     // Return the number of sections.
+    //return 3;
     return sectionArray.count;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -83,6 +108,7 @@
     UILabel * dateLabel = [[UILabel alloc] init];
     dateLabel.font = [UIFont fontWithName:@"Roboto-Regular" size:16.0];
     dateLabel.text=[[sectionArray objectAtIndex:section]conferenceDate];
+   // dateLabel.text=@"25 April";
     float width =  [dateLabel.text boundingRectWithSize:dateLabel.frame.size options:NSStringDrawingUsesLineFragmentOrigin attributes:@{ NSFontAttributeName:dateLabel.font } context:nil]
     .size.width;
     dateLabel.frame = CGRectMake(12, 0, width,40.0);
@@ -93,6 +119,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
 
+   // return 5;
     return [[sectionArray objectAtIndex:section]eventArray].count;
 }
 
@@ -104,7 +131,7 @@
         calendarCell = [[CalendarTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     }
     [calendarCell.containerView addShadow:calendarCell.containerView color:[UIColor lightGrayColor]];
-     EventDataModel *data=[[[sectionArray objectAtIndex:indexPath.section]eventArray] objectAtIndex:indexPath.row];
+    EventDataModel *data=[[[sectionArray objectAtIndex:indexPath.section]eventArray] objectAtIndex:indexPath.row];
     [calendarCell displayData:data indexPath:(int)indexPath.row];
     return calendarCell;
 }

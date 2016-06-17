@@ -303,4 +303,37 @@
     [[UIApplication sharedApplication]  unregisterForRemoteNotifications];
 }
 #pragma mark - end
+#pragma mark - Local notification
+-(void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
+{
+    
+    if (application.applicationState == UIApplicationStateActive) {
+        
+//        [audioPlayer play];
+//        CustomLocalNotification *myLocalNotification = [[CustomLocalNotification alloc]initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 20) labelText:[notification.userInfo valueForKey:@"userInfo"]];
+//        [self.window addSubview:myLocalNotification.mainView];
+      
+
+    }
+    else {
+        
+         [[UIApplication sharedApplication] cancelLocalNotification:notification];
+    }
+}
+-(void)dismiss:(UIAlertView*)alertview
+{
+    [alertview dismissWithClickedButtonIndex:0 animated:YES];
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag==1 && buttonIndex==1)
+    {
+//        UIStoryboard *sb=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//        RatingViewController *view1=[sb instantiateViewControllerWithIdentifier:@"RatingViewController"];
+//        view1.bookingId=bookingId;
+//        [self.currentNavigationController pushViewController:view1 animated:YES];
+    }
+}
+#pragma mark - end
 @end

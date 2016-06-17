@@ -9,7 +9,7 @@
 #import "CalendarTableViewCell.h"
 
 @implementation CalendarTableViewCell
-@synthesize eventNameLabel,eventTimeLabel;
+@synthesize eventNameLabel,eventTimeLabel,viewAgendaButton;
 #pragma mark - Load nib
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -26,6 +26,7 @@
 #pragma mark - Display data
 -(void)displayData :(EventDataModel *)eventDetails indexPath:(int)indexPath
 {
+    [viewAgendaButton setViewBorder:viewAgendaButton color:[UIColor colorWithRed:79.0/255.0 green:206.0/255.0 blue:195.0/255.0 alpha:1.0]];
     eventNameLabel.text=[eventDetails.eventName uppercaseString];
     eventTimeLabel.text=eventDetails.eventTime;
 }

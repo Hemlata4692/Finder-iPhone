@@ -10,6 +10,7 @@
 #import "EventDataModel.h"
 
 @interface CalendarTableViewCell : UITableViewCell
+@property (weak, nonatomic) IBOutlet UIButton *viewAgendaButton;
 @property (weak, nonatomic) IBOutlet UIView *containerView;
 @property (weak, nonatomic) IBOutlet UILabel *eventTimeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *eventNameLabel;

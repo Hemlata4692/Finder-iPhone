@@ -88,7 +88,6 @@
 #pragma mark - end
 
 #pragma mark - Table view delegate and datasource
-#pragma mark - Table view delegate methods
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return conferenceListingArray.count;

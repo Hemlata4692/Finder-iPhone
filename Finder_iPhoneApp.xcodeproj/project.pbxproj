@@ -20,6 +20,7 @@
 		B70C5D7B1CE5939A0063246A /* ProximityAlertsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B70C5D7A1CE5939A0063246A /* ProximityAlertsViewController.m */; };
 		B70C5D811CE59C7F0063246A /* ProximityAlertViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B70C5D801CE59C7F0063246A /* ProximityAlertViewCell.m */; };
 		B71F63F31CF2CB600025EFBE /* ConferenceListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B71F63F21CF2CB600025EFBE /* ConferenceListCell.m */; };
+		B72E75941D13B07800383371 /* ProfileService.m in Sources */ = {isa = PBXBuildFile; fileRef = B72E75931D13B07800383371 /* ProfileService.m */; };
 		B7339C281D08232300D878FD /* MyProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7339C271D08232300D878FD /* MyProfileViewController.m */; };
 		B73616EE1D12CE3100194588 /* Address.m in Sources */ = {isa = PBXBuildFile; fileRef = B73616DD1D12CE3100194588 /* Address.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		B73616EF1D12CE3100194588 /* MJGeocoder.m in Sources */ = {isa = PBXBuildFile; fileRef = B73616E01D12CE3100194588 /* MJGeocoder.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -156,6 +157,8 @@
 		B70C5D801CE59C7F0063246A /* ProximityAlertViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProximityAlertViewCell.m; sourceTree = "<group>"; };
 		B71F63F11CF2CB600025EFBE /* ConferenceListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConferenceListCell.h; sourceTree = "<group>"; };
 		B71F63F21CF2CB600025EFBE /* ConferenceListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConferenceListCell.m; sourceTree = "<group>"; };
+		B72E75921D13B07800383371 /* ProfileService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileService.h; sourceTree = SOURCE_ROOT; };
+		B72E75931D13B07800383371 /* ProfileService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileService.m; sourceTree = SOURCE_ROOT; };
 		B7339C261D08232300D878FD /* MyProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyProfileViewController.h; sourceTree = "<group>"; };
 		B7339C271D08232300D878FD /* MyProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyProfileViewController.m; sourceTree = "<group>"; };
 		B73616DC1D12CE3100194588 /* Address.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Address.h; sourceTree = "<group>"; };
@@ -502,6 +505,15 @@
 				B70C5D711CE58D390063246A /* ConferenceListViewController.m */,
 			);
 			name = ConferenceListView;
+			sourceTree = "<group>";
+		};
+		B72E75911D13AF8500383371 /* ProfileSeviceModule */ = {
+			isa = PBXGroup;
+			children = (
+				B72E75921D13B07800383371 /* ProfileService.h */,
+				B72E75931D13B07800383371 /* ProfileService.m */,
+			);
+			name = ProfileSeviceModule;
 			sourceTree = "<group>";
 		};
 		B7339C251D0822D800D878FD /* MyProfileView */ = {
@@ -1002,6 +1014,7 @@
 		B7DCE4501CBB9DC50063FF72 /* Webservice */ = {
 			isa = PBXGroup;
 			children = (
+				B72E75911D13AF8500383371 /* ProfileSeviceModule */,
 				B7EAC1731CC5DBD1001C4EEC /* ConferenceServiceModule */,
 				B7EAC1721CC5DBB6001C4EEC /* UserServiceModule */,
 				B7EAC1711CC5DBA4001C4EEC /* GlobalService */,
@@ -1515,6 +1528,7 @@
 				B7C018CD1CD0B7E0006773CB /* NewMessageViewController.m in Sources */,
 				B70C5D7B1CE5939A0063246A /* ProximityAlertsViewController.m in Sources */,
 				B78405AF1CDB72A700CD7D54 /* ASValuePopUpView.m in Sources */,
+				B72E75941D13B07800383371 /* ProfileService.m in Sources */,
 				B70C5D721CE58D390063246A /* ConferenceListViewController.m in Sources */,
 				B7E024C41CC5089E00707552 /* ConferenceDataModel.m in Sources */,
 				B74DF9FC1D0A7967002EC69E /* EditProfileViewController.m in Sources */,
