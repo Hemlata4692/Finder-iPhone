@@ -13,4 +13,10 @@
 
 //Interest list
 -(void)getInterestList:(void (^)(id data))success failure:(void (^)(NSError *error))failure;
+
+//Interested In list
+-(void)getInterestedInList:(void (^)(id data))success failure:(void (^)(NSError *error))failure;
+
+//Profession list
+-(void)getProfessionList:(void (^)(id data))success failure:(void (^)(NSError *error))failure;
 @end

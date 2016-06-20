@@ -69,6 +69,9 @@
 		B77695CC1CBFB4F300794005 /* SCLSwitchView.m in Sources */ = {isa = PBXBuildFile; fileRef = B77695C41CBFB4F300794005 /* SCLSwitchView.m */; };
 		B78405AF1CDB72A700CD7D54 /* ASValuePopUpView.m in Sources */ = {isa = PBXBuildFile; fileRef = B78405AC1CDB72A700CD7D54 /* ASValuePopUpView.m */; };
 		B78405B01CDB72A700CD7D54 /* ASValueTrackingSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = B78405AE1CDB72A700CD7D54 /* ASValueTrackingSlider.m */; };
+		B79D815B1D1799BF00E8B829 /* ALPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B79D81561D1799BF00E8B829 /* ALPickerView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		B79D815C1D1799BF00E8B829 /* ALPickerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B79D81581D1799BF00E8B829 /* ALPickerViewCell.m */; };
+		B79D815D1D1799BF00E8B829 /* CYCustomMultiSelectPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B79D815A1D1799BF00E8B829 /* CYCustomMultiSelectPickerView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		B7A82A911CD1CA2F0030DB38 /* UIPlaceHolderTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = B7A82A901CD1CA2F0030DB38 /* UIPlaceHolderTextView.m */; };
 		B7A8DD6A1CAE2BF2007F56B6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B7A8DD691CAE2BF2007F56B6 /* main.m */; };
 		B7A8DD6D1CAE2BF2007F56B6 /* FinderAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B7A8DD6C1CAE2BF2007F56B6 /* FinderAppDelegate.m */; };
@@ -245,6 +248,12 @@
 		B78405AC1CDB72A700CD7D54 /* ASValuePopUpView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASValuePopUpView.m; sourceTree = "<group>"; };
 		B78405AD1CDB72A700CD7D54 /* ASValueTrackingSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ASValueTrackingSlider.h; sourceTree = "<group>"; };
 		B78405AE1CDB72A700CD7D54 /* ASValueTrackingSlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ASValueTrackingSlider.m; sourceTree = "<group>"; };
+		B79D81551D1799BF00E8B829 /* ALPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALPickerView.h; sourceTree = "<group>"; };
+		B79D81561D1799BF00E8B829 /* ALPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALPickerView.m; sourceTree = "<group>"; };
+		B79D81571D1799BF00E8B829 /* ALPickerViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALPickerViewCell.h; sourceTree = "<group>"; };
+		B79D81581D1799BF00E8B829 /* ALPickerViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALPickerViewCell.m; sourceTree = "<group>"; };
+		B79D81591D1799BF00E8B829 /* CYCustomMultiSelectPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CYCustomMultiSelectPickerView.h; sourceTree = "<group>"; };
+		B79D815A1D1799BF00E8B829 /* CYCustomMultiSelectPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CYCustomMultiSelectPickerView.m; sourceTree = "<group>"; };
 		B7A82A8F1CD1CA2F0030DB38 /* UIPlaceHolderTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UIPlaceHolderTextView.h; sourceTree = "<group>"; };
 		B7A82A901CD1CA2F0030DB38 /* UIPlaceHolderTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UIPlaceHolderTextView.m; sourceTree = "<group>"; };
 		B7A8DD651CAE2BF2007F56B6 /* Finder_iPhoneApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Finder_iPhoneApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -750,6 +759,19 @@
 			name = ASValuePopUpSlider;
 			sourceTree = "<group>";
 		};
+		B79D81541D1799A300E8B829 /* ALPickerView */ = {
+			isa = PBXGroup;
+			children = (
+				B79D81551D1799BF00E8B829 /* ALPickerView.h */,
+				B79D81561D1799BF00E8B829 /* ALPickerView.m */,
+				B79D81571D1799BF00E8B829 /* ALPickerViewCell.h */,
+				B79D81581D1799BF00E8B829 /* ALPickerViewCell.m */,
+				B79D81591D1799BF00E8B829 /* CYCustomMultiSelectPickerView.h */,
+				B79D815A1D1799BF00E8B829 /* CYCustomMultiSelectPickerView.m */,
+			);
+			name = ALPickerView;
+			sourceTree = "<group>";
+		};
 		B7A8DD5C1CAE2BF2007F56B6 = {
 			isa = PBXGroup;
 			children = (
@@ -806,6 +828,7 @@
 		B7A8DD801CAE2CE9007F56B6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B79D81541D1799A300E8B829 /* ALPickerView */,
 				B740CCA21CD8638C0006B32A /* UIImageCategory */,
 				B762DB731CCE3E1E002875A1 /* ButtonTag */,
 				B7414F841CCA4673009FE9CE /* CustomAlert */,
@@ -1528,6 +1551,7 @@
 				B7C018CD1CD0B7E0006773CB /* NewMessageViewController.m in Sources */,
 				B70C5D7B1CE5939A0063246A /* ProximityAlertsViewController.m in Sources */,
 				B78405AF1CDB72A700CD7D54 /* ASValuePopUpView.m in Sources */,
+				B79D815B1D1799BF00E8B829 /* ALPickerView.m in Sources */,
 				B72E75941D13B07800383371 /* ProfileService.m in Sources */,
 				B70C5D721CE58D390063246A /* ConferenceListViewController.m in Sources */,
 				B7E024C41CC5089E00707552 /* ConferenceDataModel.m in Sources */,
@@ -1546,6 +1570,7 @@
 				B7C018BF1CD07044006773CB /* PersonalMessageViewCell.m in Sources */,
 				B7A8DDC41CAE5B69007F56B6 /* MMMaterialDesignSpinner.m in Sources */,
 				B77695CA1CBFB4F300794005 /* SCLTimerDisplay.m in Sources */,
+				B79D815D1D1799BF00E8B829 /* CYCustomMultiSelectPickerView.m in Sources */,
 				B77695CB1CBFB4F300794005 /* SCLTextView.m in Sources */,
 				B762DB721CCE13C1002875A1 /* PendingAppointmentViewController.m in Sources */,
 				B77695C81CBFB4F300794005 /* SCLAlertViewResponder.m in Sources */,
@@ -1553,6 +1578,7 @@
 				B70C5D811CE59C7F0063246A /* ProximityAlertViewCell.m in Sources */,
 				B73616EF1D12CE3100194588 /* MJGeocoder.m in Sources */,
 				B7EAC1761CC5DBE9001C4EEC /* ConferenceService.m in Sources */,
+				B79D815C1D1799BF00E8B829 /* ALPickerViewCell.m in Sources */,
 				5D93619D1CC606190004F030 /* MatchesTableViewCell.m in Sources */,
 				B78405B01CDB72A700CD7D54 /* ASValueTrackingSlider.m in Sources */,
 				B7C018C41CD0708B006773CB /* PersonalMessageViewController.m in Sources */,

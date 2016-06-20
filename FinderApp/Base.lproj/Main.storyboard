@@ -2103,6 +2103,16 @@
                                                             <constraint firstAttribute="width" constant="100" id="DFw-8z-Lya"/>
                                                         </constraints>
                                                     </imageView>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="78D-JI-eUL">
+                                                        <rect key="frame" x="12" y="17" width="100" height="100"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="100" id="7qu-km-FOu"/>
+                                                            <constraint firstAttribute="height" constant="100" id="men-Z1-c9U"/>
+                                                        </constraints>
+                                                        <connections>
+                                                            <action selector="selectImageButtonAction:" destination="AC5-23-ob5" eventType="touchUpInside" id="Yja-40-IoS"/>
+                                                        </connections>
+                                                    </button>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="32z-39-B2h">
                                                         <rect key="frame" x="124" y="2" width="185" height="63"/>
                                                         <subviews>
@@ -2116,7 +2126,7 @@
                                                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="ffh" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rdW-mt-1na">
+                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rdW-mt-1na">
                                                                 <rect key="frame" x="3" y="29" width="181" height="31"/>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <constraints>
@@ -2165,7 +2175,7 @@
                                                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="jhk" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NDo-xD-S29">
+                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="NDo-xD-S29">
                                                                 <rect key="frame" x="3" y="25" width="181" height="32"/>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <constraints>
@@ -2197,12 +2207,15 @@
                                                     <constraint firstAttribute="trailing" secondItem="32z-39-B2h" secondAttribute="trailing" constant="1" id="00A-se-Tpv"/>
                                                     <constraint firstAttribute="trailing" secondItem="uBw-gi-NMb" secondAttribute="trailing" constant="1" id="0qT-ro-FfR"/>
                                                     <constraint firstItem="32z-39-B2h" firstAttribute="top" secondItem="36u-Sp-ObY" secondAttribute="top" constant="2" id="0qw-lW-z99"/>
+                                                    <constraint firstItem="32z-39-B2h" firstAttribute="leading" secondItem="78D-JI-eUL" secondAttribute="trailing" constant="12" id="3OB-05-fyR"/>
                                                     <constraint firstItem="32z-39-B2h" firstAttribute="leading" secondItem="GdO-vo-KQS" secondAttribute="trailing" constant="12" id="9M3-bR-NpP"/>
                                                     <constraint firstAttribute="height" constant="134" id="9TJ-FK-yDy"/>
                                                     <constraint firstItem="anH-Rz-57n" firstAttribute="top" secondItem="uBw-gi-NMb" secondAttribute="bottom" id="GdY-UQ-xpM"/>
                                                     <constraint firstAttribute="trailing" secondItem="anH-Rz-57n" secondAttribute="trailing" constant="1" id="NZd-Ra-y1M"/>
                                                     <constraint firstItem="uBw-gi-NMb" firstAttribute="leading" secondItem="GdO-vo-KQS" secondAttribute="trailing" constant="12" id="RiV-gQ-T1K"/>
+                                                    <constraint firstItem="78D-JI-eUL" firstAttribute="leading" secondItem="36u-Sp-ObY" secondAttribute="leading" constant="12" id="Z7J-Qu-GJ3"/>
                                                     <constraint firstItem="anH-Rz-57n" firstAttribute="leading" secondItem="GdO-vo-KQS" secondAttribute="trailing" constant="12" id="ZK9-9c-gdu"/>
+                                                    <constraint firstItem="78D-JI-eUL" firstAttribute="centerY" secondItem="36u-Sp-ObY" secondAttribute="centerY" id="gIB-8h-Cog"/>
                                                     <constraint firstItem="uBw-gi-NMb" firstAttribute="top" secondItem="32z-39-B2h" secondAttribute="bottom" id="h1f-D5-P3V"/>
                                                     <constraint firstItem="GdO-vo-KQS" firstAttribute="leading" secondItem="36u-Sp-ObY" secondAttribute="leading" constant="12" id="n3L-JO-D4W"/>
                                                     <constraint firstItem="GdO-vo-KQS" firstAttribute="centerY" secondItem="36u-Sp-ObY" secondAttribute="centerY" id="oZ7-AZ-vJh"/>
@@ -2231,7 +2244,7 @@
                                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="124563" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="idz-1s-NRv">
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="idz-1s-NRv">
                                                         <rect key="frame" x="8" y="25" width="294" height="26"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
@@ -2280,7 +2293,7 @@
                                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Ranosys technologies" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hbs-gl-IS8">
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hbs-gl-IS8">
                                                         <rect key="frame" x="8" y="24" width="294" height="26"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <color key="textColor" red="0.42352941179999998" green="0.42352941179999998" blue="0.42352941179999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -2326,7 +2339,7 @@
                                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Software Engineer" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kNT-aD-aps">
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kNT-aD-aps">
                                                         <rect key="frame" x="8" y="24" width="294" height="26"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <color key="textColor" red="0.42352941179999998" green="0.42352941179999998" blue="0.42352941179999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -2372,7 +2385,7 @@
                                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="www.linkedin.com/bing/" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UjS-J4-Ajd">
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UjS-J4-Ajd">
                                                         <rect key="frame" x="8" y="24" width="294" height="26"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <color key="textColor" red="0.42352941179999998" green="0.42352941179999998" blue="0.42352941179999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -2421,7 +2434,6 @@
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FDw-OD-JX7">
                                                         <rect key="frame" x="3" y="23" width="294" height="70"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugi</string>
                                                         <color key="textColor" red="0.42352941179999998" green="0.42352941179999998" blue="0.42352941179999998" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
                                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no"/>
@@ -2465,7 +2477,7 @@
                                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="www.linkedin.com/bing/" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3x6-FC-Fln">
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3x6-FC-Fln">
                                                         <rect key="frame" x="8" y="24" width="294" height="26"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <color key="textColor" red="0.42352941179999998" green="0.42352941179999998" blue="0.42352941179999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -2523,7 +2535,7 @@
                                                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="www.linkedin.com/bing/" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Z7p-hf-LGB">
+                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Z7p-hf-LGB">
                                                                 <rect key="frame" x="8" y="24" width="294" height="26"/>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <color key="textColor" red="0.42352941179999998" green="0.42352941179999998" blue="0.42352941179999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -2534,7 +2546,7 @@
                                                                 </connections>
                                                             </textField>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MdN-cr-w2U">
-                                                                <rect key="frame" x="8" y="24" width="294" height="26"/>
+                                                                <rect key="frame" x="8" y="1" width="294" height="54"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                 <connections>
                                                                     <action selector="professionPickerAction:" destination="AC5-23-ob5" eventType="touchUpInside" id="rog-On-LTC"/>
@@ -2543,17 +2555,17 @@
                                                         </subviews>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
-                                                            <constraint firstItem="MdN-cr-w2U" firstAttribute="leading" secondItem="E5J-sT-vLw" secondAttribute="leading" constant="8" id="086-fs-cwb"/>
                                                             <constraint firstItem="Z7p-hf-LGB" firstAttribute="leading" secondItem="E5J-sT-vLw" secondAttribute="leading" constant="8" id="0VN-I6-un0"/>
-                                                            <constraint firstAttribute="bottom" secondItem="MdN-cr-w2U" secondAttribute="bottom" constant="5" id="Hj4-dU-eBK"/>
-                                                            <constraint firstItem="MdN-cr-w2U" firstAttribute="top" secondItem="42w-XA-wpU" secondAttribute="bottom" id="KYZ-qX-qUn"/>
-                                                            <constraint firstAttribute="trailing" secondItem="MdN-cr-w2U" secondAttribute="trailing" constant="8" id="QfB-tc-kTT"/>
+                                                            <constraint firstAttribute="trailing" secondItem="MdN-cr-w2U" secondAttribute="trailing" constant="8" id="Bok-7d-b7Z"/>
+                                                            <constraint firstItem="MdN-cr-w2U" firstAttribute="top" secondItem="E5J-sT-vLw" secondAttribute="top" constant="1" id="BwC-jt-zBK"/>
+                                                            <constraint firstAttribute="bottom" secondItem="MdN-cr-w2U" secondAttribute="bottom" id="P5r-A8-1k4"/>
                                                             <constraint firstItem="42w-XA-wpU" firstAttribute="leading" secondItem="E5J-sT-vLw" secondAttribute="leading" constant="8" id="RDK-Xt-Gsh"/>
                                                             <constraint firstAttribute="height" constant="55" id="UHm-5c-ZsY"/>
                                                             <constraint firstItem="42w-XA-wpU" firstAttribute="top" secondItem="E5J-sT-vLw" secondAttribute="top" constant="4" id="Zis-Fy-sKy"/>
                                                             <constraint firstAttribute="trailing" secondItem="Z7p-hf-LGB" secondAttribute="trailing" constant="8" id="ddm-h9-Mhn"/>
                                                             <constraint firstAttribute="bottom" secondItem="Z7p-hf-LGB" secondAttribute="bottom" constant="5" id="ewL-0z-HCl"/>
                                                             <constraint firstAttribute="trailing" secondItem="42w-XA-wpU" secondAttribute="trailing" constant="8" id="f5I-M0-IxX"/>
+                                                            <constraint firstItem="MdN-cr-w2U" firstAttribute="leading" secondItem="E5J-sT-vLw" secondAttribute="leading" constant="8" id="nVT-6n-5nX"/>
                                                             <constraint firstItem="Z7p-hf-LGB" firstAttribute="top" secondItem="42w-XA-wpU" secondAttribute="bottom" id="vEP-i9-z2S"/>
                                                         </constraints>
                                                     </view>
@@ -2580,7 +2592,7 @@
                                                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="www.linkedin.com/bing/" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wgn-gE-h8H">
+                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Wgn-gE-h8H">
                                                                 <rect key="frame" x="8" y="24" width="294" height="26"/>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <color key="textColor" red="0.42352941179999998" green="0.42352941179999998" blue="0.42352941179999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -2591,7 +2603,7 @@
                                                                 </connections>
                                                             </textField>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ROu-Ik-sBz">
-                                                                <rect key="frame" x="8" y="24" width="294" height="26"/>
+                                                                <rect key="frame" x="8" y="1" width="294" height="54"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                 <connections>
                                                                     <action selector="interestedInPickerAction:" destination="AC5-23-ob5" eventType="touchUpInside" id="gVA-ih-6aK"/>
@@ -2600,17 +2612,17 @@
                                                         </subviews>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
-                                                            <constraint firstItem="ROu-Ik-sBz" firstAttribute="top" secondItem="MPp-Vd-b9O" secondAttribute="bottom" id="5wY-UG-fKr"/>
                                                             <constraint firstItem="Wgn-gE-h8H" firstAttribute="leading" secondItem="lpF-ti-XUq" secondAttribute="leading" constant="8" id="7cw-S6-Pe4"/>
+                                                            <constraint firstItem="ROu-Ik-sBz" firstAttribute="top" secondItem="lpF-ti-XUq" secondAttribute="top" constant="1" id="DKw-oJ-wJY"/>
+                                                            <constraint firstAttribute="trailing" secondItem="ROu-Ik-sBz" secondAttribute="trailing" constant="8" id="Irh-3A-REC"/>
                                                             <constraint firstAttribute="trailing" secondItem="MPp-Vd-b9O" secondAttribute="trailing" constant="8" id="KTQ-HB-O8O"/>
-                                                            <constraint firstAttribute="trailing" secondItem="ROu-Ik-sBz" secondAttribute="trailing" constant="8" id="LBS-tw-a4z"/>
-                                                            <constraint firstAttribute="bottom" secondItem="ROu-Ik-sBz" secondAttribute="bottom" constant="5" id="OdN-Mo-cdG"/>
+                                                            <constraint firstItem="ROu-Ik-sBz" firstAttribute="leading" secondItem="lpF-ti-XUq" secondAttribute="leading" constant="8" id="OJu-Kj-7pH"/>
                                                             <constraint firstAttribute="trailing" secondItem="Wgn-gE-h8H" secondAttribute="trailing" constant="8" id="S3V-ye-9ZK"/>
                                                             <constraint firstAttribute="bottom" secondItem="Wgn-gE-h8H" secondAttribute="bottom" constant="5" id="SGi-vk-Ziq"/>
                                                             <constraint firstAttribute="height" constant="55" id="Tza-MJ-lGM"/>
-                                                            <constraint firstItem="ROu-Ik-sBz" firstAttribute="leading" secondItem="lpF-ti-XUq" secondAttribute="leading" constant="8" id="WGB-IY-78p"/>
                                                             <constraint firstItem="MPp-Vd-b9O" firstAttribute="top" secondItem="lpF-ti-XUq" secondAttribute="top" constant="4" id="bwY-Nr-cGW"/>
                                                             <constraint firstItem="Wgn-gE-h8H" firstAttribute="top" secondItem="MPp-Vd-b9O" secondAttribute="bottom" id="iaV-sY-aTh"/>
+                                                            <constraint firstAttribute="bottom" secondItem="ROu-Ik-sBz" secondAttribute="bottom" id="oOE-h5-DCI"/>
                                                             <constraint firstItem="MPp-Vd-b9O" firstAttribute="leading" secondItem="lpF-ti-XUq" secondAttribute="leading" constant="8" id="vkq-4s-hzh"/>
                                                         </constraints>
                                                     </view>
@@ -2637,7 +2649,7 @@
                                                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="www.linkedin.com/bing/" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LeJ-fi-7GE">
+                                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LeJ-fi-7GE">
                                                                 <rect key="frame" x="8" y="24" width="294" height="26"/>
                                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                 <color key="textColor" red="0.42352941179999998" green="0.42352941179999998" blue="0.42352941179999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -2648,7 +2660,7 @@
                                                                 </connections>
                                                             </textField>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f1Y-r4-8gC">
-                                                                <rect key="frame" x="8" y="24" width="294" height="26"/>
+                                                                <rect key="frame" x="8" y="1" width="294" height="54"/>
                                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                 <connections>
                                                                     <action selector="interestedAreaPickerAction:" destination="AC5-23-ob5" eventType="touchUpInside" id="t4K-pY-Gwc"/>
@@ -2659,15 +2671,15 @@
                                                         <constraints>
                                                             <constraint firstItem="LeJ-fi-7GE" firstAttribute="top" secondItem="m3g-oE-KcG" secondAttribute="bottom" id="3ir-Nm-aam"/>
                                                             <constraint firstAttribute="trailing" secondItem="LeJ-fi-7GE" secondAttribute="trailing" constant="8" id="905-qg-n34"/>
+                                                            <constraint firstItem="f1Y-r4-8gC" firstAttribute="top" secondItem="Xdh-ZC-vom" secondAttribute="top" constant="1" id="BkJ-X9-pdy"/>
                                                             <constraint firstItem="LeJ-fi-7GE" firstAttribute="leading" secondItem="Xdh-ZC-vom" secondAttribute="leading" constant="8" id="C73-YY-yk6"/>
                                                             <constraint firstAttribute="bottom" secondItem="LeJ-fi-7GE" secondAttribute="bottom" constant="5" id="J6H-tT-5QM"/>
                                                             <constraint firstAttribute="height" constant="55" id="JE9-0U-j0h"/>
                                                             <constraint firstItem="m3g-oE-KcG" firstAttribute="top" secondItem="Xdh-ZC-vom" secondAttribute="top" constant="4" id="JJe-9J-FtX"/>
-                                                            <constraint firstItem="f1Y-r4-8gC" firstAttribute="top" secondItem="m3g-oE-KcG" secondAttribute="bottom" id="amr-Vy-tT9"/>
-                                                            <constraint firstAttribute="bottom" secondItem="f1Y-r4-8gC" secondAttribute="bottom" constant="5" id="fze-sg-a93"/>
-                                                            <constraint firstItem="f1Y-r4-8gC" firstAttribute="leading" secondItem="Xdh-ZC-vom" secondAttribute="leading" constant="8" id="khh-Qc-kv7"/>
+                                                            <constraint firstItem="f1Y-r4-8gC" firstAttribute="leading" secondItem="Xdh-ZC-vom" secondAttribute="leading" constant="8" id="d2b-ur-Kjp"/>
+                                                            <constraint firstAttribute="bottom" secondItem="f1Y-r4-8gC" secondAttribute="bottom" id="eU9-QS-6Rc"/>
+                                                            <constraint firstAttribute="trailing" secondItem="f1Y-r4-8gC" secondAttribute="trailing" constant="8" id="fNq-KP-LLg"/>
                                                             <constraint firstItem="m3g-oE-KcG" firstAttribute="leading" secondItem="Xdh-ZC-vom" secondAttribute="leading" constant="8" id="odG-34-RVy"/>
-                                                            <constraint firstAttribute="trailing" secondItem="f1Y-r4-8gC" secondAttribute="trailing" constant="8" id="xBy-40-lcm"/>
                                                             <constraint firstAttribute="trailing" secondItem="m3g-oE-KcG" secondAttribute="trailing" constant="8" id="zmb-Pa-2QT"/>
                                                         </constraints>
                                                     </view>
@@ -2783,7 +2795,37 @@
                                 <state key="normal" title="Save">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="saveButtonAction:" destination="AC5-23-ob5" eventType="touchUpInside" id="jgP-Ns-V4u"/>
+                                </connections>
                             </button>
+                            <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Niv-OD-tGr">
+                                <rect key="frame" x="0.0" y="1000" width="320" height="182"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="AC5-23-ob5" id="tWg-D5-e1w"/>
+                                    <outlet property="delegate" destination="AC5-23-ob5" id="6gb-vG-BTb"/>
+                                </connections>
+                            </pickerView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cgi-Lc-yRa">
+                                <rect key="frame" x="0.0" y="1000" width="320" height="44"/>
+                                <items>
+                                    <barButtonItem title="Cancel" id="hvT-KY-52Q">
+                                        <connections>
+                                            <action selector="cancelToolBarAction:" destination="AC5-23-ob5" id="x1U-cn-6A4"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="2YY-Cy-vAg"/>
+                                    <barButtonItem title="Done" id="pGJ-X3-hg5">
+                                        <connections>
+                                            <action selector="toolBarDoneAction:" destination="AC5-23-ob5" id="LJc-sk-8Yw"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </items>
+                                <connections>
+                                    <outlet property="delegate" destination="AC5-23-ob5" id="ZR5-PO-xNo"/>
+                                </connections>
+                            </toolbar>
                         </subviews>
                         <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -2821,6 +2863,8 @@
                         <outlet property="linkedInView" destination="5ad-1c-JL1" id="QXC-3C-Fys"/>
                         <outlet property="mobileNumberTextField" destination="idz-1s-NRv" id="sHx-cy-6Dr"/>
                         <outlet property="mobileNumberView" destination="kmp-Zi-2yw" id="EiF-VA-HfP"/>
+                        <outlet property="pickerToolBar" destination="cgi-Lc-yRa" id="Xz3-HR-MwD"/>
+                        <outlet property="pickerView" destination="Niv-OD-tGr" id="tsq-iK-IQx"/>
                         <outlet property="professionTextField" destination="Z7p-hf-LGB" id="kjv-R0-SPS"/>
                         <outlet property="professionView" destination="E5J-sT-vLw" id="dJe-Fg-ufV"/>
                         <outlet property="userEmailTextfield" destination="NDo-xD-S29" id="87W-5A-9V4"/>

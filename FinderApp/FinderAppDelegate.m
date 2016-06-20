@@ -29,6 +29,7 @@
 
 @implementation FinderAppDelegate
 @synthesize isLocation,locationManager;
+@synthesize multiplePickerDic;
 
 #pragma mark - Global indicator view
 - (void)showIndicator

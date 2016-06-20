@@ -10,6 +10,9 @@
 
 
 #define kUrlGetInterestList             @"getinterestlist"
+#define kUrlGetInterestInList           @"getinterestedinlist"
+#define kUrlGetProffessionList          @"getprofessions"
+
 
 @implementation ProfileService
 #pragma mark - Singleton instance
@@ -35,22 +38,13 @@
 #pragma mark - Interest list
 -(void)getInterestList:(void (^)(id data))success failure:(void (^)(NSError *error))failure
 {
+    //[UserDefaultManager getValue:@"conferenceId"]
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"]};
-    NSLog(@"request home %@",requestDict);
+    NSLog(@"request interest arear %@",requestDict);
     [[Webservice sharedManager] post:kUrlGetInterestList parameters:requestDict success:^(id responseObject) {
         responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
-        NSLog(@"home response %@",responseObject);
+        NSLog(@"interest area response %@",responseObject);
         if([[Webservice sharedManager] isStatusOK:responseObject]) {
-//            NSMutableArray *conferenceArray = [NSMutableArray new];
-//            ConferenceDataModel *conferenceDetail = [[ConferenceDataModel alloc]init];
-//            NSDictionary * conferenceDict =[responseObject objectForKey:@"getConfrenceDetails"];
-//            conferenceDetail.conferenceName =[conferenceDict objectForKey:@"confrenceName"];
-//            conferenceDetail.conferenceDate =[conferenceDict objectForKey:@"confrenceDate"];
-//            conferenceDetail.conferenceDescription =[conferenceDict objectForKey:@"description"];
-//            conferenceDetail.conferenceOrganiserName =[conferenceDict objectForKey:@"organiserName"];
-//            conferenceDetail.conferenceImage=[conferenceDict objectForKey:@"imageUrl"];
-//            conferenceDetail.conferenceVenue=[conferenceDict objectForKey:@"venue"];
-//            [conferenceArray addObject:conferenceDetail];
             success(responseObject);
         }
         else {
@@ -66,4 +60,56 @@
 
 }
 #pragma mark - end
+#pragma mark - Interested In list
+-(void)getInterestedInList:(void (^)(id data))success failure:(void (^)(NSError *error))failure
+{
+    //[UserDefaultManager getValue:@"conferenceId"]
+    NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"]};
+    NSLog(@"request Interested in %@",requestDict);
+    [[Webservice sharedManager] post:kUrlGetInterestInList parameters:requestDict success:^(id responseObject) {
+        responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
+        NSLog(@"Interested in response %@",responseObject);
+        if([[Webservice sharedManager] isStatusOK:responseObject]) {
+            success(responseObject);
+        }
+        else {
+            [myDelegate stopIndicator];
+            failure(nil);
+        }
+    } failure:^(NSError *error)
+     {
+         [myDelegate stopIndicator];
+         failure(error);
+     }];
+    
+    
+}
+#pragma mark - end
+//kUrlGetProffessionList
+#pragma mark - Profession list
+-(void)getProfessionList:(void (^)(id data))success failure:(void (^)(NSError *error))failure
+{
+    //[UserDefaultManager getValue:@"conferenceId"]
+    NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"]};
+    NSLog(@"request Profession  %@",requestDict);
+    [[Webservice sharedManager] post:kUrlGetProffessionList parameters:requestDict success:^(id responseObject) {
+        responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
+        NSLog(@"Profession response %@",responseObject);
+        if([[Webservice sharedManager] isStatusOK:responseObject]) {
+            success(responseObject);
+        }
+        else {
+            [myDelegate stopIndicator];
+            failure(nil);
+        }
+    } failure:^(NSError *error)
+     {
+         [myDelegate stopIndicator];
+         failure(error);
+     }];
+    
+    
+}
+#pragma mark - end
+
 @end

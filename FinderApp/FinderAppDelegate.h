@@ -16,6 +16,7 @@
 @property (nonatomic, strong) NSString *isLocation;
 @property(nonatomic,retain)NSString * deviceToken;
 @property (nonatomic, strong)  CLLocationManager *locationManager;
+@property (nonatomic, retain) NSMutableDictionary *multiplePickerDic;
 -(void)showIndicator;
 -(void)stopIndicator;
 -(void)startTrackingBg;
