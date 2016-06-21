@@ -2095,9 +2095,9 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="36u-Sp-ObY">
                                                 <rect key="frame" x="5" y="1" width="310" height="134"/>
                                                 <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GdO-vo-KQS">
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GdO-vo-KQS">
                                                         <rect key="frame" x="12" y="17" width="100" height="100"/>
-                                                        <color key="backgroundColor" red="0.94901960780000005" green="0.3294117647" blue="0.050980392159999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="100" id="BXL-w5-cqk"/>
                                                             <constraint firstAttribute="width" constant="100" id="DFw-8z-Lya"/>
@@ -2547,7 +2547,7 @@
                                                             </textField>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MdN-cr-w2U">
                                                                 <rect key="frame" x="8" y="1" width="294" height="54"/>
-                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                                <color key="backgroundColor" red="0.84313725490000002" green="0.87843137250000003" blue="0.89411764709999997" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <connections>
                                                                     <action selector="professionPickerAction:" destination="AC5-23-ob5" eventType="touchUpInside" id="rog-On-LTC"/>
                                                                 </connections>
@@ -2604,7 +2604,7 @@
                                                             </textField>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ROu-Ik-sBz">
                                                                 <rect key="frame" x="8" y="1" width="294" height="54"/>
-                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                                <color key="backgroundColor" red="0.90196078430000004" green="0.4431372549" blue="0.070588235289999995" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <connections>
                                                                     <action selector="interestedInPickerAction:" destination="AC5-23-ob5" eventType="touchUpInside" id="gVA-ih-6aK"/>
                                                                 </connections>
@@ -2661,7 +2661,7 @@
                                                             </textField>
                                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f1Y-r4-8gC">
                                                                 <rect key="frame" x="8" y="1" width="294" height="54"/>
-                                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                                <color key="backgroundColor" red="0.0039215686269999999" green="0.8980392157" blue="0.83137254900000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <connections>
                                                                     <action selector="interestedAreaPickerAction:" destination="AC5-23-ob5" eventType="touchUpInside" id="t4K-pY-Gwc"/>
                                                                 </connections>
@@ -2772,7 +2772,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.90196078430000004" green="0.43921568630000002" blue="0.054901960780000002" alpha="0.66299460430000001" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="XO7-yH-t1o" firstAttribute="centerX" secondItem="Svj-gF-vj6" secondAttribute="centerX" id="Jot-LI-b5V"/>
                                     <constraint firstAttribute="trailing" secondItem="XO7-yH-t1o" secondAttribute="trailing" id="Ky0-MX-V7R"/>
@@ -2803,8 +2803,8 @@
                                 <rect key="frame" x="0.0" y="1000" width="320" height="182"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
-                                    <outlet property="dataSource" destination="AC5-23-ob5" id="tWg-D5-e1w"/>
-                                    <outlet property="delegate" destination="AC5-23-ob5" id="6gb-vG-BTb"/>
+                                    <outlet property="dataSource" destination="AC5-23-ob5" id="b7b-n9-wrJ"/>
+                                    <outlet property="delegate" destination="AC5-23-ob5" id="ci0-qK-Ynu"/>
                                 </connections>
                             </pickerView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cgi-Lc-yRa">
@@ -2822,9 +2822,6 @@
                                         </connections>
                                     </barButtonItem>
                                 </items>
-                                <connections>
-                                    <outlet property="delegate" destination="AC5-23-ob5" id="ZR5-PO-xNo"/>
-                                </connections>
                             </toolbar>
                         </subviews>
                         <color key="backgroundColor" red="0.97647058823529409" green="0.97647058823529409" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
@@ -2863,8 +2860,7 @@
                         <outlet property="linkedInView" destination="5ad-1c-JL1" id="QXC-3C-Fys"/>
                         <outlet property="mobileNumberTextField" destination="idz-1s-NRv" id="sHx-cy-6Dr"/>
                         <outlet property="mobileNumberView" destination="kmp-Zi-2yw" id="EiF-VA-HfP"/>
-                        <outlet property="pickerToolBar" destination="cgi-Lc-yRa" id="Xz3-HR-MwD"/>
-                        <outlet property="pickerView" destination="Niv-OD-tGr" id="tsq-iK-IQx"/>
+                        <outlet property="pickerToolBar" destination="cgi-Lc-yRa" id="uhl-fM-Lvt"/>
                         <outlet property="professionTextField" destination="Z7p-hf-LGB" id="kjv-R0-SPS"/>
                         <outlet property="professionView" destination="E5J-sT-vLw" id="dJe-Fg-ufV"/>
                         <outlet property="userEmailTextfield" destination="NDo-xD-S29" id="87W-5A-9V4"/>
@@ -2872,6 +2868,7 @@
                         <outlet property="userInfoView" destination="36u-Sp-ObY" id="iDg-jE-p8Q"/>
                         <outlet property="userNameTextField" destination="rdW-mt-1na" id="8jp-hI-QMR"/>
                         <outlet property="userNameView" destination="32z-39-B2h" id="bUE-E1-LFF"/>
+                        <outlet property="userPickerView" destination="Niv-OD-tGr" id="zI3-Bb-Wfu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1ab-IO-0jC" userLabel="First Responder" sceneMemberID="firstResponder"/>

@@ -27,11 +27,11 @@
     appDelegate=(FinderAppDelegate*)[UIApplication sharedApplication].delegate;
     if (self) {
         // Initialization code
-        self.selectionStatesDic = [[NSMutableDictionary alloc] initWithCapacity:500];
-        self.selectedEntriesArr = [[NSMutableArray alloc] initWithCapacity:500];
+        self.selectionStatesDic = [[NSMutableDictionary alloc] initWithCapacity:50];
+        self.selectedEntriesArr = [[NSMutableArray alloc] initWithCapacity:50];
         
-        self.entriesArray = [[NSMutableArray alloc] initWithCapacity:500];
-        self.entriesSelectedArray = [[NSMutableArray alloc] initWithCapacity:500];
+        self.entriesArray = [[NSMutableArray alloc] initWithCapacity:50];
+        self.entriesSelectedArray = [[NSMutableArray alloc] initWithCapacity:50];
     }
     return self;
 }
@@ -70,7 +70,7 @@
     
     // Init picker and add it to view
     if (!self.pickerView) {
-        self.pickerView = [[[ALPickerView alloc] initWithFrame:CGRectMake(0,182, self.frame.size.width, 182)] autorelease];
+        self.pickerView = [[[ALPickerView alloc] initWithFrame:CGRectMake(0,self.frame.size.height-265, self.frame.size.width, 182)] autorelease];
     }
     self.pickerView.backgroundColor = [UIColor whiteColor];
     self.pickerView.delegate = self;
@@ -95,16 +95,16 @@
     }
     self.toolBar.hidden = NO;
     self.toolBar.barStyle = UIBarButtonItemStylePlain;
-    self.toolBar.backgroundColor = [UIColor whiteColor];
     self.toolBar.items = items;
     [items release];
     items = nil;
     [self addSubview:self.toolBar];
     
-    [UIView animateWithDuration:0.5 animations:^{
-        self.pickerView.frame = CGRectMake(0, self.frame.size.height-182, self.frame.size.width, 182);
-        self.toolBar.frame = CGRectMake(0, self.pickerView.frame.origin.y-44, self.frame.size.width, 44);
-    }];
+//    [UIView beginAnimations:nil context:NULL];
+//    [UIView setAnimationDuration:0.3];
+    self.pickerView.frame = CGRectMake(0, 44, self.frame.size.width, 182);
+    self.toolBar.frame = CGRectMake(0, self.pickerView.frame.origin.y-44, self.frame.size.width, 44);
+   // [UIView commitAnimations];
     
 }
 - (void)pickerHide
@@ -113,11 +113,11 @@
     {
         [self.multiPickerDelegate hidePicker];
     }
-    [UIView animateWithDuration:0.5 animations:^{
-        self.alpha = 0.0;
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.3];
         self.pickerView.frame = CGRectMake(0, 1000, self.frame.size.width, 182);
         self.toolBar.frame = CGRectMake(0, 1000, self.frame.size.width, 44);
-    }];
+   [UIView commitAnimations];
 }
 
 -(void)confirmPickView

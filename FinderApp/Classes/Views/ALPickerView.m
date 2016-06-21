@@ -52,7 +52,7 @@
     self.clipsToBounds = YES;
     self.allOptionTitle =@"All";
     
-    internalTableView_ = [[UITableView alloc] initWithFrame:CGRectMake(10, -50, 320, 220) style:UITableViewStylePlain];
+    internalTableView_ = [[UITableView alloc] initWithFrame:CGRectMake(10, -60, 320, 220) style:UITableViewStylePlain];
     internalTableView_.delegate = self;
     internalTableView_.dataSource = self;
     internalTableView_.separatorStyle = UITableViewCellSeparatorStyleNone;

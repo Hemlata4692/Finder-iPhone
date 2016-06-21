@@ -8,6 +8,7 @@
 
 #import "MyProfileViewController.h"
 #import "EditProfileViewController.h"
+#import "ProfileService.h"
 
 @interface MyProfileViewController ()
 @property (weak, nonatomic) IBOutlet UIScrollView *myProfileScrollView;
@@ -63,8 +64,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
     [self addShadow];
+    [myDelegate showIndicator];
+    [self performSelector:@selector(getUserProfile) withObject:nil afterDelay:.1];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -117,6 +119,21 @@
 }
 
 - (IBAction)addUserContactButtonAction:(id)sender {
+}
+#pragma mark - end
+
+#pragma mark - Webservices
+-(void)getUserProfile
+{
+    [[ProfileService sharedManager] getUserProfile:^(id responseObject) {
+        [myDelegate stopIndicator];
+        
+    }
+                                            failure:^(NSError *error)
+     {
+         
+     }] ;
+
 }
 #pragma mark - end
 @end

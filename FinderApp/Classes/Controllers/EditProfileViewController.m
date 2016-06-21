@@ -8,10 +8,9 @@
 
 #import "EditProfileViewController.h"
 #import "ProfileService.h"
-#import "ALPickerView.h"
 #import "CYCustomMultiSelectPickerView.h"
 
-@interface EditProfileViewController ()<UITextFieldDelegate,BSKeyboardControlsDelegate,CYCustomMultiSelectPickerViewDelegate,UIToolbarDelegate,UIPickerViewDelegate>
+@interface EditProfileViewController ()<UITextFieldDelegate,BSKeyboardControlsDelegate,CYCustomMultiSelectPickerViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 {
     NSArray *textFieldArray;
     CYCustomMultiSelectPickerView *multiPickerView;
@@ -50,7 +49,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *interestedInTextField;
 @property (weak, nonatomic) IBOutlet UIView *interestedAreaView;
 @property (weak, nonatomic) IBOutlet UITextField *interestedAreaTextField;
-@property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
+@property (weak, nonatomic) IBOutlet UIPickerView *userPickerView;
 @property (weak, nonatomic) IBOutlet UIToolbar *pickerToolBar;
 @property (nonatomic, strong) BSKeyboardControls *keyboardControls;
 @end
@@ -84,7 +83,7 @@
 @synthesize interestedInTextField;
 @synthesize interestedAreaView;
 @synthesize interestedAreaTextField;
-@synthesize pickerView;
+@synthesize userPickerView;
 @synthesize pickerToolBar;
 
 #pragma mark - View life cycle
@@ -101,7 +100,7 @@
     interestedInArray=[[NSMutableArray alloc]init];
     professionArray=[[NSMutableArray alloc]init];
     selectedInterestedArray=[[NSMutableArray alloc]init];
-    pickerView.translatesAutoresizingMaskIntoConstraints = YES;
+    userPickerView.translatesAutoresizingMaskIntoConstraints = YES;
     pickerToolBar.translatesAutoresizingMaskIntoConstraints = YES;
     [myDelegate showIndicator];
     [self performSelector:@selector(getInterestListing) withObject:nil afterDelay:.1];
@@ -113,6 +112,8 @@
 }
 -(void)addShadow
 {
+    userImageView.layer.cornerRadius=userImageView.frame.size.width/2;
+    userImageView.clipsToBounds=YES;
     [userImageView setViewBorder:userImageView color:[UIColor whiteColor]];
     [userImageView addShadowWithCornerRadius:userImageView color:[UIColor redColor]];
     [aboutCompanyView addShadow:aboutCompanyView color:[UIColor lightGrayColor]];
@@ -135,12 +136,13 @@
     [_keyboardControls.activeField resignFirstResponder];
     [self hidePickerWithAnimation];
     pickerType=@"1";
+    [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height-200) animated:YES];
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];
-    [pickerView setNeedsLayout];
-    [pickerView reloadAllComponents];
-    pickerView.frame = CGRectMake(pickerView.frame.origin.x, self.view.frame.size.height-(pickerView.frame.size.height+44), self.view.frame.size.width, pickerView.frame.size.height);
-    pickerToolBar.frame = CGRectMake(pickerToolBar.frame.origin.x, pickerView.frame.origin.y-44, self.view.frame.size.width, 44);
+    [userPickerView setNeedsLayout];
+    [userPickerView reloadAllComponents];
+    userPickerView.frame = CGRectMake(userPickerView.frame.origin.x, self.view.frame.size.height-(userPickerView.frame.size.height+44), self.view.frame.size.width, userPickerView.frame.size.height);
+    pickerToolBar.frame = CGRectMake(pickerToolBar.frame.origin.x, userPickerView.frame.origin.y-44, self.view.frame.size.width, 44);
     [UIView commitAnimations];
 }
 - (IBAction)interestedInPickerAction:(id)sender {
@@ -148,12 +150,13 @@
     [_keyboardControls.activeField resignFirstResponder];
     [self hidePickerWithAnimation];
     pickerType=@"2";
+    [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height-150) animated:YES];
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];
-    [pickerView setNeedsLayout];
-    [pickerView reloadAllComponents];
-    pickerView.frame = CGRectMake(pickerView.frame.origin.x, self.view.frame.size.height-(pickerView.frame.size.height+44), self.view.frame.size.width, pickerView.frame.size.height);
-    pickerToolBar.frame = CGRectMake(pickerToolBar.frame.origin.x, pickerView.frame.origin.y-44, self.view.frame.size.width, 44);
+    [userPickerView setNeedsLayout];
+    [userPickerView reloadAllComponents];
+    userPickerView.frame = CGRectMake(userPickerView.frame.origin.x, self.view.frame.size.height-(userPickerView.frame.size.height+44), self.view.frame.size.width, userPickerView.frame.size.height);
+    pickerToolBar.frame = CGRectMake(pickerToolBar.frame.origin.x, userPickerView.frame.origin.y-44, self.view.frame.size.width, 44);
     [UIView commitAnimations];
 
 }
@@ -168,30 +171,40 @@
             [view removeFromSuperview];
         }
     }
-    [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height-150) animated:YES];
-    multiPickerView = [[CYCustomMultiSelectPickerView alloc] initWithFrame:CGRectMake(0,self.view.frame.size.height-182, self.view.frame.size.width, 182)];
+    [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height-100) animated:YES];
+    multiPickerView = [[CYCustomMultiSelectPickerView alloc] initWithFrame:CGRectMake(0,self.view.frame.size.height-265, self.view.frame.size.width, 182)];
     multiPickerView.entriesArray = interestedAreaArray;
     multiPickerView.entriesSelectedArray = selectedInterestedArray;
     multiPickerView.multiPickerDelegate = self;
-    
     [self.view addSubview:multiPickerView];
     [multiPickerView pickerShow];
 
 }
 - (IBAction)selectImageButtonAction:(id)sender {
+    [self.keyboardControls.activeField resignFirstResponder];
+    [self hidePickerWithAnimation];
+    UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:nil
+                                                             delegate:self
+                                                    cancelButtonTitle:@"Cancel"
+                                               destructiveButtonTitle:nil
+                                                    otherButtonTitles:@"Take Photo", @"Choose from Gallery", nil];
+    [actionSheet showInView:self.view];
+
 }
 - (IBAction)saveButtonAction:(id)sender {
+    [myDelegate showIndicator];
+    [self performSelector:@selector(editUserProfile) withObject:nil afterDelay:.1];
 }
 #pragma mark - end
 #pragma mark - Toolbar actions
 - (IBAction)toolBarDoneAction:(id)sender {
     [self hidePickerWithAnimation];
     if ([pickerType isEqualToString:@"1"]) {
-        NSInteger index = [pickerView selectedRowInComponent:0];
+        NSInteger index = [userPickerView selectedRowInComponent:0];
          professionTextField.text=[professionArray objectAtIndex:index];
     }
     else {
-        NSInteger index = [pickerView selectedRowInComponent:0];
+        NSInteger index = [userPickerView selectedRowInComponent:0];
         interestedInTextField.text=[interestedInArray objectAtIndex:index];
     }
     [UIView beginAnimations:nil context:NULL];
@@ -213,7 +226,7 @@
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.3];
         [editProfileScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
-        pickerView.frame = CGRectMake(pickerView.frame.origin.x, 1000, self.view.frame.size.width, pickerView.frame.size.height);
+        userPickerView.frame = CGRectMake(userPickerView.frame.origin.x, 1000, self.view.frame.size.width, userPickerView.frame.size.height);
         pickerToolBar.frame = CGRectMake(pickerToolBar.frame.origin.x, 1000, self.view.frame.size.width, 44);
         [UIView commitAnimations];
    
@@ -274,16 +287,21 @@
 -(void)returnChoosedPickerString:(NSMutableArray *)selectedEntriesArr
 {
     editProfileScrollView.scrollEnabled = YES;
-    [editProfileScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
     NSString *dataStr = [selectedEntriesArr componentsJoinedByString:@","];
     selectedInterestedArray = selectedEntriesArr;
     interestedAreaTextField.text = dataStr;
-    
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.3];
+    [editProfileScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+    [UIView commitAnimations];
 }
 -(void)hidePicker
 {
+    editProfileScrollView.scrollEnabled = YES;
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.3];
     [editProfileScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
-  //  _scrollView.scrollEnabled = YES;
+    [UIView commitAnimations];
 }
 #pragma mark - end
 #pragma mark - Keyboard controls delegate
@@ -405,4 +423,69 @@
      }] ;
     
 }
+-(void)editUserProfile {
+    [[ProfileService sharedManager] editUserProfile:userNameTextField.text userEmail:userEmailTextfield.text mobileNumber:mobileNumberTextField.text companyName:companyNameTextField.text companyAddress:companyAddressTextField.text designation:designationTextField.text aboutCompany:aboutCompanyTextView.text linkedIn:linkedInTextField.text interests:interestedAreaTextField.text interestedIn:interestedInTextField.text profession:professionTextField.text image:userImageView.image success:^(id responseObject) {
+        [myDelegate stopIndicator];
+       
+        
+    }
+                                              failure:^(NSError *error)
+     {
+         
+     }] ;
+}
+#pragma mark - end
+#pragma mark - Action sheet delegate
+-(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
+    if (buttonIndex==0)
+    {
+        if (![UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+            
+            UIAlertView *myAlertView = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                                  message:@"Device has no camera."
+                                                                 delegate:nil
+                                                        cancelButtonTitle:@"OK"
+                                                        otherButtonTitles: nil];
+            [myAlertView show];
+        }
+        else
+        {
+            UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+            picker.delegate = self;
+            picker.allowsEditing = YES;
+            picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+            
+            [self presentViewController:picker animated:YES completion:NULL];
+        }
+    }
+    if ([buttonTitle isEqualToString:@"Choose from Gallery"])
+    {
+        UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+        picker.delegate = self;
+        picker.allowsEditing = YES;
+        picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+        
+        [self presentViewController:picker animated:YES completion:NULL];
+    }
+}
+#pragma mark - end
+
+#pragma mark - Image picker controller delegate methods
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingImage:(UIImage *)image editingInfo:(NSDictionary *)info
+{
+    userImageView.layer.cornerRadius=userImageView.frame.size.width/2;
+    userImageView.clipsToBounds=YES;
+    userImageView.image = image;
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:YES];
+}
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
+{
+    [picker dismissViewControllerAnimated:YES completion:NULL];
+}
+#pragma mark - end
+
 @end

@@ -19,4 +19,11 @@
 
 //Profession list
 -(void)getProfessionList:(void (^)(id data))success failure:(void (^)(NSError *error))failure;
+
+//Edit profile
+-(void)editUserProfile:(NSString *)userName userEmail:(NSString *)userEmail mobileNumber:(NSString *)mobileNumber companyName:(NSString *)companyName companyAddress:(NSString *)companyAddress designation:(NSString *)designation aboutCompany:(NSString *)aboutCompany linkedIn:(NSString *)linkedIn interests:(NSString *)interests interestedIn:(NSString *)interestedIn profession:(NSString *)profession image:(UIImage *)image success:(void (^)(id))success failure:(void (^)(NSError *))failure;
+
+//User profile
+-(void)getUserProfile:(void (^)(id data))success failure:(void (^)(NSError *error))failure;
+//{userId:"20", otheruserId:"2"}
 @end
