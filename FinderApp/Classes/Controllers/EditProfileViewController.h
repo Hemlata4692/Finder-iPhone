@@ -9,5 +9,5 @@
 #import <UIKit/UIKit.h>
 
 @interface EditProfileViewController : GlobalBackViewController
-
+@property(nonatomic,strong) NSMutableArray* profileArray;
 @end

@@ -9,6 +9,8 @@
 #import "EditProfileViewController.h"
 #import "ProfileService.h"
 #import "CYCustomMultiSelectPickerView.h"
+#import "ProfileDataModel.h"
+#import "MyProfileViewController.h"
 
 @interface EditProfileViewController ()<UITextFieldDelegate,BSKeyboardControlsDelegate,CYCustomMultiSelectPickerViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 {
@@ -85,6 +87,7 @@
 @synthesize interestedAreaTextField;
 @synthesize userPickerView;
 @synthesize pickerToolBar;
+@synthesize profileArray;
 
 #pragma mark - View life cycle
 - (void)viewDidLoad {
@@ -92,10 +95,13 @@
     // Do any additional setup after loading the view.
     self.navigationItem.title=@"Edit Profile";
     //Adding textfield to array
-    textFieldArray = @[userNameTextField,userEmailTextfield,mobileNumberTextField,companyNameTextField,designationTextField,linkedInTextField,aboutCompanyTextView,companyAddressTextField];
+    textFieldArray = @[userNameTextField,mobileNumberTextField,companyNameTextField,designationTextField,linkedInTextField,aboutCompanyTextView,companyAddressTextField];
     [self setKeyboardControls:[[BSKeyboardControls alloc] initWithFields:textFieldArray]];
     [self.keyboardControls setDelegate:self];
     [self addShadow];
+    [self displayData];
+    userEmailTextfield.userInteractionEnabled=NO;
+    userEmailTextfield.textColor=[UIColor colorWithRed:180.0/255.0 green:180.0/255.0 blue:180.0/255.0 alpha:1.0];
     interestedAreaArray=[[NSMutableArray alloc]init];
     interestedInArray=[[NSMutableArray alloc]init];
     professionArray=[[NSMutableArray alloc]init];
@@ -128,6 +134,32 @@
     [interestedAreaView addShadow:interestedAreaView color:[UIColor lightGrayColor]];
     [userInfoView addShadow:userInfoView color:[UIColor lightGrayColor]];
 }
+-(void)displayData {
+    __weak UIImageView *weakRef = userImageView;
+    NSURLRequest *imageRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:[[profileArray objectAtIndex:0]userImage]]
+                                                  cachePolicy:NSURLRequestReturnCacheDataElseLoad
+                                              timeoutInterval:60];
+    [userImageView setImageWithURLRequest:imageRequest placeholderImage:[UIImage imageNamed:@"user_thumbnail.png"] success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+        weakRef.contentMode = UIViewContentModeScaleAspectFill;
+        weakRef.clipsToBounds = YES;
+        weakRef.image = image;
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+        
+    }];
+    userNameTextField.text=[[profileArray objectAtIndex:0]userName];
+    userEmailTextfield.text=[[profileArray objectAtIndex:0]userEmail];
+    mobileNumberTextField.text=[[profileArray objectAtIndex:0]userMobileNumber];
+    companyNameTextField.text=[[profileArray objectAtIndex:0]userCompanyName];
+    aboutCompanyTextView.text=[[profileArray objectAtIndex:0]aboutUserCompany];
+    companyAddressTextField.text=[[profileArray objectAtIndex:0]userComapnyAddress];
+    professionTextField.text=[[profileArray objectAtIndex:0]userProfession];
+    interestedInTextField.text=[[profileArray objectAtIndex:0]userInterestedIn];
+    interestedAreaTextField.text=[[profileArray objectAtIndex:0]userInterests];
+    designationTextField.text=[[profileArray objectAtIndex:0]userDesignation];
+    linkedInTextField.text=[[profileArray objectAtIndex:0]userLinkedInLink];
+    conferenceNameLabel.text=[[profileArray objectAtIndex:0]conferenceName];
+}
+
 #pragma mark - end
 
 #pragma mark - IBActions
@@ -136,7 +168,15 @@
     [_keyboardControls.activeField resignFirstResponder];
     [self hidePickerWithAnimation];
     pickerType=@"1";
-    [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height-200) animated:YES];
+    if([[UIScreen mainScreen] bounds].size.height<568){
+        [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height+180) animated:YES];
+    }
+    else if([[UIScreen mainScreen] bounds].size.height==568){
+        [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height+50) animated:YES];
+    }
+    else{
+        [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height-200) animated:YES];
+    }
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];
     [userPickerView setNeedsLayout];
@@ -150,7 +190,15 @@
     [_keyboardControls.activeField resignFirstResponder];
     [self hidePickerWithAnimation];
     pickerType=@"2";
-    [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height-150) animated:YES];
+    if([[UIScreen mainScreen] bounds].size.height<568){
+        [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height+250) animated:YES];
+    }
+    else if([[UIScreen mainScreen] bounds].size.height==568){
+        [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height+50) animated:YES];
+    }
+    else{
+        [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height-150) animated:YES];
+    }
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];
     [userPickerView setNeedsLayout];
@@ -171,7 +219,15 @@
             [view removeFromSuperview];
         }
     }
-    [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height-100) animated:YES];
+    if([[UIScreen mainScreen] bounds].size.height<568){
+        [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height+290) animated:YES];
+    }
+    else if([[UIScreen mainScreen] bounds].size.height==568){
+        [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height+110) animated:YES];
+    }
+    else {
+        [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height-100) animated:YES];
+    }
     multiPickerView = [[CYCustomMultiSelectPickerView alloc] initWithFrame:CGRectMake(0,self.view.frame.size.height-265, self.view.frame.size.width, 182)];
     multiPickerView.entriesArray = interestedAreaArray;
     multiPickerView.entriesSelectedArray = selectedInterestedArray;
@@ -286,7 +342,6 @@
 #pragma mark - ALPicker Delegate
 -(void)returnChoosedPickerString:(NSMutableArray *)selectedEntriesArr
 {
-    editProfileScrollView.scrollEnabled = YES;
     NSString *dataStr = [selectedEntriesArr componentsJoinedByString:@","];
     selectedInterestedArray = selectedEntriesArr;
     interestedAreaTextField.text = dataStr;
@@ -297,7 +352,6 @@
 }
 -(void)hidePicker
 {
-    editProfileScrollView.scrollEnabled = YES;
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];
     [editProfileScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
@@ -426,7 +480,16 @@
 -(void)editUserProfile {
     [[ProfileService sharedManager] editUserProfile:userNameTextField.text userEmail:userEmailTextfield.text mobileNumber:mobileNumberTextField.text companyName:companyNameTextField.text companyAddress:companyAddressTextField.text designation:designationTextField.text aboutCompany:aboutCompanyTextView.text linkedIn:linkedInTextField.text interests:interestedAreaTextField.text interestedIn:interestedInTextField.text profession:professionTextField.text image:userImageView.image success:^(id responseObject) {
         [myDelegate stopIndicator];
-       
+        for (UIViewController *controller in self.navigationController.viewControllers)
+        {
+            if ([controller isKindOfClass:[MyProfileViewController class]])
+            {
+                [self.navigationController popToViewController:controller animated:YES];
+                
+                break;
+            }
+        }
+
         
     }
                                               failure:^(NSError *error)

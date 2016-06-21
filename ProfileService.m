@@ -7,7 +7,7 @@
 //
 
 #import "ProfileService.h"
-
+#import "ProfileDataModel.h"
 
 #define kUrlGetInterestList             @"getinterestlist"
 #define kUrlGetInterestInList           @"getinterestedinlist"
@@ -147,7 +147,24 @@
         responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
         NSLog(@"user profile response %@",responseObject);
         if([[Webservice sharedManager] isStatusOK:responseObject]) {
-            success(responseObject);
+            NSMutableArray *profileDataArray = [NSMutableArray new];
+            ProfileDataModel *profileData = [[ProfileDataModel alloc]init];
+            NSDictionary * profileDataDict =[responseObject objectForKey:@"userProfile"];
+            profileData.userImage =[profileDataDict objectForKey:@"userProfilePic"];
+            profileData.userName =[profileDataDict objectForKey:@"userName"];
+            profileData.userEmail =[profileDataDict objectForKey:@"email"];
+            profileData.userMobileNumber =[profileDataDict objectForKey:@"mobileNumber"];
+            profileData.userCompanyName =[profileDataDict objectForKey:@"companyName"];
+            profileData.userComapnyAddress =[profileDataDict objectForKey:@"companyAddress"];
+            profileData.aboutUserCompany =[profileDataDict objectForKey:@"aboutCompany"];
+            profileData.userInterests =[profileDataDict objectForKey:@"interests"];
+            profileData.userDesignation =[profileDataDict objectForKey:@"designation"];
+            profileData.userProfession =[profileDataDict objectForKey:@"profession"];
+            profileData.userInterestedIn =[profileDataDict objectForKey:@"interestIn"];
+            profileData.userLinkedInLink =[profileDataDict objectForKey:@"linkedIn"];
+            profileData.conferenceName =[profileDataDict objectForKey:@"conferenceName"];
+            [profileDataArray addObject:profileData];
+            success(profileDataArray);
         }
         else {
             [myDelegate stopIndicator];

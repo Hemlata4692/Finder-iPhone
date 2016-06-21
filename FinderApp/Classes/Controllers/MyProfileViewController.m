@@ -9,8 +9,13 @@
 #import "MyProfileViewController.h"
 #import "EditProfileViewController.h"
 #import "ProfileService.h"
+#import "ProfileDataModel.h"
 
-@interface MyProfileViewController ()
+@interface MyProfileViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
+{
+    NSMutableArray *userProfileDataArray;
+    NSArray *interestsArray;
+}
 @property (weak, nonatomic) IBOutlet UIScrollView *myProfileScrollView;
 @property (weak, nonatomic) IBOutlet UIView *mainContainerView;
 @property (weak, nonatomic) IBOutlet UIImageView *profileBackground;
@@ -65,6 +70,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self addShadow];
+    userProfileDataArray=[[NSMutableArray alloc]init];
+    interestsArray=[[NSArray alloc]init];
     [myDelegate showIndicator];
     [self performSelector:@selector(getUserProfile) withObject:nil afterDelay:.1];
 }
@@ -106,6 +113,7 @@
 - (IBAction)editProfileButtonAction:(id)sender {
     UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     EditProfileViewController *editProfile =[storyboard instantiateViewControllerWithIdentifier:@"EditProfileViewController"];
+    editProfile.profileArray=[userProfileDataArray mutableCopy];
     [self.navigationController pushViewController:editProfile animated:YES];
 }
 
@@ -125,15 +133,54 @@
 #pragma mark - Webservices
 -(void)getUserProfile
 {
-    [[ProfileService sharedManager] getUserProfile:^(id responseObject) {
+    [[ProfileService sharedManager] getUserProfile:^(id profileDataArray) {
         [myDelegate stopIndicator];
-        
+        userProfileDataArray=[profileDataArray mutableCopy];
+        [self displayUserProfileData];
     }
                                             failure:^(NSError *error)
      {
          
      }] ;
 
+}
+-(void)displayUserProfileData {
+    __weak UIImageView *weakRef = userProfileImage;
+    NSURLRequest *imageRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:[[userProfileDataArray objectAtIndex:0]userImage]]
+                                                  cachePolicy:NSURLRequestReturnCacheDataElseLoad
+                                              timeoutInterval:60];
+    [userProfileImage setImageWithURLRequest:imageRequest placeholderImage:[UIImage imageNamed:@"user_thumbnail.png"] success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+        weakRef.contentMode = UIViewContentModeScaleAspectFill;
+        weakRef.clipsToBounds = YES;
+        weakRef.image = image;
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+        
+    }];
+    userNameLabel.text=[NSString stringWithFormat:@"%@ (%@)",[[userProfileDataArray objectAtIndex:0]userName],[[userProfileDataArray objectAtIndex:0]userDesignation]];
+    mobileNumberLabel.text=[[userProfileDataArray objectAtIndex:0]userMobileNumber];
+    companyNameLabel.text=[[userProfileDataArray objectAtIndex:0]userCompanyName];
+    companyDescriptionLabel.text=[[userProfileDataArray objectAtIndex:0]aboutUserCompany];
+    comapnyAddressLabel.text=[[userProfileDataArray objectAtIndex:0]userComapnyAddress];
+    professionLabel.text=[[userProfileDataArray objectAtIndex:0]userProfession];
+    interestedInLabel.text=[[userProfileDataArray objectAtIndex:0]userInterestedIn];
+    interestsArray=[[[userProfileDataArray objectAtIndex:0]userInterests] componentsSeparatedByString:@","];
+    [interestAreaCollectionView reloadData];
+}
+#pragma mark - end
+#pragma mark - Collection view delegate methods
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return interestsArray.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView1 cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    UICollectionViewCell *interestCell = [collectionView1
+                                    dequeueReusableCellWithReuseIdentifier:@"interestCell"
+                                    forIndexPath:indexPath];
+    UILabel *interestLabel=(UILabel *)[interestCell viewWithTag:1];
+    interestLabel.text=[interestsArray objectAtIndex:indexPath.row];
+    return interestCell;
 }
 #pragma mark - end
 @end

@@ -115,6 +115,7 @@
     }
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];
+    self.alpha=0.0;
         self.pickerView.frame = CGRectMake(0, 1000, self.frame.size.width, 182);
         self.toolBar.frame = CGRectMake(0, 1000, self.frame.size.width, 44);
    [UIView commitAnimations];

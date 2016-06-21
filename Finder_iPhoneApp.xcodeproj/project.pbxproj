@@ -22,6 +22,7 @@
 		B71F63F31CF2CB600025EFBE /* ConferenceListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B71F63F21CF2CB600025EFBE /* ConferenceListCell.m */; };
 		B72E75941D13B07800383371 /* ProfileService.m in Sources */ = {isa = PBXBuildFile; fileRef = B72E75931D13B07800383371 /* ProfileService.m */; };
 		B7339C281D08232300D878FD /* MyProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7339C271D08232300D878FD /* MyProfileViewController.m */; };
+		B733F5C11D191D4A0015F413 /* user_thumbnail.png in Resources */ = {isa = PBXBuildFile; fileRef = B733F5C01D191D4A0015F413 /* user_thumbnail.png */; };
 		B73616EE1D12CE3100194588 /* Address.m in Sources */ = {isa = PBXBuildFile; fileRef = B73616DD1D12CE3100194588 /* Address.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		B73616EF1D12CE3100194588 /* MJGeocoder.m in Sources */ = {isa = PBXBuildFile; fileRef = B73616E01D12CE3100194588 /* MJGeocoder.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		B73616F01D12CE3100194588 /* NSObject+SBJSON.m in Sources */ = {isa = PBXBuildFile; fileRef = B73616E31D12CE3100194588 /* NSObject+SBJSON.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -44,6 +45,7 @@
 		B7414F941CCA4715009FE9CE /* CustomAlert.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7414F911CCA4715009FE9CE /* CustomAlert.xib */; };
 		B74B44551CFD60DD00275CC9 /* EventDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B74B44541CFD60DD00275CC9 /* EventDataModel.m */; };
 		B74DF9FC1D0A7967002EC69E /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B74DF9FB1D0A7967002EC69E /* EditProfileViewController.m */; };
+		B750502A1D1934E000763AD5 /* ProfileDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B75050291D1934E000763AD5 /* ProfileDataModel.m */; };
 		B75FCECD1D0E683B00B8CE4C /* OtherUserProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B75FCECC1D0E683B00B8CE4C /* OtherUserProfileViewController.m */; };
 		B762DB6D1CCDFAEB002875A1 /* PendingAppointmentCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B762DB6C1CCDFAEB002875A1 /* PendingAppointmentCell.m */; };
 		B762DB721CCE13C1002875A1 /* PendingAppointmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B762DB711CCE13C1002875A1 /* PendingAppointmentViewController.m */; };
@@ -164,6 +166,7 @@
 		B72E75931D13B07800383371 /* ProfileService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileService.m; sourceTree = SOURCE_ROOT; };
 		B7339C261D08232300D878FD /* MyProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyProfileViewController.h; sourceTree = "<group>"; };
 		B7339C271D08232300D878FD /* MyProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyProfileViewController.m; sourceTree = "<group>"; };
+		B733F5C01D191D4A0015F413 /* user_thumbnail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = user_thumbnail.png; sourceTree = "<group>"; };
 		B73616DC1D12CE3100194588 /* Address.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Address.h; sourceTree = "<group>"; };
 		B73616DD1D12CE3100194588 /* Address.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Address.m; sourceTree = "<group>"; };
 		B73616DE1D12CE3100194588 /* JSON.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSON.h; sourceTree = "<group>"; };
@@ -203,6 +206,8 @@
 		B74B44541CFD60DD00275CC9 /* EventDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDataModel.m; sourceTree = SOURCE_ROOT; };
 		B74DF9FA1D0A7967002EC69E /* EditProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProfileViewController.h; sourceTree = "<group>"; };
 		B74DF9FB1D0A7967002EC69E /* EditProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditProfileViewController.m; sourceTree = "<group>"; };
+		B75050281D1934E000763AD5 /* ProfileDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileDataModel.h; sourceTree = SOURCE_ROOT; };
+		B75050291D1934E000763AD5 /* ProfileDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileDataModel.m; sourceTree = SOURCE_ROOT; };
 		B75FCECB1D0E683B00B8CE4C /* OtherUserProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OtherUserProfileViewController.h; sourceTree = "<group>"; };
 		B75FCECC1D0E683B00B8CE4C /* OtherUserProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OtherUserProfileViewController.m; sourceTree = "<group>"; };
 		B762DB6B1CCDFAEB002875A1 /* PendingAppointmentCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PendingAppointmentCell.h; sourceTree = "<group>"; };
@@ -589,6 +594,7 @@
 		B740CC991CD861AC0006B32A /* OtherImages */ = {
 			isa = PBXGroup;
 			children = (
+				B733F5C01D191D4A0015F413 /* user_thumbnail.png */,
 				B73616FC1D12CFA300194588 /* placeholder.png */,
 				B7FF9C661CF415DA0067AF60 /* TabBarImages */,
 				B7FF9C651CF415C70067AF60 /* BackgroundImages */,
@@ -624,6 +630,15 @@
 				B74DF9FB1D0A7967002EC69E /* EditProfileViewController.m */,
 			);
 			name = EditProfileView;
+			sourceTree = "<group>";
+		};
+		B75050271D1934C300763AD5 /* ProfileModel */ = {
+			isa = PBXGroup;
+			children = (
+				B75050281D1934E000763AD5 /* ProfileDataModel.h */,
+				B75050291D1934E000763AD5 /* ProfileDataModel.m */,
+			);
+			name = ProfileModel;
 			sourceTree = "<group>";
 		};
 		B75FCECA1D0E682100B8CE4C /* OtherUserProfile */ = {
@@ -1102,6 +1117,7 @@
 		B7EAC1771CC5DDF8001C4EEC /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
+				B75050271D1934C300763AD5 /* ProfileModel */,
 				B7FFA59A1CF6B5CE00B0614A /* CalendarModel */,
 				B7E024C11CC5087A00707552 /* ConferenceModel */,
 			);
@@ -1456,6 +1472,7 @@
 				B7FF9C901CF4162D0067AF60 /* more@2x.png in Resources */,
 				B7FF9C851CF416240067AF60 /* messages_selected@2x.png in Resources */,
 				B771FB6E1CBE200C006CBA32 /* Roboto-Bold.ttf in Resources */,
+				B733F5C11D191D4A0015F413 /* user_thumbnail.png in Resources */,
 				B7FF9C841CF416240067AF60 /* matches_selected@2x.png in Resources */,
 				B771FB6D1CBE200C006CBA32 /* Roboto-Black.ttf in Resources */,
 				B7FF9C861CF416240067AF60 /* more_selected@2x.png in Resources */,
@@ -1539,6 +1556,7 @@
 				B762DB761CCE3E27002875A1 /* MyButton.m in Sources */,
 				B7EAC18B1CC63328001C4EEC /* SettingsViewCell.m in Sources */,
 				B7FFA59D1CF6B5EE00B0614A /* CalendarDataModel.m in Sources */,
+				B750502A1D1934E000763AD5 /* ProfileDataModel.m in Sources */,
 				5D32EC0F1CC4A31F00C50969 /* MatchesViewController.m in Sources */,
 				B73616F11D12CE3100194588 /* NSString+SBJSON.m in Sources */,
 				B73616F51D12CE3100194588 /* AddressAnnotation.m in Sources */,
@@ -1651,7 +1669,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "5e0490cd-4ccb-4009-8f6c-1593e5efc187";
+				PROVISIONING_PROFILE = "9d9d674d-2424-446a-9e0a-9a2fd5b578c3";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1690,7 +1708,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "5e0490cd-4ccb-4009-8f6c-1593e5efc187";
+				PROVISIONING_PROFILE = "9d9d674d-2424-446a-9e0a-9a2fd5b578c3";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1707,9 +1725,9 @@
 				INFOPLIST_FILE = "$(SRCROOT)/FinderApp/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.createapp.finderApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ranosys.finderApp;
 				PRODUCT_NAME = Finder_iPhoneApp;
-				PROVISIONING_PROFILE = "5e0490cd-4ccb-4009-8f6c-1593e5efc187";
+				PROVISIONING_PROFILE = "9d9d674d-2424-446a-9e0a-9a2fd5b578c3";
 			};
 			name = Debug;
 		};
@@ -1724,9 +1742,9 @@
 				INFOPLIST_FILE = "$(SRCROOT)/FinderApp/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.createapp.finderApp;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ranosys.finderApp;
 				PRODUCT_NAME = Finder_iPhoneApp;
-				PROVISIONING_PROFILE = "5e0490cd-4ccb-4009-8f6c-1593e5efc187";
+				PROVISIONING_PROFILE = "9d9d674d-2424-446a-9e0a-9a2fd5b578c3";
 			};
 			name = Release;
 		};
