@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ProfileDataModel.h"
 
 @interface MyProfileViewController : GlobalBackViewController
 @property (nonatomic,strong) NSString *viewName;
+@property (nonatomic,strong) NSString *otherUserID;
+@property(strong, nonatomic) ProfileDataModel *myProfileData;
 @end

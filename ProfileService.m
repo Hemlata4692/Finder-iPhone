@@ -14,6 +14,8 @@
 #define kUrlGetProffessionList          @"getprofessions"
 #define kUrlEditUserProfile             @"edituserprofile"
 #define kUrlGetUserProfile              @"getuserprofile"
+#define kUrlGetOtherUserProfile         @"getotheruserprofile"
+
 
 @implementation ProfileService
 #pragma mark - Singleton instance
@@ -175,9 +177,48 @@
          [myDelegate stopIndicator];
          failure(error);
      }];
-    
-    
 }
+#pragma mark - end
 
+#pragma mark - Other user profile
+-(void)getOtherUserProfile:(NSString *)otherUserId success:(void (^)(id))success failure:(void (^)(NSError *))failure
+{
+    NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"otheruserId":otherUserId};
+    NSLog(@"request other user profile  %@",requestDict);
+    [[Webservice sharedManager] post:kUrlGetOtherUserProfile parameters:requestDict success:^(id responseObject) {
+        responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
+        NSLog(@"other user profile response %@",responseObject);
+        if([[Webservice sharedManager] isStatusOK:responseObject]) {
+            NSMutableArray *profileDataArray = [NSMutableArray new];
+            ProfileDataModel *profileData = [[ProfileDataModel alloc]init];
+            NSDictionary * profileDataDict =[responseObject objectForKey:@"userProfile"];
+            profileData.userImage =[profileDataDict objectForKey:@"userProfilePic"];
+            profileData.userName =[profileDataDict objectForKey:@"userName"];
+            profileData.userEmail =[profileDataDict objectForKey:@"email"];
+            profileData.userMobileNumber =[profileDataDict objectForKey:@"mobileNumber"];
+            profileData.userCompanyName =[profileDataDict objectForKey:@"companyName"];
+            profileData.userComapnyAddress =[profileDataDict objectForKey:@"companyAddress"];
+            profileData.aboutUserCompany =[profileDataDict objectForKey:@"aboutCompany"];
+            profileData.userInterests =[profileDataDict objectForKey:@"interests"];
+            profileData.userDesignation =[profileDataDict objectForKey:@"designation"];
+            profileData.userProfession =[profileDataDict objectForKey:@"profession"];
+            profileData.userInterestedIn =[profileDataDict objectForKey:@"interestIn"];
+            profileData.userLinkedInLink =[profileDataDict objectForKey:@"linkedIn"];
+            profileData.conferenceName =[profileDataDict objectForKey:@"conferenceName"];
+            profileData.vCard=[profileDataDict objectForKey:@"vCardLink"];
+            [profileDataArray addObject:profileData];
+            success(profileDataArray);
+        }
+        else {
+            [myDelegate stopIndicator];
+            failure(nil);
+        }
+    } failure:^(NSError *error)
+     {
+         [myDelegate stopIndicator];
+         failure(error);
+     }];
+
+}
 #pragma mark - end
 @end

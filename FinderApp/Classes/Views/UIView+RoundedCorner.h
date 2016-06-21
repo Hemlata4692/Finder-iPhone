@@ -16,4 +16,5 @@
 - (void)setBottomBorder: (UIView *)view color:(UIColor *)color;
 - (void)addShadow: (UIView *)view color:(UIColor *)color;
 - (void)addShadowWithCornerRadius: (UIView *)view color:(UIColor *)color;
+- (void)setLabelBorder: (UIView *)view  color:(UIColor *)color;
 @end

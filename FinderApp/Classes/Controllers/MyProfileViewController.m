@@ -9,12 +9,14 @@
 #import "MyProfileViewController.h"
 #import "EditProfileViewController.h"
 #import "ProfileService.h"
-#import "ProfileDataModel.h"
+#import "WebViewController.h"
 
 @interface MyProfileViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 {
     NSMutableArray *userProfileDataArray;
     NSArray *interestsArray;
+    CGSize size;
+    CGRect textRect;
 }
 @property (weak, nonatomic) IBOutlet UIScrollView *myProfileScrollView;
 @property (weak, nonatomic) IBOutlet UIView *mainContainerView;
@@ -37,6 +39,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *interestedInLabel;
 @property (weak, nonatomic) IBOutlet UIView *otherUserView;
 @property (weak, nonatomic) IBOutlet UIButton *editProfileButton;
+@property (weak, nonatomic) IBOutlet UILabel *mobileNumberHeading;
+@property (weak, nonatomic) IBOutlet UILabel *aboutcompanyHeading;
 @property (weak, nonatomic) IBOutlet UICollectionView *interestAreaCollectionView;
 @end
 
@@ -64,6 +68,10 @@
 @synthesize viewName;
 @synthesize otherUserView;
 @synthesize editProfileButton;
+@synthesize aboutcompanyHeading;
+@synthesize mobileNumberHeading;
+@synthesize otherUserID;
+@synthesize myProfileData;
 
 #pragma mark - View life cycle
 - (void)viewDidLoad {
@@ -72,8 +80,7 @@
     [self addShadow];
     userProfileDataArray=[[NSMutableArray alloc]init];
     interestsArray=[[NSArray alloc]init];
-    [myDelegate showIndicator];
-    [self performSelector:@selector(getUserProfile) withObject:nil afterDelay:.1];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -82,18 +89,24 @@
 }
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
-    if ([viewName isEqualToString:@"My Profile"]) {
-        self.navigationItem.title=@"My Profile";
-        otherUserView.hidden=YES;
-        linkedInButton.hidden=NO;
-        editProfileButton.hidden=NO;
-    }
-    else {
-        self.navigationItem.title=@"User Profile";
-        otherUserView.hidden=NO;
-        linkedInButton.hidden=YES;
-        editProfileButton.hidden=YES;
-    }
+//    if ([viewName isEqualToString:@"My Profile"]) {
+//        self.navigationItem.title=@"My Profile";
+//        otherUserView.hidden=YES;
+//        linkedInButton.hidden=NO;
+//        editProfileButton.hidden=NO;
+//        [myDelegate showIndicator];
+//        [self performSelector:@selector(getUserProfile) withObject:nil afterDelay:.1];
+//    }
+//    else {
+//        self.navigationItem.title=@"User Profile";
+//        otherUserView.hidden=NO;
+//        linkedInButton.hidden=YES;
+//        editProfileButton.hidden=YES;
+//        [myDelegate showIndicator];
+//        [self performSelector:@selector(getOtherUserProfile) withObject:nil afterDelay:.1];
+//    }
+    [myDelegate showIndicator];
+    [self performSelector:@selector(getOtherUserProfile) withObject:nil afterDelay:.1];
 }
 
 -(void)addShadow
@@ -113,11 +126,18 @@
 - (IBAction)editProfileButtonAction:(id)sender {
     UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     EditProfileViewController *editProfile =[storyboard instantiateViewControllerWithIdentifier:@"EditProfileViewController"];
+    editProfile.userProfileObj=self;
     editProfile.profileArray=[userProfileDataArray mutableCopy];
     [self.navigationController pushViewController:editProfile animated:YES];
 }
 
 - (IBAction)linkedInButtonAction:(id)sender {
+    
+    UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    WebViewController *loadWebPage =[storyboard instantiateViewControllerWithIdentifier:@"WebViewController"];
+    loadWebPage.linkedInLink=[[userProfileDataArray objectAtIndex:0]userLinkedInLink];
+    loadWebPage.navigationTitle=@"Linked In";
+    [self.navigationController pushViewController:loadWebPage animated:YES];
 }
 
 - (IBAction)otherUserLinkedInButtonAction:(id)sender {
@@ -144,7 +164,26 @@
      }] ;
 
 }
+-(void)getOtherUserProfile {
+    otherUserID=@"2";
+    [[ProfileService sharedManager] getOtherUserProfile:otherUserID success:^(id profileDataArray) {
+        [myDelegate stopIndicator];
+        userProfileDataArray=[profileDataArray mutableCopy];
+        [self displayUserProfileData];
+    }
+                                           failure:^(NSError *error)
+     {
+         
+     }] ;
+}
 -(void)displayUserProfileData {
+    
+    companyDescriptionLabel.translatesAutoresizingMaskIntoConstraints = YES;
+    aboutCompanyView.translatesAutoresizingMaskIntoConstraints = YES;
+    mainContainerView.translatesAutoresizingMaskIntoConstraints=YES;
+    companyAddressView.translatesAutoresizingMaskIntoConstraints=YES;
+    comapnyAddressLabel.translatesAutoresizingMaskIntoConstraints=YES;
+    
     __weak UIImageView *weakRef = userProfileImage;
     NSURLRequest *imageRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:[[userProfileDataArray objectAtIndex:0]userImage]]
                                                   cachePolicy:NSURLRequestReturnCacheDataElseLoad
@@ -159,13 +198,42 @@
     userNameLabel.text=[NSString stringWithFormat:@"%@ (%@)",[[userProfileDataArray objectAtIndex:0]userName],[[userProfileDataArray objectAtIndex:0]userDesignation]];
     mobileNumberLabel.text=[[userProfileDataArray objectAtIndex:0]userMobileNumber];
     companyNameLabel.text=[[userProfileDataArray objectAtIndex:0]userCompanyName];
+
+    size = CGSizeMake(mainContainerView.frame.size.width-16,999);
+    textRect=[self setDynamicHeight:size textString:[[userProfileDataArray objectAtIndex:0]aboutUserCompany] fontSize:[UIFont fontWithName:@"Roboto-Regular" size:14]];
+    companyDescriptionLabel.numberOfLines = 0;
+    aboutCompanyView.frame=CGRectMake(8, aboutcompanyHeading.frame.origin.y+aboutcompanyHeading.frame.size.height+5, mainContainerView.frame.size.width-16, textRect.size.height+10);
+    companyDescriptionLabel.frame = CGRectMake(8, 3, aboutCompanyView.frame.size.width-10, textRect.size.height);
     companyDescriptionLabel.text=[[userProfileDataArray objectAtIndex:0]aboutUserCompany];
+    [companyDescriptionLabel setLabelBorder:companyDescriptionLabel color:[UIColor whiteColor]];
+  
+    size = CGSizeMake(mainContainerView.frame.size.width-16,999);
+    textRect=[self setDynamicHeight:size textString:[[userProfileDataArray objectAtIndex:0]userComapnyAddress] fontSize:[UIFont fontWithName:@"Roboto-Regular" size:14]];
+    comapnyAddressLabel.numberOfLines = 0;
+    companyAddressView.frame=CGRectMake(8, aboutCompanyView.frame.origin.y+aboutCompanyView.frame.size.height+8+addressHeadingLabel.frame.size.height+8, mainContainerView.frame.size.width-16, textRect.size.height+10);
+    comapnyAddressLabel.frame = CGRectMake(8, 3, companyAddressView.frame.size.width-10, textRect.size.height);
+    [comapnyAddressLabel setLabelBorder:comapnyAddressLabel color:[UIColor whiteColor]];
     comapnyAddressLabel.text=[[userProfileDataArray objectAtIndex:0]userComapnyAddress];
+  
     professionLabel.text=[[userProfileDataArray objectAtIndex:0]userProfession];
     interestedInLabel.text=[[userProfileDataArray objectAtIndex:0]userInterestedIn];
     interestsArray=[[[userProfileDataArray objectAtIndex:0]userInterests] componentsSeparatedByString:@","];
     [interestAreaCollectionView reloadData];
+  
+    float dynamicHeight=profileBackground.frame.origin.y+profileBackground.frame.size.height+15+mobileNumberHeading.frame.size.height+5+mobileNumberView.frame.size.height+8+aboutcompanyHeading.frame.size.height+5+aboutCompanyView.frame.size.height+8+addressHeadingLabel.frame.size.height+5+companyAddressView.frame.size.height+8+bottomView.frame.size.height+20;
+    mainContainerView.frame = CGRectMake(mainContainerView.frame.origin.x, mainContainerView.frame.origin.y, mainContainerView.frame.size.width, dynamicHeight);
+    myProfileScrollView.contentSize = CGSizeMake(0,mainContainerView.frame.size.height+64);
+
 }
+-(CGRect)setDynamicHeight:(CGSize)rectSize textString:(NSString *)textString fontSize:(UIFont *)fontSize{
+    CGRect textHeight = [textString
+                         boundingRectWithSize:rectSize
+                         options:NSStringDrawingUsesLineFragmentOrigin
+                         attributes:@{NSFontAttributeName:fontSize}
+                         context:nil];
+    return textHeight;
+}
+
 #pragma mark - end
 #pragma mark - Collection view delegate methods
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section

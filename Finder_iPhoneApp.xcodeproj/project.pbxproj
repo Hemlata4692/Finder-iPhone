@@ -84,6 +84,7 @@
 		B7A8DDCE1CAE5C32007F56B6 /* NullValueChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = B7A8DDCD1CAE5C32007F56B6 /* NullValueChecker.m */; };
 		B7A8DDDC1CAE5FC8007F56B6 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7A8DDDB1CAE5FC8007F56B6 /* LoginViewController.m */; };
 		B7A8DDDF1CAE60BB007F56B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7A8DDDD1CAE60BB007F56B6 /* Main.storyboard */; };
+		B7B3B6BA1D19798100679F20 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7B3B6B91D19798100679F20 /* WebViewController.m */; };
 		B7C018BF1CD07044006773CB /* PersonalMessageViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B7C018BE1CD07044006773CB /* PersonalMessageViewCell.m */; };
 		B7C018C41CD0708B006773CB /* PersonalMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7C018C31CD0708B006773CB /* PersonalMessageViewController.m */; };
 		B7C018C81CD08630006773CB /* CalendarTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B7C018C71CD08630006773CB /* CalendarTableViewCell.m */; };
@@ -289,6 +290,8 @@
 		B7A8DDDA1CAE5FC8007F56B6 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		B7A8DDDB1CAE5FC8007F56B6 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		B7A8DDDE1CAE60BB007F56B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B7B3B6B81D19798100679F20 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
+		B7B3B6B91D19798100679F20 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		B7C018BD1CD07044006773CB /* PersonalMessageViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalMessageViewCell.h; sourceTree = "<group>"; };
 		B7C018BE1CD07044006773CB /* PersonalMessageViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PersonalMessageViewCell.m; sourceTree = "<group>"; };
 		B7C018C21CD0708B006773CB /* PersonalMessageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalMessageViewController.h; sourceTree = "<group>"; };
@@ -987,6 +990,15 @@
 			name = AppDelegate;
 			sourceTree = "<group>";
 		};
+		B7B3B6B71D19796000679F20 /* WebViewController */ = {
+			isa = PBXGroup;
+			children = (
+				B7B3B6B81D19798100679F20 /* WebViewController.h */,
+				B7B3B6B91D19798100679F20 /* WebViewController.m */,
+			);
+			name = WebViewController;
+			sourceTree = "<group>";
+		};
 		B7C018BC1CD0701F006773CB /* PersonalMessageView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1127,6 +1139,7 @@
 		B7EAC1781CC5EC7A001C4EEC /* MoreModule */ = {
 			isa = PBXGroup;
 			children = (
+				B7B3B6B71D19796000679F20 /* WebViewController */,
 				B75FCECA1D0E682100B8CE4C /* OtherUserProfile */,
 				B74DF9F91D0A794D002EC69E /* EditProfileView */,
 				B7339C251D0822D800D878FD /* MyProfileView */,
@@ -1578,6 +1591,7 @@
 				B7C018C81CD08630006773CB /* CalendarTableViewCell.m in Sources */,
 				B77695C61CBFB4F300794005 /* SCLAlertView.m in Sources */,
 				B71F63F31CF2CB600025EFBE /* ConferenceListCell.m in Sources */,
+				B7B3B6BA1D19798100679F20 /* WebViewController.m in Sources */,
 				5D32EC0B1CC4A31F00C50969 /* MoreViewController.m in Sources */,
 				B7A8DDCE1CAE5C32007F56B6 /* NullValueChecker.m in Sources */,
 				B7414F931CCA4715009FE9CE /* CustomAlert.m in Sources */,

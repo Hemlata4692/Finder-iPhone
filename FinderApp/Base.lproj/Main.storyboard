@@ -2051,6 +2051,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="aboutCompanyView" destination="YbS-s7-KJf" id="kMd-3c-2S9"/>
+                        <outlet property="aboutcompanyHeading" destination="iee-kA-6Au" id="iNd-5e-2S4"/>
                         <outlet property="addressHeadingLabel" destination="jTZ-4L-0Ij" id="DWH-oC-eRR"/>
                         <outlet property="bottomView" destination="UJn-Xh-15G" id="v4V-Im-BcW"/>
                         <outlet property="comapnyAddressLabel" destination="MF1-Af-BMi" id="0KP-Gr-bfs"/>
@@ -2063,6 +2064,7 @@
                         <outlet property="interestedInView" destination="CdH-wN-jxZ" id="xND-0B-WtX"/>
                         <outlet property="linkedInButton" destination="bwh-W1-ThI" id="dwL-Bl-Uzw"/>
                         <outlet property="mainContainerView" destination="VzX-Mt-zFU" id="plI-EA-tz6"/>
+                        <outlet property="mobileNumberHeading" destination="HdG-bs-bht" id="CoL-qS-qrb"/>
                         <outlet property="mobileNumberLabel" destination="xvy-kx-N3o" id="MiM-xr-kAU"/>
                         <outlet property="mobileNumberView" destination="5n1-Ka-AXI" id="lbk-dW-6cI"/>
                         <outlet property="myProfileScrollView" destination="PNE-iX-aPl" id="Jho-bH-0If"/>
@@ -3344,6 +3346,48 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fJH-bx-oaI" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1258" y="2558"/>
+        </scene>
+        <!--Web View Controller-->
+        <scene sceneID="dLQ-hG-MTb">
+            <objects>
+                <viewController storyboardIdentifier="WebViewController" id="SOt-RN-p0y" customClass="WebViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="j4M-gy-1UG"/>
+                        <viewControllerLayoutGuide type="bottom" id="gNE-ja-QPG"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qYj-Tw-vNr">
+                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Kv-al-iPm">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="4Kv-al-iPm" secondAttribute="height" multiplier="10:13" id="fZk-y4-WBS"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="delegate" destination="SOt-RN-p0y" id="CoE-JL-4m6"/>
+                                </connections>
+                            </webView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="4Kv-al-iPm" secondAttribute="trailing" id="BcX-Tn-nDp"/>
+                            <constraint firstItem="4Kv-al-iPm" firstAttribute="top" secondItem="j4M-gy-1UG" secondAttribute="bottom" id="LlW-ee-hmQ"/>
+                            <constraint firstItem="gNE-ja-QPG" firstAttribute="top" secondItem="4Kv-al-iPm" secondAttribute="bottom" id="Vpe-2Q-pgR"/>
+                            <constraint firstItem="4Kv-al-iPm" firstAttribute="leading" secondItem="qYj-Tw-vNr" secondAttribute="leading" id="p4q-tq-0rm"/>
+                        </constraints>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="webView" destination="4Kv-al-iPm" id="eq0-3d-R2z"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lbS-nc-3ZF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1616" y="2558"/>
         </scene>
         <!--Conference List View Controller-->
         <scene sceneID="Qmh-2Y-hCj">

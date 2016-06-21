@@ -33,6 +33,12 @@
     view.layer.borderWidth = 1.5f;
 }
 
+- (void)setLabelBorder: (UIView *)view  color:(UIColor *)color {
+    
+    view.layer.borderColor =color.CGColor;
+    view.layer.borderWidth = 0.5f;
+}
+
 -(void)setBottomBorder: (UIView *)view color:(UIColor *)color
 {
     CALayer *bottomBorder = [CALayer layer];

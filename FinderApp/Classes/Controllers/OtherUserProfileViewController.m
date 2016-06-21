@@ -7,6 +7,7 @@
 //
 
 #import "OtherUserProfileViewController.h"
+#import "WebViewController.h"
 
 @interface OtherUserProfileViewController ()
 @property (weak, nonatomic) IBOutlet UIScrollView *otherUserProfileScrollView;

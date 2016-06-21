@@ -22,5 +22,5 @@
 @property(nonatomic,retain)NSString * userInterests;
 @property(nonatomic,retain)NSString * userInterestedIn;
 @property(nonatomic,retain)NSString * conferenceName;
-
+@property(nonatomic,retain)NSString * vCard;
 @end

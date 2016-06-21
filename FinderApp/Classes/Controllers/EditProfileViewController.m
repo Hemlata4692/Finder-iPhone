@@ -10,7 +10,6 @@
 #import "ProfileService.h"
 #import "CYCustomMultiSelectPickerView.h"
 #import "ProfileDataModel.h"
-#import "MyProfileViewController.h"
 
 @interface EditProfileViewController ()<UITextFieldDelegate,BSKeyboardControlsDelegate,CYCustomMultiSelectPickerViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 {
@@ -21,7 +20,7 @@
     NSMutableArray *professionArray;
     NSMutableArray *selectedInterestedArray;
     NSString* pickerType;
-
+    
 }
 @property (weak, nonatomic) IBOutlet UIScrollView *editProfileScrollView;
 @property (weak, nonatomic) IBOutlet UIView *editProfileContainerview;
@@ -88,6 +87,7 @@
 @synthesize userPickerView;
 @synthesize pickerToolBar;
 @synthesize profileArray;
+@synthesize userProfileObj;
 
 #pragma mark - View life cycle
 - (void)viewDidLoad {
@@ -248,10 +248,26 @@
 
 }
 - (IBAction)saveButtonAction:(id)sender {
-    [myDelegate showIndicator];
-    [self performSelector:@selector(editUserProfile) withObject:nil afterDelay:.1];
+    if([self performValidations]) {
+        [myDelegate showIndicator];
+        [self performSelector:@selector(editUserProfile) withObject:nil afterDelay:.1];
+
+    }
 }
 #pragma mark - end
+#pragma mark - Validation
+- (BOOL)performValidations {
+    if ([userNameTextField isEmpty] || [mobileNumberTextField isEmpty] || [companyAddressTextField isEmpty] || [companyNameTextField isEmpty] || [professionTextField isEmpty] || [interestedAreaTextField isEmpty] || [interestedInTextField isEmpty] || [linkedInTextField isEmpty] || [designationTextField isEmpty] || [aboutCompanyTextView.text isEqualToString:@""]) {
+        SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
+        [alert showWarning:self title:@"Alert" subTitle:@"All the fields are mandatory except profile image." closeButtonTitle:@"Done" duration:0.0f];
+        return NO;
+    }
+    else {
+        return YES;
+    }
+}
+#pragma mark - end
+
 #pragma mark - Toolbar actions
 - (IBAction)toolBarDoneAction:(id)sender {
     [self hidePickerWithAnimation];
@@ -303,8 +319,6 @@
     else {
         pickerLabel.text=[interestedInArray objectAtIndex:row];
     }
-    //interestedInArray
-   
     return pickerLabel;
 }
 -(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
@@ -480,6 +494,17 @@
 -(void)editUserProfile {
     [[ProfileService sharedManager] editUserProfile:userNameTextField.text userEmail:userEmailTextfield.text mobileNumber:mobileNumberTextField.text companyName:companyNameTextField.text companyAddress:companyAddressTextField.text designation:designationTextField.text aboutCompany:aboutCompanyTextView.text linkedIn:linkedInTextField.text interests:interestedAreaTextField.text interestedIn:interestedInTextField.text profession:professionTextField.text image:userImageView.image success:^(id responseObject) {
         [myDelegate stopIndicator];
+//        userProfileObj.myProfileData.userName=userNameTextField.text;
+//        userProfileObj.myProfileData.userMobileNumber=mobileNumberTextField.text;
+//        userProfileObj.myProfileData.userCompanyName=companyNameTextField.text;
+//        userProfileObj.myProfileData.userComapnyAddress=companyAddressTextField.text;
+//        userProfileObj.myProfileData.userDesignation=designationTextField.text;
+//        userProfileObj.myProfileData.aboutUserCompany=aboutCompanyTextView.text;
+//        userProfileObj.myProfileData.userInterests=interestedAreaTextField.text;
+//        userProfileObj.myProfileData.userProfession=professionTextField.text;
+//        userProfileObj.myProfileData.userInterestedIn=interestedInTextField.text;
+//        userProfileObj.myProfileData.userImage=userNameView;
+    
         for (UIViewController *controller in self.navigationController.viewControllers)
         {
             if ([controller isKindOfClass:[MyProfileViewController class]])

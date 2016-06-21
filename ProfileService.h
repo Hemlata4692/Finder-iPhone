@@ -25,5 +25,7 @@
 
 //User profile
 -(void)getUserProfile:(void (^)(id data))success failure:(void (^)(NSError *error))failure;
-//{userId:"20", otheruserId:"2"}
+
+//Other user profile
+-(void)getOtherUserProfile:(NSString *)otherUserId success:(void (^)(id))success failure:(void (^)(NSError *))failure;
 @end
