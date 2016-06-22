@@ -14,7 +14,6 @@
 
 #define kUrlConferenceList              @"getconferencelisting"
 #define kUrlConferenceDetail            @"getconferencedetails"
-#define kUrlMatcheslist                 @"Matcheslist"
 #define kUrlChangeSettings              @"settings"
 #define kUrlUserSettings                @"getusersetting"
 #define kUrlCalendarDetails             @"getcalenderdetails"
@@ -127,41 +126,6 @@
          [myDelegate stopIndicator];
          failure(error);
      }];
-    
-}
-#pragma mark- end
-#pragma mark- Matches detail
--(void)getMatchesDetails:(void (^)(id data))success failure:(void (^)(NSError *error))failure
-{
-    NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"]};
-    NSLog(@"Matcheslist request %@",requestDict);
-    [[Webservice sharedManager] post:kUrlMatcheslist parameters:requestDict success:^(id responseObject)
-     {
-         responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
-         NSLog(@"Matcheslist response %@",responseObject);
-         if([[Webservice sharedManager] isStatusOK:responseObject]) {
-             NSMutableArray *matchesArray = [NSMutableArray new];
-             //             ConferenceDataModel *conferenceDetail = [[ConferenceDataModel alloc]init];
-             //             NSDictionary * conferenceDict =[responseObject objectForKey:@"getConfrenceDetails"];
-             //             conferenceDetail.conferenceName =[conferenceDict objectForKey:@"confrenceName"];
-             //             conferenceDetail.conferenceDate =[conferenceDict objectForKey:@"confrenceDate"];
-             //             conferenceDetail.conferenceDescription =[conferenceDict objectForKey:@"description"];
-             //             conferenceDetail.conferenceOrganiserName =[conferenceDict objectForKey:@"organiserName"];
-             //             conferenceDetail.conferenceImage=[conferenceDict objectForKey:@"imageUrl"];
-             //             conferenceDetail.conferenceVenue=[conferenceDict objectForKey:@"venue"];
-             //             [conferenceArray addObject:conferenceDetail];
-             success(matchesArray);
-         }
-         else {
-             [myDelegate stopIndicator];
-             failure(nil);
-         }
-     } failure:^(NSError *error)
-     {
-         [myDelegate stopIndicator];
-         failure(error);
-     }];
-    
     
 }
 #pragma mark- end

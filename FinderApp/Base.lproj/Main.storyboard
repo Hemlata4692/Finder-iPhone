@@ -3369,12 +3369,23 @@
                                     <outlet property="delegate" destination="SOt-RN-p0y" id="CoE-JL-4m6"/>
                                 </connections>
                             </webView>
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="YwU-lP-sui">
+                                <rect key="frame" x="150" y="198" width="20" height="20"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="YwU-lP-sui" secondAttribute="height" multiplier="1:1" id="J6B-FD-dkD"/>
+                                </constraints>
+                                <color key="color" red="0.92941176470588238" green="0.47058823529411764" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="4Kv-al-iPm" secondAttribute="trailing" id="BcX-Tn-nDp"/>
+                            <constraint firstItem="YwU-lP-sui" firstAttribute="centerX" secondItem="qYj-Tw-vNr" secondAttribute="centerX" id="CI3-Lw-mYs"/>
+                            <constraint firstAttribute="trailing" secondItem="YwU-lP-sui" secondAttribute="trailing" constant="150" id="J3C-cG-Ssg"/>
                             <constraint firstItem="4Kv-al-iPm" firstAttribute="top" secondItem="j4M-gy-1UG" secondAttribute="bottom" id="LlW-ee-hmQ"/>
                             <constraint firstItem="gNE-ja-QPG" firstAttribute="top" secondItem="4Kv-al-iPm" secondAttribute="bottom" id="Vpe-2Q-pgR"/>
+                            <constraint firstItem="YwU-lP-sui" firstAttribute="centerY" secondItem="qYj-Tw-vNr" secondAttribute="centerY" id="cYt-6z-Drw"/>
+                            <constraint firstItem="YwU-lP-sui" firstAttribute="leading" secondItem="qYj-Tw-vNr" secondAttribute="leading" constant="150" id="koB-ZT-zPe"/>
                             <constraint firstItem="4Kv-al-iPm" firstAttribute="leading" secondItem="qYj-Tw-vNr" secondAttribute="leading" id="p4q-tq-0rm"/>
                         </constraints>
                     </view>
@@ -3382,6 +3393,7 @@
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="YwU-lP-sui" id="DHw-bG-XTd"/>
                         <outlet property="webView" destination="4Kv-al-iPm" id="eq0-3d-R2z"/>
                     </connections>
                 </viewController>
@@ -3615,19 +3627,16 @@
                                                             <color key="textColor" red="0.098039215686274508" green="0.79607843137254897" blue="0.66274509803921566" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="abN-lA-6SO">
+                                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="abN-lA-6SO" customClass="MyButton">
                                                             <rect key="frame" x="248" y="7" width="30" height="30"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <state key="normal" image="approve"/>
                                                         </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pFr-31-0Hm">
+                                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pFr-31-0Hm" customClass="MyButton">
                                                             <rect key="frame" x="279" y="7" width="30" height="30"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <state key="normal" image="reject"/>
                                                         </button>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dI2-vk-x2c">
-                                                            <rect key="frame" x="248" y="7" width="30" height="30"/>
-                                                        </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Shivendra singh" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y90-yI-kRz">
                                                             <rect key="frame" x="8" y="13" width="155" height="20"/>
                                                             <color key="backgroundColor" red="0.44295943776289731" green="0.90448805117298814" blue="0.94509803920000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -3635,8 +3644,20 @@
                                                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="52g-5o-cBN" customClass="MyButton">
+                                                            <rect key="frame" x="255" y="17" width="40" height="40"/>
+                                                            <state key="normal" image="sendRequest"/>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edk-dn-zGi" customClass="MyButton">
+                                                            <rect key="frame" x="248" y="7" width="30" height="30"/>
+                                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FLU-rE-fFO" customClass="MyButton">
+                                                            <rect key="frame" x="279" y="7" width="30" height="30"/>
+                                                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        </button>
                                                     </subviews>
-                                                    <color key="backgroundColor" red="0.3411764706" green="0.69019607839999997" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="gxO-QK-b5e" secondAttribute="height" multiplier="31:6" constant="-72.333333333333371" id="McP-Kh-bFM"/>
                                                     </constraints>
@@ -3650,13 +3671,15 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="allMatchesApproveButton" destination="edk-dn-zGi" id="6ac-Eb-Xyz"/>
+                                            <outlet property="allMatchesRejectButton" destination="FLU-rE-fFO" id="mqs-8r-Tbn"/>
                                             <outlet property="approveButton" destination="abN-lA-6SO" id="4Qh-c7-oLd"/>
-                                            <outlet property="approvedContactImageView" destination="dI2-vk-x2c" id="7YF-gc-Wlz"/>
                                             <outlet property="cancelButton" destination="pFr-31-0Hm" id="Lva-dE-hAM"/>
                                             <outlet property="companyName" destination="nRr-su-VpR" id="R2H-Pr-SI0"/>
                                             <outlet property="containerView" destination="gxO-QK-b5e" id="fHk-y0-j3s"/>
                                             <outlet property="name" destination="Y90-yI-kRz" id="8bo-9T-CqN"/>
                                             <outlet property="reviewedStatusLbl" destination="kmJ-mN-mRl" id="YWN-Zy-Sy0"/>
+                                            <outlet property="sendRequestButton" destination="52g-5o-cBN" id="JTB-j8-OYA"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="contactsCell" id="obI-1c-IIZ" customClass="MatchesTableViewCell">
@@ -3679,24 +3702,24 @@
                                                             <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NOE-lJ-OOK">
-                                                            <rect key="frame" x="277" y="8" width="30" height="30"/>
-                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                            <state key="normal" image="message_icon"/>
-                                                        </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s6N-zX-6S3">
                                                             <rect key="frame" x="86" y="37" width="172" height="21"/>
                                                             <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
                                                             <color key="textColor" red="0.40000000000000002" green="0.40000000000000002" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iay-vG-67N">
+                                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NOE-lJ-OOK" customClass="MyButton">
+                                                            <rect key="frame" x="277" y="8" width="30" height="30"/>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <state key="normal" image="message_icon"/>
+                                                        </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iay-vG-67N" customClass="MyButton">
                                                             <rect key="frame" x="246" y="8" width="30" height="30"/>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <state key="normal" image="schedule_meeting"/>
                                                         </button>
                                                     </subviews>
-                                                    <color key="backgroundColor" red="0.81568627449999997" green="0.81568627449999997" blue="0.81568627449999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="SLb-gA-sL2" secondAttribute="height" multiplier="31:7" constant="-17.714285714285722" id="ADa-t5-X3b"/>
                                                     </constraints>
@@ -3754,6 +3777,7 @@
                     <navigationItem key="navigationItem" id="kl8-Ra-BaT"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
+                        <outlet property="matchesSegmentControl" destination="N54-MS-1pJ" id="NFR-XL-OUW"/>
                         <outlet property="matchesTableView" destination="2XL-CO-dqY" id="e9h-tZ-oaA"/>
                         <outlet property="noRecordLabel" destination="edf-Ac-9LT" id="ViM-3P-zUY"/>
                     </connections>
@@ -5061,6 +5085,7 @@
         <image name="reject" width="21" height="21"/>
         <image name="schedule_meeting" width="21" height="21"/>
         <image name="send" width="36" height="36"/>
+        <image name="sendRequest" width="33" height="33"/>
         <image name="tick_Interest" width="16" height="16"/>
         <image name="time_icon" width="13" height="13"/>
         <image name="timer_popUp" width="14" height="14"/>

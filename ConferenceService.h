@@ -18,10 +18,6 @@
 -(void)getConferenceDetail:(NSString *)conferenceId success:(void (^)(id))success failure:(void (^)(NSError *error))failure;
 //end
 
-//Matches detail
--(void)getMatchesDetails:(void (^)(id data))success failure:(void (^)(NSError *error))failure;
-//end
-
 //Settings
 -(void)changeSettings:(NSString *)switchIdentifire switchStatus:(NSString *)switchStatus success:(void (^)(id))success failure:(void (^)(NSError *))failure;
 

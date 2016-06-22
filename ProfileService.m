@@ -59,8 +59,6 @@
          [myDelegate stopIndicator];
          failure(error);
      }];
-    
-
 }
 #pragma mark - end
 #pragma mark - Interested In list

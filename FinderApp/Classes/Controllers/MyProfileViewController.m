@@ -89,24 +89,24 @@
 }
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
-//    if ([viewName isEqualToString:@"My Profile"]) {
-//        self.navigationItem.title=@"My Profile";
-//        otherUserView.hidden=YES;
-//        linkedInButton.hidden=NO;
-//        editProfileButton.hidden=NO;
-//        [myDelegate showIndicator];
-//        [self performSelector:@selector(getUserProfile) withObject:nil afterDelay:.1];
-//    }
-//    else {
-//        self.navigationItem.title=@"User Profile";
-//        otherUserView.hidden=NO;
-//        linkedInButton.hidden=YES;
-//        editProfileButton.hidden=YES;
-//        [myDelegate showIndicator];
-//        [self performSelector:@selector(getOtherUserProfile) withObject:nil afterDelay:.1];
-//    }
-    [myDelegate showIndicator];
-    [self performSelector:@selector(getOtherUserProfile) withObject:nil afterDelay:.1];
+    if ([viewName isEqualToString:@"My Profile"]) {
+        self.navigationItem.title=@"My Profile";
+        otherUserView.hidden=YES;
+        linkedInButton.hidden=NO;
+        editProfileButton.hidden=NO;
+        [myDelegate showIndicator];
+        [self performSelector:@selector(getUserProfile) withObject:nil afterDelay:.1];
+    }
+    else {
+        self.navigationItem.title=@"User Profile";
+        otherUserView.hidden=NO;
+        linkedInButton.hidden=YES;
+        editProfileButton.hidden=YES;
+        [myDelegate showIndicator];
+        [self performSelector:@selector(getOtherUserProfile) withObject:nil afterDelay:.1];
+    }
+//    [myDelegate showIndicator];
+//    [self performSelector:@selector(getOtherUserProfile) withObject:nil afterDelay:.1];
 }
 
 -(void)addShadow

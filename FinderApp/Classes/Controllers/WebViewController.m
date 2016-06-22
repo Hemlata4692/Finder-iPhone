@@ -31,7 +31,7 @@
         url = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.linkedin.com/%@",linkedInString]];
     }
 }
-
+//https://www.linkedin.com/in/hemlata-khajanchi-4617b99a
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -41,7 +41,6 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     [activityIndicator stopAnimating];
-    
 }
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(nullable NSError *)error
 {
