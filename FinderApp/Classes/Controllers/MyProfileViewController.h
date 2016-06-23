@@ -11,6 +11,7 @@
 
 @interface MyProfileViewController : GlobalBackViewController
 @property (nonatomic,strong) NSString *viewName;
+@property (nonatomic,strong) NSString *viewType;
 @property (nonatomic,strong) NSString *otherUserID;
 @property(strong, nonatomic) ProfileDataModel *myProfileData;
 @end

@@ -43,6 +43,7 @@
 		B7414F921CCA4715009FE9CE /* MyAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = B7414F8E1CCA4715009FE9CE /* MyAlert.m */; };
 		B7414F931CCA4715009FE9CE /* CustomAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = B7414F901CCA4715009FE9CE /* CustomAlert.m */; };
 		B7414F941CCA4715009FE9CE /* CustomAlert.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7414F911CCA4715009FE9CE /* CustomAlert.xib */; };
+		B74B36D01D1B8EBA006CD64B /* UIView+Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = B74B36CF1D1B8EBA006CD64B /* UIView+Toast.m */; };
 		B74B44551CFD60DD00275CC9 /* EventDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B74B44541CFD60DD00275CC9 /* EventDataModel.m */; };
 		B74DF9FC1D0A7967002EC69E /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B74DF9FB1D0A7967002EC69E /* EditProfileViewController.m */; };
 		B750502A1D1934E000763AD5 /* ProfileDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B75050291D1934E000763AD5 /* ProfileDataModel.m */; };
@@ -205,6 +206,8 @@
 		B7414F8F1CCA4715009FE9CE /* CustomAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAlert.h; sourceTree = "<group>"; };
 		B7414F901CCA4715009FE9CE /* CustomAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAlert.m; sourceTree = "<group>"; };
 		B7414F911CCA4715009FE9CE /* CustomAlert.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomAlert.xib; sourceTree = "<group>"; };
+		B74B36CE1D1B8EBA006CD64B /* UIView+Toast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Toast.h"; sourceTree = "<group>"; };
+		B74B36CF1D1B8EBA006CD64B /* UIView+Toast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Toast.m"; sourceTree = "<group>"; };
 		B74B44531CFD60DD00275CC9 /* EventDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDataModel.h; sourceTree = SOURCE_ROOT; };
 		B74B44541CFD60DD00275CC9 /* EventDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EventDataModel.m; sourceTree = SOURCE_ROOT; };
 		B74DF9FA1D0A7967002EC69E /* EditProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditProfileViewController.h; sourceTree = "<group>"; };
@@ -632,6 +635,15 @@
 			name = CustomAlert;
 			sourceTree = "<group>";
 		};
+		B74B36CD1D1B8EA3006CD64B /* UIView+Toast */ = {
+			isa = PBXGroup;
+			children = (
+				B74B36CE1D1B8EBA006CD64B /* UIView+Toast.h */,
+				B74B36CF1D1B8EBA006CD64B /* UIView+Toast.m */,
+			);
+			name = "UIView+Toast";
+			sourceTree = "<group>";
+		};
 		B74DF9F91D0A794D002EC69E /* EditProfileView */ = {
 			isa = PBXGroup;
 			children = (
@@ -870,6 +882,7 @@
 		B7A8DD801CAE2CE9007F56B6 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				B74B36CD1D1B8EA3006CD64B /* UIView+Toast */,
 				B79D81541D1799A300E8B829 /* ALPickerView */,
 				B740CCA21CD8638C0006B32A /* UIImageCategory */,
 				B762DB731CCE3E1E002875A1 /* ButtonTag */,
@@ -1642,6 +1655,7 @@
 				5D93619D1CC606190004F030 /* MatchesTableViewCell.m in Sources */,
 				B78405B01CDB72A700CD7D54 /* ASValueTrackingSlider.m in Sources */,
 				B7C018C41CD0708B006773CB /* PersonalMessageViewController.m in Sources */,
+				B74B36D01D1B8EBA006CD64B /* UIView+Toast.m in Sources */,
 				B73616F21D12CE3100194588 /* SBJsonBase.m in Sources */,
 				B7414F921CCA4715009FE9CE /* MyAlert.m in Sources */,
 				B77695AD1CBF70E400794005 /* GlobalBackViewController.m in Sources */,

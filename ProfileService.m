@@ -114,9 +114,9 @@
 #pragma mark - end
 
 #pragma mark - Edit profile
--(void)editUserProfile:(NSString *)userName userEmail:(NSString *)userEmail mobileNumber:(NSString *)mobileNumber companyName:(NSString *)companyName companyAddress:(NSString *)companyAddress designation:(NSString *)designation aboutCompany:(NSString *)aboutCompany linkedIn:(NSString *)linkedIn interests:(NSString *)interests interestedIn:(NSString *)interestedIn profession:(NSString *)profession image:(UIImage *)image success:(void (^)(id))success failure:(void (^)(NSError *))failure {
+-(void)editUserProfile:(NSString *)userName mobileNumber:(NSString *)mobileNumber companyName:(NSString *)companyName companyAddress:(NSString *)companyAddress designation:(NSString *)designation aboutCompany:(NSString *)aboutCompany linkedIn:(NSString *)linkedIn interests:(NSString *)interests interestedIn:(NSString *)interestedIn profession:(NSString *)profession image:(UIImage *)image success:(void (^)(id))success failure:(void (^)(NSError *))failure {
    
-    NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"],@"userName":userName,@"userEmail":userEmail,@"mobileNumber":mobileNumber,@"companyName":companyName,@"companyAddress":companyAddress,@"designation":designation,@"aboutCompany":aboutCompany,@"linkedIn":linkedIn,@"interests":interests,@"interestInName":interestedIn,@"professionName":profession};
+    NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"],@"userName":userName,@"mobileNumber":mobileNumber,@"companyName":companyName,@"companyAddress":companyAddress,@"designation":designation,@"aboutCompany":aboutCompany,@"linkedIn":linkedIn,@"interests":interests,@"interestInName":interestedIn,@"professionName":profession};
     NSLog(@"request edit user profile  %@",requestDict);
     [[Webservice sharedManager] postImage:kUrlEditUserProfile parameters:requestDict image:image success:^(id responseObject) {
         responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];

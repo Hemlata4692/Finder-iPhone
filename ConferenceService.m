@@ -114,6 +114,7 @@
              conferenceDetail.conferenceOrganiserName =[conferenceDict objectForKey:@"organiserName"];
              conferenceDetail.conferenceImage=[conferenceDict objectForKey:@"imageUrl"];
              conferenceDetail.conferenceVenue=[conferenceDict objectForKey:@"venue"];
+              conferenceDetail.representativeEmail=[conferenceDict objectForKey:@"organiserEmail"];
              [conferenceArray addObject:conferenceDetail];
              success(conferenceArray);
          }

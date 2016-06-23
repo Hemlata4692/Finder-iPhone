@@ -12,5 +12,6 @@
 
 - (BOOL)isEmpty;
 - (BOOL)isValidEmail;
+-(BOOL)isValidURL;
 - (void)setPlaceholderFontSize : (UITextField *)textfield string:(NSString *)string;
 @end

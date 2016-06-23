@@ -68,7 +68,7 @@
         
         [proximityCell.sliderView setValue:[[[UserDefaultManager getValue:@"switchStatusDict"] objectForKey:@"02"] intValue]];
         [proximityCell.sliderView setMaxFractionDigitsDisplayed:0];
-        proximityCell.sliderView.popUpViewColor = [UIColor colorWithRed:255.0/255.0 green:76.0/255.0 blue:60.0/255.0 alpha:1.0];
+        proximityCell.sliderView.popUpViewColor = [UIColor colorWithRed:47.0/255.0 green:81.0/255.0 blue:116.0/255.0 alpha:1.0];
         proximityCell.sliderView.font = [UIFont fontWithName:@"Roboto-Regular" size:16];
         proximityCell.sliderView.textColor = [UIColor whiteColor];
         proximityCell.sliderView.popUpViewWidthPaddingFactor = 1.7;

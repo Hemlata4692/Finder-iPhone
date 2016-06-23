@@ -15,4 +15,5 @@
 @property(nonatomic,retain)NSString * conferenceImage;
 @property(nonatomic,retain)NSString * conferenceOrganiserName;
 @property(nonatomic,retain)NSString * conferenceVenue;
+@property(nonatomic,retain)NSString * representativeEmail;
 @end

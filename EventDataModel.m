@@ -11,4 +11,6 @@
 @implementation EventDataModel
 @synthesize eventName;
 @synthesize eventTime;
+@synthesize eventDescription;
+@synthesize userImage;
 @end

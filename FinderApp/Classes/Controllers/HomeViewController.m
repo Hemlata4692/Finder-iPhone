@@ -11,8 +11,11 @@
 #import "ConferenceDataModel.h"
 #import "MJGeocodingServices.h"
 #import "MapViewController.h"
+#import <MessageUI/MessageUI.h>
+#import "UIView+Toast.h"
+#import <CoreText/CoreText.h>
 
-@interface HomeViewController ()<MJGeocoderDelegate>
+@interface HomeViewController ()<MJGeocoderDelegate,MFMailComposeViewControllerDelegate>
 {
     NSMutableArray *conferenceDetailArray;
     CGSize size;
@@ -41,6 +44,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *mapButton;
 @property (nonatomic,retain) NSString * conferenceId;
 @property (weak, nonatomic) IBOutlet UIButton *viewMapButton;
+@property (weak, nonatomic) IBOutlet UIButton *finderRepresentativeButton;
 
 @end
 
@@ -88,9 +92,16 @@
 -(void)displayConferenceDetail{
     conferenceDescription.translatesAutoresizingMaskIntoConstraints = YES;
     mainContainerView.translatesAutoresizingMaskIntoConstraints=YES;
-    
+ 
     conferenceTitleLabel.text = [[conferenceDetailArray objectAtIndex:0]conferenceName];
-    conferenceOrganiserName.text=[[conferenceDetailArray objectAtIndex:0]conferenceOrganiserName];
+    
+    NSMutableAttributedString *attString = [[NSMutableAttributedString alloc] initWithString:[[conferenceDetailArray objectAtIndex:0]conferenceOrganiserName]];
+    [attString addAttribute:(NSString*)kCTUnderlineStyleAttributeName
+                      value:[NSNumber numberWithInt:kCTUnderlineStyleSingle]
+                      range:(NSRange){0,[attString length]}];
+    conferenceOrganiserName.attributedText = attString;
+    // conferenceOrganiserName.text=[[conferenceDetailArray objectAtIndex:0]conferenceOrganiserName];
+ 
     conferenceVenue.text=[[conferenceDetailArray objectAtIndex:0]conferenceVenue];
     conferenceDate.text=[[conferenceDetailArray objectAtIndex:0]conferenceDate];
     size = CGSizeMake(mainContainerView.frame.size.width-16,999);
@@ -111,6 +122,8 @@
     float dynamicHeight=conferenceImageView.frame.origin.y+conferenceImageView.frame.size.height+8+descriptionHeadingLabel.frame.size.height+2+conferenceDescription.frame.size.height+8+bottomContainerView.frame.size.height+20;
     mainContainerView.frame = CGRectMake(mainContainerView.frame.origin.x, mainContainerView.frame.origin.y, mainContainerView.frame.size.width, dynamicHeight);
     homeScrollView.contentSize = CGSizeMake(0,mainContainerView.frame.size.height+64);
+    
+    
 }
 -(CGRect)setDynamicHeight:(CGSize)rectSize textString:(NSString *)textString fontSize:(UIFont *)fontSize{
     CGRect textHeight = [textString
@@ -121,7 +134,7 @@
     return textHeight;
 }
 #pragma mark - end
-#pragma mark - IBActions
+#pragma mark - IBAction
 - (IBAction)mapButtonAction:(id)sender
 {
     if(!forwardGeocoder)
@@ -162,6 +175,58 @@
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 }
 #pragma mark - end
-
+#pragma mark - IBActions
+- (IBAction)finderReprestativeEmailAction:(id)sender {
+    if ([MFMailComposeViewController canSendMail])
+    {
+        // Email Subject
+        NSString *emailTitle = @"Finder App";
+        NSArray *toRecipents = [NSArray arrayWithObject:[[conferenceDetailArray objectAtIndex:0]representativeEmail]];
+        MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
+        [mc.navigationBar setTintColor:[UIColor whiteColor]];
+        mc.mailComposeDelegate = self;
+        [mc setSubject:emailTitle];
+        [mc setToRecipients:toRecipents];
+        [self presentViewController: mc animated:YES completion:^{
+            [[UIApplication sharedApplication] setStatusBarStyle: UIStatusBarStyleLightContent];
+        }];
+    }
+    else
+    {
+        UIAlertView *alertView = [[UIAlertView alloc]
+                                  initWithTitle:@"Alert"
+                                  message:@"Email account is not configured in your device."
+                                  delegate:self
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles:nil];
+        [alertView show];
+    }
+    
+}
+#pragma mark - end
+#pragma mark - MFMailcomposeviewcontroller delegate
+- (void)mailComposeController:(MFMailComposeViewController*)controller
+          didFinishWithResult:(MFMailComposeResult)result
+                        error:(NSError*)error
+{
+    switch (result)
+    {
+        case MFMailComposeResultCancelled:
+            break;
+        case MFMailComposeResultSaved:
+            break;
+        case MFMailComposeResultSent:
+            [self.view makeToast:@"Your email was sent."];
+            break;
+        case MFMailComposeResultFailed:
+            [self.view makeToast:@"Your email was not sent."];
+            break;
+        default:
+            [self.view makeToast:@"Your email was not sent."];
+            break;
+    }
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+#pragma mark - end
 
 @end

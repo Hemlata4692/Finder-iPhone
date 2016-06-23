@@ -11,4 +11,6 @@
 @interface EventDataModel : NSObject
 @property(nonatomic,retain)NSString * eventName;
 @property(nonatomic,retain)NSString * eventTime;
+@property(nonatomic,retain)NSString * eventDescription;
+@property(nonatomic,retain)NSString * userImage;
 @end

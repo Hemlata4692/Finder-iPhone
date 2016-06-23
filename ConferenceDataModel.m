@@ -15,4 +15,5 @@
 @synthesize conferenceVenue;
 @synthesize conferenceDescription;
 @synthesize conferenceOrganiserName;
+@synthesize representativeEmail;
 @end

@@ -51,13 +51,11 @@
     // Do any additional setup after loading the view.
     self.navigationItem.title=@"Matches";
     [self setTabBarImages];
-//    noRecordLabel.hidden=NO;
-//    matchesTableView.hidden=YES;
+    //    noRecordLabel.hidden=NO;
+    //    matchesTableView.hidden=YES;
     allMatchesDataArray=[[NSMutableArray alloc]init];
     latestMatchesArray=[[NSMutableArray alloc]init];
     contactArray=[[NSMutableArray alloc]init];
-    matchesSegmentControl.selectedSegmentIndex=1;
-    selectedSegment=1;
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -65,6 +63,8 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    matchesSegmentControl.selectedSegmentIndex=1;
+    selectedSegment=1;
     [myDelegate showIndicator];
     [self performSelector:@selector(getMatchesDetails) withObject:nil afterDelay:.1];
 }
@@ -78,7 +78,7 @@
     UITabBarItem *tabBarItem3 = [tabBar.items objectAtIndex:2];
     UITabBarItem *tabBarItem4 = [tabBar.items objectAtIndex:3];
     UITabBarItem *tabBarItem5 = [tabBar.items objectAtIndex:4];
-
+    
     tabBar.clipsToBounds=YES;
     UIImage * tempImg =[UIImage imageNamed:@"matches"];
     [tabBarItem1 setImage:[[UIImage imageNamed:[tempImg imageForDeviceWithNameForOtherImages:@"matches"]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
@@ -114,7 +114,7 @@
     tempImg =[UIImage imageNamed:@"more_selected"];
     [tabBarItem5 setSelectedImage:[[UIImage imageNamed:[tempImg imageForDeviceWithNameForOtherImages:@"more_selected"]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     tabBarItem5.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
-   // myTab.selectedIndex=2;
+    // myTab.selectedIndex=2;
 }
 
 #pragma mark - end
@@ -122,7 +122,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (selectedSegment==0) {
-         return latestMatchesArray.count;
+        return latestMatchesArray.count;
     }
     else if (selectedSegment==1) {
         return allMatchesDataArray.count;
@@ -186,7 +186,7 @@
         }
         [contactsCell.contactsContainerView addShadow:contactsCell.contactsContainerView color:[UIColor lightGrayColor]];
         MatchesDataModel *data=[contactArray objectAtIndex:indexPath.row];
-        [contactsCell displayContacts:data indexPath:(int)indexPath.row];
+        [contactsCell displayContacts:data indexPath:(int)indexPath.row rectSize:contactsCell.frame.size];
         contactsCell.scheduleMeetingBtn.Tag=(int)indexPath.row;
         contactsCell.messageButton.Tag=(int)indexPath.row;
         [contactsCell.scheduleMeetingBtn addTarget:self action:@selector(scheduleMeetingBtnAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -202,26 +202,15 @@
         }
         [newMatchesCell.containerView addShadow:newMatchesCell.containerView color:[UIColor lightGrayColor]];
         MatchesDataModel *data=[latestMatchesArray objectAtIndex:indexPath.row];
-        [newMatchesCell displayNewMatchRequests:data indexPath:(int)indexPath.row];
+        [newMatchesCell displayNewMatchRequests:data indexPath:(int)indexPath.row rectSize:newMatchesCell.frame.size];
         newMatchesCell.approveButton.Tag=(int)indexPath.row;
         newMatchesCell.cancelButton.Tag=(int)indexPath.row;
         [newMatchesCell.approveButton addTarget:self action:@selector(approveButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         [newMatchesCell.cancelButton addTarget:self action:@selector(cancelRequestButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-        //        CGSize size = CGSizeMake(postListingTableView.frame.size.width-70,999);
-        //        CGRect textRect = [postLabel.text
-        //                           boundingRectWithSize:size
-        //                           options:NSStringDrawingUsesLineFragmentOrigin
-        //                           attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Roboto-Regular" size:15.0]}
-        //                           context:nil];
-        //        postLabel.numberOfLines = 0;
-        //        textRect.origin.x = postLabel.frame.origin.x;
-        //        textRect.origin.y = 19;
-        //        postLabel.frame = textRect;
-        //        //dynamic framing of objects
-        //        postLabel.frame =CGRectMake(8, postLabel.frame.origin.y, postListingTableView.frame.size.width-70, postLabel.frame.size.height);
         return newMatchesCell;
     }
     else {
+        
         NSString *simpleTableIdentifier = @"matchesCell";
         MatchesTableViewCell *matchesCell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
         if (matchesCell == nil)  {
@@ -229,38 +218,57 @@
         }
         [matchesCell.containerView addShadow:matchesCell.containerView color:[UIColor lightGrayColor]];
         MatchesDataModel *data=[allMatchesDataArray objectAtIndex:indexPath.row];
-        [matchesCell displayData:data indexPath:(int)indexPath.row];
+        [matchesCell displayData:data indexPath:(int)indexPath.row rectSize:matchesCell.frame.size];
         matchesCell.allMatchesApproveButton.Tag=(int)indexPath.row;
         matchesCell.allMatchesRejectButton.Tag=(int)indexPath.row;
         matchesCell.sendRequestButton.Tag=(int)indexPath.row;
         [matchesCell.allMatchesApproveButton addTarget:self action:@selector(allMatchesApproveButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         [matchesCell.allMatchesRejectButton addTarget:self action:@selector(allMatchesRejectButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         [matchesCell.sendRequestButton addTarget:self action:@selector(sendRequestButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-
-        //        CGSize size = CGSizeMake(postListingTableView.frame.size.width-70,999);
-        //        CGRect textRect = [postLabel.text
-        //                           boundingRectWithSize:size
-        //                           options:NSStringDrawingUsesLineFragmentOrigin
-        //                           attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Roboto-Regular" size:15.0]}
-        //                           context:nil];
-        //        postLabel.numberOfLines = 0;
-        //        textRect.origin.x = postLabel.frame.origin.x;
-        //        textRect.origin.y = 19;
-        //        postLabel.frame = textRect;
-        //        //dynamic framing of objects
-        //        postLabel.frame =CGRectMake(8, postLabel.frame.origin.y, postListingTableView.frame.size.width-70, postLabel.frame.size.height);
         return matchesCell;
     }
-
+    
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    MyProfileViewController *profileView =[storyboard instantiateViewControllerWithIdentifier:@"MyProfileViewController"];
-//    profileView.viewName=@"User Profile";
-//    [self.navigationController pushViewController:profileView animated:YES];
-    UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    OtherUserProfileViewController *userProfile =[storyboard instantiateViewControllerWithIdentifier:@"OtherUserProfileViewController"];
-    [self.navigationController pushViewController:userProfile animated:YES];
+    
+    if (selectedSegment==0) {
+        UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        OtherUserProfileViewController *userProfile =[storyboard instantiateViewControllerWithIdentifier:@"OtherUserProfileViewController"];
+        userProfile.viewType=@"Matches";
+        userProfile.otherUserId=[[latestMatchesArray objectAtIndex:indexPath.row] otherUserId];
+        userProfile.isRequestSent=[[latestMatchesArray objectAtIndex:indexPath.row] isRequestSent];
+        userProfile.isRequestArrived=[[latestMatchesArray objectAtIndex:indexPath.row] isArrived];
+        [self.navigationController pushViewController:userProfile animated:YES];
+
+    }
+    else if (selectedSegment==1) {
+        if ([[[allMatchesDataArray objectAtIndex:indexPath.row] isAccepted] isEqualToString:@"T"]) {
+            UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            MyProfileViewController *profileView =[storyboard instantiateViewControllerWithIdentifier:@"MyProfileViewController"];
+            profileView.viewName=@"User Profile";
+            profileView.viewType=@"Matches";
+            profileView.otherUserID=[[allMatchesDataArray objectAtIndex:indexPath.row] otherUserId];
+            [self.navigationController pushViewController:profileView animated:YES];
+        }
+        else {
+            UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            OtherUserProfileViewController *userProfile =[storyboard instantiateViewControllerWithIdentifier:@"OtherUserProfileViewController"];
+            userProfile.viewType=@"Matches";
+            userProfile.otherUserId=[[allMatchesDataArray objectAtIndex:indexPath.row] otherUserId];
+            userProfile.isRequestSent=[[allMatchesDataArray objectAtIndex:indexPath.row] isRequestSent];
+            userProfile.isRequestArrived=[[allMatchesDataArray objectAtIndex:indexPath.row] isArrived];
+            [self.navigationController pushViewController:userProfile animated:YES];
+        }
+
+    }
+    else {
+        UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        MyProfileViewController *profileView =[storyboard instantiateViewControllerWithIdentifier:@"MyProfileViewController"];
+        profileView.viewName=@"User Profile";
+        profileView.viewType=@"Matches";
+        profileView.otherUserID=[[contactArray objectAtIndex:indexPath.row] otherUserId];
+        [self.navigationController pushViewController:profileView animated:YES];
+    }
 }
 #pragma mark - end
 #pragma mark - Webservice
@@ -268,26 +276,34 @@
 -(void)getMatchesDetails
 {
     [[MatchesService sharedManager] getMatchesList:^(id dataArray) {
-         [myDelegate stopIndicator];
+        [myDelegate stopIndicator];
         allMatchesDataArray=[dataArray mutableCopy];
-        matchesSegmentControl.selectedSegmentIndex=1;
-        selectedSegment=1;
+      //  matchesSegmentControl.selectedSegmentIndex=1;
+        if (matchesSegmentControl.selectedSegmentIndex==0) {
+            selectedSegment=0;
+            
+        }
+        else{
+            selectedSegment=1;
+        }
         if (allMatchesDataArray.count==0) {
             noRecordLabel.hidden=NO;
             noRecordLabel.text=@"No matches found.";
         }
-        else{
-        [self filterData];
+        else {
+            [self filterData];
         }
-     }
-                                                 failure:^(NSError *error)
+    }
+                                           failure:^(NSError *error)
      {
-
+         
      }] ;
 }
 //filter data for new , all and contacts segment
 -(void)filterData {
     
+    [latestMatchesArray removeAllObjects];
+    [contactArray removeAllObjects];
     if (selectedSegment==0)
     {
         //new segment
@@ -308,7 +324,7 @@
     }
     else if (selectedSegment==1)
     {
-         noRecordLabel.hidden=YES;
+        noRecordLabel.hidden=YES;
     }
     else{
         //contacts segment
@@ -326,10 +342,9 @@
             noRecordLabel.hidden=NO;
             noRecordLabel.text=@"No contacts added yet.";
         }
-
     }
     [matchesTableView reloadData];
-   
+    
 }
 //send/cancel match request
 -(void)sendCancelMatchRequest {
@@ -339,23 +354,24 @@
         tempModel.isRequestSent=requestSent;
         [allMatchesDataArray replaceObjectAtIndex:btnTag withObject:tempModel];
         [matchesTableView reloadData];
-
     }
-                                           failure:^(NSError *error)
+                                                   failure:^(NSError *error)
      {
          
      }] ;
-
+    
 }
 
 //accept/decline match request
 -(void)acceptDeclineRequest {
     if (selectedSegment==0) {
         [[MatchesService sharedManager] acceptDeclineRequest:otherUserId acceptRequest:accepted success:^(id responseObject) {
-            [myDelegate stopIndicator];
-            MatchesDataModel *tempModel = [latestMatchesArray objectAtIndex:btnTag];
-            tempModel.isAccepted=accepted;
-            [latestMatchesArray replaceObjectAtIndex:btnTag withObject:tempModel];
+            [self getMatchesDetails];
+//            MatchesDataModel *tempModel = [latestMatchesArray objectAtIndex:btnTag];
+//            tempModel.isAccepted=accepted;
+//            tempModel.isArrived=@"F";
+//            tempModel.isRequestSent=@"F";
+//            [latestMatchesArray replaceObjectAtIndex:btnTag withObject:tempModel];
             [matchesTableView reloadData];
             
         }
@@ -365,10 +381,13 @@
          }] ;
     }
     else {
+        
         [[MatchesService sharedManager] acceptDeclineRequest:otherUserId acceptRequest:accepted success:^(id responseObject) {
             [myDelegate stopIndicator];
             MatchesDataModel *tempModel = [allMatchesDataArray objectAtIndex:btnTag];
             tempModel.isAccepted=accepted;
+            tempModel.isArrived=@"F";
+            tempModel.isRequestSent=@"F";
             [allMatchesDataArray replaceObjectAtIndex:btnTag withObject:tempModel];
             [matchesTableView reloadData];
             
@@ -377,9 +396,9 @@
          {
              
          }] ;
-
+        
     }
-   
+    
 }
 #pragma mark - end
 #pragma mark - Segment control
@@ -403,7 +422,7 @@
 - (IBAction)scheduleMeetingBtnAction:(MyButton *)sender {
     UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     ScheduleMeetingViewController *scheduleMeeting =[storyboard instantiateViewControllerWithIdentifier:@"ScheduleMeetingViewController"];
-     scheduleMeeting.screenName=@"Matches";
+    scheduleMeeting.screenName=@"Matches";
     scheduleMeeting.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.1f];
     [scheduleMeeting setModalPresentationStyle:UIModalPresentationOverCurrentContext];
     [self presentViewController:scheduleMeeting animated: NO completion:nil];
@@ -437,10 +456,13 @@
         [myDelegate showIndicator];
         [self performSelector:@selector(acceptDeclineRequest) withObject:nil afterDelay:.1];
     }
-    else if ([[[allMatchesDataArray objectAtIndex:btnTag]isAccepted] isEqualToString:@"T"]) {
-        NSLog(@"accepted");
+    else if ([[[allMatchesDataArray objectAtIndex:btnTag]isRequestSent] isEqualToString:@"T"]) {
+         NSLog(@"pending");
     }
-
+    else if ([[[allMatchesDataArray objectAtIndex:btnTag]isAccepted] isEqualToString:@"T"]) {
+        NSLog(@"contact");
+    }
+    
 }
 
 - (IBAction)allMatchesRejectButtonAction:(MyButton *)sender {
@@ -451,8 +473,13 @@
         [myDelegate showIndicator];
         [self performSelector:@selector(acceptDeclineRequest) withObject:nil afterDelay:.1];
     }
+    else if ([[[allMatchesDataArray objectAtIndex:btnTag]isRequestSent] isEqualToString:@"T"]) {
+        requestSent=@"F";
+        [myDelegate showIndicator];
+        [self performSelector:@selector(sendCancelMatchRequest) withObject:nil afterDelay:.1];
+    }
     else if ([[[allMatchesDataArray objectAtIndex:btnTag]isAccepted] isEqualToString:@"T"]) {
-        NSLog(@"accepted");
+        NSLog(@"contact");
     }
     
 }

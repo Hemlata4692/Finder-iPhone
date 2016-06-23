@@ -98,7 +98,6 @@
          [myDelegate stopIndicator];
          failure(error);
      }];
-
 }
 #pragma mark - end
 

@@ -10,6 +10,8 @@
 #import "EditProfileViewController.h"
 #import "ProfileService.h"
 #import "WebViewController.h"
+#import "MatchesService.h"
+#import "MatchesViewController.h"
 
 @interface MyProfileViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
 {
@@ -17,6 +19,7 @@
     NSArray *interestsArray;
     CGSize size;
     CGRect textRect;
+    int count;
 }
 @property (weak, nonatomic) IBOutlet UIScrollView *myProfileScrollView;
 @property (weak, nonatomic) IBOutlet UIView *mainContainerView;
@@ -72,6 +75,7 @@
 @synthesize mobileNumberHeading;
 @synthesize otherUserID;
 @synthesize myProfileData;
+@synthesize viewType;
 
 #pragma mark - View life cycle
 - (void)viewDidLoad {
@@ -105,10 +109,33 @@
         [myDelegate showIndicator];
         [self performSelector:@selector(getOtherUserProfile) withObject:nil afterDelay:.1];
     }
-//    [myDelegate showIndicator];
-//    [self performSelector:@selector(getOtherUserProfile) withObject:nil afterDelay:.1];
+    if ([viewType isEqualToString:@"pop"]) {
+         [self addLeftBarButtonWithImage1:[UIImage imageNamed:@"back"]];
+    }
 }
-
+#pragma mark - Add back button
+- (void)addLeftBarButtonWithImage1:(UIImage *)backButton{
+    CGRect framing = CGRectMake(0, 0, backButton.size.width, backButton.size.height);
+    UIButton *button = [[UIButton alloc] initWithFrame:framing];
+    [button setBackgroundImage:backButton forState:UIControlStateNormal];
+  UIBarButtonItem*  barButton =[[UIBarButtonItem alloc] initWithCustomView:button];
+    [button addTarget:self action:@selector(backAction:) forControlEvents:UIControlEventTouchUpInside];
+    self.navigationItem.leftBarButtonItems=[NSArray arrayWithObjects:barButton, nil];
+    
+}
+//back button action
+-(void)backAction :(id)sender{
+    for (UIViewController *controller in self.navigationController.viewControllers)
+    {
+        if ([controller isKindOfClass:[MatchesViewController class]])
+        {
+            [self.navigationController popToViewController:controller animated:YES];
+            
+            break;
+        }
+    }
+}
+#pragma mark - end
 -(void)addShadow
 {
     [userProfileImage setCornerRadius:userProfileImage.frame.size.width/2];
@@ -141,9 +168,15 @@
 }
 
 - (IBAction)otherUserLinkedInButtonAction:(id)sender {
+    UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    WebViewController *loadWebPage =[storyboard instantiateViewControllerWithIdentifier:@"WebViewController"];
+    loadWebPage.linkedInLink=[[userProfileDataArray objectAtIndex:0]userLinkedInLink];
+    loadWebPage.navigationTitle=@"Linked In";
+    [self.navigationController pushViewController:loadWebPage animated:YES];
 }
 
 - (IBAction)otherUserEmailButtonAction:(id)sender {
+    
 }
 
 - (IBAction)addUserContactButtonAction:(id)sender {
@@ -165,9 +198,11 @@
 
 }
 -(void)getOtherUserProfile {
-    otherUserID=@"2";
     [[ProfileService sharedManager] getOtherUserProfile:otherUserID success:^(id profileDataArray) {
         [myDelegate stopIndicator];
+        if ([viewType isEqualToString:@"Matches"]) {
+            [self updateReviewStatus];
+        }
         userProfileDataArray=[profileDataArray mutableCopy];
         [self displayUserProfileData];
     }
@@ -176,6 +211,16 @@
          
      }] ;
 }
+-(void)updateReviewStatus {
+    [[MatchesService sharedManager] updateReviewStatus:otherUserID reviewStatus:@"T" success:^(id responseObject) {
+        [myDelegate stopIndicator];
+    }
+                                                failure:^(NSError *error)
+     {
+         
+     }] ;
+
+}
 -(void)displayUserProfileData {
     
     companyDescriptionLabel.translatesAutoresizingMaskIntoConstraints = YES;
@@ -183,6 +228,8 @@
     mainContainerView.translatesAutoresizingMaskIntoConstraints=YES;
     companyAddressView.translatesAutoresizingMaskIntoConstraints=YES;
     comapnyAddressLabel.translatesAutoresizingMaskIntoConstraints=YES;
+    interestAreaCollectionView.translatesAutoresizingMaskIntoConstraints=YES;
+    bottomView.translatesAutoresizingMaskIntoConstraints=YES;
     
     __weak UIImageView *weakRef = userProfileImage;
     NSURLRequest *imageRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:[[userProfileDataArray objectAtIndex:0]userImage]]
@@ -207,7 +254,7 @@
     companyDescriptionLabel.text=[[userProfileDataArray objectAtIndex:0]aboutUserCompany];
     [companyDescriptionLabel setLabelBorder:companyDescriptionLabel color:[UIColor whiteColor]];
   
-    size = CGSizeMake(mainContainerView.frame.size.width-16,999);
+    size = CGSizeMake(mainContainerView.frame.size.width-16,300);
     textRect=[self setDynamicHeight:size textString:[[userProfileDataArray objectAtIndex:0]userComapnyAddress] fontSize:[UIFont fontWithName:@"Roboto-Regular" size:14]];
     comapnyAddressLabel.numberOfLines = 0;
     companyAddressView.frame=CGRectMake(8, aboutCompanyView.frame.origin.y+aboutCompanyView.frame.size.height+8+addressHeadingLabel.frame.size.height+8, mainContainerView.frame.size.width-16, textRect.size.height+10);
@@ -218,8 +265,20 @@
     professionLabel.text=[[userProfileDataArray objectAtIndex:0]userProfession];
     interestedInLabel.text=[[userProfileDataArray objectAtIndex:0]userInterestedIn];
     interestsArray=[[[userProfileDataArray objectAtIndex:0]userInterests] componentsSeparatedByString:@","];
+    count=(int)interestsArray.count;
+    
+    if ((interestsArray.count%2)!=0) {
+        count=count*42;
+        interestAreaCollectionView.frame=CGRectMake(4, interestAreaCollectionView.frame.origin.y, bottomView.frame.size.width-8, count);
+    }
+    else{
+        count=(count-1)*42;
+        interestAreaCollectionView.frame=CGRectMake(4, interestAreaCollectionView.frame.origin.y, bottomView.frame.size.width-8, count);
+    }
     [interestAreaCollectionView reloadData];
-  
+    float bottomHeight=professionView.frame.origin.y+professionView.frame.size.height+2+interestedInView.frame.size.height+22+count+30;
+    bottomView.frame=CGRectMake(8, profileBackground.frame.origin.y+profileBackground.frame.size.height+15+mobileNumberHeading.frame.size.height+5+mobileNumberView.frame.size.height+8+aboutcompanyHeading.frame.size.height+5+aboutCompanyView.frame.size.height+8+addressHeadingLabel.frame.size.height+5+companyAddressView.frame.size.height+25, mainContainerView.frame.size.width-16,bottomHeight);
+    
     float dynamicHeight=profileBackground.frame.origin.y+profileBackground.frame.size.height+15+mobileNumberHeading.frame.size.height+5+mobileNumberView.frame.size.height+8+aboutcompanyHeading.frame.size.height+5+aboutCompanyView.frame.size.height+8+addressHeadingLabel.frame.size.height+5+companyAddressView.frame.size.height+8+bottomView.frame.size.height+20;
     mainContainerView.frame = CGRectMake(mainContainerView.frame.origin.x, mainContainerView.frame.origin.y, mainContainerView.frame.size.width, dynamicHeight);
     myProfileScrollView.contentSize = CGSizeMake(0,mainContainerView.frame.size.height+64);
@@ -250,5 +309,6 @@
     interestLabel.text=[interestsArray objectAtIndex:indexPath.row];
     return interestCell;
 }
+
 #pragma mark - end
 @end

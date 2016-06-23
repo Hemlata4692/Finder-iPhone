@@ -263,8 +263,16 @@
         return NO;
     }
     else {
-        return YES;
+        if (![linkedInTextField isValidURL]) {
+            SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
+            [alert showWarning:self title:@"Alert" subTitle:@"Please enter a valid linked in link." closeButtonTitle:@"Done" duration:0.0f];
+            return NO;
+        }
+        else {
+            return YES;
+        }
     }
+
 }
 #pragma mark - end
 
@@ -492,7 +500,7 @@
     
 }
 -(void)editUserProfile {
-    [[ProfileService sharedManager] editUserProfile:userNameTextField.text userEmail:userEmailTextfield.text mobileNumber:mobileNumberTextField.text companyName:companyNameTextField.text companyAddress:companyAddressTextField.text designation:designationTextField.text aboutCompany:aboutCompanyTextView.text linkedIn:linkedInTextField.text interests:interestedAreaTextField.text interestedIn:interestedInTextField.text profession:professionTextField.text image:userImageView.image success:^(id responseObject) {
+    [[ProfileService sharedManager] editUserProfile:userNameTextField.text mobileNumber:mobileNumberTextField.text companyName:companyNameTextField.text companyAddress:companyAddressTextField.text designation:designationTextField.text aboutCompany:aboutCompanyTextView.text linkedIn:linkedInTextField.text interests:interestedAreaTextField.text interestedIn:interestedInTextField.text profession:professionTextField.text image:userImageView.image success:^(id responseObject) {
         [myDelegate stopIndicator];
 //        userProfileObj.myProfileData.userName=userNameTextField.text;
 //        userProfileObj.myProfileData.userMobileNumber=mobileNumberTextField.text;

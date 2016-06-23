@@ -39,21 +39,21 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
-//    [myDelegate showIndicator];
-//    [self performSelector:@selector(getCalendarDetails) withObject:nil afterDelay:.1];
+    [myDelegate showIndicator];
+    [self performSelector:@selector(getCalendarDetails) withObject:nil afterDelay:.1];
     
 }
 #pragma mark - end
 
 #pragma mark - Webservice
--(void)getCalendarDetails{
+-(void)getCalendarDetails {
+    
     [[ConferenceService sharedManager] getCalendarDetails:[UserDefaultManager getValue:@"conferenceId"] success:^(id dataArray) {
         [myDelegate stopIndicator];
         sectionArray=[dataArray mutableCopy];
         for (int i=0; i<=sectionArray.count; i++) {
             for (int j=0; j<=[[sectionArray objectAtIndex:i]eventArray].count; j++) {
                EventDataModel *data=[[[sectionArray objectAtIndex:i]eventArray] objectAtIndex:j];
-    
                 NSArray *dateStrings = [data.eventTime componentsSeparatedByString:@" - "];
                 NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
                 [dateFormatter setDateFormat:@"yyyy-MM-dd"];
@@ -145,7 +145,6 @@
     scheduleMeeting.screenName=@"Calendar";
     scheduleMeeting.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.1f];
     [scheduleMeeting setModalPresentationStyle:UIModalPresentationOverCurrentContext];
-    
     [self presentViewController:scheduleMeeting animated: NO completion:nil];
 }
 
