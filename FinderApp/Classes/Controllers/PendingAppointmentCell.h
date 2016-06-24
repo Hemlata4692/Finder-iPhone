@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "MyButton.h"
+#import "PendingAppointmentDataModel.h"
 
 @interface PendingAppointmentCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UIView *pendingViewContainer;
@@ -18,5 +19,5 @@
 @property (weak, nonatomic) IBOutlet MyButton *cancelButton;
 @property (weak, nonatomic) IBOutlet UILabel *pendingUserName;
 @property (weak, nonatomic) IBOutlet MyButton *acceptButton;
-
+-(void)displayData :(PendingAppointmentDataModel *)contactData indexPath:(int)indexPath rectSize:(CGSize)rectSize;
 @end

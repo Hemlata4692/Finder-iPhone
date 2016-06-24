@@ -92,16 +92,16 @@
         [self.navigationController pushViewController:profileView animated:YES];
     }
     else if (indexPath.row==1) {
-        //        UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        //        PendingAppointmentViewController *settingsView =[storyboard instantiateViewControllerWithIdentifier:@"PendingAppointmentViewController"];
-        //         settingsView.screenName=@"Pending Appointments";
-        //        [self.navigationController pushViewController:settingsView animated:YES];
+        UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        PendingAppointmentViewController *settingsView =[storyboard instantiateViewControllerWithIdentifier:@"PendingAppointmentViewController"];
+        settingsView.screenName=@"Pending Appointments";
+        [self.navigationController pushViewController:settingsView animated:YES];
     }
     else if (indexPath.row==2) {
-        //        UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        //        PendingAppointmentViewController *settingsView =[storyboard instantiateViewControllerWithIdentifier:@"PendingAppointmentViewController"];
-        //        settingsView.screenName=@"Requested Appointments";
-        //        [self.navigationController pushViewController:settingsView animated:YES];
+        UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        PendingAppointmentViewController *settingsView =[storyboard instantiateViewControllerWithIdentifier:@"PendingAppointmentViewController"];
+        settingsView.screenName=@"Requested Appointments";
+        [self.navigationController pushViewController:settingsView animated:YES];
     }
     else if (indexPath.row==3) {
         UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];

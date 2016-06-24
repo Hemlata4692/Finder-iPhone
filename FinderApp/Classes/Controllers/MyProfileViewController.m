@@ -180,6 +180,12 @@
 }
 
 - (IBAction)addUserContactButtonAction:(id)sender {
+    if ([[[userProfileDataArray objectAtIndex:0]vCard] isEqualToString:@""]) {
+        
+    }
+    else {
+        
+    }
 }
 #pragma mark - end
 

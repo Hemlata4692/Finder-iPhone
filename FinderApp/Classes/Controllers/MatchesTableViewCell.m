@@ -147,7 +147,7 @@
 }
 //contact segement
 -(void)displayContacts :(MatchesDataModel *)contactData indexPath:(int)indexPath rectSize:(CGSize)rectSize{
-     contactName.translatesAutoresizingMaskIntoConstraints=YES;
+    contactName.translatesAutoresizingMaskIntoConstraints=YES;
     CGSize size = CGSizeMake(rectSize.width-157,100);
     CGRect textRect = [contactData.userName
                        boundingRectWithSize:size

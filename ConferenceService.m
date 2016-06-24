@@ -10,13 +10,20 @@
 #import "ConferenceDataModel.h"
 #import "ConferenceListDataModel.h"
 #import "CalendarDataModel.h"
+#import "ContactDataModel.h"
 #import "EventDataModel.h"
+#import "PendingAppointmentDataModel.h"
 
 #define kUrlConferenceList              @"getconferencelisting"
 #define kUrlConferenceDetail            @"getconferencedetails"
 #define kUrlChangeSettings              @"settings"
 #define kUrlUserSettings                @"getusersetting"
 #define kUrlCalendarDetails             @"getcalenderdetails"
+#define kUrlContactDetails              @"getcontactlist"
+#define kUrlScheduleMeeting             @"schedulemeetingrequest"
+#define kUrlPendingAppointment          @"pendingappointments"
+#define kUrlRequestedAppointment        @"requestedappointments"
+#define kUrlAcceptCancelAppointment     @"accpetcancelscheduledmeeting"
 
 @implementation ConferenceService
 #pragma mark - Singleton instance
@@ -201,8 +208,10 @@
                      for (int j=0; j<tempArray.count; j++) {
                           NSDictionary * eventArrayDict =[tempArray objectAtIndex:j];
                          EventDataModel *eventDetails = [[EventDataModel alloc]init];
-                         eventDetails.eventName =[eventArrayDict objectForKey:@"event"];
+                         eventDetails.eventName =[eventArrayDict objectForKey:@"eventName"];
                          eventDetails.eventTime =[eventArrayDict objectForKey:@"eventTime"];
+                         eventDetails.eventDescription =[eventArrayDict objectForKey:@"eventDescription"];
+                         eventDetails.userImage =[eventArrayDict objectForKey:@"userImage"];
                          [calendarDetails.eventArray addObject:eventDetails];
                      }
                      [dataArray addObject:calendarDetails];
@@ -224,4 +233,166 @@
     
 }
 #pragma mark- end
+
+#pragma mark- Contact list
+-(void)getContactDetails:(void (^)(id data))success failure:(void (^)(NSError *error))failure {
+    NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"]};
+    NSLog(@"user contact request %@",requestDict);
+    [[Webservice sharedManager] post:kUrlContactDetails parameters:requestDict success:^(id responseObject)
+     {
+        responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
+         NSLog(@"user contact response %@",responseObject);
+         if([[Webservice sharedManager] isStatusOK:responseObject]) {
+             id array =[responseObject objectForKey:@"userContactList"];
+             if (([array isKindOfClass:[NSArray class]])) {
+                 NSArray * contactDataArray = [responseObject objectForKey:@"userContactList"];
+                 NSMutableArray *dataArray = [NSMutableArray new];
+                 for (int i =0; i<contactDataArray.count; i++) {
+                     ContactDataModel *contactDetails = [[ContactDataModel alloc]init];
+                     NSDictionary * calendarDict =[contactDataArray objectAtIndex:i];
+                     contactDetails.companyName =[calendarDict objectForKey:@"companyName"];
+                     contactDetails.contactName =[calendarDict objectForKey:@"contactName"];
+                     contactDetails.contactUserId =[calendarDict objectForKey:@"contactUserId"];
+                     contactDetails.userImage =[calendarDict objectForKey:@"userImage"];
+                    [dataArray addObject:contactDetails];
+                 }
+                 success(dataArray);
+         }
+         }
+         else {
+             [myDelegate stopIndicator];
+             failure(nil);
+         }
+     } failure:^(NSError *error) {
+         [myDelegate stopIndicator];
+         failure(error);
+     }];
+}
+#pragma mark- end
+
+#pragma mark- Schedule meeting
+-(void)scheduleMeeting:(NSString *)contactUserId venue:(NSString *)venue meetingAgenda:(NSString *)meetingAgenda date:(NSString *)date timeFrom:(NSString *)timeFrom timeTo:(NSString *)timeTo success:(void (^)(id))success failure:(void (^)(NSError *))failure {
+    NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"],@"contactUserId":contactUserId,@"venue":venue,@"meetingAgenda":meetingAgenda,@"date":date,@"timeFrom":timeFrom,@"timeTo":timeTo};
+    NSLog(@"schedule meeting request %@",requestDict);
+    [[Webservice sharedManager] post:kUrlScheduleMeeting parameters:requestDict success:^(id responseObject)
+     {
+         responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
+         NSLog(@"schedule meeting response %@",responseObject);
+         if([[Webservice sharedManager] isStatusOK:responseObject]) {
+                 success(responseObject);
+             }
+         else {
+             [myDelegate stopIndicator];
+             failure(nil);
+         }
+     } failure:^(NSError *error) {
+         [myDelegate stopIndicator];
+         failure(error);
+     }];
+
+}
+#pragma mark- end
+#pragma mark - Pending appointment
+-(void)pendingAppointment:(void (^)(id data))success failure:(void (^)(NSError *error))failure
+{
+    NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"]};
+    NSLog(@"request pending appointment  %@",requestDict);
+    [[Webservice sharedManager] post:kUrlPendingAppointment parameters:requestDict success:^(id responseObject) {
+        responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
+        NSLog(@"pending appointment response %@",responseObject);
+        if([[Webservice sharedManager] isStatusOK:responseObject]) {
+            id array =[responseObject objectForKey:@"pendingAppointments"];
+            if (([array isKindOfClass:[NSArray class]])) {
+                NSArray * pendingAppointmentArray = [responseObject objectForKey:@"pendingAppointments"];
+                NSMutableArray *dataArray = [NSMutableArray new];
+                for (int i =0; i<pendingAppointmentArray.count; i++) {
+                    PendingAppointmentDataModel *appointmentDetails = [[PendingAppointmentDataModel alloc]init];
+                    NSDictionary * appointmentDict =[pendingAppointmentArray objectAtIndex:i];
+                    appointmentDetails.appointmentDate =[appointmentDict objectForKey:@"appointmentDate"];
+                    appointmentDetails.appointmentId =[appointmentDict objectForKey:@"appointmentId"];
+                    appointmentDetails.meetingPerson =[appointmentDict objectForKey:@"meetingPerson"];
+                    appointmentDetails.meetingPersonImage =[appointmentDict objectForKey:@"meetingPersonImage"];
+                    appointmentDetails.meetingTime =[appointmentDict objectForKey:@"meetingTime"];
+                    appointmentDetails.meetingUserId =[appointmentDict objectForKey:@"meetingUserId"];
+                    appointmentDetails.meetingDescription=[appointmentDict objectForKey:@"meetingDescription"];
+                    [dataArray addObject:appointmentDetails];
+                }
+                success(dataArray);
+            }
+        }
+
+        else {
+            [myDelegate stopIndicator];
+            failure(nil);
+        }
+    } failure:^(NSError *error)
+     {
+         [myDelegate stopIndicator];
+         failure(error);
+     }];
+}
+#pragma mark - end
+
+#pragma mark - Requested appointment
+-(void)requestedAppointment:(void (^)(id data))success failure:(void (^)(NSError *error))failure
+{
+    NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"]};
+    NSLog(@"request request appointment  %@",requestDict);
+    [[Webservice sharedManager] post:kUrlRequestedAppointment parameters:requestDict success:^(id responseObject) {
+        responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
+        NSLog(@"request appointment response %@",responseObject);
+        if([[Webservice sharedManager] isStatusOK:responseObject]) {
+            id array =[responseObject objectForKey:@"pendingAppointments"];
+            if (([array isKindOfClass:[NSArray class]])) {
+                NSArray * pendingAppointmentArray = [responseObject objectForKey:@"pendingAppointments"];
+                NSMutableArray *dataArray = [NSMutableArray new];
+                for (int i =0; i<pendingAppointmentArray.count; i++) {
+                    PendingAppointmentDataModel *appointmentDetails = [[PendingAppointmentDataModel alloc]init];
+                    NSDictionary * appointmentDict =[pendingAppointmentArray objectAtIndex:i];
+                    appointmentDetails.appointmentDate =[appointmentDict objectForKey:@"appointmentDate"];
+                    appointmentDetails.appointmentId =[appointmentDict objectForKey:@"appointmentId"];
+                    appointmentDetails.meetingPerson =[appointmentDict objectForKey:@"meetingPerson"];
+                    appointmentDetails.meetingPersonImage =[appointmentDict objectForKey:@"meetingPersonImage"];
+                    appointmentDetails.meetingTime =[appointmentDict objectForKey:@"meetingTime"];
+                    appointmentDetails.meetingUserId =[appointmentDict objectForKey:@"meetingUserId"];
+                    appointmentDetails.meetingDescription=[appointmentDict objectForKey:@"meetingDescription"];
+                    [dataArray addObject:appointmentDetails];
+                }
+                success(dataArray);
+            }
+        }
+        else {
+            [myDelegate stopIndicator];
+            failure(nil);
+        }
+    } failure:^(NSError *error)
+     {
+         [myDelegate stopIndicator];
+         failure(error);
+     }];
+}
+#pragma mark - end
+
+#pragma mark - Accept cancel meeting
+-(void)acceptCancelMeeting:(NSString *)appointmentId meetingUserId:(NSString *)meetingUserId flag:(NSString *)flag date:(NSString *)date type:(NSString *)type success:(void (^)(id))success failure:(void (^)(NSError *))failure {
+    NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"],@"appointmentId":appointmentId,@"meetingUserId":meetingUserId,@"flag":flag,@"type":type};
+    NSLog(@"accept decline appointment %@",requestDict);
+    [[Webservice sharedManager] post:kUrlAcceptCancelAppointment parameters:requestDict success:^(id responseObject) {
+        responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
+        NSLog(@"accept decline appointment response %@",responseObject);
+        if([[Webservice sharedManager] isStatusOK:responseObject]) {
+            success(responseObject);
+        }
+        else {
+            [myDelegate stopIndicator];
+            failure(nil);
+        }
+    } failure:^(NSError *error)
+     {
+         [myDelegate stopIndicator];
+         failure(error);
+     }];
+
+}
+#pragma mark - end
 @end

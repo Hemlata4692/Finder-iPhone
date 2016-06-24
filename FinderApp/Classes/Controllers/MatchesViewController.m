@@ -420,9 +420,12 @@
 
 #pragma mark - IBActions
 - (IBAction)scheduleMeetingBtnAction:(MyButton *)sender {
+    btnTag=[sender Tag];
     UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     ScheduleMeetingViewController *scheduleMeeting =[storyboard instantiateViewControllerWithIdentifier:@"ScheduleMeetingViewController"];
     scheduleMeeting.screenName=@"Matches";
+     scheduleMeeting.ContactName=[[contactArray objectAtIndex:btnTag]userName];
+    scheduleMeeting.contactUserID=[[contactArray objectAtIndex:btnTag]otherUserId];
     scheduleMeeting.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.1f];
     [scheduleMeeting setModalPresentationStyle:UIModalPresentationOverCurrentContext];
     [self presentViewController:scheduleMeeting animated: NO completion:nil];
@@ -460,7 +463,15 @@
          NSLog(@"pending");
     }
     else if ([[[allMatchesDataArray objectAtIndex:btnTag]isAccepted] isEqualToString:@"T"]) {
-        NSLog(@"contact");
+        UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        ScheduleMeetingViewController *scheduleMeeting =[storyboard instantiateViewControllerWithIdentifier:@"ScheduleMeetingViewController"];
+        scheduleMeeting.screenName=@"Matches";
+        scheduleMeeting.ContactName=[[allMatchesDataArray objectAtIndex:btnTag]userName];
+        scheduleMeeting.contactUserID=[[allMatchesDataArray objectAtIndex:btnTag]otherUserId];
+        scheduleMeeting.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.1f];
+        [scheduleMeeting setModalPresentationStyle:UIModalPresentationOverCurrentContext];
+        [self presentViewController:scheduleMeeting animated: NO completion:nil];
+
     }
     
 }
@@ -479,7 +490,7 @@
         [self performSelector:@selector(sendCancelMatchRequest) withObject:nil afterDelay:.1];
     }
     else if ([[[allMatchesDataArray objectAtIndex:btnTag]isAccepted] isEqualToString:@"T"]) {
-        NSLog(@"contact");
+        NSLog(@"message");
     }
     
 }

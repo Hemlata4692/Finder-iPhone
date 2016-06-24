@@ -32,6 +32,8 @@
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     NSDate *startDate = [dateFormatter dateFromString:[dateStrings objectAtIndex:0]];
     NSDate *endDate = [dateFormatter dateFromString:[dateStrings objectAtIndex:1]];
+    [UserDefaultManager setValue:startDate key:@"conferenceStartDate"];
+    [UserDefaultManager setValue:endDate key:@"conferenceEndDate"];
     [dateFormatter setDateFormat:@"MMM"];
     conferenceStartMonth.text=[[dateFormatter stringFromDate:startDate] uppercaseString];
     conferenceEndMonth.text=[[dateFormatter stringFromDate:endDate]uppercaseString];

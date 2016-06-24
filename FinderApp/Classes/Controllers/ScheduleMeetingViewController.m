@@ -8,12 +8,15 @@
 
 #import "ScheduleMeetingViewController.h"
 #import "UIPlaceHolderTextView.h"
+#import "ContactDataModel.h"
+#import "ConferenceService.h"
 
 @interface ScheduleMeetingViewController ()<UITextFieldDelegate,BSKeyboardControlsDelegate,UITextViewDelegate>
 {
     NSArray *textFieldArray;
     int selectedPicker;
     BOOL isDatePicker;
+    int timeRange;
 }
 @property (nonatomic, strong) BSKeyboardControls *keyboardControls;
 @property (weak, nonatomic) IBOutlet UIScrollView *scheduleMeetingScrollView;
@@ -21,7 +24,8 @@
 @property (weak, nonatomic) IBOutlet UITextField *contactNameTextField;
 @property (weak, nonatomic) IBOutlet UITextField *venueTextField;
 @property (weak, nonatomic) IBOutlet UITextField *dateTextField;
-@property (weak, nonatomic) IBOutlet UITextField *timeTextField;
+@property (weak, nonatomic) IBOutlet UITextField *toTimeTextField;
+@property (weak, nonatomic) IBOutlet UITextField *fromTimeTextField;
 @property (weak, nonatomic) IBOutlet UIImageView *userImage;
 @property (weak, nonatomic) IBOutlet UIImageView *dropDownImage;
 @property (weak, nonatomic) IBOutlet UIButton *contactButton;
@@ -29,14 +33,18 @@
 @property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
 @property (weak, nonatomic) IBOutlet UIToolbar *pickerToolbar;
+
 @end
 
 @implementation ScheduleMeetingViewController
-@synthesize pickerView,pickerToolbar,datePicker,contactNameTextField,venueTextField,dateTextField,timeTextField,meetingAgendaTextField,keyboardControls,scheduleMeetingScrollView,scheduleMeetingView;
+@synthesize pickerView,pickerToolbar,datePicker,contactNameTextField,venueTextField,dateTextField,toTimeTextField,meetingAgendaTextField,keyboardControls,scheduleMeetingScrollView,scheduleMeetingView,fromTimeTextField,contactDetailArray;
 @synthesize screenName;
 @synthesize contactButton;
 @synthesize userImage;
 @synthesize dropDownImage;
+@synthesize contactUserID;
+@synthesize ContactName;
+
 #pragma mark - View life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -46,8 +54,8 @@
         contactButton.hidden=YES;
         dropDownImage.hidden=YES;
         userImage.hidden=NO;
+        contactNameTextField.text=ContactName;
         textFieldArray = @[contactNameTextField,venueTextField,meetingAgendaTextField];
-
     }
     else{
         contactButton.hidden=NO;
@@ -55,7 +63,7 @@
         userImage.hidden=YES;
         textFieldArray = @[venueTextField,meetingAgendaTextField];
     }
-       [self setKeyboardControls:[[BSKeyboardControls alloc] initWithFields:textFieldArray]];
+    [self setKeyboardControls:[[BSKeyboardControls alloc] initWithFields:textFieldArray]];
     [self.keyboardControls setDelegate:self];
     [self addBorderCornerRadius];
 }
@@ -84,11 +92,17 @@
 
 #pragma mark - IBActions
 - (IBAction)saveButtonAction:(id)sender{
-    [keyboardControls.activeField resignFirstResponder];
     [scheduleMeetingScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+    [keyboardControls.activeField resignFirstResponder];
+    [self hidePickerWithAnimation];
+    if([self performValidations]) {
+        [myDelegate showIndicator];
+        [self performSelector:@selector(scheduleMeeting) withObject:nil afterDelay:.1];
+    }
 }
 - (IBAction)cancelButtonAction:(id)sender{
     [keyboardControls.activeField resignFirstResponder];
+     [self hidePickerWithAnimation];
     [scheduleMeetingScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
     [self.presentingViewController dismissViewControllerAnimated:NO completion:nil];
 }
@@ -114,6 +128,8 @@
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];
     datePicker.datePickerMode = UIDatePickerModeDate;
+    datePicker.minimumDate=[UserDefaultManager getValue:@"conferenceStartDate"];
+    datePicker.maximumDate=[UserDefaultManager getValue:@"conferenceEndDate"];
     if([[UIScreen mainScreen] bounds].size.height<568){
          [scheduleMeetingScrollView setContentOffset:CGPointMake(0, scheduleMeetingScrollView.frame.origin.y+50) animated:YES];
     }
@@ -123,6 +139,13 @@
 }
 //Load time picker
 - (IBAction)timePickerButtonAction:(id)sender{
+    if ([sender tag]==20) {
+        timeRange=1;
+    }
+    else
+    {
+        timeRange=21;
+    }
     [keyboardControls.activeField resignFirstResponder];
     [self hidePickerWithAnimation];
     isDatePicker=false;
@@ -134,6 +157,9 @@
     }
      datePicker.frame = CGRectMake(datePicker.frame.origin.x, self.view.frame.size.height-(datePicker.frame.size.height+44), self.view.frame.size.width, datePicker.frame.size.height);
     pickerToolbar.frame = CGRectMake(pickerToolbar.frame.origin.x, datePicker.frame.origin.y-44, self.view.frame.size.width, 44);
+    //24 hour format
+//    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"NL"];
+//    [datePicker setLocale:locale];
     datePicker.datePickerMode = UIDatePickerModeTime;
     [UIView commitAnimations];
 }
@@ -143,18 +169,25 @@
 - (IBAction)toolbarDoneAction:(id)sender{
     [self hidePickerWithAnimation];
     if (selectedPicker==0) {
-         //NSInteger index = [pickerView selectedRowInComponent:0];
-       // contactNameTextField.text=[yourarray objectAtIndex:index];
+         NSInteger index = [pickerView selectedRowInComponent:0];
+        contactNameTextField.text=[[contactDetailArray objectAtIndex:index]contactName];
+        contactUserID=[[contactDetailArray objectAtIndex:index]contactUserId];
     }
     else {
         if (isDatePicker==false) {
             NSDateFormatter * timePickerValue = [[NSDateFormatter alloc] init];
-            [timePickerValue setDateFormat:@"hh:mm a"]; // from here u can change format..
-            timeTextField.text=[timePickerValue stringFromDate:datePicker.date];
+            [timePickerValue setDateFormat:@"HH:mm"]; // from here u can change format..
+            if (timeRange==1) {
+              fromTimeTextField.text=[timePickerValue stringFromDate:datePicker.date];
+            }
+            else {
+            toTimeTextField.text=[timePickerValue stringFromDate:datePicker.date];
+            }
+            
         }
         else {
             NSDateFormatter * datePickerValue = [[NSDateFormatter alloc] init];
-            [datePickerValue setDateFormat:@"M-d-yyyy"]; // from here u can change format..
+            [datePickerValue setDateFormat:@"YYYY-MM-dd"]; // from here u can change format..
             dateTextField.text=[datePickerValue stringFromDate:datePicker.date];
         }
     }
@@ -199,24 +232,23 @@
         pickerLabel.font = [UIFont fontWithName:@"Roboto-Regular" size:15];
         pickerLabel.textAlignment=NSTextAlignmentCenter;
     }
-    pickerLabel.text=@"monika";
+    pickerLabel.text=[[contactDetailArray objectAtIndex:row]contactName];
     return pickerLabel;
 }
 -(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
     return 1;
 }
 -(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
-    return 4;
+    return contactDetailArray.count;
 }
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
     NSString *str;
-    str=@"monika";
+    str=[[contactDetailArray objectAtIndex:row]contactName];
     return str;
 }
 - (void)pickerView:(UIPickerView *)pickerView1 didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
     if(pickerView1 == pickerView) {
-       // NSString *myText = [yourarray objectAtIndex:row];
-      //  contactNameTextField.text = [yourarray objectAtIndex:row];
+        contactNameTextField.text = [[contactDetailArray objectAtIndex:row]contactName];
     }
 }
 #pragma mark - end
@@ -262,6 +294,7 @@
     return YES;
 }
 #pragma mark - end
+
 #pragma mark - Textview delegates
 -(void)textViewDidBeginEditing:(UITextView *)textView{
     [self hidePickerWithAnimation];
@@ -285,4 +318,78 @@
 
 #pragma mark - end
 
+#pragma mark - Webservice
+
+-(BOOL)performValidations {
+    if ([contactNameTextField isEmpty] || [venueTextField isEmpty] || [dateTextField isEmpty] || [fromTimeTextField isEmpty] || [toTimeTextField isEmpty] || [meetingAgendaTextField.text isEqualToString:@""]) {
+        SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
+        [alert showWarning:self title:@"Alert" subTitle:@"All the fields are mandatory." closeButtonTitle:@"Done" duration:0.0f];
+        return NO;
+    }
+    else {
+            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+            [formatter setDateFormat:@"HH:mm"];
+        
+            NSDate *date1= [formatter dateFromString:fromTimeTextField.text];
+            NSDate *date2 = [formatter dateFromString:toTimeTextField.text];
+        
+            NSComparisonResult result = [date1 compare:date2];
+            if(result == NSOrderedDescending)
+            {
+                NSLog(@"date1 is later than date2");
+                SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
+                [alert showWarning:self title:@"Alert" subTitle:@"Please enter valid time" closeButtonTitle:@"Done" duration:0.0f];
+                return NO;
+            }
+            else if(result == NSOrderedAscending)
+            {
+                NSLog(@"date2 is later than date1");
+                return YES;
+            }
+            else
+            {
+                NSLog(@"date1 is equal to date2");
+                SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
+                [alert showWarning:self title:@"Alert" subTitle:@"Please enter valid time" closeButtonTitle:@"Done" duration:0.0f];
+                return NO;
+            }
+    }
+    
+
+//    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//    [formatter setDateFormat:@"HH:mm"];
+//    
+//    NSDate *date1= [formatter dateFromString:fromTimeTextField.text];
+//    NSDate *date2 = [formatter dateFromString:toTimeTextField.text];
+//    
+//    NSComparisonResult result = [date1 compare:date2];
+//    if(result == NSOrderedDescending)
+//    {
+//        NSLog(@"date1 is later than date2");
+//        SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
+//        [alert showWarning:self title:@"Alert" subTitle:@"Please enter a valid linked in link." closeButtonTitle:@"Done" duration:0.0f];
+//    }
+//    else if(result == NSOrderedAscending)
+//    {
+//        NSLog(@"date2 is later than date1");
+//        
+//    }
+//    else
+//    {
+//        NSLog(@"date1 is equal to date2");
+//    }
+}
+-(void)scheduleMeeting {
+    
+    [[ConferenceService sharedManager] scheduleMeeting:contactUserID venue:venueTextField.text meetingAgenda:meetingAgendaTextField.text date:dateTextField.text timeFrom:fromTimeTextField.text timeTo:toTimeTextField.text success:^(id responseObject) {
+        [myDelegate stopIndicator];
+        [self.presentingViewController dismissViewControllerAnimated:NO completion:nil];
+    }
+                                                 failure:^(NSError *error)
+     {
+         
+     }] ;
+
+}
+#pragma mark - end
 @end

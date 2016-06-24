@@ -87,6 +87,9 @@
 		B7A8DDCE1CAE5C32007F56B6 /* NullValueChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = B7A8DDCD1CAE5C32007F56B6 /* NullValueChecker.m */; };
 		B7A8DDDC1CAE5FC8007F56B6 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7A8DDDB1CAE5FC8007F56B6 /* LoginViewController.m */; };
 		B7A8DDDF1CAE60BB007F56B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7A8DDDD1CAE60BB007F56B6 /* Main.storyboard */; };
+		B7B1169B1D1D042600D3D6DC /* MeetingDescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7B1169A1D1D042600D3D6DC /* MeetingDescriptionViewController.m */; };
+		B7B1169F1D1D28E100D3D6DC /* ContactDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B7B1169E1D1D28E100D3D6DC /* ContactDataModel.m */; };
+		B7B116A31D1D533D00D3D6DC /* PendingAppointmentDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B7B116A21D1D533D00D3D6DC /* PendingAppointmentDataModel.m */; };
 		B7B3B6BA1D19798100679F20 /* WebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7B3B6B91D19798100679F20 /* WebViewController.m */; };
 		B7C018BF1CD07044006773CB /* PersonalMessageViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B7C018BE1CD07044006773CB /* PersonalMessageViewCell.m */; };
 		B7C018C41CD0708B006773CB /* PersonalMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7C018C31CD0708B006773CB /* PersonalMessageViewController.m */; };
@@ -299,6 +302,12 @@
 		B7A8DDDA1CAE5FC8007F56B6 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		B7A8DDDB1CAE5FC8007F56B6 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		B7A8DDDE1CAE60BB007F56B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B7B116991D1D042600D3D6DC /* MeetingDescriptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeetingDescriptionViewController.h; sourceTree = "<group>"; };
+		B7B1169A1D1D042600D3D6DC /* MeetingDescriptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeetingDescriptionViewController.m; sourceTree = "<group>"; };
+		B7B1169D1D1D28E100D3D6DC /* ContactDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactDataModel.h; sourceTree = SOURCE_ROOT; };
+		B7B1169E1D1D28E100D3D6DC /* ContactDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactDataModel.m; sourceTree = SOURCE_ROOT; };
+		B7B116A11D1D533D00D3D6DC /* PendingAppointmentDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PendingAppointmentDataModel.h; sourceTree = SOURCE_ROOT; };
+		B7B116A21D1D533D00D3D6DC /* PendingAppointmentDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PendingAppointmentDataModel.m; sourceTree = SOURCE_ROOT; };
 		B7B3B6B81D19798100679F20 /* WebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebViewController.h; sourceTree = "<group>"; };
 		B7B3B6B91D19798100679F20 /* WebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebViewController.m; sourceTree = "<group>"; };
 		B7C018BD1CD07044006773CB /* PersonalMessageViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PersonalMessageViewCell.h; sourceTree = "<group>"; };
@@ -1027,6 +1036,33 @@
 			name = AppDelegate;
 			sourceTree = "<group>";
 		};
+		B7B116981D1D03F900D3D6DC /* MeetingDescriptionView */ = {
+			isa = PBXGroup;
+			children = (
+				B7B116991D1D042600D3D6DC /* MeetingDescriptionViewController.h */,
+				B7B1169A1D1D042600D3D6DC /* MeetingDescriptionViewController.m */,
+			);
+			name = MeetingDescriptionView;
+			sourceTree = "<group>";
+		};
+		B7B1169C1D1D28C400D3D6DC /* ContactModel */ = {
+			isa = PBXGroup;
+			children = (
+				B7B1169D1D1D28E100D3D6DC /* ContactDataModel.h */,
+				B7B1169E1D1D28E100D3D6DC /* ContactDataModel.m */,
+			);
+			name = ContactModel;
+			sourceTree = "<group>";
+		};
+		B7B116A01D1D52ED00D3D6DC /* PendingAppointmentModel */ = {
+			isa = PBXGroup;
+			children = (
+				B7B116A11D1D533D00D3D6DC /* PendingAppointmentDataModel.h */,
+				B7B116A21D1D533D00D3D6DC /* PendingAppointmentDataModel.m */,
+			);
+			name = PendingAppointmentModel;
+			sourceTree = "<group>";
+		};
 		B7B3B6B71D19796000679F20 /* WebViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1167,6 +1203,8 @@
 		B7EAC1771CC5DDF8001C4EEC /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
+				B7B116A01D1D52ED00D3D6DC /* PendingAppointmentModel */,
+				B7B1169C1D1D28C400D3D6DC /* ContactModel */,
 				B782C25A1D1A4F2B000459C4 /* MatchesModel */,
 				B75050271D1934C300763AD5 /* ProfileModel */,
 				B7FFA59A1CF6B5CE00B0614A /* CalendarModel */,
@@ -1211,6 +1249,7 @@
 		B7EAC17B1CC5ECAB001C4EEC /* CalenderScheduleModule */ = {
 			isa = PBXGroup;
 			children = (
+				B7B116981D1D03F900D3D6DC /* MeetingDescriptionView */,
 				B7C018CE1CD0C787006773CB /* ScheduleMeetingView */,
 				B7C018C51CD085F8006773CB /* CalenderViewCell */,
 				5D32EC121CC4A33600C50969 /* CalendarViewController */,
@@ -1594,6 +1633,7 @@
 				B776959B1CBF537D00794005 /* UITextField+Validations.m in Sources */,
 				B782C2591D1A44B8000459C4 /* MatchesService.m in Sources */,
 				B73616F41D12CE3100194588 /* SBJsonWriter.m in Sources */,
+				B7B1169B1D1D042600D3D6DC /* MeetingDescriptionViewController.m in Sources */,
 				B736EBAA1CCF93E000CE7B6E /* MessagesViewCell.m in Sources */,
 				B75FCECD1D0E683B00B8CE4C /* OtherUserProfileViewController.m in Sources */,
 				B762DB6D1CCDFAEB002875A1 /* PendingAppointmentCell.m in Sources */,
@@ -1642,6 +1682,8 @@
 				B7A8DDCB1CAE5BD4007F56B6 /* UserDefaultManager.m in Sources */,
 				B7C018BF1CD07044006773CB /* PersonalMessageViewCell.m in Sources */,
 				B7A8DDC41CAE5B69007F56B6 /* MMMaterialDesignSpinner.m in Sources */,
+				B7B116A31D1D533D00D3D6DC /* PendingAppointmentDataModel.m in Sources */,
+				B7B1169F1D1D28E100D3D6DC /* ContactDataModel.m in Sources */,
 				B77695CA1CBFB4F300794005 /* SCLTimerDisplay.m in Sources */,
 				B79D815D1D1799BF00E8B829 /* CYCustomMultiSelectPickerView.m in Sources */,
 				B77695CB1CBFB4F300794005 /* SCLTextView.m in Sources */,

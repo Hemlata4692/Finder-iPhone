@@ -27,4 +27,25 @@
 //Calendar detail
 -(void)getCalendarDetails:(NSString *)conferenceId success:(void (^)(id))success failure:(void (^)(NSError *error))failure;
 //end
+
+//Contact detail
+-(void)getContactDetails:(void (^)(id data))success failure:(void (^)(NSError *error))failure;
+//end
+
+//Schedule meeting
+-(void)scheduleMeeting:(NSString *)contactUserId venue:(NSString *)venue meetingAgenda:(NSString *)meetingAgenda date:(NSString *)date timeFrom:(NSString *)timeFrom timeTo:(NSString *)timeTo success:(void (^)(id))success failure:(void (^)(NSError *))failure;
+//end
+
+//Pending appointments
+-(void)pendingAppointment:(void (^)(id data))success failure:(void (^)(NSError *error))failure;
+//end
+
+//Requested appointments
+-(void)requestedAppointment:(void (^)(id data))success failure:(void (^)(NSError *error))failure;
+//end
+
+//Accpet cancel appointment
+-(void)acceptCancelMeeting:(NSString *)appointmentId meetingUserId:(NSString *)meetingUserId flag:(NSString *)flag date:(NSString *)date type:(NSString *)type success:(void (^)(id))success failure:(void (^)(NSError *))failure;
+//end
+
 @end
