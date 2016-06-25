@@ -58,11 +58,22 @@
         sectionArray=[dataArray mutableCopy];
         for (int i=0; i<sectionArray.count; i++) {
             for (int j=0; j<[[sectionArray objectAtIndex:i]eventArray].count; j++) {
-               EventDataModel *data=[[[sectionArray objectAtIndex:i]eventArray] objectAtIndex:j];
+                
+                NSDateFormatter *dateFormat=[[NSDateFormatter alloc]init];
+                NSLocale *locale = [[NSLocale alloc]
+                                    initWithLocaleIdentifier:@"en_US"];
+                [dateFormat setLocale:locale];
+                [dateFormat setDateFormat:@"yyyy-MM-dd"];
+                NSDate *date =[dateFormat dateFromString:[[sectionArray objectAtIndex:i]conferenceDate]];
+                [dateFormat setDateFormat:@"yyyy-MM-dd"];
+                NSString *fireDate=[dateFormat stringFromDate:date];
+                [dateFormat setDateFormat:@"HH:mm"];
+                EventDataModel *data=[[[sectionArray objectAtIndex:i]eventArray] objectAtIndex:j];
                 NSArray *dateStrings = [data.eventTime componentsSeparatedByString:@"-"];
-                NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-                [dateFormatter setDateFormat:@"yyyy-MM-dd"];
-                NSDate *startDate = [dateFormatter dateFromString:[dateStrings objectAtIndex:0]];
+                [dateFormat setDateFormat:@"hh:mm a"];
+                NSDate *fireToTime=[dateFormat dateFromString:[dateStrings objectAtIndex:0]];
+                NSString *startdate1= [NSString stringWithFormat:@"%@ %@",fireDate,fireToTime];
+                NSDate *startDate = [dateFormat dateFromString:startdate1];
                // NSDate *endDate = [dateFormatter dateFromString:[dateStrings objectAtIndex:1]];
                 NSTimeInterval notiInterval =[startDate timeIntervalSinceDate:[NSDate date]] -15*60;
                 UILocalNotification *notification = [[UILocalNotification alloc] init];
@@ -161,13 +172,13 @@
 
 #pragma mark - IBActions
 - (IBAction)userProfileAction:(MyButton *)sender {
-//    int btnTag=[sender Tag];
-//    int sectionTag= [sender sectionTag];
-//    EventDataModel *data=[[[sectionArray objectAtIndex:sectionTag]eventArray] objectAtIndex:btnTag];
-//    UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    MyProfileViewController *profileView =[storyboard instantiateViewControllerWithIdentifier:@"MyProfileViewController"];
-//    profileView.otherUserID=@"";
-//     [self.navigationController pushViewController:profileView animated:YES];
+    int btnTag=[sender Tag];
+    int sectionTag= [sender sectionTag];
+    EventDataModel *data=[[[sectionArray objectAtIndex:sectionTag]eventArray] objectAtIndex:btnTag];
+    UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    MyProfileViewController *profileView =[storyboard instantiateViewControllerWithIdentifier:@"MyProfileViewController"];
+    profileView.otherUserID=data.userId;
+     [self.navigationController pushViewController:profileView animated:YES];
 }
 
 - (IBAction)viewAgendaButonAction:(MyButton *)sender {

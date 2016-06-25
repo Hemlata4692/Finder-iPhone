@@ -12,8 +12,12 @@
 #import "WebViewController.h"
 #import "MatchesService.h"
 #import "MatchesViewController.h"
+#import <MessageUI/MessageUI.h>
+#import "UIView+Toast.h"
+#import <AddressBook/AddressBook.h>
+#import <AddressBookUI/AddressBookUI.h>
 
-@interface MyProfileViewController ()<UICollectionViewDelegate,UICollectionViewDataSource>
+@interface MyProfileViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,MFMailComposeViewControllerDelegate>
 {
     NSMutableArray *userProfileDataArray;
     NSArray *interestsArray;
@@ -84,22 +88,11 @@
     [self addShadow];
     userProfileDataArray=[[NSMutableArray alloc]init];
     interestsArray=[[NSArray alloc]init];
-    
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
--(void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:YES];
     if ([viewName isEqualToString:@"My Profile"]) {
         self.navigationItem.title=@"My Profile";
         otherUserView.hidden=YES;
         linkedInButton.hidden=NO;
         editProfileButton.hidden=NO;
-        [myDelegate showIndicator];
-        [self performSelector:@selector(getUserProfile) withObject:nil afterDelay:.1];
     }
     else {
         self.navigationItem.title=@"User Profile";
@@ -109,6 +102,20 @@
         [myDelegate showIndicator];
         [self performSelector:@selector(getOtherUserProfile) withObject:nil afterDelay:.1];
     }
+
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:YES];
+    if ([viewName isEqualToString:@"My Profile"]) {
+        [myDelegate showIndicator];
+        [self performSelector:@selector(getUserProfile) withObject:nil afterDelay:.1];
+    }
+   
     if ([viewType isEqualToString:@"pop"]) {
          [self addLeftBarButtonWithImage1:[UIImage imageNamed:@"back"]];
     }
@@ -176,17 +183,147 @@
 }
 
 - (IBAction)otherUserEmailButtonAction:(id)sender {
-    
+    if ([MFMailComposeViewController canSendMail])
+    {
+        // Email Subject
+        NSString *emailTitle = @"Finder App";
+        NSArray *toRecipents = [NSArray arrayWithObject:@"garima@ranosys.com"];
+        MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
+        [mc.navigationBar setTintColor:[UIColor whiteColor]];
+        mc.mailComposeDelegate = self;
+        [mc setSubject:emailTitle];
+        [mc setToRecipients:toRecipents];
+        [self presentViewController: mc animated:YES completion:^{
+            [[UIApplication sharedApplication] setStatusBarStyle: UIStatusBarStyleLightContent];
+        }];
+    }
+    else
+    {
+        UIAlertView *alertView = [[UIAlertView alloc]
+                                  initWithTitle:@"Alert"
+                                  message:@"Email account is not configured in your device."
+                                  delegate:self
+                                  cancelButtonTitle:@"OK"
+                                  otherButtonTitles:nil];
+        [alertView show];
+    }
+
 }
 
 - (IBAction)addUserContactButtonAction:(id)sender {
     if ([[[userProfileDataArray objectAtIndex:0]vCard] isEqualToString:@""]) {
+        ABAddressBookRef addressBookRef = ABAddressBookCreateWithOptions(NULL, NULL);
         
+        if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusNotDetermined) {
+            ABAddressBookRequestAccessWithCompletion(addressBookRef, ^(bool granted, CFErrorRef error) {
+                if (granted) {
+                    // First time access has been granted, add the contact
+                    [self addContactToAddressBook];
+                } else {
+                    // User denied access
+                    // Display an alert telling user the contact could not be added
+                }
+            });
+        }
+        else if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized) {
+            // The user has previously given access, add the contact
+            [self addContactToAddressBook];
+        }
+        else {
+            // The user has previously denied access
+            // Send an alert telling user to change privacy setting in settings app
+        }
+
     }
     else {
-        
+        //from vcf file
+         CFErrorRef error = NULL;
+        NSURL *vCardURL= [NSURL URLWithString:[[userProfileDataArray objectAtIndex:0]vCard]];
+//        NSURL *vCardURL = [[NSBundle bundleForClass:self.class] URLForResource:[[userProfileDataArray objectAtIndex:0]vCard] withExtension:@"vcf"];
+        CFDataRef vCardData = (__bridge CFDataRef)[NSData dataWithContentsOfURL:vCardURL];
+        ABAddressBookRef book = ABAddressBookCreate();
+        ABRecordRef defaultSource = ABAddressBookCopyDefaultSource(book);
+        CFArrayRef vCardPeople = ABPersonCreatePeopleInSourceWithVCardRepresentation(defaultSource, vCardData);
+        for (CFIndex index = 0; index < CFArrayGetCount(vCardPeople); index++) {
+            ABRecordRef person = CFArrayGetValueAtIndex(vCardPeople, index);
+            ABAddressBookAddRecord(book, person, &error);
+        }
+//        NSArray *allContacts = (__bridge NSArray *)ABAddressBookCopyArrayOfAllPeople(book);
+//        for (id record in allContacts){
+//            ABRecordRef thisContact = (__bridge ABRecordRef)record;
+//            if (CFStringCompare(ABRecordCopyCompositeName(thisContact),
+//                                ABRecordCopyCompositeName(vCardPeople), 0) == kCFCompareEqualTo){
+//                [self.view makeToast:@"The contact already exists!"];
+//                //The contact already exists!
+//                //            SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
+//                //            [alert showWarning:self title:@"Alert" subTitle:@"The contact already exists!" closeButtonTitle:@"Done" duration:0.0f];
+//            }
+//        }
+        CFRelease(vCardPeople);
+        CFRelease(defaultSource);
+       
+        ABAddressBookSave(book, &error);
+         [self.view makeToast:@"Contact added successfully."];
+        CFRelease(book);
+        if (error != NULL)
+        {
+            CFStringRef errorDesc = CFErrorCopyDescription(error);
+            [self.view makeToast:[NSString stringWithFormat:@"Contact not saved: %@",errorDesc]];
+            NSLog(@"Contact not saved: %@", errorDesc);
+            CFRelease(errorDesc);
+        }
     }
 }
+-(void)addContactToAddressBook
+{
+    CFErrorRef error = NULL;
+    NSLog(@"%@", [self description]);
+    ABAddressBookRef iPhoneAddressBook = ABAddressBookCreate();
+    ABRecordRef newPerson = ABPersonCreate();
+    NSData *dataRef = UIImagePNGRepresentation(userProfileImage.image);
+    ABPersonSetImageData(newPerson, (__bridge CFDataRef)dataRef, nil);
+    ABRecordSetValue(newPerson, kABPersonFirstNameProperty, (__bridge CFTypeRef)([[userProfileDataArray objectAtIndex:0]userName]), &error);
+    ABMutableMultiValueRef multiPhone =     ABMultiValueCreateMutable(kABMultiStringPropertyType);
+    ABMultiValueAddValueAndLabel(multiPhone, (__bridge CFTypeRef)(mobileNumberLabel.text), kABPersonPhoneMainLabel, NULL);
+    ABRecordSetValue(newPerson, kABPersonPhoneProperty, multiPhone,nil);
+    CFRelease(multiPhone);
+//    ABMutableMultiValueRef emailMultiValue = ABMultiValueCreateMutable(kABMultiStringPropertyType);
+//    ABMultiValueAddValueAndLabel(emailMultiValue, (__bridge CFStringRef) venueEmail, kABWorkLabel, NULL);
+//    ABRecordSetValue(newPerson, kABPersonEmailProperty, emailMultiValue, nil);
+//    CFRelease(emailMultiValue);
+    ABRecordSetValue(newPerson, kABPersonOrganizationProperty, (__bridge CFTypeRef)(companyNameLabel.text), &error);
+    ABMutableMultiValueRef multiAddress = ABMultiValueCreateMutable(kABMultiDictionaryPropertyType);
+    NSMutableDictionary *addressDictionary = [[NSMutableDictionary alloc] init];
+    addressDictionary[(NSString *) kABPersonAddressStreetKey] = comapnyAddressLabel.text;
+    ABMultiValueAddValueAndLabel(multiAddress, (__bridge CFTypeRef) addressDictionary, kABWorkLabel,NULL);
+    ABRecordSetValue(newPerson, kABPersonAddressProperty, multiAddress, &error);
+    CFRelease(multiAddress);
+    
+    ABAddressBookAddRecord(iPhoneAddressBook, newPerson, &error);
+    NSArray *allContacts = (__bridge NSArray *)ABAddressBookCopyArrayOfAllPeople(iPhoneAddressBook);
+    for (id record in allContacts){
+        ABRecordRef thisContact = (__bridge ABRecordRef)record;
+        if (CFStringCompare(ABRecordCopyCompositeName(thisContact),
+                            ABRecordCopyCompositeName(newPerson), 0) == kCFCompareEqualTo){
+            [self.view makeToast:@"The contact already exists!"];
+            //The contact already exists!
+//            SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
+//            [alert showWarning:self title:@"Alert" subTitle:@"The contact already exists!" closeButtonTitle:@"Done" duration:0.0f];
+        }
+    }
+    ABAddressBookSave(iPhoneAddressBook, &error);
+    [self.view makeToast:@"Contact added successfully."];
+    CFRelease(newPerson);
+    CFRelease(iPhoneAddressBook);
+    if (error != NULL)
+    {
+        CFStringRef errorDesc = CFErrorCopyDescription(error);
+        [self.view makeToast:[NSString stringWithFormat:@"Contact not saved: %@",errorDesc]];
+        NSLog(@"Contact not saved: %@", errorDesc);
+        CFRelease(errorDesc);
+    }
+}
+
 #pragma mark - end
 
 #pragma mark - Webservices
@@ -248,28 +385,68 @@
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
         
     }];
+    if ([[[userProfileDataArray objectAtIndex:0]userDesignation] isEqualToString:@""]) {
+        userNameLabel.text=[NSString stringWithFormat:@"%@ (NA)",[[userProfileDataArray objectAtIndex:0]userName]];
+    }
+    else {
     userNameLabel.text=[NSString stringWithFormat:@"%@ (%@)",[[userProfileDataArray objectAtIndex:0]userName],[[userProfileDataArray objectAtIndex:0]userDesignation]];
+    }
+    if ([[[userProfileDataArray objectAtIndex:0]userMobileNumber] isEqualToString:@""]) {
+        mobileNumberLabel.text=@"NA";
+    }
+    else {
     mobileNumberLabel.text=[[userProfileDataArray objectAtIndex:0]userMobileNumber];
-    companyNameLabel.text=[[userProfileDataArray objectAtIndex:0]userCompanyName];
+    }
+    if ([[[userProfileDataArray objectAtIndex:0]userCompanyName] isEqualToString:@""]) {
+        companyNameLabel.text=@"NA";
+    }
+    else {
+       companyNameLabel.text=[[userProfileDataArray objectAtIndex:0]userCompanyName];
+    }
+    NSString *aboutComapny;
+    if ([[[userProfileDataArray objectAtIndex:0]aboutUserCompany] isEqualToString:@""]) {
+        aboutComapny=@"NA";
+    }
+    else {
+        aboutComapny=[[userProfileDataArray objectAtIndex:0]aboutUserCompany];
+    }
 
     size = CGSizeMake(mainContainerView.frame.size.width-16,999);
-    textRect=[self setDynamicHeight:size textString:[[userProfileDataArray objectAtIndex:0]aboutUserCompany] fontSize:[UIFont fontWithName:@"Roboto-Regular" size:14]];
+    textRect=[self setDynamicHeight:size textString:aboutComapny fontSize:[UIFont fontWithName:@"Roboto-Regular" size:14]];
     companyDescriptionLabel.numberOfLines = 0;
     aboutCompanyView.frame=CGRectMake(8, aboutcompanyHeading.frame.origin.y+aboutcompanyHeading.frame.size.height+5, mainContainerView.frame.size.width-16, textRect.size.height+10);
     companyDescriptionLabel.frame = CGRectMake(8, 3, aboutCompanyView.frame.size.width-10, textRect.size.height);
-    companyDescriptionLabel.text=[[userProfileDataArray objectAtIndex:0]aboutUserCompany];
+    companyDescriptionLabel.text=aboutComapny;
     [companyDescriptionLabel setLabelBorder:companyDescriptionLabel color:[UIColor whiteColor]];
   
+    NSString *companyAddress;
+    if ([[[userProfileDataArray objectAtIndex:0]userComapnyAddress] isEqualToString:@""]) {
+        companyAddress=@"NA";
+    }
+    else {
+        companyAddress=[[userProfileDataArray objectAtIndex:0]userComapnyAddress];
+    }
     size = CGSizeMake(mainContainerView.frame.size.width-16,300);
-    textRect=[self setDynamicHeight:size textString:[[userProfileDataArray objectAtIndex:0]userComapnyAddress] fontSize:[UIFont fontWithName:@"Roboto-Regular" size:14]];
+    textRect=[self setDynamicHeight:size textString:companyAddress fontSize:[UIFont fontWithName:@"Roboto-Regular" size:14]];
     comapnyAddressLabel.numberOfLines = 0;
     companyAddressView.frame=CGRectMake(8, aboutCompanyView.frame.origin.y+aboutCompanyView.frame.size.height+8+addressHeadingLabel.frame.size.height+8, mainContainerView.frame.size.width-16, textRect.size.height+10);
     comapnyAddressLabel.frame = CGRectMake(8, 3, companyAddressView.frame.size.width-10, textRect.size.height);
     [comapnyAddressLabel setLabelBorder:comapnyAddressLabel color:[UIColor whiteColor]];
-    comapnyAddressLabel.text=[[userProfileDataArray objectAtIndex:0]userComapnyAddress];
+    comapnyAddressLabel.text=companyAddress;
   
-    professionLabel.text=[[userProfileDataArray objectAtIndex:0]userProfession];
-    interestedInLabel.text=[[userProfileDataArray objectAtIndex:0]userInterestedIn];
+    if ([[[userProfileDataArray objectAtIndex:0]userProfession] isEqualToString:@""]) {
+        professionLabel.text=@"NA";
+    }
+    else {
+        professionLabel.text=[[userProfileDataArray objectAtIndex:0]userProfession];
+    }
+    if ([[[userProfileDataArray objectAtIndex:0]userInterestedIn] isEqualToString:@""]) {
+        interestedInLabel.text=@"NA";
+    }
+    else {
+       interestedInLabel.text=[[userProfileDataArray objectAtIndex:0]userInterestedIn];
+    }
+    
     interestsArray=[[[userProfileDataArray objectAtIndex:0]userInterests] componentsSeparatedByString:@","];
     count=(int)interestsArray.count;
     
@@ -317,4 +494,29 @@
 }
 
 #pragma mark - end
+#pragma mark - MFMailcomposeviewcontroller delegate
+- (void)mailComposeController:(MFMailComposeViewController*)controller
+          didFinishWithResult:(MFMailComposeResult)result
+                        error:(NSError*)error
+{
+    switch (result)
+    {
+        case MFMailComposeResultCancelled:
+            break;
+        case MFMailComposeResultSaved:
+            break;
+        case MFMailComposeResultSent:
+            [self.view makeToast:@"Your email was sent."];
+            break;
+        case MFMailComposeResultFailed:
+            [self.view makeToast:@"Your email was not sent."];
+            break;
+        default:
+            [self.view makeToast:@"Your email was not sent."];
+            break;
+    }
+    [self dismissViewControllerAnimated:YES completion:NULL];
+}
+#pragma mark - end
+
 @end

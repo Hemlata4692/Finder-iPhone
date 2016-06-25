@@ -73,16 +73,14 @@
     [[ConferenceService sharedManager] requestedAppointment:^(id dataArray) {
         [myDelegate stopIndicator];
         appointmentDataArray=[dataArray mutableCopy];
-        if (appointmentDataArray.count==0) {
-            noResulFoundLabel.hidden=NO;
-        }
-        else {
+        noResulFoundLabel.hidden=YES;
         [pendingAppointmentTable reloadData];
-        }
+        
+     
     }
                                                  failure:^(NSError *error)
      {
-         
+         noResulFoundLabel.hidden=NO;
      }] ;
 
 }
@@ -91,16 +89,13 @@
     [[ConferenceService sharedManager] pendingAppointment:^(id dataArray) {
         [myDelegate stopIndicator];
          appointmentDataArray=[dataArray mutableCopy];
-        if (appointmentDataArray.count==0) {
-            noResulFoundLabel.hidden=NO;
-        }
-        else {
-            [pendingAppointmentTable reloadData];
-        }
+        noResulFoundLabel.hidden=YES;
+        [pendingAppointmentTable reloadData];
+      
     }
                                                     failure:^(NSError *error)
      {
-         
+         noResulFoundLabel.hidden=NO;
      }] ;
 
 }

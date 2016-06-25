@@ -212,6 +212,7 @@
                          eventDetails.eventTime =[eventArrayDict objectForKey:@"eventTime"];
                          eventDetails.eventDescription =[eventArrayDict objectForKey:@"eventDescription"];
                          eventDetails.userImage =[eventArrayDict objectForKey:@"userImage"];
+                         eventDetails.userId =[eventArrayDict objectForKey:@"userId"];
                          [calendarDetails.eventArray addObject:eventDetails];
                      }
                      [dataArray addObject:calendarDetails];

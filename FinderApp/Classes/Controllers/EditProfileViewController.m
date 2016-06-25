@@ -248,6 +248,8 @@
 
 }
 - (IBAction)saveButtonAction:(id)sender {
+    [self.keyboardControls.activeField resignFirstResponder];
+    [self hidePickerWithAnimation];
     if([self performValidations]) {
         [myDelegate showIndicator];
         [self performSelector:@selector(editUserProfile) withObject:nil afterDelay:.1];
@@ -263,14 +265,15 @@
         return NO;
     }
     else {
-        if (![linkedInTextField isValidURL]) {
-            SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
-            [alert showWarning:self title:@"Alert" subTitle:@"Please enter a valid linked in link." closeButtonTitle:@"Done" duration:0.0f];
-            return NO;
-        }
-        else {
-            return YES;
-        }
+//        if (![linkedInTextField isValidURL]) {
+//            SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
+//            [alert showWarning:self title:@"Alert" subTitle:@"Please enter a valid linked in link." closeButtonTitle:@"Done" duration:0.0f];
+//            return NO;
+//        }
+//        else {
+//            return YES;
+//        }
+        return YES;
     }
 
 }

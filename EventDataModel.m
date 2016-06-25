@@ -13,4 +13,5 @@
 @synthesize eventTime;
 @synthesize eventDescription;
 @synthesize userImage;
+@synthesize userId;
 @end

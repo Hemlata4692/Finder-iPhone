@@ -166,12 +166,17 @@
 #pragma mark - end
 
 #pragma mark - Toobar button actions
-- (IBAction)toolbarDoneAction:(id)sender{
+- (IBAction)toolbarDoneAction:(id)sender {
     [self hidePickerWithAnimation];
     if (selectedPicker==0) {
+        if (contactDetailArray.count==0) {
+            contactNameTextField.text=@"";
+        }
+        else {
          NSInteger index = [pickerView selectedRowInComponent:0];
         contactNameTextField.text=[[contactDetailArray objectAtIndex:index]contactName];
         contactUserID=[[contactDetailArray objectAtIndex:index]contactUserId];
+        }
     }
     else {
         if (isDatePicker==false) {

@@ -247,28 +247,66 @@
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
         
     }];
-    otherUserNameLabel.text=[NSString stringWithFormat:@"%@ (%@)",[[otherUserProfileDataArray objectAtIndex:0]userName],[[otherUserProfileDataArray objectAtIndex:0]userDesignation]];
-    mobileNumberLabel.text=[[otherUserProfileDataArray objectAtIndex:0]userMobileNumber];
-    companyNameLabel.text=[[otherUserProfileDataArray objectAtIndex:0]userCompanyName];
-    
+    if ([[[otherUserProfileDataArray objectAtIndex:0]userDesignation] isEqualToString:@""]) {
+        otherUserNameLabel.text=[NSString stringWithFormat:@"%@ (NA)",[[otherUserProfileDataArray objectAtIndex:0]userName]];
+    }
+    else {
+        otherUserNameLabel.text=[NSString stringWithFormat:@"%@ (%@)",[[otherUserProfileDataArray objectAtIndex:0]userName],[[otherUserProfileDataArray objectAtIndex:0]userDesignation]];
+    }
+    if ([[[otherUserProfileDataArray objectAtIndex:0]userMobileNumber] isEqualToString:@""]) {
+        mobileNumberLabel.text=@"NA";
+    }
+    else {
+        mobileNumberLabel.text=[[otherUserProfileDataArray objectAtIndex:0]userMobileNumber];
+    }
+    if ([[[otherUserProfileDataArray objectAtIndex:0]userCompanyName] isEqualToString:@""]) {
+        companyNameLabel.text=@"NA";
+    }
+    else {
+        companyNameLabel.text=[[otherUserProfileDataArray objectAtIndex:0]userCompanyName];
+    }
+    NSString *aboutComapny;
+    if ([[[otherUserProfileDataArray objectAtIndex:0]aboutUserCompany] isEqualToString:@""]) {
+        aboutComapny=@"NA";
+    }
+    else {
+        aboutComapny=[[otherUserProfileDataArray objectAtIndex:0]aboutUserCompany];
+    }
     size = CGSizeMake(mainContainerView.frame.size.width-16,999);
-    textRect=[self setDynamicHeight:size textString:[[otherUserProfileDataArray objectAtIndex:0]aboutUserCompany] fontSize:[UIFont fontWithName:@"Roboto-Regular" size:14]];
+    textRect=[self setDynamicHeight:size textString:aboutComapny fontSize:[UIFont fontWithName:@"Roboto-Regular" size:14]];
     companyDescriptionLabel.numberOfLines = 0;
     aboutCompanyView.frame=CGRectMake(8, aboutCompanyHeading.frame.origin.y+aboutCompanyHeading.frame.size.height+5, mainContainerView.frame.size.width-16, textRect.size.height+10);
     companyDescriptionLabel.frame = CGRectMake(8, 3, aboutCompanyView.frame.size.width-10, textRect.size.height);
-    companyDescriptionLabel.text=[[otherUserProfileDataArray objectAtIndex:0]aboutUserCompany];
+    companyDescriptionLabel.text=aboutComapny;
     [companyDescriptionLabel setLabelBorder:companyDescriptionLabel color:[UIColor whiteColor]];
     
+    NSString *companyAddress;
+    if ([[[otherUserProfileDataArray objectAtIndex:0]userComapnyAddress] isEqualToString:@""]) {
+        companyAddress=@"NA";
+    }
+    else {
+        companyAddress=[[otherUserProfileDataArray objectAtIndex:0]userComapnyAddress];
+    }
     size = CGSizeMake(mainContainerView.frame.size.width-16,300);
-    textRect=[self setDynamicHeight:size textString:[[otherUserProfileDataArray objectAtIndex:0]userComapnyAddress] fontSize:[UIFont fontWithName:@"Roboto-Regular" size:14]];
+    textRect=[self setDynamicHeight:size textString:companyAddress fontSize:[UIFont fontWithName:@"Roboto-Regular" size:14]];
     comapnyAddressLabel.numberOfLines = 0;
     companyAddressView.frame=CGRectMake(8, aboutCompanyView.frame.origin.y+aboutCompanyView.frame.size.height+8+addressHeadingLabel.frame.size.height+8, mainContainerView.frame.size.width-16, textRect.size.height+10);
     comapnyAddressLabel.frame = CGRectMake(8, 3, companyAddressView.frame.size.width-10, textRect.size.height);
     [comapnyAddressLabel setLabelBorder:comapnyAddressLabel color:[UIColor whiteColor]];
-    comapnyAddressLabel.text=[[otherUserProfileDataArray objectAtIndex:0]userComapnyAddress];
+    comapnyAddressLabel.text=companyAddress;
     
-    professionLabel.text=[[otherUserProfileDataArray objectAtIndex:0]userProfession];
-    interestedInLabel.text=[[otherUserProfileDataArray objectAtIndex:0]userInterestedIn];
+    if ([[[otherUserProfileDataArray objectAtIndex:0]userProfession] isEqualToString:@""]) {
+        professionLabel.text=@"NA";
+    }
+    else {
+        professionLabel.text=[[otherUserProfileDataArray objectAtIndex:0]userProfession];
+    }
+    if ([[[otherUserProfileDataArray objectAtIndex:0]userInterestedIn] isEqualToString:@""]) {
+        interestedInLabel.text=@"NA";
+    }
+    else {
+        interestedInLabel.text=[[otherUserProfileDataArray objectAtIndex:0]userInterestedIn];
+    }
     interestsArray=[[[otherUserProfileDataArray objectAtIndex:0]userInterests] componentsSeparatedByString:@","];
     count=(int)interestsArray.count;
     

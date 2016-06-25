@@ -286,17 +286,13 @@
         else{
             selectedSegment=1;
         }
-        if (allMatchesDataArray.count==0) {
-            noRecordLabel.hidden=NO;
-            noRecordLabel.text=@"No matches found.";
-        }
-        else {
-            [self filterData];
-        }
+        [self filterData];
+     
     }
                                            failure:^(NSError *error)
      {
-         
+         noRecordLabel.hidden=NO;
+         noRecordLabel.text=@"No matches found.";
      }] ;
 }
 //filter data for new , all and contacts segment

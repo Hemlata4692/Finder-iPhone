@@ -134,19 +134,7 @@
     return textHeight;
 }
 #pragma mark - end
-#pragma mark - IBAction
-- (IBAction)mapButtonAction:(id)sender
-{
-    if(!forwardGeocoder)
-    {
-        forwardGeocoder = [[MJGeocoder alloc] init];
-        forwardGeocoder.delegate = self;
-    }
-    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    NSString *string=[NSString stringWithFormat:@"%@",conferenceVenue.text];
-    [forwardGeocoder findLocationsWithAddress:string title:nil];
-}
-#pragma mark - end
+
 #pragma mark - MJGeocoderDelegate
 //Getting the location of store added
 - (void)geocoder:(MJGeocoder *)geocoder didFindLocations:(NSArray *)locations
@@ -203,6 +191,18 @@
     }
     
 }
+- (IBAction)mapButtonAction:(id)sender
+{
+    if(!forwardGeocoder)
+    {
+        forwardGeocoder = [[MJGeocoder alloc] init];
+        forwardGeocoder.delegate = self;
+    }
+    [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
+    NSString *string=[NSString stringWithFormat:@"%@",conferenceVenue.text];
+    [forwardGeocoder findLocationsWithAddress:string title:nil];
+}
+
 #pragma mark - end
 #pragma mark - MFMailcomposeviewcontroller delegate
 - (void)mailComposeController:(MFMailComposeViewController*)controller

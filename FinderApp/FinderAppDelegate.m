@@ -65,7 +65,7 @@
     [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:237.0/255.0 green:120.0/255.0 blue:0.0/255.0 alpha:1.0]];
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, [UIFont fontWithName:@"Roboto-Regular" size:19.0], NSFontAttributeName, nil]];
     // _window.backgroundColor = [UIColor redColor];
-
+    multiplePickerDic=[NSMutableDictionary new];
     locationManager = [[CLLocationManager alloc] init];
     locationManager.delegate = self;
     [locationManager requestAlwaysAuthorization];
@@ -247,7 +247,7 @@
     NSLog(@"didRegisterForRemoteNotificationsWithDeviceToken");
     self.deviceToken = token;
     [[UserService sharedManager] registerDeviceForPushNotification:token deviceType:@"ios" success:^(id responseObject) {
-      NSLog(@"push notification response is %@",responseObject);
+      NSLog(@"push notification response is  --------------------->>>%@",responseObject);
         } failure:^(NSError *error) {
     
         }] ;

@@ -25,11 +25,36 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [activityIndicator startAnimating];
+    self.navigationItem.title=navigationTitle;
+    if ([linkedInLink isEqualToString:@""])
+    {
+        [activityIndicator stopAnimating];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"Invalid Url." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            [alert show];
+        });
+    }
+
     if ([navigationTitle isEqualToString:@"Linked In"]) {
         NSArray* words = [linkedInLink componentsSeparatedByCharactersInSet :[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         NSString* linkedInString = [words componentsJoinedByString:@""];
-        url = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.linkedin.com/%@",linkedInString]];
+        url = [NSURL URLWithString:linkedInString];
     }
+    if (url==nil)
+    {
+        [activityIndicator stopAnimating];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"Invalid Url." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            [alert show];
+        });
+    }
+    else
+    {
+        NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
+        [webView loadRequest:requestObj];
+    }
+
 }
 //https://www.linkedin.com/in/hemlata-khajanchi-4617b99a
 - (void)didReceiveMemoryWarning {
@@ -41,6 +66,7 @@
 - (void)webViewDidFinishLoad:(UIWebView *)webView
 {
     [activityIndicator stopAnimating];
+   // activityIndicator.hidden=YES;
 }
 - (void)webView:(UIWebView *)webView didFailLoadWithError:(nullable NSError *)error
 {

@@ -1175,7 +1175,7 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="100" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="0To-yu-quJ">
+                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="100" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="0To-yu-quJ">
                                 <rect key="frame" x="8" y="10" width="304" height="347"/>
                                 <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1283,7 +1283,7 @@
                                     <outlet property="delegate" destination="8ob-Yx-PQR" id="ioO-IM-iQ7"/>
                                 </connections>
                             </tableView>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Under Development." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H4l-8Z-goa">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Under Development." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H4l-8Z-goa">
                                 <rect key="frame" x="0.0" y="173" width="320" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="4uu-N7-3g6"/>
@@ -1308,7 +1308,7 @@
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="afA-ds-BjL">
                         <barButtonItem key="rightBarButtonItem" id="I4o-bw-5Qc">
-                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Wi5-uA-iDS">
+                            <button key="customView" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Wi5-uA-iDS">
                                 <rect key="frame" x="264" y="2" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="chat"/>
@@ -2174,7 +2174,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="370"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XO7-yH-t1o">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="742"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="762"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="36u-Sp-ObY">
                                                 <rect key="frame" x="5" y="1" width="310" height="134"/>
@@ -2336,7 +2336,7 @@
                                                         </constraints>
                                                         <color key="textColor" red="0.42352941176470588" green="0.42352941176470588" blue="0.42352941176470588" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                         <connections>
                                                             <outlet property="delegate" destination="AC5-23-ob5" id="ISV-fR-h0p"/>
                                                         </connections>
@@ -2594,17 +2594,17 @@
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Business and Finance (ICBF - 2016)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wgt-LY-xEC">
-                                                <rect key="frame" x="18" y="534" width="285" height="21"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Business and Finance (ICBF - 2016)" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wgt-LY-xEC">
+                                                <rect key="frame" x="18" y="534" width="285" height="40"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="21" id="n0F-Qt-kmv"/>
+                                                    <constraint firstAttribute="height" constant="40" id="n0F-Qt-kmv"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="16"/>
+                                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
                                                 <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GcK-4B-9j7">
-                                                <rect key="frame" x="5" y="570" width="310" height="170"/>
+                                                <rect key="frame" x="5" y="590" width="310" height="170"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="E5J-sT-vLw">
                                                         <rect key="frame" x="0.0" y="0.0" width="310" height="55"/>
@@ -2849,9 +2849,9 @@
                                             <constraint firstItem="36u-Sp-ObY" firstAttribute="leading" secondItem="XO7-yH-t1o" secondAttribute="leading" constant="5" id="pLH-So-Iue"/>
                                             <constraint firstItem="Sjl-V3-3Ci" firstAttribute="top" secondItem="Vjj-jW-q6h" secondAttribute="bottom" id="pob-CN-jDL"/>
                                             <constraint firstItem="DV3-ff-NOU" firstAttribute="top" secondItem="ne2-2R-GHp" secondAttribute="bottom" id="rBc-dw-MmW"/>
-                                            <constraint firstAttribute="height" constant="742" id="tDu-oh-t9Y"/>
+                                            <constraint firstAttribute="height" constant="762" id="tDu-oh-t9Y"/>
                                             <constraint firstAttribute="trailing" secondItem="HJa-9Y-zqq" secondAttribute="trailing" constant="5" id="uTt-aa-n2N"/>
-                                            <constraint firstItem="GcK-4B-9j7" firstAttribute="top" secondItem="wgt-LY-xEC" secondAttribute="bottom" constant="15" id="yFe-oW-mM2"/>
+                                            <constraint firstItem="GcK-4B-9j7" firstAttribute="top" secondItem="wgt-LY-xEC" secondAttribute="bottom" constant="16" id="yFe-oW-mM2"/>
                                             <constraint firstItem="yjy-yy-rCo" firstAttribute="top" secondItem="HJa-9Y-zqq" secondAttribute="bottom" id="zAg-1a-wW9"/>
                                         </constraints>
                                     </view>
@@ -2861,7 +2861,7 @@
                                     <constraint firstItem="XO7-yH-t1o" firstAttribute="centerX" secondItem="Svj-gF-vj6" secondAttribute="centerX" id="Jot-LI-b5V"/>
                                     <constraint firstAttribute="trailing" secondItem="XO7-yH-t1o" secondAttribute="trailing" id="Ky0-MX-V7R"/>
                                     <constraint firstItem="XO7-yH-t1o" firstAttribute="leading" secondItem="Svj-gF-vj6" secondAttribute="leading" id="Luw-w8-ts0"/>
-                                    <constraint firstAttribute="bottom" secondItem="XO7-yH-t1o" secondAttribute="bottom" constant="10" id="s0h-6N-GMC"/>
+                                    <constraint firstAttribute="bottom" secondItem="XO7-yH-t1o" secondAttribute="bottom" constant="20" id="s0h-6N-GMC"/>
                                     <constraint firstItem="XO7-yH-t1o" firstAttribute="top" secondItem="Svj-gF-vj6" secondAttribute="top" id="se5-mL-Rtm"/>
                                     <constraint firstAttribute="width" secondItem="Svj-gF-vj6" secondAttribute="height" multiplier="10:13" constant="35.384615384615358" id="xfu-OV-ztY"/>
                                 </constraints>
@@ -3454,7 +3454,7 @@
                                     <outlet property="delegate" destination="SOt-RN-p0y" id="CoE-JL-4m6"/>
                                 </connections>
                             </webView>
-                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="YwU-lP-sui">
+                            <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="YwU-lP-sui">
                                 <rect key="frame" x="150" y="198" width="20" height="20"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="YwU-lP-sui" secondAttribute="height" multiplier="1:1" id="J6B-FD-dkD"/>
@@ -4460,7 +4460,7 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="60" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="cJe-xg-IjE">
+                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="60" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="cJe-xg-IjE">
                                 <rect key="frame" x="0.0" y="8" width="320" height="311"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -4618,7 +4618,7 @@
                                     <outlet property="delegate" destination="fFv-xA-H7J" id="zNx-b1-f4Q"/>
                                 </connections>
                             </tableView>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Under Development." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BAc-qt-281">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Under Development." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BAc-qt-281">
                                 <rect key="frame" x="0.0" y="173" width="320" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="HF0-87-gKb"/>
@@ -4627,7 +4627,7 @@
                                 <color key="textColor" red="0.23921568630000001" green="0.23921568630000001" blue="0.23921568630000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rAg-z6-b8X">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rAg-z6-b8X">
                                 <rect key="frame" x="0.0" y="327" width="320" height="40"/>
                                 <color key="backgroundColor" red="0.30196078431372547" green="0.30196078431372547" blue="0.30196078431372547" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
