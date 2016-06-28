@@ -10,15 +10,17 @@
 #import "ProfileService.h"
 #import "CYCustomMultiSelectPickerView.h"
 #import "ProfileDataModel.h"
+#import "MyProfileViewController.h"
 
 @interface EditProfileViewController ()<UITextFieldDelegate,BSKeyboardControlsDelegate,CYCustomMultiSelectPickerViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
 {
     NSArray *textFieldArray;
     CYCustomMultiSelectPickerView *multiPickerView;
     NSMutableArray *interestedAreaArray;
-     NSMutableArray *interestedInArray;
+    NSMutableArray *interestedInArray;
     NSMutableArray *professionArray;
     NSMutableArray *selectedInterestedArray;
+    NSArray *selectedPickerArray;
     NSString* pickerType;
     
 }
@@ -87,7 +89,7 @@
 @synthesize userPickerView;
 @synthesize pickerToolBar;
 @synthesize profileArray;
-@synthesize userProfileObj;
+
 
 #pragma mark - View life cycle
 - (void)viewDidLoad {
@@ -106,6 +108,7 @@
     interestedInArray=[[NSMutableArray alloc]init];
     professionArray=[[NSMutableArray alloc]init];
     selectedInterestedArray=[[NSMutableArray alloc]init];
+    selectedPickerArray=[[NSArray alloc]init];
     userPickerView.translatesAutoresizingMaskIntoConstraints = YES;
     pickerToolBar.translatesAutoresizingMaskIntoConstraints = YES;
     [myDelegate showIndicator];
@@ -155,6 +158,7 @@
     professionTextField.text=[[profileArray objectAtIndex:0]userProfession];
     interestedInTextField.text=[[profileArray objectAtIndex:0]userInterestedIn];
     interestedAreaTextField.text=[[profileArray objectAtIndex:0]userInterests];
+    selectedPickerArray=[[[profileArray objectAtIndex:0]userInterests] componentsSeparatedByString:@","];
     designationTextField.text=[[profileArray objectAtIndex:0]userDesignation];
     linkedInTextField.text=[[profileArray objectAtIndex:0]userLinkedInLink];
     conferenceNameLabel.text=[[profileArray objectAtIndex:0]conferenceName];
@@ -229,8 +233,14 @@
         [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height-100) animated:YES];
     }
     multiPickerView = [[CYCustomMultiSelectPickerView alloc] initWithFrame:CGRectMake(0,self.view.frame.size.height-265, self.view.frame.size.width, 182)];
+    
     multiPickerView.entriesArray = interestedAreaArray;
-    multiPickerView.entriesSelectedArray = selectedInterestedArray;
+    multiPickerView.entriesSelectedArray =selectedPickerArray;
+//    for (int k =0; k<selectedPickerArray.count; k++)
+//    {
+//        //NSDictionary * pickerDict = [selectedPickerArray objectAtIndex:k];
+//        [myDelegate.multiplePickerDic setObject:[NSNumber numberWithBool:YES] forKey:[selectedPickerArray objectAtIndex:k]];
+//    }
     multiPickerView.multiPickerDelegate = self;
     [self.view addSubview:multiPickerView];
     [multiPickerView pickerShow];
@@ -250,6 +260,7 @@
 - (IBAction)saveButtonAction:(id)sender {
     [self.keyboardControls.activeField resignFirstResponder];
     [self hidePickerWithAnimation];
+    [self hidePicker];
     if([self performValidations]) {
         [myDelegate showIndicator];
         [self performSelector:@selector(editUserProfile) withObject:nil afterDelay:.1];
@@ -265,15 +276,15 @@
         return NO;
     }
     else {
-//        if (![linkedInTextField isValidURL]) {
-//            SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
-//            [alert showWarning:self title:@"Alert" subTitle:@"Please enter a valid linked in link." closeButtonTitle:@"Done" duration:0.0f];
-//            return NO;
-//        }
-//        else {
-//            return YES;
-//        }
-        return YES;
+        if (![linkedInTextField isValidURL]) {
+            SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
+            [alert showWarning:self title:@"Alert" subTitle:@"Please enter a valid linked in link." closeButtonTitle:@"Done" duration:0.0f];
+            return NO;
+        }
+        else {
+            return YES;
+        }
+       // return YES;
     }
 
 }
@@ -284,11 +295,22 @@
     [self hidePickerWithAnimation];
     if ([pickerType isEqualToString:@"1"]) {
         NSInteger index = [userPickerView selectedRowInComponent:0];
+        if(professionArray.count==0) {
+            professionTextField.text=@"";
+        }
+        else {
          professionTextField.text=[professionArray objectAtIndex:index];
+        }
     }
     else {
         NSInteger index = [userPickerView selectedRowInComponent:0];
-        interestedInTextField.text=[interestedInArray objectAtIndex:index];
+        if(interestedInArray.count==0) {
+            interestedInTextField.text=@"";
+        }
+        else {
+            interestedInTextField.text=[interestedInArray objectAtIndex:index];
+        }
+        
     }
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];
@@ -344,21 +366,38 @@
     }
 }
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
-    NSString *str;
+    NSString *str=@"";
+
     if ([pickerType isEqualToString:@"1"]) {
-        str=[professionArray objectAtIndex:row];
+        if (professionArray.count>1) {
+            str=[professionArray objectAtIndex:row];
+        }
     }
     else {
-        str=[interestedInArray objectAtIndex:row];
+        if (interestedInArray.count>1) {
+            str=[interestedInArray objectAtIndex:row];
+        }
     }
     return str;
 }
 - (void)pickerView:(UIPickerView *)pickerView1 didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
      if ([pickerType isEqualToString:@"1"]) {
-          professionTextField.text = [professionArray objectAtIndex:row];
+         if (professionArray.count>1) {
+             professionTextField.text = [professionArray objectAtIndex:row];
+         }
+         else{
+             professionTextField.text=@"";
+         }
+         
     }
     else {
-        interestedAreaTextField.text=[interestedInArray objectAtIndex:row];
+        if (interestedInArray.count>1) {
+            interestedInTextField.text = [interestedInArray objectAtIndex:row];
+        }
+        else{
+            interestedInTextField.text=@"";
+        }
+       
     }
 }
 #pragma mark - end
@@ -368,7 +407,7 @@
 -(void)returnChoosedPickerString:(NSMutableArray *)selectedEntriesArr
 {
     NSString *dataStr = [selectedEntriesArr componentsJoinedByString:@","];
-    selectedInterestedArray = selectedEntriesArr;
+    selectedPickerArray = selectedEntriesArr;
     interestedAreaTextField.text = dataStr;
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];
@@ -503,18 +542,9 @@
     
 }
 -(void)editUserProfile {
+   
     [[ProfileService sharedManager] editUserProfile:userNameTextField.text mobileNumber:mobileNumberTextField.text companyName:companyNameTextField.text companyAddress:companyAddressTextField.text designation:designationTextField.text aboutCompany:aboutCompanyTextView.text linkedIn:linkedInTextField.text interests:interestedAreaTextField.text interestedIn:interestedInTextField.text profession:professionTextField.text image:userImageView.image success:^(id responseObject) {
         [myDelegate stopIndicator];
-//        userProfileObj.myProfileData.userName=userNameTextField.text;
-//        userProfileObj.myProfileData.userMobileNumber=mobileNumberTextField.text;
-//        userProfileObj.myProfileData.userCompanyName=companyNameTextField.text;
-//        userProfileObj.myProfileData.userComapnyAddress=companyAddressTextField.text;
-//        userProfileObj.myProfileData.userDesignation=designationTextField.text;
-//        userProfileObj.myProfileData.aboutUserCompany=aboutCompanyTextView.text;
-//        userProfileObj.myProfileData.userInterests=interestedAreaTextField.text;
-//        userProfileObj.myProfileData.userProfession=professionTextField.text;
-//        userProfileObj.myProfileData.userInterestedIn=interestedInTextField.text;
-//        userProfileObj.myProfileData.userImage=userNameView;
     
         for (UIViewController *controller in self.navigationController.viewControllers)
         {

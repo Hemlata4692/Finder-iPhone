@@ -45,7 +45,7 @@
 //end
 
 //Accpet cancel appointment
--(void)acceptCancelMeeting:(NSString *)appointmentId meetingUserId:(NSString *)meetingUserId flag:(NSString *)flag date:(NSString *)date type:(NSString *)type success:(void (^)(id))success failure:(void (^)(NSError *))failure;
+-(void)acceptCancelMeeting:(NSString *)appointmentId meetingUserId:(NSString *)meetingUserId flag:(NSString *)flag type:(NSString *)type success:(void (^)(id))success failure:(void (^)(NSError *))failure;
 //end
 
 @end

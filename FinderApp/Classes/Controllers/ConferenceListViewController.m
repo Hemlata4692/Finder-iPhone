@@ -30,8 +30,6 @@
     self.navigationItem.title=@"Select Conference";
     noRecordFoundLabel.hidden=YES;
     conferenceListingArray=[[NSMutableArray alloc]init];
-    [myDelegate showIndicator];
-    [self performSelector:@selector(getConferenceListing) withObject:nil afterDelay:.1];
     
 }
 
@@ -42,6 +40,9 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    [myDelegate showIndicator];
+    [self performSelector:@selector(getConferenceListing) withObject:nil afterDelay:.1];
+
 }
 #pragma mark - end
 

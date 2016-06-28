@@ -19,6 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    myDelegate.currentNavigationController=self.navigationController;
     [self addLeftBarButtonWithImage:[UIImage imageNamed:@"back"]];
 }
 - (void)didReceiveMemoryWarning {

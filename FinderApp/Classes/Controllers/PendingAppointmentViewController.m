@@ -73,6 +73,7 @@
     [[ConferenceService sharedManager] requestedAppointment:^(id dataArray) {
         [myDelegate stopIndicator];
         appointmentDataArray=[dataArray mutableCopy];
+        pendingAppointmentTable.hidden=NO;
         noResulFoundLabel.hidden=YES;
         [pendingAppointmentTable reloadData];
         
@@ -81,6 +82,7 @@
                                                  failure:^(NSError *error)
      {
          noResulFoundLabel.hidden=NO;
+         pendingAppointmentTable.hidden=YES;
      }] ;
 
 }
@@ -89,6 +91,7 @@
     [[ConferenceService sharedManager] pendingAppointment:^(id dataArray) {
         [myDelegate stopIndicator];
          appointmentDataArray=[dataArray mutableCopy];
+         pendingAppointmentTable.hidden=NO;
         noResulFoundLabel.hidden=YES;
         [pendingAppointmentTable reloadData];
       
@@ -96,11 +99,12 @@
                                                     failure:^(NSError *error)
      {
          noResulFoundLabel.hidden=NO;
+          pendingAppointmentTable.hidden=YES;
      }] ;
 
 }
 -(void)acceptMeetingRequest {
-    [[ConferenceService sharedManager] acceptCancelMeeting:appointmentId meetingUserId:meetingId flag:status date:appointmentDate type:appointmentType success:^(id dataArray) {
+    [[ConferenceService sharedManager] acceptCancelMeeting:appointmentId meetingUserId:meetingId flag:status  type:appointmentType success:^(id dataArray) {
         [self getPendingAppointmentList];
     }
                                                    failure:^(NSError *error)
@@ -110,8 +114,8 @@
 
 }
 -(void)cancelMeetingRequest {
-    [[ConferenceService sharedManager] acceptCancelMeeting:appointmentId meetingUserId:meetingId flag:status date:appointmentDate type:appointmentType success:^(id dataArray) {
-        if ([appointmentType isEqualToString:@"assigned"]) {
+    [[ConferenceService sharedManager] acceptCancelMeeting:appointmentId meetingUserId:meetingId flag:status type:appointmentType success:^(id dataArray) {
+        if ([appointmentType isEqualToString:@"requested"]) {
             [self getPendingAppointmentList];
         }
         else {
@@ -205,7 +209,7 @@
     meetingId=[[appointmentDataArray objectAtIndex:btnTag]meetingUserId];
     appointmentDate=[[appointmentDataArray objectAtIndex:btnTag]appointmentDate];
     status=@"accept";
-    appointmentType=@"assigned";
+    appointmentType=@"requested";
     [myDelegate showIndicator];
     [self performSelector:@selector(acceptMeetingRequest) withObject:nil afterDelay:.1];
 }
@@ -217,10 +221,10 @@
     appointmentDate=[[appointmentDataArray objectAtIndex:btnTag]appointmentDate];
     status=@"cancel";
     if ([screenName isEqualToString:@"Pending Appointments"]) {
-        appointmentType=@"assigned";
+        appointmentType=@"requested";
     }
     else {
-        appointmentType=@"requested";
+        appointmentType=@"assigned";
     }
     [myDelegate showIndicator];
     [self performSelector:@selector(cancelMeetingRequest) withObject:nil afterDelay:.1];

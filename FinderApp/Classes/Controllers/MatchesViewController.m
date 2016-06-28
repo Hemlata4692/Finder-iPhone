@@ -16,6 +16,7 @@
 #import "MatchesService.h"
 #import "MatchesDataModel.h"
 #import "MyButton.h"
+#import "PendingAppointmentViewController.h"
 
 @interface MatchesViewController ()
 {
@@ -65,6 +66,11 @@
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     matchesSegmentControl.selectedSegmentIndex=1;
     selectedSegment=1;
+    if ([myDelegate.alertType isEqualToString:@"2"]) {
+        UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        PendingAppointmentViewController *profileView =[storyboard instantiateViewControllerWithIdentifier:@"PendingAppointmentViewController"];
+        [self.navigationController pushViewController:profileView animated:YES];
+    }
     [myDelegate showIndicator];
     [self performSelector:@selector(getMatchesDetails) withObject:nil afterDelay:.1];
 }
@@ -132,49 +138,6 @@
     }
 }
 
-//- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    PostListingDataModel *postListData;
-//    if (indexPath.section==0) {
-//        postListData=[todayPostData objectAtIndex:indexPath.row];
-//        CGSize size = CGSizeMake(postListingTableView.frame.size.width-70,999);
-//        CGRect textRect = [postListData.postContent
-//                           boundingRectWithSize:size
-//                           options:NSStringDrawingUsesLineFragmentOrigin
-//                           attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Roboto-Regular" size:15.0]}
-//                           context:nil];
-//        textRect.origin.x = 8;
-//        textRect.origin.y = 19;
-//        if ([[todayPostData objectAtIndex:indexPath.row]uploadedPhotoArray].count==0 )
-//        {
-//            return 180+textRect.size.height;
-//        }
-//        else
-//        {
-//            return 286+textRect.size.height;
-//        }
-//    }
-//    else
-//    {
-//        postListData=[yesterdayPostData objectAtIndex:indexPath.row];
-//        CGSize size = CGSizeMake(postListingTableView.frame.size.width-70,999);
-//        CGRect textRect = [postListData.postContent
-//                           boundingRectWithSize:size
-//                           options:NSStringDrawingUsesLineFragmentOrigin
-//                           attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Roboto-Regular" size:15.0]}
-//                           context:nil];
-//        textRect.origin.x = 8;
-//        textRect.origin.y = 19;
-//        if ([[yesterdayPostData objectAtIndex:indexPath.row]uploadedPhotoArray].count==0 )
-//        {
-//            return 180+textRect.size.height;
-//        }
-//        else
-//        {
-//            return 286+textRect.size.height;
-//        }
-//    }
-//}
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -277,6 +240,7 @@
 {
     [[MatchesService sharedManager] getMatchesList:^(id dataArray) {
         [myDelegate stopIndicator];
+         [myDelegate removeBadgeIconLastTab];
         allMatchesDataArray=[dataArray mutableCopy];
       //  matchesSegmentControl.selectedSegmentIndex=1;
         if (matchesSegmentControl.selectedSegmentIndex==0) {
@@ -320,7 +284,13 @@
     }
     else if (selectedSegment==1)
     {
+        if (allMatchesDataArray.count==0) {
+            noRecordLabel.hidden=NO;
+            noRecordLabel.text=@"No matches found.";
+        }
+        else {
         noRecordLabel.hidden=YES;
+        }
     }
     else{
         //contacts segment

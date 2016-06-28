@@ -15,6 +15,9 @@
 #import "MyAlert.h"
 #import "UserService.h"
 #import "MatchesViewController.h"
+#import "MatchesService.h"
+#import "ConferenceService.h"
+#import "OtherUserProfileViewController.h"
 
 @interface FinderAppDelegate ()<CLLocationManagerDelegate,MyAlertDelegate>
 {
@@ -25,11 +28,16 @@
     MyAlert* alert;
 }
 @property (nonatomic, strong) MMMaterialDesignSpinner *spinnerView;
+@property (nonatomic, strong) NSDictionary *alertDict;
 @end
 
 @implementation FinderAppDelegate
 @synthesize isLocation,locationManager;
 @synthesize multiplePickerDic;
+@synthesize alertDict;
+@synthesize tabBarView;
+@synthesize alertType;
+@synthesize currentNavigationController;
 
 #pragma mark - Global indicator view
 - (void)showIndicator
@@ -66,6 +74,7 @@
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, [UIFont fontWithName:@"Roboto-Regular" size:19.0], NSFontAttributeName, nil]];
     // _window.backgroundColor = [UIColor redColor];
     multiplePickerDic=[NSMutableDictionary new];
+    alertDict=[NSDictionary new];
     locationManager = [[CLLocationManager alloc] init];
     locationManager.delegate = self;
     [locationManager requestAlwaysAuthorization];
@@ -79,6 +88,7 @@
     self.deviceToken = @"";
 
     NSLog(@"userId %@",[[NSUserDefaults standardUserDefaults] objectForKey:@"userId"]);
+     NSLog(@"conferenceId %@",[[NSUserDefaults standardUserDefaults] objectForKey:@"conferenceId"]);
     UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     //conferenceId
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"userId"]!=nil && [[NSUserDefaults standardUserDefaults] objectForKey:@"conferenceId"]!=nil)
@@ -254,13 +264,42 @@
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
-    
+     NSLog(@"push notification user info is active state --------------------->>>%@",userInfo);
     [UIApplication sharedApplication].applicationIconBadgeNumber=0;
+     alertDict=[userInfo objectForKey:@"aps"];
     if (application.applicationState == UIApplicationStateActive)
     {
-       alert = [[MyAlert alloc] initWithTitle:@"New Meeting Request" myView:self.window delegate:self message:@"this is text vaklfkldsfkl lfj fjg gjr jthik rthjrtkhj rtjhhjrtihrtkhj tjhtjh hjrtjhkrth rthjrtjhkrththjrth g 5 hguhg ghghu g ghrhg rgr ghrgjr ghr g hema" viewBtnText:@"View" acceptBtnText:@"Accept" declineBtnText:@"Decline"];
-        
-        NSLog(@"push notification user info is active state --------------------->>>%@",userInfo);
+        if ([[alertDict objectForKey:@"type"] isEqualToString:@"1"]) {
+            
+              alert = [[MyAlert alloc] initWithTitle:@"New Match Request" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"View" acceptBtnText:@"Accept" declineBtnText:@"Decline"];
+        }
+        else if ([[alertDict objectForKey:@"type"] isEqualToString:@"2"]) {
+            alert = [[MyAlert alloc] initWithTitle:@"New Meeting Request" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Accept" acceptBtnText:@"" declineBtnText:@"Decline"];
+        }
+        else if ([[alertDict objectForKey:@"type"] isEqualToString:@"3"]) {
+            alert = [[MyAlert alloc] initWithTitle:@"Request Accepted" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel"];
+        }
+        else if ([[alertDict objectForKey:@"type"] isEqualToString:@"4"]) {
+            alert = [[MyAlert alloc] initWithTitle:@"Match Request Rejected" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel"];
+        }
+        else if ([[alertDict objectForKey:@"type"] isEqualToString:@"5"]) {
+            alert = [[MyAlert alloc] initWithTitle:@"Meeting Request Accepted" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel"];
+        }
+        else if ([[alertDict objectForKey:@"type"] isEqualToString:@"6"]) {
+            alert = [[MyAlert alloc] initWithTitle:@"Meeting Request Rejected" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel"];
+        }
+        else if ([[alertDict objectForKey:@"type"] isEqualToString:@"7"]) {
+            alert = [[MyAlert alloc] initWithTitle:@"New Conference Assigned" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel"];
+        }
+    }
+    else {
+        if ([[alertDict objectForKey:@"type"] isEqualToString:@"1"]) {
+            [self addBadgeIcon];
+        }
+
+       else if ([[alertDict objectForKey:@"type"] isEqualToString:@"2"]) {
+            alertType=@"2";
+        }
     }
     
 }
@@ -268,31 +307,73 @@
 - (void)myAlertDelegateAction:(CustomAlert *)myAlert option:(int)option{
     
     if (option == 0) {
-        
+        if ([[alertDict objectForKey:@"type"] isEqualToString:@"1"]) {
+            alertType=@"2";
+//            UIStoryboard *sb=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//            OtherUserProfileViewController *view1=[sb instantiateViewControllerWithIdentifier:@"OtherUserProfileViewController"];
+//            [self.currentNavigationController pushViewController:view1 animated:YES];
+
+        }
+
+       else if ([[alertDict objectForKey:@"type"] isEqualToString:@"2"]) {
+            [[ConferenceService sharedManager] acceptCancelMeeting:[alertDict objectForKey:@"appointmentId"] meetingUserId:[alertDict objectForKey:@"meetinguserId"] flag:@"accept" type:@"requested" success:^(id dataArray) {
+                
+            }
+                                                           failure:^(NSError *error)
+             {
+                 
+             }] ;
+
+            
+        }
+
         NSLog(@"left");
     }
     else if(option == 1){
-        
+        if ([[alertDict objectForKey:@"type"] isEqualToString:@"1"]) {
+            [[MatchesService sharedManager] acceptDeclineRequest:[alertDict objectForKey:@"otherUserId"] acceptRequest:@"T" success:^(id responseObject) {
+           
+                
+            }
+                                                         failure:^(NSError *error)
+             {
+                 
+             }] ;
+
+        }
         NSLog(@"right");
     }
     else
     {
+        if ([[alertDict objectForKey:@"type"] isEqualToString:@"1"]) {
+            [[MatchesService sharedManager] acceptDeclineRequest:[alertDict objectForKey:@"otherUserId"] acceptRequest:@"F" success:^(id responseObject) {
+                
+                
+            }
+                                                         failure:^(NSError *error)
+             {
+                 
+             }] ;
+            
+        }
+        else if ([[alertDict objectForKey:@"type"] isEqualToString:@"2"]) {
+            [[ConferenceService sharedManager] acceptCancelMeeting:[alertDict objectForKey:@"alert"] meetingUserId:[alertDict objectForKey:@"meetinguserId"] flag:@"cancel" type:@"requested" success:^(id dataArray) {
+                
+            }
+                                                           failure:^(NSError *error)
+             {
+                 
+             }] ;
+            
+            
+        }
+
         NSLog(@"decline");
     }
     [alert dismissAlertView:self.window];
 }
 
-//-(NSString *)getNotificationMessage : (NSDictionary *)userInfo
-//{
-//    NSLog(@"Notification response  %@", userInfo);
-//    NSDictionary *tempDict=[userInfo objectForKey:@"aps"];
-//    threadId = [tempDict objectForKey:@"threadid"];
-//    groupId = [tempDict objectForKey:@"groupId"];
-//    notificationRole = [[tempDict objectForKey:@"role"] intValue];
-//    NSLog(@"%@", threadId);
-//    NSLog(@"%@", groupId);
-//    return [tempDict objectForKey:@"alert"];
-//}
+
 - (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err
 {
     NSString *str = [NSString stringWithFormat: @"Error: %@", err];
@@ -337,4 +418,43 @@
     }
 }
 #pragma mark - end
+
+#pragma mark - Add badge icon
+-(void)addBadgeIcon
+{
+    for (UILabel *subview in myDelegate.tabBarView.tabBar.subviews)
+    {
+        if ([subview isKindOfClass:[UILabel class]])
+        {
+            if (subview.tag == 3365) {
+                [subview removeFromSuperview];
+            }
+        }
+    }
+    UILabel *notificationBadge = [[UILabel alloc] init];
+    notificationBadge.frame = CGRectMake(8 , 8, 8, 8);
+    notificationBadge.backgroundColor = [UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:1.0];
+    notificationBadge.layer.cornerRadius = 5;
+    notificationBadge.layer.masksToBounds = YES;
+    notificationBadge.tag = 3365;
+    [myDelegate.tabBarView.tabBar addSubview:notificationBadge];
+    [myDelegate.tabBarView.tabBar bringSubviewToFront:notificationBadge];
+}
+#pragma mark - end
+
+#pragma mark - Remove badge icon
+-(void)removeBadgeIconLastTab
+{
+    for (UILabel *subview in myDelegate.tabBarView.tabBar.subviews)
+    {
+        if ([subview isKindOfClass:[UILabel class]])
+        {
+            if (subview.tag == 3365) {
+                [subview removeFromSuperview];
+            }
+        }
+    }
+}
+#pragma mark - end
+
 @end

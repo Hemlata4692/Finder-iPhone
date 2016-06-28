@@ -7,9 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MyProfileViewController.h"
 
 @interface EditProfileViewController : GlobalBackViewController
 @property(nonatomic,strong) NSMutableArray* profileArray;
-@property(strong, nonatomic) MyProfileViewController *userProfileObj;
 @end

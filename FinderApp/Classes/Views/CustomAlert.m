@@ -35,8 +35,8 @@
         acceptBtnAction.translatesAutoresizingMaskIntoConstraints = YES;
         declineBtnAction.translatesAutoresizingMaskIntoConstraints = YES;
         backView.frame = CGRectMake(0, 0, mainView.frame.size.width, mainView.frame.size.height);
-        myAlertBackView.frame = CGRectMake(0, 0, mainView.frame.size.width, 250);
-        title.frame = CGRectMake(0, 10, myAlertBackView.frame.size.width, 30);
+        myAlertBackView.frame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 300);
+        title.frame = CGRectMake(0, 30, myAlertBackView.frame.size.width, 30);
         title.text = titleText;
         if ([messageText isEqualToString:@""]) {
             
@@ -63,15 +63,16 @@
         }
         if ([acceptBtnText isEqualToString:@""] ) {
             
-            viewBtnAction.frame = CGRectMake((myAlertBackView.frame.size.width / 2) - 95, messageLabel.frame.origin.y + messageLabel.frame.size.height + 14,85, 40);
-            declineBtnAction.frame = CGRectMake(viewBtnAction.frame.origin.x+viewBtnAction.frame.size.width+16, messageLabel.frame.origin.y + messageLabel.frame.size.height + 14, 85, 40);
+            viewBtnAction.frame = CGRectMake(10, messageLabel.frame.origin.y + messageLabel.frame.size.height + 14,(myAlertBackView.frame.size.width-40)/2, 40);
+            viewBtnAction.backgroundColor=[UIColor colorWithRed:51.0/255.0 green:139.0/255.0 blue:37.0/255.0 alpha:1.0];
+            declineBtnAction.frame = CGRectMake(viewBtnAction.frame.origin.x+viewBtnAction.frame.size.width+15, messageLabel.frame.origin.y + messageLabel.frame.size.height + 14, (myAlertBackView.frame.size.width-40)/2, 40);
             acceptBtnAction.hidden = YES;
         }
         else{
         
-            viewBtnAction.frame = CGRectMake(15, messageLabel.frame.origin.y + messageLabel.frame.size.height + 14,85, 40);
-            acceptBtnAction.frame = CGRectMake(viewBtnAction.frame.origin.x+viewBtnAction.frame.size.width + 16, messageLabel.frame.origin.y + messageLabel.frame.size.height + 14, 85, 40);
-            declineBtnAction.frame = CGRectMake(acceptBtnAction.frame.origin.x+acceptBtnAction.frame.size.width + 16, messageLabel.frame.origin.y + messageLabel.frame.size.height + 14, 85, 40);
+            viewBtnAction.frame = CGRectMake(10, messageLabel.frame.origin.y + messageLabel.frame.size.height + 14,(myAlertBackView.frame.size.width-20)/3-10, 40);
+            acceptBtnAction.frame = CGRectMake(viewBtnAction.frame.origin.x+viewBtnAction.frame.size.width + 15, messageLabel.frame.origin.y + messageLabel.frame.size.height + 14, (myAlertBackView.frame.size.width-20)/3-10, 40);
+            declineBtnAction.frame = CGRectMake(acceptBtnAction.frame.origin.x+acceptBtnAction.frame.size.width + 15, messageLabel.frame.origin.y + messageLabel.frame.size.height + 14, (myAlertBackView.frame.size.width-20)/3-10, 40);
            // acceptBtnAction.hidden = NO;
         }
         
@@ -86,8 +87,8 @@
             [declineBtnAction setTitle:declineBtnText forState:UIControlStateNormal];
         }
         
-        float alertViewHeight = viewBtnAction.frame.origin.y + viewBtnAction.frame.size.height + 10;
-         myAlertBackView.frame = CGRectMake(0, 0, 320, alertViewHeight);
+        float alertViewHeight = viewBtnAction.frame.origin.y + viewBtnAction.frame.size.height + 20;
+         myAlertBackView.frame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, alertViewHeight);
         viewBtnAction.layer.cornerRadius =  acceptBtnAction.layer.cornerRadius = declineBtnAction.layer.cornerRadius = 2.0f;
         viewBtnAction.layer.masksToBounds =  acceptBtnAction.layer.masksToBounds =declineBtnAction.layer.masksToBounds = YES;
         

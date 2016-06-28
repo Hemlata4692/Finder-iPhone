@@ -59,7 +59,7 @@
     name.text=allMatchesDetails.userName;
     if ([allMatchesDetails.reviewStatus isEqualToString:@"T"]) {
         reviewedStatusLbl.hidden=NO;
-        reviewedStatusLbl.frame=CGRectMake(name.frame.origin.x+name.frame.size.width+3, 18, reviewedStatusLbl.frame.size.width, reviewedStatusLbl.frame.size.height);
+        reviewedStatusLbl.frame=CGRectMake(name.frame.origin.x+name.frame.size.width+3, 17, reviewedStatusLbl.frame.size.width, reviewedStatusLbl.frame.size.height);
     }
     else {
         reviewedStatusLbl.hidden=YES;
@@ -128,7 +128,7 @@
     name.text=newMatchesDetails.userName;
     if ([newMatchesDetails.reviewStatus isEqualToString:@"T"]) {
         reviewedStatusLbl.hidden=NO;
-        reviewedStatusLbl.frame=CGRectMake(name.frame.origin.x+name.frame.size.width+3, 18, reviewedStatusLbl.frame.size.width, reviewedStatusLbl.frame.size.height);
+        reviewedStatusLbl.frame=CGRectMake(name.frame.origin.x+name.frame.size.width+3, 17, reviewedStatusLbl.frame.size.width, reviewedStatusLbl.frame.size.height);
     }
     else {
         reviewedStatusLbl.hidden=YES;

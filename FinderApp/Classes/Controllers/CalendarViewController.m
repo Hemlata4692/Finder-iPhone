@@ -23,11 +23,13 @@
     NSMutableArray *contactArray;
 }
 
+@property (weak, nonatomic) IBOutlet UILabel *noResultFoundLabel;
 @property (weak, nonatomic) IBOutlet UITableView *calendarTableView;
 @end
 
 @implementation CalendarViewController
 @synthesize calendarTableView;
+@synthesize noResultFoundLabel;
 
 #pragma mark - View lifecycle
 - (void)viewDidLoad {
@@ -35,6 +37,7 @@
     self.navigationItem.title=@"Calendar";
     sectionArray=[[NSMutableArray alloc]init];
     contactArray=[[NSMutableArray alloc]init];
+    noResultFoundLabel.hidden=YES;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -58,27 +61,40 @@
         sectionArray=[dataArray mutableCopy];
         for (int i=0; i<sectionArray.count; i++) {
             for (int j=0; j<[[sectionArray objectAtIndex:i]eventArray].count; j++) {
+                NSString *conferenceDate =@"";
                 
+                if ([[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "] objectAtIndex:1] containsString:@"st"]) {
+                    
+                    conferenceDate = [NSString stringWithFormat:@"%@ %@ %@ %@",[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "] objectAtIndex:0],[[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "] objectAtIndex:1] stringByReplacingOccurrencesOfString: @"st" withString:@""],[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "] objectAtIndex:2],[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "] objectAtIndex:3]];
+                }
+                else if ([[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "] objectAtIndex:1] containsString:@"nd"]){
+                    conferenceDate = [NSString stringWithFormat:@"%@ %@ %@ %@",[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "] objectAtIndex:0],[[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "] objectAtIndex:1] stringByReplacingOccurrencesOfString: @"nd" withString:@""],[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "] objectAtIndex:2],[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "] objectAtIndex:3]];
+                }
+                else if ([[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "]  objectAtIndex:1] containsString:@"rd"]){
+                    
+                    conferenceDate = [NSString stringWithFormat:@"%@ %@ %@ %@",[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "] objectAtIndex:0],[[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "] objectAtIndex:1] stringByReplacingOccurrencesOfString: @"rd" withString:@""],[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "] objectAtIndex:2],[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "] objectAtIndex:3]];
+                }
+                else if ([[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "]  objectAtIndex:1] containsString:@"th"]){
+                        
+                        conferenceDate = [NSString stringWithFormat:@"%@ %@ %@ %@",[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "] objectAtIndex:0],[[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "] objectAtIndex:1] stringByReplacingOccurrencesOfString: @"th" withString:@""],[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "] objectAtIndex:2],[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "] objectAtIndex:3]];
+                    }
+                EventDataModel *data=[[[sectionArray objectAtIndex:i]eventArray] objectAtIndex:j];
+                NSArray *dateStrings = [data.eventTime componentsSeparatedByString:@"-"];
+
+                conferenceDate=[NSString stringWithFormat:@"%@ %@",conferenceDate,[dateStrings objectAtIndex:0]];
                 NSDateFormatter *dateFormat=[[NSDateFormatter alloc]init];
                 NSLocale *locale = [[NSLocale alloc]
                                     initWithLocaleIdentifier:@"en_US"];
                 [dateFormat setLocale:locale];
-                [dateFormat setDateFormat:@"yyyy-MM-dd"];
-                NSDate *date =[dateFormat dateFromString:[[sectionArray objectAtIndex:i]conferenceDate]];
-                [dateFormat setDateFormat:@"yyyy-MM-dd"];
+                [dateFormat setDateFormat:@"EEEE d MMMM yyyy HH:mm"];
+                NSDate *date =[dateFormat dateFromString:conferenceDate];
+                [dateFormat setDateFormat:@"yyyy-MM-dd hh:mm a"];
                 NSString *fireDate=[dateFormat stringFromDate:date];
-                [dateFormat setDateFormat:@"HH:mm"];
-                EventDataModel *data=[[[sectionArray objectAtIndex:i]eventArray] objectAtIndex:j];
-                NSArray *dateStrings = [data.eventTime componentsSeparatedByString:@"-"];
-                [dateFormat setDateFormat:@"hh:mm a"];
-                NSDate *fireToTime=[dateFormat dateFromString:[dateStrings objectAtIndex:0]];
-                NSString *startdate1= [NSString stringWithFormat:@"%@ %@",fireDate,fireToTime];
-                NSDate *startDate = [dateFormat dateFromString:startdate1];
-               // NSDate *endDate = [dateFormatter dateFromString:[dateStrings objectAtIndex:1]];
+                NSDate *startDate = [dateFormat dateFromString:fireDate];
                 NSTimeInterval notiInterval =[startDate timeIntervalSinceDate:[NSDate date]] -15*60;
                 UILocalNotification *notification = [[UILocalNotification alloc] init];
                 notification.fireDate = [NSDate dateWithTimeIntervalSinceNow:notiInterval];
-                notification.alertBody = [NSString stringWithFormat:@"%@ %@ %@ %@",@"You have calender event for",data.eventName,@"at",startDate];
+                notification.alertBody = [NSString stringWithFormat:@"%@ %@ %@ %@",@"You have calender event for",data.eventName,@"at",fireDate];
                 notification.timeZone = [NSTimeZone defaultTimeZone];
                 notification.soundName = UILocalNotificationDefaultSoundName;
                 notification.applicationIconBadgeNumber = 0;
@@ -89,11 +105,13 @@
                 [[UIApplication sharedApplication] scheduleLocalNotification:notification];
             }
         }
+        noResultFoundLabel.hidden=YES;
          [calendarTableView reloadData];
     }
                                                    failure:^(NSError *error)
      {
-         
+         noResultFoundLabel.hidden=NO;
+         noResultFoundLabel.text=@"Calendar schedule no added yet.";
      }] ;
 }
 -(void)contactDetails {
@@ -137,7 +155,6 @@
         result = [dateStrings objectAtIndex:i];
         [string appendString:[NSString stringWithFormat:@"%@ ",result]];
     }
-    NSLog(@"response %@",string);
     dateLabel.text=string;
     float width =  [dateLabel.text boundingRectWithSize:dateLabel.frame.size options:NSStringDrawingUsesLineFragmentOrigin attributes:@{ NSFontAttributeName:dateLabel.font } context:nil]
     .size.width;
@@ -164,6 +181,8 @@
     calendarCell.viewAgendaButton.sectionTag=(int)indexPath.section;
     [calendarCell.viewAgendaButton addTarget:self action:@selector(viewAgendaButonAction:) forControlEvents:UIControlEventTouchUpInside];
     [calendarCell.userImageClickAction addTarget:self action:@selector(userProfileAction:) forControlEvents:UIControlEventTouchUpInside];
+    calendarCell.userImageClickAction.Tag=(int)indexPath.row;
+    calendarCell.userImageClickAction.sectionTag=(int)indexPath.section;
     EventDataModel *data=[[[sectionArray objectAtIndex:indexPath.section]eventArray] objectAtIndex:indexPath.row];
     [calendarCell displayData:data indexPath:(int)indexPath.row];
     return calendarCell;

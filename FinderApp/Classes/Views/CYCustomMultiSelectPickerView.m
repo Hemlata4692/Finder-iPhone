@@ -59,11 +59,7 @@
         else{
             isSelected = NO;
         }
-        //        for (NSString *keyed in self.entriesSelectedArray) {
-        //            if ([key isEqualToString:keyed]) {
-        //               isSelected = YES;
-        //            }
-        //        }
+
         [self.selectionStatesDic setObject:[NSNumber numberWithBool:isSelected] forKey:key];
         [appDelegate.multiplePickerDic setObject:[NSNumber numberWithBool:isSelected] forKey:key];
     }

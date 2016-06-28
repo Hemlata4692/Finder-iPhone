@@ -120,6 +120,18 @@
          [self addLeftBarButtonWithImage1:[UIImage imageNamed:@"back"]];
     }
 }
+-(void)addShadow
+{
+    [userProfileImage setCornerRadius:userProfileImage.frame.size.width/2];
+    [userProfileImage setViewBorder:userProfileImage color:[UIColor whiteColor]];
+    [mobileNumberView addShadow:mobileNumberView color:[UIColor lightGrayColor]];
+    [aboutCompanyView addShadow:aboutCompanyView color:[UIColor lightGrayColor]];
+    [companyAddressView addShadow:companyAddressView color:[UIColor lightGrayColor]];
+    [bottomView addShadow:bottomView color:[UIColor lightGrayColor]];
+    [professionView addShadow:professionView color:[UIColor lightGrayColor]];
+    [interestedInView addShadow:interestedInView color:[UIColor lightGrayColor]];
+}
+
 #pragma mark - Add back button
 - (void)addLeftBarButtonWithImage1:(UIImage *)backButton{
     CGRect framing = CGRectMake(0, 0, backButton.size.width, backButton.size.height);
@@ -143,24 +155,12 @@
     }
 }
 #pragma mark - end
--(void)addShadow
-{
-    [userProfileImage setCornerRadius:userProfileImage.frame.size.width/2];
-    [userProfileImage setViewBorder:userProfileImage color:[UIColor whiteColor]];
-    [mobileNumberView addShadow:mobileNumberView color:[UIColor lightGrayColor]];
-    [aboutCompanyView addShadow:aboutCompanyView color:[UIColor lightGrayColor]];
-    [companyAddressView addShadow:companyAddressView color:[UIColor lightGrayColor]];
-    [bottomView addShadow:bottomView color:[UIColor lightGrayColor]];
-    [professionView addShadow:professionView color:[UIColor lightGrayColor]];
-    [interestedInView addShadow:interestedInView color:[UIColor lightGrayColor]];
-}
-#pragma mark - end
+
 
 #pragma mark - IBActions
 - (IBAction)editProfileButtonAction:(id)sender {
     UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     EditProfileViewController *editProfile =[storyboard instantiateViewControllerWithIdentifier:@"EditProfileViewController"];
-    editProfile.userProfileObj=self;
     editProfile.profileArray=[userProfileDataArray mutableCopy];
     [self.navigationController pushViewController:editProfile animated:YES];
 }
@@ -187,7 +187,7 @@
     {
         // Email Subject
         NSString *emailTitle = @"Finder App";
-        NSArray *toRecipents = [NSArray arrayWithObject:@"garima@ranosys.com"];
+        NSArray *toRecipents = [NSArray arrayWithObject:[[userProfileDataArray objectAtIndex:0]userEmail]];
         MFMailComposeViewController *mc = [[MFMailComposeViewController alloc] init];
         [mc.navigationBar setTintColor:[UIColor whiteColor]];
         mc.mailComposeDelegate = self;
@@ -222,6 +222,7 @@
                 } else {
                     // User denied access
                     // Display an alert telling user the contact could not be added
+                    NSLog(@"contact cannot be added.............");
                 }
             });
         }
@@ -230,6 +231,8 @@
             [self addContactToAddressBook];
         }
         else {
+            NSLog(@"contact cannot be added.............access denied previously");
+
             // The user has previously denied access
             // Send an alert telling user to change privacy setting in settings app
         }
@@ -248,6 +251,7 @@
             ABRecordRef person = CFArrayGetValueAtIndex(vCardPeople, index);
             ABAddressBookAddRecord(book, person, &error);
         }
+  //      CFIndex nPeople = CFArrayGetCount(vCardPeople);
 //        NSArray *allContacts = (__bridge NSArray *)ABAddressBookCopyArrayOfAllPeople(book);
 //        for (id record in allContacts){
 //            ABRecordRef thisContact = (__bridge ABRecordRef)record;
@@ -276,6 +280,7 @@
 }
 -(void)addContactToAddressBook
 {
+     NSLog(@"contact to be added.............");
     CFErrorRef error = NULL;
     NSLog(@"%@", [self description]);
     ABAddressBookRef iPhoneAddressBook = ABAddressBookCreate();
@@ -287,10 +292,10 @@
     ABMultiValueAddValueAndLabel(multiPhone, (__bridge CFTypeRef)(mobileNumberLabel.text), kABPersonPhoneMainLabel, NULL);
     ABRecordSetValue(newPerson, kABPersonPhoneProperty, multiPhone,nil);
     CFRelease(multiPhone);
-//    ABMutableMultiValueRef emailMultiValue = ABMultiValueCreateMutable(kABMultiStringPropertyType);
-//    ABMultiValueAddValueAndLabel(emailMultiValue, (__bridge CFStringRef) venueEmail, kABWorkLabel, NULL);
-//    ABRecordSetValue(newPerson, kABPersonEmailProperty, emailMultiValue, nil);
-//    CFRelease(emailMultiValue);
+    ABMutableMultiValueRef emailMultiValue = ABMultiValueCreateMutable(kABMultiStringPropertyType);
+    ABMultiValueAddValueAndLabel(emailMultiValue, (__bridge CFStringRef) ([[userProfileDataArray objectAtIndex:0]userEmail]), kABWorkLabel, NULL);
+    ABRecordSetValue(newPerson, kABPersonEmailProperty, emailMultiValue, nil);
+    CFRelease(emailMultiValue);
     ABRecordSetValue(newPerson, kABPersonOrganizationProperty, (__bridge CFTypeRef)(companyNameLabel.text), &error);
     ABMutableMultiValueRef multiAddress = ABMultiValueCreateMutable(kABMultiDictionaryPropertyType);
     NSMutableDictionary *addressDictionary = [[NSMutableDictionary alloc] init];
@@ -298,20 +303,59 @@
     ABMultiValueAddValueAndLabel(multiAddress, (__bridge CFTypeRef) addressDictionary, kABWorkLabel,NULL);
     ABRecordSetValue(newPerson, kABPersonAddressProperty, multiAddress, &error);
     CFRelease(multiAddress);
-    
+     NSLog(@"contact to be added value set..................");
     ABAddressBookAddRecord(iPhoneAddressBook, newPerson, &error);
-    NSArray *allContacts = (__bridge NSArray *)ABAddressBookCopyArrayOfAllPeople(iPhoneAddressBook);
-    for (id record in allContacts){
-        ABRecordRef thisContact = (__bridge ABRecordRef)record;
-        if (CFStringCompare(ABRecordCopyCompositeName(thisContact),
-                            ABRecordCopyCompositeName(newPerson), 0) == kCFCompareEqualTo){
-            [self.view makeToast:@"The contact already exists!"];
-            //The contact already exists!
-//            SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
-//            [alert showWarning:self title:@"Alert" subTitle:@"The contact already exists!" closeButtonTitle:@"Done" duration:0.0f];
-        }
-    }
+    
+    
+//    NSArray *allContacts = (__bridge NSArray *)ABAddressBookCopyArrayOfAllPeople(iPhoneAddressBook);
+//    
+//    ABRecordSetValue(newPerson, kABPersonFirstNameProperty, (__bridge CFStringRef)@"VoxSci Activation", nil);
+//    
+//    for (id record in allContacts){
+//        ABRecordRef thisContact = (__bridge ABRecordRef)record;
+//        if (CFStringCompare(ABRecordCopyCompositeName(thisContact),
+//                            ABRecordCopyCompositeName(newPerson), 0) == kCFCompareEqualTo){
+//            
+//            NSLog(@"The contact already exists");
+//            [self.view makeToast:@"Contact added successfully."];
+//            //The contact already exists!
+//            
+//        }
+//        
+//    }
+    
+//  ///  NSArray *allContacts = (__bridge NSArray *)ABAddressBookCopyArrayOfAllPeople(iPhoneAddressBook);
+//     NSLog(@"contact to be added check already exists..................");
+//    
+//    CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople( iPhoneAddressBook );
+//    CFIndex nPeople = ABAddressBookGetPersonCount( iPhoneAddressBook );
+//    
+//    for ( int i = 0; i < nPeople; i++ )
+//    {
+//        ABRecordRef ref = CFArrayGetValueAtIndex( allPeople, i );
+//        if (CFStringCompare(ABRecordCopyCompositeName(ref),
+//                            ABRecordCopyCompositeName(newPerson), 0) == kCFCompareEqualTo){
+//            [self.view makeToast:@"The contact already exists!"];
+//            NSLog(@"The contact already exists already exists..................");
+//            //The contact already exists!
+//            //            SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
+//            //            [alert showWarning:self title:@"Alert" subTitle:@"The contact already exists!" closeButtonTitle:@"Done" duration:0.0f];
+//        }
+//
+//    }
+//    for (id record in allContacts){
+//        ABRecordRef thisContact = (__bridge ABRecordRef)record;
+//        if (CFStringCompare(ABRecordCopyCompositeName(thisContact),
+//                            ABRecordCopyCompositeName(newPerson), 0) == kCFCompareEqualTo){
+//            [self.view makeToast:@"The contact already exists!"];
+//            NSLog(@"The contact already exists already exists..................");
+//            //The contact already exists!
+////            SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
+////            [alert showWarning:self title:@"Alert" subTitle:@"The contact already exists!" closeButtonTitle:@"Done" duration:0.0f];
+//        }
+//    }
     ABAddressBookSave(iPhoneAddressBook, &error);
+     NSLog(@"The contact savedd..........................");
     [self.view makeToast:@"Contact added successfully."];
     CFRelease(newPerson);
     CFRelease(iPhoneAddressBook);
@@ -449,6 +493,11 @@
     
     interestsArray=[[[userProfileDataArray objectAtIndex:0]userInterests] componentsSeparatedByString:@","];
     count=(int)interestsArray.count;
+    for (int k =0; k<interestsArray.count; k++)
+    {
+        //NSDictionary * pickerDict = [selectedPickerArray objectAtIndex:k];
+        [myDelegate.multiplePickerDic setObject:[NSNumber numberWithBool:YES] forKey:[interestsArray objectAtIndex:k]];
+    }
     
     if ((interestsArray.count%2)!=0) {
         count=count*42;
@@ -489,7 +538,12 @@
                                     dequeueReusableCellWithReuseIdentifier:@"interestCell"
                                     forIndexPath:indexPath];
     UILabel *interestLabel=(UILabel *)[interestCell viewWithTag:1];
+    if ([[interestsArray objectAtIndex:indexPath.row] isEqualToString:@""]) {
+        interestLabel.text=@"NA";
+    }
+    else {
     interestLabel.text=[interestsArray objectAtIndex:indexPath.row];
+    }
     return interestCell;
 }
 

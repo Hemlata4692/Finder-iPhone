@@ -16,12 +16,16 @@
 @property (nonatomic, strong) NSString *isLocation;
 @property(nonatomic,retain)NSString * deviceToken;
 @property (nonatomic, strong)  CLLocationManager *locationManager;
+@property (nonatomic,retain) UITabBarController *tabBarView;
 @property (nonatomic, retain) NSMutableDictionary *multiplePickerDic;
+@property (nonatomic, strong) NSString *alertType;
+@property(nonatomic,retain) UINavigationController *currentNavigationController;
 -(void)showIndicator;
 -(void)stopIndicator;
 -(void)startTrackingBg;
 -(void)locationUpdate;
 -(void)registerDeviceForNotification;
 -(void)unregisterDeviceForNotification;
+-(void)removeBadgeIconLastTab;
 @end
 

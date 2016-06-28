@@ -15,7 +15,7 @@
 @property (weak, nonatomic) IBOutlet UIView *containerView;
 @property (weak, nonatomic) IBOutlet UILabel *eventTimeLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *userImage;
-@property (weak, nonatomic) IBOutlet UIButton *userImageClickAction;
+@property (weak, nonatomic) IBOutlet MyButton *userImageClickAction;
 @property (weak, nonatomic) IBOutlet UILabel *eventNameLabel;
 -(void)displayData :(EventDataModel *)eventDetails indexPath:(int)indexPath;
 @end

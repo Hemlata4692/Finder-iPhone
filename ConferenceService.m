@@ -193,7 +193,8 @@
      {
          responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
          NSLog(@"calendar details response %@",responseObject);
-         if([[Webservice sharedManager] isStatusOK:responseObject]) {
+         NSNumber *number = responseObject[@"isSuccess"];
+         if (number.integerValue==1) {
              id array =[responseObject objectForKey:@"calenderDetails"];
              if (([array isKindOfClass:[NSArray class]])) {
                  NSArray * calendarDataArray = [responseObject objectForKey:@"calenderDetails"];
@@ -219,14 +220,20 @@
                  }
                  success(dataArray);
              }
-             else {
-                 success(responseObject);
-             }
+            
+         }
+         else if(number.integerValue==0) {
+             [myDelegate stopIndicator];
+             success(nil);
          }
          else {
-             [myDelegate stopIndicator];
-             failure(nil);
+             SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
+             [alert addButton:@"Ok" actionBlock:^(void) {
+                 [self logoutUser];
+             }];
+             [alert showWarning:nil title:@"Alert" subTitle:responseObject[@"message"] closeButtonTitle:nil duration:0.0f];
          }
+
      } failure:^(NSError *error) {
          [myDelegate stopIndicator];
          failure(error);
@@ -375,7 +382,7 @@
 #pragma mark - end
 
 #pragma mark - Accept cancel meeting
--(void)acceptCancelMeeting:(NSString *)appointmentId meetingUserId:(NSString *)meetingUserId flag:(NSString *)flag date:(NSString *)date type:(NSString *)type success:(void (^)(id))success failure:(void (^)(NSError *))failure {
+-(void)acceptCancelMeeting:(NSString *)appointmentId meetingUserId:(NSString *)meetingUserId flag:(NSString *)flag type:(NSString *)type success:(void (^)(id))success failure:(void (^)(NSError *))failure {
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"],@"appointmentId":appointmentId,@"meetingUserId":meetingUserId,@"flag":flag,@"type":type};
     NSLog(@"accept decline appointment %@",requestDict);
     [[Webservice sharedManager] post:kUrlAcceptCancelAppointment parameters:requestDict success:^(id responseObject) {

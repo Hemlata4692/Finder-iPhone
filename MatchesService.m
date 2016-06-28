@@ -45,7 +45,8 @@
     [[Webservice sharedManager] post:kUrlMatchesList parameters:requestDict success:^(id responseObject) {
         responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
         NSLog(@"matches response %@",responseObject);
-        if([[Webservice sharedManager] isStatusOK:responseObject]) {
+         NSNumber *number = responseObject[@"isSuccess"];
+          if (number.integerValue==1) {
             id array =[responseObject objectForKey:@"userContactList"];
             if (([array isKindOfClass:[NSArray class]])) {
                 NSArray * matchesListArray = [responseObject objectForKey:@"userContactList"];
@@ -66,16 +67,34 @@
                 success(dataArray);
             }
         }
-        else {
-            [myDelegate stopIndicator];
-            failure(nil);
-        }
+          else if(number.integerValue==0) {
+              [myDelegate stopIndicator];
+              success(nil);
+          }
+          else {
+              SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
+              [alert addButton:@"Ok" actionBlock:^(void) {
+                  [self logoutUser];
+              }];
+              [alert showWarning:nil title:@"Alert" subTitle:responseObject[@"message"] closeButtonTitle:nil duration:0.0f];
+          }
+
     } failure:^(NSError *error)
      {
          [myDelegate stopIndicator];
          failure(error);
      }];
 
+}
+- (void)logoutUser
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+    myDelegate.navigationController = [storyboard instantiateViewControllerWithIdentifier:@"mainNavController"];
+    
+    myDelegate.window.rootViewController = myDelegate.navigationController;
+    [UserDefaultManager removeValue:@"userId"];
+    [UserDefaultManager removeValue:@"username"];
 }
 #pragma mark - end
 

@@ -44,6 +44,7 @@
 @synthesize dropDownImage;
 @synthesize contactUserID;
 @synthesize ContactName;
+@synthesize calenderObj;
 
 #pragma mark - View life cycle
 - (void)viewDidLoad {
@@ -57,7 +58,7 @@
         contactNameTextField.text=ContactName;
         textFieldArray = @[contactNameTextField,venueTextField,meetingAgendaTextField];
     }
-    else{
+    else {
         contactButton.hidden=NO;
         dropDownImage.hidden=NO;
         userImage.hidden=YES;
@@ -66,12 +67,17 @@
     [self setKeyboardControls:[[BSKeyboardControls alloc] initWithFields:textFieldArray]];
     [self.keyboardControls setDelegate:self];
     [self addBorderCornerRadius];
+    if([[UIScreen mainScreen] bounds].size.height>=568)  {
+        scheduleMeetingScrollView.scrollEnabled=NO;
+    }
+    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
     pickerView.translatesAutoresizingMaskIntoConstraints=YES;
@@ -87,6 +93,10 @@
     [meetingAgendaTextField setCornerRadius:2.0f];
     [meetingAgendaTextField setPlaceholder:@"  Meeting Agenda"];
     [meetingAgendaTextField setFont:[UIFont fontWithName:@"Roboto-Regular" size:15.0]];
+}
+-(void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:YES];
+   [self.presentingViewController dismissViewControllerAnimated:NO completion:nil];
 }
 #pragma mark - end
 
@@ -152,15 +162,18 @@
     selectedPicker=1;
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];
+    datePicker.datePickerMode = UIDatePickerModeTime;
     if([[UIScreen mainScreen] bounds].size.height<568){
-        [scheduleMeetingScrollView setContentOffset:CGPointMake(0, scheduleMeetingScrollView.frame.origin.y+50) animated:YES];
+        [scheduleMeetingScrollView setContentOffset:CGPointMake(0, scheduleMeetingScrollView.frame.origin.y+80) animated:YES];
+    }
+    else  if([[UIScreen mainScreen] bounds].size.height==568){
+        [scheduleMeetingScrollView setContentOffset:CGPointMake(0, scheduleMeetingScrollView.frame.origin.y+30) animated:YES];
     }
      datePicker.frame = CGRectMake(datePicker.frame.origin.x, self.view.frame.size.height-(datePicker.frame.size.height+44), self.view.frame.size.width, datePicker.frame.size.height);
     pickerToolbar.frame = CGRectMake(pickerToolbar.frame.origin.x, datePicker.frame.origin.y-44, self.view.frame.size.width, 44);
     //24 hour format
 //    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"NL"];
 //    [datePicker setLocale:locale];
-    datePicker.datePickerMode = UIDatePickerModeTime;
     [UIView commitAnimations];
 }
 #pragma mark - end
@@ -247,13 +260,20 @@
     return contactDetailArray.count;
 }
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
-    NSString *str;
-    str=[[contactDetailArray objectAtIndex:row]contactName];
+    NSString *str=@"";
+    if (contactDetailArray.count>1) {
+        str=[[contactDetailArray objectAtIndex:row]contactName];
+    }
     return str;
 }
 - (void)pickerView:(UIPickerView *)pickerView1 didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
     if(pickerView1 == pickerView) {
+        if (contactDetailArray.count==0) {
+            contactNameTextField.text=@"";
+        }
+        else {
         contactNameTextField.text = [[contactDetailArray objectAtIndex:row]contactName];
+        }
     }
 }
 #pragma mark - end
@@ -281,6 +301,7 @@
                 [scheduleMeetingScrollView setContentOffset:CGPointMake(0, scheduleMeetingScrollView.frame.origin.y+30) animated:YES];
             }];
         }
+        
     }
 }
 -(void)textFieldDidEndEditing:(UITextField *)textField{
@@ -389,6 +410,17 @@
     [[ConferenceService sharedManager] scheduleMeeting:contactUserID venue:venueTextField.text meetingAgenda:meetingAgendaTextField.text date:dateTextField.text timeFrom:fromTimeTextField.text timeTo:toTimeTextField.text success:^(id responseObject) {
         [myDelegate stopIndicator];
         [self.presentingViewController dismissViewControllerAnimated:NO completion:nil];
+//        if (![screenName isEqualToString:@"Calendar"]) {
+//            [self.presentingViewController dismissViewControllerAnimated:NO completion:nil];
+//        }
+//        else {
+//            [self dismissViewControllerAnimated: YES completion: ^{
+//                
+//                // call your completion method:
+//                [calenderObj viewWillAppear:YES];
+//            }];
+//        }
+
     }
                                                  failure:^(NSError *error)
      {

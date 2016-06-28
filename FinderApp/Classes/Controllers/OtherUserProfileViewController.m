@@ -89,6 +89,8 @@
     [self addShadow];
     otherUserProfileDataArray=[[NSMutableArray alloc]init];
     interestsArray=[[NSArray alloc]init];
+    [myDelegate showIndicator];
+    [self performSelector:@selector(getOtherUserProfile) withObject:nil afterDelay:.1];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -108,8 +110,7 @@
 }
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
-    [myDelegate showIndicator];
-    [self performSelector:@selector(getOtherUserProfile) withObject:nil afterDelay:.1];
+    
     if ([isRequestArrived isEqualToString:@"T"]) {
         sendRequestButton.hidden=YES;
         acceptRequestButton.hidden=NO;
@@ -189,9 +190,11 @@
         [myDelegate stopIndicator];
         if ([isRequestSent isEqualToString:@"T"]) {
              [sendRequestButton setTitle:@"Request Sent" forState:UIControlStateNormal];
+           
         }
         else{
              [sendRequestButton setTitle:@"Send Request" forState:UIControlStateNormal];
+            isRequestSent=@"T";
         }
     }
                                                    failure:^(NSError *error)
@@ -218,6 +221,7 @@
                 seperatorLabel.hidden=YES;
                 sendRequestButton.hidden=NO;
                 [sendRequestButton setTitle:@"Send Request" forState:UIControlStateNormal];
+                isRequestSent=@"T";
             }
         }
                                                      failure:^(NSError *error)
@@ -349,7 +353,13 @@
                                           dequeueReusableCellWithReuseIdentifier:@"interestCell"
                                           forIndexPath:indexPath];
     UILabel *interestLabel=(UILabel *)[interestCell viewWithTag:1];
-    interestLabel.text=[interestsArray objectAtIndex:indexPath.row];
+    if ([[interestsArray objectAtIndex:indexPath.row] isEqualToString:@""]) {
+        interestLabel.text=@"NA";
+    }
+    else {
+        interestLabel.text=[interestsArray objectAtIndex:indexPath.row];
+    }
+
     return interestCell;
 }
 #pragma mark - end

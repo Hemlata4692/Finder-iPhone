@@ -72,10 +72,14 @@
 {
     NSString *errorMsg;
     if (error==nil) {
+        [activityIndicator stopAnimating];
+        activityIndicator.hidden=YES;
         errorMsg=@"Request time out.";
     }
     else
     {
+        [activityIndicator stopAnimating];
+        activityIndicator.hidden=YES;
         errorMsg=error.localizedDescription;
     }
     dispatch_async(dispatch_get_main_queue(), ^{
