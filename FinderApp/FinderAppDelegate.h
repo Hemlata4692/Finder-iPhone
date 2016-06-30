@@ -19,7 +19,9 @@
 @property (nonatomic,retain) UITabBarController *tabBarView;
 @property (nonatomic, retain) NSMutableDictionary *multiplePickerDic;
 @property (nonatomic, strong) NSString *alertType;
+@property (nonatomic, strong) NSString *requestArrived;
 @property(nonatomic,retain) UINavigationController *currentNavigationController;
+@property (strong, nonatomic)NSString *myView;
 -(void)showIndicator;
 -(void)stopIndicator;
 -(void)startTrackingBg;

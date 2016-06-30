@@ -50,6 +50,7 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
     self.navigationItem.title=@"Matches";
     [self setTabBarImages];
     //    noRecordLabel.hidden=NO;
@@ -57,23 +58,41 @@
     allMatchesDataArray=[[NSMutableArray alloc]init];
     latestMatchesArray=[[NSMutableArray alloc]init];
     contactArray=[[NSMutableArray alloc]init];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(matchesDetails) name:@"MatchesDetails" object:nil];
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
--(void)viewWillAppear:(BOOL)animated{
+-(void)matchesDetails{
+    [myDelegate removeBadgeIconLastTab];
+    [myDelegate showIndicator];
+    [self performSelector:@selector(getMatchesDetails) withObject:nil afterDelay:0.1];
+}
+-(void)viewWillAppear:(BOOL)animated {
+    
+    [super viewWillAppear:YES];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    myDelegate.currentNavigationController=self.navigationController;
     matchesSegmentControl.selectedSegmentIndex=1;
     selectedSegment=1;
+    myDelegate.myView=@"MatchesViewController";
     if ([myDelegate.alertType isEqualToString:@"2"]) {
         UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         PendingAppointmentViewController *profileView =[storyboard instantiateViewControllerWithIdentifier:@"PendingAppointmentViewController"];
+        profileView.screenName=@"Pending Appointments";
         [self.navigationController pushViewController:profileView animated:YES];
     }
     [myDelegate showIndicator];
     [self performSelector:@selector(getMatchesDetails) withObject:nil afterDelay:.1];
 }
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:YES];
+    myDelegate.myView=@"other";
+    // [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 #pragma mark - end
 #pragma mark - Set tabbar images
 -(void)setTabBarImages{
@@ -240,7 +259,7 @@
 {
     [[MatchesService sharedManager] getMatchesList:^(id dataArray) {
         [myDelegate stopIndicator];
-         [myDelegate removeBadgeIconLastTab];
+        [myDelegate stopIndicator];
         allMatchesDataArray=[dataArray mutableCopy];
       //  matchesSegmentControl.selectedSegmentIndex=1;
         if (matchesSegmentControl.selectedSegmentIndex==0) {
@@ -256,7 +275,8 @@
                                            failure:^(NSError *error)
      {
          noRecordLabel.hidden=NO;
-         noRecordLabel.text=@"No matches found.";
+         noRecordLabel.text=@"You have to select interest area first.";
+         matchesTableView.hidden=YES;
      }] ;
 }
 //filter data for new , all and contacts segment
@@ -286,7 +306,7 @@
     {
         if (allMatchesDataArray.count==0) {
             noRecordLabel.hidden=NO;
-            noRecordLabel.text=@"No matches found.";
+            noRecordLabel.text=@"You have to select interest area first.";
         }
         else {
         noRecordLabel.hidden=YES;
@@ -333,11 +353,7 @@
     if (selectedSegment==0) {
         [[MatchesService sharedManager] acceptDeclineRequest:otherUserId acceptRequest:accepted success:^(id responseObject) {
             [self getMatchesDetails];
-//            MatchesDataModel *tempModel = [latestMatchesArray objectAtIndex:btnTag];
-//            tempModel.isAccepted=accepted;
-//            tempModel.isArrived=@"F";
-//            tempModel.isRequestSent=@"F";
-//            [latestMatchesArray replaceObjectAtIndex:btnTag withObject:tempModel];
+
             [matchesTableView reloadData];
             
         }

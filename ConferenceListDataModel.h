@@ -12,4 +12,5 @@
 @property(nonatomic,retain)NSString * conferenceDate;
 @property(nonatomic,retain)NSString * conferenceName;
 @property(nonatomic,retain)NSString * conferenceId;
+@property(nonatomic,retain)NSString * isExpired;
 @end

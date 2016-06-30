@@ -165,7 +165,6 @@
         if ([viewType isEqualToString:@"Matches"]) {
             [self updateReviewStatus];
         }
-        
         otherUserProfileDataArray=[profileDataArray mutableCopy];
         [self displayUserProfileData];
     }

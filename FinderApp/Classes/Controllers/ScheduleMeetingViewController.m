@@ -33,6 +33,7 @@
 @property (weak, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (weak, nonatomic) IBOutlet UIPickerView *pickerView;
 @property (weak, nonatomic) IBOutlet UIToolbar *pickerToolbar;
+@property (weak, nonatomic) IBOutlet UIDatePicker *timePicker;
 
 @end
 
@@ -45,6 +46,7 @@
 @synthesize contactUserID;
 @synthesize ContactName;
 @synthesize calenderObj;
+@synthesize timePicker;
 
 #pragma mark - View life cycle
 - (void)viewDidLoad {
@@ -83,8 +85,10 @@
     pickerView.translatesAutoresizingMaskIntoConstraints=YES;
     pickerToolbar.translatesAutoresizingMaskIntoConstraints=YES;
     datePicker.translatesAutoresizingMaskIntoConstraints=YES;
+    timePicker.translatesAutoresizingMaskIntoConstraints=YES;
     pickerView.backgroundColor=[UIColor whiteColor];
     datePicker.backgroundColor=[UIColor whiteColor];
+    timePicker.backgroundColor=[UIColor whiteColor];
     selectedPicker=0;
 }
 //add padding, corner radius and border on text fields
@@ -139,6 +143,18 @@
     [UIView setAnimationDuration:0.3];
     datePicker.datePickerMode = UIDatePickerModeDate;
     datePicker.minimumDate=[UserDefaultManager getValue:@"conferenceStartDate"];
+    NSDate *today = [NSDate date]; // it will give you current date
+    NSComparisonResult result;
+    result = [today compare:datePicker.minimumDate]; // comparing two dates
+    if(result==NSOrderedAscending){
+        datePicker.minimumDate=[UserDefaultManager getValue:@"conferenceStartDate"];
+    }
+    else if(result==NSOrderedDescending){
+        datePicker.minimumDate=[NSDate date];
+    }
+    else {
+        datePicker.minimumDate=[NSDate date];
+    }
     datePicker.maximumDate=[UserDefaultManager getValue:@"conferenceEndDate"];
     if([[UIScreen mainScreen] bounds].size.height<568){
          [scheduleMeetingScrollView setContentOffset:CGPointMake(0, scheduleMeetingScrollView.frame.origin.y+50) animated:YES];
@@ -162,15 +178,15 @@
     selectedPicker=1;
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];
-    datePicker.datePickerMode = UIDatePickerModeTime;
+    timePicker.datePickerMode = UIDatePickerModeTime;
     if([[UIScreen mainScreen] bounds].size.height<568){
         [scheduleMeetingScrollView setContentOffset:CGPointMake(0, scheduleMeetingScrollView.frame.origin.y+80) animated:YES];
     }
     else  if([[UIScreen mainScreen] bounds].size.height==568){
         [scheduleMeetingScrollView setContentOffset:CGPointMake(0, scheduleMeetingScrollView.frame.origin.y+30) animated:YES];
     }
-     datePicker.frame = CGRectMake(datePicker.frame.origin.x, self.view.frame.size.height-(datePicker.frame.size.height+44), self.view.frame.size.width, datePicker.frame.size.height);
-    pickerToolbar.frame = CGRectMake(pickerToolbar.frame.origin.x, datePicker.frame.origin.y-44, self.view.frame.size.width, 44);
+     timePicker.frame = CGRectMake(timePicker.frame.origin.x, self.view.frame.size.height-(timePicker.frame.size.height+44), self.view.frame.size.width, timePicker.frame.size.height);
+    pickerToolbar.frame = CGRectMake(pickerToolbar.frame.origin.x, timePicker.frame.origin.y-44, self.view.frame.size.width, 44);
     //24 hour format
 //    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"NL"];
 //    [datePicker setLocale:locale];
@@ -196,10 +212,10 @@
             NSDateFormatter * timePickerValue = [[NSDateFormatter alloc] init];
             [timePickerValue setDateFormat:@"HH:mm"]; // from here u can change format..
             if (timeRange==1) {
-              fromTimeTextField.text=[timePickerValue stringFromDate:datePicker.date];
+              fromTimeTextField.text=[timePickerValue stringFromDate:timePicker.date];
             }
             else {
-            toTimeTextField.text=[timePickerValue stringFromDate:datePicker.date];
+            toTimeTextField.text=[timePickerValue stringFromDate:timePicker.date];
             }
             
         }
@@ -229,6 +245,7 @@
         [scheduleMeetingScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
         pickerToolbar.frame = CGRectMake(pickerToolbar.frame.origin.x, 1000, self.view.frame.size.width, 44);
         datePicker.frame = CGRectMake(datePicker.frame.origin.x, 1000, self.view.frame.size.width, datePicker.frame.size.height);
+         timePicker.frame = CGRectMake(timePicker.frame.origin.x, 1000, self.view.frame.size.width, timePicker.frame.size.height);
         [UIView commitAnimations];
     }
     else {

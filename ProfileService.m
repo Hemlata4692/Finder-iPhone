@@ -9,7 +9,7 @@
 #import "ProfileService.h"
 #import "ProfileDataModel.h"
 
-#define kUrlGetInterestList             @"getinterestlist"
+#define kUrlGetInterestList             @"getinteresteslists"
 #define kUrlGetInterestInList           @"getinterestedinlist"
 #define kUrlGetProffessionList          @"getprofessions"
 #define kUrlEditUserProfile             @"edituserprofile"
@@ -182,7 +182,7 @@
 #pragma mark - Other user profile
 -(void)getOtherUserProfile:(NSString *)otherUserId success:(void (^)(id))success failure:(void (^)(NSError *))failure
 {
-    NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"otheruserId":otherUserId};
+    NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"],@"otheruserId":otherUserId};
     NSLog(@"request other user profile  %@",requestDict);
     [[Webservice sharedManager] post:kUrlGetOtherUserProfile parameters:requestDict success:^(id responseObject) {
         responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];

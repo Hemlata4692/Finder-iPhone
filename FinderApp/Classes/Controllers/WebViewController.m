@@ -27,39 +27,36 @@
     // Do any additional setup after loading the view.
     [activityIndicator startAnimating];
     self.navigationItem.title=navigationTitle;
-    if ([linkedInLink isEqualToString:@""])
+    if ([linkedInLink isEqualToString:@""] || url==nil)
     {
         [activityIndicator stopAnimating];
         dispatch_async(dispatch_get_main_queue(), ^{
             UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"Invalid Url." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+            alert.tag=1;
             [alert show];
         });
     }
 
-    if ([navigationTitle isEqualToString:@"Linked In"]) {
+    else if ([navigationTitle isEqualToString:@"LinkedIn"]) {
         NSArray* words = [linkedInLink componentsSeparatedByCharactersInSet :[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         NSString* linkedInString = [words componentsJoinedByString:@""];
         url = [NSURL URLWithString:linkedInString];
-    }
-    if (url==nil)
-    {
-        [activityIndicator stopAnimating];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Alert" message:@"Invalid Url." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
-            [alert show];
-        });
-    }
-    else
-    {
         NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
         [webView loadRequest:requestObj];
     }
-
 }
 //https://www.linkedin.com/in/hemlata-khajanchi-4617b99a
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    
+    if (alertView.tag==1 && buttonIndex==0)
+    {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 #pragma mark - Webview delegate
@@ -84,6 +81,7 @@
     }
     dispatch_async(dispatch_get_main_queue(), ^{
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Alert" message:errorMsg delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+         alert.tag=1;
         [alert show];
     });
 }

@@ -30,9 +30,14 @@
     self.navigationItem.title=@"Select Conference";
     noRecordFoundLabel.hidden=YES;
     conferenceListingArray=[[NSMutableArray alloc]init];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(conferenceList) name:@"Conference" object:nil];
+    //Conference
 }
-
+-(void)conferenceList{
+    [myDelegate removeBadgeIconLastTab];
+    [myDelegate showIndicator];
+    [self performSelector:@selector(getConferenceListing) withObject:nil afterDelay:0.1];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -40,10 +45,18 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
+     myDelegate.myView=@"ConferenceViewController";
     [myDelegate showIndicator];
     [self performSelector:@selector(getConferenceListing) withObject:nil afterDelay:.1];
 
 }
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:YES];
+    myDelegate.myView=@"other";
+    // [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 #pragma mark - end
 
 
@@ -65,6 +78,7 @@
         }
         else{
             noRecordFoundLabel.hidden=YES;
+            conferenceListTableView.hidden=NO;
         }
         [conferenceListTableView reloadData];
         
@@ -110,6 +124,13 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     MatchesViewController * homeView = [storyboard instantiateViewControllerWithIdentifier:@"tabBar"];
     [UserDefaultManager setValue:[[conferenceListingArray objectAtIndex:indexPath.row] conferenceId] key:@"conferenceId"];
+    NSArray *dateStrings = [[[conferenceListingArray objectAtIndex:indexPath.row] conferenceDate] componentsSeparatedByString:@" - "];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-MM-dd"];
+    NSDate *startDate = [dateFormatter dateFromString:[dateStrings objectAtIndex:0]];
+    NSDate *endDate = [dateFormatter dateFromString:[dateStrings objectAtIndex:1]];
+    [UserDefaultManager setValue:startDate key:@"conferenceStartDate"];
+    [UserDefaultManager setValue:endDate key:@"conferenceEndDate"];
     [myDelegate.window setRootViewController:homeView];
     [myDelegate.window makeKeyAndVisible];
 }

@@ -21,6 +21,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title=@"Messages";
+    myDelegate.currentNavigationController=self.navigationController;
     // Do any additional setup after loading the view.
 }
 

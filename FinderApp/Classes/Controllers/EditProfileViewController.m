@@ -16,9 +16,9 @@
 {
     NSArray *textFieldArray;
     CYCustomMultiSelectPickerView *multiPickerView;
-    NSMutableArray *interestedAreaArray;
-    NSMutableArray *interestedInArray;
-    NSMutableArray *professionArray;
+    NSArray *interestedAreaArray;
+    NSArray *interestedInArray;
+    NSArray *professionArray;
     NSMutableArray *selectedInterestedArray;
     NSArray *selectedPickerArray;
     NSString* pickerType;
@@ -54,6 +54,9 @@
 @property (weak, nonatomic) IBOutlet UITextField *interestedAreaTextField;
 @property (weak, nonatomic) IBOutlet UIPickerView *userPickerView;
 @property (weak, nonatomic) IBOutlet UIToolbar *pickerToolBar;
+@property (weak, nonatomic) IBOutlet UIButton *professionButton;
+@property (weak, nonatomic) IBOutlet UIButton *interestesInButton;
+@property (weak, nonatomic) IBOutlet UIButton *interestAreaButton;
 @property (nonatomic, strong) BSKeyboardControls *keyboardControls;
 @end
 
@@ -89,7 +92,9 @@
 @synthesize userPickerView;
 @synthesize pickerToolBar;
 @synthesize profileArray;
-
+@synthesize professionButton;
+@synthesize interestesInButton;
+@synthesize interestAreaButton;
 
 #pragma mark - View life cycle
 - (void)viewDidLoad {
@@ -104,9 +109,9 @@
     [self displayData];
     userEmailTextfield.userInteractionEnabled=NO;
     userEmailTextfield.textColor=[UIColor colorWithRed:180.0/255.0 green:180.0/255.0 blue:180.0/255.0 alpha:1.0];
-    interestedAreaArray=[[NSMutableArray alloc]init];
-    interestedInArray=[[NSMutableArray alloc]init];
-    professionArray=[[NSMutableArray alloc]init];
+    interestedAreaArray=[[NSArray alloc]init];
+    interestedInArray=[[NSArray alloc]init];
+    professionArray=[[NSArray alloc]init];
     selectedInterestedArray=[[NSMutableArray alloc]init];
     selectedPickerArray=[[NSArray alloc]init];
     userPickerView.translatesAutoresizingMaskIntoConstraints = YES;
@@ -270,9 +275,9 @@
 #pragma mark - end
 #pragma mark - Validation
 - (BOOL)performValidations {
-    if ([userNameTextField isEmpty] || [mobileNumberTextField isEmpty] || [companyAddressTextField isEmpty] || [companyNameTextField isEmpty] || [professionTextField isEmpty] || [interestedAreaTextField isEmpty] || [interestedInTextField isEmpty] || [linkedInTextField isEmpty] || [designationTextField isEmpty] || [aboutCompanyTextView.text isEqualToString:@""]) {
+    if ([userNameTextField isEmpty] || [mobileNumberTextField isEmpty] || [companyAddressTextField isEmpty] || [companyNameTextField isEmpty] || [interestedAreaTextField isEmpty]  || [linkedInTextField isEmpty] || [designationTextField isEmpty] || [aboutCompanyTextView.text isEqualToString:@""]) {
         SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
-        [alert showWarning:self title:@"Alert" subTitle:@"All the fields are mandatory except profile image." closeButtonTitle:@"Done" duration:0.0f];
+        [alert showWarning:self title:@"Alert" subTitle:@"Please fill in all mandatory fields." closeButtonTitle:@"Done" duration:0.0f];
         return NO;
     }
     else {
@@ -505,37 +510,32 @@
 #pragma mark - Webservice
 -(void)getInterestListing{
     [[ProfileService sharedManager] getInterestList:^(id responseObject) {
-        [self getInterestedInList];
-        interestedAreaArray=[responseObject objectForKey:@"interestsList"];
-        
-    }
-                                            failure:^(NSError *error)
-     {
-         
-     }] ;
-    
-}
--(void)getInterestedInList
-{
-    [[ProfileService sharedManager] getInterestedInList:^(id responseObject) {
-        [self getProfessionList];
-        interestedInArray=[responseObject objectForKey:@"interestedInList"];
-        
-    }
-                                            failure:^(NSError *error)
-     {
-         
-     }] ;
-
-}
--(void)getProfessionList
-{
-    [[ProfileService sharedManager] getProfessionList:^(id responseObject) {
         [myDelegate stopIndicator];
-        professionArray=[responseObject objectForKey:@"professionList"];
+        NSDictionary *tempDict=[responseObject objectForKey:@"details"];
+        interestedAreaArray=[[tempDict objectForKey:@"interestsList"] componentsSeparatedByString:@","];
+        professionArray=[[tempDict objectForKey:@"profession"] componentsSeparatedByString:@","];
+        interestedInArray=[[tempDict objectForKey:@"interestedInList"] componentsSeparatedByString:@","];
         
+        if ([[tempDict objectForKey:@"interestsList"] isEqualToString:@""]) {
+            interestAreaButton.userInteractionEnabled=NO;
+            interestedAreaTextField.userInteractionEnabled=NO;
+            interestedAreaTextField.text=@"NA";
+            interestedAreaTextField.textColor=[UIColor colorWithRed:180.0/255.0 green:180.0/255.0 blue:180.0/255.0 alpha:1.0];
+        }
+         if ([[tempDict objectForKey:@"profession"] isEqualToString:@""]) {
+            professionButton.userInteractionEnabled=NO;
+            professionTextField.userInteractionEnabled=NO;
+            professionTextField.text=@"NA";
+            professionTextField.textColor=[UIColor colorWithRed:180.0/255.0 green:180.0/255.0 blue:180.0/255.0 alpha:1.0];
+        }
+         if ([[tempDict objectForKey:@"interestedInList"] isEqualToString:@""]) {
+            interestesInButton.userInteractionEnabled=NO;
+            interestedInTextField.userInteractionEnabled=NO;
+            interestedInTextField.text=@"NA";
+            interestedInTextField.textColor=[UIColor colorWithRed:180.0/255.0 green:180.0/255.0 blue:180.0/255.0 alpha:1.0];
+        }
     }
-                                                failure:^(NSError *error)
+                                            failure:^(NSError *error)
      {
          
      }] ;

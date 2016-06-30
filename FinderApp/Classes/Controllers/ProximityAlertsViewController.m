@@ -22,6 +22,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationItem.title=@"Proximity Alerts";
+    myDelegate.currentNavigationController=self.navigationController;
 }
 
 - (void)didReceiveMemoryWarning {

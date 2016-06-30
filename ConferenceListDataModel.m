@@ -12,4 +12,5 @@
 @synthesize conferenceDate;
 @synthesize conferenceId;
 @synthesize conferenceName;
+@synthesize isExpired;
 @end

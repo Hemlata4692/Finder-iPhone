@@ -32,14 +32,16 @@
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];
     NSDate *startDate = [dateFormatter dateFromString:[dateStrings objectAtIndex:0]];
     NSDate *endDate = [dateFormatter dateFromString:[dateStrings objectAtIndex:1]];
-    [UserDefaultManager setValue:startDate key:@"conferenceStartDate"];
-    [UserDefaultManager setValue:endDate key:@"conferenceEndDate"];
     [dateFormatter setDateFormat:@"MMM"];
     conferenceStartMonth.text=[[dateFormatter stringFromDate:startDate] uppercaseString];
     conferenceEndMonth.text=[[dateFormatter stringFromDate:endDate]uppercaseString];
     [dateFormatter setDateFormat:@"dd"];
     conferenceStartDate.text=[dateFormatter stringFromDate:startDate];
     conferenceEndDate.text=[dateFormatter stringFromDate:endDate];
+    if ([conferenceList.isExpired integerValue]==1) {
+       conferenceNameLabel.textColor=[UIColor colorWithRed:180.0/255.0 green:180.0/255.0 blue:180.0/255.0 alpha:1.0];
+    }
+        
 }
 #pragma mark - end
 @end

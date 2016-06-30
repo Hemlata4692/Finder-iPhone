@@ -68,6 +68,7 @@
                      conferenceList.conferenceName =[conferenceDict objectForKey:@"conferenceName"];
                      conferenceList.conferenceDate =[conferenceDict objectForKey:@"conferenceDate"];
                      conferenceList.conferenceId =[conferenceDict objectForKey:@"conferenceId"];
+                     conferenceList.isExpired =[conferenceDict objectForKey:@"isExpired"];
                      [dataArray addObject:conferenceList];
                  }
                  success(dataArray);
@@ -308,7 +309,8 @@
     [[Webservice sharedManager] post:kUrlPendingAppointment parameters:requestDict success:^(id responseObject) {
         responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
         NSLog(@"pending appointment response %@",responseObject);
-        if([[Webservice sharedManager] isStatusOK:responseObject]) {
+        NSNumber *number = responseObject[@"isSuccess"];
+        if (number.integerValue==1) {
             id array =[responseObject objectForKey:@"pendingAppointments"];
             if (([array isKindOfClass:[NSArray class]])) {
                 NSArray * pendingAppointmentArray = [responseObject objectForKey:@"pendingAppointments"];
@@ -328,11 +330,18 @@
                 success(dataArray);
             }
         }
-
-        else {
+        else if(number.integerValue==0) {
             [myDelegate stopIndicator];
-            failure(nil);
+            success(nil);
         }
+        else {
+            SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
+            [alert addButton:@"Ok" actionBlock:^(void) {
+                [self logoutUser];
+            }];
+            [alert showWarning:nil title:@"Alert" subTitle:responseObject[@"message"] closeButtonTitle:nil duration:0.0f];
+        }
+
     } failure:^(NSError *error)
      {
          [myDelegate stopIndicator];
@@ -349,7 +358,8 @@
     [[Webservice sharedManager] post:kUrlRequestedAppointment parameters:requestDict success:^(id responseObject) {
         responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
         NSLog(@"request appointment response %@",responseObject);
-        if([[Webservice sharedManager] isStatusOK:responseObject]) {
+        NSNumber *number = responseObject[@"isSuccess"];
+        if (number.integerValue==1) {
             id array =[responseObject objectForKey:@"pendingAppointments"];
             if (([array isKindOfClass:[NSArray class]])) {
                 NSArray * pendingAppointmentArray = [responseObject objectForKey:@"pendingAppointments"];
@@ -369,9 +379,16 @@
                 success(dataArray);
             }
         }
-        else {
+        else if(number.integerValue==0) {
             [myDelegate stopIndicator];
-            failure(nil);
+            success(nil);
+        }
+        else {
+            SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
+            [alert addButton:@"Ok" actionBlock:^(void) {
+                [self logoutUser];
+            }];
+            [alert showWarning:nil title:@"Alert" subTitle:responseObject[@"message"] closeButtonTitle:nil duration:0.0f];
         }
     } failure:^(NSError *error)
      {

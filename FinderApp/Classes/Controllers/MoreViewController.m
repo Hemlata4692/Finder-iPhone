@@ -42,6 +42,7 @@
 {
     [super viewDidLoad];
     self.navigationItem.title=@"More";
+    myDelegate.currentNavigationController=self.navigationController;
     changePwdContainerView.hidden = YES;
     textFieldArray = @[oldPasswordTextField,passwordTextField,confirmPasswordTextField];
     [self setKeyboardControls:[[BSKeyboardControls alloc] initWithFields:textFieldArray]];
@@ -122,6 +123,7 @@
     else if (indexPath.row == 6) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         ConferenceListViewController * homeView = [storyboard instantiateViewControllerWithIdentifier:@"ConferenceListViewController"];
+        [UserDefaultManager removeValue:@"conferenceId"];
         [myDelegate.window setRootViewController:homeView];
         [myDelegate.window makeKeyAndVisible];
     }

@@ -38,8 +38,13 @@
     sectionArray=[[NSMutableArray alloc]init];
     contactArray=[[NSMutableArray alloc]init];
     noResultFoundLabel.hidden=YES;
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(calendarDetails) name:@"CalendarDetails" object:nil];
 }
+-(void)calendarDetails {
 
+    [myDelegate showIndicator];
+    [self performSelector:@selector(getCalendarDetails) withObject:nil afterDelay:0.1];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -47,10 +52,19 @@
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    myDelegate.currentNavigationController=self.navigationController;
+    myDelegate.myView=@"CalendarViewController";
     [myDelegate showIndicator];
     [self performSelector:@selector(getCalendarDetails) withObject:nil afterDelay:.1];
     
 }
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:YES];
+    myDelegate.myView=@"other";
+   // [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 #pragma mark - end
 
 #pragma mark - Webservice
@@ -59,6 +73,15 @@
     [[ConferenceService sharedManager] getCalendarDetails:[UserDefaultManager getValue:@"conferenceId"] success:^(id dataArray) {
         [self contactDetails];
         sectionArray=[dataArray mutableCopy];
+        if (sectionArray==nil) {
+            noResultFoundLabel.hidden=NO;
+            noResultFoundLabel.text=@"No calender added.";
+            calendarTableView.hidden=YES;
+
+        }
+        else {
+            calendarTableView.hidden=NO;
+              noResultFoundLabel.hidden=YES;
         for (int i=0; i<sectionArray.count; i++) {
             for (int j=0; j<[[sectionArray objectAtIndex:i]eventArray].count; j++) {
                 NSString *conferenceDate =@"";
@@ -91,27 +114,54 @@
                 [dateFormat setDateFormat:@"yyyy-MM-dd hh:mm a"];
                 NSString *fireDate=[dateFormat stringFromDate:date];
                 NSDate *startDate = [dateFormat dateFromString:fireDate];
-                NSTimeInterval notiInterval =[startDate timeIntervalSinceDate:[NSDate date]] -15*60;
-                UILocalNotification *notification = [[UILocalNotification alloc] init];
-                notification.fireDate = [NSDate dateWithTimeIntervalSinceNow:notiInterval];
-                notification.alertBody = [NSString stringWithFormat:@"%@ %@ %@ %@",@"You have calender event for",data.eventName,@"at",fireDate];
-                notification.timeZone = [NSTimeZone defaultTimeZone];
-                notification.soundName = UILocalNotificationDefaultSoundName;
-                notification.applicationIconBadgeNumber = 0;
-                NSDictionary *infoDict = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%@ %@ %@ %@",@"You have calender event for",data.eventName,@"at",startDate] forKey:@"Calender"];
-                notification.userInfo = infoDict;
-                NSMutableArray *notifications = [[NSMutableArray alloc] init];
-                [notifications addObject:notification];
-                [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+                
+                NSComparisonResult result;
+                result = [[NSDate date] compare:startDate]; // comparing two dates
+                if(result==NSOrderedAscending){
+                   NSLog(@"date1 is less than date2");
+                    NSTimeInterval notiInterval =[startDate timeIntervalSinceDate:[NSDate date]] -15*60;
+                    UILocalNotification *notification = [[UILocalNotification alloc] init];
+                    notification.fireDate = [NSDate dateWithTimeIntervalSinceNow:notiInterval];
+                    notification.alertBody = [NSString stringWithFormat:@"%@ %@ %@ %@",@"You have a",data.eventName,@"at",fireDate];
+                    notification.timeZone = [NSTimeZone defaultTimeZone];
+                    notification.soundName = UILocalNotificationDefaultSoundName;
+                    notification.applicationIconBadgeNumber = 0;
+                    NSDictionary *infoDict = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%@ %@ %@ %@",@"You have a",data.eventName,@"at",startDate] forKey:@"Calender"];
+                    notification.userInfo = infoDict;
+                    NSMutableArray *notifications = [[NSMutableArray alloc] init];
+                    [notifications addObject:notification];
+                    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+                }
+                else if(result==NSOrderedDescending){
+                    NSLog(@"date1 is greater than date2");
+                }
+                else {
+                  //  equal
+                    NSTimeInterval notiInterval =[startDate timeIntervalSinceDate:[NSDate date]] -15*60;
+                    UILocalNotification *notification = [[UILocalNotification alloc] init];
+                    notification.fireDate = [NSDate dateWithTimeIntervalSinceNow:notiInterval];
+                    notification.alertBody = [NSString stringWithFormat:@"%@ %@ %@ %@",@"You have a",data.eventName,@"at",fireDate];
+                    notification.timeZone = [NSTimeZone defaultTimeZone];
+                    notification.soundName = UILocalNotificationDefaultSoundName;
+                    notification.applicationIconBadgeNumber = 0;
+                    NSDictionary *infoDict = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%@ %@ %@ %@",@"You have a",data.eventName,@"at",startDate] forKey:@"Calender"];
+                    notification.userInfo = infoDict;
+                    NSMutableArray *notifications = [[NSMutableArray alloc] init];
+                    [notifications addObject:notification];
+                    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+                }
+                
+                
             }
         }
-        noResultFoundLabel.hidden=YES;
+        }
          [calendarTableView reloadData];
     }
                                                    failure:^(NSError *error)
      {
          noResultFoundLabel.hidden=NO;
-         noResultFoundLabel.text=@"Calendar schedule no added yet.";
+         noResultFoundLabel.text=@"No calender added.";
+         calendarTableView.hidden=YES;
      }] ;
 }
 -(void)contactDetails {

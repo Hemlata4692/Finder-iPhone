@@ -37,7 +37,9 @@
 @synthesize alertDict;
 @synthesize tabBarView;
 @synthesize alertType;
+@synthesize requestArrived;
 @synthesize currentNavigationController;
+@synthesize myView;
 
 #pragma mark - Global indicator view
 - (void)showIndicator
@@ -86,9 +88,9 @@
     [locationManager startUpdatingLocation];
     isLocation=@"0";
     self.deviceToken = @"";
-
+    
     NSLog(@"userId %@",[[NSUserDefaults standardUserDefaults] objectForKey:@"userId"]);
-     NSLog(@"conferenceId %@",[[NSUserDefaults standardUserDefaults] objectForKey:@"conferenceId"]);
+    NSLog(@"conferenceId %@",[[NSUserDefaults standardUserDefaults] objectForKey:@"conferenceId"]);
     UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     //conferenceId
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"userId"]!=nil && [[NSUserDefaults standardUserDefaults] objectForKey:@"conferenceId"]!=nil)
@@ -105,7 +107,7 @@
         ConferenceListViewController * homeView = [storyboard instantiateViewControllerWithIdentifier:@"ConferenceListViewController"];
         [myDelegate.window setRootViewController:homeView];
         [myDelegate.window makeKeyAndVisible];
-
+        
     }
     else
     {
@@ -134,7 +136,7 @@
     }
     
     UILocalNotification *localNotiInfo = [launchOptions objectForKey: UIApplicationLaunchOptionsLocalNotificationKey];
-   
+    
     //Accept local notification when app is not open
     if (localNotiInfo)
     {
@@ -186,50 +188,50 @@
 -(void)locationUpdate{
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"userId"]!=nil)
     {
-    [[UserService sharedManager] locationUpdate:latitude longitude:longitude success:^(id responseObject)
-     {
-         NSLog(@"webservice did fire");
-         [self startTrackingBg];
-         
-     } failure:^(NSError *error) {
-         
-     }] ;
+        [[UserService sharedManager] locationUpdate:latitude longitude:longitude success:^(id responseObject)
+         {
+             NSLog(@"webservice did fire");
+             [self startTrackingBg];
+             
+         } failure:^(NSError *error) {
+             
+         }] ;
     }
 }
 - (void) startTrackingBg{
     if ([isLocation isEqualToString:@"2"])
     {
         isLocation=@"0";
-      
+        
         timer = [NSTimer scheduledTimerWithTimeInterval:3*60
                                                  target: self
                                                selector: @selector(locationUpdate)
                                                userInfo: nil
                                                 repeats: YES];
-         NSLog(@"Timer did fire");
+        NSLog(@"Timer did fire");
     }
 }
 
--(void)locationManager:(CLLocationManager *)manager
-   didUpdateToLocation:(CLLocation *)newLocation
-          fromLocation:(CLLocation *)oldLocation{
-    NSLog(@"location updating1111");
-    CLLocationCoordinate2D cordinates = newLocation.coordinate;
-    NSLog(@"***************************My Loaction---->%f, %f*************************** ", cordinates.latitude, cordinates.longitude);
-}
+//-(void)locationManager:(CLLocationManager *)manager
+//   didUpdateToLocation:(CLLocation *)newLocation
+//          fromLocation:(CLLocation *)oldLocation{
+//   // NSLog(@"location updating1111");
+//    CLLocationCoordinate2D cordinates = newLocation.coordinate;
+//  //  NSLog(@"***************************My Loaction---->%f, %f*************************** ", cordinates.latitude, cordinates.longitude);
+//}
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
-    NSLog(@"location updating2222");
+   // NSLog(@"location updating2222");
     CLLocation *newLocation = (CLLocation *)[locations lastObject];
     CLLocationCoordinate2D cordinates = newLocation.coordinate;
-       NSLog(@"***************************My Loaction---->%f, %f*************************** ", cordinates.latitude, cordinates.longitude);
-  
+    //NSLog(@"***************************My Loaction---->%f, %f*************************** ", cordinates.latitude, cordinates.longitude);
+    
     latitude=[NSString stringWithFormat:@"%f",cordinates.latitude];
     longitude=[NSString stringWithFormat:@"%f",cordinates.longitude];
     if ([isLocation isEqualToString:@"1"])
     {
         isLocation=@"2";
-        [ self locationUpdate];
+      //  [ self locationUpdate];
     }
 }
 #pragma mark - end
@@ -257,21 +259,21 @@
     NSLog(@"didRegisterForRemoteNotificationsWithDeviceToken");
     self.deviceToken = token;
     [[UserService sharedManager] registerDeviceForPushNotification:token deviceType:@"ios" success:^(id responseObject) {
-      NSLog(@"push notification response is  --------------------->>>%@",responseObject);
-        } failure:^(NSError *error) {
-    
-        }] ;
+        NSLog(@"push notification response is  --------------------->>>%@",responseObject);
+    } failure:^(NSError *error) {
+        
+    }] ;
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
-     NSLog(@"push notification user info is active state --------------------->>>%@",userInfo);
+    NSLog(@"push notification user info is active state --------------------->>>%@",userInfo);
     [UIApplication sharedApplication].applicationIconBadgeNumber=0;
-     alertDict=[userInfo objectForKey:@"aps"];
+    alertDict=[userInfo objectForKey:@"aps"];
     if (application.applicationState == UIApplicationStateActive)
     {
         if ([[alertDict objectForKey:@"type"] isEqualToString:@"1"]) {
             
-              alert = [[MyAlert alloc] initWithTitle:@"New Match Request" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"View" acceptBtnText:@"Accept" declineBtnText:@"Decline"];
+            alert = [[MyAlert alloc] initWithTitle:@"New Match Request" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"View" acceptBtnText:@"Accept" declineBtnText:@"Decline"];
         }
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"2"]) {
             alert = [[MyAlert alloc] initWithTitle:@"New Meeting Request" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Accept" acceptBtnText:@"" declineBtnText:@"Decline"];
@@ -296,8 +298,8 @@
         if ([[alertDict objectForKey:@"type"] isEqualToString:@"1"]) {
             [self addBadgeIcon];
         }
-
-       else if ([[alertDict objectForKey:@"type"] isEqualToString:@"2"]) {
+        
+        else if ([[alertDict objectForKey:@"type"] isEqualToString:@"2"]) {
             alertType=@"2";
         }
     }
@@ -308,45 +310,94 @@
     
     if (option == 0) {
         if ([[alertDict objectForKey:@"type"] isEqualToString:@"1"]) {
-            alertType=@"2";
-//            UIStoryboard *sb=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//            OtherUserProfileViewController *view1=[sb instantiateViewControllerWithIdentifier:@"OtherUserProfileViewController"];
-//            [self.currentNavigationController pushViewController:view1 animated:YES];
-
+             NSLog(@"alert 1");
+            UIStoryboard *sb=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            OtherUserProfileViewController *view1=[sb instantiateViewControllerWithIdentifier:@"OtherUserProfileViewController"];
+            view1.isRequestArrived=@"T";
+            view1.otherUserId=[alertDict objectForKey:@"otherUserId"];
+            [self.currentNavigationController pushViewController:view1 animated:YES];
         }
-
-       else if ([[alertDict objectForKey:@"type"] isEqualToString:@"2"]) {
-            [[ConferenceService sharedManager] acceptCancelMeeting:[alertDict objectForKey:@"appointmentId"] meetingUserId:[alertDict objectForKey:@"meetinguserId"] flag:@"accept" type:@"requested" success:^(id dataArray) {
+        
+        else if ([[alertDict objectForKey:@"type"] isEqualToString:@"2"]) {
+            [[ConferenceService sharedManager] acceptCancelMeeting:[alertDict objectForKey:@"appointmentId"] meetingUserId:[alertDict objectForKey:@"meetinguserId"] flag:@"accept" type:@"requested" success:^(id responseObject) {
+                 NSLog(@"calendar type 2");
+                if ([myDelegate.myView isEqualToString:@"CalendarViewController"]) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"CalendarDetails" object:nil];
+                      NSLog(@"calendar type 2 after success");
+                }
+//                else if ([myDelegate.myView isEqualToString:@"PendingViewController"]) {
+//                    alertType=@"2";
+//                    [[NSNotificationCenter defaultCenter] postNotificationName:@"Pending" object:nil];
+//                }
                 
             }
                                                            failure:^(NSError *error)
              {
                  
              }] ;
-
+        }
+        else if ([[alertDict objectForKey:@"type"] isEqualToString:@"3"]) {
+            if ([myDelegate.myView isEqualToString:@"MatchesViewController"]) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"MatchesDetails" object:nil];
+            }
             
         }
 
-        NSLog(@"left");
+        else if ([[alertDict objectForKey:@"type"] isEqualToString:@"4"]) {
+            if ([myDelegate.myView isEqualToString:@"MatchesViewController"]) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"MatchesDetails" object:nil];
+            }
+
+        }
+        else if ([[alertDict objectForKey:@"type"] isEqualToString:@"5"]) {
+            if ([myDelegate.myView isEqualToString:@"CalendarViewController"]) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"CalendarDetails" object:nil];
+            }
+           else if ([myDelegate.myView isEqualToString:@"PendingViewController"]) {
+                alertType=@"5";
+               NSLog(@"accepted");
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"Requested" object:nil];
+            }
+        }
+        else if ([[alertDict objectForKey:@"type"] isEqualToString:@"6"]) {
+                if ([myDelegate.myView isEqualToString:@"CalendarViewController"]) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"CalendarDetails" object:nil];
+                }
+                else if ([myDelegate.myView isEqualToString:@"PendingViewController"]) {
+                     alertType=@"6";
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"Requested" object:nil];
+                }
+            }
+        else if ([[alertDict objectForKey:@"type"] isEqualToString:@"7"]) {
+            if ([myDelegate.myView isEqualToString:@"ConferenceViewController"]) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"Conference" object:nil];
+            }
+        }
+//ConferenceViewController
+        NSLog(@"view");
     }
-    else if(option == 1){
+    else if(option == 1) {
         if ([[alertDict objectForKey:@"type"] isEqualToString:@"1"]) {
             [[MatchesService sharedManager] acceptDeclineRequest:[alertDict objectForKey:@"otherUserId"] acceptRequest:@"T" success:^(id responseObject) {
-           
                 
+                if ([myDelegate.myView isEqualToString:@"MatchesViewController"]) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"MatchesDetails" object:nil];
+                }
             }
                                                          failure:^(NSError *error)
              {
                  
              }] ;
-
         }
-        NSLog(@"right");
+        NSLog(@"accept");
     }
     else
     {
         if ([[alertDict objectForKey:@"type"] isEqualToString:@"1"]) {
             [[MatchesService sharedManager] acceptDeclineRequest:[alertDict objectForKey:@"otherUserId"] acceptRequest:@"F" success:^(id responseObject) {
+                if ([myDelegate.myView isEqualToString:@"MatchesViewController"]) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"MatchesDetails" object:nil];
+                }
                 
                 
             }
@@ -357,7 +408,11 @@
             
         }
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"2"]) {
-            [[ConferenceService sharedManager] acceptCancelMeeting:[alertDict objectForKey:@"alert"] meetingUserId:[alertDict objectForKey:@"meetinguserId"] flag:@"cancel" type:@"requested" success:^(id dataArray) {
+            [[ConferenceService sharedManager] acceptCancelMeeting:[alertDict objectForKey:@"appointmentId"] meetingUserId:[alertDict objectForKey:@"meetinguserId"] flag:@"cancel" type:@"requested" success:^(id responseObject) {
+                
+                if ([myDelegate.myView isEqualToString:@"CalendarViewController"]) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"CalendarDetails" object:nil];
+                }
                 
             }
                                                            failure:^(NSError *error)
@@ -365,9 +420,8 @@
                  
              }] ;
             
-            
         }
-
+        
         NSLog(@"decline");
     }
     [alert dismissAlertView:self.window];
@@ -391,15 +445,15 @@
     
     if (application.applicationState == UIApplicationStateActive) {
         
-//        [audioPlayer play];
-//        CustomLocalNotification *myLocalNotification = [[CustomLocalNotification alloc]initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 20) labelText:[notification.userInfo valueForKey:@"userInfo"]];
-//        [self.window addSubview:myLocalNotification.mainView];
-      
-
+        //        [audioPlayer play];
+        //        CustomLocalNotification *myLocalNotification = [[CustomLocalNotification alloc]initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 20) labelText:[notification.userInfo valueForKey:@"userInfo"]];
+        //        [self.window addSubview:myLocalNotification.mainView];
+        
+        
     }
     else {
         
-         [[UIApplication sharedApplication] cancelLocalNotification:notification];
+        [[UIApplication sharedApplication] cancelLocalNotification:notification];
     }
 }
 -(void)dismiss:(UIAlertView*)alertview
@@ -411,10 +465,10 @@
 {
     if (alertView.tag==1 && buttonIndex==1)
     {
-//        UIStoryboard *sb=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//        RatingViewController *view1=[sb instantiateViewControllerWithIdentifier:@"RatingViewController"];
-//        view1.bookingId=bookingId;
-//        [self.currentNavigationController pushViewController:view1 animated:YES];
+        //        UIStoryboard *sb=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        //        RatingViewController *view1=[sb instantiateViewControllerWithIdentifier:@"RatingViewController"];
+        //        view1.bookingId=bookingId;
+        //        [self.currentNavigationController pushViewController:view1 animated:YES];
     }
 }
 #pragma mark - end

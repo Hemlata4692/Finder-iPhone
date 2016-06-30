@@ -55,15 +55,29 @@
         [myDelegate showIndicator];
         [self performSelector:@selector(getRequestedAppointmentList) withObject:nil afterDelay:.1];
     }
+ 
+   // [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pendingDetails) name:@"Pending" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestedDetails) name:@"Requested" object:nil];
 
+    
 }
+-(void)pendingDetails{
 
+    [myDelegate showIndicator];
+    [self performSelector:@selector(getPendingAppointmentList) withObject:nil afterDelay:0.1];
+}
+-(void)requestedDetails{
+    
+    [myDelegate showIndicator];
+    [self performSelector:@selector(getRequestedAppointmentList) withObject:nil afterDelay:0.1];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 -(void)viewWillAppear:(BOOL)animated{
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    myDelegate.myView=@"PendingViewController";
 }
 
 #pragma mark - end
@@ -73,15 +87,23 @@
     [[ConferenceService sharedManager] requestedAppointment:^(id dataArray) {
         [myDelegate stopIndicator];
         appointmentDataArray=[dataArray mutableCopy];
+        if (appointmentDataArray==nil) {
+            noResulFoundLabel.hidden=NO;
+            noResulFoundLabel.text=@"No requested appointement(s).";
+            pendingAppointmentTable.hidden=YES;
+        }
+        else {
         pendingAppointmentTable.hidden=NO;
         noResulFoundLabel.hidden=YES;
         [pendingAppointmentTable reloadData];
+        }
         
      
     }
                                                  failure:^(NSError *error)
      {
          noResulFoundLabel.hidden=NO;
+         noResulFoundLabel.text=@"No requested appointement(s).";
          pendingAppointmentTable.hidden=YES;
      }] ;
 
@@ -91,14 +113,22 @@
     [[ConferenceService sharedManager] pendingAppointment:^(id dataArray) {
         [myDelegate stopIndicator];
          appointmentDataArray=[dataArray mutableCopy];
+        if (appointmentDataArray==nil) {
+            noResulFoundLabel.hidden=NO;
+            noResulFoundLabel.text=@"No pending appointement(s).";
+            pendingAppointmentTable.hidden=YES;
+        }
+        else {
          pendingAppointmentTable.hidden=NO;
         noResulFoundLabel.hidden=YES;
         [pendingAppointmentTable reloadData];
+        }
       
     }
                                                     failure:^(NSError *error)
      {
          noResulFoundLabel.hidden=NO;
+         noResulFoundLabel.text=@"No pending appointement(s).";
           pendingAppointmentTable.hidden=YES;
      }] ;
 
