@@ -31,7 +31,7 @@
     self.navigationItem.title=@"My Settings";
     // Do any additional setup after loading the view.
     settingsSection1Array = [NSMutableArray arrayWithObjects:@"Pre-Conference Match",@"Proximity Alert", nil];
-    settingsSection2Array = [NSMutableArray arrayWithObjects:@"New Request",@"New Message",@"Request Accepted",@"Proximity Matches",@"Conference Updates",nil];
+    settingsSection2Array = [NSMutableArray arrayWithObjects:@"New Message",@"Request Accepted",@"Proximity Matches",@"Conference Updates",nil];
     setSwitchStatus=[[NSMutableArray alloc]init];
     
     [myDelegate showIndicator];
@@ -225,36 +225,19 @@
             if (switchView.on==1) {
                 switchView.on=0;
                 switchStatus=@"false";
-                switchIdentifire=@"newRequest";
+                switchIdentifire=@"newMessage";
                 [switchView setBackgroundImage:[UIImage imageNamed:@"off.png"] forState:UIControlStateNormal];
                 [self changeSettings:[NSString stringWithFormat:@"%d%d", switchView.sectionTag,switchView.Tag]];
             }
             else {
                 switchView.on=1;
                 switchStatus=@"true";
-                switchIdentifire=@"newRequest";
+                switchIdentifire=@"newMessage";
                 [switchView setBackgroundImage:[UIImage imageNamed:@"on.png"] forState:UIControlStateNormal];
                 [self changeSettings:[NSString stringWithFormat:@"%d%d", switchView.sectionTag,switchView.Tag]];
             }
         }
         if (switchView.Tag==1) {
-            NSLog(@"Value 1: %i", switchView.on);
-            if (switchView.on==1) {
-                switchView.on=0;
-                switchStatus=@"false";
-                switchIdentifire=@"newMessage";
-                [switchView setBackgroundImage:[UIImage imageNamed:@"off.png"] forState:UIControlStateNormal];
-                [self changeSettings:[NSString stringWithFormat:@"%d%d", switchView.sectionTag,switchView.Tag]];
-            }
-            else {
-                switchView.on=1;
-                switchStatus=@"true";
-                switchIdentifire=@"newMessage";
-                [switchView setBackgroundImage:[UIImage imageNamed:@"on.png"] forState:UIControlStateNormal];
-                [self changeSettings:[NSString stringWithFormat:@"%d%d", switchView.sectionTag,switchView.Tag]];
-            }
-        }
-        if (switchView.Tag==2) {
             NSLog(@"Value 1: %i", switchView.on);
             if (switchView.on==1) {
                 switchView.on=0;
@@ -271,7 +254,7 @@
                 [self changeSettings:[NSString stringWithFormat:@"%d%d", switchView.sectionTag,switchView.Tag]];
             }
         }
-        if (switchView.Tag==3) {
+        if (switchView.Tag==2) {
             NSLog(@"Value 1: %i", switchView.on);
             if (switchView.on==1) {
                 switchView.on=0;
@@ -288,7 +271,7 @@
                 [self changeSettings:[NSString stringWithFormat:@"%d%d", switchView.sectionTag,switchView.Tag]];
             }
         }
-        if (switchView.Tag==4) {
+        if (switchView.Tag==3) {
             NSLog(@"Value 1: %i", switchView.on);
             if (switchView.on==1) {
                 switchView.on=0;
@@ -337,20 +320,17 @@
             if ([settingDict objectForKey:@"proximityAlert"]) {
                 [tempDict setObject:[settingDict objectForKey:@"proximityAlert"] forKey:@"01"];
             }
-            if ([settingDict objectForKey:@"newRequest"]) {
-                [tempDict setObject:[settingDict objectForKey:@"newRequest"] forKey:@"10"];
-            }
-            if ([settingDict objectForKey:@"newMessage"]) {
-                [tempDict setObject:[settingDict objectForKey:@"newMessage"] forKey:@"11"];
+                       if ([settingDict objectForKey:@"newMessage"]) {
+                [tempDict setObject:[settingDict objectForKey:@"newMessage"] forKey:@"10"];
             }
             if ([settingDict objectForKey:@"requestAccept"]) {
-                [tempDict setObject:[settingDict objectForKey:@"requestAccept"] forKey:@"12"];
+                [tempDict setObject:[settingDict objectForKey:@"requestAccept"] forKey:@"11"];
             }
             if ([settingDict objectForKey:@"proximityMatches"]) {
-                [tempDict setObject:[settingDict objectForKey:@"proximityMatches"] forKey:@"13"];
+                [tempDict setObject:[settingDict objectForKey:@"proximityMatches"] forKey:@"12"];
             }
             if ([settingDict objectForKey:@"conferenceUpdates"]) {
-                [tempDict setObject:[settingDict objectForKey:@"conferenceUpdates"] forKey:@"14"];
+                [tempDict setObject:[settingDict objectForKey:@"conferenceUpdates"] forKey:@"13"];
             }
             [UserDefaultManager setValue:tempDict key:@"switchStatusDict"];
             [settingsTableView reloadData];

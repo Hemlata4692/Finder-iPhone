@@ -53,12 +53,12 @@
     
     self.navigationItem.title=@"Matches";
     [self setTabBarImages];
-    //    noRecordLabel.hidden=NO;
-    //    matchesTableView.hidden=YES;
     allMatchesDataArray=[[NSMutableArray alloc]init];
     latestMatchesArray=[[NSMutableArray alloc]init];
     contactArray=[[NSMutableArray alloc]init];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(matchesDetails) name:@"MatchesDetails" object:nil];
+    
+    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -221,7 +221,7 @@
         userProfile.isRequestSent=[[latestMatchesArray objectAtIndex:indexPath.row] isRequestSent];
         userProfile.isRequestArrived=[[latestMatchesArray objectAtIndex:indexPath.row] isArrived];
         [self.navigationController pushViewController:userProfile animated:YES];
-
+        
     }
     else if (selectedSegment==1) {
         if ([[[allMatchesDataArray objectAtIndex:indexPath.row] isAccepted] isEqualToString:@"T"]) {
@@ -241,7 +241,7 @@
             userProfile.isRequestArrived=[[allMatchesDataArray objectAtIndex:indexPath.row] isArrived];
             [self.navigationController pushViewController:userProfile animated:YES];
         }
-
+        
     }
     else {
         UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -261,7 +261,8 @@
         [myDelegate stopIndicator];
         [myDelegate stopIndicator];
         allMatchesDataArray=[dataArray mutableCopy];
-      //  matchesSegmentControl.selectedSegmentIndex=1;
+        matchesTableView.hidden=NO;
+        //  matchesSegmentControl.selectedSegmentIndex=1;
         if (matchesSegmentControl.selectedSegmentIndex==0) {
             selectedSegment=0;
             
@@ -270,7 +271,7 @@
             selectedSegment=1;
         }
         [self filterData];
-     
+        
     }
                                            failure:^(NSError *error)
      {
@@ -309,7 +310,7 @@
             noRecordLabel.text=@"You have to select interest area first.";
         }
         else {
-        noRecordLabel.hidden=YES;
+            noRecordLabel.hidden=YES;
         }
     }
     else{
@@ -353,7 +354,7 @@
     if (selectedSegment==0) {
         [[MatchesService sharedManager] acceptDeclineRequest:otherUserId acceptRequest:accepted success:^(id responseObject) {
             [self getMatchesDetails];
-
+            
             [matchesTableView reloadData];
             
         }
@@ -406,7 +407,7 @@
     UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     ScheduleMeetingViewController *scheduleMeeting =[storyboard instantiateViewControllerWithIdentifier:@"ScheduleMeetingViewController"];
     scheduleMeeting.screenName=@"Matches";
-     scheduleMeeting.ContactName=[[contactArray objectAtIndex:btnTag]userName];
+    scheduleMeeting.ContactName=[[contactArray objectAtIndex:btnTag]userName];
     scheduleMeeting.contactUserID=[[contactArray objectAtIndex:btnTag]otherUserId];
     scheduleMeeting.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.1f];
     [scheduleMeeting setModalPresentationStyle:UIModalPresentationOverCurrentContext];
@@ -442,7 +443,7 @@
         [self performSelector:@selector(acceptDeclineRequest) withObject:nil afterDelay:.1];
     }
     else if ([[[allMatchesDataArray objectAtIndex:btnTag]isRequestSent] isEqualToString:@"T"]) {
-         NSLog(@"pending");
+        NSLog(@"pending");
     }
     else if ([[[allMatchesDataArray objectAtIndex:btnTag]isAccepted] isEqualToString:@"T"]) {
         UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -453,7 +454,7 @@
         scheduleMeeting.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.1f];
         [scheduleMeeting setModalPresentationStyle:UIModalPresentationOverCurrentContext];
         [self presentViewController:scheduleMeeting animated: NO completion:nil];
-
+        
     }
     
 }

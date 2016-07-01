@@ -88,6 +88,8 @@
     [locationManager startUpdatingLocation];
     isLocation=@"0";
     self.deviceToken = @"";
+    //google analytics tracking id
+    //UA-80202935-1
     
     NSLog(@"userId %@",[[NSUserDefaults standardUserDefaults] objectForKey:@"userId"]);
     NSLog(@"conferenceId %@",[[NSUserDefaults standardUserDefaults] objectForKey:@"conferenceId"]);
@@ -125,7 +127,6 @@
         [switchDict setObject:@"true" forKey:@"11"];
         [switchDict setObject:@"true" forKey:@"12"];
         [switchDict setObject:@"true" forKey:@"13"];
-        [switchDict setObject:@"true" forKey:@"14"];
         [UserDefaultManager setValue:switchDict key:@"switchStatusDict"];
     }
     
@@ -188,21 +189,20 @@
 -(void)locationUpdate{
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"userId"]!=nil)
     {
-        [[UserService sharedManager] locationUpdate:latitude longitude:longitude success:^(id responseObject)
-         {
-             NSLog(@"webservice did fire");
-             [self startTrackingBg];
-             
-         } failure:^(NSError *error) {
-             
-         }] ;
+//        [[UserService sharedManager] locationUpdate:latitude longitude:longitude success:^(id responseObject)
+//         {
+//             NSLog(@"webservice did fire");
+//             [self startTrackingBg];
+//             
+//         } failure:^(NSError *error) {
+//             
+//         }] ;
     }
 }
 - (void) startTrackingBg{
     if ([isLocation isEqualToString:@"2"])
     {
         isLocation=@"0";
-        
         timer = [NSTimer scheduledTimerWithTimeInterval:3*60
                                                  target: self
                                                selector: @selector(locationUpdate)
@@ -231,7 +231,7 @@
     if ([isLocation isEqualToString:@"1"])
     {
         isLocation=@"2";
-      //  [ self locationUpdate];
+        [ self locationUpdate];
     }
 }
 #pragma mark - end
@@ -313,6 +313,7 @@
              NSLog(@"alert 1");
             UIStoryboard *sb=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
             OtherUserProfileViewController *view1=[sb instantiateViewControllerWithIdentifier:@"OtherUserProfileViewController"];
+        view1.viewType=@"Matches";
             view1.isRequestArrived=@"T";
             view1.otherUserId=[alertDict objectForKey:@"otherUserId"];
             [self.currentNavigationController pushViewController:view1 animated:YES];
@@ -486,7 +487,7 @@
         }
     }
     UILabel *notificationBadge = [[UILabel alloc] init];
-    notificationBadge.frame = CGRectMake(8 , 8, 8, 8);
+    notificationBadge.frame = CGRectMake(50 , 8, 8, 8);
     notificationBadge.backgroundColor = [UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:1.0];
     notificationBadge.layer.cornerRadius = 5;
     notificationBadge.layer.masksToBounds = YES;
