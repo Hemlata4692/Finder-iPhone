@@ -241,11 +241,6 @@
     
     multiPickerView.entriesArray = interestedAreaArray;
     multiPickerView.entriesSelectedArray =selectedPickerArray;
-//    for (int k =0; k<selectedPickerArray.count; k++)
-//    {
-//        //NSDictionary * pickerDict = [selectedPickerArray objectAtIndex:k];
-//        [myDelegate.multiplePickerDic setObject:[NSNumber numberWithBool:YES] forKey:[selectedPickerArray objectAtIndex:k]];
-//    }
     multiPickerView.multiPickerDelegate = self;
     [self.view addSubview:multiPickerView];
     [multiPickerView pickerShow];
@@ -281,15 +276,15 @@
         return NO;
     }
     else {
-        if (![linkedInTextField isValidURL]) {
-            SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
-            [alert showWarning:self title:@"Alert" subTitle:@"Please enter a valid linked in link." closeButtonTitle:@"Done" duration:0.0f];
-            return NO;
-        }
-        else {
-            return YES;
-        }
-       // return YES;
+//        if (![linkedInTextField isValidURL]) {
+//            SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
+//            [alert showWarning:self title:@"Alert" subTitle:@"Please enter a valid linked in link." closeButtonTitle:@"Done" duration:0.0f];
+//            return NO;
+//        }
+//        else {
+//            return YES;
+//        }
+        return YES;
     }
 
 }
@@ -316,6 +311,10 @@
             interestedInTextField.text=[interestedInArray objectAtIndex:index];
         }
         
+    }
+    for (int k =0; k<selectedPickerArray.count; k++)
+    {
+        [myDelegate.multiplePickerDic setObject:[NSNumber numberWithBool:YES] forKey:[selectedPickerArray objectAtIndex:k]];
     }
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];

@@ -75,7 +75,7 @@
     [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:237.0/255.0 green:120.0/255.0 blue:0.0/255.0 alpha:1.0]];
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, [UIFont fontWithName:@"Roboto-Regular" size:19.0], NSFontAttributeName, nil]];
     // _window.backgroundColor = [UIColor redColor];
-    multiplePickerDic=[NSMutableDictionary new];
+    multiplePickerDic=[[NSMutableDictionary alloc]init];
     alertDict=[NSDictionary new];
     locationManager = [[CLLocationManager alloc] init];
     locationManager.delegate = self;
@@ -120,13 +120,14 @@
     
     if ([UserDefaultManager getValue:@"switchStatusDict"]==NULL) {
         NSMutableDictionary *switchDict=[[NSMutableDictionary alloc]init];
-        [switchDict setObject:@"true" forKey:@"00"];
-        [switchDict setObject:@"true" forKey:@"01"];
+        [switchDict setObject:@"True" forKey:@"00"];
+        [switchDict setObject:@"True" forKey:@"01"];
         [switchDict setObject:@"25" forKey:@"02"];
-        [switchDict setObject:@"true" forKey:@"10"];
-        [switchDict setObject:@"true" forKey:@"11"];
-        [switchDict setObject:@"true" forKey:@"12"];
-        [switchDict setObject:@"true" forKey:@"13"];
+        [switchDict setObject:@"True" forKey:@"10"];
+        [switchDict setObject:@"True" forKey:@"11"];
+        [switchDict setObject:@"True" forKey:@"12"];
+        [switchDict setObject:@"True" forKey:@"13"];
+        [switchDict setObject:@"True" forKey:@"14"];
         [UserDefaultManager setValue:switchDict key:@"switchStatusDict"];
     }
     

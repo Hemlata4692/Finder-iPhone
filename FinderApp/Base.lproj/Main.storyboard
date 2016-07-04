@@ -150,6 +150,7 @@
             <string>Roboto-Regular</string>
             <string>Roboto-Regular</string>
             <string>Roboto-Regular</string>
+            <string>Roboto-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -1581,7 +1582,7 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="143" height="42"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
-                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tick_Interest" translatesAutoresizingMaskIntoConstraints="NO" id="pWL-wb-oya">
+                                                                        <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tick_Interest" translatesAutoresizingMaskIntoConstraints="NO" id="pWL-wb-oya">
                                                                             <rect key="frame" x="8" y="15" width="16" height="16"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="16" id="HRx-4E-5kJ"/>
@@ -1593,11 +1594,23 @@
                                                                             <color key="textColor" red="0.43921568630000002" green="0.43921568630000002" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Paz-De-ifL">
+                                                                            <rect key="frame" x="8" y="15" width="50" height="21"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="height" constant="21" id="Psc-o5-f57"/>
+                                                                                <constraint firstAttribute="width" constant="50" id="UIz-9U-buo"/>
+                                                                            </constraints>
+                                                                            <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
+                                                                            <color key="textColor" red="0.43921568630000002" green="0.43921568630000002" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
                                                                     </subviews>
                                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                                 </view>
                                                                 <constraints>
                                                                     <constraint firstItem="Ji5-if-OWK" firstAttribute="top" secondItem="mt3-yK-u5J" secondAttribute="topMargin" constant="-4" id="0Ti-ph-W1u"/>
+                                                                    <constraint firstItem="Paz-De-ifL" firstAttribute="top" secondItem="mt3-yK-u5J" secondAttribute="topMargin" constant="7" id="4Hb-mZ-ulu"/>
+                                                                    <constraint firstAttribute="leadingMargin" secondItem="Paz-De-ifL" secondAttribute="leading" id="4p5-zr-KXf"/>
                                                                     <constraint firstItem="Ji5-if-OWK" firstAttribute="leading" secondItem="pWL-wb-oya" secondAttribute="trailing" constant="8" symbolic="YES" id="Tkb-Tf-kwu"/>
                                                                     <constraint firstItem="pWL-wb-oya" firstAttribute="centerY" secondItem="Ji5-if-OWK" secondAttribute="centerY" id="fSY-3e-V6M"/>
                                                                     <constraint firstAttribute="bottom" secondItem="Ji5-if-OWK" secondAttribute="bottom" id="klL-rP-gUy"/>
@@ -1794,7 +1807,7 @@
                                                                 </constraints>
                                                                 <color key="textColor" red="0.42352941179999998" green="0.42352941179999998" blue="0.42352941179999998" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
-                                                                <textInputTraits key="textInputTraits"/>
+                                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no"/>
                                                                 <connections>
                                                                     <outlet property="delegate" destination="AC5-23-ob5" id="niT-Jy-dzr"/>
                                                                 </connections>
@@ -1843,7 +1856,7 @@
                                                                 </constraints>
                                                                 <color key="textColor" red="0.42352941179999998" green="0.42352941179999998" blue="0.42352941179999998" alpha="1" colorSpace="calibratedRGB"/>
                                                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
-                                                                <textInputTraits key="textInputTraits"/>
+                                                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                                                                 <connections>
                                                                     <outlet property="delegate" destination="AC5-23-ob5" id="4Nj-48-Atb"/>
                                                                 </connections>
@@ -1912,7 +1925,7 @@
                                                         </constraints>
                                                         <color key="textColor" red="0.42352941176470588" green="0.42352941176470588" blue="0.42352941176470588" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="numberPad"/>
                                                         <connections>
                                                             <outlet property="delegate" destination="AC5-23-ob5" id="ISV-fR-h0p"/>
                                                         </connections>
@@ -1958,7 +1971,7 @@
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <color key="textColor" red="0.42352941179999998" green="0.42352941179999998" blue="0.42352941179999998" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                                                         <connections>
                                                             <outlet property="delegate" destination="AC5-23-ob5" id="hL9-NX-dIT"/>
                                                         </connections>
@@ -2004,7 +2017,7 @@
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <color key="textColor" red="0.42352941179999998" green="0.42352941179999998" blue="0.42352941179999998" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                                                         <connections>
                                                             <outlet property="delegate" destination="AC5-23-ob5" id="yJb-AI-xKM"/>
                                                         </connections>
@@ -2045,12 +2058,12 @@
                                                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UjS-J4-Ajd">
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UjS-J4-Ajd">
                                                         <rect key="frame" x="8" y="24" width="294" height="26"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <color key="textColor" red="0.42352941179999998" green="0.42352941179999998" blue="0.42352941179999998" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                                                         <connections>
                                                             <outlet property="delegate" destination="AC5-23-ob5" id="F3t-SC-261"/>
                                                         </connections>
@@ -2096,7 +2109,7 @@
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <color key="textColor" red="0.42352941179999998" green="0.42352941179999998" blue="0.42352941179999998" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no"/>
                                                         <connections>
                                                             <outlet property="delegate" destination="AC5-23-ob5" id="Qd5-yO-jSb"/>
                                                         </connections>
@@ -2142,7 +2155,7 @@
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <color key="textColor" red="0.42352941179999998" green="0.42352941179999998" blue="0.42352941179999998" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
-                                                        <textInputTraits key="textInputTraits"/>
+                                                        <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                                                         <connections>
                                                             <outlet property="delegate" destination="AC5-23-ob5" id="FxS-qn-iap"/>
                                                         </connections>
@@ -2793,7 +2806,7 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="143" height="42"/>
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
-                                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tick_Interest" translatesAutoresizingMaskIntoConstraints="NO" id="8Zo-8g-PmF">
+                                                                        <imageView userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tick_Interest" translatesAutoresizingMaskIntoConstraints="NO" id="8Zo-8g-PmF">
                                                                             <rect key="frame" x="8" y="15" width="16" height="16"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="16" id="GgA-1F-CR3"/>
@@ -3498,10 +3511,10 @@
                                     <outlet property="delegate" destination="SzO-FT-SIx" id="2Df-A4-Val"/>
                                 </connections>
                             </tableView>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Under Development." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="edf-Ac-9LT">
-                                <rect key="frame" x="0.0" y="173" width="320" height="21"/>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Under Development." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="edf-Ac-9LT">
+                                <rect key="frame" x="0.0" y="173" width="320" height="46"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="21" id="4mH-3q-Ka0"/>
+                                    <constraint firstAttribute="height" constant="46" id="4mH-3q-Ka0"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
                                 <color key="textColor" red="0.23921568630000001" green="0.23921568630000001" blue="0.23921568630000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -3515,7 +3528,7 @@
                             <constraint firstItem="2XL-CO-dqY" firstAttribute="leading" secondItem="Qer-HR-O66" secondAttribute="leading" id="A4m-Vh-MlE"/>
                             <constraint firstAttribute="trailing" secondItem="N54-MS-1pJ" secondAttribute="trailing" constant="10" id="DuN-hh-N5r"/>
                             <constraint firstAttribute="trailing" secondItem="2XL-CO-dqY" secondAttribute="trailing" id="KPo-Tq-eqE"/>
-                            <constraint firstItem="HwX-lM-mlc" firstAttribute="top" secondItem="edf-Ac-9LT" secondAttribute="bottom" constant="173" id="Z0z-rt-fdV"/>
+                            <constraint firstItem="HwX-lM-mlc" firstAttribute="top" secondItem="edf-Ac-9LT" secondAttribute="bottom" constant="148" id="Z0z-rt-fdV"/>
                             <constraint firstItem="edf-Ac-9LT" firstAttribute="leading" secondItem="Qer-HR-O66" secondAttribute="leading" id="a1e-ow-maG"/>
                             <constraint firstItem="2XL-CO-dqY" firstAttribute="top" secondItem="N54-MS-1pJ" secondAttribute="bottom" constant="8" id="hMq-Jk-mfk"/>
                             <constraint firstItem="N54-MS-1pJ" firstAttribute="leading" secondItem="Qer-HR-O66" secondAttribute="leading" constant="10" id="ig0-eu-glH"/>

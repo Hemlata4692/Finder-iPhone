@@ -352,11 +352,14 @@
                                           dequeueReusableCellWithReuseIdentifier:@"interestCell"
                                           forIndexPath:indexPath];
     UILabel *interestLabel=(UILabel *)[interestCell viewWithTag:1];
+    UIImageView *tickImage=(UIImageView *)[interestCell viewWithTag:2];
     if ([[interestsArray objectAtIndex:indexPath.row] isEqualToString:@""]) {
         interestLabel.text=@"NA";
+        tickImage.hidden=YES;
     }
     else {
         interestLabel.text=[interestsArray objectAtIndex:indexPath.row];
+        tickImage.hidden=NO;
     }
 
     return interestCell;

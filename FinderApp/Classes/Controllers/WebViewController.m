@@ -27,7 +27,7 @@
     // Do any additional setup after loading the view.
     [activityIndicator startAnimating];
     self.navigationItem.title=navigationTitle;
-    if ([linkedInLink isEqualToString:@""] || url==nil)
+    if ([linkedInLink isEqualToString:@""] || linkedInLink==nil)
     {
         [activityIndicator stopAnimating];
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -40,7 +40,7 @@
     else if ([navigationTitle isEqualToString:@"LinkedIn"]) {
         NSArray* words = [linkedInLink componentsSeparatedByCharactersInSet :[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         NSString* linkedInString = [words componentsJoinedByString:@""];
-        url = [NSURL URLWithString:linkedInString];
+        url = [NSURL URLWithString:[NSString stringWithFormat:@"https://www.linkedin.com/in/%@",linkedInString]];
         NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
         [webView loadRequest:requestObj];
     }

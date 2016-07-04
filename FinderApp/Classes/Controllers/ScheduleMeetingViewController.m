@@ -121,7 +121,12 @@
     [self.presentingViewController dismissViewControllerAnimated:NO completion:nil];
 }
 //Load picker
-- (IBAction)contactNameButtonAction:(id)sender{
+- (IBAction)contactNameButtonAction:(id)sender {
+    if (contactDetailArray.count==0) {
+        SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
+        [alert showWarning:self title:@"Alert" subTitle:@"You don’t have any contact yet." closeButtonTitle:@"Done" duration:0.0f];
+    }
+    else {
     [keyboardControls.activeField resignFirstResponder];
     [self hidePickerWithAnimation];
     selectedPicker=0;
@@ -132,9 +137,10 @@
     pickerView.frame = CGRectMake(pickerView.frame.origin.x, self.view.frame.size.height-(pickerView.frame.size.height+44), self.view.frame.size.width, pickerView.frame.size.height);
     pickerToolbar.frame = CGRectMake(pickerToolbar.frame.origin.x, pickerView.frame.origin.y-44, self.view.frame.size.width, 44);
     [UIView commitAnimations];
+    }
 }
 //Load date picker
-- (IBAction)dateTimePickerButtonAction:(id)sender{
+- (IBAction)dateTimePickerButtonAction:(id)sender {
     [keyboardControls.activeField resignFirstResponder];
     [self hidePickerWithAnimation];
     selectedPicker=1;

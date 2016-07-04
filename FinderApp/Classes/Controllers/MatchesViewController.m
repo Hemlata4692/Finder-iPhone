@@ -276,7 +276,7 @@
                                            failure:^(NSError *error)
      {
          noRecordLabel.hidden=NO;
-         noRecordLabel.text=@"You have to select interest area first.";
+         noRecordLabel.text=@"There are no matches found related to your interest areas.";
          matchesTableView.hidden=YES;
      }] ;
 }
@@ -307,7 +307,7 @@
     {
         if (allMatchesDataArray.count==0) {
             noRecordLabel.hidden=NO;
-            noRecordLabel.text=@"You have to select interest area first.";
+            noRecordLabel.text=@"There are no matches found related to your interest areas.";
         }
         else {
             noRecordLabel.hidden=YES;

@@ -131,7 +131,10 @@
     [professionView addShadow:professionView color:[UIColor lightGrayColor]];
     [interestedInView addShadow:interestedInView color:[UIColor lightGrayColor]];
 }
-
+-(void)dealloc {
+    interestsArray=nil;
+}
+#pragma mark - end
 #pragma mark - Add back button
 - (void)addLeftBarButtonWithImage1:(UIImage *)backButton{
     CGRect framing = CGRectMake(0, 0, backButton.size.width, backButton.size.height);
@@ -446,6 +449,14 @@
     else {
         userNameLabel.text=[NSString stringWithFormat:@"%@ (%@)",[[userProfileDataArray objectAtIndex:0]userName],[[userProfileDataArray objectAtIndex:0]userDesignation]];
     }
+    
+    if ([[[userProfileDataArray objectAtIndex:0]userLinkedInLink] isEqualToString:@""]) {
+        linkedInButton.hidden=YES;
+    }
+    else {
+        linkedInButton.hidden=NO;
+    }
+    
     if ([[[userProfileDataArray objectAtIndex:0]userMobileNumber] isEqualToString:@""]) {
         mobileNumberLabel.text=@"NA";
     }
@@ -501,12 +512,10 @@
     else {
         interestedInLabel.text=[[userProfileDataArray objectAtIndex:0]userInterestedIn];
     }
-    
     interestsArray=[[[userProfileDataArray objectAtIndex:0]userInterests] componentsSeparatedByString:@","];
     count=(int)interestsArray.count;
     for (int k =0; k<interestsArray.count; k++)
     {
-        //NSDictionary * pickerDict = [selectedPickerArray objectAtIndex:k];
         [myDelegate.multiplePickerDic setObject:[NSNumber numberWithBool:YES] forKey:[interestsArray objectAtIndex:k]];
     }
     
@@ -549,11 +558,19 @@
                                           dequeueReusableCellWithReuseIdentifier:@"interestCell"
                                           forIndexPath:indexPath];
     UILabel *interestLabel=(UILabel *)[interestCell viewWithTag:1];
+    UILabel *noInterestLabel=(UILabel *)[interestCell viewWithTag:3];
+    UIImageView *tickImage=(UIImageView *)[interestCell viewWithTag:2];
     if ([[interestsArray objectAtIndex:indexPath.row] isEqualToString:@""]) {
-        interestLabel.text=@"NA";
+        noInterestLabel.hidden=NO;
+        noInterestLabel.text=@"NA";
+        tickImage.hidden=YES;
+        interestLabel.hidden=YES;
     }
     else {
+        interestLabel.hidden=NO;
         interestLabel.text=[interestsArray objectAtIndex:indexPath.row];
+        tickImage.hidden=NO;
+        noInterestLabel.hidden=YES;
     }
     return interestCell;
 }
