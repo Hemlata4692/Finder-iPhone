@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ContactDataModel.h"
 
 @interface MessagesViewCell : UITableViewCell
 //messageCell
@@ -23,4 +24,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *comapnyNameLabel;
 
+-(void)displayData:(ContactDataModel *)contactDetails indexPath:(int)indexPath;
 @end

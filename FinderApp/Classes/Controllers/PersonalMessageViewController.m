@@ -8,6 +8,7 @@
 #import <UIKit/UIKit.h>
 #import "PersonalMessageViewController.h"
 #import "PersonalMessageViewCell.h"
+#import "MessageService.h"
 
 @interface PersonalMessageViewController ()
 
@@ -19,10 +20,13 @@
 
 @implementation PersonalMessageViewController
 @synthesize personalMessageTableView,messageView,sendMessageTextView,sendMessageBtn;
+@synthesize otherUserId;
+@synthesize otherUserName;
 
 #pragma mark- View life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.navigationItem.title=otherUserName;
     // Do any additional setup after loading the view.
 }
 
@@ -33,7 +37,15 @@
 #pragma mark - end
 
 #pragma mark - IBActions
-- (IBAction)sendMessageBtnAction:(id)sender{
+- (IBAction)sendMessageBtnAction:(id)sender {
+    [[MessageService sharedManager] sendMessage:otherUserId message:sendMessageTextView.text success:^(id dataArray) {
+        [myDelegate stopIndicator];
+    
+    }
+                                                 failure:^(NSError *error)
+     {
+         
+     }] ;
 }
 #pragma mark - end
 

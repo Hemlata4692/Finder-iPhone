@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface PersonalMessageViewController : GlobalBackViewController
-
+@property (nonatomic,retain) NSString * otherUserId;
+@property (nonatomic,retain) NSString * otherUserName;
 @end

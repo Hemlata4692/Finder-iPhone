@@ -105,6 +105,7 @@
 		B7E434DC1D06C71600FE41A3 /* proximity_selected-667h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B7E434D91D06C71600FE41A3 /* proximity_selected-667h@2x.png */; };
 		B7E434DD1D06C71600FE41A3 /* proximity_selected-736h@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = B7E434DA1D06C71600FE41A3 /* proximity_selected-736h@3x.png */; };
 		B7E434DE1D06C71600FE41A3 /* proximity_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B7E434DB1D06C71600FE41A3 /* proximity_selected@2x.png */; };
+		B7E565CD1D2BC1FF0091F5A3 /* MessageService.m in Sources */ = {isa = PBXBuildFile; fileRef = B7E565CC1D2BC1FF0091F5A3 /* MessageService.m */; };
 		B7EAC1701CC5D58F001C4EEC /* UserService.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAC16F1CC5D58F001C4EEC /* UserService.m */; };
 		B7EAC1761CC5DBE9001C4EEC /* ConferenceService.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAC1751CC5DBE9001C4EEC /* ConferenceService.m */; };
 		B7EAC1801CC5ED06001C4EEC /* SettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7EAC17F1CC5ED06001C4EEC /* SettingsViewController.m */; };
@@ -331,6 +332,8 @@
 		B7E434D91D06C71600FE41A3 /* proximity_selected-667h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "proximity_selected-667h@2x.png"; sourceTree = "<group>"; };
 		B7E434DA1D06C71600FE41A3 /* proximity_selected-736h@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "proximity_selected-736h@3x.png"; sourceTree = "<group>"; };
 		B7E434DB1D06C71600FE41A3 /* proximity_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "proximity_selected@2x.png"; sourceTree = "<group>"; };
+		B7E565CB1D2BC1FF0091F5A3 /* MessageService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageService.h; sourceTree = SOURCE_ROOT; };
+		B7E565CC1D2BC1FF0091F5A3 /* MessageService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageService.m; sourceTree = SOURCE_ROOT; };
 		B7EAC16E1CC5D58F001C4EEC /* UserService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UserService.h; sourceTree = SOURCE_ROOT; };
 		B7EAC16F1CC5D58F001C4EEC /* UserService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserService.m; sourceTree = SOURCE_ROOT; };
 		B7EAC1741CC5DBE9001C4EEC /* ConferenceService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConferenceService.h; sourceTree = SOURCE_ROOT; };
@@ -1137,6 +1140,7 @@
 		B7DCE4501CBB9DC50063FF72 /* Webservice */ = {
 			isa = PBXGroup;
 			children = (
+				B7E565CA1D2BC1E30091F5A3 /* MessageService */,
 				B782C2561D1A4495000459C4 /* MatchesServiceModule */,
 				B72E75911D13AF8500383371 /* ProfileSeviceModule */,
 				B7EAC1731CC5DBD1001C4EEC /* ConferenceServiceModule */,
@@ -1171,6 +1175,15 @@
 				B70C5D731CE590750063246A /* ConferenceDetailModel */,
 			);
 			name = ConferenceModel;
+			sourceTree = "<group>";
+		};
+		B7E565CA1D2BC1E30091F5A3 /* MessageService */ = {
+			isa = PBXGroup;
+			children = (
+				B7E565CB1D2BC1FF0091F5A3 /* MessageService.h */,
+				B7E565CC1D2BC1FF0091F5A3 /* MessageService.m */,
+			);
+			name = MessageService;
 			sourceTree = "<group>";
 		};
 		B7EAC1711CC5DBA4001C4EEC /* GlobalService */ = {
@@ -1679,6 +1692,7 @@
 				B7DCE4531CBB9E5D0063FF72 /* Webservice.m in Sources */,
 				B73616FB1D12CEE000194588 /* MapViewController.m in Sources */,
 				B7A8DDC11CAE5B50007F56B6 /* BSKeyboardControls.m in Sources */,
+				B7E565CD1D2BC1FF0091F5A3 /* MessageService.m in Sources */,
 				B7A8DDCB1CAE5BD4007F56B6 /* UserDefaultManager.m in Sources */,
 				B7C018BF1CD07044006773CB /* PersonalMessageViewCell.m in Sources */,
 				B7A8DDC41CAE5B69007F56B6 /* MMMaterialDesignSpinner.m in Sources */,

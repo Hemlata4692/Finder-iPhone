@@ -151,6 +151,7 @@
             <string>Roboto-Regular</string>
             <string>Roboto-Regular</string>
             <string>Roboto-Regular</string>
+            <string>Roboto-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -752,7 +753,7 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="367"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="100" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="0To-yu-quJ">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="100" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="0To-yu-quJ">
                                 <rect key="frame" x="8" y="10" width="304" height="347"/>
                                 <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -860,7 +861,7 @@
                                     <outlet property="delegate" destination="8ob-Yx-PQR" id="ioO-IM-iQ7"/>
                                 </connections>
                             </tableView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Under Development." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H4l-8Z-goa">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Under Development." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H4l-8Z-goa">
                                 <rect key="frame" x="0.0" y="173" width="320" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="4uu-N7-3g6"/>
@@ -885,7 +886,7 @@
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="afA-ds-BjL">
                         <barButtonItem key="rightBarButtonItem" id="I4o-bw-5Qc">
-                            <button key="customView" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Wi5-uA-iDS">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Wi5-uA-iDS">
                                 <rect key="frame" x="264" y="2" width="40" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="chat"/>
@@ -1172,7 +1173,16 @@
                                     <outlet property="delegate" destination="arj-MT-eX1" id="Md6-R7-BTK"/>
                                 </connections>
                             </tableView>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="F5N-Xg-gaK">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No contacts added yet." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xxq-ny-Ajb">
+                                <rect key="frame" x="0.0" y="174" width="320" height="19"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Xxq-ny-Ajb" secondAttribute="height" multiplier="320:19" id="6GQ-uE-Wgd"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
+                                <color key="textColor" red="0.43921568630000002" green="0.43921568630000002" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <searchBar contentMode="redraw" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="F5N-Xg-gaK">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="B8A-r4-yfg"/>
@@ -1185,9 +1195,13 @@
                         </subviews>
                         <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
+                            <constraint firstItem="Xxq-ny-Ajb" firstAttribute="centerY" secondItem="3qe-Nn-j8l" secondAttribute="centerY" id="RK1-Be-RAT"/>
                             <constraint firstAttribute="trailing" secondItem="Ksg-Ya-zpg" secondAttribute="trailing" constant="8" id="S7e-hd-b0D"/>
                             <constraint firstItem="Ksg-Ya-zpg" firstAttribute="top" secondItem="StI-Wb-mxU" secondAttribute="bottom" constant="50" id="bn7-sJ-Qoe"/>
                             <constraint firstAttribute="trailing" secondItem="F5N-Xg-gaK" secondAttribute="trailing" id="e3u-Oy-gFq"/>
+                            <constraint firstItem="Xxq-ny-Ajb" firstAttribute="centerX" secondItem="3qe-Nn-j8l" secondAttribute="centerX" id="fcL-nw-dmb"/>
+                            <constraint firstItem="Xxq-ny-Ajb" firstAttribute="leading" secondItem="3qe-Nn-j8l" secondAttribute="leading" id="hMH-Sj-z2O"/>
+                            <constraint firstAttribute="trailing" secondItem="Xxq-ny-Ajb" secondAttribute="trailing" id="hct-qa-7Hx"/>
                             <constraint firstItem="F5N-Xg-gaK" firstAttribute="leading" secondItem="3qe-Nn-j8l" secondAttribute="leading" id="iHQ-7w-Dna"/>
                             <constraint firstItem="Ksg-Ya-zpg" firstAttribute="leading" secondItem="3qe-Nn-j8l" secondAttribute="leading" constant="8" id="mYI-hb-1aT"/>
                             <constraint firstItem="F5N-Xg-gaK" firstAttribute="top" secondItem="StI-Wb-mxU" secondAttribute="bottom" id="p5M-U9-8iX"/>
@@ -1199,6 +1213,8 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="contactListTableView" destination="Ksg-Ya-zpg" id="c5r-dt-bIm"/>
+                        <outlet property="noResultFound" destination="Xxq-ny-Ajb" id="9og-d3-zAD"/>
+                        <outlet property="searchBar" destination="F5N-Xg-gaK" id="faD-Eh-5WA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vAP-2M-rNT" userLabel="First Responder" sceneMemberID="firstResponder"/>
