@@ -27,6 +27,36 @@
 }
 #pragma mark - end
 
+#pragma mark - Messages
+-(void)displayMessageData:(MessagesDataModel *)messageDetails indexPath:(int)indexPath rectSize:(CGSize)rectSize {
+    [userImage setCornerRadius:userImage.frame.size.width/2];
+    [messageCountLabel setCornerRadius:messageCountLabel.frame.size.width/2];
+    userNameLabel.text=messageDetails.userName;
+    messageLabel.text=messageDetails.lastMessage;
+    messageCountLabel.text=messageDetails.messageCount;
+    __weak UIImageView *weakRef = userImage;
+    NSURLRequest *imageRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:messageDetails.userProfileImage]
+                                                  cachePolicy:NSURLRequestReturnCacheDataElseLoad
+                                              timeoutInterval:60];
+    [userImage setImageWithURLRequest:imageRequest placeholderImage:[UIImage imageNamed:@"user_thumbnail.png"] success:^(NSURLRequest *request, NSHTTPURLResponse *response, UIImage *image) {
+        weakRef.contentMode = UIViewContentModeScaleAspectFill;
+        weakRef.clipsToBounds = YES;
+        weakRef.image = image;
+    } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
+        
+    }];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:@"yyyy-mm-dd"];
+    NSDate *date = [dateFormatter dateFromString:messageDetails.messageDate];
+    NSDateFormatter *dateFormatter2 = [[NSDateFormatter alloc] init];
+    [dateFormatter2 setDateFormat:@"dd/mm/yy"];
+    NSString *newDateString = [dateFormatter2 stringFromDate:date];
+    dateLabel.text=newDateString;
+
+}
+#pragma mark - ends
+
+#pragma mark - Display contacts
 -(void)displayData:(ContactDataModel *)contactDetails indexPath:(int)indexPath {
 //    nameLabel.translatesAutoresizingMaskIntoConstraints=YES;
 //    CGSize size = CGSizeMake(rectSize.width-157,100);
@@ -56,4 +86,5 @@
     }];
 
 }
+#pragma mark - end
 @end

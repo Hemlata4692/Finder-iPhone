@@ -9,25 +9,35 @@
 #import "PersonalMessageViewController.h"
 #import "PersonalMessageViewCell.h"
 #import "MessageService.h"
+#import "MessagesDataModel.h"
 
 @interface PersonalMessageViewController ()
+{
+    NSString *offset;
+}
 
 @property (weak, nonatomic) IBOutlet UITableView *personalMessageTableView;
 @property (weak, nonatomic) IBOutlet UIView *messageView;
 @property (weak, nonatomic) IBOutlet UITextView *sendMessageTextView;
 @property (weak, nonatomic) IBOutlet UIButton *sendMessageBtn;
+@property (weak, nonatomic)  NSString *readStatus;
 @end
 
 @implementation PersonalMessageViewController
 @synthesize personalMessageTableView,messageView,sendMessageTextView,sendMessageBtn;
 @synthesize otherUserId;
 @synthesize otherUserName;
+@synthesize readStatus;
 
 #pragma mark- View life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title=otherUserName;
+    readStatus=@"True";
+    offset=@"0";
     // Do any additional setup after loading the view.
+    [myDelegate showIndicator];
+    [self performSelector:@selector(getMessageHistory) withObject:nil afterDelay:.1];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -36,9 +46,20 @@
 }
 #pragma mark - end
 
+-(void)getMessageHistory {
+    [[MessageService sharedManager] getMessageHistory:otherUserId readStatus:readStatus pageOffSet:offset success:^(id responseObject) {
+        [myDelegate stopIndicator];
+        
+    }
+                                        failure:^(NSError *error)
+     {
+         
+     }] ;
+}
+
 #pragma mark - IBActions
 - (IBAction)sendMessageBtnAction:(id)sender {
-    [[MessageService sharedManager] sendMessage:otherUserId message:sendMessageTextView.text success:^(id dataArray) {
+    [[MessageService sharedManager] sendMessage:otherUserId message:sendMessageTextView.text success:^(id responseObject) {
         [myDelegate stopIndicator];
     
     }

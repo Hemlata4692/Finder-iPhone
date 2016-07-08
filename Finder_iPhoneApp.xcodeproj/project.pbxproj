@@ -97,6 +97,7 @@
 		B7C018CD1CD0B7E0006773CB /* NewMessageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7C018CC1CD0B7E0006773CB /* NewMessageViewController.m */; };
 		B7C018D11CD0C7A4006773CB /* ScheduleMeetingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7C018D01CD0C7A4006773CB /* ScheduleMeetingViewController.m */; };
 		B7DCE4531CBB9E5D0063FF72 /* Webservice.m in Sources */ = {isa = PBXBuildFile; fileRef = B7DCE4521CBB9E5D0063FF72 /* Webservice.m */; };
+		B7DDCF571D2FB12300FD9D0F /* MessagesDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B7DDCF561D2FB12300FD9D0F /* MessagesDataModel.m */; };
 		B7E024C01CC4D5B100707552 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7E024BF1CC4D5B100707552 /* CoreLocation.framework */; };
 		B7E024C41CC5089E00707552 /* ConferenceDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B7E024C31CC5089E00707552 /* ConferenceDataModel.m */; };
 		B7E434D61D06C6BB00FE41A3 /* proximity_tab-667h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B7E434D31D06C6BB00FE41A3 /* proximity_tab-667h@2x.png */; };
@@ -323,6 +324,8 @@
 		B7C018D01CD0C7A4006773CB /* ScheduleMeetingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleMeetingViewController.m; sourceTree = "<group>"; };
 		B7DCE4511CBB9E5D0063FF72 /* Webservice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Webservice.h; sourceTree = SOURCE_ROOT; };
 		B7DCE4521CBB9E5D0063FF72 /* Webservice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Webservice.m; sourceTree = SOURCE_ROOT; };
+		B7DDCF551D2FB12300FD9D0F /* MessagesDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesDataModel.h; sourceTree = SOURCE_ROOT; };
+		B7DDCF561D2FB12300FD9D0F /* MessagesDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessagesDataModel.m; sourceTree = SOURCE_ROOT; };
 		B7E024BF1CC4D5B100707552 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		B7E024C21CC5089E00707552 /* ConferenceDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConferenceDataModel.h; sourceTree = SOURCE_ROOT; };
 		B7E024C31CC5089E00707552 /* ConferenceDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConferenceDataModel.m; sourceTree = SOURCE_ROOT; };
@@ -1150,6 +1153,15 @@
 			name = Webservice;
 			sourceTree = "<group>";
 		};
+		B7DDCF541D2FB0A800FD9D0F /* MessagesModel */ = {
+			isa = PBXGroup;
+			children = (
+				B7DDCF551D2FB12300FD9D0F /* MessagesDataModel.h */,
+				B7DDCF561D2FB12300FD9D0F /* MessagesDataModel.m */,
+			);
+			name = MessagesModel;
+			sourceTree = "<group>";
+		};
 		B7E024BD1CC4B8B600707552 /* MoreViewController */ = {
 			isa = PBXGroup;
 			children = (
@@ -1216,6 +1228,7 @@
 		B7EAC1771CC5DDF8001C4EEC /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
+				B7DDCF541D2FB0A800FD9D0F /* MessagesModel */,
 				B7B116A01D1D52ED00D3D6DC /* PendingAppointmentModel */,
 				B7B1169C1D1D28C400D3D6DC /* ContactModel */,
 				B782C25A1D1A4F2B000459C4 /* MatchesModel */,
@@ -1722,6 +1735,7 @@
 				B73616F01D12CE3100194588 /* NSObject+SBJSON.m in Sources */,
 				B7EAC1701CC5D58F001C4EEC /* UserService.m in Sources */,
 				B7A8DD6A1CAE2BF2007F56B6 /* main.m in Sources */,
+				B7DDCF571D2FB12300FD9D0F /* MessagesDataModel.m in Sources */,
 				B77695A31CBF594E00794005 /* UIView+RoundedCorner.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

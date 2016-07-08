@@ -74,7 +74,7 @@
           else {
               SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
               [alert addButton:@"Ok" actionBlock:^(void) {
-                  [self logoutUser];
+                  [[Webservice sharedManager] logoutUser];
               }];
               [alert showWarning:nil title:@"Alert" subTitle:responseObject[@"message"] closeButtonTitle:nil duration:0.0f];
           }
@@ -85,16 +85,6 @@
          failure(error);
      }];
 
-}
-- (void)logoutUser
-{
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    
-    myDelegate.navigationController = [storyboard instantiateViewControllerWithIdentifier:@"mainNavController"];
-    
-    myDelegate.window.rootViewController = myDelegate.navigationController;
-    [UserDefaultManager removeValue:@"userId"];
-    [UserDefaultManager removeValue:@"username"];
 }
 #pragma mark - end
 

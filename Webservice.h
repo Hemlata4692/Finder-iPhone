@@ -23,4 +23,5 @@
 - (void)postImage:(NSString *)path parameters:(NSDictionary *)parameters image:(UIImage *)image success:(void (^)(id))success failure:(void (^)(NSError *))failure;
 
 - (BOOL)isStatusOK:(id)responseObject;
+- (void)logoutUser;
 @end

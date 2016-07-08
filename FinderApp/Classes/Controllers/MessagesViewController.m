@@ -9,19 +9,28 @@
 #import "MessagesViewController.h"
 #import "PersonalMessageViewController.h"
 #import "MessagesViewCell.h"
+#import "MessageService.h"
+#import "MessagesDataModel.h"
 
 @interface MessagesViewController ()
+{
+    NSMutableArray *messagesDataArray;
+}
 @property (weak, nonatomic) IBOutlet UITableView *messagesTableView;
 
 @end
 
 @implementation MessagesViewController
+@synthesize messagesTableView;
 
 #pragma mark - View life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title=@"Messages";
     myDelegate.currentNavigationController=self.navigationController;
+    messagesDataArray=[[NSMutableArray alloc]init];
+    [myDelegate showIndicator];
+    [self performSelector:@selector(getDifferentMessages) withObject:nil afterDelay:.1];
     // Do any additional setup after loading the view.
 }
 
@@ -34,9 +43,24 @@
 }
 #pragma mark - end
 
+#pragma mark - Webservice
+-(void)getDifferentMessages {
+    [[MessageService sharedManager] getDifferentMessage:^(id dataArray) {
+        [myDelegate stopIndicator];
+        messagesDataArray=[dataArray mutableCopy];
+        [messagesTableView reloadData];
+        
+    }
+                                        failure:^(NSError *error)
+     {
+         
+     }] ;
+}
+#pragma mark - end
+
 #pragma mark - Table view delegate methods
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return 6;
+    return messagesDataArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -46,13 +70,14 @@
         messagesCell = [[MessagesViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     }
     [messagesCell.messageViewContainer addShadow:messagesCell.messageViewContainer color:[UIColor lightGrayColor]];
-    [messagesCell.userImage setCornerRadius:messagesCell.userImage.frame.size.width/2];
-    [messagesCell.messageCountLabel setCornerRadius:messagesCell.messageCountLabel.frame.size.width/2];
+    MessagesDataModel *data=[messagesDataArray objectAtIndex:indexPath.row];
+    [messagesCell displayMessageData:data indexPath:(int)indexPath.row rectSize:messagesCell.frame.size];
     return messagesCell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     PersonalMessageViewController *msgView =[storyboard instantiateViewControllerWithIdentifier:@"PersonalMessageViewController"];
+    msgView.otherUserId=[[messagesDataArray objectAtIndex:indexPath.row] otherUserId];
     [self.navigationController pushViewController:msgView animated:YES];
 }
 #pragma mark - end

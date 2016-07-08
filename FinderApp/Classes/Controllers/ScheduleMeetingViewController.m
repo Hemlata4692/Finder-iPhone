@@ -404,29 +404,6 @@
             }
     }
     
-
-//    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-//    [formatter setDateFormat:@"HH:mm"];
-//    
-//    NSDate *date1= [formatter dateFromString:fromTimeTextField.text];
-//    NSDate *date2 = [formatter dateFromString:toTimeTextField.text];
-//    
-//    NSComparisonResult result = [date1 compare:date2];
-//    if(result == NSOrderedDescending)
-//    {
-//        NSLog(@"date1 is later than date2");
-//        SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
-//        [alert showWarning:self title:@"Alert" subTitle:@"Please enter a valid linked in link." closeButtonTitle:@"Done" duration:0.0f];
-//    }
-//    else if(result == NSOrderedAscending)
-//    {
-//        NSLog(@"date2 is later than date1");
-//        
-//    }
-//    else
-//    {
-//        NSLog(@"date1 is equal to date2");
-//    }
 }
 -(void)scheduleMeeting {
     
