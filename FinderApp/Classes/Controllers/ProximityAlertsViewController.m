@@ -35,6 +35,13 @@
     myDelegate.currentNavigationController=self.navigationController;
     [myDelegate showIndicator];
     [self performSelector:@selector(getProximityAlerts) withObject:nil afterDelay:.1];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(proximityAlerts) name:@"ProximityAlerts" object:nil];
+}
+-(void)proximityAlerts{
+    [myDelegate removeBadgeIconLastTab];
+    [myDelegate showIndicator];
+    [self performSelector:@selector(getProximityAlerts) withObject:nil afterDelay:0.1];
 }
 -(void)viewWillAppear:(BOOL)animated{
     

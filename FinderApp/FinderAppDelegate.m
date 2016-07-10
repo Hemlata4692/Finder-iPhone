@@ -222,7 +222,7 @@
 //}
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
-   // NSLog(@"location updating2222");
+    // NSLog(@"location updating2222");
     CLLocation *newLocation = (CLLocation *)[locations lastObject];
     CLLocationCoordinate2D cordinates = newLocation.coordinate;
     //NSLog(@"***************************My Loaction---->%f, %f*************************** ", cordinates.latitude, cordinates.longitude);
@@ -297,7 +297,7 @@
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"8"]) {
             alert = [[MyAlert alloc] initWithTitle:@"Proximity Alerts" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel"];
         }
-
+        
     }
     else {
         if ([[alertDict objectForKey:@"type"] isEqualToString:@"1"]) {
@@ -314,9 +314,9 @@
             self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
             [self.window setRootViewController:objView];
             [self.window makeKeyAndVisible];
-
+            
         }
-
+        
     }
     
 }
@@ -325,10 +325,10 @@
     
     if (option == 0) {
         if ([[alertDict objectForKey:@"type"] isEqualToString:@"1"]) {
-             NSLog(@"alert 1");
+            NSLog(@"alert 1");
             UIStoryboard *sb=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
             OtherUserProfileViewController *view1=[sb instantiateViewControllerWithIdentifier:@"OtherUserProfileViewController"];
-        view1.viewType=@"Matches";
+            view1.viewType=@"Matches";
             view1.isRequestArrived=@"T";
             view1.otherUserId=[alertDict objectForKey:@"otherUserId"];
             [self.currentNavigationController pushViewController:view1 animated:YES];
@@ -336,15 +336,15 @@
         
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"2"]) {
             [[ConferenceService sharedManager] acceptCancelMeeting:[alertDict objectForKey:@"appointmentId"] meetingUserId:[alertDict objectForKey:@"meetinguserId"] flag:@"accept" type:@"requested" success:^(id responseObject) {
-                 NSLog(@"calendar type 2");
+                NSLog(@"calendar type 2");
                 if ([myDelegate.myView isEqualToString:@"CalendarViewController"]) {
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"CalendarDetails" object:nil];
-                      NSLog(@"calendar type 2 after success");
+                    NSLog(@"calendar type 2 after success");
                 }
-//                else if ([myDelegate.myView isEqualToString:@"PendingViewController"]) {
-//                    alertType=@"2";
-//                    [[NSNotificationCenter defaultCenter] postNotificationName:@"Pending" object:nil];
-//                }
+                //                else if ([myDelegate.myView isEqualToString:@"PendingViewController"]) {
+                //                    alertType=@"2";
+                //                    [[NSNotificationCenter defaultCenter] postNotificationName:@"Pending" object:nil];
+                //                }
                 
             }
                                                            failure:^(NSError *error)
@@ -358,38 +358,46 @@
             }
             
         }
-
+        
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"4"]) {
             if ([myDelegate.myView isEqualToString:@"MatchesViewController"]) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"MatchesDetails" object:nil];
             }
-
+            
         }
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"5"]) {
             if ([myDelegate.myView isEqualToString:@"CalendarViewController"]) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"CalendarDetails" object:nil];
             }
-           else if ([myDelegate.myView isEqualToString:@"PendingViewController"]) {
+            else if ([myDelegate.myView isEqualToString:@"PendingViewController"]) {
                 alertType=@"5";
-               NSLog(@"accepted");
+                NSLog(@"accepted");
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"Requested" object:nil];
             }
         }
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"6"]) {
-                if ([myDelegate.myView isEqualToString:@"CalendarViewController"]) {
-                    [[NSNotificationCenter defaultCenter] postNotificationName:@"CalendarDetails" object:nil];
-                }
-                else if ([myDelegate.myView isEqualToString:@"PendingViewController"]) {
-                     alertType=@"6";
-                    [[NSNotificationCenter defaultCenter] postNotificationName:@"Requested" object:nil];
-                }
+            if ([myDelegate.myView isEqualToString:@"CalendarViewController"]) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"CalendarDetails" object:nil];
             }
+            else if ([myDelegate.myView isEqualToString:@"PendingViewController"]) {
+                alertType=@"6";
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"Requested" object:nil];
+            }
+        }
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"7"]) {
             if ([myDelegate.myView isEqualToString:@"ConferenceViewController"]) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"Conference" object:nil];
             }
+            
         }
-//ConferenceViewController
+        else if ([[alertDict objectForKey:@"type"] isEqualToString:@"8"]) {
+            if ([myDelegate.myView isEqualToString:@"ProximityAlertsViewController"]) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"ProximityAlerts" object:nil];
+            }
+            
+        }
+
+        //ConferenceViewController
         NSLog(@"view");
     }
     else if(option == 1) {

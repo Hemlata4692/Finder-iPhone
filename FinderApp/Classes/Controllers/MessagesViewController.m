@@ -29,8 +29,7 @@
     self.navigationItem.title=@"Messages";
     myDelegate.currentNavigationController=self.navigationController;
     messagesDataArray=[[NSMutableArray alloc]init];
-    [myDelegate showIndicator];
-    [self performSelector:@selector(getDifferentMessages) withObject:nil afterDelay:.1];
+    
     // Do any additional setup after loading the view.
 }
 
@@ -40,6 +39,8 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    [myDelegate showIndicator];
+    [self performSelector:@selector(getDifferentMessages) withObject:nil afterDelay:.1];
 }
 #pragma mark - end
 

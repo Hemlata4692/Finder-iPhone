@@ -940,7 +940,7 @@
                                                             <color key="textColor" red="0.33725490196078434" green="0.33725490196078434" blue="0.33725490196078434" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p6p-rj-pKI" customClass="MyButton">
+                                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p6p-rj-pKI" customClass="MyButton">
                                                             <rect key="frame" x="166" y="3" width="46" height="30"/>
                                                             <state key="normal" title="Button"/>
                                                         </button>
@@ -977,10 +977,6 @@
                                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1MI-hv-wuI" customClass="MyButton">
-                                                            <rect key="frame" x="115" y="7" width="46" height="30"/>
-                                                            <state key="normal" title="Button"/>
-                                                        </button>
                                                     </subviews>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </view>
@@ -991,7 +987,6 @@
                                             <outlet property="otherUserMessageConatinerView" destination="9Xm-js-JQO" id="DtB-gO-g9Z"/>
                                             <outlet property="otherUserMessageLabel" destination="ofY-Sg-fb3" id="n9F-rQ-s7c"/>
                                             <outlet property="outgoingBubbleImage" destination="scd-7Q-v4y" id="40d-wk-N5V"/>
-                                            <outlet property="retryOtherButton" destination="1MI-hv-wuI" id="hOb-Bg-3Di"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
