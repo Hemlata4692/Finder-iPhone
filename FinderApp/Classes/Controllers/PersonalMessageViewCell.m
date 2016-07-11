@@ -26,52 +26,59 @@
     // Configure the view for the selected state
 }
 #pragma mark - end
--(void)layoutView : (CGRect )rect
+
+#pragma mark - Display data
+-(void)displayUserMessage:(MessageHistoryDataModel *)messageHistory indexPath:(int)indexPath rectSize:(CGSize)rectSize
 {
     meUserDateLabel.translatesAutoresizingMaskIntoConstraints=YES;
     meUserMessageLabel.translatesAutoresizingMaskIntoConstraints=YES;
     incomingBubbleImage.translatesAutoresizingMaskIntoConstraints=YES;
-  
-    otherUserDateLabel.translatesAutoresizingMaskIntoConstraints=YES;
-    otherUserMessageLabel.translatesAutoresizingMaskIntoConstraints=YES;
-    outgoingBubbleImage.translatesAutoresizingMaskIntoConstraints=YES;
+  //outgoing
     
+    CGFloat marginLeft = 20;
+    CGFloat marginRight = 20;
     
-    CGFloat marginLeft = 5;
-    CGFloat marginRight = 2;
+   CGSize size = CGSizeMake(rectSize.width-20,999);
+   CGRect textRect=[self setDynamicHeight:size textString:@"gv erger grg grgher gu ergrgr ghev erhyergv ergvhrugv ergvugvu gvyv v rjrgvu erhvergvuer hvrug ruhverug verhverv ierhvyerg vergvuy evehrvyg vuervgef vgv erhveruvregi fyer erg erygr erer gv erger grg grgher gu ergrgr ghev erhyergv ergvhrugv ergvugvu gvyv v rjrgvu erhvergvuer hvrug ruhverug verhverv ierhvyerg vergvuy evehrvyg vuervgef vgv erhveruvregi fyer erg erygr erer gv erger grg grgher gu ergrgr ghev erhyergv ergvhrugv ergvugvu gvyv v rjrgvu erhvergvuer hvrug ruhverug verhverv ierhvyerg vergvuy evehrvyg vuervgef vgv erhveruvregi fyer erg erygr erer gv erger grg grgher gu ergrgr ghev erhyergv ergvhrugv ergvugvu gvyv v rjrgvu erhvergvuer hvrug ruhverug verhverv ierhvyerg vergvuy evehrvyg vuervgef vgv erhveruvregi fyer erg erygr erer hema" fontSize:[UIFont fontWithName:@"Roboto-Regular" size:13]];
+    meUserMessageLabel.numberOfLines = 0;
     
     //Bubble positions
     CGFloat bubble_x;
-    CGFloat bubble_y = 0;
-    CGFloat bubble_width;
-    CGFloat bubble_height = (meUserMessageLabel.frame.size.height);
+    CGFloat bubble_y = 5;
+    CGFloat bubble_width = textRect.size.width;
+    CGFloat bubble_height = textRect.size.height;
+    meUserMessageLabel.text=@"gv erger grg grgher gu ergrgr ghev erhyergv ergvhrugv ergvugvu gvyv v rjrgvu erhvergvuer hvrug ruhverug verhverv ierhvyerg vergvuy evehrvyg vuervgef vgv erhveruvregi fyer erg erygr erer gv erger grg grgher gu ergrgr ghev erhyergv ergvhrugv ergvugvu gvyv v rjrgvu erhvergvuer hvrug ruhverug verhverv ierhvyerg vergvuy evehrvyg vuervgef vgv erhveruvregi fyer erg erygr erer gv erger grg grgher gu ergrgr ghev erhyergv ergvhrugv ergvugvu gvyv v rjrgvu erhvergvuer hvrug ruhverug verhverv ierhvyerg vergvuy evehrvyg vuervgef vgv erhveruvregi fyer erg erygr erer gv erger grg grgher gu ergrgr ghev erhyergv ergvhrugv ergvugvu gvyv v rjrgvu erhvergvuer hvrug ruhverug verhverv ierhvyerg vergvuy evehrvyg vuervgef vgv erhveruvregi fyer erg erygr erer hema";
+    meUserMessageLabel.textColor=[UIColor redColor];
+    meUserMessageLabel.backgroundColor=[UIColor clearColor];
     
-    //    if (_message.sender == MessageSenderMyself)
-    //    {
-    
-    bubble_x = (incomingBubbleImage.frame.origin.x -marginLeft);
+    bubble_x = (rectSize.width-textRect.size.width)+marginLeft;
     
     incomingBubbleImage.image = [[UIImage imageNamed:@"outgoing"]
-                                stretchableImageWithLeftCapWidth:15 topCapHeight:14];
+                                stretchableImageWithLeftCapWidth:15 topCapHeight:15];
     
     
-    bubble_width = meUserMessageLabel.frame.size.width - bubble_x - marginRight;
-    //bubble_width -= [self isStatusFailedCase]?[self fail_delta]:0.0;
-    // }
-    // else
-    //    {
-    //        bubble_x = marginRight;
-    //
-    //        _bubbleImage.image = [[UIImage imageNamed:@"bubbleSomeone"]
-    //                              stretchableImageWithLeftCapWidth:21 topCapHeight:14];
-    //
-    //        bubble_width = MAX(_textView.frame.origin.x + _textView.frame.size.width + marginLeft,
-    //                           _timeLabel.frame.origin.x + _timeLabel.frame.size.width + 2*marginLeft);
-    //    }
+    bubble_width = (textRect.size.width - bubble_x )+marginRight;
     
-    incomingBubbleImage.frame = CGRectMake(bubble_x, bubble_y, bubble_width, bubble_height);
-     incomingBubbleImage.autoresizingMask = meUserMessageLabel.autoresizingMask;
+    incomingBubbleImage.frame = CGRectMake(bubble_x, bubble_y, bubble_width, bubble_height+20);
+    meUserMessageLabel.frame=CGRectMake(bubble_x+5, bubble_y+5, bubble_width-5, textRect.size.height);
+    incomingBubbleImage.autoresizingMask = meUserMessageLabel.autoresizingMask;
     
 
+}
+-(CGRect)setDynamicHeight:(CGSize)rectSize textString:(NSString *)textString fontSize:(UIFont *)fontSize{
+    CGRect textHeight = [textString
+                         boundingRectWithSize:rectSize
+                         options:NSStringDrawingUsesLineFragmentOrigin
+                         attributes:@{NSFontAttributeName:fontSize}
+                         context:nil];
+    return textHeight;
+}
+
+#pragma mark - end
+
+-(void)displayOtherUserMessage:(MessageHistoryDataModel *)messageHistoryData indexPath:(int)indexPath rectSize:(CGSize)rectSize {
+    otherUserDateLabel.translatesAutoresizingMaskIntoConstraints=YES;
+    otherUserMessageLabel.translatesAutoresizingMaskIntoConstraints=YES;
+    outgoingBubbleImage.translatesAutoresizingMaskIntoConstraints=YES;
 }
 @end

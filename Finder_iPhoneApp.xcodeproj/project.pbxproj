@@ -87,6 +87,7 @@
 		B7A8DDCE1CAE5C32007F56B6 /* NullValueChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = B7A8DDCD1CAE5C32007F56B6 /* NullValueChecker.m */; };
 		B7A8DDDC1CAE5FC8007F56B6 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7A8DDDB1CAE5FC8007F56B6 /* LoginViewController.m */; };
 		B7A8DDDF1CAE60BB007F56B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B7A8DDDD1CAE60BB007F56B6 /* Main.storyboard */; };
+		B7B014E21D334F5500FC9851 /* MessageHistoryDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B7B014E11D334F5500FC9851 /* MessageHistoryDataModel.m */; };
 		B7B1169B1D1D042600D3D6DC /* MeetingDescriptionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B7B1169A1D1D042600D3D6DC /* MeetingDescriptionViewController.m */; };
 		B7B1169F1D1D28E100D3D6DC /* ContactDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B7B1169E1D1D28E100D3D6DC /* ContactDataModel.m */; };
 		B7B116A31D1D533D00D3D6DC /* PendingAppointmentDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B7B116A21D1D533D00D3D6DC /* PendingAppointmentDataModel.m */; };
@@ -304,6 +305,8 @@
 		B7A8DDDA1CAE5FC8007F56B6 /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		B7A8DDDB1CAE5FC8007F56B6 /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		B7A8DDDE1CAE60BB007F56B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B7B014E01D334F5500FC9851 /* MessageHistoryDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageHistoryDataModel.h; sourceTree = SOURCE_ROOT; };
+		B7B014E11D334F5500FC9851 /* MessageHistoryDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageHistoryDataModel.m; sourceTree = SOURCE_ROOT; };
 		B7B116991D1D042600D3D6DC /* MeetingDescriptionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MeetingDescriptionViewController.h; sourceTree = "<group>"; };
 		B7B1169A1D1D042600D3D6DC /* MeetingDescriptionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MeetingDescriptionViewController.m; sourceTree = "<group>"; };
 		B7B1169D1D1D28E100D3D6DC /* ContactDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactDataModel.h; sourceTree = SOURCE_ROOT; };
@@ -1158,6 +1161,8 @@
 			children = (
 				B7DDCF551D2FB12300FD9D0F /* MessagesDataModel.h */,
 				B7DDCF561D2FB12300FD9D0F /* MessagesDataModel.m */,
+				B7B014E01D334F5500FC9851 /* MessageHistoryDataModel.h */,
+				B7B014E11D334F5500FC9851 /* MessageHistoryDataModel.m */,
 			);
 			name = MessagesModel;
 			sourceTree = "<group>";
@@ -1724,6 +1729,7 @@
 				5D93619D1CC606190004F030 /* MatchesTableViewCell.m in Sources */,
 				B78405B01CDB72A700CD7D54 /* ASValueTrackingSlider.m in Sources */,
 				B7C018C41CD0708B006773CB /* PersonalMessageViewController.m in Sources */,
+				B7B014E21D334F5500FC9851 /* MessageHistoryDataModel.m in Sources */,
 				B74B36D01D1B8EBA006CD64B /* UIView+Toast.m in Sources */,
 				B73616F21D12CE3100194588 /* SBJsonBase.m in Sources */,
 				B7414F921CCA4715009FE9CE /* MyAlert.m in Sources */,

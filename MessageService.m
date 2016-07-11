@@ -8,6 +8,7 @@
 
 #import "MessageService.h"
 #import "MessagesDataModel.h"
+#import "MessageHistoryDataModel.h"
 
 #define kUrlSendMessage       @"sendmessage"
 #define kUrlMessages          @"getdifferentchats"
@@ -118,7 +119,7 @@
 }
 #pragma mark - end
 
-//{userId:"20", otherUserId:" ",conferenceId:"1",readStatus:"True/False", pageOffSet:"0"}
+#pragma mark - Message History
 -(void)getMessageHistory:(NSString *)otherUserId readStatus:(NSString *)readStatus pageOffSet:(NSString *)pageOffSet success:(void (^)(id))success failure:(void (^)(NSError *))failure {
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"],@"otherUserId":otherUserId,@"readStatus":readStatus,@"pageOffSet":pageOffSet};
     NSLog(@"get message history %@",requestDict);
@@ -127,26 +128,30 @@
         NSLog(@"get message response history %@",responseObject);
         NSNumber *number = responseObject[@"isSuccess"];
         if (number.integerValue==1) {
-//            id array =[responseObject objectForKey:@"userChatList"];
-//            if (([array isKindOfClass:[NSArray class]])) {
-//                NSArray * messagesArray = [responseObject objectForKey:@"userChatList"];
-//                NSMutableArray *dataArray = [NSMutableArray new];
-//                for (int i =0; i<messagesArray.count; i++) {
-//                    MessagesDataModel *messageDetails = [[MessagesDataModel alloc]init];
-//                    NSDictionary * messageDict =[messagesArray objectAtIndex:i];
-//                    NSArray* tempDate = [[messageDict objectForKey:@"date"] componentsSeparatedByString: @" "];
-//                    NSString* dateString = [tempDate objectAtIndex: 0];
-//                    messageDetails.messageDate =dateString;
-//                    messageDetails.messageCount =[messageDict objectForKey:@"messageCount"];
-//                    messageDetails.otherUserId =[messageDict objectForKey:@"otherUserId"];
-//                    messageDetails.userName =[messageDict objectForKey:@"userName"];
-//                    messageDetails.userProfileImage =[messageDict objectForKey:@"userProfileImage"];
-//                    messageDetails.lastMessage =[messageDict objectForKey:@"lastMessage"];
-//                    [dataArray addObject:messageDetails];
-//                }
-//                success(dataArray);
-//            }
-            success(responseObject);
+            id array =[responseObject objectForKey:@"chatDetails"];
+            if (([array isKindOfClass:[NSArray class]])) {
+                NSArray * messagesArray = [responseObject objectForKey:@"chatDetails"];
+                NSMutableArray *dataArray = [NSMutableArray new];
+                for (int i =0; i<messagesArray.count; i++) {
+                    MessagesDataModel *messageDetails = [[MessagesDataModel alloc]init];
+                    messageDetails.messagesHistoryArray=[[NSMutableArray alloc]init];
+                    NSDictionary * messageDict =[messagesArray objectAtIndex:i];
+                    NSArray* tempDate = [[messageDict objectForKey:@"messageDate"] componentsSeparatedByString: @" "];
+                    NSString* dateString = [tempDate objectAtIndex: 0];
+                    messageDetails.messageDate =dateString;
+                    NSMutableArray *tempArray=[messageDict objectForKey:@"chatHistory"];
+                    for (int j=0; j<tempArray.count; j++) {
+                        NSDictionary * messageHistoryDict =[tempArray objectAtIndex:j];
+                        MessageHistoryDataModel *messageHistory = [[MessageHistoryDataModel alloc]init];
+                        messageHistory.dateTime =[messageHistoryDict objectForKey:@"messageDate"];
+                        messageHistory.userId =[messageHistoryDict objectForKey:@"userId"];
+                        messageHistory.userMessage =[messageHistoryDict objectForKey:@"userMessage"];
+                        [messageDetails.messagesHistoryArray addObject:messageHistory];
+                    }
+                    [dataArray addObject:messageDetails];
+                }
+                 success(dataArray);
+            }
         }
         else if(number.integerValue==0) {
             [myDelegate stopIndicator];
@@ -167,5 +172,6 @@
      }];
 
 }
+#pragma mark - end
 
 @end

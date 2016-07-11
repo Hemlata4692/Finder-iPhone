@@ -15,4 +15,5 @@
 @property(nonatomic,retain)NSString * userName;
 @property(nonatomic,retain)NSString * userProfileImage;
 @property(nonatomic,retain)NSString * lastMessage;
+@property(nonatomic,retain)NSMutableArray * messagesHistoryArray;
 @end

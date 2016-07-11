@@ -15,4 +15,5 @@
 @synthesize userName;
 @synthesize userProfileImage;
 @synthesize lastMessage;
+@synthesize messagesHistoryArray;
 @end
