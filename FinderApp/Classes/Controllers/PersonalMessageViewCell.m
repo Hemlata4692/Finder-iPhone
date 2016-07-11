@@ -22,7 +22,7 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
+    
     // Configure the view for the selected state
 }
 #pragma mark - end
@@ -33,13 +33,9 @@
     meUserDateLabel.translatesAutoresizingMaskIntoConstraints=YES;
     meUserMessageLabel.translatesAutoresizingMaskIntoConstraints=YES;
     incomingBubbleImage.translatesAutoresizingMaskIntoConstraints=YES;
-  //outgoing
     
-    CGFloat marginLeft = 20;
-    CGFloat marginRight = 20;
-    
-   CGSize size = CGSizeMake(rectSize.width-20,999);
-   CGRect textRect=[self setDynamicHeight:size textString:@"gv erger grg grgher gu ergrgr ghev erhyergv ergvhrugv ergvugvu gvyv v rjrgvu erhvergvuer hvrug ruhverug verhverv ierhvyerg vergvuy evehrvyg vuervgef vgv erhveruvregi fyer erg erygr erer gv erger grg grgher gu ergrgr ghev erhyergv ergvhrugv ergvugvu gvyv v rjrgvu erhvergvuer hvrug ruhverug verhverv ierhvyerg vergvuy evehrvyg vuervgef vgv erhveruvregi fyer erg erygr erer gv erger grg grgher gu ergrgr ghev erhyergv ergvhrugv ergvugvu gvyv v rjrgvu erhvergvuer hvrug ruhverug verhverv ierhvyerg vergvuy evehrvyg vuervgef vgv erhveruvregi fyer erg erygr erer gv erger grg grgher gu ergrgr ghev erhyergv ergvhrugv ergvugvu gvyv v rjrgvu erhvergvuer hvrug ruhverug verhverv ierhvyerg vergvuy evehrvyg vuervgef vgv erhveruvregi fyer erg erygr erer hema" fontSize:[UIFont fontWithName:@"Roboto-Regular" size:13]];
+    CGSize size = CGSizeMake(rectSize.width-50,999);
+    CGRect textRect=[self setDynamicHeight:size textString:messageHistory.userMessage fontSize:[UIFont fontWithName:@"Roboto-Regular" size:13]];
     meUserMessageLabel.numberOfLines = 0;
     
     //Bubble positions
@@ -47,23 +43,23 @@
     CGFloat bubble_y = 5;
     CGFloat bubble_width = textRect.size.width;
     CGFloat bubble_height = textRect.size.height;
-    meUserMessageLabel.text=@"gv erger grg grgher gu ergrgr ghev erhyergv ergvhrugv ergvugvu gvyv v rjrgvu erhvergvuer hvrug ruhverug verhverv ierhvyerg vergvuy evehrvyg vuervgef vgv erhveruvregi fyer erg erygr erer gv erger grg grgher gu ergrgr ghev erhyergv ergvhrugv ergvugvu gvyv v rjrgvu erhvergvuer hvrug ruhverug verhverv ierhvyerg vergvuy evehrvyg vuervgef vgv erhveruvregi fyer erg erygr erer gv erger grg grgher gu ergrgr ghev erhyergv ergvhrugv ergvugvu gvyv v rjrgvu erhvergvuer hvrug ruhverug verhverv ierhvyerg vergvuy evehrvyg vuervgef vgv erhveruvregi fyer erg erygr erer gv erger grg grgher gu ergrgr ghev erhyergv ergvhrugv ergvugvu gvyv v rjrgvu erhvergvuer hvrug ruhverug verhverv ierhvyerg vergvuy evehrvyg vuervgef vgv erhveruvregi fyer erg erygr erer hema";
-    meUserMessageLabel.textColor=[UIColor redColor];
+    meUserMessageLabel.text=messageHistory.userMessage;
+    
     meUserMessageLabel.backgroundColor=[UIColor clearColor];
     
-    bubble_x = (rectSize.width-textRect.size.width)+marginLeft;
+    bubble_x = ((rectSize.width)-(textRect.size.width+20));
     
     incomingBubbleImage.image = [[UIImage imageNamed:@"outgoing"]
-                                stretchableImageWithLeftCapWidth:15 topCapHeight:15];
+                                 stretchableImageWithLeftCapWidth:15 topCapHeight:15];
     
     
-    bubble_width = (textRect.size.width - bubble_x )+marginRight;
+    bubble_width = textRect.size.width+20;
     
     incomingBubbleImage.frame = CGRectMake(bubble_x, bubble_y, bubble_width, bubble_height+20);
-    meUserMessageLabel.frame=CGRectMake(bubble_x+5, bubble_y+5, bubble_width-5, textRect.size.height);
+    meUserMessageLabel.frame=CGRectMake(bubble_x+5, bubble_y+5, bubble_width-10, textRect.size.height);
     incomingBubbleImage.autoresizingMask = meUserMessageLabel.autoresizingMask;
     
-
+    
 }
 -(CGRect)setDynamicHeight:(CGSize)rectSize textString:(NSString *)textString fontSize:(UIFont *)fontSize{
     CGRect textHeight = [textString
@@ -80,5 +76,30 @@
     otherUserDateLabel.translatesAutoresizingMaskIntoConstraints=YES;
     otherUserMessageLabel.translatesAutoresizingMaskIntoConstraints=YES;
     outgoingBubbleImage.translatesAutoresizingMaskIntoConstraints=YES;
+    CGSize size = CGSizeMake(rectSize.width-50,999);
+    CGRect textRect=[self setDynamicHeight:size textString:messageHistoryData.userMessage fontSize:[UIFont fontWithName:@"Roboto-Regular" size:13]];
+    otherUserMessageLabel.numberOfLines = 0;
+    
+    //Bubble positions
+    CGFloat bubble_x;
+    CGFloat bubble_y = 5;
+    CGFloat bubble_width = textRect.size.width;
+    CGFloat bubble_height = textRect.size.height;
+    otherUserMessageLabel.text=messageHistoryData.userMessage;
+    
+    otherUserMessageLabel.backgroundColor=[UIColor clearColor];
+    
+    bubble_x = 10;
+    
+    outgoingBubbleImage.image = [[UIImage imageNamed:@"incoming"]
+                                 stretchableImageWithLeftCapWidth:15 topCapHeight:15];
+    
+    
+    bubble_width = textRect.size.width+20;
+    
+    outgoingBubbleImage.frame = CGRectMake(bubble_x, bubble_y, bubble_width, bubble_height+20);
+    otherUserMessageLabel.frame=CGRectMake(bubble_x+10, bubble_y+5, bubble_width-10, textRect.size.height);
+    incomingBubbleImage.autoresizingMask = otherUserMessageLabel.autoresizingMask;
+
 }
 @end
