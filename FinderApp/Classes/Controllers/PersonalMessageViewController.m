@@ -149,13 +149,6 @@
     headerView.backgroundColor = [UIColor clearColor];
     UILabel * dateLabel = [[UILabel alloc] init];
     dateLabel.font = [UIFont fontWithName:@"Roboto-Regular" size:14.0];
-//    NSArray *dateStrings = [[[messageDateArray objectAtIndex:section]messageDate] componentsSeparatedByString:@" "];
-//    NSMutableString *string = [[NSMutableString alloc]init];
-//    NSString *result;
-//    for (int i=0; i<dateStrings.count-1; i++) {
-//        result = [dateStrings objectAtIndex:i];
-//        [string appendString:[NSString stringWithFormat:@"%@ ",result]];
-//    }
     dateLabel.text=[[messageDateArray objectAtIndex:section]messageDate];
     float width =  [dateLabel.text boundingRectWithSize:dateLabel.frame.size options:NSStringDrawingUsesLineFragmentOrigin attributes:@{ NSFontAttributeName:dateLabel.font } context:nil]
     .size.width;
