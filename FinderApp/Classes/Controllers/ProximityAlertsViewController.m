@@ -9,8 +9,13 @@
 #import "ProximityAlertsViewController.h"
 #import "ProximityAlertViewCell.h"
 #import "ScheduleMeetingViewController.h"
+#import "ConferenceService.h"
+#import "ContactDataModel.h"
 
 @interface ProximityAlertsViewController ()
+{
+    NSMutableArray *proximityDataArray;
+}
 @property (weak, nonatomic) IBOutlet UITableView *proximityAlertTableView;
 @end
 
@@ -23,6 +28,10 @@
     // Do any additional setup after loading the view.
     self.navigationItem.title=@"Proximity Alerts";
     myDelegate.currentNavigationController=self.navigationController;
+    NSLog(@"slider value %@",[[UserDefaultManager getValue:@"switchStatusDict"] objectForKey:@"02"]);
+    
+    [myDelegate showIndicator];
+    [self performSelector:@selector(getProximityAlerts) withObject:nil afterDelay:.1];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -42,7 +51,7 @@
         return 1;
     }
     else {
-        return 3;
+        return proximityDataArray.count;
     }
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -88,6 +97,9 @@
         [listCell.proximityListContainerView addShadow:listCell.proximityListContainerView color:[UIColor lightGrayColor]];
         [listCell.scheduleMeetingBtn addTarget:self action:@selector(scheduleMeeting:) forControlEvents:UIControlEventTouchUpInside];
         //  [settingsCell.switchBtn addTarget:self action:@selector(switchViewChanged:) forControlEvents:UIControlEventTouchUpInside];
+        
+        ContactDataModel *data=[proximityDataArray objectAtIndex:indexPath.row];
+        [listCell displayData:data indexPath:(int)indexPath.row];
         return listCell;
     }
 }
@@ -111,12 +123,30 @@
 - (IBAction)scheduleMeeting:(UIButton *)sender{
     UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     ScheduleMeetingViewController *scheduleMeeting =[storyboard instantiateViewControllerWithIdentifier:@"ScheduleMeetingViewController"];
-     scheduleMeeting.screenName=@"Proximity";
+    scheduleMeeting.screenName=@"Proximity";
     scheduleMeeting.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.1f];
     [scheduleMeeting setModalPresentationStyle:UIModalPresentationOverCurrentContext];
     
     [self presentViewController:scheduleMeeting animated: NO completion:nil];
     
 }
+- (IBAction)doneButtonAction:(id)sender {
+    [myDelegate showIndicator];
+    [self performSelector:@selector(getProximityAlerts) withObject:nil afterDelay:.1];
+}
 #pragma mark - end
+#pragma mark - Webservice
+-(void)getProximityAlerts{
+    
+    [[ConferenceService sharedManager] getproximityalerts:[[UserDefaultManager getValue:@"switchStatusDict"] objectForKey:@"02"]  success:^(id responseObject) {
+        [myDelegate stopIndicator];
+        proximityDataArray=[responseObject mutableCopy];
+        [proximityAlertTableView reloadData];
+    }
+                                                  failure:^(NSError *error)
+     {
+         
+     }] ;
+}
+
 @end

@@ -48,4 +48,8 @@
 -(void)acceptCancelMeeting:(NSString *)appointmentId meetingUserId:(NSString *)meetingUserId flag:(NSString *)flag type:(NSString *)type success:(void (^)(id))success failure:(void (^)(NSError *))failure;
 //end
 
+//Proximity alerts
+-(void)getproximityalerts:(NSString *)proximityRadius success:(void (^)(id))success failure:(void (^)(NSError *))failure;
+//end
+
 @end
