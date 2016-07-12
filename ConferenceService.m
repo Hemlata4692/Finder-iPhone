@@ -24,6 +24,7 @@
 #define kUrlPendingAppointment          @"pendingappointments"
 #define kUrlRequestedAppointment        @"requestedappointments"
 #define kUrlAcceptCancelAppointment     @"accpetcancelscheduledmeeting"
+#define kUrlgetproximityalerts          @"getproximityalerts"
 
 @implementation ConferenceService
 #pragma mark - Singleton instance
@@ -408,6 +409,42 @@
          failure(error);
      }];
 
+}
+#pragma mark - end
+#pragma mark - Proximity alerts
+-(void)getproximityalerts:(NSString *)proximityRadius success:(void (^)(id))success failure:(void (^)(NSError *))failure
+{
+    NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"],@"proximityRadius":proximityRadius};
+    NSLog(@"proximity radius request %@",requestDict);
+    [[Webservice sharedManager] post:kUrlgetproximityalerts parameters:requestDict success:^(id responseObject)
+     {
+         responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
+         NSLog(@"proximity radius response %@",responseObject);
+         if([[Webservice sharedManager] isStatusOK:responseObject]) {
+             id array =[responseObject objectForKey:@"proximityAlertList"];
+             if (([array isKindOfClass:[NSArray class]])) {
+                 NSArray * proximityRadiusArray = [responseObject objectForKey:@"proximityAlertList"];
+                 NSMutableArray *dataArray = [NSMutableArray new];
+                 for (int i =0; i<proximityRadiusArray.count; i++) {
+                     ContactDataModel *contactDetails = [[ContactDataModel alloc]init];
+                     NSDictionary * proximityRadiusDict =[proximityRadiusArray objectAtIndex:i];
+                     contactDetails.companyName =[proximityRadiusDict objectForKey:@"companyName"];
+                     contactDetails.contactName =[proximityRadiusDict objectForKey:@"userName"];
+                     contactDetails.contactUserId =[proximityRadiusDict objectForKey:@"otherUserId"];
+                     contactDetails.userImage =[proximityRadiusDict objectForKey:@"userProfileImage"];
+                     [dataArray addObject:contactDetails];
+                 }
+                 success(dataArray);
+             }
+         }
+         else {
+             [myDelegate stopIndicator];
+             failure(nil);
+         }
+     } failure:^(NSError *error) {
+         [myDelegate stopIndicator];
+         failure(error);
+     }];
 }
 #pragma mark - end
 @end
