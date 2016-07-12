@@ -295,7 +295,7 @@
             alert = [[MyAlert alloc] initWithTitle:@"New Conference Assigned" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel"];
         }
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"8"]) {
-            alert = [[MyAlert alloc] initWithTitle:@"New Conference Assigned" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel"];
+            alert = [[MyAlert alloc] initWithTitle:@"Proximity Alerts" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel"];
         }
 
     }
