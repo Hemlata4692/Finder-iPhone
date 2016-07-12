@@ -49,7 +49,7 @@
 //end
 
 //Proximity alerts
--(void)getproximityalerts:(NSString *)proximityRadius success:(void (^)(id))success failure:(void (^)(NSError *))failure;
+-(void)getProximityAlerts:(NSString *)proximityRadius success:(void (^)(id))success failure:(void (^)(NSError *))failure;
 //end
 
 @end

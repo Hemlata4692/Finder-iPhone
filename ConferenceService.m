@@ -412,7 +412,7 @@
 }
 #pragma mark - end
 #pragma mark - Proximity alerts
--(void)getproximityalerts:(NSString *)proximityRadius success:(void (^)(id))success failure:(void (^)(NSError *))failure
+-(void)getProximityAlerts:(NSString *)proximityRadius success:(void (^)(id))success failure:(void (^)(NSError *))failure
 {
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"],@"proximityRadius":proximityRadius};
     NSLog(@"proximity radius request %@",requestDict);
@@ -420,26 +420,34 @@
      {
          responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
          NSLog(@"proximity radius response %@",responseObject);
-         if([[Webservice sharedManager] isStatusOK:responseObject]) {
+         NSNumber *number = responseObject[@"isSuccess"];
+         if (number.integerValue==1) {
              id array =[responseObject objectForKey:@"proximityAlertList"];
              if (([array isKindOfClass:[NSArray class]])) {
                  NSArray * proximityRadiusArray = [responseObject objectForKey:@"proximityAlertList"];
                  NSMutableArray *dataArray = [NSMutableArray new];
                  for (int i =0; i<proximityRadiusArray.count; i++) {
-                     ContactDataModel *contactDetails = [[ContactDataModel alloc]init];
+                     ContactDataModel *proximityAlerts = [[ContactDataModel alloc]init];
                      NSDictionary * proximityRadiusDict =[proximityRadiusArray objectAtIndex:i];
-                     contactDetails.companyName =[proximityRadiusDict objectForKey:@"companyName"];
-                     contactDetails.contactName =[proximityRadiusDict objectForKey:@"userName"];
-                     contactDetails.contactUserId =[proximityRadiusDict objectForKey:@"otherUserId"];
-                     contactDetails.userImage =[proximityRadiusDict objectForKey:@"userProfileImage"];
-                     [dataArray addObject:contactDetails];
+                     proximityAlerts.companyName =[proximityRadiusDict objectForKey:@"companyName"];
+                     proximityAlerts.contactName =[proximityRadiusDict objectForKey:@"userName"];
+                     proximityAlerts.contactUserId =[proximityRadiusDict objectForKey:@"otherUserId"];
+                     proximityAlerts.userImage =[proximityRadiusDict objectForKey:@"userProfileImage"];
+                     [dataArray addObject:proximityAlerts];
                  }
                  success(dataArray);
              }
          }
-         else {
+         else if(number.integerValue==0) {
              [myDelegate stopIndicator];
-             failure(nil);
+             success(nil);
+         }
+         else {
+             SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
+             [alert addButton:@"Ok" actionBlock:^(void) {
+                 [[Webservice sharedManager] logoutUser];
+             }];
+             [alert showWarning:nil title:@"Alert" subTitle:responseObject[@"message"] closeButtonTitle:nil duration:0.0f];
          }
      } failure:^(NSError *error) {
          [myDelegate stopIndicator];

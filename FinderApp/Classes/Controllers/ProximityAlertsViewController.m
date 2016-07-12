@@ -16,11 +16,13 @@
 {
     NSMutableArray *proximityDataArray;
 }
+@property (weak, nonatomic) IBOutlet UILabel *noResultLabel;
 @property (weak, nonatomic) IBOutlet UITableView *proximityAlertTableView;
 @end
 
 @implementation ProximityAlertsViewController
 @synthesize proximityAlertTableView;
+@synthesize noResultLabel;
 
 #pragma mark - View life cycle
 - (void)viewDidLoad {
@@ -28,8 +30,6 @@
     // Do any additional setup after loading the view.
     self.navigationItem.title=@"Proximity Alerts";
     myDelegate.currentNavigationController=self.navigationController;
-    NSLog(@"slider value %@",[[UserDefaultManager getValue:@"switchStatusDict"] objectForKey:@"02"]);
-    
     [myDelegate showIndicator];
     [self performSelector:@selector(getProximityAlerts) withObject:nil afterDelay:.1];
 }
@@ -75,7 +75,6 @@
         [proximityCell.delegateRangeView addShadow:proximityCell.delegateRangeView color:[UIColor lightGrayColor]];
         proximityCell.sliderView.minimumValue=25;
         proximityCell.sliderView.maximumValue=200;
-        
         [proximityCell.sliderView setValue:[[[UserDefaultManager getValue:@"switchStatusDict"] objectForKey:@"02"] intValue]];
         [proximityCell.sliderView setMaxFractionDigitsDisplayed:0];
         proximityCell.sliderView.popUpViewColor = [UIColor colorWithRed:47.0/255.0 green:81.0/255.0 blue:116.0/255.0 alpha:1.0];
@@ -84,7 +83,6 @@
         proximityCell.sliderView.popUpViewWidthPaddingFactor = 1.7;
         [proximityCell.sliderView showPopUpViewAnimated:YES];
         [proximityCell.sliderView addTarget:self action:@selector(sliderValueChanged:) forControlEvents:UIControlEventValueChanged];
-        
         return proximityCell;
     }
     else {
@@ -96,7 +94,7 @@
         }
         [listCell.proximityListContainerView addShadow:listCell.proximityListContainerView color:[UIColor lightGrayColor]];
         [listCell.scheduleMeetingBtn addTarget:self action:@selector(scheduleMeeting:) forControlEvents:UIControlEventTouchUpInside];
-        //  [settingsCell.switchBtn addTarget:self action:@selector(switchViewChanged:) forControlEvents:UIControlEventTouchUpInside];
+          [listCell.sendMessageBtn addTarget:self action:@selector(sendMessage:) forControlEvents:UIControlEventTouchUpInside];
         
         ContactDataModel *data=[proximityDataArray objectAtIndex:indexPath.row];
         [listCell displayData:data indexPath:(int)indexPath.row];
@@ -113,14 +111,14 @@
 
 #pragma mark - IBActions
 //slider value
-- (IBAction)sliderValueChanged:(ASValueTrackingSlider *)slider{
+- (IBAction)sliderValueChanged:(ASValueTrackingSlider *)slider {
     [slider setValue:((int)((slider.value + 2.5) / 25) * 25)];
     NSMutableDictionary *tempDict=[[UserDefaultManager getValue:@"switchStatusDict"] mutableCopy];
     [tempDict setObject:[NSString stringWithFormat:@"%.2f", slider.value] forKey:@"02"];
     [UserDefaultManager setValue:tempDict key:@"switchStatusDict"];
 }
 
-- (IBAction)scheduleMeeting:(UIButton *)sender{
+- (IBAction)scheduleMeeting:(UIButton *)sender {
     UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     ScheduleMeetingViewController *scheduleMeeting =[storyboard instantiateViewControllerWithIdentifier:@"ScheduleMeetingViewController"];
     scheduleMeeting.screenName=@"Proximity";
@@ -130,6 +128,18 @@
     [self presentViewController:scheduleMeeting animated: NO completion:nil];
     
 }
+
+- (IBAction)sendMessage:(UIButton *)sender {
+    UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    ScheduleMeetingViewController *scheduleMeeting =[storyboard instantiateViewControllerWithIdentifier:@"ScheduleMeetingViewController"];
+    scheduleMeeting.screenName=@"Proximity";
+    scheduleMeeting.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.1f];
+    [scheduleMeeting setModalPresentationStyle:UIModalPresentationOverCurrentContext];
+    
+    [self presentViewController:scheduleMeeting animated: NO completion:nil];
+    
+}
+
 - (IBAction)doneButtonAction:(id)sender {
     [myDelegate showIndicator];
     [self performSelector:@selector(getProximityAlerts) withObject:nil afterDelay:.1];
@@ -138,10 +148,20 @@
 #pragma mark - Webservice
 -(void)getProximityAlerts{
     
-    [[ConferenceService sharedManager] getproximityalerts:[[UserDefaultManager getValue:@"switchStatusDict"] objectForKey:@"02"]  success:^(id responseObject) {
+    [[ConferenceService sharedManager] getProximityAlerts:[[UserDefaultManager getValue:@"switchStatusDict"] objectForKey:@"02"]  success:^(id dataArray) {
         [myDelegate stopIndicator];
-        proximityDataArray=[responseObject mutableCopy];
-        [proximityAlertTableView reloadData];
+         proximityDataArray=[dataArray mutableCopy];
+        if (proximityDataArray==nil) {
+            noResultLabel.hidden=NO;
+            noResultLabel.text=@"No result found.";
+            proximityAlertTableView.hidden=YES;
+        }
+        else {
+            proximityAlertTableView.hidden=NO;
+            noResultLabel.hidden=YES;
+            [proximityAlertTableView reloadData];
+        }
+
     }
                                                   failure:^(NSError *error)
      {

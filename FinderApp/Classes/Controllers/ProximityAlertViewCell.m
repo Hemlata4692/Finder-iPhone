@@ -22,6 +22,8 @@
     
     // Configure the view for the selected state
 }
+#pragma mark - end
+#pragma mark - Display data
 -(void)displayData:(ContactDataModel *)proximityDetails indexPath:(int)indexPath
 {
     nameLabel.text=proximityDetails.contactName;

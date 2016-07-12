@@ -934,6 +934,7 @@
 				B7EAC17B1CC5ECAB001C4EEC /* CalenderScheduleModule */,
 				B7EAC17A1CC5EC9E001C4EEC /* MessageModule */,
 				B7EAC1791CC5EC89001C4EEC /* MatchesModule */,
+				B70C5D781CE5936D0063246A /* ProximityAlerts */,
 				B7EAC1781CC5EC7A001C4EEC /* MoreModule */,
 			);
 			path = Controllers;
@@ -1251,7 +1252,6 @@
 				B75FCECA1D0E682100B8CE4C /* OtherUserProfile */,
 				B74DF9F91D0A794D002EC69E /* EditProfileView */,
 				B7339C251D0822D800D878FD /* MyProfileView */,
-				B70C5D781CE5936D0063246A /* ProximityAlerts */,
 				B762DB6A1CCDFACE002875A1 /* PendingAppointment */,
 				B7EAC17D1CC5ECE8001C4EEC /* SettingsView */,
 				5D32EC111CC4A32400C50969 /* MoreView */,

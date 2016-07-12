@@ -4269,6 +4269,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
+                        <outlet property="noResultLabel" destination="BAc-qt-281" id="aFr-9t-ZO5"/>
                         <outlet property="proximityAlertTableView" destination="cJe-xg-IjE" id="E7x-Zv-Jss"/>
                     </connections>
                 </viewController>
