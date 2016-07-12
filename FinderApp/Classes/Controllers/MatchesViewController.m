@@ -83,6 +83,9 @@
         profileView.screenName=@"Pending Appointments";
         [self.navigationController pushViewController:profileView animated:YES];
     }
+    else if ([myDelegate.alertType isEqualToString:@"8"]) {
+        myDelegate.tabBarView.selectedIndex = 2;
+    }
     [myDelegate showIndicator];
     [self performSelector:@selector(getMatchesDetails) withObject:nil afterDelay:.1];
 }
