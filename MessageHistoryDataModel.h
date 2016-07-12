@@ -12,4 +12,5 @@
 @property(nonatomic,retain)NSString * dateTime;
 @property(nonatomic,retain)NSString * userId;
 @property(nonatomic,retain)NSString * userMessage;
+@property(nonatomic,retain)NSString * messageSendingFailed;
 @end

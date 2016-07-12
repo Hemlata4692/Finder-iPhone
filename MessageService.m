@@ -91,6 +91,7 @@
                     messageDetails.messageCount =[messageDict objectForKey:@"messageCount"];
                     messageDetails.otherUserId =[messageDict objectForKey:@"otherUserId"];
                     messageDetails.userName =[messageDict objectForKey:@"userName"];
+
                     messageDetails.userProfileImage =[messageDict objectForKey:@"userProfileImage"];
                     messageDetails.lastMessage =[messageDict objectForKey:@"lastMessage"];
                     [dataArray addObject:messageDetails];
@@ -146,6 +147,7 @@
                         messageHistory.dateTime =[messageHistoryDict objectForKey:@"messageDate"];
                         messageHistory.userId =[messageHistoryDict objectForKey:@"userId"];
                         messageHistory.userMessage =[messageHistoryDict objectForKey:@"userMessage"];
+                        messageHistory.messageSendingFailed =@"No";
                         [messageDetails.messagesHistoryArray addObject:messageHistory];
                     }
                     [dataArray addObject:messageDetails];
