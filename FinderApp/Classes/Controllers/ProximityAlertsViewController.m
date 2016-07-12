@@ -11,10 +11,13 @@
 #import "ScheduleMeetingViewController.h"
 #import "ConferenceService.h"
 #import "ContactDataModel.h"
+#import "MyButton.h"
+#import "PersonalMessageViewController.h"
 
 @interface ProximityAlertsViewController ()
 {
     NSMutableArray *proximityDataArray;
+    int btnTag;
 }
 @property (weak, nonatomic) IBOutlet UILabel *noResultLabel;
 @property (weak, nonatomic) IBOutlet UITableView *proximityAlertTableView;
@@ -106,7 +109,8 @@
         [listCell.proximityListContainerView addShadow:listCell.proximityListContainerView color:[UIColor lightGrayColor]];
         [listCell.scheduleMeetingBtn addTarget:self action:@selector(scheduleMeeting:) forControlEvents:UIControlEventTouchUpInside];
           [listCell.sendMessageBtn addTarget:self action:@selector(sendMessage:) forControlEvents:UIControlEventTouchUpInside];
-        
+        listCell.scheduleMeetingBtn.Tag=(int)indexPath.row;
+        listCell.sendMessageBtn.Tag=(int)indexPath.row;
         ContactDataModel *data=[proximityDataArray objectAtIndex:indexPath.row];
         [listCell displayData:data indexPath:(int)indexPath.row];
         return listCell;
@@ -129,10 +133,13 @@
     [UserDefaultManager setValue:tempDict key:@"switchStatusDict"];
 }
 
-- (IBAction)scheduleMeeting:(UIButton *)sender {
+- (IBAction)scheduleMeeting:(MyButton *)sender {
+    btnTag=[sender Tag];
     UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     ScheduleMeetingViewController *scheduleMeeting =[storyboard instantiateViewControllerWithIdentifier:@"ScheduleMeetingViewController"];
     scheduleMeeting.screenName=@"Proximity";
+    scheduleMeeting.ContactName=[[proximityDataArray objectAtIndex:btnTag]contactName];
+    scheduleMeeting.contactUserID=[[proximityDataArray objectAtIndex:btnTag]contactUserId];
     scheduleMeeting.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.1f];
     [scheduleMeeting setModalPresentationStyle:UIModalPresentationOverCurrentContext];
     
@@ -140,15 +147,13 @@
     
 }
 
-- (IBAction)sendMessage:(UIButton *)sender {
+- (IBAction)sendMessage:(MyButton *)sender {
+    btnTag=[sender Tag];
     UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    ScheduleMeetingViewController *scheduleMeeting =[storyboard instantiateViewControllerWithIdentifier:@"ScheduleMeetingViewController"];
-    scheduleMeeting.screenName=@"Proximity";
-    scheduleMeeting.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.1f];
-    [scheduleMeeting setModalPresentationStyle:UIModalPresentationOverCurrentContext];
-    
-    [self presentViewController:scheduleMeeting animated: NO completion:nil];
-    
+    PersonalMessageViewController *messageView =[storyboard instantiateViewControllerWithIdentifier:@"PersonalMessageViewController"];
+    messageView.otherUserName=[[proximityDataArray objectAtIndex:btnTag]contactName];
+    messageView.otherUserId=[[proximityDataArray objectAtIndex:btnTag]contactUserId];
+    [self.navigationController pushViewController:messageView animated:YES];
 }
 
 - (IBAction)doneButtonAction:(id)sender {

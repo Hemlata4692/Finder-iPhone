@@ -17,6 +17,7 @@
 #import "MatchesDataModel.h"
 #import "MyButton.h"
 #import "PendingAppointmentViewController.h"
+#import "PersonalMessageViewController.h"
 
 @interface MatchesViewController ()
 {
@@ -418,7 +419,12 @@
 }
 
 - (IBAction)sendMessage:(MyButton *)sender {
-    
+    btnTag=[sender Tag];
+    UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    PersonalMessageViewController *messageView =[storyboard instantiateViewControllerWithIdentifier:@"PersonalMessageViewController"];
+    messageView.otherUserName=[[contactArray objectAtIndex:btnTag]userName];
+    messageView.otherUserId=[[contactArray objectAtIndex:btnTag]otherUserId];
+    [self.navigationController pushViewController:messageView animated:YES];
 }
 
 - (IBAction)approveButtonAction:(MyButton *)sender {
@@ -476,7 +482,12 @@
         [self performSelector:@selector(sendCancelMatchRequest) withObject:nil afterDelay:.1];
     }
     else if ([[[allMatchesDataArray objectAtIndex:btnTag]isAccepted] isEqualToString:@"T"]) {
-        NSLog(@"message");
+        btnTag=[sender Tag];
+        UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        PersonalMessageViewController *messageView =[storyboard instantiateViewControllerWithIdentifier:@"PersonalMessageViewController"];
+        messageView.otherUserName=[[allMatchesDataArray objectAtIndex:btnTag]userName];
+        messageView.otherUserId=[[allMatchesDataArray objectAtIndex:btnTag]otherUserId];
+        [self.navigationController pushViewController:messageView animated:YES];
     }
     
 }

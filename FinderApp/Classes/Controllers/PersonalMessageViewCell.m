@@ -10,9 +10,9 @@
 
 @implementation PersonalMessageViewCell
 //meCell
-@synthesize userMessageConatinerView,meUserDateLabel,meUserMessageLabel,meLabel,incomingBubbleImage;
+@synthesize userMessageConatinerView,meUserMessageLabel,incomingBubbleImage;
 //otherUserCell
-@synthesize otherUserName,otherUserDateLabel,otherUserMessageLabel,otherUserMessageConatinerView,outgoingBubbleImage;
+@synthesize otherUserMessageLabel,otherUserMessageConatinerView,outgoingBubbleImage;
 
 #pragma mark - Laod nib
 - (void)awakeFromNib {
@@ -30,7 +30,7 @@
 #pragma mark - Display data
 -(void)displayUserMessage:(MessageHistoryDataModel *)messageHistory indexPath:(int)indexPath rectSize:(CGSize)rectSize
 {
-    meUserDateLabel.translatesAutoresizingMaskIntoConstraints=YES;
+   
     meUserMessageLabel.translatesAutoresizingMaskIntoConstraints=YES;
     incomingBubbleImage.translatesAutoresizingMaskIntoConstraints=YES;
     
@@ -73,7 +73,6 @@
 #pragma mark - end
 
 -(void)displayOtherUserMessage:(MessageHistoryDataModel *)messageHistoryData indexPath:(int)indexPath rectSize:(CGSize)rectSize {
-    otherUserDateLabel.translatesAutoresizingMaskIntoConstraints=YES;
     otherUserMessageLabel.translatesAutoresizingMaskIntoConstraints=YES;
     outgoingBubbleImage.translatesAutoresizingMaskIntoConstraints=YES;
     CGSize size = CGSizeMake(rectSize.width-50,999);
