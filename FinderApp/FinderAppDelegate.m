@@ -190,14 +190,14 @@
 -(void)locationUpdate{
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"userId"]!=nil)
     {
-//        [[UserService sharedManager] locationUpdate:latitude longitude:longitude success:^(id responseObject)
-//         {
-//             NSLog(@"webservice did fire");
-//             [self startTrackingBg];
-//             
-//         } failure:^(NSError *error) {
-//             
-//         }] ;
+        [[UserService sharedManager] locationUpdate:latitude longitude:longitude success:^(id responseObject)
+         {
+             NSLog(@"webservice did fire");
+             [self startTrackingBg];
+             
+         } failure:^(NSError *error) {
+             
+         }] ;
     }
 }
 - (void) startTrackingBg{

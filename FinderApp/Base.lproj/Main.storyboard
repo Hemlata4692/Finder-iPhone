@@ -933,8 +933,8 @@
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m70-HM-G4i">
                                                             <rect key="frame" x="225" y="2" width="80" height="24"/>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lnd-Ie-XpX">
-                                                            <rect key="frame" x="222" y="2" width="80" height="32"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lnd-Ie-XpX">
+                                                            <rect key="frame" x="225" y="2" width="80" height="32"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="13"/>
                                                             <color key="textColor" red="0.33725490196078434" green="0.33725490196078434" blue="0.33725490196078434" alpha="1" colorSpace="calibratedRGB"/>
@@ -961,19 +961,19 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Xm-js-JQO">
-                                                    <rect key="frame" x="4" y="10" width="240" height="77"/>
+                                                    <rect key="frame" x="0.0" y="10" width="310" height="77"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="scd-7Q-v4y">
-                                                            <rect key="frame" x="0.0" y="10" width="80" height="60"/>
+                                                            <rect key="frame" x="8" y="10" width="80" height="26"/>
                                                         </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Hey, how are you" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ofY-Sg-fb3">
-                                                            <rect key="frame" x="8" y="24" width="224" height="21"/>
-                                                            <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
-                                                            <color key="textColor" red="0.31764705879999999" green="0.31764705879999999" blue="0.31764705879999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="justified" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ofY-Sg-fb3">
+                                                            <rect key="frame" x="8" y="13" width="80" height="21"/>
+                                                            <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="13"/>
+                                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </view>
                                             </subviews>
                                         </tableViewCellContentView>
@@ -1003,7 +1003,7 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="hey, how are you?" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="07c-mT-ySf">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="07c-mT-ySf" customClass="UIPlaceHolderTextView">
                                         <rect key="frame" x="5" y="5" width="240" height="32"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -1012,6 +1012,9 @@
                                         <inset key="scrollIndicatorInsets" minX="0.0" minY="5" maxX="0.0" maxY="0.0"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="2sS-Th-hPr" id="CtL-IT-a2Q"/>
+                                        </connections>
                                     </textView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pbv-hf-rlM">
                                         <rect key="frame" x="271" y="7" width="40" height="40"/>
@@ -1042,6 +1045,7 @@
                             </view>
                         </subviews>
                         <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
+                        <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="ehr-fV-LwX" firstAttribute="top" secondItem="TrK-dK-046" secondAttribute="bottom" constant="59" id="Fso-J3-qM4"/>
                             <constraint firstItem="TrK-dK-046" firstAttribute="top" secondItem="NtV-zP-fcy" secondAttribute="bottom" constant="10" id="L0F-Ur-nN0"/>
@@ -1051,6 +1055,9 @@
                             <constraint firstAttribute="trailing" secondItem="TrK-dK-046" secondAttribute="trailing" constant="5" id="vvC-d5-Sse"/>
                             <constraint firstAttribute="trailing" secondItem="fmg-sE-L5g" secondAttribute="trailing" id="yaD-oS-a1C"/>
                         </constraints>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="7mA-Eg-CYz" appends="YES" id="TFZ-TC-7UH"/>
+                        </connections>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
@@ -1063,6 +1070,12 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rl8-hi-AsI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="7mA-Eg-CYz">
+                    <connections>
+                        <action selector="tapGestureOnView:" destination="2sS-Th-hPr" id="Obx-oA-tMR"/>
+                        <outlet property="delegate" destination="2sS-Th-hPr" id="8gF-GP-oyg"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="238" y="1912"/>
         </scene>

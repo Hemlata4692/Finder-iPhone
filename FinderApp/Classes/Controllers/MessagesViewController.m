@@ -78,6 +78,7 @@
     UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     PersonalMessageViewController *msgView =[storyboard instantiateViewControllerWithIdentifier:@"PersonalMessageViewController"];
     msgView.otherUserId=[[messagesDataArray objectAtIndex:indexPath.row] otherUserId];
+    msgView.otherUserName=[[messagesDataArray objectAtIndex:indexPath.row] userName];
     [self.navigationController pushViewController:msgView animated:YES];
 }
 #pragma mark - end
