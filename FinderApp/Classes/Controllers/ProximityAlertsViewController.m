@@ -33,6 +33,17 @@
     [myDelegate showIndicator];
     [self performSelector:@selector(getProximityAlerts) withObject:nil afterDelay:.1];
 }
+-(void)viewWillAppear:(BOOL)animated{
+    
+    [super viewWillAppear:YES];
+    myDelegate.myView=@"ProximityAlertsViewController";
+    
+}
+-(void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:YES];
+    myDelegate.myView=@"other";
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
