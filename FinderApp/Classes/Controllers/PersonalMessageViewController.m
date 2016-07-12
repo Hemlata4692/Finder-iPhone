@@ -37,6 +37,31 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title=otherUserName;
+    [self setTextView];
+    readStatus=@"True";
+    offset=@"0";
+    myDelegate.myView=@"PersonalMessageView";
+    // Do any additional setup after loading the view.
+     [myDelegate removeBadgeIconLastTab];
+    [myDelegate showIndicator];
+    [self performSelector:@selector(getMessageHistory) withObject:nil afterDelay:.1];
+    messageDateArray=[[NSMutableArray alloc]init];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getHistory) name:@"GetMessageHistory" object:nil];
+}
+-(void)getHistory {
+    
+    [myDelegate showIndicator];
+    [self performSelector:@selector(getMessageHistory) withObject:nil afterDelay:0.1];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+-(void)setTextView {
+//    if ([myDelegate.myView isEqualToString:@"PersonalMessageView"]) {
+//        [[NSNotificationCenter defaultCenter] postNotificationName:@"GetMessageHistory" object:nil];
+//    }
     sendMessageTextView.text = @"";
     [sendMessageTextView setPlaceholder:@"Type a message here..."];
     [sendMessageTextView setFont:[UIFont fontWithName:@"Roboto-Regular" size:14.0]];
@@ -61,18 +86,6 @@
     //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(historUpdated:) name:@"UserHistory" object:nil];
     personalMessageTableView.translatesAutoresizingMaskIntoConstraints = YES;
     personalMessageTableView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - (messageHeight +64 +49 + 14));
-    
-    readStatus=@"True";
-    offset=@"0";
-    // Do any additional setup after loading the view.
-    [myDelegate showIndicator];
-    [self performSelector:@selector(getMessageHistory) withObject:nil afterDelay:.1];
-    messageDateArray=[[NSMutableArray alloc]init];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 #pragma mark - end
 
@@ -81,7 +94,11 @@
     [[MessageService sharedManager] getMessageHistory:otherUserId readStatus:readStatus pageOffSet:offset success:^(id dataArray) {
         [myDelegate stopIndicator];
         messageDateArray=[dataArray mutableCopy];
+       
         [personalMessageTableView reloadData];
+        NSIndexPath* ip = [NSIndexPath indexPathForRow:[[[messageDateArray objectAtIndex:messageDateArray.count-1] messagesHistoryArray] count]-1 inSection:messageDateArray.count-1 ];
+        [personalMessageTableView scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+       
         
     }
                                               failure:^(NSError *error)
@@ -92,6 +109,7 @@
 -(void)sendMessage {
     [[MessageService sharedManager] sendMessage:otherUserId message:sendMessageTextView.text success:^(id responseObject) {
         [myDelegate stopIndicator];
+        sendMessageTextView.text=@"";
         
     }
                                         failure:^(NSError *error)
@@ -112,11 +130,7 @@
 #pragma mark - IBActions
 - (IBAction)sendMessageBtnAction:(id)sender {
     [self sendMessage];
-   // sendMessageTextView.text=@"";
-//    if (messageDateArray.count > 0) {
-//        NSIndexPath* ip = [NSIndexPath indexPathForRow:messageDateArray.count-1 inSection:0];
-//        [personalMessageTableView scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionBottom animated:NO];
-//    }
+
     if (sendMessageTextView.text.length>=1) {
         sendMessageBtn.enabled=YES;
     }
@@ -149,10 +163,11 @@
     else
     {
         [messageDateArray replaceObjectAtIndex:messageDateArray.count - 1 withObject:messageDetails];
-    }
-    
-    
+    }    
     [personalMessageTableView reloadData];
+    sendMessageTextView.text=@"";
+    NSIndexPath* ip = [NSIndexPath indexPathForRow:[[[messageDateArray objectAtIndex:messageDateArray.count-1] messagesHistoryArray] count]-1 inSection:messageDateArray.count-1 ];
+    [personalMessageTableView scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionBottom animated:NO];
 }
 - (IBAction)retryButtonAction:(MyButton *)sender {
     
@@ -208,14 +223,14 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MessageHistoryDataModel *data=[[[messageDateArray objectAtIndex:indexPath.section]messagesHistoryArray] objectAtIndex:indexPath.row];
-        CGSize size = CGSizeMake(personalMessageTableView.frame.size.width-50,999);
-        CGRect textRect = [data.userMessage
-                           boundingRectWithSize:size
-                           options:NSStringDrawingUsesLineFragmentOrigin
-                           attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Roboto-Regular" size:13.0]}
-                           context:nil];
-        
-        return 80+textRect.size.height;
+    CGSize size = CGSizeMake(personalMessageTableView.frame.size.width-50,999);
+    CGRect textRect = [data.userMessage
+                       boundingRectWithSize:size
+                       options:NSStringDrawingUsesLineFragmentOrigin
+                       attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Roboto-Regular" size:13.0]}
+                       context:nil];
+    
+    return 80+textRect.size.height;
 }
 
 

@@ -297,11 +297,19 @@
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"8"]) {
             alert = [[MyAlert alloc] initWithTitle:@"Proximity Alerts" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel"];
         }
+        else if ([[alertDict objectForKey:@"type"] isEqualToString:@"9"]) {
+            if ([myDelegate.myView isEqualToString:@"PersonalMessageView"]) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"GetMessageHistory" object:nil];
+            }
+            else {
+                [self addBadgeIcon];
+            }
+        }
         
     }
     else {
         if ([[alertDict objectForKey:@"type"] isEqualToString:@"1"]) {
-            [self addBadgeIcon];
+            
         }
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"2"]) {
             alertType=@"2";
@@ -510,13 +518,12 @@
         }
     }
     UILabel *notificationBadge = [[UILabel alloc] init];
-    notificationBadge.frame = CGRectMake(50 , 8, 8, 8);
+    notificationBadge.frame = CGRectMake((([UIScreen mainScreen].bounds.size.width/5)*4) + (([UIScreen mainScreen].bounds.size.width/5)/2) + 8 , 8, 8, 8);;
     notificationBadge.backgroundColor = [UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:1.0];
     notificationBadge.layer.cornerRadius = 5;
     notificationBadge.layer.masksToBounds = YES;
     notificationBadge.tag = 3365;
     [myDelegate.tabBarView.tabBar addSubview:notificationBadge];
-    [myDelegate.tabBarView.tabBar bringSubviewToFront:notificationBadge];
 }
 #pragma mark - end
 
