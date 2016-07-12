@@ -294,15 +294,29 @@
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"7"]) {
             alert = [[MyAlert alloc] initWithTitle:@"New Conference Assigned" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel"];
         }
+        else if ([[alertDict objectForKey:@"type"] isEqualToString:@"8"]) {
+            alert = [[MyAlert alloc] initWithTitle:@"New Conference Assigned" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel"];
+        }
+
     }
     else {
         if ([[alertDict objectForKey:@"type"] isEqualToString:@"1"]) {
             [self addBadgeIcon];
         }
-        
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"2"]) {
             alertType=@"2";
         }
+        else if ([[alertDict objectForKey:@"type"] isEqualToString:@"8"]) {
+            
+            alertType=@"8";
+            UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            MatchesViewController * objView=[storyboard instantiateViewControllerWithIdentifier:@"tabBar"];
+            self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+            [self.window setRootViewController:objView];
+            [self.window makeKeyAndVisible];
+
+        }
+
     }
     
 }
