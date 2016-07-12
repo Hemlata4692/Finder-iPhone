@@ -105,11 +105,11 @@
 #pragma mark - IBActions
 - (IBAction)sendMessageBtnAction:(id)sender {
     [self sendMessage];
-    sendMessageTextView.text=@"";
-    if (messageDateArray.count > 0) {
-        NSIndexPath* ip = [NSIndexPath indexPathForRow:messageDateArray.count-1 inSection:0];
-        [personalMessageTableView scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionBottom animated:NO];
-    }
+   // sendMessageTextView.text=@"";
+//    if (messageDateArray.count > 0) {
+//        NSIndexPath* ip = [NSIndexPath indexPathForRow:messageDateArray.count-1 inSection:0];
+//        [personalMessageTableView scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionBottom animated:NO];
+//    }
     if (sendMessageTextView.text.length>=1) {
         sendMessageBtn.enabled=YES;
     }
@@ -163,7 +163,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MessageHistoryDataModel *data=[[[messageDateArray objectAtIndex:indexPath.row]messagesHistoryArray] objectAtIndex:indexPath.row];
+    MessageHistoryDataModel *data=[[[messageDateArray objectAtIndex:indexPath.section]messagesHistoryArray] objectAtIndex:indexPath.row];
         CGSize size = CGSizeMake(personalMessageTableView.frame.size.width-50,999);
         CGRect textRect = [data.userMessage
                            boundingRectWithSize:size
