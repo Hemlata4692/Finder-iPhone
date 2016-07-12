@@ -186,7 +186,8 @@
     return [[messageDateArray objectAtIndex:section]messagesHistoryArray].count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-     MessageHistoryDataModel *data=[[[messageDateArray objectAtIndex:indexPath.row]messagesHistoryArray] objectAtIndex:indexPath.row];
+    
+     MessageHistoryDataModel *data=[[[messageDateArray objectAtIndex:indexPath.section]messagesHistoryArray] objectAtIndex:indexPath.row];
     if ([data.userId isEqualToString:[UserDefaultManager getValue:@"userId"]]) {
         NSString *simpleTableIdentifier = @"meCell";
         PersonalMessageViewCell *meCell=[personalMessageTableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];

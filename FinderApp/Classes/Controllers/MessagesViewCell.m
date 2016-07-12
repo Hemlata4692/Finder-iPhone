@@ -33,7 +33,14 @@
     [messageCountLabel setCornerRadius:messageCountLabel.frame.size.width/2];
     userNameLabel.text=messageDetails.userName;
     messageLabel.text=messageDetails.lastMessage;
-    messageCountLabel.text=messageDetails.messageCount;
+    if ([messageDetails.messageCount isEqualToString:@"0"]) {
+        messageCountLabel.hidden=YES;
+    }
+    else {
+        messageCountLabel.hidden=NO;
+        messageCountLabel.text=messageDetails.messageCount;
+    }
+    
     __weak UIImageView *weakRef = userImage;
     NSURLRequest *imageRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:messageDetails.userProfileImage]
                                                   cachePolicy:NSURLRequestReturnCacheDataElseLoad
