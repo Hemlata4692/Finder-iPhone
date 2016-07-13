@@ -859,7 +859,7 @@
                                     <outlet property="delegate" destination="8ob-Yx-PQR" id="ioO-IM-iQ7"/>
                                 </connections>
                             </tableView>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Under Development." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H4l-8Z-goa">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Under Development." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H4l-8Z-goa">
                                 <rect key="frame" x="0.0" y="173" width="320" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="4uu-N7-3g6"/>
@@ -897,6 +897,7 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="messagesTableView" destination="0To-yu-quJ" id="dWq-ZK-dlE"/>
+                        <outlet property="noRecordLabel" destination="H4l-8Z-goa" id="UiM-ar-8SZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="67h-qw-T4k" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -942,8 +943,8 @@
                                                         </label>
                                                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p6p-rj-pKI" customClass="MyButton">
                                                             <rect key="frame" x="244" y="3" width="31" height="22"/>
-                                                            <color key="backgroundColor" red="0.91764705879999997" green="0.23529411759999999" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <state key="normal" title="b" image="errorMessage">
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                            <state key="normal" image="errorMessage">
                                                                 <color key="titleColor" white="0.0" alpha="0.85517056300000005" colorSpace="calibratedWhite"/>
                                                             </state>
                                                         </button>
@@ -1016,6 +1017,7 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="32" id="3uE-Vt-0Oq"/>
+                                            <constraint firstAttribute="width" constant="240" id="4sg-lI-8Bu"/>
                                         </constraints>
                                         <inset key="scrollIndicatorInsets" minX="0.0" minY="5" maxX="0.0" maxY="0.0"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
@@ -1044,7 +1046,6 @@
                                     <constraint firstAttribute="trailing" secondItem="pbv-hf-rlM" secondAttribute="trailing" constant="9" id="OoG-ir-ezn"/>
                                     <constraint firstAttribute="bottom" secondItem="07c-mT-ySf" secondAttribute="bottom" constant="13" id="SCX-kU-kaF"/>
                                     <constraint firstItem="07c-mT-ySf" firstAttribute="top" secondItem="fmg-sE-L5g" secondAttribute="top" constant="5" id="bTX-Tl-xIj"/>
-                                    <constraint firstItem="pbv-hf-rlM" firstAttribute="leading" secondItem="07c-mT-ySf" secondAttribute="trailing" constant="26" id="ckP-fa-oVg"/>
                                     <constraint firstItem="Rga-iN-FIy" firstAttribute="top" secondItem="fmg-sE-L5g" secondAttribute="top" id="co7-4C-8he"/>
                                     <constraint firstAttribute="trailing" secondItem="Rga-iN-FIy" secondAttribute="trailing" id="hD6-td-feJ"/>
                                     <constraint firstAttribute="width" secondItem="fmg-sE-L5g" secondAttribute="height" multiplier="32:5" id="owH-Y6-LnJ"/>
@@ -4277,6 +4278,7 @@
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
+                        <outlet property="doneButton" destination="rAg-z6-b8X" id="Ops-bW-xN0"/>
                         <outlet property="noResultLabel" destination="BAc-qt-281" id="aFr-9t-ZO5"/>
                         <outlet property="proximityAlertTableView" destination="cJe-xg-IjE" id="E7x-Zv-Jss"/>
                     </connections>

@@ -151,7 +151,9 @@
                         [messageDetails.messagesHistoryArray addObject:messageHistory];
                     }
                     [dataArray addObject:messageDetails];
+                   
                 }
+                 [dataArray addObject:[responseObject objectForKey:@"totalCount"]];
                  success(dataArray);
             }
         }

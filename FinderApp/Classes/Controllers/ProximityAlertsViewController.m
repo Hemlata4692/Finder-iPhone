@@ -20,12 +20,14 @@
     int btnTag;
 }
 @property (weak, nonatomic) IBOutlet UILabel *noResultLabel;
+@property (weak, nonatomic) IBOutlet UIButton *doneButton;
 @property (weak, nonatomic) IBOutlet UITableView *proximityAlertTableView;
 @end
 
 @implementation ProximityAlertsViewController
 @synthesize proximityAlertTableView;
 @synthesize noResultLabel;
+@synthesize doneButton;
 
 #pragma mark - View life cycle
 - (void)viewDidLoad {
@@ -33,8 +35,6 @@
     // Do any additional setup after loading the view.
     self.navigationItem.title=@"Proximity Alerts";
     myDelegate.currentNavigationController=self.navigationController;
-    [myDelegate showIndicator];
-    [self performSelector:@selector(getProximityAlerts) withObject:nil afterDelay:.1];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(proximityAlerts) name:@"ProximityAlerts" object:nil];
 }
@@ -47,6 +47,8 @@
     
     [super viewWillAppear:YES];
     myDelegate.myView=@"ProximityAlertsViewController";
+    [myDelegate showIndicator];
+    [self performSelector:@selector(getProximityAlerts) withObject:nil afterDelay:.1];
     
 }
 -(void)viewWillDisappear:(BOOL)animated
@@ -178,9 +180,11 @@
             noResultLabel.hidden=NO;
             noResultLabel.text=@"No result found.";
             proximityAlertTableView.hidden=YES;
+            doneButton.hidden=YES;
         }
         else {
             proximityAlertTableView.hidden=NO;
+            doneButton.hidden=NO;
             noResultLabel.hidden=YES;
             [proximityAlertTableView reloadData];
         }

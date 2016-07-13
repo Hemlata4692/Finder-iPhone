@@ -10,7 +10,7 @@
 
 @implementation PersonalMessageViewCell
 //meCell
-@synthesize userMessageConatinerView,meUserMessageLabel,incomingBubbleImage;
+@synthesize userMessageConatinerView,meUserMessageLabel,incomingBubbleImage,retryButton;
 //otherUserCell
 @synthesize otherUserMessageLabel,otherUserMessageConatinerView,outgoingBubbleImage;
 
@@ -33,7 +33,7 @@
    
     meUserMessageLabel.translatesAutoresizingMaskIntoConstraints=YES;
     incomingBubbleImage.translatesAutoresizingMaskIntoConstraints=YES;
-    _retryButton.translatesAutoresizingMaskIntoConstraints=YES;
+    retryButton.translatesAutoresizingMaskIntoConstraints=YES;
 
     CGSize size = CGSizeMake(rectSize.width-50,999);
     CGRect textRect=[self setDynamicHeight:size textString:messageHistory.userMessage fontSize:[UIFont fontWithName:@"Roboto-Regular" size:13]];
@@ -47,13 +47,11 @@
     meUserMessageLabel.text=messageHistory.userMessage;
     
     meUserMessageLabel.backgroundColor=[UIColor clearColor];
-    
-//    _retryButton.hidden = NO;
     if ([messageHistory.messageSendingFailed isEqualToString:@"No"]) {
-        _retryButton.hidden = YES;
+        retryButton.hidden = YES;
     }
     else {
-        _retryButton.hidden = NO;
+        retryButton.hidden = NO;
     }
     
     bubble_x = ((rectSize.width)-(textRect.size.width+20));
@@ -66,7 +64,7 @@
     
     incomingBubbleImage.frame = CGRectMake(bubble_x, bubble_y, bubble_width, bubble_height+20);
     meUserMessageLabel.frame=CGRectMake(bubble_x+5, bubble_y+5, bubble_width-10, textRect.size.height);
-    _retryButton.frame=CGRectMake(5,bubble_y+5, 30, 30);
+    retryButton.frame=CGRectMake(meUserMessageLabel.frame.origin.x-35,bubble_y+5, 30, 30);
 
     incomingBubbleImage.autoresizingMask = meUserMessageLabel.autoresizingMask;
     

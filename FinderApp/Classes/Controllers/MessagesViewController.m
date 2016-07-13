@@ -17,11 +17,13 @@
     NSMutableArray *messagesDataArray;
 }
 @property (weak, nonatomic) IBOutlet UITableView *messagesTableView;
+@property (weak, nonatomic) IBOutlet UILabel *noRecordLabel;
 
 @end
 
 @implementation MessagesViewController
 @synthesize messagesTableView;
+@synthesize noRecordLabel;
 
 #pragma mark - View life cycle
 - (void)viewDidLoad {
@@ -29,7 +31,7 @@
     self.navigationItem.title=@"Messages";
     myDelegate.currentNavigationController=self.navigationController;
     messagesDataArray=[[NSMutableArray alloc]init];
-    
+    noRecordLabel.hidden=YES;
     // Do any additional setup after loading the view.
 }
 
@@ -50,8 +52,17 @@
     [[MessageService sharedManager] getDifferentMessage:^(id dataArray) {
         [myDelegate stopIndicator];
         messagesDataArray=[dataArray mutableCopy];
+        if (messagesDataArray==nil) {
+            noRecordLabel.hidden=NO;
+            noRecordLabel.text=@"No new message.";
+            messagesTableView.hidden=YES;
+        }
+        else {
+            messagesTableView.hidden=NO;
+            noRecordLabel.hidden=YES;
+            [messagesTableView reloadData];
+        }
         [messagesTableView reloadData];
-        
     }
                                         failure:^(NSError *error)
      {
