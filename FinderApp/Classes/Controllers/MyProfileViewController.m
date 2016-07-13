@@ -304,7 +304,7 @@
     if (error != NULL)
     {
         CFStringRef errorDesc = CFErrorCopyDescription(error);
-        [self.view makeToast:[NSString stringWithFormat:@"Contact not saved: %@",errorDesc]];
+     //   [self.view makeToast:[NSString stringWithFormat:@"Contact not saved: %@",errorDesc]];
         CFRelease(errorDesc);
     }
     
@@ -375,7 +375,7 @@
     if (error != NULL)
     {
         CFStringRef errorDesc = CFErrorCopyDescription(error);
-        [self.view makeToast:[NSString stringWithFormat:@"Contact not saved: %@",errorDesc]];
+      //  [self.view makeToast:[NSString stringWithFormat:@"Contact not saved: %@",errorDesc]];
         CFRelease(errorDesc);
     }
 }

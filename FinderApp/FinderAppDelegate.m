@@ -349,11 +349,6 @@
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"CalendarDetails" object:nil];
                     NSLog(@"calendar type 2 after success");
                 }
-                //                else if ([myDelegate.myView isEqualToString:@"PendingViewController"]) {
-                //                    alertType=@"2";
-                //                    [[NSNotificationCenter defaultCenter] postNotificationName:@"Pending" object:nil];
-                //                }
-                
             }
                                                            failure:^(NSError *error)
              {
@@ -364,14 +359,12 @@
             if ([myDelegate.myView isEqualToString:@"MatchesViewController"]) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"MatchesDetails" object:nil];
             }
-            
         }
         
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"4"]) {
             if ([myDelegate.myView isEqualToString:@"MatchesViewController"]) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"MatchesDetails" object:nil];
             }
-            
         }
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"5"]) {
             if ([myDelegate.myView isEqualToString:@"CalendarViewController"]) {
@@ -396,15 +389,12 @@
             if ([myDelegate.myView isEqualToString:@"ConferenceViewController"]) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"Conference" object:nil];
             }
-            
         }
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"8"]) {
             if ([myDelegate.myView isEqualToString:@"ProximityAlertsViewController"]) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"ProximityAlerts" object:nil];
             }
-            
         }
-
         //ConferenceViewController
         NSLog(@"view");
     }
@@ -508,6 +498,7 @@
 #pragma mark - Add badge icon
 -(void)addBadgeIcon
 {
+   // [[myDelegate.tabBarView tabBarItem] setBadgeValue:@"42"];
     for (UILabel *subview in myDelegate.tabBarView.tabBar.subviews)
     {
         if ([subview isKindOfClass:[UILabel class]])
@@ -518,12 +509,13 @@
         }
     }
     UILabel *notificationBadge = [[UILabel alloc] init];
-    notificationBadge.frame = CGRectMake((([UIScreen mainScreen].bounds.size.width/5)*4) + (([UIScreen mainScreen].bounds.size.width/5)/2) + 8 , 8, 8, 8);;
-    notificationBadge.backgroundColor = [UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:1.0];
+    notificationBadge.frame = CGRectMake((([UIScreen mainScreen].bounds.size.width/5))+45 , ([UIScreen mainScreen].bounds.size.height-40), 8, 8);;
+    notificationBadge.backgroundColor = [UIColor redColor];
     notificationBadge.layer.cornerRadius = 5;
     notificationBadge.layer.masksToBounds = YES;
     notificationBadge.tag = 3365;
     [myDelegate.tabBarView.tabBar addSubview:notificationBadge];
+    [[UIApplication sharedApplication].keyWindow addSubview:notificationBadge];
 }
 #pragma mark - end
 

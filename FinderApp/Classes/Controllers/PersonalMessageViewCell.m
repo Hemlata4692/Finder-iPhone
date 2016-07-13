@@ -42,10 +42,9 @@
     //Bubble positions
     CGFloat bubble_x;
     CGFloat bubble_y = 5;
-    CGFloat bubble_width = textRect.size.width;
+    CGFloat bubble_width;
     CGFloat bubble_height = textRect.size.height;
     meUserMessageLabel.text=messageHistory.userMessage;
-    
     meUserMessageLabel.backgroundColor=[UIColor clearColor];
     if ([messageHistory.messageSendingFailed isEqualToString:@"No"]) {
         retryButton.hidden = YES;
@@ -54,8 +53,8 @@
         retryButton.hidden = NO;
     }
     
-    bubble_x = ((rectSize.width)-(textRect.size.width+20));
-    
+    bubble_x = ((rectSize.width)-(textRect.size.width+30));
+   
     incomingBubbleImage.image = [[UIImage imageNamed:@"outgoing"]
                                  stretchableImageWithLeftCapWidth:15 topCapHeight:15];
     
@@ -65,7 +64,6 @@
     incomingBubbleImage.frame = CGRectMake(bubble_x, bubble_y, bubble_width, bubble_height+20);
     meUserMessageLabel.frame=CGRectMake(bubble_x+5, bubble_y+5, bubble_width-10, textRect.size.height);
     retryButton.frame=CGRectMake(meUserMessageLabel.frame.origin.x-35,bubble_y+5, 30, 30);
-
     incomingBubbleImage.autoresizingMask = meUserMessageLabel.autoresizingMask;
     
     
@@ -106,7 +104,7 @@
     bubble_width = textRect.size.width+20;
     
     outgoingBubbleImage.frame = CGRectMake(bubble_x, bubble_y, bubble_width, bubble_height+20);
-    otherUserMessageLabel.frame=CGRectMake(bubble_x+10, bubble_y+5, bubble_width-10, textRect.size.height);
+    otherUserMessageLabel.frame=CGRectMake(bubble_x+13, bubble_y+5, bubble_width-10, textRect.size.height);
     incomingBubbleImage.autoresizingMask = otherUserMessageLabel.autoresizingMask;
 
 }

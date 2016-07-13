@@ -916,20 +916,20 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="100" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="TrK-dK-046">
-                                <rect key="frame" x="5" y="10" width="310" height="347"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="50" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="TrK-dK-046">
+                                <rect key="frame" x="0.0" y="5" width="320" height="359"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="meCell" rowHeight="80" id="DaI-u8-GL7" customClass="PersonalMessageViewCell">
-                                        <rect key="frame" x="0.0" y="50" width="310" height="80"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="meCell" rowHeight="50" id="DaI-u8-GL7" customClass="PersonalMessageViewCell">
+                                        <rect key="frame" x="0.0" y="50" width="320" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DaI-u8-GL7" id="yLg-Qc-EDp">
-                                            <rect key="frame" x="0.0" y="0.0" width="310" height="80"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9qy-3N-dDt">
-                                                    <rect key="frame" x="0.0" y="4" width="310" height="74"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9qy-3N-dDt">
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m70-HM-G4i">
                                                             <rect key="frame" x="225" y="2" width="80" height="24"/>
@@ -953,6 +953,12 @@
                                                 </view>
                                             </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="9qy-3N-dDt" secondAttribute="bottom" id="Icd-fY-QCp"/>
+                                                <constraint firstItem="9qy-3N-dDt" firstAttribute="top" secondItem="yLg-Qc-EDp" secondAttribute="top" id="PfX-Wb-TON"/>
+                                                <constraint firstAttribute="trailing" secondItem="9qy-3N-dDt" secondAttribute="trailing" id="T2y-OT-8Ih"/>
+                                                <constraint firstItem="9qy-3N-dDt" firstAttribute="leading" secondItem="yLg-Qc-EDp" secondAttribute="leading" id="gMx-Xh-Tgz"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
@@ -962,15 +968,15 @@
                                             <outlet property="userMessageConatinerView" destination="9qy-3N-dDt" id="nbI-g7-LG2"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="otherUserCell" rowHeight="95" id="VUN-uv-8CN" customClass="PersonalMessageViewCell">
-                                        <rect key="frame" x="0.0" y="130" width="310" height="95"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="otherUserCell" rowHeight="50" id="VUN-uv-8CN" customClass="PersonalMessageViewCell">
+                                        <rect key="frame" x="0.0" y="100" width="320" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="VUN-uv-8CN" id="htJ-TC-dgP">
-                                            <rect key="frame" x="0.0" y="0.0" width="310" height="95"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9Xm-js-JQO">
-                                                    <rect key="frame" x="0.0" y="10" width="310" height="77"/>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9Xm-js-JQO">
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="scd-7Q-v4y">
                                                             <rect key="frame" x="8" y="10" width="80" height="26"/>
@@ -985,6 +991,12 @@
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 </view>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="9Xm-js-JQO" firstAttribute="leading" secondItem="htJ-TC-dgP" secondAttribute="leading" id="b7d-hA-WwA"/>
+                                                <constraint firstItem="9Xm-js-JQO" firstAttribute="top" secondItem="htJ-TC-dgP" secondAttribute="top" id="h6L-R0-tXL"/>
+                                                <constraint firstAttribute="bottom" secondItem="9Xm-js-JQO" secondAttribute="bottom" id="hfA-xS-dVZ"/>
+                                                <constraint firstAttribute="trailing" secondItem="9Xm-js-JQO" secondAttribute="trailing" id="tbG-rp-ZvN"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
@@ -1021,7 +1033,7 @@
                                         </constraints>
                                         <inset key="scrollIndicatorInsets" minX="0.0" minY="5" maxX="0.0" maxY="0.0"/>
                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no"/>
                                         <connections>
                                             <outlet property="delegate" destination="2sS-Th-hPr" id="CtL-IT-a2Q"/>
                                         </connections>
@@ -1056,12 +1068,12 @@
                         <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="calibratedRGB"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="ehr-fV-LwX" firstAttribute="top" secondItem="TrK-dK-046" secondAttribute="bottom" constant="59" id="Fso-J3-qM4"/>
-                            <constraint firstItem="TrK-dK-046" firstAttribute="top" secondItem="NtV-zP-fcy" secondAttribute="bottom" constant="10" id="L0F-Ur-nN0"/>
+                            <constraint firstItem="TrK-dK-046" firstAttribute="top" secondItem="NtV-zP-fcy" secondAttribute="bottom" constant="5" id="L0F-Ur-nN0"/>
                             <constraint firstItem="fmg-sE-L5g" firstAttribute="leading" secondItem="7pV-Uk-CAr" secondAttribute="leading" id="Zmq-kP-ygN"/>
+                            <constraint firstAttribute="bottom" secondItem="TrK-dK-046" secondAttribute="bottom" constant="52" id="e8q-5U-ZyV"/>
                             <constraint firstItem="ehr-fV-LwX" firstAttribute="top" secondItem="fmg-sE-L5g" secondAttribute="bottom" constant="1" id="g0f-Iv-h6A"/>
-                            <constraint firstItem="TrK-dK-046" firstAttribute="leading" secondItem="7pV-Uk-CAr" secondAttribute="leading" constant="5" id="v9l-fu-7s3"/>
-                            <constraint firstAttribute="trailing" secondItem="TrK-dK-046" secondAttribute="trailing" constant="5" id="vvC-d5-Sse"/>
+                            <constraint firstItem="TrK-dK-046" firstAttribute="leading" secondItem="7pV-Uk-CAr" secondAttribute="leading" id="v9l-fu-7s3"/>
+                            <constraint firstAttribute="trailing" secondItem="TrK-dK-046" secondAttribute="trailing" id="vvC-d5-Sse"/>
                             <constraint firstAttribute="trailing" secondItem="fmg-sE-L5g" secondAttribute="trailing" id="yaD-oS-a1C"/>
                         </constraints>
                         <connections>
@@ -3059,7 +3071,7 @@
                         <rect key="frame" x="0.0" y="64" width="320" height="416"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Kv-al-iPm">
+                            <webView contentMode="scaleToFill" scalesPageToFit="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4Kv-al-iPm">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
                                 <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
                                 <constraints>
