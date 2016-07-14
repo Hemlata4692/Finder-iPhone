@@ -20,6 +20,7 @@
     CGFloat messageHeight, messageYValue;
     int totalRecords, firstTime;
     int btnTag;
+    int pageOffset;
     UIRefreshControl *refreshControl;
 }
 
@@ -39,33 +40,30 @@
     [super viewDidLoad];
     self.navigationItem.title=otherUserName;
     firstTime=1;
+   
     [self setTextView];
     // Pull To Refresh
-    if (messageDateArray.count<totalRecords && messageDateArray.count>=20) {
-        
-        refreshControl = [[UIRefreshControl alloc] initWithFrame:CGRectMake(personalMessageTableView.frame.size.width/2, 50, 30, 30)];
-        [personalMessageTableView addSubview:refreshControl];
-        NSMutableAttributedString *refreshString = [[NSMutableAttributedString alloc] initWithString:@""];
+    refreshControl = [[UIRefreshControl alloc] initWithFrame:CGRectMake(personalMessageTableView.frame.size.width/2, 50, 30, 30)];
+    [personalMessageTableView addSubview:refreshControl];
+    NSMutableAttributedString *refreshString = [[NSMutableAttributedString alloc] initWithString:@""];
         [refreshString addAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]} range:NSMakeRange(0, refreshString.length)];
-        refreshControl.attributedTitle = refreshString;
-        [refreshControl addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
-        personalMessageTableView.alwaysBounceVertical = YES;
-    }
+    refreshControl.attributedTitle = refreshString;
+    [refreshControl addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
+    personalMessageTableView.alwaysBounceVertical = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getHistory) name:@"GetMessageHistory" object:nil];
 }
 -(void)getHistory {
-    
-    for (int i=0; i<messageDateArray.count; i++) {
-        int pageOffset=[[NSString stringWithFormat:@"%lu",(unsigned long)[[messageDateArray objectAtIndex:i] messagesHistoryArray].count] intValue];
-        offset=[NSString stringWithFormat: @"%d", [offset intValue]+pageOffset+1];
-    }
-    
+    [myDelegate removeBadgeIconLastTab];
+    offset=@"0";
+    [messageDateArray removeAllObjects];
     [myDelegate showIndicator];
     [self performSelector:@selector(getMessageHistory) withObject:nil afterDelay:0.1];
 }
 -(void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
+    myDelegate.myView=@"PersonalMessageView";
     offset=@"0";
+    pageOffset=0;
     [myDelegate removeBadgeIconLastTab];
 }
 - (void)didReceiveMemoryWarning {
@@ -73,7 +71,6 @@
     // Dispose of any resources that can be recreated.
 }
 -(void)setTextView {
-    myDelegate.myView=@"PersonalMessageView";
     sendMessageTextView.text = @"";
     [sendMessageTextView setPlaceholder:@"Type a message here..."];
     [sendMessageTextView setFont:[UIFont fontWithName:@"Roboto-Regular" size:14.0]];
@@ -108,15 +105,20 @@
 - (void)refreshTable
 {
     firstTime=2;
+    
+     offset=[NSString stringWithFormat: @"%d", [offset intValue]-pageOffset];
     for (int i=0; i<messageDateArray.count; i++) {
-        int pageOffset=[[NSString stringWithFormat:@"%lu",(unsigned long)[[messageDateArray objectAtIndex:i] messagesHistoryArray].count] intValue];
-        offset=[NSString stringWithFormat: @"%d", [offset intValue]-pageOffset];;
+        pageOffset=[[NSString stringWithFormat:@"%lu",(unsigned long)[[messageDateArray objectAtIndex:i] messagesHistoryArray].count] intValue];
         offset=[NSString stringWithFormat: @"%d", [offset intValue]+pageOffset];
     }
-    if (messageDateArray.count<totalRecords && messageDateArray.count>=20) {
+    if ([offset integerValue]<totalRecords) {
         [self getMessageHistory];
+        [refreshControl endRefreshing];
     }
-    [refreshControl endRefreshing];
+    else {
+        [refreshControl endRefreshing];
+    }
+    
 }
 #pragma mark - end
 #pragma mark - Webservice
@@ -193,13 +195,6 @@
 - (IBAction)sendMessageBtnAction:(id)sender {
 //    [sendMessageTextView resignFirstResponder];
     [self sendMessage];
-    if (sendMessageTextView.text.length>=1) {
-        sendMessageBtn.enabled=YES;
-    }
-    else if (sendMessageTextView.text.length==0) {
-        sendMessageBtn.enabled=NO;
-    }
-    
     MessagesDataModel *messageDetails = [[MessagesDataModel alloc]init];
     messageDetails.messagesHistoryArray=[[NSMutableArray alloc]init];
     MessageHistoryDataModel *messageHistory = [[MessageHistoryDataModel alloc]init];
@@ -243,6 +238,12 @@
     }
     [personalMessageTableView reloadData];
     sendMessageTextView.text=@"";
+    if (sendMessageTextView.text.length>=1) {
+        sendMessageBtn.enabled=YES;
+    }
+    else if (sendMessageTextView.text.length==0) {
+        sendMessageBtn.enabled=NO;
+    }
     NSIndexPath* ip = [NSIndexPath indexPathForRow:[[[messageDateArray objectAtIndex:messageDateArray.count-1] messagesHistoryArray] count]-1 inSection:messageDateArray.count-1 ];
     [personalMessageTableView scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionBottom animated:NO];
 }

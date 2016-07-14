@@ -51,9 +51,13 @@
 - (void)viewDidLoad{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
     self.navigationItem.title=@"Matches";
+    [myDelegate.locationManager startUpdatingLocation];
+    myDelegate.isLocation=@"1";
     [self setTabBarImages];
+    if ([[UserDefaultManager getValue:@"unReadMessegaes"] isEqualToString:@"true"]) {
+        [myDelegate addBadgeIcon];
+    }
     allMatchesDataArray=[[NSMutableArray alloc]init];
     latestMatchesArray=[[NSMutableArray alloc]init];
     contactArray=[[NSMutableArray alloc]init];
@@ -65,8 +69,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
--(void)matchesDetails{
-    [myDelegate removeBadgeIconLastTab];
+-(void)matchesDetails {
     [myDelegate showIndicator];
     [self performSelector:@selector(getMatchesDetails) withObject:nil afterDelay:0.1];
 }
@@ -84,9 +87,7 @@
         profileView.screenName=@"Pending Appointments";
         [self.navigationController pushViewController:profileView animated:YES];
     }
-    else if ([myDelegate.alertType isEqualToString:@"8"]) {
-        myDelegate.tabBarView.selectedIndex = 2;
-    }
+    
     [myDelegate showIndicator];
     [self performSelector:@selector(getMatchesDetails) withObject:nil afterDelay:.1];
 }
@@ -143,7 +144,9 @@
     tempImg =[UIImage imageNamed:@"more_selected"];
     [tabBarItem5 setSelectedImage:[[UIImage imageNamed:[tempImg imageForDeviceWithNameForOtherImages:@"more_selected"]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     tabBarItem5.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
-    // myTab.selectedIndex=2;
+   if ([myDelegate.alertType isEqualToString:@"8"]) {
+        myTab.selectedIndex = 2;
+    }
 }
 
 #pragma mark - end

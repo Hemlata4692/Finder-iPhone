@@ -181,6 +181,7 @@
     NSMutableDictionary *tempDict=[[UserDefaultManager getValue:@"switchStatusDict"] mutableCopy];
     [tempDict setObject:[NSString stringWithFormat:@"%.2f", slider.value] forKey:@"02"];
     [UserDefaultManager setValue:tempDict key:@"switchStatusDict"];
+    
 }
 //switch value
 - (IBAction)switchViewChanged:(MyButton *)switchView {

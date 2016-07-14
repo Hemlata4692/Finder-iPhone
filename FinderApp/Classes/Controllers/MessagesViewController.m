@@ -41,7 +41,7 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
-     [myDelegate removeBadgeIconLastTab];
+    [myDelegate removeBadgeIconLastTab];
     [myDelegate showIndicator];
     [self performSelector:@selector(getDifferentMessages) withObject:nil afterDelay:.1];
 }

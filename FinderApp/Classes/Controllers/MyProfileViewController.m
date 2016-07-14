@@ -227,9 +227,10 @@
                 else {
                     [self addVcfFile];
                 }
-            } else {
-                [self.view makeToast:@"Contact cannot be added access denied."];
             }
+//            else {
+//                [self.view makeToast:@"Contact cannot be added access denied."];
+//            }
         });
     }
     else if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized) {
@@ -264,8 +265,6 @@
     CFIndex nPeople = ABAddressBookGetPersonCount( book );
     NSString *aNSString;
     NSString *userName;
-    NSString *userMobileNumber;
-    NSString *phoneLabel1;
     for ( int i = 0; i < nPeople; i++ )
     {
         ABRecordRef ref = CFArrayGetValueAtIndex( allPeople, i );
@@ -274,19 +273,6 @@
         
         CFStringRef appUserName = ABRecordCopyValue(person, kABPersonFirstNameProperty);
         userName = (__bridge NSString *)appUserName;
-        
-        ABMultiValueRef phones = ABRecordCopyValue(ref, kABPersonPhoneProperty);
-        for(CFIndex j = 0; j < ABMultiValueGetCount(phones); j++)
-        {
-            CFStringRef locLabel1 = ABMultiValueCopyLabelAtIndex(phones, j);
-            phoneLabel1 =(__bridge NSString*) ABAddressBookCopyLocalizedLabel(locLabel1);
-        }
-        ABMultiValueRef userPhone = ABRecordCopyValue(person, kABPersonPhoneProperty);
-        for(CFIndex j = 0; j < ABMultiValueGetCount(userPhone); j++)
-        {
-            CFStringRef locLabel1 = ABMultiValueCopyLabelAtIndex(userPhone, j);
-            userMobileNumber =(__bridge NSString*) ABAddressBookCopyLocalizedLabel(locLabel1);
-        }
     }
     
     if ([aNSString isEqualToString:userName]){
@@ -337,8 +323,6 @@
     CFIndex nPeople = ABAddressBookGetPersonCount( iPhoneAddressBook );
     NSString *aNSString;
     NSString *userName;
-    NSString *userMobileNumber;
-    NSString *phoneLabel1;
     for ( int i = 0; i < nPeople; i++ )
     {
         ABRecordRef ref = CFArrayGetValueAtIndex( allPeople, i );
@@ -347,19 +331,6 @@
         
         CFStringRef appUserName = ABRecordCopyValue(newPerson, kABPersonFirstNameProperty);
         userName = (__bridge NSString *)appUserName;
-        
-        ABMultiValueRef phones = ABRecordCopyValue(ref, kABPersonPhoneProperty);
-        for(CFIndex j = 0; j < ABMultiValueGetCount(phones); j++)
-        {
-            CFStringRef locLabel1 = ABMultiValueCopyLabelAtIndex(phones, j);
-            phoneLabel1 =(__bridge NSString*) ABAddressBookCopyLocalizedLabel(locLabel1);
-        }
-        ABMultiValueRef userPhone = ABRecordCopyValue(newPerson, kABPersonPhoneProperty);
-        for(CFIndex j = 0; j < ABMultiValueGetCount(userPhone); j++)
-        {
-            CFStringRef locLabel1 = ABMultiValueCopyLabelAtIndex(userPhone, j);
-            userMobileNumber =(__bridge NSString*) ABAddressBookCopyLocalizedLabel(locLabel1);
-        }
     }
     
     if ([aNSString isEqualToString:userName]){

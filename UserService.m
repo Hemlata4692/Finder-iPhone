@@ -120,10 +120,9 @@
 #pragma mark- end
 
 #pragma mark- Location update
--(void)locationUpdate:(NSString *)latitude longitude:(NSString *)longitude success:(void (^)(id))success failure:(void (^)(NSError *))failure
+-(void)locationUpdate:(NSString *)latitude longitude:(NSString *)longitude proximityRange:(NSString *)proximityRange success:(void (^)(id))success failure:(void (^)(NSError *))failure
 {
-    
-    NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"latitude":latitude,@"longitude":longitude};
+    NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"],@"latitude":latitude,@"longitude":longitude ,@"proximityRange":proximityRange};
      NSLog(@"location %@",requestDict);
     [[Webservice sharedManager] post:kUrlLocationUpdate parameters:requestDict success:^(id responseObject)
      {
@@ -134,10 +133,6 @@
          {
              success(responseObject);
          }
-//         if([[Webservice sharedManager] isStatusOK:responseObject])
-//         {
-//             success(responseObject);
-//         }
          else
          {
              [myDelegate stopIndicator];

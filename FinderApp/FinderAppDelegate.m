@@ -26,6 +26,7 @@
     NSTimer *timer;
     NSString *latitude, *longitude;
     MyAlert* alert;
+    UILabel *notificationBadge;
 }
 @property (nonatomic, strong) MMMaterialDesignSpinner *spinnerView;
 @property (nonatomic, strong) NSDictionary *alertDict;
@@ -187,10 +188,11 @@
 #pragma mark - end
 
 #pragma mark - Location update in background
--(void)locationUpdate{
+-(void)locationUpdate {
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"userId"]!=nil)
     {
-        [[UserService sharedManager] locationUpdate:latitude longitude:longitude success:^(id responseObject)
+//                [NSString stringWithFormat:@"%2d,M",[[[UserDefaultManager getValue:@"switchStatusDict"] objectForKey:@"02"] intValue]];
+        [[UserService sharedManager] locationUpdate:latitude longitude:longitude proximityRange:[[UserDefaultManager getValue:@"switchStatusDict"] objectForKey:@"02"] success:^(id responseObject)
          {
              NSLog(@"webservice did fire");
              [self startTrackingBg];
@@ -216,16 +218,15 @@
 //-(void)locationManager:(CLLocationManager *)manager
 //   didUpdateToLocation:(CLLocation *)newLocation
 //          fromLocation:(CLLocation *)oldLocation{
-//   // NSLog(@"location updating1111");
+//    NSLog(@"location updating1111");
 //    CLLocationCoordinate2D cordinates = newLocation.coordinate;
-//  //  NSLog(@"***************************My Loaction---->%f, %f*************************** ", cordinates.latitude, cordinates.longitude);
+//    NSLog(@"***************************My Loaction---->%f, %f*************************** ", cordinates.latitude, cordinates.longitude);
 //}
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
     // NSLog(@"location updating2222");
     CLLocation *newLocation = (CLLocation *)[locations lastObject];
     CLLocationCoordinate2D cordinates = newLocation.coordinate;
-    //NSLog(@"***************************My Loaction---->%f, %f*************************** ", cordinates.latitude, cordinates.longitude);
     
     latitude=[NSString stringWithFormat:@"%f",cordinates.latitude];
     longitude=[NSString stringWithFormat:@"%f",cordinates.longitude];
@@ -298,6 +299,7 @@
             alert = [[MyAlert alloc] initWithTitle:@"Proximity Alerts" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel"];
         }
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"9"]) {
+            
             if ([myDelegate.myView isEqualToString:@"PersonalMessageView"]) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"GetMessageHistory" object:nil];
             }
@@ -498,7 +500,6 @@
 #pragma mark - Add badge icon
 -(void)addBadgeIcon
 {
-   // [[myDelegate.tabBarView tabBarItem] setBadgeValue:@"42"];
     for (UILabel *subview in myDelegate.tabBarView.tabBar.subviews)
     {
         if ([subview isKindOfClass:[UILabel class]])
@@ -508,8 +509,9 @@
             }
         }
     }
-    UILabel *notificationBadge = [[UILabel alloc] init];
-    notificationBadge.frame = CGRectMake((([UIScreen mainScreen].bounds.size.width/5))+45 , ([UIScreen mainScreen].bounds.size.height-40), 8, 8);;
+    notificationBadge = [[UILabel alloc] init];
+    notificationBadge.hidden=NO;
+    notificationBadge.frame = CGRectMake((([UIScreen mainScreen].bounds.size.width/5))+45 , ([UIScreen mainScreen].bounds.size.height-40), 8, 8);
     notificationBadge.backgroundColor = [UIColor redColor];
     notificationBadge.layer.cornerRadius = 5;
     notificationBadge.layer.masksToBounds = YES;
@@ -522,6 +524,8 @@
 #pragma mark - Remove badge icon
 -(void)removeBadgeIconLastTab
 {
+    notificationBadge.hidden=YES;
+     notificationBadge.frame = CGRectMake((([UIScreen mainScreen].bounds.size.width/5))+45 , ([UIScreen mainScreen].bounds.size.height-40), 0, 0);
     for (UILabel *subview in myDelegate.tabBarView.tabBar.subviews)
     {
         if ([subview isKindOfClass:[UILabel class]])
