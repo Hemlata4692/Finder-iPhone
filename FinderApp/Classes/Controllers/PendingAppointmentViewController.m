@@ -202,6 +202,8 @@
     [pendingCell.pendingViewContainer addShadow:pendingCell.pendingViewContainer color:[UIColor lightGrayColor]];
     [pendingCell.meetingTitle addTarget:self action:@selector(meetingDetail:) forControlEvents:UIControlEventTouchUpInside];
     pendingCell.meetingTitle.Tag=(int)indexPath.row;
+    pendingCell.acceptButton.Tag=(int)indexPath.row;
+    pendingCell.cancelButton.Tag=(int)indexPath.row;
     PendingAppointmentDataModel *data=[appointmentDataArray objectAtIndex:indexPath.row];
     [pendingCell displayData:data indexPath:(int)indexPath.row rectSize:pendingCell.frame.size];
      [pendingCell.acceptButton addTarget:self action:@selector(acceptMeetingButtionAction:) forControlEvents:UIControlEventTouchUpInside];
