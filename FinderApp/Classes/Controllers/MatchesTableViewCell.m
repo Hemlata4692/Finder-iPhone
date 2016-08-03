@@ -28,7 +28,7 @@
 @synthesize contactCompanyName;
 @synthesize messageButton;
 @synthesize scheduleMeetingBtn;
-
+@synthesize contactDesignation;
 #pragma mark - Load nib
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -134,14 +134,14 @@
         sendRequestButton.hidden=NO;
     }
     else if ([newMatchesDetails.isAccepted isEqualToString:@"F"] && [newMatchesDetails.isRequestSent isEqualToString:@"F"] && [newMatchesDetails.isArrived isEqualToString:@"T"]) {
-        approveButton.hidden=YES;
-        cancelButton.hidden=YES;
+        approveButton.hidden=NO;
+        cancelButton.hidden=NO;
         sendRequestButton.hidden=YES;
-        allMatchesRejectButton.hidden=NO;
-        allMatchesApproveButton.hidden=NO;
-        [allMatchesApproveButton setImage:[UIImage imageNamed:@"approve.png"] forState:UIControlStateNormal
+        allMatchesRejectButton.hidden=YES;
+        allMatchesApproveButton.hidden=YES;
+        [approveButton setImage:[UIImage imageNamed:@"approve.png"] forState:UIControlStateNormal
          ];
-        [allMatchesRejectButton setImage:[UIImage imageNamed:@"reject.png"] forState:UIControlStateNormal
+        [cancelButton setImage:[UIImage imageNamed:@"reject.png"] forState:UIControlStateNormal
          ];
         
     }
@@ -161,6 +161,19 @@
     contactName.frame = textRect;
     contactName.frame =CGRectMake(78, 13, textRect.size.width, textRect.size.height);
     [contactName setLabelBorder:contactName color:[UIColor whiteColor]];
+    
+    contactDesignation.translatesAutoresizingMaskIntoConstraints=YES;
+//    CGSize size = CGSizeMake(rectSize.width-157,100);
+    CGRect designationtextRect = [@"Senior Softwate Engineer"
+                       boundingRectWithSize:size
+                       options:NSStringDrawingUsesLineFragmentOrigin
+                       attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Roboto-Regular" size:15.0]}
+                       context:nil];
+    contactDesignation.numberOfLines = 0;
+    contactDesignation.frame = designationtextRect;
+    contactDesignation.frame =CGRectMake(78, contactName.frame.origin.y + contactName.frame.size.height+2 , designationtextRect.size.width, designationtextRect.size.height);
+    [contactDesignation setLabelBorder:contactName color:[UIColor whiteColor]];
+
     
     contactName.text=contactData.userName;
     contactCompanyName.text=contactData.userCompanyName;

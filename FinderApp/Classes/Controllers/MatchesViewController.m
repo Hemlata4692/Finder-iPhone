@@ -151,6 +151,15 @@
 #pragma mark - end
 #pragma mark - Table view methods
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (selectedSegment==0) {
+        return 80;
+    }
+    else {
+        return 110;
+    }
+}
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (selectedSegment==0) {
         return latestMatchesArray.count;
@@ -188,8 +197,12 @@
         [newMatchesCell displayNewMatchRequests:data indexPath:(int)indexPath.row rectSize:newMatchesCell.frame.size];
         newMatchesCell.approveButton.Tag=(int)indexPath.row;
         newMatchesCell.cancelButton.Tag=(int)indexPath.row;
+        newMatchesCell.sendRequestButton.Tag=(int)indexPath.row;
+
         [newMatchesCell.approveButton addTarget:self action:@selector(approveButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         [newMatchesCell.cancelButton addTarget:self action:@selector(cancelRequestButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+        [newMatchesCell.sendRequestButton addTarget:self action:@selector(sendRequestButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+
         return newMatchesCell;
     }
 }
@@ -290,11 +303,12 @@
 //send/cancel match request
 -(void)sendCancelMatchRequest {
     [[MatchesService sharedManager] sendCancelMatchRequest:otherUserId sendRequest:requestSent success:^(id responseObject) {
-        [myDelegate stopIndicator];
-        MatchesDataModel *tempModel = [allMatchesDataArray objectAtIndex:btnTag];
-        tempModel.isRequestSent=requestSent;
-        [allMatchesDataArray replaceObjectAtIndex:btnTag withObject:tempModel];
-        [matchesTableView reloadData];
+      //  [myDelegate stopIndicator];
+        [self getMatchesDetails];
+//        MatchesDataModel *tempModel = [latestMatchesArray objectAtIndex:btnTag];
+////        tempModel.isRequestSent=requestSent;
+////        [latestMatchesArray replaceObjectAtIndex:btnTag withObject:tempModel];
+////        [matchesTableView reloadData];
     }
                                                    failure:^(NSError *error)
      {
@@ -309,33 +323,12 @@
         [[MatchesService sharedManager] acceptDeclineRequest:otherUserId acceptRequest:accepted success:^(id responseObject) {
             [self getMatchesDetails];
             
-            [matchesTableView reloadData];
-            
         }
                                                      failure:^(NSError *error)
          {
              
          }] ;
     }
-    else {
-        
-        [[MatchesService sharedManager] acceptDeclineRequest:otherUserId acceptRequest:accepted success:^(id responseObject) {
-            [myDelegate stopIndicator];
-            MatchesDataModel *tempModel = [allMatchesDataArray objectAtIndex:btnTag];
-            tempModel.isAccepted=accepted;
-            tempModel.isArrived=@"F";
-            tempModel.isRequestSent=@"F";
-            [allMatchesDataArray replaceObjectAtIndex:btnTag withObject:tempModel];
-            [matchesTableView reloadData];
-            
-        }
-                                                     failure:^(NSError *error)
-         {
-             
-         }] ;
-        
-    }
-    
 }
 #pragma mark - end
 #pragma mark - Segment control
@@ -390,58 +383,10 @@
     [self performSelector:@selector(acceptDeclineRequest) withObject:nil afterDelay:.1];
 }
 
-- (IBAction)allMatchesApproveButtonAction:(MyButton *)sender {
-    btnTag=[sender Tag];
-    otherUserId=[[allMatchesDataArray objectAtIndex:btnTag]otherUserId];
-    if ([[[allMatchesDataArray objectAtIndex:btnTag]isArrived] isEqualToString:@"T"]) {
-        accepted=@"T";
-        [myDelegate showIndicator];
-        [self performSelector:@selector(acceptDeclineRequest) withObject:nil afterDelay:.1];
-    }
-    else if ([[[allMatchesDataArray objectAtIndex:btnTag]isRequestSent] isEqualToString:@"T"]) {
-        NSLog(@"pending");
-    }
-    else if ([[[allMatchesDataArray objectAtIndex:btnTag]isAccepted] isEqualToString:@"T"]) {
-        UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        ScheduleMeetingViewController *scheduleMeeting =[storyboard instantiateViewControllerWithIdentifier:@"ScheduleMeetingViewController"];
-        scheduleMeeting.screenName=@"Matches";
-        scheduleMeeting.ContactName=[[allMatchesDataArray objectAtIndex:btnTag]userName];
-        scheduleMeeting.contactUserID=[[allMatchesDataArray objectAtIndex:btnTag]otherUserId];
-        scheduleMeeting.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.1f];
-        [scheduleMeeting setModalPresentationStyle:UIModalPresentationOverCurrentContext];
-        [self presentViewController:scheduleMeeting animated: NO completion:nil];
-        
-    }
-    
-}
-
-- (IBAction)allMatchesRejectButtonAction:(MyButton *)sender {
-    btnTag=[sender Tag];
-    otherUserId=[[allMatchesDataArray objectAtIndex:btnTag]otherUserId];
-    if ([[[allMatchesDataArray objectAtIndex:btnTag]isArrived] isEqualToString:@"T"]) {
-        accepted=@"F";
-        [myDelegate showIndicator];
-        [self performSelector:@selector(acceptDeclineRequest) withObject:nil afterDelay:.1];
-    }
-    else if ([[[allMatchesDataArray objectAtIndex:btnTag]isRequestSent] isEqualToString:@"T"]) {
-        requestSent=@"F";
-        [myDelegate showIndicator];
-        [self performSelector:@selector(sendCancelMatchRequest) withObject:nil afterDelay:.1];
-    }
-    else if ([[[allMatchesDataArray objectAtIndex:btnTag]isAccepted] isEqualToString:@"T"]) {
-        btnTag=[sender Tag];
-        UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        PersonalMessageViewController *messageView =[storyboard instantiateViewControllerWithIdentifier:@"PersonalMessageViewController"];
-        messageView.otherUserName=[[allMatchesDataArray objectAtIndex:btnTag]userName];
-        messageView.otherUserId=[[allMatchesDataArray objectAtIndex:btnTag]otherUserId];
-        [self.navigationController pushViewController:messageView animated:YES];
-    }
-    
-}
 
 - (IBAction)sendRequestButtonAction:(MyButton *)sender {
     btnTag=[sender Tag];
-    otherUserId=[[allMatchesDataArray objectAtIndex:btnTag]otherUserId];
+    otherUserId=[[latestMatchesArray objectAtIndex:btnTag]otherUserId];
     requestSent=@"T";
     [myDelegate showIndicator];
     [self performSelector:@selector(sendCancelMatchRequest) withObject:nil afterDelay:.1];
