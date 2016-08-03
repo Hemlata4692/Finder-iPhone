@@ -73,7 +73,7 @@
 -(void)setTextView {
     sendMessageTextView.text = @"";
     [sendMessageTextView setPlaceholder:@"Type a message here..."];
-    [sendMessageTextView setFont:[UIFont fontWithName:@"Roboto-Regular" size:14.0]];
+    [sendMessageTextView setFont:[UIFont fontWithName:@"Roboto-Regular" size:16.0]];
     sendMessageTextView.contentInset = UIEdgeInsetsMake(-5, 5, 0, 0);
     sendMessageTextView.alwaysBounceHorizontal = NO;
     sendMessageTextView.bounces = NO;
@@ -285,7 +285,7 @@
     headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 40.0)];
     headerView.backgroundColor = [UIColor clearColor];
     UILabel * dateLabel = [[UILabel alloc] init];
-    dateLabel.font = [UIFont fontWithName:@"Roboto-Regular" size:14.0];
+    dateLabel.font = [UIFont fontWithName:@"Roboto-Regular" size:16.0];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.dateFormat = @"yyyy-MM-dd";
     NSString *today = [dateFormatter stringFromDate:[NSDate date]];
@@ -313,7 +313,7 @@
     CGRect textRect = [data.userMessage
                        boundingRectWithSize:size
                        options:NSStringDrawingUsesLineFragmentOrigin
-                       attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Roboto-Regular" size:13.0]}
+                       attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Roboto-Regular" size:15.0]}
                        context:nil];
     
     return 60+textRect.size.height;
@@ -396,7 +396,7 @@
         CGRect textRect=[text
                          boundingRectWithSize:size
                          options:NSStringDrawingUsesLineFragmentOrigin
-                         attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Roboto-Regular" size:15]}
+                         attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Roboto-Regular" size:17]}
                          context:nil];
         
         if ((textRect.size.height < 126) && (textRect.size.height > 50)) {

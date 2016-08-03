@@ -37,7 +37,7 @@
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
+    
     // Configure the view for the selected state
 }
 #pragma mark - end
@@ -50,7 +50,7 @@
     CGRect textRect = [allMatchesDetails.userName
                        boundingRectWithSize:size
                        options:NSStringDrawingUsesLineFragmentOrigin
-                       attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Roboto-Bold" size:14.0]}
+                       attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Roboto-Bold" size:16.0]}
                        context:nil];
     name.numberOfLines = 0;
     name.frame = textRect;
@@ -64,7 +64,7 @@
     else {
         reviewedStatusLbl.hidden=YES;
     }
-
+    
     companyName.text=allMatchesDetails.userCompanyName;
     if ([allMatchesDetails.isAccepted isEqualToString:@"F"] && [allMatchesDetails.isRequestSent isEqualToString:@"F"] && [allMatchesDetails.isArrived isEqualToString:@"F"]) {
         approveButton.hidden=YES;
@@ -83,7 +83,7 @@
          ];
         [allMatchesRejectButton setImage:[UIImage imageNamed:@"reject.png"] forState:UIControlStateNormal
          ];
-    
+        
     }
     else if ([allMatchesDetails.isAccepted isEqualToString:@"F"] && [allMatchesDetails.isRequestSent isEqualToString:@"F"] && [allMatchesDetails.isArrived isEqualToString:@"T"]) {
         approveButton.hidden=YES;
@@ -95,7 +95,7 @@
          ];
         [allMatchesRejectButton setImage:[UIImage imageNamed:@"reject.png"] forState:UIControlStateNormal
          ];
-
+        
     }
     else if ([allMatchesDetails.isAccepted isEqualToString:@"T"] && [allMatchesDetails.isRequestSent isEqualToString:@"F"] && [allMatchesDetails.isArrived isEqualToString:@"F"]) {
         approveButton.hidden=YES;
@@ -107,7 +107,7 @@
          ];
         [allMatchesRejectButton setImage:[UIImage imageNamed:@"message_icon.png"] forState:UIControlStateNormal
          ];
-
+        
     }
 }
 //new segment
@@ -119,31 +119,34 @@
     CGRect textRect = [newMatchesDetails.userName
                        boundingRectWithSize:size
                        options:NSStringDrawingUsesLineFragmentOrigin
-                       attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Roboto-Bold" size:14.0]}
+                       attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Roboto-Bold" size:16.0]}
                        context:nil];
     name.numberOfLines = 0;
     name.frame = textRect;
     name.frame =CGRectMake(8, 13, textRect.size.width, textRect.size.height);
     [name setLabelBorder:name color:[UIColor whiteColor]];
     name.text=newMatchesDetails.userName;
-    if ([newMatchesDetails.reviewStatus isEqualToString:@"T"]) {
-        reviewedStatusLbl.hidden=NO;
-        reviewedStatusLbl.frame=CGRectMake(name.frame.origin.x+name.frame.size.width+3, 17, reviewedStatusLbl.frame.size.width, reviewedStatusLbl.frame.size.height);
+    if ([newMatchesDetails.isAccepted isEqualToString:@"F"] && [newMatchesDetails.isRequestSent isEqualToString:@"F"] && [newMatchesDetails.isArrived isEqualToString:@"F"]) {
+        approveButton.hidden=YES;
+        cancelButton.hidden=YES;
+        allMatchesRejectButton.hidden=YES;
+        allMatchesApproveButton.hidden=YES;
+        sendRequestButton.hidden=NO;
     }
-    else {
-        reviewedStatusLbl.hidden=YES;
+    else if ([newMatchesDetails.isAccepted isEqualToString:@"F"] && [newMatchesDetails.isRequestSent isEqualToString:@"F"] && [newMatchesDetails.isArrived isEqualToString:@"T"]) {
+        approveButton.hidden=YES;
+        cancelButton.hidden=YES;
+        sendRequestButton.hidden=YES;
+        allMatchesRejectButton.hidden=NO;
+        allMatchesApproveButton.hidden=NO;
+        [allMatchesApproveButton setImage:[UIImage imageNamed:@"approve.png"] forState:UIControlStateNormal
+         ];
+        [allMatchesRejectButton setImage:[UIImage imageNamed:@"reject.png"] forState:UIControlStateNormal
+         ];
+        
     }
+    reviewedStatusLbl.hidden=YES;
     companyName.text=newMatchesDetails.userCompanyName;
-    approveButton.hidden=NO;
-    cancelButton.hidden=NO;
-    sendRequestButton.hidden=YES;
-    allMatchesRejectButton.hidden=YES;
-    allMatchesApproveButton.hidden=YES;
-    [approveButton setImage:[UIImage imageNamed:@"approve.png"] forState:UIControlStateNormal
-     ];
-    [cancelButton setImage:[UIImage imageNamed:@"reject.png"] forState:UIControlStateNormal
-     ];
-
 }
 //contact segement
 -(void)displayContacts :(MatchesDataModel *)contactData indexPath:(int)indexPath rectSize:(CGSize)rectSize{
@@ -152,13 +155,13 @@
     CGRect textRect = [contactData.userName
                        boundingRectWithSize:size
                        options:NSStringDrawingUsesLineFragmentOrigin
-                       attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Roboto-Bold" size:14.0]}
+                       attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Roboto-Bold" size:16.0]}
                        context:nil];
     contactName.numberOfLines = 0;
     contactName.frame = textRect;
     contactName.frame =CGRectMake(78, 13, textRect.size.width, textRect.size.height);
     [contactName setLabelBorder:contactName color:[UIColor whiteColor]];
-
+    
     contactName.text=contactData.userName;
     contactCompanyName.text=contactData.userCompanyName;
     [contactIcon setCornerRadius:contactIcon.frame.size.width/2];

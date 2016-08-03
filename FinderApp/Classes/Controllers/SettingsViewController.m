@@ -74,7 +74,7 @@
     headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 40.0)];
     headerView.backgroundColor = [UIColor clearColor];
     UILabel * notificationLabel = [[UILabel alloc] init];
-    notificationLabel.font = [UIFont fontWithName:@"Roboto-Regular" size:17.0];
+    notificationLabel.font = [UIFont fontWithName:@"Roboto-Regular" size:18.0];
     notificationLabel.text=@"Notifications";
     float width =  [notificationLabel.text boundingRectWithSize:notificationLabel.frame.size options:NSStringDrawingUsesLineFragmentOrigin attributes:@{ NSFontAttributeName:notificationLabel.font } context:nil]
     .size.width;
@@ -131,7 +131,7 @@
         [proximityCell.sliderView setValue:[[[UserDefaultManager getValue:@"switchStatusDict"] objectForKey:@"02"] intValue]];
         [proximityCell.sliderView setMaxFractionDigitsDisplayed:0];
         proximityCell.sliderView.popUpViewColor = [UIColor colorWithRed:47.0/255.0 green:81.0/255.0 blue:116.0/255.0 alpha:1.0];
-        proximityCell.sliderView.font = [UIFont fontWithName:@"Roboto-Regular" size:16];
+        proximityCell.sliderView.font = [UIFont fontWithName:@"Roboto-Regular" size:17];
         proximityCell.sliderView.textColor = [UIColor whiteColor];
         proximityCell.sliderView.popUpViewWidthPaddingFactor = 1.7;
         [proximityCell.sliderView showPopUpViewAnimated:YES];

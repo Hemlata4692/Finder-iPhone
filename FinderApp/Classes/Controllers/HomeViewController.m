@@ -105,7 +105,7 @@
     conferenceVenue.text=[[conferenceDetailArray objectAtIndex:0]conferenceVenue];
     conferenceDate.text=[[conferenceDetailArray objectAtIndex:0]conferenceDate];
     size = CGSizeMake(mainContainerView.frame.size.width-16,999);
-    textRect=[self setDynamicHeight:size textString:[[conferenceDetailArray objectAtIndex:0]conferenceDescription] fontSize:[UIFont fontWithName:@"Roboto-Regular" size:13]];
+    textRect=[self setDynamicHeight:size textString:[[conferenceDetailArray objectAtIndex:0]conferenceDescription] fontSize:[UIFont fontWithName:@"Roboto-Regular" size:14]];
     conferenceDescription.numberOfLines = 0;
     conferenceDescription.frame = CGRectMake(8, descriptionHeadingLabel.frame.origin.y+descriptionHeadingLabel.frame.size.height+5, mainContainerView.frame.size.width-16, textRect.size.height);
     conferenceDescription.text=[[conferenceDetailArray objectAtIndex:0]conferenceDescription];

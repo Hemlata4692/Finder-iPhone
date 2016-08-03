@@ -449,7 +449,7 @@
     }
     
     size = CGSizeMake(mainContainerView.frame.size.width-16,999);
-    textRect=[self setDynamicHeight:size textString:aboutComapny fontSize:[UIFont fontWithName:@"Roboto-Regular" size:14]];
+    textRect=[self setDynamicHeight:size textString:aboutComapny fontSize:[UIFont fontWithName:@"Roboto-Regular" size:15]];
     companyDescriptionLabel.numberOfLines = 0;
     aboutCompanyView.frame=CGRectMake(8, aboutcompanyHeading.frame.origin.y+aboutcompanyHeading.frame.size.height+5, mainContainerView.frame.size.width-16, textRect.size.height+10);
     companyDescriptionLabel.frame = CGRectMake(8, 3, aboutCompanyView.frame.size.width-10, textRect.size.height);

@@ -347,7 +347,7 @@
     UILabel* pickerLabel = (UILabel*)view;
     if (!pickerLabel) {
         pickerLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0,320,20)];
-        pickerLabel.font = [UIFont fontWithName:@"Roboto-Regular" size:15];
+        pickerLabel.font = [UIFont fontWithName:@"Roboto-Regular" size:16];
         pickerLabel.textAlignment=NSTextAlignmentCenter;
     }
     if ([pickerType isEqualToString:@"1"]) {

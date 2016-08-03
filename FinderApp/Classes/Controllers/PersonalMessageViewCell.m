@@ -36,7 +36,7 @@
     retryButton.translatesAutoresizingMaskIntoConstraints=YES;
 
     CGSize size = CGSizeMake(rectSize.width-50,999);
-    CGRect textRect=[self setDynamicHeight:size textString:messageHistory.userMessage fontSize:[UIFont fontWithName:@"Roboto-Regular" size:13]];
+    CGRect textRect=[self setDynamicHeight:size textString:messageHistory.userMessage fontSize:[UIFont fontWithName:@"Roboto-Regular" size:15]];
     meUserMessageLabel.numberOfLines = 0;
     
     //Bubble positions
@@ -83,7 +83,7 @@
     otherUserMessageLabel.translatesAutoresizingMaskIntoConstraints=YES;
     outgoingBubbleImage.translatesAutoresizingMaskIntoConstraints=YES;
     CGSize size = CGSizeMake(rectSize.width-50,999);
-    CGRect textRect=[self setDynamicHeight:size textString:messageHistoryData.userMessage fontSize:[UIFont fontWithName:@"Roboto-Regular" size:13]];
+    CGRect textRect=[self setDynamicHeight:size textString:messageHistoryData.userMessage fontSize:[UIFont fontWithName:@"Roboto-Regular" size:15]];
     otherUserMessageLabel.numberOfLines = 0;
     
     //Bubble positions

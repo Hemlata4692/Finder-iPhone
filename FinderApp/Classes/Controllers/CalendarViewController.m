@@ -197,7 +197,7 @@
     headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 40.0)];
     headerView.backgroundColor = [UIColor clearColor];
     UILabel * dateLabel = [[UILabel alloc] init];
-    dateLabel.font = [UIFont fontWithName:@"Roboto-Regular" size:16.0];
+    dateLabel.font = [UIFont fontWithName:@"Roboto-Regular" size:17.0];
     NSArray *dateStrings = [[[sectionArray objectAtIndex:section]conferenceDate] componentsSeparatedByString:@" "];
     NSMutableString *string = [[NSMutableString alloc]init];
     NSString *result;
