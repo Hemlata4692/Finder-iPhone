@@ -64,7 +64,6 @@
     myDelegate.myView=@"other";
    // [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-
 #pragma mark - end
 
 #pragma mark - Webservice
@@ -150,8 +149,6 @@
                     [notifications addObject:notification];
                     [[UIApplication sharedApplication] scheduleLocalNotification:notification];
                 }
-                
-                
             }
         }
         }

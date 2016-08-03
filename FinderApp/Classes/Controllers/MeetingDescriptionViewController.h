@@ -10,4 +10,6 @@
 
 @interface MeetingDescriptionViewController : UIViewController
 @property(nonatomic, strong) NSString *meetingDescription;
+@property(nonatomic, strong) NSString *meetingLocation;
+
 @end
