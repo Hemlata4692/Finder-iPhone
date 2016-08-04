@@ -358,7 +358,7 @@
         }
         
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"2"]) {
-            [[ConferenceService sharedManager] acceptCancelMeeting:[alertDict objectForKey:@"appointmentId"] meetingUserId:[alertDict objectForKey:@"meetinguserId"] flag:@"accept" type:@"requested" success:^(id responseObject) {
+            [[ConferenceService sharedManager] acceptCancelMeeting:[alertDict objectForKey:@"appointmentId"] meetingUserId:[alertDict objectForKey:@"meetinguserId"] flag:@"accept" type:@"requested" reasonForCancel:@"" success:^(id responseObject) {
                 NSLog(@"calendar type 2");
                 if ([myDelegate.myView isEqualToString:@"CalendarViewController"]) {
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"CalendarDetails" object:nil];
@@ -445,7 +445,7 @@
             
         }
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"2"]) {
-            [[ConferenceService sharedManager] acceptCancelMeeting:[alertDict objectForKey:@"appointmentId"] meetingUserId:[alertDict objectForKey:@"meetinguserId"] flag:@"cancel" type:@"requested" success:^(id responseObject) {
+            [[ConferenceService sharedManager] acceptCancelMeeting:[alertDict objectForKey:@"appointmentId"] meetingUserId:[alertDict objectForKey:@"meetinguserId"] flag:@"cancel" type:@"requested" reasonForCancel:@"" success:^(id responseObject) {
                 
                 if ([myDelegate.myView isEqualToString:@"CalendarViewController"]) {
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"CalendarDetails" object:nil];

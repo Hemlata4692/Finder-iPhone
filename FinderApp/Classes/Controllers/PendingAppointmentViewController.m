@@ -12,11 +12,14 @@
 #import "ConferenceService.h"
 #import "MeetingDescriptionViewController.h"
 #import "MyProfileViewController.h"
+#import "UIPlaceHolderTextView.h"
 
-@interface PendingAppointmentViewController ()<UIGestureRecognizerDelegate>
+@interface PendingAppointmentViewController ()<UIGestureRecognizerDelegate,BSKeyboardControlsDelegate>
 {
     int btnTag;
     NSMutableArray *appointmentDataArray;
+    NSString *cancelMessageString;
+    NSArray *textFieldArray;
 }
 @property (weak, nonatomic) IBOutlet UITableView *pendingAppointmentTable;
 @property (weak, nonatomic) IBOutlet UILabel *noResulFoundLabel;
@@ -24,7 +27,12 @@
 @property (nonatomic,strong) NSString *meetingId;
 @property (nonatomic,strong) NSString *status;
 @property (nonatomic,strong) NSString *appointmentType;
+@property (strong, nonatomic) IBOutlet UIView *messageForCancelView;
+@property (strong, nonatomic) IBOutlet UIView *cancelMessageContainerView;
+@property (strong, nonatomic) IBOutlet UIPlaceHolderTextView *cancelMessageTextView;
 @property (nonatomic,strong) NSString *appointmentDate;
+@property (nonatomic, strong) BSKeyboardControls *keyboardControls;
+
 @end
 
 @implementation PendingAppointmentViewController
@@ -36,11 +44,24 @@
 @synthesize meetingId;
 @synthesize appointmentDate;
 @synthesize noResulFoundLabel;
-
+@synthesize messageForCancelView;
+@synthesize cancelMessageTextView;
+@synthesize cancelMessageContainerView;
+@synthesize keyboardControls;
 #pragma mark - View life cycle
 - (void)viewDidLoad{
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    textFieldArray = @[cancelMessageTextView];
+    [self setKeyboardControls:[[BSKeyboardControls alloc] initWithFields:textFieldArray]];
+    [self.keyboardControls setDelegate:self];
+
+    
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(meetingDescriptionContainerView:)];
+    tapGesture.delegate=self;
+    [cancelMessageContainerView addGestureRecognizer:tapGesture];
+
+    
     appointmentDataArray=[[NSMutableArray alloc]init];
     noResulFoundLabel.hidden=YES;
     if ([screenName isEqualToString:@"Pending Appointments"]) {
@@ -51,18 +72,18 @@
     }
     else {
         self.navigationItem.title=screenName;
-         noResulFoundLabel.text=@"No requested appointement(s).";
+        noResulFoundLabel.text=@"No requested appointement(s).";
         [myDelegate showIndicator];
         [self performSelector:@selector(getRequestedAppointmentList) withObject:nil afterDelay:.1];
     }
- 
-   // [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pendingDetails) name:@"Pending" object:nil];
+    
+    // [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pendingDetails) name:@"Pending" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestedDetails) name:@"Requested" object:nil];
-
+    [cancelMessageTextView setPlaceholder:@"  Cancel Message"];
     
 }
 -(void)pendingDetails{
-
+    
     [myDelegate showIndicator];
     [self performSelector:@selector(getPendingAppointmentList) withObject:nil afterDelay:0.1];
 }
@@ -99,60 +120,61 @@
             pendingAppointmentTable.hidden=YES;
         }
         else {
-        pendingAppointmentTable.hidden=NO;
-        noResulFoundLabel.hidden=YES;
-        [pendingAppointmentTable reloadData];
+            pendingAppointmentTable.hidden=NO;
+            noResulFoundLabel.hidden=YES;
+            [pendingAppointmentTable reloadData];
         }
         
-     
+        
     }
-                                                 failure:^(NSError *error)
+                                                    failure:^(NSError *error)
      {
          noResulFoundLabel.hidden=NO;
          noResulFoundLabel.text=@"No requested appointement(s).";
          pendingAppointmentTable.hidden=YES;
      }] ;
-
+    
 }
 
 -(void)getPendingAppointmentList {
     [[ConferenceService sharedManager] pendingAppointment:^(id dataArray) {
         [myDelegate stopIndicator];
-         appointmentDataArray=[dataArray mutableCopy];
+        appointmentDataArray=[dataArray mutableCopy];
         if (appointmentDataArray==nil) {
             noResulFoundLabel.hidden=NO;
             noResulFoundLabel.text=@"No pending appointement(s).";
             pendingAppointmentTable.hidden=YES;
         }
         else {
-         pendingAppointmentTable.hidden=NO;
-        noResulFoundLabel.hidden=YES;
-        [pendingAppointmentTable reloadData];
+            pendingAppointmentTable.hidden=NO;
+            noResulFoundLabel.hidden=YES;
+            [pendingAppointmentTable reloadData];
         }
-      
+        
     }
-                                                    failure:^(NSError *error)
+                                                  failure:^(NSError *error)
      {
          noResulFoundLabel.hidden=NO;
          noResulFoundLabel.text=@"No pending appointement(s).";
-          pendingAppointmentTable.hidden=YES;
+         pendingAppointmentTable.hidden=YES;
      }] ;
-
+    
 }
 -(void)acceptMeetingRequest {
-    [[ConferenceService sharedManager] acceptCancelMeeting:appointmentId meetingUserId:meetingId flag:status  type:appointmentType success:^(id dataArray) {
+    [[ConferenceService sharedManager] acceptCancelMeeting:appointmentId meetingUserId:meetingId flag:status  type:appointmentType reasonForCancel:@"" success:^(id dataArray) {
         [self getPendingAppointmentList];
     }
                                                    failure:^(NSError *error)
      {
          
      }] ;
-
+    
 }
 -(void)cancelMeetingRequest {
-    [[ConferenceService sharedManager] acceptCancelMeeting:appointmentId meetingUserId:meetingId flag:status type:appointmentType success:^(id dataArray) {
+    [[ConferenceService sharedManager] acceptCancelMeeting:appointmentId meetingUserId:meetingId flag:status type:appointmentType reasonForCancel:cancelMessageString success:^(id dataArray) {
         if ([appointmentType isEqualToString:@"requested"]) {
             [self getPendingAppointmentList];
+            cancelMessageContainerView.hidden = YES;
         }
         else {
             [self getRequestedAppointmentList];
@@ -162,7 +184,7 @@
      {
          
      }] ;
-
+    
 }
 #pragma mark - end
 #pragma mark - Table view methods
@@ -212,8 +234,8 @@
     pendingCell.cancelButton.Tag=(int)indexPath.row;
     PendingAppointmentDataModel *data=[appointmentDataArray objectAtIndex:indexPath.row];
     [pendingCell displayData:data indexPath:(int)indexPath.row rectSize:pendingCell.frame.size];
-     [pendingCell.acceptButton addTarget:self action:@selector(acceptMeetingButtionAction:) forControlEvents:UIControlEventTouchUpInside];
-     [pendingCell.cancelButton addTarget:self action:@selector(cancelMeetingButtionAction:) forControlEvents:UIControlEventTouchUpInside];
+    [pendingCell.acceptButton addTarget:self action:@selector(acceptMeetingButtionAction:) forControlEvents:UIControlEventTouchUpInside];
+    [pendingCell.cancelButton addTarget:self action:@selector(cancelMeetingButtionAction:) forControlEvents:UIControlEventTouchUpInside];
     return pendingCell;
 }
 
@@ -224,7 +246,7 @@
     profileView.viewName=@"User Profile";
     profileView.otherUserID=[[appointmentDataArray objectAtIndex:indexPath.row]meetingUserId];
     [self.navigationController pushViewController:profileView animated:YES];
-
+    
 }
 #pragma mark - end
 
@@ -261,15 +283,55 @@
     status=@"cancel";
     if ([screenName isEqualToString:@"Pending Appointments"]) {
         appointmentType=@"requested";
+        cancelMessageContainerView.hidden = NO;
+        
     }
     else {
         appointmentType=@"assigned";
+        cancelMessageString = @"";
+        [myDelegate showIndicator];
+        [self performSelector:@selector(cancelMeetingRequest) withObject:nil afterDelay:.1];
+        
     }
-    [myDelegate showIndicator];
-    [self performSelector:@selector(cancelMeetingRequest) withObject:nil afterDelay:.1];
+    
+}
+- (IBAction)confirmCancelButtonAction:(id)sender {
+    
+    [keyboardControls.activeField resignFirstResponder];
+
+    if ([cancelMessageTextView.text isEqualToString:@""]) {
+        SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
+        [alert showWarning:self title:@"Alert" subTitle:@"Please Enter Message for cancel." closeButtonTitle:@"Done" duration:0.0f];
+    }
+    else
+    {
+        cancelMessageString = cancelMessageTextView.text;
+        [myDelegate showIndicator];
+        [self performSelector:@selector(cancelMeetingRequest) withObject:nil afterDelay:.1];
+        
+    }
 }
 
 #pragma mark - end
+#pragma mark - Tap gesture delegate
+-(void) meetingDescriptionContainerView:(UITapGestureRecognizer *)sender {
+    cancelMessageContainerView.hidden = YES;
+}
+#pragma mark - end
+#pragma mark - Keyboard controls delegate
+- (void)keyboardControls:(BSKeyboardControls *)keyboardControls selectedField:(UIView *)field inDirection:(BSKeyboardControlsDirection)direction{
+    UIView *view;
+    view = field.superview.superview.superview;
+}
 
+- (void)keyboardControlsDonePressed:(BSKeyboardControls *)keyboardControls{
+    [keyboardControls.activeField resignFirstResponder];
+}
+#pragma mark - end
+#pragma mark - Textview delegates
+-(void)textViewDidBeginEditing:(UITextView *)textView {
+    [self.keyboardControls setActiveField:textView];
+}
+#pragma mark - end
 
 @end

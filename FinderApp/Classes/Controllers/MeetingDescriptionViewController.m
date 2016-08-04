@@ -38,7 +38,8 @@
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(meetingDescriptionContainerView:)];
     tapGesture.delegate=self;
     [meetingDescriptionContainerView addGestureRecognizer:tapGesture];
-    
+
+    meetingLocation = @"my location";
     [self setMeetingDetail:meetingDescription locationText:meetingLocation];
 }
 

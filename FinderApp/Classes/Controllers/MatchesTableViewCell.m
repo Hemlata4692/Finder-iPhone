@@ -164,7 +164,7 @@
     
     contactDesignation.translatesAutoresizingMaskIntoConstraints=YES;
 //    CGSize size = CGSizeMake(rectSize.width-157,100);
-    CGRect designationtextRect = [@"Senior Softwate Engineer"
+    CGRect designationtextRect = [contactData.userDesignation
                        boundingRectWithSize:size
                        options:NSStringDrawingUsesLineFragmentOrigin
                        attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Roboto-Regular" size:15.0]}
@@ -176,6 +176,7 @@
 
     
     contactName.text=contactData.userName;
+    contactDesignation.text=contactData.userDesignation;
     contactCompanyName.text=contactData.userCompanyName;
     [contactIcon setCornerRadius:contactIcon.frame.size.width/2];
     __weak UIImageView *weakRef = contactIcon;
