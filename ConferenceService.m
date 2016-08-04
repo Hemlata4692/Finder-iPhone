@@ -390,8 +390,8 @@
 #pragma mark - end
 
 #pragma mark - Accept cancel meeting
--(void)acceptCancelMeeting:(NSString *)appointmentId meetingUserId:(NSString *)meetingUserId flag:(NSString *)flag type:(NSString *)type success:(void (^)(id))success failure:(void (^)(NSError *))failure {
-    NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"],@"appointmentId":appointmentId,@"meetingUserId":meetingUserId,@"flag":flag,@"type":type};
+-(void)acceptCancelMeeting:(NSString *)appointmentId meetingUserId:(NSString *)meetingUserId flag:(NSString *)flag type:(NSString *)type reasonForCancel:(NSString *)reasonForCancel success:(void (^)(id))success failure:(void (^)(NSError *))failure {
+    NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"],@"appointmentId":appointmentId,@"meetingUserId":meetingUserId,@"flag":flag,@"type":type, @"reasonForCancel":reasonForCancel};
     NSLog(@"accept decline appointment %@",requestDict);
     [[Webservice sharedManager] post:kUrlAcceptCancelAppointment parameters:requestDict success:^(id responseObject) {
         responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];

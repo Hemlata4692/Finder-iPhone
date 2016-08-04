@@ -17,4 +17,6 @@
 @property(nonatomic,retain)NSString * reviewStatus;
 @property(nonatomic,retain)NSString * otherUserId;
 @property(nonatomic,retain)NSString * isArrived;
+@property(nonatomic,retain)NSString * userDesignation;
+
 @end

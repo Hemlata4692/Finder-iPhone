@@ -31,6 +31,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *userProfileImage;
 @property (weak, nonatomic) IBOutlet UILabel *userNameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *companyNameLabel;
+@property (strong, nonatomic) IBOutlet UILabel *userDesignationLabel;
 @property (weak, nonatomic) IBOutlet UIView *mobileNumberView;
 @property (weak, nonatomic) IBOutlet UILabel *mobileNumberLabel;
 @property (weak, nonatomic) IBOutlet UIView *aboutCompanyView;
@@ -57,6 +58,7 @@
 @synthesize profileBackground;
 @synthesize userProfileImage;
 @synthesize userNameLabel;
+@synthesize userDesignationLabel;
 @synthesize companyNameLabel;
 @synthesize mobileNumberView;
 @synthesize mobileNumberLabel;
@@ -414,11 +416,12 @@
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
         
     }];
+    userNameLabel.text=[[userProfileDataArray objectAtIndex:0]userName];
     if ([[[userProfileDataArray objectAtIndex:0]userDesignation] isEqualToString:@""]) {
-        userNameLabel.text=[NSString stringWithFormat:@"%@ (NA)",[[userProfileDataArray objectAtIndex:0]userName]];
+        userDesignationLabel.text=@"NA";
     }
     else {
-        userNameLabel.text=[NSString stringWithFormat:@"%@ (%@)",[[userProfileDataArray objectAtIndex:0]userName],[[userProfileDataArray objectAtIndex:0]userDesignation]];
+        userDesignationLabel.text=[[userProfileDataArray objectAtIndex:0]userDesignation];
     }
     
     if ([[[userProfileDataArray objectAtIndex:0]userLinkedInLink] isEqualToString:@""]) {

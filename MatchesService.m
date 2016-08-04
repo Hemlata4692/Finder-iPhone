@@ -62,6 +62,7 @@
                     matchesDetails.isRequestSent =[matchesDataDict objectForKey:@"isRequestSent"];
                     matchesDetails.otherUserId =[matchesDataDict objectForKey:@"otherUserId"];
                     matchesDetails.isArrived =[matchesDataDict objectForKey:@"isArrived"];
+                    matchesDetails.userDesignation =[matchesDataDict objectForKey:@"userDesignation"];
                     [dataArray addObject:matchesDetails];
                 }
                 success(dataArray);
