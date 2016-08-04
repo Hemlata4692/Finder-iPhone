@@ -49,22 +49,29 @@
 }
 
 - (IBAction)viewButtonAction:(UIButton *)sender {
-
+    if ([customAlertObj.messageTextView isFirstResponder]) {
+        [customAlertObj.messageTextView resignFirstResponder];
+    }
     [_delegate myAlertDelegateAction:customAlertObj option:0 reason:customAlertObj.messageTextView.text];
 }
 
 - (IBAction)acceptButtonAction:(UIButton *)sender {
-    
+    if ([customAlertObj.messageTextView isFirstResponder]) {
+        [customAlertObj.messageTextView resignFirstResponder];
+    }
     [_delegate myAlertDelegateAction:customAlertObj option:1 reason:customAlertObj.messageTextView.text];
 }
 - (IBAction)declineButtonAction:(UIButton *)sender {
+    if ([customAlertObj.messageTextView isFirstResponder]) {
+        [customAlertObj.messageTextView resignFirstResponder];
+    }
     if (isTextViewCheck && ([customAlertObj.messageTextView.text isEqualToString:@""] || customAlertObj.messageTextView.text.length == 0)) {
         SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
         [alert addButton:@"Ok" actionBlock:^(void) {
             
             //                 [alert hideView];
         }];
-        [alert showWarning:nil title:@"Alert" subTitle:@"Please fill reason." closeButtonTitle:nil duration:0.0f];
+        [alert showWarning:nil title:@"Alert" subTitle:@"Please enter message for cancel." closeButtonTitle:nil duration:0.0f];
 //         [_delegate myAlertDelegateAction:customAlertObj option:2 reason:customAlertObj.messageTextView.text];
     }
     else {

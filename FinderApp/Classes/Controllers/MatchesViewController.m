@@ -55,6 +55,9 @@
     [myDelegate.locationManager startUpdatingLocation];
     myDelegate.isLocation=@"1";
     [self setTabBarImages];
+    if ([[UserDefaultManager getValue:@"PendingMessage"] isEqualToString:@"1"]) {
+        [myDelegate addBadgeIconOnMoreTab];
+    }
     if ([[UserDefaultManager getValue:@"unReadMessegaes"] isEqualToString:@"true"]) {
         [myDelegate addBadgeIcon];
     }
@@ -87,7 +90,6 @@
         profileView.screenName=@"Pending Appointments";
         [self.navigationController pushViewController:profileView animated:YES];
     }
-    
     [myDelegate showIndicator];
     [self performSelector:@selector(getMatchesDetails) withObject:nil afterDelay:.1];
 }

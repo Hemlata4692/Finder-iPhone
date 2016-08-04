@@ -101,6 +101,7 @@
     if ([screenName isEqualToString:@"Pending Appointments"]) {
         
         myDelegate.myView=@"PendingViewController";
+        [UserDefaultManager setValue:@"0" key:@"PendingMessage"];
         [myDelegate removeBadgeIconOnMoreTab];
     }
     else {

@@ -9,11 +9,11 @@
 #import "CustomAlert.h"
 #import "MyAlert.h"
 
-@interface CustomAlert(){
+@interface CustomAlert()<BSKeyboardControlsDelegate>{
     
     float scrollTextView;
 }
-
+@property (nonatomic, strong) BSKeyboardControls *keyboardControls;
 @end
 @implementation CustomAlert
 @synthesize mainView, title, viewBtnAction, acceptBtnAction,declineBtnAction, messageLabel, backView, myAlertBackView,messageTextView;
@@ -39,6 +39,10 @@
         myAlertBackView.frame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 300);
         title.frame = CGRectMake(0, 30, myAlertBackView.frame.size.width, 30);
         title.text = titleText;
+        
+        [self setKeyboardControls:[[BSKeyboardControls alloc] initWithFields:@[messageTextView]]];
+        [self.keyboardControls setDelegate:self];
+        
         if ([messageText isEqualToString:@""]) {
             
              messageLabel.frame = CGRectMake(10, title.frame.origin.y + title.frame.size.height + 8, myAlertBackView.frame.size.width - 20, 0);
@@ -62,6 +66,9 @@
             messageLabel.text = messageText;
             messageLabel.hidden = NO;
         }
+        
+        messageTextView.placeholder = @"Message for cancel";
+        messageTextView.placeholderTextColor = [UIColor colorWithRed:(237.0/255.0) green:(238.0/255.0) blue:(240.0/255.0) alpha:1.0f];
         
         if (isTextField) {
              messageTextView.frame = CGRectMake(10, messageLabel.frame.origin.y + messageLabel.frame.size.height + 8, myAlertBackView.frame.size.width - 20, 50);
@@ -104,7 +111,23 @@
     return self;
 }
 
+#pragma mark - Keyboard controls delegate
+- (void)keyboardControls:(BSKeyboardControls *)keyboardControls selectedField:(UIView *)field inDirection:(BSKeyboardControlsDirection)direction{
+    UIView *view;
+    view = field.superview.superview.superview;
+}
 
+- (void)keyboardControlsDonePressed:(BSKeyboardControls *)keyboardControls{
+    [keyboardControls.activeField resignFirstResponder];
+}
+#pragma mark - end
+
+#pragma mark - Textview delegates
+- (void)textViewDidBeginEditing:(UITextView *)textView {
+    
+    [self.keyboardControls setActiveField:textView];
+}
+#pragma mark - end
 
 -(id)initWithCoder:(NSCoder *)aDecoder{
     self=[super initWithCoder:aDecoder];
