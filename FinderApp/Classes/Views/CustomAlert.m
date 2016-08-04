@@ -16,7 +16,7 @@
 
 @end
 @implementation CustomAlert
-@synthesize mainView, title, viewBtnAction, acceptBtnAction,declineBtnAction, messageLabel, backView, myAlertBackView,reason;
+@synthesize mainView, title, viewBtnAction, acceptBtnAction,declineBtnAction, messageLabel, backView, myAlertBackView,messageTextView;
 //done=acceptBtnAction
 -(id)initWithFrame:(CGRect)frame title:(NSString*)titleText message:(NSString*)messageText viewBtnText:(NSString*)viewBtnText acceptBtnText:(NSString*)acceptBtnText declineBtnText:(NSString*)declineBtnText isTextField:(BOOL)isTextField
 {
@@ -34,7 +34,7 @@
         viewBtnAction.translatesAutoresizingMaskIntoConstraints = YES;
         acceptBtnAction.translatesAutoresizingMaskIntoConstraints = YES;
         declineBtnAction.translatesAutoresizingMaskIntoConstraints = YES;
-        reason.translatesAutoresizingMaskIntoConstraints = YES;
+        messageTextView.translatesAutoresizingMaskIntoConstraints = YES;
         backView.frame = CGRectMake(0, 0, mainView.frame.size.width, mainView.frame.size.height);
         myAlertBackView.frame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 300);
         title.frame = CGRectMake(0, 30, myAlertBackView.frame.size.width, 30);
@@ -64,23 +64,23 @@
         }
         
         if (isTextField) {
-             reason.frame = CGRectMake(10, messageLabel.frame.origin.y + messageLabel.frame.size.height + 8, myAlertBackView.frame.size.width - 20, 30);
+             messageTextView.frame = CGRectMake(10, messageLabel.frame.origin.y + messageLabel.frame.size.height + 8, myAlertBackView.frame.size.width - 20, 50);
         }
         else {
-             reason.frame = CGRectMake(10, messageLabel.frame.origin.y + messageLabel.frame.size.height + 8, myAlertBackView.frame.size.width - 20, 0);
+             messageTextView.frame = CGRectMake(10, messageLabel.frame.origin.y + messageLabel.frame.size.height + 8, myAlertBackView.frame.size.width - 20, 0);
         }
         if ([acceptBtnText isEqualToString:@""] ) {
             
-            viewBtnAction.frame = CGRectMake(10, reason.frame.origin.y + reason.frame.size.height + 14,(myAlertBackView.frame.size.width-40)/2, 40);
+            viewBtnAction.frame = CGRectMake(10, messageTextView.frame.origin.y + messageTextView.frame.size.height + 14,(myAlertBackView.frame.size.width-40)/2, 40);
             viewBtnAction.backgroundColor=[UIColor colorWithRed:51.0/255.0 green:139.0/255.0 blue:37.0/255.0 alpha:1.0];
-            declineBtnAction.frame = CGRectMake(viewBtnAction.frame.origin.x+viewBtnAction.frame.size.width+15, reason.frame.origin.y + reason.frame.size.height + 14, (myAlertBackView.frame.size.width-40)/2, 40);
+            declineBtnAction.frame = CGRectMake(viewBtnAction.frame.origin.x+viewBtnAction.frame.size.width+15, messageTextView.frame.origin.y + messageTextView.frame.size.height + 14, (myAlertBackView.frame.size.width-40)/2, 40);
             acceptBtnAction.hidden = YES;
         }
         else{
         
-            viewBtnAction.frame = CGRectMake(10, reason.frame.origin.y + reason.frame.size.height + 14,(myAlertBackView.frame.size.width-20)/3-10, 40);
-            acceptBtnAction.frame = CGRectMake(viewBtnAction.frame.origin.x+viewBtnAction.frame.size.width + 15, reason.frame.origin.y + reason.frame.size.height + 14, (myAlertBackView.frame.size.width-20)/3-10, 40);
-            declineBtnAction.frame = CGRectMake(acceptBtnAction.frame.origin.x+acceptBtnAction.frame.size.width + 15, reason.frame.origin.y + reason.frame.size.height + 14, (myAlertBackView.frame.size.width-20)/3-10, 40);
+            viewBtnAction.frame = CGRectMake(10, messageTextView.frame.origin.y + messageTextView.frame.size.height + 14,(myAlertBackView.frame.size.width-20)/3-10, 40);
+            acceptBtnAction.frame = CGRectMake(viewBtnAction.frame.origin.x+viewBtnAction.frame.size.width + 15, messageTextView.frame.origin.y + messageTextView.frame.size.height + 14, (myAlertBackView.frame.size.width-20)/3-10, 40);
+            declineBtnAction.frame = CGRectMake(acceptBtnAction.frame.origin.x+acceptBtnAction.frame.size.width + 15, messageTextView.frame.origin.y + messageTextView.frame.size.height + 14, (myAlertBackView.frame.size.width-20)/3-10, 40);
            // acceptBtnAction.hidden = NO;
         }
         
@@ -103,6 +103,9 @@
     }
     return self;
 }
+
+
+
 -(id)initWithCoder:(NSCoder *)aDecoder{
     self=[super initWithCoder:aDecoder];
     if (self) {

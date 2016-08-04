@@ -12,6 +12,7 @@
                 <outlet property="declineBtnAction" destination="29g-Xq-hMG" id="Ifm-iK-FiV"/>
                 <outlet property="mainView" destination="iN0-l3-epB" id="r9X-wU-bMO"/>
                 <outlet property="messageLabel" destination="dRs-uK-JAP" id="shs-GR-PaT"/>
+                <outlet property="messageTextView" destination="YSR-DT-T6r" id="1aq-p8-F2G"/>
                 <outlet property="myAlertBackView" destination="ceM-Jw-BxG" id="6ok-CM-dWA"/>
                 <outlet property="title" destination="Bzl-Is-q8B" id="q1I-Po-tGf"/>
                 <outlet property="viewBtnAction" destination="Izn-7o-g4A" id="nVk-ar-7dB"/>
@@ -62,11 +63,12 @@
                                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </state>
                                 </button>
-                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="YSR-DT-T6r">
-                                    <rect key="frame" x="15" y="84" width="292" height="58"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="YSR-DT-T6r" customClass="UIPlaceHolderTextView">
+                                    <rect key="frame" x="15" y="92" width="292" height="50"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 </textView>
                             </subviews>
