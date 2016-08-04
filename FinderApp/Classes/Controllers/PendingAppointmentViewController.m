@@ -301,7 +301,7 @@
 
     if ([cancelMessageTextView.text isEqualToString:@""]) {
         SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
-        [alert showWarning:self title:@"Alert" subTitle:@"Please Enter Message for cancel." closeButtonTitle:@"Done" duration:0.0f];
+        [alert showWarning:self title:@"Alert" subTitle:@"Please enter message for cancel." closeButtonTitle:@"Done" duration:0.0f];
     }
     else
     {
@@ -316,6 +316,7 @@
 #pragma mark - Tap gesture delegate
 -(void) meetingDescriptionContainerView:(UITapGestureRecognizer *)sender {
     cancelMessageContainerView.hidden = YES;
+    [keyboardControls.activeField resignFirstResponder];
 }
 #pragma mark - end
 #pragma mark - Keyboard controls delegate

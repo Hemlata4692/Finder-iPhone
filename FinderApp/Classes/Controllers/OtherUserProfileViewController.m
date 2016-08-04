@@ -309,7 +309,7 @@
             companyAddress=[[otherUserProfileDataArray objectAtIndex:0]userComapnyAddress];
         }
         size = CGSizeMake(mainContainerView.frame.size.width-16,300);
-        textRect=[self setDynamicHeight:size textString:companyAddress fontSize:[UIFont fontWithName:@"Roboto-Regular" size:15]];
+        textRect=[self setDynamicHeight:size textString:companyAddress fontSize:[UIFont fontWithName:@"Roboto-Regular" size:14]];
         comapnyAddressLabel.numberOfLines = 0;
         companyAddressView.frame=CGRectMake(8, aboutCompanyView.frame.origin.y+aboutCompanyView.frame.size.height+8+addressHeadingLabel.frame.size.height+8, mainContainerView.frame.size.width-16, textRect.size.height+10);
         comapnyAddressLabel.frame = CGRectMake(8, 3, companyAddressView.frame.size.width-10, textRect.size.height);
