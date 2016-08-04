@@ -91,15 +91,12 @@
     self.deviceToken = @"";
     //google analytics tracking id
     //UA-80202935-1
-    
+    NSLog(@"%@",[UserDefaultManager getValue:@"PendingMessage"]);
     if([UserDefaultManager getValue:@"PendingMessage"]==NULL)
     {
         [UserDefaultManager setValue:@"0" key:@"PendingMessage"];
     }
-    else if ([[UserDefaultManager getValue:@"PendingMessage"] isEqualToString:@"1"]) {
-        [self addBadgeIconOnMoreTab];
-    }
-    
+   
     NSLog(@"userId %@",[[NSUserDefaults standardUserDefaults] objectForKey:@"userId"]);
     NSLog(@"conferenceId %@",[[NSUserDefaults standardUserDefaults] objectForKey:@"conferenceId"]);
     UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -287,7 +284,9 @@
             
             alert = [[MyAlert alloc] initWithTitle:@"New Meeting Request" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Accept" acceptBtnText:@"" declineBtnText:@"Decline" isTextField:YES];
             if (![myDelegate.myView isEqualToString:@"PendingViewController"]) {
-               [self addBadgeIconOnMoreTab];
+                if ([[UserDefaultManager getValue:@"PendingMessage"] isEqualToString:@"0"]) {
+                    [self addBadgeIconOnMoreTab];
+                }
             }
             else {
                 [self removeBadgeIconOnMoreTab];
@@ -445,7 +444,7 @@
             
         }
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"2"]) {
-            [[ConferenceService sharedManager] acceptCancelMeeting:[alertDict objectForKey:@"appointmentId"] meetingUserId:[alertDict objectForKey:@"meetinguserId"] flag:@"cancel" type:@"requested" reasonForCancel:@"" success:^(id responseObject) {
+            [[ConferenceService sharedManager] acceptCancelMeeting:[alertDict objectForKey:@"appointmentId"] meetingUserId:[alertDict objectForKey:@"meetinguserId"] flag:@"cancel" type:@"requested" reasonForCancel:reason success:^(id responseObject) {
                 
                 if ([myDelegate.myView isEqualToString:@"CalendarViewController"]) {
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"CalendarDetails" object:nil];
@@ -565,7 +564,7 @@
     }
     notificationBadge = [[UILabel alloc] init];
     notificationBadge.hidden=NO;
-    notificationBadge.frame = CGRectMake((([UIScreen mainScreen].bounds.size.width/5) * 4)+45 , ([UIScreen mainScreen].bounds.size.height-40), 8, 8);
+    notificationBadge.frame = CGRectMake((([UIScreen mainScreen].bounds.size.width/5) * 5) - (([UIScreen mainScreen].bounds.size.width/5)/2) + 13 , ([UIScreen mainScreen].bounds.size.height-44), 8, 8);
     notificationBadge.backgroundColor = [UIColor redColor];
     notificationBadge.layer.cornerRadius = 4;
     notificationBadge.layer.masksToBounds = YES;
@@ -580,8 +579,7 @@
 -(void)removeBadgeIconOnMoreTab
 {
     notificationBadge.hidden=YES;
-    [UserDefaultManager setValue:@"0" key:@"PendingMessage"];
-    notificationBadge.frame = CGRectMake((([UIScreen mainScreen].bounds.size.width/5))+45 , ([UIScreen mainScreen].bounds.size.height-40), 0, 0);
+    notificationBadge.frame = CGRectMake((([UIScreen mainScreen].bounds.size.width/5) * 5) - (([UIScreen mainScreen].bounds.size.width/5)/2) + 13 , ([UIScreen mainScreen].bounds.size.height-44), 0, 0);
     for (UILabel *subview in myDelegate.tabBarView.tabBar.subviews)
     {
         if ([subview isKindOfClass:[UILabel class]])

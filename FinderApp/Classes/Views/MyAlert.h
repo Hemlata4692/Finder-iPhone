@@ -17,6 +17,7 @@
 @interface MyAlert : NSObject{
     id <MyAlertDelegate> _delegate;
     CustomAlert *customAlertObj;
+    BOOL isTextViewCheck;
 }
 @property (nonatomic,strong) id delegate;
 //-(void)callOptionalMethod:(UIView*)myView frame:(CGRect)myFrame;

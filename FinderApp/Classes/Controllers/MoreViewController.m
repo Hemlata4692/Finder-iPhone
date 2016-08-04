@@ -58,6 +58,7 @@
 }
 -(void)viewWillAppear:(BOOL)animated {
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    [_moreTableView reloadData];
 }
 #pragma mark - end
 
@@ -84,6 +85,8 @@
     cell.badgeIcon.hidden = YES;
     
     if ([[UserDefaultManager getValue:@"PendingMessage"] isEqualToString:@"1"] && indexPath.row == 1) {
+        cell.badgeIcon.layer.cornerRadius = 4.0f;
+        cell.badgeIcon.layer.masksToBounds = YES;
         cell.badgeIcon.hidden = NO;
     }
     return cell;
@@ -267,7 +270,7 @@
          [UserDefaultManager removeValue:@"userName"];
          [UserDefaultManager removeValue:@"userImage"];
          [UserDefaultManager removeValue:@"conferenceId"];
-         [UserDefaultManager removeValue:@"PendingMessage"];
+         [UserDefaultManager setValue:@"0" key:@"PendingMessage"];
      } failure:^(NSError *error)
      {
          

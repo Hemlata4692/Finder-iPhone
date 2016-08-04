@@ -147,7 +147,7 @@
     myDelegate.window.rootViewController = myDelegate.navigationController;
     [UserDefaultManager removeValue:@"userId"];
     [UserDefaultManager removeValue:@"username"];
-    [UserDefaultManager removeValue:@"PendingMessage"];
+    [UserDefaultManager setValue:@"0" key:@"PendingMessage"];
 }
 
 #pragma mark - end
