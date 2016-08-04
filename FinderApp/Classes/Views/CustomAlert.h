@@ -17,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *acceptBtnAction;
 @property (strong, nonatomic) IBOutlet UIView *myAlertBackView;
 @property (weak, nonatomic) IBOutlet UIButton *declineBtnAction;
+@property (weak, nonatomic) IBOutlet UITextView *reason;
 
--(id)initWithFrame:(CGRect)frame title:(NSString*)titleText message:(NSString*)messageText viewBtnText:(NSString*)viewBtnText acceptBtnText:(NSString*)acceptBtnText declineBtnText:(NSString*)declineBtnText;
+-(id)initWithFrame:(CGRect)frame title:(NSString*)titleText message:(NSString*)messageText viewBtnText:(NSString*)viewBtnText acceptBtnText:(NSString*)acceptBtnText declineBtnText:(NSString*)declineBtnText isTextField:(BOOL)isTextField;
 @end

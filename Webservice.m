@@ -140,13 +140,14 @@
 }
 - (void)logoutUser
 {
-            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
-            myDelegate.navigationController = [storyboard instantiateViewControllerWithIdentifier:@"mainNavController"];
+    myDelegate.navigationController = [storyboard instantiateViewControllerWithIdentifier:@"mainNavController"];
     
-            myDelegate.window.rootViewController = myDelegate.navigationController;
-            [UserDefaultManager removeValue:@"userId"];
-            [UserDefaultManager removeValue:@"username"];
+    myDelegate.window.rootViewController = myDelegate.navigationController;
+    [UserDefaultManager removeValue:@"userId"];
+    [UserDefaultManager removeValue:@"username"];
+    [UserDefaultManager removeValue:@"PendingMessage"];
 }
 
 #pragma mark - end

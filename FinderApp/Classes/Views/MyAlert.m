@@ -11,10 +11,10 @@
 @implementation MyAlert
 @synthesize alertView;
 
-- (instancetype)initWithTitle:(NSString*)titleText myView:(UIView*)myView delegate:(id)delegate message:(NSString*)messageText viewBtnText:(NSString*)viewBtnText acceptBtnText:(NSString*)acceptBtnText declineBtnText:(NSString*)declineBtnText{
+- (instancetype)initWithTitle:(NSString*)titleText myView:(UIView*)myView delegate:(id)delegate message:(NSString*)messageText viewBtnText:(NSString*)viewBtnText acceptBtnText:(NSString*)acceptBtnText declineBtnText:(NSString*)declineBtnText isTextField:(BOOL)isTextField{
     
     _delegate = delegate;
-    customAlertObj=[[CustomAlert alloc] initWithFrame:myView.frame title:titleText message:messageText viewBtnText:viewBtnText acceptBtnText:acceptBtnText declineBtnText:declineBtnText];
+    customAlertObj=[[CustomAlert alloc] initWithFrame:myView.frame title:titleText message:messageText viewBtnText:viewBtnText acceptBtnText:acceptBtnText declineBtnText:declineBtnText isTextField:isTextField];
     customAlertObj.mainView.backgroundColor = [UIColor clearColor];
     [customAlertObj.viewBtnAction addTarget:self action:@selector(viewButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [customAlertObj.acceptBtnAction addTarget:self action:@selector(acceptButtonAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -49,15 +49,15 @@
 
 - (IBAction)viewButtonAction:(UIButton *)sender {
 
-    [_delegate myAlertDelegateAction:customAlertObj option:0];
+    [_delegate myAlertDelegateAction:customAlertObj option:0 reason:customAlertObj.reason.text];
 }
 
 - (IBAction)acceptButtonAction:(UIButton *)sender {
     
-    [_delegate myAlertDelegateAction:customAlertObj option:1];
+    [_delegate myAlertDelegateAction:customAlertObj option:1 reason:customAlertObj.reason.text];
 }
 - (IBAction)declineButtonAction:(UIButton *)sender {
     
-    [_delegate myAlertDelegateAction:customAlertObj option:2];
+    [_delegate myAlertDelegateAction:customAlertObj option:2 reason:customAlertObj.reason.text];
 }
 @end

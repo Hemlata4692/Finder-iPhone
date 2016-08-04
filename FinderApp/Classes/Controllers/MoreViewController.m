@@ -15,6 +15,7 @@
 #import "ConferenceListViewController.h"
 #import "HomeViewController.h"
 #import "MyProfileViewController.h"
+#import "RequestedMatchesViewController.h"
 
 @interface MoreViewController ()<UITextFieldDelegate,BSKeyboardControlsDelegate>
 {
@@ -47,8 +48,8 @@
     textFieldArray = @[oldPasswordTextField,passwordTextField,confirmPasswordTextField];
     [self setKeyboardControls:[[BSKeyboardControls alloc] initWithFields:textFieldArray]];
     [self.keyboardControls setDelegate:self];
-    moreOptionsArray = [NSMutableArray arrayWithObjects:@"My Profile",@"Pending Appointments",@"Requested Appointments",@"Conference",@"Settings",@"Change Password",@"Switch Conference",@"Logout", nil];
-    moreImagesArray= [NSMutableArray arrayWithObjects:@"my_profile.png",@"pending_appointment.png",@"requested_appointment.png",@"conference_icon.png",@"setting.png",@"change_password.png",@"switch_conference.png",@"logout.png", nil];
+    moreOptionsArray = [NSMutableArray arrayWithObjects:@"My Profile",@"Pending Appointments",@"Requested Appointments",@"Requested Matches",@"Conference",@"Settings",@"Change Password",@"Switch Conference",@"Logout", nil];
+    moreImagesArray= [NSMutableArray arrayWithObjects:@"my_profile.png",@"pending_appointment.png",@"requested_appointment.png",@"request_match",@"conference_icon.png",@"setting.png",@"change_password.png",@"switch_conference.png",@"logout.png", nil];
 }
 
 - (void)didReceiveMemoryWarningn {
@@ -80,7 +81,11 @@
     [cell.containerView addShadow:cell.containerView color:[UIColor lightGrayColor]];
     cell.screenNameLabel.text = [moreOptionsArray objectAtIndex:indexPath.row];
     cell.iconImageView.image=[UIImage imageNamed:[moreImagesArray objectAtIndex:indexPath.row]];
+    cell.badgeIcon.hidden = YES;
     
+    if ([[UserDefaultManager getValue:@"PendingMessage"] isEqualToString:@"1"] && indexPath.row == 1) {
+        cell.badgeIcon.hidden = NO;
+    }
     return cell;
 }
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -106,28 +111,33 @@
     }
     else if (indexPath.row==3) {
         UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        HomeViewController *settingsView =[storyboard instantiateViewControllerWithIdentifier:@"HomeViewController"];
+        RequestedMatchesViewController *settingsView =[storyboard instantiateViewControllerWithIdentifier:@"RequestedMatchesViewController"];
         [self.navigationController pushViewController:settingsView animated:YES];
     }
     else if (indexPath.row==4) {
         UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        HomeViewController *settingsView =[storyboard instantiateViewControllerWithIdentifier:@"HomeViewController"];
+        [self.navigationController pushViewController:settingsView animated:YES];
+    }
+    else if (indexPath.row==5) {
+        UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         SettingsViewController *settingsView =[storyboard instantiateViewControllerWithIdentifier:@"SettingsViewController"];
         [self.navigationController pushViewController:settingsView animated:YES];
     }
-    else if (indexPath.row == 5) {
+    else if (indexPath.row == 6) {
         changePwdContainerView.hidden = NO;
         oldPasswordTextField.text=@"";
         passwordTextField.text=@"";
         confirmPasswordTextField.text=@"";
     }
-    else if (indexPath.row == 6) {
+    else if (indexPath.row == 7) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         ConferenceListViewController * homeView = [storyboard instantiateViewControllerWithIdentifier:@"ConferenceListViewController"];
         [UserDefaultManager removeValue:@"conferenceId"];
         [myDelegate.window setRootViewController:homeView];
         [myDelegate.window makeKeyAndVisible];
     }
-    else if (indexPath.row == 7) {
+    else if (indexPath.row == 8) {
         [myDelegate showIndicator];
         [self performSelector:@selector(logout) withObject:nil afterDelay:.1];
         //  [UserDefaultManager removeValue:@"switchStatusDict"];
@@ -241,7 +251,6 @@
      {
          
      }] ;
-    
 }
 
 -(void)logout {
@@ -255,10 +264,10 @@
          myDelegate.window.rootViewController = myDelegate.navigationController;
          [UserDefaultManager removeValue:@"userId"];
          [UserDefaultManager removeValue:@"accessToken"];
-         [UserDefaultManager removeValue:@"userEmail"];
          [UserDefaultManager removeValue:@"userName"];
          [UserDefaultManager removeValue:@"userImage"];
          [UserDefaultManager removeValue:@"conferenceId"];
+         [UserDefaultManager removeValue:@"PendingMessage"];
      } failure:^(NSError *error)
      {
          

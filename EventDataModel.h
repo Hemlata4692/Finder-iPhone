@@ -12,6 +12,7 @@
 @property(nonatomic,retain)NSString * eventName;
 @property(nonatomic,retain)NSString * eventTime;
 @property(nonatomic,retain)NSString * eventDescription;
+@property(nonatomic,retain)NSString * eventVenue;
 @property(nonatomic,retain)NSString * userImage;
 @property(nonatomic,retain)NSString * userId;
 @end

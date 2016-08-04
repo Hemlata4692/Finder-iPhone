@@ -16,4 +16,5 @@
 @property(nonatomic,retain)NSString * meetingUserId;
 @property(nonatomic,retain)NSString * meetingTime;
 @property(nonatomic,retain)NSString * meetingDescription;
+@property(nonatomic,retain)NSString * meetingVenue;
 @end
