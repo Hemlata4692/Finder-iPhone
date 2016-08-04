@@ -254,6 +254,7 @@
     UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     MeetingDescriptionViewController *descreptionView =[storyboard instantiateViewControllerWithIdentifier:@"MeetingDescriptionViewController"];
     descreptionView.meetingDescription=data.eventDescription;
+    descreptionView.meetingLocation=data.eventVenue;
     descreptionView.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.5f];
     [descreptionView setModalPresentationStyle:UIModalPresentationOverCurrentContext];
     [self presentViewController:descreptionView animated: NO completion:nil];

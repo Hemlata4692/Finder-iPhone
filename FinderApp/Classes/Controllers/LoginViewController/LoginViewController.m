@@ -41,6 +41,7 @@
     UIImage * tempImg =[UIImage imageNamed:@"bg"];
     backgroundImageView.image = [UIImage imageNamed:[tempImg imageForDeviceWithName:@"bg"]];
     [self addPadding];
+    emailField.text = [UserDefaultManager getValue:@"userEmail"];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -98,9 +98,15 @@
 }
 -(void)viewWillAppear:(BOOL)animated{
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
-    myDelegate.myView=@"PendingViewController";
+    if ([screenName isEqualToString:@"Pending Appointments"]) {
+        
+        myDelegate.myView=@"PendingViewController";
+        [myDelegate removeBadgeIconOnMoreTab];
+    }
+    else {
+        myDelegate.myView=@"NoPendingViewController";
+    }
 }
-
 #pragma mark - end
 
 #pragma mark - Webservices
@@ -252,6 +258,7 @@
     UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     MeetingDescriptionViewController *descreptionView =[storyboard instantiateViewControllerWithIdentifier:@"MeetingDescriptionViewController"];
     descreptionView.meetingDescription=data.meetingDescription;
+    descreptionView.meetingLocation=data.meetingVenue;
     descreptionView.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.5f];
     [descreptionView setModalPresentationStyle:UIModalPresentationOverCurrentContext];
     [self presentViewController:descreptionView animated: NO completion:nil];

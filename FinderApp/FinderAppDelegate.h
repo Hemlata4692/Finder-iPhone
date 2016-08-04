@@ -30,5 +30,7 @@
 -(void)unregisterDeviceForNotification;
 -(void)removeBadgeIconLastTab;
 -(void)addBadgeIcon;
+-(void)removeBadgeIconOnMoreTab;
+-(void)addBadgeIconOnMoreTab;
 @end
 

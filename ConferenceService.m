@@ -206,6 +206,7 @@
                          eventDetails.eventDescription =[eventArrayDict objectForKey:@"eventDescription"];
                          eventDetails.userImage =[eventArrayDict objectForKey:@"userImage"];
                          eventDetails.userId =[eventArrayDict objectForKey:@"userId"];
+                         eventDetails.eventVenue = [eventArrayDict objectForKey:@"eventVenue"];
                          [calendarDetails.eventArray addObject:eventDetails];
                      }
                      [dataArray addObject:calendarDetails];
@@ -316,6 +317,7 @@
                     appointmentDetails.meetingTime =[appointmentDict objectForKey:@"meetingTime"];
                     appointmentDetails.meetingUserId =[appointmentDict objectForKey:@"meetingUserId"];
                     appointmentDetails.meetingDescription=[appointmentDict objectForKey:@"meetingDescription"];
+                    appointmentDetails.meetingVenue=[appointmentDict objectForKey:@"meetingVenue"];
                     [dataArray addObject:appointmentDetails];
                 }
                 success(dataArray);

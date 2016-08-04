@@ -92,6 +92,14 @@
     //google analytics tracking id
     //UA-80202935-1
     
+    if([UserDefaultManager getValue:@"PendingMessage"]==NULL)
+    {
+        [UserDefaultManager setValue:@"0" key:@"PendingMessage"];
+    }
+    else if ([[UserDefaultManager getValue:@"PendingMessage"] isEqualToString:@"1"]) {
+        [self addBadgeIconOnMoreTab];
+    }
+    
     NSLog(@"userId %@",[[NSUserDefaults standardUserDefaults] objectForKey:@"userId"]);
     NSLog(@"conferenceId %@",[[NSUserDefaults standardUserDefaults] objectForKey:@"conferenceId"]);
     UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -155,8 +163,6 @@
         [UIApplication sharedApplication].applicationIconBadgeNumber = 0;
         [self application:application didReceiveRemoteNotification:remoteNotifiInfo];
     }
-    
-    
     return YES;
 }
 
@@ -275,28 +281,35 @@
     {
         if ([[alertDict objectForKey:@"type"] isEqualToString:@"1"]) {
             
-            alert = [[MyAlert alloc] initWithTitle:@"New Match Request" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"View" acceptBtnText:@"Accept" declineBtnText:@"Decline"];
+            alert = [[MyAlert alloc] initWithTitle:@"New Match Request" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"View" acceptBtnText:@"Accept" declineBtnText:@"Decline" isTextField:NO];
         }
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"2"]) {
-            alert = [[MyAlert alloc] initWithTitle:@"New Meeting Request" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Accept" acceptBtnText:@"" declineBtnText:@"Decline"];
+            
+            alert = [[MyAlert alloc] initWithTitle:@"New Meeting Request" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Accept" acceptBtnText:@"" declineBtnText:@"Decline" isTextField:YES];
+            if (![myDelegate.myView isEqualToString:@"PendingViewController"]) {
+               [self addBadgeIconOnMoreTab];
+            }
+            else {
+                [self removeBadgeIconOnMoreTab];
+            }
         }
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"3"]) {
-            alert = [[MyAlert alloc] initWithTitle:@"Request Accepted" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel"];
+            alert = [[MyAlert alloc] initWithTitle:@"Request Accepted" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel" isTextField:NO];
         }
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"4"]) {
-            alert = [[MyAlert alloc] initWithTitle:@"Match Request Rejected" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel"];
+            alert = [[MyAlert alloc] initWithTitle:@"Match Request Rejected" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel" isTextField:NO];
         }
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"5"]) {
-            alert = [[MyAlert alloc] initWithTitle:@"Meeting Request Accepted" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel"];
+            alert = [[MyAlert alloc] initWithTitle:@"Meeting Request Accepted" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel" isTextField:NO];
         }
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"6"]) {
-            alert = [[MyAlert alloc] initWithTitle:@"Meeting Request Rejected" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel"];
+            alert = [[MyAlert alloc] initWithTitle:@"Meeting Request Rejected" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel" isTextField:NO];
         }
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"7"]) {
-            alert = [[MyAlert alloc] initWithTitle:@"New Conference Assigned" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel"];
+            alert = [[MyAlert alloc] initWithTitle:@"New Conference Assigned" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel" isTextField:NO];
         }
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"8"]) {
-            alert = [[MyAlert alloc] initWithTitle:@"Proximity Alerts" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel"];
+            alert = [[MyAlert alloc] initWithTitle:@"Proximity Alerts" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel" isTextField:NO];
         }
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"9"]) {
             
@@ -331,7 +344,7 @@
     
 }
 
-- (void)myAlertDelegateAction:(CustomAlert *)myAlert option:(int)option{
+- (void)myAlertDelegateAction:(CustomAlert *)myAlert option:(int)option reason:(NSString *)reason{
     
     if (option == 0) {
         if ([[alertDict objectForKey:@"type"] isEqualToString:@"1"]) {
@@ -531,6 +544,49 @@
         if ([subview isKindOfClass:[UILabel class]])
         {
             if (subview.tag == 3365) {
+                [subview removeFromSuperview];
+            }
+        }
+    }
+}
+#pragma mark - end
+
+#pragma mark - Add badge icon
+-(void)addBadgeIconOnMoreTab
+{
+    for (UILabel *subview in myDelegate.tabBarView.tabBar.subviews)
+    {
+        if ([subview isKindOfClass:[UILabel class]])
+        {
+            if (subview.tag == 3367) {
+                [subview removeFromSuperview];
+            }
+        }
+    }
+    notificationBadge = [[UILabel alloc] init];
+    notificationBadge.hidden=NO;
+    notificationBadge.frame = CGRectMake((([UIScreen mainScreen].bounds.size.width/5) * 4)+45 , ([UIScreen mainScreen].bounds.size.height-40), 8, 8);
+    notificationBadge.backgroundColor = [UIColor redColor];
+    notificationBadge.layer.cornerRadius = 4;
+    notificationBadge.layer.masksToBounds = YES;
+    notificationBadge.tag = 3367;
+    [myDelegate.tabBarView.tabBar addSubview:notificationBadge];
+    [UserDefaultManager setValue:@"1" key:@"PendingMessage"];
+    [[UIApplication sharedApplication].keyWindow addSubview:notificationBadge];
+}
+#pragma mark - end
+
+#pragma mark - Remove badge icon
+-(void)removeBadgeIconOnMoreTab
+{
+    notificationBadge.hidden=YES;
+    [UserDefaultManager setValue:@"0" key:@"PendingMessage"];
+    notificationBadge.frame = CGRectMake((([UIScreen mainScreen].bounds.size.width/5))+45 , ([UIScreen mainScreen].bounds.size.height-40), 0, 0);
+    for (UILabel *subview in myDelegate.tabBarView.tabBar.subviews)
+    {
+        if ([subview isKindOfClass:[UILabel class]])
+        {
+            if (subview.tag == 3367) {
                 [subview removeFromSuperview];
             }
         }
