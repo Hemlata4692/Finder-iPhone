@@ -92,7 +92,7 @@
     //google analytics tracking id
     //UA-80202935-1
     NSLog(@"%@",[UserDefaultManager getValue:@"PendingMessage"]);
-    if([UserDefaultManager getValue:@"PendingMessage"]==NULL)
+    if(NULL==[UserDefaultManager getValue:@"PendingMessage"] || nil==[UserDefaultManager getValue:@"PendingMessage"])
     {
         [UserDefaultManager setValue:@"0" key:@"PendingMessage"];
     }
@@ -115,7 +115,6 @@
         ConferenceListViewController * homeView = [storyboard instantiateViewControllerWithIdentifier:@"ConferenceListViewController"];
         [myDelegate.window setRootViewController:homeView];
         [myDelegate.window makeKeyAndVisible];
-        
     }
     else
     {

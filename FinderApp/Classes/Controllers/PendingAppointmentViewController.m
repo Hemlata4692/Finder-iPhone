@@ -327,7 +327,7 @@
 }
 
 - (void)keyboardControlsDonePressed:(BSKeyboardControls *)keyboardControls{
-    [keyboardControls.activeField resignFirstResponder];
+    [self.keyboardControls.activeField resignFirstResponder];
 }
 #pragma mark - end
 #pragma mark - Textview delegates

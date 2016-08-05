@@ -43,7 +43,6 @@
     self.selectionStatesDic = nil;
     self.pickerView = nil;
     self.toolBar = nil;
-    
     [super dealloc];
 }
 

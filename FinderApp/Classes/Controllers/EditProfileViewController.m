@@ -238,7 +238,6 @@
         [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height-100) animated:YES];
     }
     multiPickerView = [[CYCustomMultiSelectPickerView alloc] initWithFrame:CGRectMake(0,self.view.frame.size.height-265, self.view.frame.size.width, 182)];
-    
     multiPickerView.entriesArray = interestedAreaArray;
     multiPickerView.entriesSelectedArray =selectedPickerArray;
     multiPickerView.multiPickerDelegate = self;
