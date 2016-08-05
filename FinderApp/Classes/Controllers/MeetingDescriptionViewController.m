@@ -39,7 +39,7 @@
     tapGesture.delegate=self;
     [meetingDescriptionContainerView addGestureRecognizer:tapGesture];
 
-    meetingLocation = @"my location";
+//    meetingLocation = @"my location";
     [self setMeetingDetail:meetingDescription locationText:meetingLocation];
 }
 

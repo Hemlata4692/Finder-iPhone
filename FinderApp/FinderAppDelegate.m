@@ -357,6 +357,7 @@
         }
         
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"2"]) {
+            [self removeBadgeIconOnMoreTab];
             [[ConferenceService sharedManager] acceptCancelMeeting:[alertDict objectForKey:@"appointmentId"] meetingUserId:[alertDict objectForKey:@"meetinguserId"] flag:@"accept" type:@"requested" reasonForCancel:@"" success:^(id responseObject) {
                 NSLog(@"calendar type 2");
                 if ([myDelegate.myView isEqualToString:@"CalendarViewController"]) {
