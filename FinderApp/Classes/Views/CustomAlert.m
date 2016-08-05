@@ -17,7 +17,6 @@
 @end
 @implementation CustomAlert
 @synthesize mainView, title, viewBtnAction, acceptBtnAction,declineBtnAction, messageLabel, backView, myAlertBackView,messageTextView;
-//done=acceptBtnAction
 -(id)initWithFrame:(CGRect)frame title:(NSString*)titleText message:(NSString*)messageText viewBtnText:(NSString*)viewBtnText acceptBtnText:(NSString*)acceptBtnText declineBtnText:(NSString*)declineBtnText isTextField:(BOOL)isTextField
 {
     self=[super initWithFrame:frame];

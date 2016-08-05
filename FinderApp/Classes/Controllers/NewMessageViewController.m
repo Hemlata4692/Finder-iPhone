@@ -42,12 +42,12 @@
     [myDelegate showIndicator];
     [self performSelector:@selector(getContactDetails) withObject:nil afterDelay:.1];
 }
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 #pragma mark - end
+
 #pragma mark - Webservice
 - (void)getContactDetails {
     [[ConferenceService sharedManager] getContactDetails:^(id dataArray) {
@@ -65,40 +65,37 @@
     }
                                                  failure:^(NSError *error)
      {
-         
      }] ;
 }
 #pragma mark - end
+
 #pragma mark - Table view delegates
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (isSearch) {
-         return searchResultArray.count;
+        return searchResultArray.count;
     }
     else {
-         return contactDataArray.count;
+        return contactDataArray.count;
     }
 }
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *simpleTableIdentifier = @"newMessageCell";
     MessagesViewCell *contactUser=[contactListTableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
-    if (contactUser == nil)
-    {
+    if (contactUser == nil) {
         contactUser=[[MessagesViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:simpleTableIdentifier];
     }
     ContactDataModel *data;
     [contactUser.messageContainerView addShadow:contactUser.messageContainerView color:[UIColor lightGrayColor]];
     [contactUser.userImageView setCornerRadius:contactUser.userImageView.frame.size.width/2];
     if (isSearch) {
-         data=[searchResultArray objectAtIndex:indexPath.row];
+        data=[searchResultArray objectAtIndex:indexPath.row];
     }
     else {
-         data=[contactDataArray objectAtIndex:indexPath.row];
+        data=[contactDataArray objectAtIndex:indexPath.row];
     }
     [contactUser displayData:data indexPath:(int)indexPath.row];
     return contactUser;
-    
 }
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -112,64 +109,57 @@
         chatView.otherUserName=[[contactDataArray objectAtIndex:indexPath.row] contactName];
     }
     [self.navigationController pushViewController:chatView animated:YES];
-
+    
 }
 #pragma mark - end
+
 #pragma mark - Search bar delegates
--(BOOL)searchBar:(UISearchBar *)srchBar shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text
-{
+-(BOOL)searchBar:(UISearchBar *)srchBar shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
     if (text.length<1) {
         noResultFound.hidden=YES;
         searchResultArray = [NSArray arrayWithArray:contactDataArray];
         isSearch = NO;
     }
     NSString *searchKey;
-    if([text isEqualToString:@"\n"]){
+    if([text isEqualToString:@"\n"]) {
         searchKey = searchBar.text;
     }
-    else if(text.length){
+    else if(text.length) {
         searchKey = [searchBar.text stringByAppendingString:text];
     }
-    else if((searchBar.text.length-1)!=0){
+    else if((searchBar.text.length-1)!=0) {
         searchKey = [searchBar.text substringWithRange:NSMakeRange(0, searchBar.text.length-1)];
     }
-    else{
+    else {
         searchKey = @"";
     }
     searchResultArray = nil;
-    if (searchKey.length)
-    {
-       
+    if (searchKey.length) {
         isSearch = YES;
         NSPredicate *pred1 = [NSPredicate predicateWithFormat:@"contactName contains[cd] %@",searchKey];
         NSArray *subPredicates = [NSArray arrayWithObjects:pred1, nil];
         NSPredicate * orPredicate = [NSCompoundPredicate orPredicateWithSubpredicates:subPredicates];
         searchResultArray=[contactDataArray filteredArrayUsingPredicate:orPredicate];
         if (searchResultArray.count==0) {
-             noResultFound.hidden=NO;
+            noResultFound.hidden=NO;
             noResultFound.text=@"No result found.";
         }
         else {
             noResultFound.hidden=YES;
         }
     }
-    else
-    {
+    else {
         searchResultArray = [NSArray arrayWithArray:contactDataArray];
         searchBar.text=@"";
-      //  [searchBar resignFirstResponder];
         isSearch = NO;
     }
     [contactListTableView reloadData];
     return YES;
 }
-- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar
-{
+- (BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar {
     return YES;
 }
-
--(BOOL)searchBarShouldEndEditing:(UISearchBar *)srchBar
-{
+-(BOOL)searchBarShouldEndEditing:(UISearchBar *)srchBar {
     if ([srchBar.text isEqualToString:@""]) {
         searchResultArray = [contactDataArray mutableCopy];
         //[searchBar resignFirstResponder];
@@ -178,23 +168,17 @@
     }
     return  YES;
 }
-
-- (void)searchBar:(UISearchBar *)srchBar textDidChange:(NSString *)searchText
-{
+- (void)searchBar:(UISearchBar *)srchBar textDidChange:(NSString *)searchText {
     if (searchText.length<1)
     {
         noResultFound.hidden=YES;
-       // [searchBar resignFirstResponder];
         searchResultArray = [contactDataArray mutableCopy];
         isSearch = NO;
         [contactListTableView reloadData];
     }
 }
-- (void)searchBarSearchButtonClicked:(UISearchBar *)srchBar
-{
+- (void)searchBarSearchButtonClicked:(UISearchBar *)srchBar {
     [searchBar resignFirstResponder];
 }
 #pragma mark - end
-
-
 @end

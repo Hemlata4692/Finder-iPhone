@@ -38,12 +38,12 @@
     textFieldArray = @[emailField,passwordField];
     [self setKeyboardControls:[[BSKeyboardControls alloc] initWithFields:textFieldArray]];
     [self.keyboardControls setDelegate:self];
+    //Set background image
     UIImage * tempImg =[UIImage imageNamed:@"bg"];
     backgroundImageView.image = [UIImage imageNamed:[tempImg imageForDeviceWithName:@"bg"]];
     [self addPadding];
     emailField.text = [UserDefaultManager getValue:@"userEmail"];
 }
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -53,6 +53,7 @@
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
 }
 #pragma mark - end
+
 #pragma mark - Corner radius and padding
 - (void)addPadding{
     [emailField addTextFieldPaddingWithoutImages:emailField];
@@ -61,12 +62,12 @@
     [textFieldContainerView addShadow:textFieldContainerView color:[UIColor purpleColor]];
 }
 #pragma mark - end
+
 #pragma mark - Keyboard controls delegate
 - (void)keyboardControls:(BSKeyboardControls *)keyboardControls selectedField:(UIView *)field inDirection:(BSKeyboardControlsDirection)direction{
     UIView *view;
     view = field.superview.superview.superview;
 }
-
 - (void)keyboardControlsDonePressed:(BSKeyboardControls *)keyboardControls{
     [loginScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
     [keyboardControls.activeField resignFirstResponder];
@@ -74,7 +75,6 @@
 #pragma mark - end
 
 #pragma mark - Textfield delegates
-
 - (void)textFieldDidBeginEditing:(UITextField *)textField{
     [self.keyboardControls setActiveField:textField];
     if (textField==emailField) {
@@ -91,8 +91,7 @@
         }
     }
 }
-
-- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [loginScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
     [textField resignFirstResponder];
     return YES;
@@ -127,7 +126,7 @@
 #pragma mark - end
 
 #pragma mark - IBActions
-- (IBAction)signInButtonclicked:(id)sender{
+- (IBAction)signInButtonclicked:(id)sender {
     [self.keyboardControls.activeField resignFirstResponder];
     [loginScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
     if([self performValidationsForLogin]) {
@@ -135,33 +134,30 @@
         [self performSelector:@selector(loginUser) withObject:nil afterDelay:.1];
     }
 }
-
-- (IBAction)forgotPasswordButtonClicked:(id)sender{
+- (IBAction)forgotPasswordButtonClicked:(id)sender {
     [self.keyboardControls.activeField resignFirstResponder];
 }
 #pragma mark - end
+
 #pragma mark - Webservice
-- (void)loginUser{
-    [[UserService sharedManager] userLogin:emailField.text password:passwordField.text success:^(id responseObject)
-     {
-         
-         [myDelegate stopIndicator];
-         [myDelegate registerDeviceForNotification];
-         [UserDefaultManager setValue:[responseObject objectForKey:@"accesstokenKey"] key:@"accessToken"];
-         [UserDefaultManager setValue:[responseObject objectForKey:@"userId"] key:@"userId"];
-         [UserDefaultManager setValue:[responseObject objectForKey:@"userEmail"] key:@"userEmail"];
-         [UserDefaultManager setValue:[responseObject objectForKey:@"userImage"] key:@"userImage"];
-         [UserDefaultManager setValue:[responseObject objectForKey:@"userName"] key:@"userName"];
-         [UserDefaultManager setValue:[responseObject objectForKey:@"unReadMessegaes"] key:@"unReadMessegaes"];
-        // [UserDefaultManager setValue:[responseObject objectForKey:@"unReadMatches"] key:@"unReadMatches"];         
-         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-         ConferenceListViewController * homeView = [storyboard instantiateViewControllerWithIdentifier:@"ConferenceListViewController"];
-         [myDelegate.window setRootViewController:homeView];
-         [myDelegate.window makeKeyAndVisible];
-         
-     } failure:^(NSError *error) {
-         
-     }] ;
+- (void)loginUser {
+    [[UserService sharedManager] userLogin:emailField.text password:passwordField.text success:^(id responseObject){
+        
+        [myDelegate stopIndicator];
+        [myDelegate registerDeviceForNotification];
+        [UserDefaultManager setValue:[responseObject objectForKey:@"accesstokenKey"] key:@"accessToken"];
+        [UserDefaultManager setValue:[responseObject objectForKey:@"userId"] key:@"userId"];
+        [UserDefaultManager setValue:[responseObject objectForKey:@"userEmail"] key:@"userEmail"];
+        [UserDefaultManager setValue:[responseObject objectForKey:@"userImage"] key:@"userImage"];
+        [UserDefaultManager setValue:[responseObject objectForKey:@"userName"] key:@"userName"];
+        [UserDefaultManager setValue:[responseObject objectForKey:@"unReadMessegaes"] key:@"unReadMessegaes"];
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        ConferenceListViewController * homeView = [storyboard instantiateViewControllerWithIdentifier:@"ConferenceListViewController"];
+        [myDelegate.window setRootViewController:homeView];
+        [myDelegate.window makeKeyAndVisible];
+    } failure:^(NSError *error) {
+        
+    }] ;
 }
 #pragma mark - end
 @end

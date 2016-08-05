@@ -16,7 +16,6 @@
     [super awakeFromNib];
     // Initialization code
 }
-
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
     
@@ -29,6 +28,5 @@
     nameLabel.text=proximityDetails.contactName;
     comapanyNameLabel.text=proximityDetails.companyName;
 }
-
 #pragma mark - end
 @end

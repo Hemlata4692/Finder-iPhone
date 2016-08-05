@@ -104,9 +104,7 @@
         [myDelegate showIndicator];
         [self performSelector:@selector(getOtherUserProfile) withObject:nil afterDelay:.1];
     }
-    
 }
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -117,13 +115,12 @@
         [myDelegate showIndicator];
         [self performSelector:@selector(getUserProfile) withObject:nil afterDelay:.1];
     }
-    
     if ([viewType isEqualToString:@"pop"]) {
         [self addLeftBarButtonWithImage1:[UIImage imageNamed:@"back"]];
     }
 }
-- (void)addShadow
-{
+//Add view shadow
+- (void)addShadow {
     [userProfileImage setCornerRadius:userProfileImage.frame.size.width/2];
     [userProfileImage setViewBorder:userProfileImage color:[UIColor whiteColor]];
     [mobileNumberView addShadow:mobileNumberView color:[UIColor lightGrayColor]];
@@ -148,7 +145,7 @@
     
 }
 //back button action
-- (void)backAction :(id)sender{
+- (void)backAction :(id)sender {
     for (UIViewController *controller in self.navigationController.viewControllers)
     {
         if ([controller isKindOfClass:[MatchesViewController class]])
@@ -161,7 +158,6 @@
 }
 #pragma mark - end
 
-
 #pragma mark - IBActions
 - (IBAction)editProfileButtonAction:(id)sender {
     UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -169,7 +165,6 @@
     editProfile.profileArray=[userProfileDataArray mutableCopy];
     [self.navigationController pushViewController:editProfile animated:YES];
 }
-
 - (IBAction)linkedInButtonAction:(id)sender {
     
     UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -178,7 +173,6 @@
     loadWebPage.navigationTitle=@"LinkedIn";
     [self.navigationController pushViewController:loadWebPage animated:YES];
 }
-
 - (IBAction)otherUserLinkedInButtonAction:(id)sender {
     UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     WebViewController *loadWebPage =[storyboard instantiateViewControllerWithIdentifier:@"WebViewController"];
@@ -186,7 +180,6 @@
     loadWebPage.navigationTitle=@"LinkedIn";
     [self.navigationController pushViewController:loadWebPage animated:YES];
 }
-
 - (IBAction)otherUserEmailButtonAction:(id)sender {
     if ([MFMailComposeViewController canSendMail])
     {
@@ -212,13 +205,10 @@
                                   otherButtonTitles:nil];
         [alertView show];
     }
-    
 }
-
 - (IBAction)addUserContactButtonAction:(id)sender {
     
     ABAddressBookRef addressBookRef = ABAddressBookCreateWithOptions(NULL, NULL);
-    
     if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusNotDetermined) {
         ABAddressBookRequestAccessWithCompletion(addressBookRef, ^(bool granted, CFErrorRef error) {
             if (granted) {
@@ -230,9 +220,6 @@
                     [self addVcfFile];
                 }
             }
-//            else {
-//                [self.view makeToast:@"Contact cannot be added access denied."];
-//            }
         });
     }
     else if (ABAddressBookGetAuthorizationStatus() == kABAuthorizationStatusAuthorized) {
@@ -247,9 +234,7 @@
     else {
         [self.view makeToast:@"Contact cannot be added access denied previously."];
     }
-    
 }
-
 - (void)addVcfFile {
     //from vcf file
     CFErrorRef error = NULL;
@@ -258,7 +243,7 @@
     ABAddressBookRef book = ABAddressBookCreate();
     ABRecordRef defaultSource = ABAddressBookCopyDefaultSource(book);
     CFArrayRef vCardPeople = ABPersonCreatePeopleInSourceWithVCardRepresentation(defaultSource, vCardData);
-    ABRecordRef person;
+    ABRecordRef person = NULL;
     for (CFIndex index = 0; index < CFArrayGetCount(vCardPeople); index++) {
         person = CFArrayGetValueAtIndex(vCardPeople, index);
         ABAddressBookAddRecord(book, person, &error);
@@ -267,8 +252,7 @@
     CFIndex nPeople = ABAddressBookGetPersonCount( book );
     NSString *aNSString;
     NSString *userName;
-    for ( int i = 0; i < nPeople; i++ )
-    {
+    for ( int i = 0; i < nPeople; i++ ) {
         ABRecordRef ref = CFArrayGetValueAtIndex( allPeople, i );
         CFStringRef firstName = ABRecordCopyValue(ref, kABPersonFirstNameProperty);
         aNSString = (__bridge NSString *)firstName;
@@ -276,26 +260,20 @@
         CFStringRef appUserName = ABRecordCopyValue(person, kABPersonFirstNameProperty);
         userName = (__bridge NSString *)appUserName;
     }
-    
-    if ([aNSString isEqualToString:userName]){
+    if ([aNSString isEqualToString:userName]) {
         [self.view makeToast:@"The contact already exists!"];
-        
     }
     else {
-        
         ABAddressBookSave(book, &error);
         CFRelease(vCardPeople);
         CFRelease(defaultSource);
         CFRelease(book);
         [self.view makeToast:@"Contact added successfully."];
     }
-    if (error != NULL)
-    {
+    if (error != NULL) {
         CFStringRef errorDesc = CFErrorCopyDescription(error);
-     //   [self.view makeToast:[NSString stringWithFormat:@"Contact not saved: %@",errorDesc]];
         CFRelease(errorDesc);
     }
-    
 }
 - (void)addContactToAddressBook {
     CFErrorRef error = NULL;
@@ -320,13 +298,11 @@
     ABRecordSetValue(newPerson, kABPersonAddressProperty, multiAddress, &error);
     CFRelease(multiAddress);
     ABAddressBookAddRecord(iPhoneAddressBook, newPerson, &error);
-    
     CFArrayRef allPeople = ABAddressBookCopyArrayOfAllPeople( iPhoneAddressBook );
     CFIndex nPeople = ABAddressBookGetPersonCount( iPhoneAddressBook );
     NSString *aNSString;
     NSString *userName;
-    for ( int i = 0; i < nPeople; i++ )
-    {
+    for ( int i = 0; i < nPeople; i++ ) {
         ABRecordRef ref = CFArrayGetValueAtIndex( allPeople, i );
         CFStringRef firstName = ABRecordCopyValue(ref, kABPersonFirstNameProperty);
         aNSString = (__bridge NSString *)firstName;
@@ -334,10 +310,8 @@
         CFStringRef appUserName = ABRecordCopyValue(newPerson, kABPersonFirstNameProperty);
         userName = (__bridge NSString *)appUserName;
     }
-    
-    if ([aNSString isEqualToString:userName]){
+    if ([aNSString isEqualToString:userName]) {
         [self.view makeToast:@"The contact already exists!"];
-        
     }
     else {
         ABAddressBookSave(iPhoneAddressBook, &error);
@@ -348,18 +322,13 @@
     if (error != NULL)
     {
         CFStringRef errorDesc = CFErrorCopyDescription(error);
-      //  [self.view makeToast:[NSString stringWithFormat:@"Contact not saved: %@",errorDesc]];
         CFRelease(errorDesc);
     }
-}
-- (void)checkMultipleAddress {
-    
 }
 #pragma mark - end
 
 #pragma mark - Webservices
-- (void)getUserProfile
-{
+- (void)getUserProfile {
     [[ProfileService sharedManager] getUserProfile:^(id profileDataArray) {
         [myDelegate stopIndicator];
         userProfileDataArray=[profileDataArray mutableCopy];
@@ -367,9 +336,7 @@
     }
                                            failure:^(NSError *error)
      {
-         
      }] ;
-    
 }
 - (void)getOtherUserProfile {
     [[ProfileService sharedManager] getOtherUserProfile:otherUserID success:^(id profileDataArray) {
@@ -382,7 +349,6 @@
     }
                                                 failure:^(NSError *error)
      {
-         
      }] ;
 }
 - (void)updateReviewStatus {
@@ -391,9 +357,7 @@
     }
                                                failure:^(NSError *error)
      {
-         
      }] ;
-    
 }
 - (void)displayUserProfileData {
     
@@ -404,7 +368,6 @@
     comapnyAddressLabel.translatesAutoresizingMaskIntoConstraints=YES;
     interestAreaCollectionView.translatesAutoresizingMaskIntoConstraints=YES;
     bottomView.translatesAutoresizingMaskIntoConstraints=YES;
-    
     __weak UIImageView *weakRef = userProfileImage;
     NSURLRequest *imageRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:[[userProfileDataArray objectAtIndex:0]userImage]]
                                                   cachePolicy:NSURLRequestReturnCacheDataElseLoad
@@ -423,14 +386,12 @@
     else {
         userDesignationLabel.text=[[userProfileDataArray objectAtIndex:0]userDesignation];
     }
-    
     if ([[[userProfileDataArray objectAtIndex:0]userLinkedInLink] isEqualToString:@""]) {
         linkedInButton.hidden=YES;
     }
     else {
         linkedInButton.hidden=NO;
     }
-    
     if ([[[userProfileDataArray objectAtIndex:0]userMobileNumber] isEqualToString:@""]) {
         mobileNumberLabel.text=@"NA";
     }
@@ -450,7 +411,6 @@
     else {
         aboutComapny=[[userProfileDataArray objectAtIndex:0]aboutUserCompany];
     }
-    
     size = CGSizeMake(mainContainerView.frame.size.width-16,999);
     textRect=[self setDynamicHeight:size textString:aboutComapny fontSize:[UIFont fontWithName:@"Roboto-Regular" size:14]];
     companyDescriptionLabel.numberOfLines = 0;
@@ -458,7 +418,6 @@
     companyDescriptionLabel.frame = CGRectMake(8, 3, aboutCompanyView.frame.size.width-10, textRect.size.height);
     companyDescriptionLabel.text=aboutComapny;
     [companyDescriptionLabel setLabelBorder:companyDescriptionLabel color:[UIColor whiteColor]];
-    
     NSString *companyAddress;
     if ([[[userProfileDataArray objectAtIndex:0]userComapnyAddress] isEqualToString:@""]) {
         companyAddress=@"NA";
@@ -473,7 +432,6 @@
     comapnyAddressLabel.frame = CGRectMake(8, 3, companyAddressView.frame.size.width-10, textRect.size.height);
     [comapnyAddressLabel setLabelBorder:comapnyAddressLabel color:[UIColor whiteColor]];
     comapnyAddressLabel.text=companyAddress;
-    
     if ([[[userProfileDataArray objectAtIndex:0]userProfession] isEqualToString:@""]) {
         professionLabel.text=@"NA";
     }
@@ -492,7 +450,6 @@
     {
         [myDelegate.multiplePickerDic setObject:[NSNumber numberWithBool:YES] forKey:[interestsArray objectAtIndex:k]];
     }
-    
     if ((interestsArray.count%2)!=0) {
         count=count*42;
         interestAreaCollectionView.frame=CGRectMake(4, interestAreaCollectionView.frame.origin.y, bottomView.frame.size.width-8, count);
@@ -508,7 +465,6 @@
     float dynamicHeight=profileBackground.frame.origin.y+profileBackground.frame.size.height+15+mobileNumberHeading.frame.size.height+5+mobileNumberView.frame.size.height+8+aboutcompanyHeading.frame.size.height+5+aboutCompanyView.frame.size.height+8+addressHeadingLabel.frame.size.height+5+companyAddressView.frame.size.height+8+bottomView.frame.size.height+20;
     mainContainerView.frame = CGRectMake(mainContainerView.frame.origin.x, mainContainerView.frame.origin.y, mainContainerView.frame.size.width, dynamicHeight);
     myProfileScrollView.contentSize = CGSizeMake(0,mainContainerView.frame.size.height+64);
-    
 }
 -(CGRect)setDynamicHeight:(CGSize)rectSize textString:(NSString *)textString fontSize:(UIFont *)fontSize{
     CGRect textHeight = [textString
@@ -525,9 +481,7 @@
 {
     return interestsArray.count;
 }
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView1 cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView1 cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     UICollectionViewCell *interestCell = [collectionView1
                                           dequeueReusableCellWithReuseIdentifier:@"interestCell"
                                           forIndexPath:indexPath];
@@ -548,13 +502,9 @@
     }
     return interestCell;
 }
-
 #pragma mark - end
 #pragma mark - MFMailcomposeviewcontroller delegate
-- (void)mailComposeController:(MFMailComposeViewController*)controller
-          didFinishWithResult:(MFMailComposeResult)result
-                        error:(NSError*)error
-{
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
     switch (result)
     {
         case MFMailComposeResultCancelled:

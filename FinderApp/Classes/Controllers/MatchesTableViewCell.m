@@ -29,21 +29,20 @@
 @synthesize messageButton;
 @synthesize scheduleMeetingBtn;
 @synthesize contactDesignation;
+
 #pragma mark - Load nib
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
 }
-
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-    
     // Configure the view for the selected state
 }
 #pragma mark - end
+#pragma mark - Display cell data
 //all segment
-- (void)displayData :(MatchesDataModel *)allMatchesDetails indexPath:(int)indexPath rectSize:(CGSize)rectSize{
-    
+- (void)displayData :(MatchesDataModel *)allMatchesDetails indexPath:(int)indexPath rectSize:(CGSize)rectSize {
     name.translatesAutoresizingMaskIntoConstraints=YES;
     reviewedStatusLbl.translatesAutoresizingMaskIntoConstraints=YES;
     CGSize size = CGSizeMake(rectSize.width-157,100);
@@ -64,7 +63,6 @@
     else {
         reviewedStatusLbl.hidden=YES;
     }
-    
     companyName.text=allMatchesDetails.userCompanyName;
     if ([allMatchesDetails.isAccepted isEqualToString:@"F"] && [allMatchesDetails.isRequestSent isEqualToString:@"F"] && [allMatchesDetails.isArrived isEqualToString:@"F"]) {
         approveButton.hidden=YES;
@@ -83,7 +81,6 @@
          ];
         [allMatchesRejectButton setImage:[UIImage imageNamed:@"reject.png"] forState:UIControlStateNormal
          ];
-        
     }
     else if ([allMatchesDetails.isAccepted isEqualToString:@"F"] && [allMatchesDetails.isRequestSent isEqualToString:@"F"] && [allMatchesDetails.isArrived isEqualToString:@"T"]) {
         approveButton.hidden=YES;
@@ -95,7 +92,6 @@
          ];
         [allMatchesRejectButton setImage:[UIImage imageNamed:@"reject.png"] forState:UIControlStateNormal
          ];
-        
     }
     else if ([allMatchesDetails.isAccepted isEqualToString:@"T"] && [allMatchesDetails.isRequestSent isEqualToString:@"F"] && [allMatchesDetails.isArrived isEqualToString:@"F"]) {
         approveButton.hidden=YES;
@@ -107,12 +103,10 @@
          ];
         [allMatchesRejectButton setImage:[UIImage imageNamed:@"message_icon.png"] forState:UIControlStateNormal
          ];
-        
     }
 }
 //new segment
 - (void)displayNewMatchRequests :(MatchesDataModel *)newMatchesDetails indexPath:(int)indexPath rectSize:(CGSize)rectSize {
-    
     name.translatesAutoresizingMaskIntoConstraints=YES;
     reviewedStatusLbl.translatesAutoresizingMaskIntoConstraints=YES;
     CGSize size = CGSizeMake(rectSize.width-157,100);
@@ -143,7 +137,6 @@
          ];
         [cancelButton setImage:[UIImage imageNamed:@"reject.png"] forState:UIControlStateNormal
          ];
-        
     }
     reviewedStatusLbl.hidden=YES;
     companyName.text=newMatchesDetails.userCompanyName;
@@ -161,20 +154,16 @@
     contactName.frame = textRect;
     contactName.frame =CGRectMake(78, 13, textRect.size.width, textRect.size.height);
     [contactName setLabelBorder:contactName color:[UIColor whiteColor]];
-    
     contactDesignation.translatesAutoresizingMaskIntoConstraints=YES;
-//    CGSize size = CGSizeMake(rectSize.width-157,100);
     CGRect designationtextRect = [contactData.userDesignation
-                       boundingRectWithSize:size
-                       options:NSStringDrawingUsesLineFragmentOrigin
-                       attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Roboto-Regular" size:15.0]}
-                       context:nil];
+                                  boundingRectWithSize:size
+                                  options:NSStringDrawingUsesLineFragmentOrigin
+                                  attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Roboto-Regular" size:15.0]}
+                                  context:nil];
     contactDesignation.numberOfLines = 0;
     contactDesignation.frame = designationtextRect;
     contactDesignation.frame =CGRectMake(78, contactName.frame.origin.y + contactName.frame.size.height+2 , designationtextRect.size.width, designationtextRect.size.height);
     [contactDesignation setLabelBorder:contactName color:[UIColor whiteColor]];
-
-    
     contactName.text=contactData.userName;
     contactDesignation.text=contactData.userDesignation;
     contactCompanyName.text=contactData.userCompanyName;
@@ -188,7 +177,8 @@
         weakRef.clipsToBounds = YES;
         weakRef.image = image;
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-        
     }];
 }
+#pragma mark - end
+
 @end

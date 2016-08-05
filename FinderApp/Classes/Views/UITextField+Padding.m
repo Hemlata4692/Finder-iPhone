@@ -10,6 +10,7 @@
 
 @implementation UITextField (Padding)
 
+//Text field padding
 - (void)addTextFieldPadding: (UITextField *)textfield;
 {
     UIView *leftPadding = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 35, 20)];
@@ -17,6 +18,7 @@
     textfield.leftViewMode = UITextFieldViewModeAlways;
 
 }
+//Text field with images padding
 - (void)addTextFieldPaddingWithoutImages: (UITextField *)textfield
 {
     UIView *leftPadding = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 10, 10)];

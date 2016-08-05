@@ -1,4 +1,4 @@
- //
+//
 //  ConferenceListViewController.m
 //  Finder_iPhoneApp
 //
@@ -31,9 +31,8 @@
     noRecordFoundLabel.hidden=YES;
     conferenceListingArray=[[NSMutableArray alloc]init];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(conferenceList) name:@"Conference" object:nil];
-    //Conference
 }
-- (void)conferenceList{
+- (void)conferenceList {
     [myDelegate removeBadgeIconLastTab];
     [myDelegate showIndicator];
     [self performSelector:@selector(getConferenceListing) withObject:nil afterDelay:0.1];
@@ -42,26 +41,22 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
-     myDelegate.myView=@"ConferenceViewController";
+    myDelegate.myView=@"ConferenceViewController";
     [myDelegate showIndicator];
     [self performSelector:@selector(getConferenceListing) withObject:nil afterDelay:.1];
-
 }
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:YES];
     myDelegate.myView=@"other";
-    // [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-
 #pragma mark - end
 
-
 #pragma mark - Webservice
-- (void)getConferenceListing{
+- (void)getConferenceListing {
     [[ConferenceService sharedManager] getConferenceListing:^(id dataArray) {
         [myDelegate stopIndicator];
         conferenceListingArray=[dataArray mutableCopy];
@@ -69,47 +64,36 @@
             SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
             [alert addButton:@"Yes" actionBlock:^(void) {
                 [self logoutUser];
-                //                 [alert hideView];
             }];
             [alert showWarning:nil title:@"Alert" subTitle:@"No conference is assigned to you. Do you want to logout?" closeButtonTitle:@"No" duration:0.0f];
             noRecordFoundLabel.hidden=NO;
             noRecordFoundLabel.text=@"No conference is assigned yet.";
-            
         }
-        else{
+        else {
             noRecordFoundLabel.hidden=YES;
             conferenceListTableView.hidden=NO;
         }
         [conferenceListTableView reloadData];
-        
     }
                                                     failure:^(NSError *error)
      {
-         
      }] ;
-    
 }
-- (void)logoutUser
-{
+- (void)logoutUser {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    
     myDelegate.navigationController = [storyboard instantiateViewControllerWithIdentifier:@"mainNavController"];
-    
     myDelegate.window.rootViewController = myDelegate.navigationController;
     [UserDefaultManager removeValue:@"userId"];
     [UserDefaultManager setValue:@"0" key:@"PendingMessage"];
     [UserDefaultManager removeValue:@"username"];
 }
-
 #pragma mark - end
 
 #pragma mark - Table view delegate and datasource
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return conferenceListingArray.count;
 }
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *simpleTableIdentifier = @"conferenceListCell";
     ConferenceListCell *conferenceCell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
     if (conferenceCell == nil)
@@ -118,10 +102,9 @@
     }
     ConferenceListDataModel *data=[conferenceListingArray objectAtIndex:indexPath.row];
     [conferenceCell displayConferenceListData:data indexPath:(int)indexPath.row rectSize:conferenceListTableView.frame.size];
-    
     return conferenceCell;
 }
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     MatchesViewController * homeView = [storyboard instantiateViewControllerWithIdentifier:@"tabBar"];
     [UserDefaultManager setValue:[[conferenceListingArray objectAtIndex:indexPath.row] conferenceId] key:@"conferenceId"];
@@ -135,6 +118,5 @@
     [myDelegate.window setRootViewController:homeView];
     [myDelegate.window makeKeyAndVisible];
 }
-
 #pragma mark - end
 @end

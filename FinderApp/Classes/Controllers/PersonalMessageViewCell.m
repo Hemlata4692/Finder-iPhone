@@ -19,26 +19,20 @@
     [super awakeFromNib];
     // Initialization code
 }
-
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-    
     // Configure the view for the selected state
 }
 #pragma mark - end
 
 #pragma mark - Display data
-- (void)displayUserMessage:(MessageHistoryDataModel *)messageHistory indexPath:(int)indexPath rectSize:(CGSize)rectSize
-{
-   
+- (void)displayUserMessage:(MessageHistoryDataModel *)messageHistory indexPath:(int)indexPath rectSize:(CGSize)rectSize {
     meUserMessageLabel.translatesAutoresizingMaskIntoConstraints=YES;
     incomingBubbleImage.translatesAutoresizingMaskIntoConstraints=YES;
     retryButton.translatesAutoresizingMaskIntoConstraints=YES;
-
     CGSize size = CGSizeMake(rectSize.width-50,999);
     CGRect textRect=[self setDynamicHeight:size textString:messageHistory.userMessage fontSize:[UIFont fontWithName:@"Roboto-Regular" size:15]];
     meUserMessageLabel.numberOfLines = 0;
-    
     //Bubble positions
     CGFloat bubble_x;
     CGFloat bubble_y = 5;
@@ -52,23 +46,16 @@
     else {
         retryButton.hidden = NO;
     }
-    
     bubble_x = ((rectSize.width)-(textRect.size.width+30));
-   
     incomingBubbleImage.image = [[UIImage imageNamed:@"outgoing"]
                                  stretchableImageWithLeftCapWidth:15 topCapHeight:15];
-    
-    
     bubble_width = textRect.size.width+20;
-    
     incomingBubbleImage.frame = CGRectMake(bubble_x, bubble_y, bubble_width, bubble_height+20);
     meUserMessageLabel.frame=CGRectMake(bubble_x+5, bubble_y+5, bubble_width-10, textRect.size.height);
     retryButton.frame=CGRectMake(meUserMessageLabel.frame.origin.x-35,bubble_y+5, 30, 30);
     incomingBubbleImage.autoresizingMask = meUserMessageLabel.autoresizingMask;
-    
-    
 }
--(CGRect)setDynamicHeight:(CGSize)rectSize textString:(NSString *)textString fontSize:(UIFont *)fontSize{
+-(CGRect)setDynamicHeight:(CGSize)rectSize textString:(NSString *)textString fontSize:(UIFont *)fontSize {
     CGRect textHeight = [textString
                          boundingRectWithSize:rectSize
                          options:NSStringDrawingUsesLineFragmentOrigin
@@ -76,36 +63,29 @@
                          context:nil];
     return textHeight;
 }
-
 #pragma mark - end
 
+#pragma mark - Display other user message
 - (void)displayOtherUserMessage:(MessageHistoryDataModel *)messageHistoryData indexPath:(int)indexPath rectSize:(CGSize)rectSize {
     otherUserMessageLabel.translatesAutoresizingMaskIntoConstraints=YES;
     outgoingBubbleImage.translatesAutoresizingMaskIntoConstraints=YES;
     CGSize size = CGSizeMake(rectSize.width-50,999);
     CGRect textRect=[self setDynamicHeight:size textString:messageHistoryData.userMessage fontSize:[UIFont fontWithName:@"Roboto-Regular" size:15]];
     otherUserMessageLabel.numberOfLines = 0;
-    
     //Bubble positions
     CGFloat bubble_x;
     CGFloat bubble_y = 5;
     CGFloat bubble_width = textRect.size.width;
     CGFloat bubble_height = textRect.size.height;
     otherUserMessageLabel.text=messageHistoryData.userMessage;
-    
     otherUserMessageLabel.backgroundColor=[UIColor clearColor];
-    
     bubble_x = 10;
-    
     outgoingBubbleImage.image = [[UIImage imageNamed:@"incoming"]
                                  stretchableImageWithLeftCapWidth:15 topCapHeight:15];
-    
-    
     bubble_width = textRect.size.width+20;
-    
     outgoingBubbleImage.frame = CGRectMake(bubble_x, bubble_y, bubble_width, bubble_height+20);
     otherUserMessageLabel.frame=CGRectMake(bubble_x+13, bubble_y+5, bubble_width-10, textRect.size.height);
     incomingBubbleImage.autoresizingMask = otherUserMessageLabel.autoresizingMask;
-
 }
+#pragma mark - end
 @end

@@ -34,12 +34,11 @@
     noRecordLabel.hidden=YES;
     // Do any additional setup after loading the view.
 }
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated {
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     [myDelegate removeBadgeIconLastTab];
     [myDelegate showIndicator];
@@ -64,7 +63,7 @@
         }
         [messagesTableView reloadData];
     }
-                                        failure:^(NSError *error)
+                                                failure:^(NSError *error)
      {
          
      }] ;
@@ -72,11 +71,10 @@
 #pragma mark - end
 
 #pragma mark - Table view delegate methods
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return messagesDataArray.count;
 }
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *simpleTableIdentifier = @"messagesCell";
     MessagesViewCell *messagesCell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
     if (messagesCell == nil)  {
@@ -87,7 +85,7 @@
     [messagesCell displayMessageData:data indexPath:(int)indexPath.row rectSize:messagesCell.frame.size];
     return messagesCell;
 }
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     PersonalMessageViewController *msgView =[storyboard instantiateViewControllerWithIdentifier:@"PersonalMessageViewController"];
     msgView.otherUserId=[[messagesDataArray objectAtIndex:indexPath.row] otherUserId];

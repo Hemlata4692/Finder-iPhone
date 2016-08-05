@@ -55,13 +55,9 @@
     textFieldArray = @[cancelMessageTextView];
     [self setKeyboardControls:[[BSKeyboardControls alloc] initWithFields:textFieldArray]];
     [self.keyboardControls setDelegate:self];
-
-    
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(meetingDescriptionContainerView:)];
     tapGesture.delegate=self;
     [cancelMessageContainerView addGestureRecognizer:tapGesture];
-
-    
     appointmentDataArray=[[NSMutableArray alloc]init];
     noResulFoundLabel.hidden=YES;
     if ([screenName isEqualToString:@"Pending Appointments"]) {
@@ -76,19 +72,14 @@
         [myDelegate showIndicator];
         [self performSelector:@selector(getRequestedAppointmentList) withObject:nil afterDelay:.1];
     }
-    
-    // [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pendingDetails) name:@"Pending" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(requestedDetails) name:@"Requested" object:nil];
     [cancelMessageTextView setPlaceholder:@"  Cancel Message"];
-    
 }
-- (void)pendingDetails{
-    
+- (void)pendingDetails {
     [myDelegate showIndicator];
     [self performSelector:@selector(getPendingAppointmentList) withObject:nil afterDelay:0.1];
 }
-- (void)requestedDetails{
-    
+- (void)requestedDetails {
     [myDelegate showIndicator];
     [self performSelector:@selector(getRequestedAppointmentList) withObject:nil afterDelay:0.1];
 }
@@ -96,7 +87,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated {
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     if ([screenName isEqualToString:@"Pending Appointments"]) {
         
@@ -125,8 +116,6 @@
             noResulFoundLabel.hidden=YES;
             [pendingAppointmentTable reloadData];
         }
-        
-        
     }
                                                     failure:^(NSError *error)
      {
@@ -134,9 +123,7 @@
          noResulFoundLabel.text=@"No requested appointement(s).";
          pendingAppointmentTable.hidden=YES;
      }] ;
-    
 }
-
 - (void)getPendingAppointmentList {
     [[ConferenceService sharedManager] pendingAppointment:^(id dataArray) {
         [myDelegate stopIndicator];
@@ -151,7 +138,6 @@
             noResulFoundLabel.hidden=YES;
             [pendingAppointmentTable reloadData];
         }
-        
     }
                                                   failure:^(NSError *error)
      {
@@ -159,7 +145,6 @@
          noResulFoundLabel.text=@"No pending appointement(s).";
          pendingAppointmentTable.hidden=YES;
      }] ;
-    
 }
 - (void)acceptMeetingRequest {
     [[ConferenceService sharedManager] acceptCancelMeeting:appointmentId meetingUserId:meetingId flag:status  type:appointmentType reasonForCancel:@"" success:^(id dataArray) {
@@ -167,9 +152,7 @@
     }
                                                    failure:^(NSError *error)
      {
-         
      }] ;
-    
 }
 - (void)cancelMeetingRequest {
     [[ConferenceService sharedManager] acceptCancelMeeting:appointmentId meetingUserId:meetingId flag:status type:appointmentType reasonForCancel:cancelMessageString success:^(id dataArray) {
@@ -185,30 +168,12 @@
      {
          
      }] ;
-    
 }
 #pragma mark - end
 #pragma mark - Table view methods
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    // Return the number of sections.
     return 1;
 }
-
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
-//    UIView * headerView;
-//    headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 40.0)];
-//    headerView.backgroundColor = [UIColor clearColor];
-//    UILabel * notificationLabel = [[UILabel alloc] init];
-//    notificationLabel.font = [UIFont fontWithName:@"Roboto-Regular" size:15.0];
-//    notificationLabel.text=@"Date";
-//    float width =  [notificationLabel.text boundingRectWithSize:notificationLabel.frame.size options:NSStringDrawingUsesLineFragmentOrigin attributes:@{ NSFontAttributeName:notificationLabel.font } context:nil]
-//    .size.width;
-//    notificationLabel.frame = CGRectMake(15, 0, width,40.0);
-//    notificationLabel.textColor=[UIColor colorWithRed:(40.0/255.0) green:(40.0/255.0) blue:(40.0/255.0) alpha:1];
-//    [headerView addSubview:notificationLabel];
-//    return headerView;
-//}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return appointmentDataArray.count;
 }
@@ -239,7 +204,6 @@
     [pendingCell.cancelButton addTarget:self action:@selector(cancelMeetingButtionAction:) forControlEvents:UIControlEventTouchUpInside];
     return pendingCell;
 }
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -247,12 +211,10 @@
     profileView.viewName=@"User Profile";
     profileView.otherUserID=[[appointmentDataArray objectAtIndex:indexPath.row]meetingUserId];
     [self.navigationController pushViewController:profileView animated:YES];
-    
 }
 #pragma mark - end
 
 #pragma mark - IBActions
-
 - (IBAction)meetingDetail:(MyButton *)sender {
     btnTag=[sender Tag];
     PendingAppointmentDataModel *data=[appointmentDataArray objectAtIndex:btnTag];
@@ -264,7 +226,6 @@
     [descreptionView setModalPresentationStyle:UIModalPresentationOverCurrentContext];
     [self presentViewController:descreptionView animated: NO completion:nil];
 }
-
 - (IBAction)acceptMeetingButtionAction:(MyButton *)sender {
     btnTag=[sender Tag];
     appointmentId=[[appointmentDataArray objectAtIndex:btnTag]appointmentId];
@@ -275,7 +236,6 @@
     [myDelegate showIndicator];
     [self performSelector:@selector(acceptMeetingRequest) withObject:nil afterDelay:.1];
 }
-
 - (IBAction)cancelMeetingButtionAction:(MyButton *)sender {
     btnTag=[sender Tag];
     appointmentId=[[appointmentDataArray objectAtIndex:btnTag]appointmentId];
@@ -285,51 +245,46 @@
     if ([screenName isEqualToString:@"Pending Appointments"]) {
         appointmentType=@"requested";
         cancelMessageContainerView.hidden = NO;
-        
     }
     else {
         appointmentType=@"assigned";
         cancelMessageString = @"";
         [myDelegate showIndicator];
         [self performSelector:@selector(cancelMeetingRequest) withObject:nil afterDelay:.1];
-        
     }
-    
 }
 - (IBAction)confirmCancelButtonAction:(id)sender {
     
     [keyboardControls.activeField resignFirstResponder];
-
     if ([cancelMessageTextView.text isEqualToString:@""]) {
         SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
         [alert showWarning:self title:@"Alert" subTitle:@"Please enter message for cancel." closeButtonTitle:@"Done" duration:0.0f];
     }
-    else
-    {
+    else {
         cancelMessageString = cancelMessageTextView.text;
         [myDelegate showIndicator];
         [self performSelector:@selector(cancelMeetingRequest) withObject:nil afterDelay:.1];
-        
     }
 }
-
 #pragma mark - end
+
 #pragma mark - Tap gesture delegate
 - (void) meetingDescriptionContainerView:(UITapGestureRecognizer *)sender {
     cancelMessageContainerView.hidden = YES;
     [keyboardControls.activeField resignFirstResponder];
 }
 #pragma mark - end
+
 #pragma mark - Keyboard controls delegate
-- (void)keyboardControls:(BSKeyboardControls *)keyboardControls selectedField:(UIView *)field inDirection:(BSKeyboardControlsDirection)direction{
+- (void)keyboardControls:(BSKeyboardControls *)keyboardControls selectedField:(UIView *)field inDirection:(BSKeyboardControlsDirection)direction {
     UIView *view;
     view = field.superview.superview.superview;
 }
-
 - (void)keyboardControlsDonePressed:(BSKeyboardControls *)keyboardControls{
     [self.keyboardControls.activeField resignFirstResponder];
 }
 #pragma mark - end
+
 #pragma mark - Textview delegates
 - (void)textViewDidBeginEditing:(UITextView *)textView {
     [self.keyboardControls setActiveField:textView];

@@ -25,23 +25,6 @@
     [alertView addSubview:customAlertObj.mainView];
     return self;
 }
-//- (void)TapGestureHideCallOptionalMethod{
-//    [UIView animateWithDuration:0.3f animations:^{
-//        customAlertObj.shadowView.alpha = 0;
-//        customAlertObj.backView.frame = CGRectMake(customAlertObj.shadowView.frame.size.width + 10, 0,  customAlertObj.shadowView.frame.size.width - 100,  customAlertObj.backView.frame.size.height);
-//    }
-//                     completion:^(BOOL finished){
-//                         for (UIView *subview in yourView.subviews) {
-//                             
-//                             // List the subviews of subview
-//                             if (subview.tag == 234) {
-//                                 [subview removeFromSuperview];
-//                             }
-//                         }
-//                         [_delegate OncallDelegateMethod];
-//                     }];
-//}
-//
 - (void)dismissAlertView:(UIView*)myView{
     
     customAlertObj.mainView.hidden = YES;
@@ -68,14 +51,11 @@
     if (isTextViewCheck && ([customAlertObj.messageTextView.text isEqualToString:@""] || customAlertObj.messageTextView.text.length == 0)) {
         SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
         [alert addButton:@"Ok" actionBlock:^(void) {
-            
-            //                 [alert hideView];
         }];
         [alert showWarning:nil title:@"Alert" subTitle:@"Please enter message for cancel." closeButtonTitle:nil duration:0.0f];
-//         [_delegate myAlertDelegateAction:customAlertObj option:2 reason:customAlertObj.messageTextView.text];
     }
     else {
-    
+        
         [_delegate myAlertDelegateAction:customAlertObj option:2 reason:customAlertObj.messageTextView.text];
     }
 }

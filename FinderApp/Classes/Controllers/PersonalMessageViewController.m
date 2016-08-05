@@ -40,13 +40,12 @@
     [super viewDidLoad];
     self.navigationItem.title=otherUserName;
     firstTime=1;
-   
     [self setTextView];
     // Pull To Refresh
     refreshControl = [[UIRefreshControl alloc] initWithFrame:CGRectMake(personalMessageTableView.frame.size.width/2, 50, 30, 30)];
     [personalMessageTableView addSubview:refreshControl];
     NSMutableAttributedString *refreshString = [[NSMutableAttributedString alloc] initWithString:@""];
-        [refreshString addAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]} range:NSMakeRange(0, refreshString.length)];
+    [refreshString addAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]} range:NSMakeRange(0, refreshString.length)];
     refreshControl.attributedTitle = refreshString;
     [refreshControl addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
     personalMessageTableView.alwaysBounceVertical = YES;
@@ -102,11 +101,9 @@
 #pragma mark - end
 #pragma mark - Refresh table
 //Pull to refresh implementation on my submission data
-- (void)refreshTable
-{
+- (void)refreshTable {
     firstTime=2;
-    
-     offset=[NSString stringWithFormat: @"%d", [offset intValue]-pageOffset];
+    offset=[NSString stringWithFormat: @"%d", [offset intValue]-pageOffset];
     for (int i=0; i<messageDateArray.count; i++) {
         pageOffset=[[NSString stringWithFormat:@"%lu",(unsigned long)[[messageDateArray objectAtIndex:i] messagesHistoryArray].count] intValue];
         offset=[NSString stringWithFormat: @"%d", [offset intValue]+pageOffset];
@@ -118,7 +115,6 @@
     else {
         [refreshControl endRefreshing];
     }
-    
 }
 #pragma mark - end
 #pragma mark - Webservice
@@ -128,13 +124,11 @@
         if (messageDateArray.count<1) {
             messageDateArray=[dataArray mutableCopy];
         }
-        else
-        {
+        else {
             MessagesDataModel *messageDetails = [[MessagesDataModel alloc]init];
             messageDetails.messagesHistoryArray=[[NSMutableArray alloc]init];
             messageDateArray=[[[messageDateArray reverseObjectEnumerator] allObjects] mutableCopy];
             for (int i=0; i<[dataArray count]-1; i++) {
-                
                 if ([[[messageDateArray objectAtIndex:messageDateArray.count-1]messageDate] isEqualToString:[[dataArray objectAtIndex:i]messageDate]]) {
                     messageDetails = [messageDateArray objectAtIndex:messageDateArray.count-1];
                     NSMutableArray *localMessageArray = [NSMutableArray new];
@@ -163,7 +157,6 @@
          
      }] ;
 }
-
 - (void)sendMessage {
     [[MessageService sharedManager] sendMessage:otherUserId message:sendMessageTextView.text success:^(id responseObject) {
         [myDelegate stopIndicator];
@@ -174,7 +167,6 @@
         tempModel.messageSendingFailed=@"No";
         [[[messageDateArray objectAtIndex:lastSectionIndex]messagesHistoryArray ] replaceObjectAtIndex:lastRowIndex withObject:tempModel];
         [personalMessageTableView reloadData];
-        
     }
                                         failure:^(NSError *error)
      {
@@ -187,13 +179,11 @@
          [personalMessageTableView reloadData];
          
      }] ;
-    
 }
 #pragma mark - end
 
 #pragma mark - IBActions
 - (IBAction)sendMessageBtnAction:(id)sender {
-//    [sendMessageTextView resignFirstResponder];
     [self sendMessage];
     MessagesDataModel *messageDetails = [[MessagesDataModel alloc]init];
     messageDetails.messagesHistoryArray=[[NSMutableArray alloc]init];
@@ -202,7 +192,6 @@
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.dateFormat = @"yyyy-MM-dd";
     NSString *dateString = [dateFormatter stringFromDate:[NSDate date]];
-    
     if (messageDateArray==nil) {
         messageDateArray=[[NSMutableArray alloc]init];
         messageDetails.messageDate =dateString;
@@ -214,7 +203,6 @@
         [messageDetails.messagesHistoryArray addObject:messageHistory];
         [messageDateArray addObject:messageDetails];
     }
-    
     else if (![dateString isEqualToString:[[messageDateArray objectAtIndex:messageDateArray.count - 1]messageDate]]) {
         messageDetails.messageDate =dateString;
         messageHistory.dateTime =@"";
@@ -254,19 +242,14 @@
         [self sendMessage];
     }];
     [alert showWarning:nil title:@"Alert" subTitle:@"Do you want to resend message?" closeButtonTitle:@"No" duration:0.0f];
-    
 }
-
 - (IBAction)tapGestureOnView:(UITapGestureRecognizer *)sender {
     [sendMessageTextView resignFirstResponder];
 }
-
 #pragma mark - end
 
 #pragma mark - Table view delegate methods
-
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    
     return messageDateArray.count;
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
@@ -280,7 +263,7 @@
         return 0;
     }
 }
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIView * headerView;
     headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 40.0)];
     headerView.backgroundColor = [UIColor clearColor];
@@ -305,7 +288,6 @@
     [headerView addSubview:dateLabel];
     return headerView;
 }
-
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MessageHistoryDataModel *data=[[[messageDateArray objectAtIndex:indexPath.section]messagesHistoryArray] objectAtIndex:indexPath.row];
@@ -318,9 +300,7 @@
     
     return 60+textRect.size.height;
 }
-
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [[messageDateArray objectAtIndex:section]messagesHistoryArray].count;
 }
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -329,8 +309,7 @@
     if ([data.userId isEqualToString:[UserDefaultManager getValue:@"userId"]]) {
         NSString *simpleTableIdentifier = @"meCell";
         PersonalMessageViewCell *meCell=[personalMessageTableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
-        if (meCell == nil)
-        {
+        if (meCell == nil) {
             meCell=[[PersonalMessageViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:simpleTableIdentifier];
         }
         [meCell displayUserMessage:data indexPath:(int)indexPath.row rectSize:self.view.frame.size];
@@ -341,14 +320,12 @@
     else {
         NSString *simpleTableIdentifier = @"otherUserCell";
         PersonalMessageViewCell *otherCell=[personalMessageTableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
-        if (otherCell == nil)
-        {
+        if (otherCell == nil) {
             otherCell=[[PersonalMessageViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:simpleTableIdentifier];
         }
         [otherCell displayOtherUserMessage:data indexPath:(int)indexPath.row rectSize:self.view.frame.size];
         return otherCell;
     }
-    
 }
 #pragma mark - end
 
@@ -400,7 +377,6 @@
                          context:nil];
         
         if ((textRect.size.height < 126) && (textRect.size.height > 50)) {
-            
             sendMessageTextView.frame = CGRectMake(sendMessageTextView.frame.origin.x, sendMessageTextView.frame.origin.y, sendMessageTextView.frame.size.width, textRect.size.height);
             
             messageHeight = textRect.size.height + 8;
@@ -411,7 +387,7 @@
                 [personalMessageTableView scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionBottom animated:NO];
             }
         }
-        else if(textRect.size.height <= 50){
+        else if(textRect.size.height <= 50) {
             messageHeight = 40;
             sendMessageTextView.frame = CGRectMake(sendMessageTextView.frame.origin.x, sendMessageTextView.frame.origin.y, sendMessageTextView.frame.size.width, messageHeight-8);
             messageView.frame = CGRectMake(0, messageYValue-messageHeight - 14  , self.view.bounds.size.width, messageHeight + 10);
@@ -420,14 +396,12 @@
                 NSIndexPath* ip = [NSIndexPath indexPathForRow:[[[messageDateArray objectAtIndex:messageDateArray.count-1] messagesHistoryArray] count]-1 inSection:messageDateArray.count-1 ];
                 [personalMessageTableView scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionBottom animated:NO];
             }
-            
         }
         if (textView.text.length>=1) {
-            
             if (trimmedString.length>=1) {
                 sendMessageBtn.enabled=YES;
             }
-            else{
+            else {
                 sendMessageBtn.enabled=NO;
             }
         }
@@ -437,8 +411,7 @@
     }
     return YES;
 }
-- (void)textViewDidChange:(UITextView *)textView
-{
+- (void)textViewDidChange:(UITextView *)textView {
     if (([sendMessageTextView sizeThatFits:sendMessageTextView.frame.size].height < 126) && ([sendMessageTextView sizeThatFits:sendMessageTextView.frame.size].height > 50)) {
         
         sendMessageTextView.frame = CGRectMake(sendMessageTextView.frame.origin.x, sendMessageTextView.frame.origin.y, sendMessageTextView.frame.size.width, [sendMessageTextView sizeThatFits:sendMessageTextView.frame.size].height);
@@ -450,7 +423,7 @@
             [personalMessageTableView scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionBottom animated:NO];
         }
     }
-    else if([sendMessageTextView sizeThatFits:sendMessageTextView.frame.size].height <= 50){
+    else if([sendMessageTextView sizeThatFits:sendMessageTextView.frame.size].height <= 50) {
         messageHeight = 40;
         sendMessageTextView.frame = CGRectMake(sendMessageTextView.frame.origin.x, sendMessageTextView.frame.origin.y, sendMessageTextView.frame.size.width, messageHeight-8);
         messageView.frame = CGRectMake(0, messageYValue-messageHeight - 14  , self.view.bounds.size.width, messageHeight + 10);
@@ -474,7 +447,6 @@
         sendMessageBtn.enabled=NO;
     }
 }
-
 #pragma mark - end
 
 @end

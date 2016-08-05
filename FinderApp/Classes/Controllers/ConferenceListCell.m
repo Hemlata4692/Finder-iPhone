@@ -16,16 +16,15 @@
     [super awakeFromNib];
     // Initialization code
 }
-
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
+    
     // Configure the view for the selected state
 }
 #pragma mark - end
 
 #pragma mark - Display data in cell
-- (void)displayConferenceListData :(ConferenceListDataModel *)conferenceList indexPath:(int)indexPath rectSize:(CGSize)rectSize{
+- (void)displayConferenceListData :(ConferenceListDataModel *)conferenceList indexPath:(int)indexPath rectSize:(CGSize)rectSize {
     conferenceNameLabel.text=conferenceList.conferenceName;
     NSArray *dateStrings = [conferenceList.conferenceDate componentsSeparatedByString:@" - "];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -39,9 +38,8 @@
     conferenceStartDate.text=[dateFormatter stringFromDate:startDate];
     conferenceEndDate.text=[dateFormatter stringFromDate:endDate];
     if ([conferenceList.isExpired integerValue]==1) {
-       conferenceNameLabel.textColor=[UIColor colorWithRed:180.0/255.0 green:180.0/255.0 blue:180.0/255.0 alpha:1.0];
+        conferenceNameLabel.textColor=[UIColor colorWithRed:180.0/255.0 green:180.0/255.0 blue:180.0/255.0 alpha:1.0];
     }
-        
 }
 #pragma mark - end
 @end

@@ -12,8 +12,7 @@
 //static int count=1;
 @synthesize manager;
 #pragma mark - Singleton instance
-+ (id)sharedManager
-{
++ (id)sharedManager {
     static Webservice *sharedMyManager = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -21,8 +20,7 @@
     });
     return sharedMyManager;
 }
-- (id)init
-{
+- (id)init {
     if (self = [super init])
     {
         manager = [[AFHTTPRequestOperationManager manager] initWithBaseURL:[NSURL URLWithString:BASE_URL]];
@@ -43,7 +41,6 @@
         [manager.requestSerializer setValue:[UserDefaultManager getValue:@"accessToken"] forHTTPHeaderField:@"access-token-key"];
     }
     manager.securityPolicy.allowInvalidCertificates = YES;
-    
     [manager POST:path parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         success(responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -51,14 +48,10 @@
         [myDelegate stopIndicator];
         SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
         [alert showWarning:nil title:@"Alert" subTitle:error.localizedDescription closeButtonTitle:@"Ok" duration:0.0f];
-        
     }];
 }
-
-
 - (void)postImage:(NSString *)path parameters:(NSDictionary *)parameters image:(UIImage *)image success:(void (^)(id))success failure:(void (^)(NSError *))failure {
     path = [path stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    
     manager.responseSerializer = [AFJSONResponseSerializer serializer];
     manager.requestSerializer = [AFJSONRequestSerializer serializer];
     [manager.requestSerializer setValue:@"parse-application-id-removed" forHTTPHeaderField:@"X-Parse-Application-Id"];
@@ -68,39 +61,27 @@
         [manager.requestSerializer setValue:[UserDefaultManager getValue:@"accessToken"] forHTTPHeaderField:@"access-token-key"];
     }
     manager.securityPolicy.allowInvalidCertificates = YES;
-    
     NSData *imageData = UIImageJPEGRepresentation(image, 0.3);
     [manager POST:path parameters:parameters constructingBodyWithBlock:^(id<AFMultipartFormData> formData) {
         [formData appendPartWithFileData:imageData name:@"profile_img" fileName:@"files.jpg" mimeType:@"image/jpeg"];
-        
     } success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        // [myDelegate stopIndicator];
         success(responseObject);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
           [myDelegate stopIndicator];
         failure(error);
         SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
         [alert showWarning:nil title:@"Alert" subTitle:error.localizedDescription closeButtonTitle:@"Ok" duration:0.0f];
-        
     }];
 }
-
 - (BOOL)isStatusOK:(id)responseObject {
     NSNumber *number = responseObject[@"isSuccess"];
     NSString *msg;
-    switch (number.integerValue)
-    {
+    switch (number.integerValue) {
         case 0:
         {
             msg = responseObject[@"message"];
             SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
             [alert showWarning:nil title:@"Alert" subTitle:msg closeButtonTitle:@"Ok" duration:0.0f];
-//            if (count==1) {
-//            count++;
-//            msg = responseObject[@"message"];
-//            SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
-//            [alert showWarning:nil title:@"Alert" subTitle:msg closeButtonTitle:@"Ok" duration:0.0f];
-//            }
             return NO;
         }
         case 1:
@@ -113,20 +94,8 @@
             SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
             [alert addButton:@"Ok" actionBlock:^(void) {
                 [self logoutUser];
-                //                 [alert hideView];
             }];
             [alert showWarning:nil title:@"Alert" subTitle:msg closeButtonTitle:nil duration:0.0f];
-//            if (count==1) {
-//                count++;
-//                msg = responseObject[@"message"];
-//                SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
-//                [alert addButton:@"Ok" actionBlock:^(void) {
-//                    [self logoutUser];
-//                    //                 [alert hideView];
-//                }];
-//                [alert showWarning:nil title:@"Alert" subTitle:msg closeButtonTitle:nil duration:0.0f];
-//            }
-          
         }
             return NO;
             break;
@@ -138,8 +107,8 @@
             break;
     }
 }
-- (void)logoutUser
-{
+//Logout
+- (void)logoutUser {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
     myDelegate.navigationController = [storyboard instantiateViewControllerWithIdentifier:@"mainNavController"];

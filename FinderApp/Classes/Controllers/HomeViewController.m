@@ -23,7 +23,6 @@
     MJGeocoder *forwardGeocoder;
     NSString *latitude;
     NSString *longitude;
-    
 }
 @property (weak, nonatomic) IBOutlet UIScrollView *homeScrollView;
 @property (weak, nonatomic) IBOutlet UIView *mainContainerView;
@@ -63,16 +62,14 @@
     [myDelegate showIndicator];
     [self performSelector:@selector(getConferenceDetail) withObject:nil afterDelay:.1];
 }
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-- (void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
 }
-
 #pragma mark - end
 
 #pragma mark - Webservice
@@ -85,23 +82,18 @@
     }
                                                    failure:^(NSError *error)
      {
-         
      }] ;
 }
-//Display data
-- (void)displayConferenceDetail{
+//Display conference detail data
+- (void)displayConferenceDetail {
     conferenceDescription.translatesAutoresizingMaskIntoConstraints = YES;
     mainContainerView.translatesAutoresizingMaskIntoConstraints=YES;
- 
     conferenceTitleLabel.text = [[conferenceDetailArray objectAtIndex:0]conferenceName];
-    
     NSMutableAttributedString *attString = [[NSMutableAttributedString alloc] initWithString:[[conferenceDetailArray objectAtIndex:0]conferenceOrganiserName]];
     [attString addAttribute:(NSString*)kCTUnderlineStyleAttributeName
                       value:[NSNumber numberWithInt:kCTUnderlineStyleSingle]
                       range:(NSRange){0,[attString length]}];
     conferenceOrganiserName.attributedText = attString;
-    // conferenceOrganiserName.text=[[conferenceDetailArray objectAtIndex:0]conferenceOrganiserName];
- 
     conferenceVenue.text=[[conferenceDetailArray objectAtIndex:0]conferenceVenue];
     conferenceDate.text=[[conferenceDetailArray objectAtIndex:0]conferenceDate];
     size = CGSizeMake(mainContainerView.frame.size.width-16,999);
@@ -122,10 +114,9 @@
     float dynamicHeight=conferenceImageView.frame.origin.y+conferenceImageView.frame.size.height+8+descriptionHeadingLabel.frame.size.height+2+conferenceDescription.frame.size.height+8+bottomContainerView.frame.size.height+20;
     mainContainerView.frame = CGRectMake(mainContainerView.frame.origin.x, mainContainerView.frame.origin.y, mainContainerView.frame.size.width, dynamicHeight);
     homeScrollView.contentSize = CGSizeMake(0,mainContainerView.frame.size.height+64);
-    
-    
 }
--(CGRect)setDynamicHeight:(CGSize)rectSize textString:(NSString *)textString fontSize:(UIFont *)fontSize{
+//Set dynamic height
+-(CGRect)setDynamicHeight:(CGSize)rectSize textString:(NSString *)textString fontSize:(UIFont *)fontSize {
     CGRect textHeight = [textString
                          boundingRectWithSize:rectSize
                          options:NSStringDrawingUsesLineFragmentOrigin
@@ -137,8 +128,7 @@
 
 #pragma mark - MJGeocoderDelegate
 //Getting the location of store added
-- (void)geocoder:(MJGeocoder *)geocoder didFindLocations:(NSArray *)locations
-{
+- (void)geocoder:(MJGeocoder *)geocoder didFindLocations:(NSArray *)locations {
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
     NSArray * displayedResults = [locations mutableCopy] ;
     Address *address = [displayedResults objectAtIndex:0];
@@ -150,23 +140,19 @@
     mapView.latitude=latitude;
     mapView.longitude=longitude;
     [self.navigationController pushViewController:mapView animated:YES];
-    //[myDelegate StopIndicator];
 }
-
-- (void)geocoder:(MJGeocoder *)geocoder didFailWithError:(NSError *)error
-{
-    if([error code] == 1)
-    {
+- (void)geocoder:(MJGeocoder *)geocoder didFailWithError:(NSError *)error {
+    if([error code] == 1) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"You have entered an invalid location." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [alertView show];
     }
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:NO];
 }
 #pragma mark - end
+
 #pragma mark - IBActions
 - (IBAction)finderReprestativeEmailAction:(id)sender {
-    if ([MFMailComposeViewController canSendMail])
-    {
+    if ([MFMailComposeViewController canSendMail]) {
         // Email Subject
         NSString *emailTitle = @"Finder App";
         NSArray *toRecipents = [NSArray arrayWithObject:[[conferenceDetailArray objectAtIndex:0]representativeEmail]];
@@ -179,8 +165,7 @@
             [[UIApplication sharedApplication] setStatusBarStyle: UIStatusBarStyleLightContent];
         }];
     }
-    else
-    {
+    else {
         UIAlertView *alertView = [[UIAlertView alloc]
                                   initWithTitle:@"Alert"
                                   message:@"Email account is not configured in your device."
@@ -189,12 +174,9 @@
                                   otherButtonTitles:nil];
         [alertView show];
     }
-    
 }
-- (IBAction)mapButtonAction:(id)sender
-{
-    if(!forwardGeocoder)
-    {
+- (IBAction)mapButtonAction:(id)sender {
+    if(!forwardGeocoder) {
         forwardGeocoder = [[MJGeocoder alloc] init];
         forwardGeocoder.delegate = self;
     }
@@ -205,12 +187,8 @@
 
 #pragma mark - end
 #pragma mark - MFMailcomposeviewcontroller delegate
-- (void)mailComposeController:(MFMailComposeViewController*)controller
-          didFinishWithResult:(MFMailComposeResult)result
-                        error:(NSError*)error
-{
-    switch (result)
-    {
+- (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
+    switch (result) {
         case MFMailComposeResultCancelled:
             break;
         case MFMailComposeResultSaved:

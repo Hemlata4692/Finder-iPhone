@@ -10,6 +10,7 @@
 
 @implementation NullValueChecker
 
+//Check dictionary for null value
 + (NSMutableDictionary *)checkDictionaryForNullValue: (NSMutableDictionary *)dict{
 
     for (int i = 0; i < [[dict allValues] count]; i++) {
@@ -27,6 +28,7 @@
     }
     return dict;
 }
+//Check array for null value
 + (NSMutableArray *)checkArrayForNullValue: (NSMutableArray *)array{
     for (int i = 0; i < [array count]; i++) {
         id value = array[i];

@@ -48,7 +48,7 @@
 @synthesize matchesSegmentControl;
 
 #pragma mark - View lifecycle
-- (void)viewDidLoad{
+- (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationItem.title=@"Matches";
@@ -65,8 +65,6 @@
     latestMatchesArray=[[NSMutableArray alloc]init];
     contactArray=[[NSMutableArray alloc]init];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(matchesDetails) name:@"MatchesDetails" object:nil];
-    
-    
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -93,15 +91,13 @@
     [myDelegate showIndicator];
     [self performSelector:@selector(getMatchesDetails) withObject:nil afterDelay:.1];
 }
-- (void)viewWillDisappear:(BOOL)animated
-{
+- (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:YES];
     myDelegate.myView=@"other";
 }
-
 #pragma mark - end
 #pragma mark - Set tabbar images
-- (void)setTabBarImages{
+- (void)setTabBarImages {
     UITabBarController * myTab = (UITabBarController *)self.tabBarController;
     UITabBar *tabBar = myTab.tabBar;
     UITabBarItem *tabBarItem1 = [tabBar.items objectAtIndex:0];
@@ -109,39 +105,29 @@
     UITabBarItem *tabBarItem3 = [tabBar.items objectAtIndex:2];
     UITabBarItem *tabBarItem4 = [tabBar.items objectAtIndex:3];
     UITabBarItem *tabBarItem5 = [tabBar.items objectAtIndex:4];
-    
     tabBar.clipsToBounds=YES;
     UIImage * tempImg =[UIImage imageNamed:@"matches"];
     [tabBarItem1 setImage:[[UIImage imageNamed:[tempImg imageForDeviceWithNameForOtherImages:@"matches"]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-    
     tempImg =[UIImage imageNamed:@"matches_selected"];
     [tabBarItem1 setSelectedImage:[[UIImage imageNamed:[tempImg imageForDeviceWithNameForOtherImages:@"matches_selected"]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     tabBarItem1.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
-    
     tempImg =[UIImage imageNamed:@"messages"];
     [tabBarItem2 setImage:[[UIImage imageNamed:[tempImg imageForDeviceWithNameForOtherImages:@"messages"]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-    
     tempImg =[UIImage imageNamed:@"messages_selected"];
     [tabBarItem2 setSelectedImage:[[UIImage imageNamed:[tempImg imageForDeviceWithNameForOtherImages:@"messages_selected"]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     tabBarItem2.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
-    
     tempImg =[UIImage imageNamed:@"proximity_tab"];
     [tabBarItem3 setImage:[[UIImage imageNamed:[tempImg imageForDeviceWithNameForOtherImages:@"proximity_tab"]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-    
     tempImg =[UIImage imageNamed:@"proximity_selected"];
     [tabBarItem3 setSelectedImage:[[UIImage imageNamed:[tempImg imageForDeviceWithNameForOtherImages:@"proximity_selected"]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     tabBarItem3.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
-    
     tempImg =[UIImage imageNamed:@"calendar"];
     [tabBarItem4 setImage:[[UIImage imageNamed:[tempImg imageForDeviceWithNameForOtherImages:@"calendar"]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-    
     tempImg =[UIImage imageNamed:@"calendar_selected"];
     [tabBarItem4 setSelectedImage:[[UIImage imageNamed:[tempImg imageForDeviceWithNameForOtherImages:@"calendar_selected"]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     tabBarItem4.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
-    
     tempImg =[UIImage imageNamed:@"more"];
     [tabBarItem5 setImage:[[UIImage imageNamed:[tempImg imageForDeviceWithNameForOtherImages:@"more"]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
-    
     tempImg =[UIImage imageNamed:@"more_selected"];
     [tabBarItem5 setSelectedImage:[[UIImage imageNamed:[tempImg imageForDeviceWithNameForOtherImages:@"more_selected"]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     tabBarItem5.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
@@ -149,12 +135,10 @@
         myTab.selectedIndex = 2;
     }
 }
-
 #pragma mark - end
-#pragma mark - Table view methods
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+#pragma mark - Table view methods
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (selectedSegment==0) {
         return 80;
     }
@@ -200,11 +184,9 @@
         newMatchesCell.approveButton.Tag=(int)indexPath.row;
         newMatchesCell.cancelButton.Tag=(int)indexPath.row;
         newMatchesCell.sendRequestButton.Tag=(int)indexPath.row;
-
         [newMatchesCell.approveButton addTarget:self action:@selector(approveButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         [newMatchesCell.cancelButton addTarget:self action:@selector(cancelRequestButtonAction:) forControlEvents:UIControlEventTouchUpInside];
         [newMatchesCell.sendRequestButton addTarget:self action:@selector(sendRequestButtonAction:) forControlEvents:UIControlEventTouchUpInside];
-
         return newMatchesCell;
     }
 }
@@ -218,7 +200,6 @@
         userProfile.isRequestSent=[[latestMatchesArray objectAtIndex:indexPath.row] isRequestSent];
         userProfile.isRequestArrived=[[latestMatchesArray objectAtIndex:indexPath.row] isArrived];
         [self.navigationController pushViewController:userProfile animated:YES];
-        
     }
     else {
         UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -230,10 +211,10 @@
     }
 }
 #pragma mark - end
+
 #pragma mark - Webservice
 //get matches details
-- (void)getMatchesDetails
-{
+- (void)getMatchesDetails {
     [[MatchesService sharedManager] getMatchesList:^(id dataArray) {
         [myDelegate stopIndicator];
         [myDelegate stopIndicator];
@@ -259,20 +240,15 @@
     
     [latestMatchesArray removeAllObjects];
     [contactArray removeAllObjects];
-    if (selectedSegment==0)
-    {
+    if (selectedSegment==0) {
         //new segment
-        for (int i =0; i<allMatchesDataArray.count; i++)
-        {
+        for (int i =0; i<allMatchesDataArray.count; i++) {
             MatchesDataModel *requestArrivedData = [allMatchesDataArray objectAtIndex:i];
-            
             if ([[[allMatchesDataArray objectAtIndex:i] isAccepted] isEqualToString:@"F"] && [[[allMatchesDataArray objectAtIndex:i] isRequestSent] isEqualToString:@"F"] && [[[allMatchesDataArray objectAtIndex:i] isArrived] isEqualToString:@"F"]) {
-                
                 [latestMatchesArray addObject:requestArrivedData];
                 noRecordLabel.hidden=YES;
             }
-            else if ([[[allMatchesDataArray objectAtIndex:i] isArrived] isEqualToString:@"T"])
-            {
+            else if ([[[allMatchesDataArray objectAtIndex:i] isArrived] isEqualToString:@"T"]) {
                 [latestMatchesArray addObject:requestArrivedData];
                 noRecordLabel.hidden=YES;
             }
@@ -282,12 +258,10 @@
             noRecordLabel.text=@"No new match requests.";
         }
     }
-    else{
+    else {
         //contacts segment
-        for (int i =0; i<allMatchesDataArray.count; i++)
-        {
+        for (int i =0; i<allMatchesDataArray.count; i++) {
             MatchesDataModel *acceptedRequests = [allMatchesDataArray objectAtIndex:i];
-            
             if ([[[allMatchesDataArray objectAtIndex:i] isAccepted] isEqualToString:@"T"])
             {
                 [contactArray addObject:acceptedRequests];
@@ -300,42 +274,32 @@
         }
     }
     [matchesTableView reloadData];
-    
 }
 //send/cancel match request
 - (void)sendCancelMatchRequest {
     [[MatchesService sharedManager] sendCancelMatchRequest:otherUserId sendRequest:requestSent success:^(id responseObject) {
-      //  [myDelegate stopIndicator];
         [self getMatchesDetails];
-//        MatchesDataModel *tempModel = [latestMatchesArray objectAtIndex:btnTag];
-////        tempModel.isRequestSent=requestSent;
-////        [latestMatchesArray replaceObjectAtIndex:btnTag withObject:tempModel];
-////        [matchesTableView reloadData];
     }
                                                    failure:^(NSError *error)
      {
          
      }] ;
-    
 }
-
 //accept/decline match request
 - (void)acceptDeclineRequest {
     if (selectedSegment==0) {
         [[MatchesService sharedManager] acceptDeclineRequest:otherUserId acceptRequest:accepted success:^(id responseObject) {
             [self getMatchesDetails];
-            
         }
                                                      failure:^(NSError *error)
          {
-             
          }] ;
     }
 }
 #pragma mark - end
-#pragma mark - Segment control
 
-- (IBAction)matchesSegmentAction:(UISegmentedControl *)sender{
+#pragma mark - Segment control
+- (IBAction)matchesSegmentAction:(UISegmentedControl *)sender {
     UISegmentedControl *segmentedControl = (UISegmentedControl *) sender;
     selectedSegment = segmentedControl.selectedSegmentIndex;
     if (selectedSegment == 0) {
@@ -359,7 +323,6 @@
     [scheduleMeeting setModalPresentationStyle:UIModalPresentationOverCurrentContext];
     [self presentViewController:scheduleMeeting animated: NO completion:nil];
 }
-
 - (IBAction)sendMessage:(MyButton *)sender {
     btnTag=[sender Tag];
     UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -368,7 +331,6 @@
     messageView.otherUserId=[[contactArray objectAtIndex:btnTag]otherUserId];
     [self.navigationController pushViewController:messageView animated:YES];
 }
-
 - (IBAction)approveButtonAction:(MyButton *)sender {
     btnTag=[sender Tag];
     otherUserId=[[latestMatchesArray objectAtIndex:btnTag]otherUserId];
@@ -376,7 +338,6 @@
     [myDelegate showIndicator];
     [self performSelector:@selector(acceptDeclineRequest) withObject:nil afterDelay:.1];
 }
-
 - (IBAction)cancelRequestButtonAction:(MyButton *)sender {
     btnTag=[sender Tag];
     otherUserId=[[latestMatchesArray objectAtIndex:btnTag]otherUserId];
@@ -384,8 +345,6 @@
     [myDelegate showIndicator];
     [self performSelector:@selector(acceptDeclineRequest) withObject:nil afterDelay:.1];
 }
-
-
 - (IBAction)sendRequestButtonAction:(MyButton *)sender {
     btnTag=[sender Tag];
     otherUserId=[[latestMatchesArray objectAtIndex:btnTag]otherUserId];
@@ -393,6 +352,5 @@
     [myDelegate showIndicator];
     [self performSelector:@selector(sendCancelMatchRequest) withObject:nil afterDelay:.1];
 }
-
 #pragma mark - end
 @end

@@ -52,7 +52,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-
     if (![screenName isEqualToString:@"Calendar"]) {
         contactButton.hidden=YES;
         dropDownImage.hidden=YES;
@@ -69,18 +68,15 @@
     [self setKeyboardControls:[[BSKeyboardControls alloc] initWithFields:textFieldArray]];
     [self.keyboardControls setDelegate:self];
     [self addBorderCornerRadius];
-    if([[UIScreen mainScreen] bounds].size.height>=568)  {
+    if([[UIScreen mainScreen] bounds].size.height>=568) {
         scheduleMeetingScrollView.scrollEnabled=NO;
     }
-    
 }
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-- (void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
     pickerView.translatesAutoresizingMaskIntoConstraints=YES;
     pickerToolbar.translatesAutoresizingMaskIntoConstraints=YES;
@@ -100,12 +96,12 @@
 }
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:YES];
-   [self.presentingViewController dismissViewControllerAnimated:NO completion:nil];
+    [self.presentingViewController dismissViewControllerAnimated:NO completion:nil];
 }
 #pragma mark - end
 
 #pragma mark - IBActions
-- (IBAction)saveButtonAction:(id)sender{
+- (IBAction)saveButtonAction:(id)sender {
     [scheduleMeetingScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
     [keyboardControls.activeField resignFirstResponder];
     [self hidePickerWithAnimation];
@@ -114,9 +110,9 @@
         [self performSelector:@selector(scheduleMeeting) withObject:nil afterDelay:.1];
     }
 }
-- (IBAction)cancelButtonAction:(id)sender{
+- (IBAction)cancelButtonAction:(id)sender {
     [keyboardControls.activeField resignFirstResponder];
-     [self hidePickerWithAnimation];
+    [self hidePickerWithAnimation];
     [scheduleMeetingScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
     [self.presentingViewController dismissViewControllerAnimated:NO completion:nil];
 }
@@ -127,16 +123,16 @@
         [alert showWarning:self title:@"Alert" subTitle:@"You don’t have any contact yet." closeButtonTitle:@"Done" duration:0.0f];
     }
     else {
-    [keyboardControls.activeField resignFirstResponder];
-    [self hidePickerWithAnimation];
-    selectedPicker=0;
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.3];
-    [pickerView setNeedsLayout];
-    [pickerView reloadAllComponents];
-    pickerView.frame = CGRectMake(pickerView.frame.origin.x, self.view.frame.size.height-(pickerView.frame.size.height+44), self.view.frame.size.width, pickerView.frame.size.height);
-    pickerToolbar.frame = CGRectMake(pickerToolbar.frame.origin.x, pickerView.frame.origin.y-44, self.view.frame.size.width, 44);
-    [UIView commitAnimations];
+        [keyboardControls.activeField resignFirstResponder];
+        [self hidePickerWithAnimation];
+        selectedPicker=0;
+        [UIView beginAnimations:nil context:NULL];
+        [UIView setAnimationDuration:0.3];
+        [pickerView setNeedsLayout];
+        [pickerView reloadAllComponents];
+        pickerView.frame = CGRectMake(pickerView.frame.origin.x, self.view.frame.size.height-(pickerView.frame.size.height+44), self.view.frame.size.width, pickerView.frame.size.height);
+        pickerToolbar.frame = CGRectMake(pickerToolbar.frame.origin.x, pickerView.frame.origin.y-44, self.view.frame.size.width, 44);
+        [UIView commitAnimations];
     }
 }
 //Load date picker
@@ -163,19 +159,18 @@
     }
     datePicker.maximumDate=[UserDefaultManager getValue:@"conferenceEndDate"];
     if([[UIScreen mainScreen] bounds].size.height<568){
-         [scheduleMeetingScrollView setContentOffset:CGPointMake(0, scheduleMeetingScrollView.frame.origin.y+50) animated:YES];
+        [scheduleMeetingScrollView setContentOffset:CGPointMake(0, scheduleMeetingScrollView.frame.origin.y+50) animated:YES];
     }
-     datePicker.frame = CGRectMake(datePicker.frame.origin.x, self.view.frame.size.height-(datePicker.frame.size.height+44), self.view.frame.size.width, datePicker.frame.size.height);
+    datePicker.frame = CGRectMake(datePicker.frame.origin.x, self.view.frame.size.height-(datePicker.frame.size.height+44), self.view.frame.size.width, datePicker.frame.size.height);
     pickerToolbar.frame = CGRectMake(pickerToolbar.frame.origin.x, datePicker.frame.origin.y-44, self.view.frame.size.width, 44);
     [UIView commitAnimations];
 }
 //Load time picker
-- (IBAction)timePickerButtonAction:(id)sender{
+- (IBAction)timePickerButtonAction:(id)sender {
     if ([sender tag]==20) {
         timeRange=1;
     }
-    else
-    {
+    else {
         timeRange=21;
     }
     [keyboardControls.activeField resignFirstResponder];
@@ -185,17 +180,14 @@
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];
     timePicker.datePickerMode = UIDatePickerModeTime;
-    if([[UIScreen mainScreen] bounds].size.height<568){
+    if([[UIScreen mainScreen] bounds].size.height<568) {
         [scheduleMeetingScrollView setContentOffset:CGPointMake(0, scheduleMeetingScrollView.frame.origin.y+80) animated:YES];
     }
-    else  if([[UIScreen mainScreen] bounds].size.height==568){
+    else  if([[UIScreen mainScreen] bounds].size.height==568) {
         [scheduleMeetingScrollView setContentOffset:CGPointMake(0, scheduleMeetingScrollView.frame.origin.y+30) animated:YES];
     }
-     timePicker.frame = CGRectMake(timePicker.frame.origin.x, self.view.frame.size.height-(timePicker.frame.size.height+44), self.view.frame.size.width, timePicker.frame.size.height);
+    timePicker.frame = CGRectMake(timePicker.frame.origin.x, self.view.frame.size.height-(timePicker.frame.size.height+44), self.view.frame.size.width, timePicker.frame.size.height);
     pickerToolbar.frame = CGRectMake(pickerToolbar.frame.origin.x, timePicker.frame.origin.y-44, self.view.frame.size.width, 44);
-    //24 hour format
-//    NSLocale *locale = [[NSLocale alloc] initWithLocaleIdentifier:@"NL"];
-//    [datePicker setLocale:locale];
     [UIView commitAnimations];
 }
 #pragma mark - end
@@ -208,9 +200,9 @@
             contactNameTextField.text=@"";
         }
         else {
-         NSInteger index = [pickerView selectedRowInComponent:0];
-        contactNameTextField.text=[[contactDetailArray objectAtIndex:index]contactName];
-        contactUserID=[[contactDetailArray objectAtIndex:index]contactUserId];
+            NSInteger index = [pickerView selectedRowInComponent:0];
+            contactNameTextField.text=[[contactDetailArray objectAtIndex:index]contactName];
+            contactUserID=[[contactDetailArray objectAtIndex:index]contactUserId];
         }
     }
     else {
@@ -218,10 +210,10 @@
             NSDateFormatter * timePickerValue = [[NSDateFormatter alloc] init];
             [timePickerValue setDateFormat:@"HH:mm"]; // from here u can change format..
             if (timeRange==1) {
-              fromTimeTextField.text=[timePickerValue stringFromDate:timePicker.date];
+                fromTimeTextField.text=[timePickerValue stringFromDate:timePicker.date];
             }
             else {
-            toTimeTextField.text=[timePickerValue stringFromDate:timePicker.date];
+                toTimeTextField.text=[timePickerValue stringFromDate:timePicker.date];
             }
             
         }
@@ -236,7 +228,8 @@
     [scheduleMeetingScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
     [UIView commitAnimations];
 }
-- (IBAction)toolbarCancelAction:(id)sender{
+//Cancel toolbar action
+- (IBAction)toolbarCancelAction:(id)sender {
     [self hidePickerWithAnimation];
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];
@@ -244,29 +237,29 @@
     [UIView commitAnimations];
 }
 //Hide picker
-- (void)hidePickerWithAnimation{
+- (void)hidePickerWithAnimation {
     if (selectedPicker==1) {
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.3];
         [scheduleMeetingScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
         pickerToolbar.frame = CGRectMake(pickerToolbar.frame.origin.x, 1000, self.view.frame.size.width, 44);
         datePicker.frame = CGRectMake(datePicker.frame.origin.x, 1000, self.view.frame.size.width, datePicker.frame.size.height);
-         timePicker.frame = CGRectMake(timePicker.frame.origin.x, 1000, self.view.frame.size.width, timePicker.frame.size.height);
+        timePicker.frame = CGRectMake(timePicker.frame.origin.x, 1000, self.view.frame.size.width, timePicker.frame.size.height);
         [UIView commitAnimations];
     }
     else {
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.3];
-       [scheduleMeetingScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+        [scheduleMeetingScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
         pickerView.frame = CGRectMake(pickerView.frame.origin.x, 1000, self.view.frame.size.width, pickerView.frame.size.height);
         pickerToolbar.frame = CGRectMake(pickerToolbar.frame.origin.x, 1000, self.view.frame.size.width, 44);
         [UIView commitAnimations];
     }
 }
-
 #pragma mark - end
+
 #pragma mark - Picker view delegate methods
-- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view{
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
     UILabel* pickerLabel = (UILabel*)view;
     if (!pickerLabel) {
         pickerLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0,600,20)];
@@ -276,26 +269,26 @@
     pickerLabel.text=[[contactDetailArray objectAtIndex:row]contactName];
     return pickerLabel;
 }
--(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
+-(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
     return 1;
 }
--(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component{
+-(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
     return contactDetailArray.count;
 }
--(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
+-(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     NSString *str=@"";
     if (contactDetailArray.count>1) {
         str=[[contactDetailArray objectAtIndex:row]contactName];
     }
     return str;
 }
-- (void)pickerView:(UIPickerView *)pickerView1 didSelectRow:(NSInteger)row inComponent:(NSInteger)component{
+- (void)pickerView:(UIPickerView *)pickerView1 didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     if(pickerView1 == pickerView) {
         if (contactDetailArray.count==0) {
             contactNameTextField.text=@"";
         }
         else {
-        contactNameTextField.text = [[contactDetailArray objectAtIndex:row]contactName];
+            contactNameTextField.text = [[contactDetailArray objectAtIndex:row]contactName];
         }
     }
 }
@@ -303,19 +296,18 @@
 
 #pragma mark - Keyboard controls delegate
 
-- (void)keyboardControls:(BSKeyboardControls *)keyboardControls selectedField:(UIView *)field inDirection:(BSKeyboardControlsDirection)direction{
+- (void)keyboardControls:(BSKeyboardControls *)keyboardControls selectedField:(UIView *)field inDirection:(BSKeyboardControlsDirection)direction {
     UIView *view;
     view = field.superview.superview.superview;
 }
-- (void)keyboardControlsDonePressed:(BSKeyboardControls *)keyboard{
+- (void)keyboardControlsDonePressed:(BSKeyboardControls *)keyboard {
     [keyboard.activeField resignFirstResponder];
     [scheduleMeetingScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
 }
-
 #pragma mark - end
 
 #pragma mark - Textfield delegates
-- (void)textFieldDidBeginEditing:(UITextField *)textField{
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
     [self hidePickerWithAnimation];
     [self.keyboardControls setActiveField:textField];
     if([[UIScreen mainScreen] bounds].size.height<568) {
@@ -324,10 +316,9 @@
                 [scheduleMeetingScrollView setContentOffset:CGPointMake(0, scheduleMeetingScrollView.frame.origin.y+30) animated:YES];
             }];
         }
-        
     }
 }
-- (void)textFieldDidEndEditing:(UITextField *)textField{
+- (void)textFieldDidEndEditing:(UITextField *)textField {
     if([[UIScreen mainScreen] bounds].size.height<568) {
         if (textField==venueTextField) {
             [UIView animateWithDuration:0.3 animations:^{
@@ -337,7 +328,7 @@
     }
     [textField resignFirstResponder];
 }
-- (BOOL)textFieldShouldReturn:(UITextField *)textField{
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     [scheduleMeetingScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
     return YES;
@@ -345,7 +336,7 @@
 #pragma mark - end
 
 #pragma mark - Textview delegates
-- (void)textViewDidBeginEditing:(UITextView *)textView{
+- (void)textViewDidBeginEditing:(UITextView *)textView {
     [self hidePickerWithAnimation];
     [self.keyboardControls setActiveField:textView];
     if (textView==meetingAgendaTextField) {
@@ -361,14 +352,12 @@
         }
     }
 }
-- (void)textViewDidEndEditing:(UITextView *)textView{
-     [scheduleMeetingScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+- (void)textViewDidEndEditing:(UITextView *)textView {
+    [scheduleMeetingScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
 }
-
 #pragma mark - end
 
 #pragma mark - Webservice
-
 -(BOOL)performValidations {
     if ([contactNameTextField isEmpty] || [venueTextField isEmpty] || [dateTextField isEmpty] || [fromTimeTextField isEmpty] || [toTimeTextField isEmpty] || [meetingAgendaTextField.text isEqualToString:@""]) {
         SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
@@ -376,57 +365,41 @@
         return NO;
     }
     else {
-            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-            [formatter setDateFormat:@"HH:mm"];
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"HH:mm"];
         
-            NSDate *date1= [formatter dateFromString:fromTimeTextField.text];
-            NSDate *date2 = [formatter dateFromString:toTimeTextField.text];
+        NSDate *date1= [formatter dateFromString:fromTimeTextField.text];
+        NSDate *date2 = [formatter dateFromString:toTimeTextField.text];
         
-            NSComparisonResult result = [date1 compare:date2];
-            if(result == NSOrderedDescending)
-            {
-                NSLog(@"date1 is later than date2");
-                SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
-                [alert showWarning:self title:@"Alert" subTitle:@"Please enter valid time" closeButtonTitle:@"Done" duration:0.0f];
-                return NO;
-            }
-            else if(result == NSOrderedAscending)
-            {
-                NSLog(@"date2 is later than date1");
-                return YES;
-            }
-            else
-            {
-                NSLog(@"date1 is equal to date2");
-                SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
-                [alert showWarning:self title:@"Alert" subTitle:@"Please enter valid time" closeButtonTitle:@"Done" duration:0.0f];
-                return NO;
-            }
+        NSComparisonResult result = [date1 compare:date2];
+        if(result == NSOrderedDescending) {
+            NSLog(@"date1 is later than date2");
+            SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
+            [alert showWarning:self title:@"Alert" subTitle:@"Please enter valid time" closeButtonTitle:@"Done" duration:0.0f];
+            return NO;
+        }
+        else if(result == NSOrderedAscending) {
+            NSLog(@"date2 is later than date1");
+            return YES;
+        }
+        else {
+            NSLog(@"date1 is equal to date2");
+            SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
+            [alert showWarning:self title:@"Alert" subTitle:@"Please enter valid time" closeButtonTitle:@"Done" duration:0.0f];
+            return NO;
+        }
     }
-    
 }
 - (void)scheduleMeeting {
     
     [[ConferenceService sharedManager] scheduleMeeting:contactUserID venue:venueTextField.text meetingAgenda:meetingAgendaTextField.text date:dateTextField.text timeFrom:fromTimeTextField.text timeTo:toTimeTextField.text success:^(id responseObject) {
         [myDelegate stopIndicator];
         [self.presentingViewController dismissViewControllerAnimated:NO completion:nil];
-//        if (![screenName isEqualToString:@"Calendar"]) {
-//            [self.presentingViewController dismissViewControllerAnimated:NO completion:nil];
-//        }
-//        else {
-//            [self dismissViewControllerAnimated: YES completion: ^{
-//                
-//                // call your completion method:
-//                [calenderObj viewWillAppear:YES];
-//            }];
-//        }
-
     }
-                                                 failure:^(NSError *error)
+                                               failure:^(NSError *error)
      {
          
      }] ;
-
 }
 #pragma mark - end
 @end

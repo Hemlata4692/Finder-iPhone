@@ -39,8 +39,7 @@
 @synthesize changePwdContainerView,changePasswordView,oldPasswordTextField,confirmPasswordTextField,passwordTextField,keyboardControls;
 
 #pragma mark - View life cycle
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title=@"More";
     myDelegate.currentNavigationController=self.navigationController;
@@ -51,7 +50,6 @@
     moreOptionsArray = [NSMutableArray arrayWithObjects:@"My Profile",@"Pending Appointments",@"Requested Appointments",@"Requested Matches",@"Conference",@"Settings",@"Change Password",@"Switch Conference",@"Logout", nil];
     moreImagesArray= [NSMutableArray arrayWithObjects:@"my_profile.png",@"pending_appointment.png",@"requested_appointment.png",@"request_match",@"conference_icon.png",@"setting.png",@"change_password.png",@"switch_conference.png",@"logout.png", nil];
 }
-
 - (void)didReceiveMemoryWarningn {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -72,7 +70,6 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 60;
 }
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *simpleTableIdentifier = @"moreCell";
     MoreTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
@@ -91,8 +88,7 @@
     }
     return cell;
 }
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     //MyProfileViewController
     if (indexPath.row==0) {
         UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -143,13 +139,11 @@
     else if (indexPath.row == 8) {
         [myDelegate showIndicator];
         [self performSelector:@selector(logout) withObject:nil afterDelay:.1];
-        //  [UserDefaultManager removeValue:@"switchStatusDict"];
     }
 }
-
 #pragma mark - end
-#pragma mark - Keyboard controls delegate
 
+#pragma mark - Keyboard controls delegate
 - (void)keyboardControls:(BSKeyboardControls *)keyboardControls selectedField:(UIView *)field inDirection:(BSKeyboardControlsDirection)direction {
     UIView *view;
     view = field.superview.superview.superview;
@@ -157,19 +151,16 @@
 - (void)keyboardControlsDonePressed:(BSKeyboardControls *)keyboard {
     [keyboard.activeField resignFirstResponder];
 }
-
 #pragma mark - end
-#pragma mark - Textfield delegates
 
+#pragma mark - Textfield delegates
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
     [self.keyboardControls setActiveField:textField];
-    
     if([[UIScreen mainScreen] bounds].size.height<568) {
         if (textField==oldPasswordTextField) {
             [UIView animateWithDuration:0.3 animations:^{
                 changePasswordView.frame=CGRectMake(changePasswordView.frame.origin.x, changePasswordView.frame.origin.y-10, changePasswordView.frame.size.width, changePasswordView.frame.size.height);
             }];
-            
         }
         if (textField==passwordTextField) {
             [UIView animateWithDuration:0.3 animations:^{
@@ -223,8 +214,8 @@
     }
 }
 #pragma mark - end
-#pragma mark - IBActions
 
+#pragma mark - IBActions
 - (IBAction)saveButtonAction:(id)sender {
     [keyboardControls.activeField resignFirstResponder];
     if([self performValidationsForChangePassword]) {
@@ -249,13 +240,10 @@
              changePwdContainerView.hidden = YES;
          }];
         [alert showSuccess:nil title:@"Success" subTitle:@"Your password has been changed successfully." closeButtonTitle:nil duration:0.0f];
-        
     } failure:^(NSError *error)
      {
-         
      }] ;
 }
-
 - (void)logout {
     [[UserService sharedManager] logoutUser:^(id responseObject)
      {

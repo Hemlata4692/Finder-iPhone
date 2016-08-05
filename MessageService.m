@@ -17,8 +17,7 @@
 @implementation MessageService
 
 #pragma mark - Singleton instance
-+ (id)sharedManager
-{
++ (id)sharedManager {
     static MessageService *sharedMyManager = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
@@ -26,11 +25,8 @@
     });
     return sharedMyManager;
 }
-
-- (id)init
-{
-    if (self = [super init])
-    {
+- (id)init {
+    if (self = [super init]) {
     }
     return self;
 }
@@ -46,8 +42,7 @@
         NSNumber *number = responseObject[@"isSuccess"];
         if (number.integerValue==1) {
             success(responseObject);
-            }
-        
+        }
         else if(number.integerValue==0) {
             [myDelegate stopIndicator];
             success(nil);
@@ -65,7 +60,7 @@
          [myDelegate stopIndicator];
          failure(error);
      }];
-
+    
 }
 #pragma mark - end
 #pragma mark - Send message
@@ -91,13 +86,12 @@
                     messageDetails.messageCount =[messageDict objectForKey:@"messageCount"];
                     messageDetails.otherUserId =[messageDict objectForKey:@"otherUserId"];
                     messageDetails.userName =[messageDict objectForKey:@"userName"];
-
                     messageDetails.userProfileImage =[messageDict objectForKey:@"userProfileImage"];
                     messageDetails.lastMessage =[messageDict objectForKey:@"lastMessage"];
                     [dataArray addObject:messageDetails];
                 }
                 success(dataArray);
-        }
+            }
         }
         else if(number.integerValue==0) {
             [myDelegate stopIndicator];
@@ -111,12 +105,10 @@
             [alert showWarning:nil title:@"Alert" subTitle:responseObject[@"message"] closeButtonTitle:nil duration:0.0f];
         }
         
-    } failure:^(NSError *error)
-     {
-         [myDelegate stopIndicator];
-         failure(error);
-     }];
-    
+    } failure:^(NSError *error) {
+        [myDelegate stopIndicator];
+        failure(error);
+    }];
 }
 #pragma mark - end
 
@@ -151,10 +143,9 @@
                         [messageDetails.messagesHistoryArray addObject:messageHistory];
                     }
                     [dataArray addObject:messageDetails];
-                   
                 }
-                 [dataArray addObject:[responseObject objectForKey:@"totalCount"]];
-                 success(dataArray);
+                [dataArray addObject:[responseObject objectForKey:@"totalCount"]];
+                success(dataArray);
             }
         }
         else if(number.integerValue==0) {
@@ -168,13 +159,11 @@
             }];
             [alert showWarning:nil title:@"Alert" subTitle:responseObject[@"message"] closeButtonTitle:nil duration:0.0f];
         }
-        
     } failure:^(NSError *error)
      {
          [myDelegate stopIndicator];
          failure(error);
      }];
-
 }
 #pragma mark - end
 

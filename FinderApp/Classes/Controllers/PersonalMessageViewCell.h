@@ -21,8 +21,6 @@
 //otherCell
 @property (weak, nonatomic) IBOutlet UIView *otherUserMessageConatinerView;
 @property (weak, nonatomic) IBOutlet UILabel *otherUserMessageLabel;
-
-@property (weak, nonatomic) IBOutlet MyButton *retryOtherButton;
 @property (weak, nonatomic) IBOutlet UIImageView *outgoingBubbleImage;
 - (void)displayOtherUserMessage:(MessageHistoryDataModel *)messageHistoryData indexPath:(int)indexPath rectSize:(CGSize)rectSize;
 @end

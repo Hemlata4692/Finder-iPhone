@@ -32,13 +32,10 @@
     // Do any additional setup after loading the view.
     settingsSection1Array = [NSMutableArray arrayWithObjects:@"Pre-Conference Match",@"Proximity Alert", nil];
     settingsSection2Array = [NSMutableArray arrayWithObjects:@"New Request",@"New Message",@"Request Accepted",@"Proximity Matches",@"Conference Updates", nil];
-
     setSwitchStatus=[[NSMutableArray alloc]init];
-    
     [myDelegate showIndicator];
     [self performSelector:@selector(getUserSettings) withObject:nil afterDelay:.1];
 }
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -58,10 +55,8 @@
     else {
         return 40;
     }
-    
 }
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     if (section==0) {
         return 0;
     }
@@ -83,7 +78,6 @@
     [headerView addSubview:notificationLabel];
     return headerView;
 }
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section==0) {
         return 3;
@@ -92,8 +86,7 @@
         return settingsSection2Array.count;
     }
 }
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section==0) {
         if (indexPath.row==2) {
             return 125;
@@ -106,9 +99,7 @@
         return 60;
     }
 }
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section==0 && indexPath.row==2) {
         NSString *simpleTableIdentifier = @"proximityCell";
         SettingsViewCell *proximityCell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
@@ -118,15 +109,6 @@
         [proximityCell.proximityRadiusView addShadow:proximityCell.proximityRadiusView color:[UIColor lightGrayColor]];
         proximityCell.sliderView.minimumValue=25;
         proximityCell.sliderView.maximumValue=200;
-        //        UIImage *thumbImage = [UIImage imageNamed:@"knob.png"];
-        //        UIImage *sliderMinTrackImage = [UIImage imageNamed: @"range_slider.png"];
-        //        UIImage *sliderMaxTrackImage = [UIImage imageNamed: @"range_slider.png"];
-        //        sliderMinTrackImage = [sliderMinTrackImage resizableImageWithCapInsets:UIEdgeInsetsMake(0, 17, 0, 0)];
-        //        sliderMaxTrackImage = [sliderMaxTrackImage resizableImageWithCapInsets:UIEdgeInsetsMake(0, 0, 0, 17)];
-        //        [proximityCell.sliderView setThumbImage:thumbImage forState:UIControlStateNormal];
-        //        [proximityCell.sliderView setMinimumTrackImage:sliderMinTrackImage forState:UIControlStateNormal];
-        //        [proximityCell.sliderView setMaximumTrackImage:sliderMaxTrackImage forState:UIControlStateNormal];
-        //
         [NSString stringWithFormat:@"%2d,M",[[[UserDefaultManager getValue:@"switchStatusDict"] objectForKey:@"02"] intValue]];
         [proximityCell.sliderView setValue:[[[UserDefaultManager getValue:@"switchStatusDict"] objectForKey:@"02"] intValue]];
         [proximityCell.sliderView setMaxFractionDigitsDisplayed:0];
@@ -153,7 +135,7 @@
         }
         settingsCell.switchBtn.Tag=(int)indexPath.row;
         settingsCell.switchBtn.sectionTag=(int)indexPath.section;
-
+        
         if ([[[UserDefaultManager getValue:@"switchStatusDict"] objectForKey:[NSString stringWithFormat:@"%d%d", settingsCell.switchBtn.sectionTag,settingsCell.switchBtn.Tag]] isEqualToString: @"false"]) {
             settingsCell.switchBtn.on=0;
             [settingsCell.switchBtn setBackgroundImage:[UIImage imageNamed:@"off.png"] forState:UIControlStateNormal];
@@ -166,12 +148,6 @@
         return settingsCell;
     }
 }
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    //    if (indexPath.row == 4)
-    //    {
-    //        changePwdContainerView.hidden = NO;
-    //    }
-}
 #pragma mark - end
 
 #pragma mark - IBActions
@@ -181,24 +157,20 @@
     NSMutableDictionary *tempDict=[[UserDefaultManager getValue:@"switchStatusDict"] mutableCopy];
     [tempDict setObject:[NSString stringWithFormat:@"%.2f", slider.value] forKey:@"02"];
     [UserDefaultManager setValue:tempDict key:@"switchStatusDict"];
-    
 }
 //switch value
 - (IBAction)switchViewChanged:(MyButton *)switchView {
     if (switchView.sectionTag==0) {
-        
         if ( switchView.Tag==0) {
             NSLog(@"Value 0: %i", switchView.on);
-            if (switchView.on==1)
-            {
+            if (switchView.on==1) {
                 switchView.on=0;
                 switchStatus=@"False";
                 switchIdentifire=@"preConferenceMatch";
                 [switchView setBackgroundImage:[UIImage imageNamed:@"off.png"] forState:UIControlStateNormal];
                 [self changeSettings:[NSString stringWithFormat:@"%d%d", switchView.sectionTag,switchView.Tag]];
             }
-            else
-            {
+            else {
                 switchView.on=1;
                 switchStatus=@"True";
                 switchIdentifire=@"preConferenceMatch";
@@ -206,8 +178,7 @@
                 [self changeSettings:[NSString stringWithFormat:@"%d%d", switchView.sectionTag,switchView.Tag]];
             }
         }
-        else if (switchView.Tag==1)
-        {
+        else if (switchView.Tag==1) {
             NSLog(@"Value 1: %i", switchView.on);
             if (switchView.on==1) {
                 switchView.on=0;
@@ -216,8 +187,7 @@
                 [switchView setBackgroundImage:[UIImage imageNamed:@"off.png"] forState:UIControlStateNormal];
                 [self changeSettings:[NSString stringWithFormat:@"%d%d", switchView.sectionTag,switchView.Tag]];
             }
-            else
-            {
+            else {
                 switchView.on=1;
                 switchStatus=@"True";
                 switchIdentifire=@"proximityAlert";
@@ -226,10 +196,8 @@
             }
         }
     }
-    else
-    {
-        if (switchView.Tag==0)
-        {
+    else {
+        if (switchView.Tag==0) {
             NSLog(@"Value 1: %i", switchView.on);
             if (switchView.on==1) {
                 switchView.on=0;
@@ -238,8 +206,7 @@
                 [switchView setBackgroundImage:[UIImage imageNamed:@"off.png"] forState:UIControlStateNormal];
                 [self changeSettings:[NSString stringWithFormat:@"%d%d", switchView.sectionTag,switchView.Tag]];
             }
-            else
-            {
+            else {
                 switchView.on=1;
                 switchStatus=@"True";
                 switchIdentifire=@"newRequest";
@@ -247,8 +214,7 @@
                 [self changeSettings:[NSString stringWithFormat:@"%d%d", switchView.sectionTag,switchView.Tag]];
             }
         }
-        if (switchView.Tag==1)
-        {
+        if (switchView.Tag==1) {
             NSLog(@"Value 1: %i", switchView.on);
             if (switchView.on==1) {
                 switchView.on=0;
@@ -257,8 +223,7 @@
                 [switchView setBackgroundImage:[UIImage imageNamed:@"off.png"] forState:UIControlStateNormal];
                 [self changeSettings:[NSString stringWithFormat:@"%d%d", switchView.sectionTag,switchView.Tag]];
             }
-            else
-            {
+            else {
                 switchView.on=1;
                 switchStatus=@"True";
                 switchIdentifire=@"newMessage";
@@ -266,19 +231,16 @@
                 [self changeSettings:[NSString stringWithFormat:@"%d%d", switchView.sectionTag,switchView.Tag]];
             }
         }
-        if (switchView.Tag==2)
-        {
+        if (switchView.Tag==2) {
             NSLog(@"Value 1: %i", switchView.on);
-            if (switchView.on==1)
-            {
+            if (switchView.on==1) {
                 switchView.on=0;
                 switchStatus=@"False";
                 switchIdentifire=@"requestAccept";
                 [switchView setBackgroundImage:[UIImage imageNamed:@"off.png"] forState:UIControlStateNormal];
                 [self changeSettings:[NSString stringWithFormat:@"%d%d", switchView.sectionTag,switchView.Tag]];
             }
-            else
-            {
+            else {
                 switchView.on=1;
                 switchStatus=@"True";
                 switchIdentifire=@"requestAccept";
@@ -286,19 +248,16 @@
                 [self changeSettings:[NSString stringWithFormat:@"%d%d", switchView.sectionTag,switchView.Tag]];
             }
         }
-        if (switchView.Tag==3)
-        {
+        if (switchView.Tag==3) {
             NSLog(@"Value 1: %i", switchView.on);
-            if (switchView.on==1)
-            {
+            if (switchView.on==1) {
                 switchView.on=0;
                 switchStatus=@"False";
                 switchIdentifire=@"proximityMatches";
                 [switchView setBackgroundImage:[UIImage imageNamed:@"off.png"] forState:UIControlStateNormal];
                 [self changeSettings:[NSString stringWithFormat:@"%d%d", switchView.sectionTag,switchView.Tag]];
             }
-            else
-            {
+            else {
                 switchView.on=1;
                 switchStatus=@"True";
                 switchIdentifire=@"proximityMatches";
@@ -306,19 +265,16 @@
                 [self changeSettings:[NSString stringWithFormat:@"%d%d", switchView.sectionTag,switchView.Tag]];
             }
         }
-        if (switchView.Tag==4)
-        {
+        if (switchView.Tag==4) {
             NSLog(@"Value 1: %i", switchView.on);
-            if (switchView.on==1)
-            {
+            if (switchView.on==1) {
                 switchView.on=0;
                 switchStatus=@"False";
                 switchIdentifire=@"conferenceUpdates";
                 [switchView setBackgroundImage:[UIImage imageNamed:@"off.png"] forState:UIControlStateNormal];
                 [self changeSettings:[NSString stringWithFormat:@"%d%d", switchView.sectionTag,switchView.Tag]];
             }
-            else
-            {
+            else {
                 switchView.on=1;
                 switchStatus=@"True";
                 switchIdentifire=@"conferenceUpdates";
@@ -326,11 +282,8 @@
                 [self changeSettings:[NSString stringWithFormat:@"%d%d", switchView.sectionTag,switchView.Tag]];
             }
         }
-
-        
     }
 }
-
 #pragma mark - end
 
 #pragma mark - Webservice
@@ -345,7 +298,6 @@
     }
                                               failure:^(NSError *error)
      {
-         
      }] ;
 }
 - (void)getUserSettings {
@@ -381,7 +333,6 @@
     }
                                               failure:^(NSError *error)
      {
-         
      }] ;
 }
 #pragma mark - end

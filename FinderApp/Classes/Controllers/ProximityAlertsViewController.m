@@ -35,28 +35,23 @@
     // Do any additional setup after loading the view.
     self.navigationItem.title=@"Proximity Alerts";
     myDelegate.currentNavigationController=self.navigationController;
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(proximityAlerts) name:@"ProximityAlerts" object:nil];
 }
-- (void)proximityAlerts{
+- (void)proximityAlerts {
     [myDelegate removeBadgeIconLastTab];
     [myDelegate showIndicator];
     [self performSelector:@selector(getProximityAlerts) withObject:nil afterDelay:0.1];
 }
-- (void)viewWillAppear:(BOOL)animated{
-    
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
     myDelegate.myView=@"ProximityAlertsViewController";
     [myDelegate showIndicator];
     [self performSelector:@selector(getProximityAlerts) withObject:nil afterDelay:.1];
-    
 }
-- (void)viewWillDisappear:(BOOL)animated
-{
+- (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:YES];
     myDelegate.myView=@"other";
 }
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -68,8 +63,7 @@
     // Return the number of sections.
     return 2;
 }
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section==0) {
         return 1;
     }
@@ -77,8 +71,7 @@
         return proximityDataArray.count;
     }
 }
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section==0) {
         return 125;
     }
@@ -86,13 +79,11 @@
         return 70;
     }
 }
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section==0) {
         NSString *simpleTableIdentifier = @"proximityRadiusCell";
         ProximityAlertViewCell *proximityCell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
-        if (proximityCell == nil)  {
+        if (proximityCell == nil) {
             proximityCell = [[ProximityAlertViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
         }
         [proximityCell.delegateRangeView addShadow:proximityCell.delegateRangeView color:[UIColor lightGrayColor]];
@@ -111,25 +102,18 @@
     else {
         NSString *simpleTableIdentifier = @"proximityListCell";
         ProximityAlertViewCell *listCell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
-        if (listCell == nil)
-        {
+        if (listCell == nil) {
             listCell = [[ProximityAlertViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
         }
         [listCell.proximityListContainerView addShadow:listCell.proximityListContainerView color:[UIColor lightGrayColor]];
         [listCell.scheduleMeetingBtn addTarget:self action:@selector(scheduleMeeting:) forControlEvents:UIControlEventTouchUpInside];
-          [listCell.sendMessageBtn addTarget:self action:@selector(sendMessage:) forControlEvents:UIControlEventTouchUpInside];
+        [listCell.sendMessageBtn addTarget:self action:@selector(sendMessage:) forControlEvents:UIControlEventTouchUpInside];
         listCell.scheduleMeetingBtn.Tag=(int)indexPath.row;
         listCell.sendMessageBtn.Tag=(int)indexPath.row;
         ContactDataModel *data=[proximityDataArray objectAtIndex:indexPath.row];
         [listCell displayData:data indexPath:(int)indexPath.row];
         return listCell;
     }
-}
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    //    if (indexPath.row == 4)
-    //    {
-    //        changePwdContainerView.hidden = NO;
-    //    }
 }
 #pragma mark - end
 
@@ -141,7 +125,6 @@
     [tempDict setObject:[NSString stringWithFormat:@"%.2f", slider.value] forKey:@"02"];
     [UserDefaultManager setValue:tempDict key:@"switchStatusDict"];
 }
-
 - (IBAction)scheduleMeeting:(MyButton *)sender {
     btnTag=[sender Tag];
     UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -151,11 +134,8 @@
     scheduleMeeting.contactUserID=[[proximityDataArray objectAtIndex:btnTag]contactUserId];
     scheduleMeeting.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.1f];
     [scheduleMeeting setModalPresentationStyle:UIModalPresentationOverCurrentContext];
-    
     [self presentViewController:scheduleMeeting animated: NO completion:nil];
-    
 }
-
 - (IBAction)sendMessage:(MyButton *)sender {
     btnTag=[sender Tag];
     UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -164,18 +144,18 @@
     messageView.otherUserId=[[proximityDataArray objectAtIndex:btnTag]contactUserId];
     [self.navigationController pushViewController:messageView animated:YES];
 }
-
 - (IBAction)doneButtonAction:(id)sender {
     [myDelegate showIndicator];
     [self performSelector:@selector(getProximityAlerts) withObject:nil afterDelay:.1];
 }
 #pragma mark - end
+
 #pragma mark - Webservice
-- (void)getProximityAlerts{
+- (void)getProximityAlerts {
     
     [[ConferenceService sharedManager] getProximityAlerts:[[UserDefaultManager getValue:@"switchStatusDict"] objectForKey:@"02"]  success:^(id dataArray) {
         [myDelegate stopIndicator];
-         proximityDataArray=[dataArray mutableCopy];
+        proximityDataArray=[dataArray mutableCopy];
         if (proximityDataArray==nil) {
             noResultLabel.hidden=NO;
             noResultLabel.text=@"No result found.";
@@ -188,12 +168,12 @@
             noResultLabel.hidden=YES;
             [proximityAlertTableView reloadData];
         }
-
+        
     }
                                                   failure:^(NSError *error)
      {
-         
      }] ;
 }
+#pragma mark - end
 
 @end
