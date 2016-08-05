@@ -327,6 +327,9 @@
         }
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"2"]) {
             alertType=@"2";
+            if ([[UserDefaultManager getValue:@"PendingMessage"] isEqualToString:@"0"]) {
+                [self addBadgeIconOnMoreTab];
+            }
         }
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"8"]) {
             
