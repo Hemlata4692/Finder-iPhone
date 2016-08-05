@@ -26,6 +26,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *profileBackground;
 @property (weak, nonatomic) IBOutlet UIImageView *otherUserProfileImage;
 @property (weak, nonatomic) IBOutlet UILabel *otherUserNameLabel;
+@property (strong, nonatomic) IBOutlet UILabel *otherUserDesignation;
 @property (weak, nonatomic) IBOutlet UILabel *companyNameLabel;
 @property (weak, nonatomic) IBOutlet UIView *mobileNumberView;
 @property (weak, nonatomic) IBOutlet UILabel *mobileNumberLabel;
@@ -55,6 +56,7 @@
 @synthesize profileBackground;
 @synthesize otherUserProfileImage;
 @synthesize otherUserNameLabel;
+@synthesize otherUserDesignation;
 @synthesize companyNameLabel;
 @synthesize mobileNumberView;
 @synthesize mobileNumberLabel;
@@ -85,20 +87,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-      self.navigationItem.title=@"User Profile";
+    self.navigationItem.title=@"User Profile";
     [self addShadow];
     otherUserProfileDataArray=[[NSMutableArray alloc]init];
     interestsArray=[[NSArray alloc]init];
     [myDelegate showIndicator];
     [self performSelector:@selector(getOtherUserProfile) withObject:nil afterDelay:.1];
 }
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
--(void)addShadow
-{
+- (void)addShadow {
     [otherUserProfileImage setCornerRadius:otherUserProfileImage.frame.size.width/2];
     [otherUserProfileImage setViewBorder:otherUserProfileImage color:[UIColor whiteColor]];
     [mobileNumberView addShadow:mobileNumberView color:[UIColor lightGrayColor]];
@@ -108,9 +108,8 @@
     [professionView addShadow:professionView color:[UIColor lightGrayColor]];
     [interestedInView addShadow:interestedInView color:[UIColor lightGrayColor]];
 }
--(void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
-    
     if ([isRequestArrived isEqualToString:@"T"]) {
         sendRequestButton.hidden=YES;
         acceptRequestButton.hidden=NO;
@@ -133,8 +132,6 @@
         seperatorLabel.hidden=YES;
     }
 }
-
-
 #pragma mark - end
 
 #pragma mark - IBActions
@@ -142,14 +139,12 @@
     [myDelegate showIndicator];
     [self performSelector:@selector(sendCancelMatchesRequest) withObject:nil afterDelay:.1];
 }
-
 - (IBAction)acceptrequestButtonAction:(id)sender {
-
+    
     acceptRequest=@"T";
     [myDelegate showIndicator];
     [self performSelector:@selector(acceptDeclineRequest) withObject:nil afterDelay:.1];
 }
-
 - (IBAction)cancelRequestButtonAction:(id)sender {
     acceptRequest=@"F";
     [myDelegate showIndicator];
@@ -158,8 +153,8 @@
 #pragma mark - end
 
 #pragma mark - Webservice
--(void)getOtherUserProfile {
-
+- (void)getOtherUserProfile {
+    
     [[ProfileService sharedManager] getOtherUserProfile:otherUserId success:^(id profileDataArray) {
         [myDelegate stopIndicator];
         if ([viewType isEqualToString:@"Matches"]) {
@@ -170,66 +165,59 @@
     }
                                                 failure:^(NSError *error)
      {
-         
      }] ;
 }
--(void)updateReviewStatus {
+- (void)updateReviewStatus {
     [[MatchesService sharedManager] updateReviewStatus:otherUserId reviewStatus:@"T" success:^(id responseObject) {
         [myDelegate stopIndicator];
     }
                                                failure:^(NSError *error)
      {
-         
      }] ;
-    
 }
 //send/cancel match request
--(void)sendCancelMatchesRequest {
+- (void)sendCancelMatchesRequest {
     [[MatchesService sharedManager] sendCancelMatchRequest:otherUserId sendRequest:isRequestSent success:^(id responseObject) {
         [myDelegate stopIndicator];
         if ([isRequestSent isEqualToString:@"T"]) {
-             [sendRequestButton setTitle:@"Request Sent" forState:UIControlStateNormal];
-           
+            [sendRequestButton setTitle:@"Request Sent" forState:UIControlStateNormal];
+            
         }
         else{
-             [sendRequestButton setTitle:@"Send Request" forState:UIControlStateNormal];
+            [sendRequestButton setTitle:@"Send Request" forState:UIControlStateNormal];
             isRequestSent=@"T";
         }
     }
                                                    failure:^(NSError *error)
      {
-         
      }] ;
+}
+- (void)acceptDeclineRequest {
     
-}
--(void)acceptDeclineRequest {
-
-        [[MatchesService sharedManager] acceptDeclineRequest:otherUserId acceptRequest:acceptRequest success:^(id responseObject) {
-            [myDelegate stopIndicator];
-            if ([acceptRequest isEqualToString:@"T"]) {
-                UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-                MyProfileViewController *profileView =[storyboard instantiateViewControllerWithIdentifier:@"MyProfileViewController"];
-                profileView.viewName=@"User Profile";
-                profileView.viewType=@"pop";
-                profileView.otherUserID=otherUserId;
-                [self.navigationController pushViewController:profileView animated:NO];
-            }
-            else{
-                acceptRequestButton.hidden=YES;
-                cancelRequestButton.hidden=YES;
-                seperatorLabel.hidden=YES;
-                sendRequestButton.hidden=NO;
-                [sendRequestButton setTitle:@"Send Request" forState:UIControlStateNormal];
-                isRequestSent=@"T";
-            }
+    [[MatchesService sharedManager] acceptDeclineRequest:otherUserId acceptRequest:acceptRequest success:^(id responseObject) {
+        [myDelegate stopIndicator];
+        if ([acceptRequest isEqualToString:@"T"]) {
+            UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            MyProfileViewController *profileView =[storyboard instantiateViewControllerWithIdentifier:@"MyProfileViewController"];
+            profileView.viewName=@"User Profile";
+            profileView.viewType=@"pop";
+            profileView.otherUserID=otherUserId;
+            [self.navigationController pushViewController:profileView animated:NO];
         }
-                                                     failure:^(NSError *error)
-         {
-             
-         }] ;
+        else {
+            acceptRequestButton.hidden=YES;
+            cancelRequestButton.hidden=YES;
+            seperatorLabel.hidden=YES;
+            sendRequestButton.hidden=NO;
+            [sendRequestButton setTitle:@"Send Request" forState:UIControlStateNormal];
+            isRequestSent=@"T";
+        }
+    }
+                                                 failure:^(NSError *error)
+     {
+     }] ;
 }
-
--(void)displayUserProfileData {
+- (void)displayUserProfileData {
     
     companyDescriptionLabel.translatesAutoresizingMaskIntoConstraints = YES;
     aboutCompanyView.translatesAutoresizingMaskIntoConstraints = YES;
@@ -238,7 +226,6 @@
     comapnyAddressLabel.translatesAutoresizingMaskIntoConstraints=YES;
     interestAreaCollectionView.translatesAutoresizingMaskIntoConstraints=YES;
     bottomView.translatesAutoresizingMaskIntoConstraints=YES;
-    
     __weak UIImageView *weakRef = otherUserProfileImage;
     NSURLRequest *imageRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:[[otherUserProfileDataArray objectAtIndex:0]userImage]]
                                                   cachePolicy:NSURLRequestReturnCacheDataElseLoad
@@ -250,11 +237,12 @@
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
         
     }];
+    otherUserNameLabel.text=[[otherUserProfileDataArray objectAtIndex:0]userName];
     if ([[[otherUserProfileDataArray objectAtIndex:0]userDesignation] isEqualToString:@""]) {
-        otherUserNameLabel.text=[NSString stringWithFormat:@"%@ (NA)",[[otherUserProfileDataArray objectAtIndex:0]userName]];
+        otherUserDesignation.text=@"NA";
     }
     else {
-        otherUserNameLabel.text=[NSString stringWithFormat:@"%@ (%@)",[[otherUserProfileDataArray objectAtIndex:0]userName],[[otherUserProfileDataArray objectAtIndex:0]userDesignation]];
+        otherUserDesignation.text=[[otherUserProfileDataArray objectAtIndex:0]userDesignation];
     }
     if ([[[otherUserProfileDataArray objectAtIndex:0]userMobileNumber] isEqualToString:@""]) {
         mobileNumberLabel.text=@"NA";
@@ -275,60 +263,120 @@
     else {
         aboutComapny=[[otherUserProfileDataArray objectAtIndex:0]aboutUserCompany];
     }
-    size = CGSizeMake(mainContainerView.frame.size.width-16,999);
-    textRect=[self setDynamicHeight:size textString:aboutComapny fontSize:[UIFont fontWithName:@"Roboto-Regular" size:14]];
-    companyDescriptionLabel.numberOfLines = 0;
-    aboutCompanyView.frame=CGRectMake(8, aboutCompanyHeading.frame.origin.y+aboutCompanyHeading.frame.size.height+5, mainContainerView.frame.size.width-16, textRect.size.height+10);
-    companyDescriptionLabel.frame = CGRectMake(8, 3, aboutCompanyView.frame.size.width-10, textRect.size.height);
-    companyDescriptionLabel.text=aboutComapny;
-    [companyDescriptionLabel setLabelBorder:companyDescriptionLabel color:[UIColor whiteColor]];
-    
-    NSString *companyAddress;
-    if ([[[otherUserProfileDataArray objectAtIndex:0]userComapnyAddress] isEqualToString:@""]) {
-        companyAddress=@"NA";
+    if ([viewType isEqualToString:@"Matches"]) {
+        mobileNumberHeading.translatesAutoresizingMaskIntoConstraints = YES;
+        mobileNumberView.translatesAutoresizingMaskIntoConstraints = YES;
+        aboutCompanyHeading.translatesAutoresizingMaskIntoConstraints = YES;
+        mobileNumberHeading.frame=CGRectMake(8, profileBackground.frame.origin.y+profileBackground.frame.size.height+5, mainContainerView.frame.size.width-16,0);
+        mobileNumberView.frame=CGRectMake(8, mobileNumberHeading.frame.origin.y+mobileNumberHeading.frame.size.height+5, mainContainerView.frame.size.width-16,0);
+        aboutCompanyHeading.frame=CGRectMake(15, mobileNumberView.frame.origin.y+mobileNumberView.frame.size.height+5, mainContainerView.frame.size.width-16, 21);
+        size = CGSizeMake(mainContainerView.frame.size.width-16,999);
+        textRect=[self setDynamicHeight:size textString:aboutComapny fontSize:[UIFont fontWithName:@"Roboto-Regular" size:15]];
+        companyDescriptionLabel.numberOfLines = 0;
+        aboutCompanyView.frame=CGRectMake(8, aboutCompanyHeading.frame.origin.y+aboutCompanyHeading.frame.size.height+5, mainContainerView.frame.size.width-16, textRect.size.height+10);
+        companyDescriptionLabel.frame = CGRectMake(8, 3, aboutCompanyView.frame.size.width-10, textRect.size.height);
+        companyDescriptionLabel.text=aboutComapny;
+        [companyDescriptionLabel setLabelBorder:companyDescriptionLabel color:[UIColor whiteColor]];
+        NSString *companyAddress;
+        if ([[[otherUserProfileDataArray objectAtIndex:0]userComapnyAddress] isEqualToString:@""]) {
+            companyAddress=@"NA";
+        }
+        else {
+            companyAddress=[[otherUserProfileDataArray objectAtIndex:0]userComapnyAddress];
+        }
+        size = CGSizeMake(mainContainerView.frame.size.width-16,300);
+        textRect=[self setDynamicHeight:size textString:companyAddress fontSize:[UIFont fontWithName:@"Roboto-Regular" size:14]];
+        comapnyAddressLabel.numberOfLines = 0;
+        companyAddressView.frame=CGRectMake(8, aboutCompanyView.frame.origin.y+aboutCompanyView.frame.size.height+8+addressHeadingLabel.frame.size.height+8, mainContainerView.frame.size.width-16, textRect.size.height+10);
+        comapnyAddressLabel.frame = CGRectMake(8, 3, companyAddressView.frame.size.width-10, textRect.size.height);
+        [comapnyAddressLabel setLabelBorder:comapnyAddressLabel color:[UIColor whiteColor]];
+        comapnyAddressLabel.text=companyAddress;
+        
+        if ([[[otherUserProfileDataArray objectAtIndex:0]userProfession] isEqualToString:@""]) {
+            professionLabel.text=@"NA";
+        }
+        else {
+            professionLabel.text=[[otherUserProfileDataArray objectAtIndex:0]userProfession];
+        }
+        if ([[[otherUserProfileDataArray objectAtIndex:0]userInterestedIn] isEqualToString:@""]) {
+            interestedInLabel.text=@"NA";
+        }
+        else {
+            interestedInLabel.text=[[otherUserProfileDataArray objectAtIndex:0]userInterestedIn];
+        }
+        interestsArray=[[[otherUserProfileDataArray objectAtIndex:0]userInterests] componentsSeparatedByString:@","];
+        count=(int)interestsArray.count;
+        if ((interestsArray.count%2)!=0) {
+            count=count*42;
+            interestAreaCollectionView.frame=CGRectMake(4, interestAreaCollectionView.frame.origin.y, bottomView.frame.size.width-8, count);
+        }
+        else {
+            count=(count-1)*42;
+            interestAreaCollectionView.frame=CGRectMake(4, interestAreaCollectionView.frame.origin.y, bottomView.frame.size.width-8, count);
+        }
+        [interestAreaCollectionView reloadData];
+        float bottomHeight=professionView.frame.origin.y+professionView.frame.size.height+2+interestedInView.frame.size.height+22+count+30;
+        bottomView.frame=CGRectMake(8, profileBackground.frame.origin.y+profileBackground.frame.size.height+15+mobileNumberHeading.frame.size.height+5+mobileNumberView.frame.size.height+8+aboutCompanyHeading.frame.size.height+5+aboutCompanyView.frame.size.height+8+addressHeadingLabel.frame.size.height+5+companyAddressView.frame.size.height+5, mainContainerView.frame.size.width-16,bottomHeight);
+        float dynamicHeight=profileBackground.frame.origin.y+profileBackground.frame.size.height+15+mobileNumberHeading.frame.size.height+5+mobileNumberView.frame.size.height+8+aboutCompanyHeading.frame.size.height+5+aboutCompanyView.frame.size.height+8+addressHeadingLabel.frame.size.height+5+companyAddressView.frame.size.height+8+bottomView.frame.size.height+20;
+        mainContainerView.frame = CGRectMake(mainContainerView.frame.origin.x, mainContainerView.frame.origin.y, mainContainerView.frame.size.width, dynamicHeight);
+        otherUserProfileScrollView.contentSize = CGSizeMake(0,mainContainerView.frame.size.height+64);
     }
-    else {
-        companyAddress=[[otherUserProfileDataArray objectAtIndex:0]userComapnyAddress];
+    else
+    {
+        size = CGSizeMake(mainContainerView.frame.size.width-16,999);
+        textRect=[self setDynamicHeight:size textString:aboutComapny fontSize:[UIFont fontWithName:@"Roboto-Regular" size:15]];
+        companyDescriptionLabel.numberOfLines = 0;
+        aboutCompanyView.frame=CGRectMake(8, aboutCompanyHeading.frame.origin.y+aboutCompanyHeading.frame.size.height+5, mainContainerView.frame.size.width-16, textRect.size.height+10);
+        companyDescriptionLabel.frame = CGRectMake(8, 3, aboutCompanyView.frame.size.width-10, textRect.size.height);
+        companyDescriptionLabel.text=aboutComapny;
+        [companyDescriptionLabel setLabelBorder:companyDescriptionLabel color:[UIColor whiteColor]];
+        
+        NSString *companyAddress;
+        if ([[[otherUserProfileDataArray objectAtIndex:0]userComapnyAddress] isEqualToString:@""]) {
+            companyAddress=@"NA";
+        }
+        else {
+            companyAddress=[[otherUserProfileDataArray objectAtIndex:0]userComapnyAddress];
+        }
+        size = CGSizeMake(mainContainerView.frame.size.width-16,300);
+        textRect=[self setDynamicHeight:size textString:companyAddress fontSize:[UIFont fontWithName:@"Roboto-Regular" size:15]];
+        comapnyAddressLabel.numberOfLines = 0;
+        companyAddressView.frame=CGRectMake(8, aboutCompanyView.frame.origin.y+aboutCompanyView.frame.size.height+8+addressHeadingLabel.frame.size.height+8, mainContainerView.frame.size.width-16, textRect.size.height+10);
+        comapnyAddressLabel.frame = CGRectMake(8, 3, companyAddressView.frame.size.width-10, textRect.size.height);
+        [comapnyAddressLabel setLabelBorder:comapnyAddressLabel color:[UIColor whiteColor]];
+        comapnyAddressLabel.text=companyAddress;
+        
+        if ([[[otherUserProfileDataArray objectAtIndex:0]userProfession] isEqualToString:@""]) {
+            professionLabel.text=@"NA";
+        }
+        else {
+            professionLabel.text=[[otherUserProfileDataArray objectAtIndex:0]userProfession];
+        }
+        if ([[[otherUserProfileDataArray objectAtIndex:0]userInterestedIn] isEqualToString:@""]) {
+            interestedInLabel.text=@"NA";
+        }
+        else {
+            interestedInLabel.text=[[otherUserProfileDataArray objectAtIndex:0]userInterestedIn];
+        }
+        interestsArray=[[[otherUserProfileDataArray objectAtIndex:0]userInterests] componentsSeparatedByString:@","];
+        count=(int)interestsArray.count;
+        
+        if ((interestsArray.count%2)!=0) {
+            count=count*42;
+            interestAreaCollectionView.frame=CGRectMake(4, interestAreaCollectionView.frame.origin.y, bottomView.frame.size.width-8, count);
+        }
+        else{
+            count=(count-1)*42;
+            interestAreaCollectionView.frame=CGRectMake(4, interestAreaCollectionView.frame.origin.y, bottomView.frame.size.width-8, count);
+        }
+        [interestAreaCollectionView reloadData];
+        float bottomHeight=professionView.frame.origin.y+professionView.frame.size.height+2+interestedInView.frame.size.height+22+count+30;
+        bottomView.frame=CGRectMake(8, profileBackground.frame.origin.y+profileBackground.frame.size.height+15+mobileNumberHeading.frame.size.height+5+mobileNumberView.frame.size.height+8+aboutCompanyHeading.frame.size.height+5+aboutCompanyView.frame.size.height+8+addressHeadingLabel.frame.size.height+5+companyAddressView.frame.size.height+25, mainContainerView.frame.size.width-16,bottomHeight);
+        
+        float dynamicHeight=profileBackground.frame.origin.y+profileBackground.frame.size.height+15+mobileNumberHeading.frame.size.height+5+mobileNumberView.frame.size.height+8+aboutCompanyHeading.frame.size.height+5+aboutCompanyView.frame.size.height+8+addressHeadingLabel.frame.size.height+5+companyAddressView.frame.size.height+8+bottomView.frame.size.height+20;
+        mainContainerView.frame = CGRectMake(mainContainerView.frame.origin.x, mainContainerView.frame.origin.y, mainContainerView.frame.size.width, dynamicHeight);
+        otherUserProfileScrollView.contentSize = CGSizeMake(0,mainContainerView.frame.size.height+64);
     }
-    size = CGSizeMake(mainContainerView.frame.size.width-16,300);
-    textRect=[self setDynamicHeight:size textString:companyAddress fontSize:[UIFont fontWithName:@"Roboto-Regular" size:14]];
-    comapnyAddressLabel.numberOfLines = 0;
-    companyAddressView.frame=CGRectMake(8, aboutCompanyView.frame.origin.y+aboutCompanyView.frame.size.height+8+addressHeadingLabel.frame.size.height+8, mainContainerView.frame.size.width-16, textRect.size.height+10);
-    comapnyAddressLabel.frame = CGRectMake(8, 3, companyAddressView.frame.size.width-10, textRect.size.height);
-    [comapnyAddressLabel setLabelBorder:comapnyAddressLabel color:[UIColor whiteColor]];
-    comapnyAddressLabel.text=companyAddress;
-    
-    if ([[[otherUserProfileDataArray objectAtIndex:0]userProfession] isEqualToString:@""]) {
-        professionLabel.text=@"NA";
-    }
-    else {
-        professionLabel.text=[[otherUserProfileDataArray objectAtIndex:0]userProfession];
-    }
-    if ([[[otherUserProfileDataArray objectAtIndex:0]userInterestedIn] isEqualToString:@""]) {
-        interestedInLabel.text=@"NA";
-    }
-    else {
-        interestedInLabel.text=[[otherUserProfileDataArray objectAtIndex:0]userInterestedIn];
-    }
-    interestsArray=[[[otherUserProfileDataArray objectAtIndex:0]userInterests] componentsSeparatedByString:@","];
-    count=(int)interestsArray.count;
-    
-    if ((interestsArray.count%2)!=0) {
-        count=count*42;
-        interestAreaCollectionView.frame=CGRectMake(4, interestAreaCollectionView.frame.origin.y, bottomView.frame.size.width-8, count);
-    }
-    else{
-        count=(count-1)*42;
-        interestAreaCollectionView.frame=CGRectMake(4, interestAreaCollectionView.frame.origin.y, bottomView.frame.size.width-8, count);
-    }
-    [interestAreaCollectionView reloadData];
-    float bottomHeight=professionView.frame.origin.y+professionView.frame.size.height+2+interestedInView.frame.size.height+22+count+30;
-    bottomView.frame=CGRectMake(8, profileBackground.frame.origin.y+profileBackground.frame.size.height+15+mobileNumberHeading.frame.size.height+5+mobileNumberView.frame.size.height+8+aboutCompanyHeading.frame.size.height+5+aboutCompanyView.frame.size.height+8+addressHeadingLabel.frame.size.height+5+companyAddressView.frame.size.height+25, mainContainerView.frame.size.width-16,bottomHeight);
-    
-    float dynamicHeight=profileBackground.frame.origin.y+profileBackground.frame.size.height+15+mobileNumberHeading.frame.size.height+5+mobileNumberView.frame.size.height+8+aboutCompanyHeading.frame.size.height+5+aboutCompanyView.frame.size.height+8+addressHeadingLabel.frame.size.height+5+companyAddressView.frame.size.height+8+bottomView.frame.size.height+20;
-    mainContainerView.frame = CGRectMake(mainContainerView.frame.origin.x, mainContainerView.frame.origin.y, mainContainerView.frame.size.width, dynamicHeight);
-    otherUserProfileScrollView.contentSize = CGSizeMake(0,mainContainerView.frame.size.height+64);
-    
 }
 -(CGRect)setDynamicHeight:(CGSize)rectSize textString:(NSString *)textString fontSize:(UIFont *)fontSize{
     CGRect textHeight = [textString
@@ -345,7 +393,6 @@
 {
     return interestsArray.count;
 }
-
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView1 cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     UICollectionViewCell *interestCell = [collectionView1
@@ -361,7 +408,7 @@
         interestLabel.text=[interestsArray objectAtIndex:indexPath.row];
         tickImage.hidden=NO;
     }
-
+    
     return interestCell;
 }
 #pragma mark - end

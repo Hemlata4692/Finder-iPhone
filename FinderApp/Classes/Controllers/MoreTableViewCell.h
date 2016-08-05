@@ -13,4 +13,5 @@
 @property (weak, nonatomic) IBOutlet UIImageView *iconImageView;
 @property (weak, nonatomic) IBOutlet UILabel *screenNameLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *rightArrowIcon;
+@property (strong, nonatomic) IBOutlet UILabel *badgeIcon;
 @end

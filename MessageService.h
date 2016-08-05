@@ -12,11 +12,11 @@
 + (id)sharedManager;
 
 //Send message
--(void)sendMessage:(NSString *)otherUserId message:(NSString *)message success:(void (^)(id))success failure:(void (^)(NSError *))failure;
+- (void)sendMessage:(NSString *)otherUserId message:(NSString *)message success:(void (^)(id))success failure:(void (^)(NSError *))failure;
 
 //Messages
--(void)getDifferentMessage:(void (^)(id data))success failure:(void (^)(NSError *error))failure;
+- (void)getDifferentMessage:(void (^)(id data))success failure:(void (^)(NSError *error))failure;
 
 //Message history
--(void)getMessageHistory:(NSString *)otherUserId readStatus:(NSString *)readStatus pageOffSet:(NSString *)pageOffSet success:(void (^)(id))success failure:(void (^)(NSError *))failure;
+- (void)getMessageHistory:(NSString *)otherUserId readStatus:(NSString *)readStatus pageOffSet:(NSString *)pageOffSet success:(void (^)(id))success failure:(void (^)(NSError *))failure;
 @end

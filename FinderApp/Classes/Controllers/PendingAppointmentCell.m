@@ -17,7 +17,6 @@
     [super awakeFromNib];
     // Initialization code
 }
-
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
     
@@ -27,22 +26,7 @@
 
 #pragma mark - Display data
 //display data
--(void)displayData :(PendingAppointmentDataModel *)data indexPath:(int)indexPath rectSize:(CGSize)rectSize{
-    //    contactName.translatesAutoresizingMaskIntoConstraints=YES;
-    //    CGSize size = CGSizeMake(rectSize.width-157,100);
-    //    CGRect textRect = [contactData.userName
-    //                       boundingRectWithSize:size
-    //                       options:NSStringDrawingUsesLineFragmentOrigin
-    //                       attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Roboto-Bold" size:14.0]}
-    //                       context:nil];
-    //    contactName.numberOfLines = 0;
-    //    contactName.frame = textRect;
-    //    contactName.frame =CGRectMake(78, 13, textRect.size.width, textRect.size.height);
-    //    [contactName setLabelBorder:contactName color:[UIColor whiteColor]];
-    //
-    //    contactName.text=contactData.userName;
-    //    contactCompanyName.text=contactData.userCompanyName;
-    //    [contactIcon setCornerRadius:contactIcon.frame.size.width/2];
+- (void)displayData :(PendingAppointmentDataModel *)data indexPath:(int)indexPath rectSize:(CGSize)rectSize{
     [userImageView setCornerRadius:userImageView.frame.size.width/2];
     __weak UIImageView *weakRef = userImageView;
     NSURLRequest *imageRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:data.meetingPersonImage]
@@ -53,7 +37,6 @@
         weakRef.clipsToBounds = YES;
         weakRef.image = image;
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
-        
     }];
     pendingUserName.text=data.meetingPerson;
     userName.text=data.meetingPerson;
@@ -63,6 +46,5 @@
     [string appendString:[NSString stringWithFormat:@"%@ - %@",[tempArray objectAtIndex:0],[tempArray objectAtIndex:1]]];
     timeLabel.text=string;
 }
-
 #pragma mark - end
 @end

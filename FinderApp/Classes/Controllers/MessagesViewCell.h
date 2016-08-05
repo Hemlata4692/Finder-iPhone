@@ -19,7 +19,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *messageLabel;
 @property (weak, nonatomic) IBOutlet UILabel *messageCountLabel;
 
--(void)displayMessageData:(MessagesDataModel *)messageDetails indexPath:(int)indexPath rectSize:(CGSize)rectSize;
+- (void)displayMessageData:(MessagesDataModel *)messageDetails indexPath:(int)indexPath rectSize:(CGSize)rectSize;
 
 //newMessageCell
 @property (weak, nonatomic) IBOutlet UIView *messageContainerView;
@@ -27,5 +27,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *nameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *comapnyNameLabel;
 
--(void)displayData:(ContactDataModel *)contactDetails indexPath:(int)indexPath;
+- (void)displayData:(ContactDataModel *)contactDetails indexPath:(int)indexPath;
 @end

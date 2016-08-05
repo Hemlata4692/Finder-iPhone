@@ -12,14 +12,14 @@
 + (id)sharedManager;
 
 //Matches listing
--(void)getMatchesList:(void (^)(id data))success failure:(void (^)(NSError *error))failure;
+- (void)getMatchesList:(void (^)(id data))success failure:(void (^)(NSError *error))failure;
 
 //Updae review status
--(void)updateReviewStatus:(NSString *)otherUserId reviewStatus:(NSString *)reviewStatus success:(void (^)(id))success failure:(void (^)(NSError *))failure;
+- (void)updateReviewStatus:(NSString *)otherUserId reviewStatus:(NSString *)reviewStatus success:(void (^)(id))success failure:(void (^)(NSError *))failure;
 
 //Send cancel request
--(void)sendCancelMatchRequest:(NSString *)otherUserId sendRequest:(NSString *)sendRequest success:(void (^)(id))success failure:(void (^)(NSError *))failure;
+- (void)sendCancelMatchRequest:(NSString *)otherUserId sendRequest:(NSString *)sendRequest success:(void (^)(id))success failure:(void (^)(NSError *))failure;
 
 //Accept decline request
--(void)acceptDeclineRequest:(NSString *)otherUserId acceptRequest:(NSString *)acceptRequest success:(void (^)(id))success failure:(void (^)(NSError *))failure;
+- (void)acceptDeclineRequest:(NSString *)otherUserId acceptRequest:(NSString *)acceptRequest success:(void (^)(id))success failure:(void (^)(NSError *))failure;
 @end

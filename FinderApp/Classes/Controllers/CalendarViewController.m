@@ -40,8 +40,9 @@
     noResultFoundLabel.hidden=YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(calendarDetails) name:@"CalendarDetails" object:nil];
 }
--(void)calendarDetails {
-
+//Get calendar details
+- (void)calendarDetails {
+    
     [myDelegate showIndicator];
     [self performSelector:@selector(getCalendarDetails) withObject:nil afterDelay:0.1];
 }
@@ -49,26 +50,22 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
--(void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     myDelegate.currentNavigationController=self.navigationController;
     myDelegate.myView=@"CalendarViewController";
     [myDelegate showIndicator];
     [self performSelector:@selector(getCalendarDetails) withObject:nil afterDelay:.1];
-    
 }
--(void)viewWillDisappear:(BOOL)animated
-{
+- (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:YES];
     myDelegate.myView=@"other";
-   // [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
-
 #pragma mark - end
 
 #pragma mark - Webservice
--(void)getCalendarDetails {
+- (void)getCalendarDetails {
     
     [[ConferenceService sharedManager] getCalendarDetails:[UserDefaultManager getValue:@"conferenceId"] success:^(id dataArray) {
         [self contactDetails];
@@ -77,114 +74,104 @@
             noResultFoundLabel.hidden=NO;
             noResultFoundLabel.text=@"No calender added.";
             calendarTableView.hidden=YES;
-
         }
         else {
             calendarTableView.hidden=NO;
-              noResultFoundLabel.hidden=YES;
-        for (int i=0; i<sectionArray.count; i++) {
-            for (int j=0; j<[[sectionArray objectAtIndex:i]eventArray].count; j++) {
-                NSString *conferenceDate =@"";
-                
-                if ([[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "] objectAtIndex:1] containsString:@"st"]) {
-                    
-                    conferenceDate = [NSString stringWithFormat:@"%@ %@ %@ %@",[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "] objectAtIndex:0],[[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "] objectAtIndex:1] stringByReplacingOccurrencesOfString: @"st" withString:@""],[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "] objectAtIndex:2],[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "] objectAtIndex:3]];
-                }
-                else if ([[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "] objectAtIndex:1] containsString:@"nd"]){
-                    conferenceDate = [NSString stringWithFormat:@"%@ %@ %@ %@",[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "] objectAtIndex:0],[[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "] objectAtIndex:1] stringByReplacingOccurrencesOfString: @"nd" withString:@""],[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "] objectAtIndex:2],[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "] objectAtIndex:3]];
-                }
-                else if ([[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "]  objectAtIndex:1] containsString:@"rd"]){
-                    
-                    conferenceDate = [NSString stringWithFormat:@"%@ %@ %@ %@",[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "] objectAtIndex:0],[[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "] objectAtIndex:1] stringByReplacingOccurrencesOfString: @"rd" withString:@""],[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "] objectAtIndex:2],[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "] objectAtIndex:3]];
-                }
-                else if ([[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "]  objectAtIndex:1] containsString:@"th"]){
-                        
+            noResultFoundLabel.hidden=YES;
+            for (int i=0; i<sectionArray.count; i++) {
+                for (int j=0; j<[[sectionArray objectAtIndex:i]eventArray].count; j++) {
+                    NSString *conferenceDate =@"";
+                    if ([[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "] objectAtIndex:1] containsString:@"st"]) {
+                        conferenceDate = [NSString stringWithFormat:@"%@ %@ %@ %@",[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "] objectAtIndex:0],[[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "] objectAtIndex:1] stringByReplacingOccurrencesOfString: @"st" withString:@""],[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "] objectAtIndex:2],[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "] objectAtIndex:3]];
+                    }
+                    else if ([[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "] objectAtIndex:1] containsString:@"nd"]){
+                        conferenceDate = [NSString stringWithFormat:@"%@ %@ %@ %@",[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "] objectAtIndex:0],[[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "] objectAtIndex:1] stringByReplacingOccurrencesOfString: @"nd" withString:@""],[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "] objectAtIndex:2],[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "] objectAtIndex:3]];
+                    }
+                    else if ([[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "]  objectAtIndex:1] containsString:@"rd"]){
+                        conferenceDate = [NSString stringWithFormat:@"%@ %@ %@ %@",[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "] objectAtIndex:0],[[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "] objectAtIndex:1] stringByReplacingOccurrencesOfString: @"rd" withString:@""],[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "] objectAtIndex:2],[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "] objectAtIndex:3]];
+                    }
+                    else if ([[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "]  objectAtIndex:1] containsString:@"th"]){
                         conferenceDate = [NSString stringWithFormat:@"%@ %@ %@ %@",[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "] objectAtIndex:0],[[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "] objectAtIndex:1] stringByReplacingOccurrencesOfString: @"th" withString:@""],[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "] objectAtIndex:2],[[[[sectionArray objectAtIndex:i]conferenceDate] componentsSeparatedByString:@" "] objectAtIndex:3]];
                     }
-                EventDataModel *data=[[[sectionArray objectAtIndex:i]eventArray] objectAtIndex:j];
-                NSArray *dateStrings = [data.eventTime componentsSeparatedByString:@"-"];
-
-                conferenceDate=[NSString stringWithFormat:@"%@ %@",conferenceDate,[dateStrings objectAtIndex:0]];
-                NSDateFormatter *dateFormat=[[NSDateFormatter alloc]init];
-                NSLocale *locale = [[NSLocale alloc]
-                                    initWithLocaleIdentifier:@"en_US"];
-                [dateFormat setLocale:locale];
-                [dateFormat setDateFormat:@"EEEE d MMMM yyyy HH:mm"];
-                NSDate *date =[dateFormat dateFromString:conferenceDate];
-                [dateFormat setDateFormat:@"yyyy-MM-dd hh:mm a"];
-                NSString *fireDate=[dateFormat stringFromDate:date];
-                NSDate *startDate = [dateFormat dateFromString:fireDate];
-                
-                NSComparisonResult result;
-                result = [[NSDate date] compare:startDate]; // comparing two dates
-                if(result==NSOrderedAscending){
-                   NSLog(@"date1 is less than date2");
-                    NSTimeInterval notiInterval =[startDate timeIntervalSinceDate:[NSDate date]] -15*60;
-                    UILocalNotification *notification = [[UILocalNotification alloc] init];
-                    notification.fireDate = [NSDate dateWithTimeIntervalSinceNow:notiInterval];
-                    notification.alertBody = [NSString stringWithFormat:@"%@ %@ %@ %@",@"You have a",data.eventName,@"at",fireDate];
-                    notification.timeZone = [NSTimeZone defaultTimeZone];
-                    notification.soundName = UILocalNotificationDefaultSoundName;
-                    notification.applicationIconBadgeNumber = 0;
-                    NSDictionary *infoDict = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%@ %@ %@ %@",@"You have a",data.eventName,@"at",startDate] forKey:@"Calender"];
-                    notification.userInfo = infoDict;
-                    NSMutableArray *notifications = [[NSMutableArray alloc] init];
-                    [notifications addObject:notification];
-                    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+                    EventDataModel *data=[[[sectionArray objectAtIndex:i]eventArray] objectAtIndex:j];
+                    NSArray *dateStrings = [data.eventTime componentsSeparatedByString:@"-"];
+                    conferenceDate=[NSString stringWithFormat:@"%@ %@",conferenceDate,[dateStrings objectAtIndex:0]];
+                    NSDateFormatter *dateFormat=[[NSDateFormatter alloc]init];
+                    NSLocale *locale = [[NSLocale alloc]
+                                        initWithLocaleIdentifier:@"en_US"];
+                    [dateFormat setLocale:locale];
+                    [dateFormat setDateFormat:@"EEEE d MMMM yyyy HH:mm"];
+                    NSDate *date =[dateFormat dateFromString:conferenceDate];
+                    [dateFormat setDateFormat:@"yyyy-MM-dd hh:mm a"];
+                    NSString *fireDate=[dateFormat stringFromDate:date];
+                    NSDate *startDate = [dateFormat dateFromString:fireDate];
+                    NSComparisonResult result;
+                    result = [[NSDate date] compare:startDate]; // comparing two dates
+                    if(result==NSOrderedAscending){
+                        NSLog(@"date1 is less than date2");
+                        NSTimeInterval notiInterval =[startDate timeIntervalSinceDate:[NSDate date]] -15*60;
+                        UILocalNotification *notification = [[UILocalNotification alloc] init];
+                        notification.fireDate = [NSDate dateWithTimeIntervalSinceNow:notiInterval];
+                        notification.alertBody = [NSString stringWithFormat:@"%@ %@ %@ %@",@"You have a",data.eventName,@"at",fireDate];
+                        notification.timeZone = [NSTimeZone defaultTimeZone];
+                        notification.soundName = UILocalNotificationDefaultSoundName;
+                        notification.applicationIconBadgeNumber = 0;
+                        NSDictionary *infoDict = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%@ %@ %@ %@",@"You have a",data.eventName,@"at",startDate] forKey:@"Calender"];
+                        notification.userInfo = infoDict;
+                        NSMutableArray *notifications = [[NSMutableArray alloc] init];
+                        [notifications addObject:notification];
+                        [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+                    }
+                    else if(result==NSOrderedDescending) {
+                        NSLog(@"date1 is greater than date2");
+                    }
+                    else {
+                        //  equal
+                        NSTimeInterval notiInterval =[startDate timeIntervalSinceDate:[NSDate date]] -15*60;
+                        UILocalNotification *notification = [[UILocalNotification alloc] init];
+                        notification.fireDate = [NSDate dateWithTimeIntervalSinceNow:notiInterval];
+                        notification.alertBody = [NSString stringWithFormat:@"%@ %@ %@ %@",@"You have a",data.eventName,@"at",fireDate];
+                        notification.timeZone = [NSTimeZone defaultTimeZone];
+                        notification.soundName = UILocalNotificationDefaultSoundName;
+                        notification.applicationIconBadgeNumber = 0;
+                        NSDictionary *infoDict = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%@ %@ %@ %@",@"You have a",data.eventName,@"at",startDate] forKey:@"Calender"];
+                        notification.userInfo = infoDict;
+                        NSMutableArray *notifications = [[NSMutableArray alloc] init];
+                        [notifications addObject:notification];
+                        [[UIApplication sharedApplication] scheduleLocalNotification:notification];
+                    }
                 }
-                else if(result==NSOrderedDescending){
-                    NSLog(@"date1 is greater than date2");
-                }
-                else {
-                  //  equal
-                    NSTimeInterval notiInterval =[startDate timeIntervalSinceDate:[NSDate date]] -15*60;
-                    UILocalNotification *notification = [[UILocalNotification alloc] init];
-                    notification.fireDate = [NSDate dateWithTimeIntervalSinceNow:notiInterval];
-                    notification.alertBody = [NSString stringWithFormat:@"%@ %@ %@ %@",@"You have a",data.eventName,@"at",fireDate];
-                    notification.timeZone = [NSTimeZone defaultTimeZone];
-                    notification.soundName = UILocalNotificationDefaultSoundName;
-                    notification.applicationIconBadgeNumber = 0;
-                    NSDictionary *infoDict = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%@ %@ %@ %@",@"You have a",data.eventName,@"at",startDate] forKey:@"Calender"];
-                    notification.userInfo = infoDict;
-                    NSMutableArray *notifications = [[NSMutableArray alloc] init];
-                    [notifications addObject:notification];
-                    [[UIApplication sharedApplication] scheduleLocalNotification:notification];
-                }
-                
-                
             }
         }
-        }
-         [calendarTableView reloadData];
+        [calendarTableView reloadData];
     }
-                                                   failure:^(NSError *error)
+                                                  failure:^(NSError *error)
      {
          noResultFoundLabel.hidden=NO;
          noResultFoundLabel.text=@"No calender added.";
          calendarTableView.hidden=YES;
      }] ;
 }
--(void)contactDetails {
+- (void)contactDetails {
     [[ConferenceService sharedManager] getContactDetails:^(id dataArray) {
         [myDelegate stopIndicator];
         contactArray=[dataArray mutableCopy];
     }
-                                                  failure:^(NSError *error)
+                                                 failure:^(NSError *error)
      {
-         
      }] ;
 }
 #pragma mark - end
 
 #pragma mark - Table view delegate methods
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-
+    
     return sectionArray.count;
 }
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 40;
 }
-- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
+- (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     if (section==0) {
         return 0;
     }
@@ -192,12 +179,12 @@
         return 0;
     }
 }
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section{
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIView * headerView;
     headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 40.0)];
     headerView.backgroundColor = [UIColor clearColor];
     UILabel * dateLabel = [[UILabel alloc] init];
-    dateLabel.font = [UIFont fontWithName:@"Roboto-Regular" size:16.0];
+    dateLabel.font = [UIFont fontWithName:@"Roboto-Regular" size:17.0];
     NSArray *dateStrings = [[[sectionArray objectAtIndex:section]conferenceDate] componentsSeparatedByString:@" "];
     NSMutableString *string = [[NSMutableString alloc]init];
     NSString *result;
@@ -213,17 +200,14 @@
     [headerView addSubview:dateLabel];
     return headerView;
 }
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-   // return 5;
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    // return 5;
     return [[sectionArray objectAtIndex:section]eventArray].count;
 }
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *simpleTableIdentifier = @"calendarCell";
     CalendarTableViewCell *calendarCell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
-    if (calendarCell == nil)
-    {
+    if (calendarCell == nil) {
         calendarCell = [[CalendarTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
     }
     [calendarCell.containerView addShadow:calendarCell.containerView color:[UIColor lightGrayColor]];
@@ -247,9 +231,8 @@
     UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     MyProfileViewController *profileView =[storyboard instantiateViewControllerWithIdentifier:@"MyProfileViewController"];
     profileView.otherUserID=data.userId;
-     [self.navigationController pushViewController:profileView animated:YES];
+    [self.navigationController pushViewController:profileView animated:YES];
 }
-
 - (IBAction)viewAgendaButonAction:(MyButton *)sender {
     int btnTag=[sender Tag];
     int sectionTag= [sender sectionTag];
@@ -257,12 +240,12 @@
     UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     MeetingDescriptionViewController *descreptionView =[storyboard instantiateViewControllerWithIdentifier:@"MeetingDescriptionViewController"];
     descreptionView.meetingDescription=data.eventDescription;
+    descreptionView.meetingLocation=data.eventVenue;
     descreptionView.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.5f];
     [descreptionView setModalPresentationStyle:UIModalPresentationOverCurrentContext];
     [self presentViewController:descreptionView animated: NO completion:nil];
 }
-
-- (IBAction)addButtonAction:(id)sender{
+- (IBAction)addButtonAction:(id)sender {
     UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     ScheduleMeetingViewController *scheduleMeeting =[storyboard instantiateViewControllerWithIdentifier:@"ScheduleMeetingViewController"];
     scheduleMeeting.screenName=@"Calendar";

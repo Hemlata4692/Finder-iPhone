@@ -14,5 +14,5 @@
 
 @property (nonatomic, strong) NSString *placeholder;
 @property (nonatomic, strong) UIColor  *placeholderTextColor;
-//-(void)addBorder:(UITextView *)textView rect:(CGRect)rect;
+//- (void)addBorder:(UITextView *)textView rect:(CGRect)rect;
 @end

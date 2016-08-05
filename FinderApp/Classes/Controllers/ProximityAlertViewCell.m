@@ -16,7 +16,6 @@
     [super awakeFromNib];
     // Initialization code
 }
-
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
     
@@ -24,11 +23,10 @@
 }
 #pragma mark - end
 #pragma mark - Display data
--(void)displayData:(ContactDataModel *)proximityDetails indexPath:(int)indexPath
+- (void)displayData:(ContactDataModel *)proximityDetails indexPath:(int)indexPath
 {
     nameLabel.text=proximityDetails.contactName;
     comapanyNameLabel.text=proximityDetails.companyName;
 }
-
 #pragma mark - end
 @end

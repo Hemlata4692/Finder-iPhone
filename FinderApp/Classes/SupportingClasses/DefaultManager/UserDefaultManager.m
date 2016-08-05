@@ -10,23 +10,17 @@
 
 @implementation UserDefaultManager
 
-+(void)setValue : (id)value key :(NSString *)key
-{
-
+//Set value in user defaults
++ (void)setValue : (id)value key :(NSString *)key {
     [[NSUserDefaults standardUserDefaults]setObject:value forKey:key];
     [[NSUserDefaults standardUserDefaults]synchronize];
-
 }
-
-+(id)getValue : (NSString *)key
-{
+//Get value in user defaults
++(id)getValue : (NSString *)key {
     return [[NSUserDefaults standardUserDefaults]objectForKey:key];
 }
-
-+(void)removeValue : (NSString *)key
-{
-
+//Remove value from user defaults
++ (void)removeValue : (NSString *)key {
     [[NSUserDefaults standardUserDefaults]removeObjectForKey:key];
-
 }
 @end

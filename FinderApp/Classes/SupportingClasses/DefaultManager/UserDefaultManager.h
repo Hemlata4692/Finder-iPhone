@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 @interface UserDefaultManager : NSObject
-+(void)setValue : (id)value key :(NSString *)key;
++ (void)setValue : (id)value key :(NSString *)key;
 +(id)getValue : (NSString *)key;
-+(void)removeValue : (NSString *)key;
++ (void)removeValue : (NSString *)key;
 @end

@@ -8,11 +8,10 @@
 
 #import "UIImage+deviceSpecificMedia.h"
 
+//Image pixel dimensions
 thisDeviceClass currentDeviceClass() {
-    
     CGFloat greaterPixelDimension = (CGFloat) fmaxf(((float)[[UIScreen mainScreen]bounds].size.height),
                                                     ((float)[[UIScreen mainScreen]bounds].size.width));
-    
     switch ((NSInteger)greaterPixelDimension) {
         case 480:
             return (( [[UIScreen mainScreen]scale] > 1.0) ? thisDeviceClass_iPhoneRetina : thisDeviceClass_iPhone );
@@ -34,9 +33,8 @@ thisDeviceClass currentDeviceClass() {
             break;
     }
 }
-
+//Device specific suffix
 @implementation UIImage (deviceSpecificMedia)
-
 + (NSString *)magicSuffixForDevice
 {
     switch (currentDeviceClass())
@@ -70,12 +68,9 @@ thisDeviceClass currentDeviceClass() {
             break;
     }
 }
-
-- (NSString * )imageForDeviceWithName:(NSString *)fileName
-{
+- (NSString * )imageForDeviceWithName:(NSString *)fileName {
     UIImage *result = nil;
     NSString *nameWithSuffix = [fileName stringByAppendingString:[UIImage magicSuffixForDevice]];
-    
     result = [UIImage imageNamed:nameWithSuffix];
     if (!result)
     {
@@ -83,8 +78,7 @@ thisDeviceClass currentDeviceClass() {
     }
     return nameWithSuffix;
 }
-+ (NSString *)magicSuffixForDeviceForOtherImages
-{
++ (NSString *)magicSuffixForDeviceForOtherImages {
     switch (currentDeviceClass())
     {
         case thisDeviceClass_iPhone:
@@ -102,31 +96,26 @@ thisDeviceClass currentDeviceClass() {
         case thisDeviceClass_iPhone6plus:
             return @"-736h@3x";
             break;
-            
         case thisDeviceClass_iPad:
             return @"~ipad";
             break;
         case thisDeviceClass_iPadRetina:
             return @"~ipad@2x";
             break;
-            
         case thisDeviceClass_unknown:
         default:
             return @"";
             break;
     }
 }
-
 - (NSString * )imageForDeviceWithNameForOtherImages:(NSString *)fileName
 {
     UIImage *result = nil;
     NSString *nameWithSuffix = [fileName stringByAppendingString:[UIImage magicSuffixForDeviceForOtherImages]];
-    
     result = [UIImage imageNamed:nameWithSuffix];
     if (!result) {
         result = [UIImage imageNamed:fileName];
     }
     return nameWithSuffix;
 }
-
 @end

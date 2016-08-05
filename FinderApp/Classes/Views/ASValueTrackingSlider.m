@@ -322,7 +322,7 @@
 
 #pragma mark - subclassed
 
--(void)layoutSubviews
+- (void)layoutSubviews
 {
     [super layoutSubviews];
     [self updatePopUpView];

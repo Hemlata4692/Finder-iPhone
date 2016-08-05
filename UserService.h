@@ -17,22 +17,22 @@
 //end
 
 //Forgot password method
--(void)forgotPassword:(NSString *)email success:(void (^)(id))success failure:(void (^)(NSError *))failure;
+- (void)forgotPassword:(NSString *)email success:(void (^)(id))success failure:(void (^)(NSError *))failure;
 //end
 
 //Change password
--(void)changePassword:(NSString *)oldPassword newPassword:(NSString *)newPassword success:(void (^)(id))success failure:(void (^)(NSError *))failure;
+- (void)changePassword:(NSString *)oldPassword newPassword:(NSString *)newPassword success:(void (^)(id))success failure:(void (^)(NSError *))failure;
 //end
 
 //Location update
--(void)locationUpdate:(NSString *)latitude longitude:(NSString *)longitude proximityRange:(NSString *)proximityRange success:(void (^)(id))success failure:(void (^)(NSError *))failure;
+- (void)locationUpdate:(NSString *)latitude longitude:(NSString *)longitude proximityRange:(NSString *)proximityRange success:(void (^)(id))success failure:(void (^)(NSError *))failure;
 //end
 
 //Logout
--(void)logoutUser:(void (^)(id data))success failure:(void (^)(NSError *error))failure;
+- (void)logoutUser:(void (^)(id data))success failure:(void (^)(NSError *error))failure;
 //end
 
 //Register Device
--(void)registerDeviceForPushNotification:(NSString *)deviceToken deviceType:(NSString *)deviceType success:(void (^)(id))success failure:(void (^)(NSError *))failure;
+- (void)registerDeviceForPushNotification:(NSString *)deviceToken deviceType:(NSString *)deviceType success:(void (^)(id))success failure:(void (^)(NSError *))failure;
 //end
 @end

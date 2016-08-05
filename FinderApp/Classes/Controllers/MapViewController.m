@@ -44,7 +44,6 @@
     [mapView setRegion:region animated:TRUE];
     [mapView regionThatFits:region];
 }
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

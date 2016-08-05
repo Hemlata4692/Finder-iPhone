@@ -16,4 +16,5 @@
 @synthesize meetingUserId;
 @synthesize meetingTime;
 @synthesize meetingDescription;
+@synthesize meetingVenue;
 @end

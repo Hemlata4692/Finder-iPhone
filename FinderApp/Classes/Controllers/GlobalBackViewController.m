@@ -36,10 +36,9 @@
     barButton =[[UIBarButtonItem alloc] initWithCustomView:button];
     [button addTarget:self action:@selector(backButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     self.navigationItem.leftBarButtonItems=[NSArray arrayWithObjects:barButton, nil];
-    
 }
 //back button action
--(void)backButtonAction :(id)sender{
+- (void)backButtonAction :(id)sender{
     [self.navigationController popViewControllerAnimated:YES];
 }
 #pragma mark - end
