@@ -249,6 +249,9 @@
                 if ([[UserDefaultManager getValue:@"PendingMessage"] isEqualToString:@"0"]) {
                     [self addBadgeIconOnMoreTab];
                 }
+                if ([myDelegate.myView isEqualToString:@"MoreViewController"]) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadMoreListing" object:nil];
+                }
             }
             else {
                 [self removeBadgeIconOnMoreTab];
@@ -314,6 +317,10 @@
         }
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"2"]) {
             [self removeBadgeIconOnMoreTab];
+            if ([myDelegate.myView isEqualToString:@"MoreViewController"]) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadMoreListing" object:nil];
+            }
+
             [[ConferenceService sharedManager] acceptCancelMeeting:[alertDict objectForKey:@"appointmentId"] meetingUserId:[alertDict objectForKey:@"meetinguserId"] flag:@"accept" type:@"requested" reasonForCancel:@"" success:^(id responseObject) {
                 NSLog(@"calendar type 2");
                 if ([myDelegate.myView isEqualToString:@"CalendarViewController"]) {
@@ -518,6 +525,7 @@
             }
         }
     }
+    [UserDefaultManager setValue:@"0" key:@"PendingMessage"];
 }
 #pragma mark - end
 @end

@@ -488,6 +488,7 @@
     }
     interestsArray=[[[userProfileDataArray objectAtIndex:0]userInterests] componentsSeparatedByString:@","];
     count=(int)interestsArray.count;
+    myDelegate.multiplePickerDic=[[NSMutableDictionary alloc]init];
     for (int k =0; k<interestsArray.count; k++)
     {
         [myDelegate.multiplePickerDic setObject:[NSNumber numberWithBool:YES] forKey:[interestsArray objectAtIndex:k]];

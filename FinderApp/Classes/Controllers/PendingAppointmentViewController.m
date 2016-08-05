@@ -108,6 +108,10 @@
         myDelegate.myView=@"NoPendingViewController";
     }
 }
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:YES];
+     myDelegate.myView=@"other";
+}
 #pragma mark - end
 
 #pragma mark - Webservices
