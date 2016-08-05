@@ -52,14 +52,14 @@
     personalMessageTableView.alwaysBounceVertical = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getHistory) name:@"GetMessageHistory" object:nil];
 }
--(void)getHistory {
+- (void)getHistory {
     [myDelegate removeBadgeIconLastTab];
     offset=@"0";
     [messageDateArray removeAllObjects];
     [myDelegate showIndicator];
     [self performSelector:@selector(getMessageHistory) withObject:nil afterDelay:0.1];
 }
--(void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
     myDelegate.myView=@"PersonalMessageView";
     offset=@"0";
@@ -70,7 +70,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
--(void)setTextView {
+- (void)setTextView {
     sendMessageTextView.text = @"";
     [sendMessageTextView setPlaceholder:@"Type a message here..."];
     [sendMessageTextView setFont:[UIFont fontWithName:@"Roboto-Regular" size:16.0]];
@@ -122,7 +122,7 @@
 }
 #pragma mark - end
 #pragma mark - Webservice
--(void)getMessageHistory {
+- (void)getMessageHistory {
     [[MessageService sharedManager] getMessageHistory:otherUserId readStatus:@"True" pageOffSet:offset success:^(id dataArray) {
         [myDelegate stopIndicator];
         if (messageDateArray.count<1) {
@@ -164,7 +164,7 @@
      }] ;
 }
 
--(void)sendMessage {
+- (void)sendMessage {
     [[MessageService sharedManager] sendMessage:otherUserId message:sendMessageTextView.text success:^(id responseObject) {
         [myDelegate stopIndicator];
         sendMessageTextView.text=@"";

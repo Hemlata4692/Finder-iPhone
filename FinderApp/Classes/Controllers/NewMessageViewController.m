@@ -49,7 +49,7 @@
 }
 #pragma mark - end
 #pragma mark - Webservice
--(void)getContactDetails {
+- (void)getContactDetails {
     [[ConferenceService sharedManager] getContactDetails:^(id dataArray) {
         [myDelegate stopIndicator];
         contactDataArray=[dataArray mutableCopy];
@@ -100,7 +100,7 @@
     return contactUser;
     
 }
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     PersonalMessageViewController *chatView =[storyboard instantiateViewControllerWithIdentifier:@"PersonalMessageViewController"];
     if (isSearch) {
@@ -179,7 +179,7 @@
     return  YES;
 }
 
--(void)searchBar:(UISearchBar *)srchBar textDidChange:(NSString *)searchText
+- (void)searchBar:(UISearchBar *)srchBar textDidChange:(NSString *)searchText
 {
     if (searchText.length<1)
     {

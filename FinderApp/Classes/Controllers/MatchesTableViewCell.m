@@ -42,7 +42,7 @@
 }
 #pragma mark - end
 //all segment
--(void)displayData :(MatchesDataModel *)allMatchesDetails indexPath:(int)indexPath rectSize:(CGSize)rectSize{
+- (void)displayData :(MatchesDataModel *)allMatchesDetails indexPath:(int)indexPath rectSize:(CGSize)rectSize{
     
     name.translatesAutoresizingMaskIntoConstraints=YES;
     reviewedStatusLbl.translatesAutoresizingMaskIntoConstraints=YES;
@@ -111,7 +111,7 @@
     }
 }
 //new segment
--(void)displayNewMatchRequests :(MatchesDataModel *)newMatchesDetails indexPath:(int)indexPath rectSize:(CGSize)rectSize {
+- (void)displayNewMatchRequests :(MatchesDataModel *)newMatchesDetails indexPath:(int)indexPath rectSize:(CGSize)rectSize {
     
     name.translatesAutoresizingMaskIntoConstraints=YES;
     reviewedStatusLbl.translatesAutoresizingMaskIntoConstraints=YES;
@@ -149,7 +149,7 @@
     companyName.text=newMatchesDetails.userCompanyName;
 }
 //contact segement
--(void)displayContacts :(MatchesDataModel *)contactData indexPath:(int)indexPath rectSize:(CGSize)rectSize{
+- (void)displayContacts :(MatchesDataModel *)contactData indexPath:(int)indexPath rectSize:(CGSize)rectSize{
     contactName.translatesAutoresizingMaskIntoConstraints=YES;
     CGSize size = CGSizeMake(rectSize.width-157,100);
     CGRect textRect = [contactData.userName

@@ -20,8 +20,8 @@
     BOOL isTextViewCheck;
 }
 @property (nonatomic,strong) id delegate;
-//-(void)callOptionalMethod:(UIView*)myView frame:(CGRect)myFrame;
--(void)dismissAlertView:(UIView*)myView;
+//- (void)callOptionalMethod:(UIView*)myView frame:(CGRect)myFrame;
+- (void)dismissAlertView:(UIView*)myView;
 - (instancetype)initWithTitle:(NSString*)titleText myView:(UIView*)myView delegate:(id)delegate message:(NSString*)messageText viewBtnText:(NSString*)viewBtnText acceptBtnText:(NSString*)acceptBtnText declineBtnText:(NSString*)declineBtnText isTextField:(BOOL)isTextField;
 @property(nonatomic,retain)UIView *alertView;
 

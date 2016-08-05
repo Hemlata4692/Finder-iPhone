@@ -39,7 +39,7 @@
 #pragma mark - end
 
 #pragma mark - Matches List
--(void)getMatchesList:(void (^)(id data))success failure:(void (^)(NSError *error))failure {
+- (void)getMatchesList:(void (^)(id data))success failure:(void (^)(NSError *error))failure {
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"]};
     NSLog(@"request matches %@",requestDict);
     [[Webservice sharedManager] post:kUrlMatchesList parameters:requestDict success:^(id responseObject) {
@@ -90,7 +90,7 @@
 #pragma mark - end
 
 #pragma mark - Update review status
--(void)updateReviewStatus:(NSString *)otherUserId reviewStatus:(NSString *)reviewStatus success:(void (^)(id))success failure:(void (^)(NSError *))failure {
+- (void)updateReviewStatus:(NSString *)otherUserId reviewStatus:(NSString *)reviewStatus success:(void (^)(id))success failure:(void (^)(NSError *))failure {
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"],@"otherUserId":otherUserId,@"reviewStatus":reviewStatus};
     NSLog(@"request matches %@",requestDict);
     [[Webservice sharedManager] post:kUrlUpdateReviewStatus parameters:requestDict success:^(id responseObject) {
@@ -112,7 +112,7 @@
 #pragma mark - end
 
 #pragma mark - Send cancel request
--(void)sendCancelMatchRequest:(NSString *)otherUserId sendRequest:(NSString *)sendRequest success:(void (^)(id))success failure:(void (^)(NSError *))failure {
+- (void)sendCancelMatchRequest:(NSString *)otherUserId sendRequest:(NSString *)sendRequest success:(void (^)(id))success failure:(void (^)(NSError *))failure {
    
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"],@"otherUserId":otherUserId,@"send":sendRequest};
     NSLog(@"request matches %@",requestDict);
@@ -135,7 +135,7 @@
 #pragma mark - end
 
 #pragma mark - Accept decline request
--(void)acceptDeclineRequest:(NSString *)otherUserId acceptRequest:(NSString *)acceptRequest success:(void (^)(id))success failure:(void (^)(NSError *))failure {
+- (void)acceptDeclineRequest:(NSString *)otherUserId acceptRequest:(NSString *)acceptRequest success:(void (^)(id))success failure:(void (^)(NSError *))failure {
  
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"],@"otherUserId":otherUserId,@"accept":acceptRequest};
     NSLog(@"accept decline matches %@",requestDict);

@@ -85,7 +85,7 @@
     
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
         UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         OtherUserProfileViewController *userProfile =[storyboard instantiateViewControllerWithIdentifier:@"OtherUserProfileViewController"];
@@ -98,7 +98,7 @@
 
 #pragma mark - Webservice
 //get matches details
--(void)getMatchesDetails
+- (void)getMatchesDetails
 {
     [requestedMatchesDataArray removeAllObjects];
     [[MatchesService sharedManager] getMatchesList:^(id dataArray) {
@@ -140,7 +140,7 @@
 }
 
 //send/cancel match request
--(void)sendCancelMatchRequest {
+- (void)sendCancelMatchRequest {
     [[MatchesService sharedManager] sendCancelMatchRequest:otherUserId sendRequest:@"F" success:^(id responseObject) {
        
         [self getMatchesDetails];

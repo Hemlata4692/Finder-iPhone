@@ -24,6 +24,6 @@
 @property (weak, nonatomic) IBOutlet MyButton *scheduleMeetingBtn;
 @property (weak, nonatomic) IBOutlet MyButton *sendMessageBtn;
 
--(void)displayData:(ContactDataModel *)proximityDetails indexPath:(int)indexPath;
+- (void)displayData:(ContactDataModel *)proximityDetails indexPath:(int)indexPath;
 
 @end

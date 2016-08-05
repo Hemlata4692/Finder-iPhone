@@ -56,7 +56,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
--(void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated {
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     [_moreTableView reloadData];
 }
@@ -91,7 +91,7 @@
     }
     return cell;
 }
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     //MyProfileViewController
     if (indexPath.row==0) {
@@ -161,7 +161,7 @@
 #pragma mark - end
 #pragma mark - Textfield delegates
 
--(void)textFieldDidBeginEditing:(UITextField *)textField {
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
     [self.keyboardControls setActiveField:textField];
     
     if([[UIScreen mainScreen] bounds].size.height<568) {
@@ -183,7 +183,7 @@
         }
     }
 }
--(void)textFieldDidEndEditing:(UITextField *)textField {
+- (void)textFieldDidEndEditing:(UITextField *)textField {
     [UIView animateWithDuration:0.3 animations:^{
         changePasswordView.frame=CGRectMake(changePasswordView.frame.origin.x, 64, changePasswordView.frame.size.width, changePasswordView.frame.size.height);
     }];
@@ -239,7 +239,7 @@
 #pragma mark - end
 
 #pragma mark - Webservice
--(void)changePassword {
+- (void)changePassword {
     [[UserService sharedManager] changePassword:oldPasswordTextField.text newPassword:confirmPasswordTextField.text success:^(id responseObject) {
         [myDelegate stopIndicator];
         changePwdContainerView.hidden=YES;
@@ -256,7 +256,7 @@
      }] ;
 }
 
--(void)logout {
+- (void)logout {
     [[UserService sharedManager] logoutUser:^(id responseObject)
      {
          [myDelegate unregisterDeviceForNotification];

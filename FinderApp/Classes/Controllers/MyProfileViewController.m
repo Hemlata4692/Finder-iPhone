@@ -111,7 +111,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
--(void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
     if ([viewName isEqualToString:@"My Profile"]) {
         [myDelegate showIndicator];
@@ -122,7 +122,7 @@
         [self addLeftBarButtonWithImage1:[UIImage imageNamed:@"back"]];
     }
 }
--(void)addShadow
+- (void)addShadow
 {
     [userProfileImage setCornerRadius:userProfileImage.frame.size.width/2];
     [userProfileImage setViewBorder:userProfileImage color:[UIColor whiteColor]];
@@ -133,7 +133,7 @@
     [professionView addShadow:professionView color:[UIColor lightGrayColor]];
     [interestedInView addShadow:interestedInView color:[UIColor lightGrayColor]];
 }
--(void)dealloc {
+- (void)dealloc {
     interestsArray=nil;
 }
 #pragma mark - end
@@ -148,7 +148,7 @@
     
 }
 //back button action
--(void)backAction :(id)sender{
+- (void)backAction :(id)sender{
     for (UIViewController *controller in self.navigationController.viewControllers)
     {
         if ([controller isKindOfClass:[MatchesViewController class]])
@@ -250,7 +250,7 @@
     
 }
 
--(void)addVcfFile {
+- (void)addVcfFile {
     //from vcf file
     CFErrorRef error = NULL;
     NSURL *vCardURL= [NSURL URLWithString:[[userProfileDataArray objectAtIndex:0]vCard]];
@@ -297,7 +297,7 @@
     }
     
 }
--(void)addContactToAddressBook {
+- (void)addContactToAddressBook {
     CFErrorRef error = NULL;
     ABAddressBookRef iPhoneAddressBook = ABAddressBookCreate();
     ABRecordRef newPerson = ABPersonCreate();
@@ -352,13 +352,13 @@
         CFRelease(errorDesc);
     }
 }
--(void)checkMultipleAddress {
+- (void)checkMultipleAddress {
     
 }
 #pragma mark - end
 
 #pragma mark - Webservices
--(void)getUserProfile
+- (void)getUserProfile
 {
     [[ProfileService sharedManager] getUserProfile:^(id profileDataArray) {
         [myDelegate stopIndicator];
@@ -371,7 +371,7 @@
      }] ;
     
 }
--(void)getOtherUserProfile {
+- (void)getOtherUserProfile {
     [[ProfileService sharedManager] getOtherUserProfile:otherUserID success:^(id profileDataArray) {
         [myDelegate stopIndicator];
         if ([viewType isEqualToString:@"Matches"]) {
@@ -385,7 +385,7 @@
          
      }] ;
 }
--(void)updateReviewStatus {
+- (void)updateReviewStatus {
     [[MatchesService sharedManager] updateReviewStatus:otherUserID reviewStatus:@"T" success:^(id responseObject) {
         [myDelegate stopIndicator];
     }
@@ -395,7 +395,7 @@
      }] ;
     
 }
--(void)displayUserProfileData {
+- (void)displayUserProfileData {
     
     companyDescriptionLabel.translatesAutoresizingMaskIntoConstraints = YES;
     aboutCompanyView.translatesAutoresizingMaskIntoConstraints = YES;
@@ -452,7 +452,7 @@
     }
     
     size = CGSizeMake(mainContainerView.frame.size.width-16,999);
-    textRect=[self setDynamicHeight:size textString:aboutComapny fontSize:[UIFont fontWithName:@"Roboto-Regular" size:15]];
+    textRect=[self setDynamicHeight:size textString:aboutComapny fontSize:[UIFont fontWithName:@"Roboto-Regular" size:14]];
     companyDescriptionLabel.numberOfLines = 0;
     aboutCompanyView.frame=CGRectMake(8, aboutcompanyHeading.frame.origin.y+aboutcompanyHeading.frame.size.height+5, mainContainerView.frame.size.width-16, textRect.size.height+10);
     companyDescriptionLabel.frame = CGRectMake(8, 3, aboutCompanyView.frame.size.width-10, textRect.size.height);

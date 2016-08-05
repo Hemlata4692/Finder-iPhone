@@ -33,7 +33,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(conferenceList) name:@"Conference" object:nil];
     //Conference
 }
--(void)conferenceList{
+- (void)conferenceList{
     [myDelegate removeBadgeIconLastTab];
     [myDelegate showIndicator];
     [self performSelector:@selector(getConferenceListing) withObject:nil afterDelay:0.1];
@@ -42,7 +42,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
--(void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
      myDelegate.myView=@"ConferenceViewController";
@@ -50,7 +50,7 @@
     [self performSelector:@selector(getConferenceListing) withObject:nil afterDelay:.1];
 
 }
--(void)viewWillDisappear:(BOOL)animated
+- (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:YES];
     myDelegate.myView=@"other";
@@ -61,7 +61,7 @@
 
 
 #pragma mark - Webservice
--(void)getConferenceListing{
+- (void)getConferenceListing{
     [[ConferenceService sharedManager] getConferenceListing:^(id dataArray) {
         [myDelegate stopIndicator];
         conferenceListingArray=[dataArray mutableCopy];
@@ -121,7 +121,7 @@
     
     return conferenceCell;
 }
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     MatchesViewController * homeView = [storyboard instantiateViewControllerWithIdentifier:@"tabBar"];
     [UserDefaultManager setValue:[[conferenceListingArray objectAtIndex:indexPath.row] conferenceId] key:@"conferenceId"];

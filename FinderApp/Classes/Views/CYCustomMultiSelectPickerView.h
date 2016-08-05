@@ -20,6 +20,6 @@
 
 @protocol CYCustomMultiSelectPickerViewDelegate <NSObject>
 @required
--(void)returnChoosedPickerString:(NSMutableArray *)selectedEntriesArr;
--(void)hidePicker;
+- (void)returnChoosedPickerString:(NSMutableArray *)selectedEntriesArr;
+- (void)hidePicker;
 @end

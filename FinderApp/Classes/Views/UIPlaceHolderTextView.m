@@ -174,7 +174,7 @@
 //    
 //    return lRect;
 //}
-//-(void)addBorder:(UITextView *)textView rect:(CGRect)rect
+//- (void)addBorder:(UITextView *)textView rect:(CGRect)rect
 //{
 //    UIView *bottomBorder=[[UIView alloc]initWithFrame:CGRectMake(textView.frame.origin.x, textView.frame.origin.y+height.size.height,rect.size.width , 1)];
 //    bottomBorder.backgroundColor=[UIColor blackColor];

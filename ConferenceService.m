@@ -47,7 +47,7 @@
 #pragma mark - end
 
 #pragma mark- Conference listing
--(void)getConferenceListing:(void (^)(id data))success failure:(void (^)(NSError *error))failure
+- (void)getConferenceListing:(void (^)(id data))success failure:(void (^)(NSError *error))failure
 {
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"]};
     NSLog(@"request conference list %@",requestDict);
@@ -96,7 +96,7 @@
 #pragma mark- end
 
 #pragma mark- Conference detail
--(void)getConferenceDetail:(NSString *)conferenceId success:(void (^)(id))success failure:(void (^)(NSError *error))failure
+- (void)getConferenceDetail:(NSString *)conferenceId success:(void (^)(id))success failure:(void (^)(NSError *error))failure
 {
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":conferenceId};
     NSLog(@"request home %@",requestDict);
@@ -131,7 +131,7 @@
 #pragma mark- end
 
 #pragma mark- Settings
--(void)changeSettings:(NSString *)switchIdentifire switchStatus:(NSString *)switchStatus success:(void (^)(id))success failure:(void (^)(NSError *))failure
+- (void)changeSettings:(NSString *)switchIdentifire switchStatus:(NSString *)switchStatus success:(void (^)(id))success failure:(void (^)(NSError *))failure
 {
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"switchIdentifire":switchIdentifire,@"switchStatus":switchStatus};
     NSLog(@"settings request %@",requestDict);
@@ -153,7 +153,7 @@
     
 }
 //getUserSetting
--(void)getUserSetting:(void (^)(id data))success failure:(void (^)(NSError *error))failure
+- (void)getUserSetting:(void (^)(id data))success failure:(void (^)(NSError *error))failure
 {
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"]};
     NSLog(@"user setting request %@",requestDict);
@@ -177,7 +177,7 @@
 #pragma mark- end
 
 #pragma mark- Calendar Details
--(void)getCalendarDetails:(NSString *)conferenceId success:(void (^)(id))success failure:(void (^)(NSError *error))failure
+- (void)getCalendarDetails:(NSString *)conferenceId success:(void (^)(id))success failure:(void (^)(NSError *error))failure
 {
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":conferenceId};
     NSLog(@"request calendar details %@",requestDict);
@@ -236,7 +236,7 @@
 #pragma mark- end
 
 #pragma mark- Contact list
--(void)getContactDetails:(void (^)(id data))success failure:(void (^)(NSError *error))failure {
+- (void)getContactDetails:(void (^)(id data))success failure:(void (^)(NSError *error))failure {
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"]};
     NSLog(@"user contact request %@",requestDict);
     [[Webservice sharedManager] post:kUrlContactDetails parameters:requestDict success:^(id responseObject)
@@ -272,7 +272,7 @@
 #pragma mark- end
 
 #pragma mark- Schedule meeting
--(void)scheduleMeeting:(NSString *)contactUserId venue:(NSString *)venue meetingAgenda:(NSString *)meetingAgenda date:(NSString *)date timeFrom:(NSString *)timeFrom timeTo:(NSString *)timeTo success:(void (^)(id))success failure:(void (^)(NSError *))failure {
+- (void)scheduleMeeting:(NSString *)contactUserId venue:(NSString *)venue meetingAgenda:(NSString *)meetingAgenda date:(NSString *)date timeFrom:(NSString *)timeFrom timeTo:(NSString *)timeTo success:(void (^)(id))success failure:(void (^)(NSError *))failure {
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"],@"contactUserId":contactUserId,@"venue":venue,@"meetingAgenda":meetingAgenda,@"date":date,@"timeFrom":timeFrom,@"timeTo":timeTo};
     NSLog(@"schedule meeting request %@",requestDict);
     [[Webservice sharedManager] post:kUrlScheduleMeeting parameters:requestDict success:^(id responseObject)
@@ -294,7 +294,7 @@
 }
 #pragma mark- end
 #pragma mark - Pending appointment
--(void)pendingAppointment:(void (^)(id data))success failure:(void (^)(NSError *error))failure
+- (void)pendingAppointment:(void (^)(id data))success failure:(void (^)(NSError *error))failure
 {
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"]};
     NSLog(@"request pending appointment  %@",requestDict);
@@ -344,7 +344,7 @@
 #pragma mark - end
 
 #pragma mark - Requested appointment
--(void)requestedAppointment:(void (^)(id data))success failure:(void (^)(NSError *error))failure
+- (void)requestedAppointment:(void (^)(id data))success failure:(void (^)(NSError *error))failure
 {
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"]};
     NSLog(@"request request appointment  %@",requestDict);
@@ -392,7 +392,7 @@
 #pragma mark - end
 
 #pragma mark - Accept cancel meeting
--(void)acceptCancelMeeting:(NSString *)appointmentId meetingUserId:(NSString *)meetingUserId flag:(NSString *)flag type:(NSString *)type reasonForCancel:(NSString *)reasonForCancel success:(void (^)(id))success failure:(void (^)(NSError *))failure {
+- (void)acceptCancelMeeting:(NSString *)appointmentId meetingUserId:(NSString *)meetingUserId flag:(NSString *)flag type:(NSString *)type reasonForCancel:(NSString *)reasonForCancel success:(void (^)(id))success failure:(void (^)(NSError *))failure {
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"],@"appointmentId":appointmentId,@"meetingUserId":meetingUserId,@"flag":flag,@"type":type, @"reasonForCancel":reasonForCancel};
     NSLog(@"accept decline appointment %@",requestDict);
     [[Webservice sharedManager] post:kUrlAcceptCancelAppointment parameters:requestDict success:^(id responseObject) {
@@ -414,7 +414,7 @@
 }
 #pragma mark - end
 #pragma mark - Proximity alerts
--(void)getProximityAlerts:(NSString *)proximityRadius success:(void (^)(id))success failure:(void (^)(NSError *))failure
+- (void)getProximityAlerts:(NSString *)proximityRadius success:(void (^)(id))success failure:(void (^)(NSError *))failure
 {
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"],@"proximityRadius":proximityRadius};
     NSLog(@"proximity radius request %@",requestDict);

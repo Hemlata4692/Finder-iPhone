@@ -99,7 +99,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
--(void)addShadow
+- (void)addShadow
 {
     [otherUserProfileImage setCornerRadius:otherUserProfileImage.frame.size.width/2];
     [otherUserProfileImage setViewBorder:otherUserProfileImage color:[UIColor whiteColor]];
@@ -110,7 +110,7 @@
     [professionView addShadow:professionView color:[UIColor lightGrayColor]];
     [interestedInView addShadow:interestedInView color:[UIColor lightGrayColor]];
 }
--(void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
     
     if ([isRequestArrived isEqualToString:@"T"]) {
@@ -160,7 +160,7 @@
 #pragma mark - end
 
 #pragma mark - Webservice
--(void)getOtherUserProfile {
+- (void)getOtherUserProfile {
     
     [[ProfileService sharedManager] getOtherUserProfile:otherUserId success:^(id profileDataArray) {
         [myDelegate stopIndicator];
@@ -175,7 +175,7 @@
          
      }] ;
 }
--(void)updateReviewStatus {
+- (void)updateReviewStatus {
     [[MatchesService sharedManager] updateReviewStatus:otherUserId reviewStatus:@"T" success:^(id responseObject) {
         [myDelegate stopIndicator];
     }
@@ -186,7 +186,7 @@
     
 }
 //send/cancel match request
--(void)sendCancelMatchesRequest {
+- (void)sendCancelMatchesRequest {
     [[MatchesService sharedManager] sendCancelMatchRequest:otherUserId sendRequest:isRequestSent success:^(id responseObject) {
         [myDelegate stopIndicator];
         if ([isRequestSent isEqualToString:@"T"]) {
@@ -204,7 +204,7 @@
      }] ;
     
 }
--(void)acceptDeclineRequest {
+- (void)acceptDeclineRequest {
     
     [[MatchesService sharedManager] acceptDeclineRequest:otherUserId acceptRequest:acceptRequest success:^(id responseObject) {
         [myDelegate stopIndicator];
@@ -231,7 +231,7 @@
      }] ;
 }
 
--(void)displayUserProfileData {
+- (void)displayUserProfileData {
     
     companyDescriptionLabel.translatesAutoresizingMaskIntoConstraints = YES;
     aboutCompanyView.translatesAutoresizingMaskIntoConstraints = YES;

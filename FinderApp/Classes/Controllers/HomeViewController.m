@@ -68,7 +68,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
--(void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
 }
@@ -76,7 +76,7 @@
 #pragma mark - end
 
 #pragma mark - Webservice
--(void)getConferenceDetail{
+- (void)getConferenceDetail{
     conferenceId=[UserDefaultManager getValue:@"conferenceId"];
     [[ConferenceService sharedManager] getConferenceDetail:conferenceId success:^(id conferenceArray) {
         [myDelegate stopIndicator];
@@ -89,7 +89,7 @@
      }] ;
 }
 //Display data
--(void)displayConferenceDetail{
+- (void)displayConferenceDetail{
     conferenceDescription.translatesAutoresizingMaskIntoConstraints = YES;
     mainContainerView.translatesAutoresizingMaskIntoConstraints=YES;
  

@@ -46,7 +46,7 @@
     // Dispose of any resources that can be recreated.
 }
 #pragma mark - end
--(void)setMeetingDetail:(NSString *)descriptionText locationText:(NSString *)locationText {
+- (void)setMeetingDetail:(NSString *)descriptionText locationText:(NSString *)locationText {
     
     [meetingDescriptionView addShadow:meetingDescriptionView color:[UIColor lightGrayColor]];
     [meetingDescriptionView setCornerRadius:2.0f];
@@ -100,7 +100,7 @@
 }
 #pragma mark - end
 
--(void) meetingDescriptionContainerView:(UITapGestureRecognizer *)sender {
+- (void) meetingDescriptionContainerView:(UITapGestureRecognizer *)sender {
       [self.presentingViewController dismissViewControllerAnimated:NO completion:nil];
 }
 

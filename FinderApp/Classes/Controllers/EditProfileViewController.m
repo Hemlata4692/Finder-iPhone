@@ -124,7 +124,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
--(void)addShadow
+- (void)addShadow
 {
     userImageView.layer.cornerRadius=userImageView.frame.size.width/2;
     userImageView.clipsToBounds=YES;
@@ -142,7 +142,7 @@
     [interestedAreaView addShadow:interestedAreaView color:[UIColor lightGrayColor]];
     [userInfoView addShadow:userInfoView color:[UIColor lightGrayColor]];
 }
--(void)displayData {
+- (void)displayData {
     __weak UIImageView *weakRef = userImageView;
     NSURLRequest *imageRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:[[profileArray objectAtIndex:0]userImage]]
                                                   cachePolicy:NSURLRequestReturnCacheDataElseLoad
@@ -329,7 +329,7 @@
     [UIView commitAnimations];
 }
 //Hide picker
--(void)hidePickerWithAnimation{
+- (void)hidePickerWithAnimation{
   
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.3];
@@ -407,7 +407,7 @@
 
 
 #pragma mark - ALPicker Delegate
--(void)returnChoosedPickerString:(NSMutableArray *)selectedEntriesArr
+- (void)returnChoosedPickerString:(NSMutableArray *)selectedEntriesArr
 {
     NSString *dataStr = [selectedEntriesArr componentsJoinedByString:@","];
     selectedPickerArray = selectedEntriesArr;
@@ -417,7 +417,7 @@
     [editProfileScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
     [UIView commitAnimations];
 }
--(void)hidePicker
+- (void)hidePicker
 {
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];
@@ -438,7 +438,7 @@
 #pragma mark - end
 
 #pragma mark - Textfield delegates
--(void)textFieldDidBeginEditing:(UITextField *)textField {
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
     [self.keyboardControls setActiveField:textField];
     if (textField==mobileNumberTextField) {
         if([[UIScreen mainScreen] bounds].size.height<568)  {
@@ -483,12 +483,12 @@
     [textField resignFirstResponder];
     return YES;
 }
--(void)textFieldDidEndEditing:(UITextField *)textField {
+- (void)textFieldDidEndEditing:(UITextField *)textField {
     [editProfileScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
 }
 #pragma mark - end
 #pragma mark - Textview delegates
--(void)textViewDidBeginEditing:(UITextView *)textView {
+- (void)textViewDidBeginEditing:(UITextView *)textView {
     [self.keyboardControls setActiveField:textView];
     if (textView==aboutCompanyTextView) {
         if([[UIScreen mainScreen] bounds].size.height<=568){
@@ -499,14 +499,14 @@
         }
     }
 }
--(void)textViewDidEndEditing:(UITextView *)textView{
+- (void)textViewDidEndEditing:(UITextView *)textView{
     [editProfileScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
 }
 
 #pragma mark - end
 
 #pragma mark - Webservice
--(void)getInterestListing{
+- (void)getInterestListing{
     [[ProfileService sharedManager] getInterestList:^(id responseObject) {
         [myDelegate stopIndicator];
         NSDictionary *tempDict=[responseObject objectForKey:@"details"];
@@ -539,7 +539,7 @@
      }] ;
     
 }
--(void)editUserProfile {
+- (void)editUserProfile {
    
     [[ProfileService sharedManager] editUserProfile:userNameTextField.text mobileNumber:mobileNumberTextField.text companyName:companyNameTextField.text companyAddress:companyAddressTextField.text designation:designationTextField.text aboutCompany:aboutCompanyTextView.text linkedIn:linkedInTextField.text interests:interestedAreaTextField.text interestedIn:interestedInTextField.text profession:professionTextField.text image:userImageView.image success:^(id responseObject) {
         [myDelegate stopIndicator];
@@ -563,7 +563,7 @@
 }
 #pragma mark - end
 #pragma mark - Action sheet delegate
--(void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     NSString *buttonTitle = [actionSheet buttonTitleAtIndex:buttonIndex];
     if (buttonIndex==0)

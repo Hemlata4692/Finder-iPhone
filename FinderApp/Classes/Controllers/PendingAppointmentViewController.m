@@ -82,12 +82,12 @@
     [cancelMessageTextView setPlaceholder:@"  Cancel Message"];
     
 }
--(void)pendingDetails{
+- (void)pendingDetails{
     
     [myDelegate showIndicator];
     [self performSelector:@selector(getPendingAppointmentList) withObject:nil afterDelay:0.1];
 }
--(void)requestedDetails{
+- (void)requestedDetails{
     
     [myDelegate showIndicator];
     [self performSelector:@selector(getRequestedAppointmentList) withObject:nil afterDelay:0.1];
@@ -96,7 +96,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
--(void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated{
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     if ([screenName isEqualToString:@"Pending Appointments"]) {
         
@@ -111,7 +111,7 @@
 #pragma mark - end
 
 #pragma mark - Webservices
--(void)getRequestedAppointmentList {
+- (void)getRequestedAppointmentList {
     [[ConferenceService sharedManager] requestedAppointment:^(id dataArray) {
         [myDelegate stopIndicator];
         appointmentDataArray=[dataArray mutableCopy];
@@ -137,7 +137,7 @@
     
 }
 
--(void)getPendingAppointmentList {
+- (void)getPendingAppointmentList {
     [[ConferenceService sharedManager] pendingAppointment:^(id dataArray) {
         [myDelegate stopIndicator];
         appointmentDataArray=[dataArray mutableCopy];
@@ -161,7 +161,7 @@
      }] ;
     
 }
--(void)acceptMeetingRequest {
+- (void)acceptMeetingRequest {
     [[ConferenceService sharedManager] acceptCancelMeeting:appointmentId meetingUserId:meetingId flag:status  type:appointmentType reasonForCancel:@"" success:^(id dataArray) {
         [self getPendingAppointmentList];
     }
@@ -171,7 +171,7 @@
      }] ;
     
 }
--(void)cancelMeetingRequest {
+- (void)cancelMeetingRequest {
     [[ConferenceService sharedManager] acceptCancelMeeting:appointmentId meetingUserId:meetingId flag:status type:appointmentType reasonForCancel:cancelMessageString success:^(id dataArray) {
         if ([appointmentType isEqualToString:@"requested"]) {
             [self getPendingAppointmentList];
@@ -240,7 +240,7 @@
     return pendingCell;
 }
 
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     MyProfileViewController *profileView =[storyboard instantiateViewControllerWithIdentifier:@"MyProfileViewController"];
@@ -315,7 +315,7 @@
 
 #pragma mark - end
 #pragma mark - Tap gesture delegate
--(void) meetingDescriptionContainerView:(UITapGestureRecognizer *)sender {
+- (void) meetingDescriptionContainerView:(UITapGestureRecognizer *)sender {
     cancelMessageContainerView.hidden = YES;
     [keyboardControls.activeField resignFirstResponder];
 }
@@ -331,7 +331,7 @@
 }
 #pragma mark - end
 #pragma mark - Textview delegates
--(void)textViewDidBeginEditing:(UITextView *)textView {
+- (void)textViewDidBeginEditing:(UITextView *)textView {
     [self.keyboardControls setActiveField:textView];
 }
 #pragma mark - end

@@ -28,7 +28,7 @@
 #pragma mark - end
 
 #pragma mark - Messages
--(void)displayMessageData:(MessagesDataModel *)messageDetails indexPath:(int)indexPath rectSize:(CGSize)rectSize {
+- (void)displayMessageData:(MessagesDataModel *)messageDetails indexPath:(int)indexPath rectSize:(CGSize)rectSize {
     [userImage setCornerRadius:userImage.frame.size.width/2];
     [messageCountLabel setCornerRadius:messageCountLabel.frame.size.width/2];
     userNameLabel.text=messageDetails.userName;
@@ -64,7 +64,7 @@
 #pragma mark - ends
 
 #pragma mark - Display contacts
--(void)displayData:(ContactDataModel *)contactDetails indexPath:(int)indexPath {
+- (void)displayData:(ContactDataModel *)contactDetails indexPath:(int)indexPath {
 //    nameLabel.translatesAutoresizingMaskIntoConstraints=YES;
 //    CGSize size = CGSizeMake(rectSize.width-157,100);
 //    CGRect textRect = [contactDetails.contactName

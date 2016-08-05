@@ -40,7 +40,7 @@
     noResultFoundLabel.hidden=YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(calendarDetails) name:@"CalendarDetails" object:nil];
 }
--(void)calendarDetails {
+- (void)calendarDetails {
 
     [myDelegate showIndicator];
     [self performSelector:@selector(getCalendarDetails) withObject:nil afterDelay:0.1];
@@ -49,7 +49,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
--(void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     myDelegate.currentNavigationController=self.navigationController;
@@ -58,7 +58,7 @@
     [self performSelector:@selector(getCalendarDetails) withObject:nil afterDelay:.1];
     
 }
--(void)viewWillDisappear:(BOOL)animated
+- (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:YES];
     myDelegate.myView=@"other";
@@ -67,7 +67,7 @@
 #pragma mark - end
 
 #pragma mark - Webservice
--(void)getCalendarDetails {
+- (void)getCalendarDetails {
     
     [[ConferenceService sharedManager] getCalendarDetails:[UserDefaultManager getValue:@"conferenceId"] success:^(id dataArray) {
         [self contactDetails];
@@ -161,7 +161,7 @@
          calendarTableView.hidden=YES;
      }] ;
 }
--(void)contactDetails {
+- (void)contactDetails {
     [[ConferenceService sharedManager] getContactDetails:^(id dataArray) {
         [myDelegate stopIndicator];
         contactArray=[dataArray mutableCopy];

@@ -22,15 +22,15 @@
 @property (nonatomic, strong) NSString *requestArrived;
 @property(nonatomic,retain) UINavigationController *currentNavigationController;
 @property (strong, nonatomic)NSString *myView;
--(void)showIndicator;
--(void)stopIndicator;
--(void)startTrackingBg;
--(void)locationUpdate;
--(void)registerDeviceForNotification;
--(void)unregisterDeviceForNotification;
--(void)removeBadgeIconLastTab;
--(void)addBadgeIcon;
--(void)removeBadgeIconOnMoreTab;
--(void)addBadgeIconOnMoreTab;
+- (void)showIndicator;
+- (void)stopIndicator;
+- (void)startTrackingBg;
+- (void)locationUpdate;
+- (void)registerDeviceForNotification;
+- (void)unregisterDeviceForNotification;
+- (void)removeBadgeIconLastTab;
+- (void)addBadgeIcon;
+- (void)removeBadgeIconOnMoreTab;
+- (void)addBadgeIconOnMoreTab;
 @end
 

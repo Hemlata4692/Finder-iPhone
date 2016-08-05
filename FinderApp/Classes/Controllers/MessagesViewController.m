@@ -39,7 +39,7 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
--(void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated{
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     [myDelegate removeBadgeIconLastTab];
     [myDelegate showIndicator];
@@ -48,7 +48,7 @@
 #pragma mark - end
 
 #pragma mark - Webservice
--(void)getDifferentMessages {
+- (void)getDifferentMessages {
     [[MessageService sharedManager] getDifferentMessage:^(id dataArray) {
         [myDelegate stopIndicator];
         messagesDataArray=[dataArray mutableCopy];
@@ -87,7 +87,7 @@
     [messagesCell displayMessageData:data indexPath:(int)indexPath.row rectSize:messagesCell.frame.size];
     return messagesCell;
 }
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     PersonalMessageViewController *msgView =[storyboard instantiateViewControllerWithIdentifier:@"PersonalMessageViewController"];
     msgView.otherUserId=[[messagesDataArray objectAtIndex:indexPath.row] otherUserId];

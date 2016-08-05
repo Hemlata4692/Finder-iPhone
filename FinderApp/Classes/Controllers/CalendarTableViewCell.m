@@ -23,7 +23,7 @@
 #pragma mark - end
 
 #pragma mark - Display data
--(void)displayData :(EventDataModel *)eventDetails indexPath:(int)indexPath
+- (void)displayData :(EventDataModel *)eventDetails indexPath:(int)indexPath
 {
     [userImage setCornerRadius:userImage.frame.size.width/2];
 //  [viewAgendaButton setViewBorder:viewAgendaButton color:[UIColor colorWithRed:79.0/255.0 green:206.0/255.0 blue:195.0/255.0 alpha:1.0]];

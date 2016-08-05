@@ -25,7 +25,7 @@
     // Configure the view for the selected state
 }
 
--(void)displayData :(MatchesDataModel *)allMatchesDetails {
+- (void)displayData :(MatchesDataModel *)allMatchesDetails {
     
     name.translatesAutoresizingMaskIntoConstraints=YES;
     companyName.translatesAutoresizingMaskIntoConstraints = YES;

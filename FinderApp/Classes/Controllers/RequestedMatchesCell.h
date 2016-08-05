@@ -16,5 +16,5 @@
 @property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 @property (weak, nonatomic) IBOutlet UIView *containerView;
 
--(void)displayData :(MatchesDataModel *)allMatchesDetails;
+- (void)displayData :(MatchesDataModel *)allMatchesDetails;
 @end

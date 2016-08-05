@@ -75,7 +75,6 @@
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:237.0/255.0 green:120.0/255.0 blue:0.0/255.0 alpha:1.0]];
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, [UIFont fontWithName:@"Roboto-Regular" size:19.0], NSFontAttributeName, nil]];
-    // _window.backgroundColor = [UIColor redColor];
     multiplePickerDic=[[NSMutableDictionary alloc]init];
     alertDict=[NSDictionary new];
     locationManager = [[CLLocationManager alloc] init];
@@ -96,7 +95,6 @@
     {
         [UserDefaultManager setValue:@"0" key:@"PendingMessage"];
     }
-   
     NSLog(@"userId %@",[[NSUserDefaults standardUserDefaults] objectForKey:@"userId"]);
     NSLog(@"conferenceId %@",[[NSUserDefaults standardUserDefaults] objectForKey:@"conferenceId"]);
     UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -122,7 +120,6 @@
         [self.navigationController setViewControllers: [NSArray arrayWithObject:loginView]
                                              animated: YES];
     }
-    
     if ([UserDefaultManager getValue:@"switchStatusDict"]==NULL) {
         NSMutableDictionary *switchDict=[[NSMutableDictionary alloc]init];
         [switchDict setObject:@"True" forKey:@"00"];
@@ -135,21 +132,15 @@
         [switchDict setObject:@"True" forKey:@"14"];
         [UserDefaultManager setValue:switchDict key:@"switchStatusDict"];
     }
-    
     //permission for local notification
-    if ([application respondsToSelector:@selector(registerUserNotificationSettings:)])
-    {
+    if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
         [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
     }
-    
     UILocalNotification *localNotiInfo = [launchOptions objectForKey: UIApplicationLaunchOptionsLocalNotificationKey];
-    
     //Accept local notification when app is not open
-    if (localNotiInfo)
-    {
+    if (localNotiInfo) {
         [self application:application didReceiveLocalNotification:localNotiInfo];
     }
-    
     //Accept push notification when app is not open
     application.applicationIconBadgeNumber = 0;
     NSDictionary *remoteNotifiInfo = [launchOptions objectForKey: UIApplicationLaunchOptionsRemoteNotificationKey];
@@ -161,12 +152,10 @@
     }
     return YES;
 }
-
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
     // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
 }
-
 - (void)applicationDidEnterBackground:(UIApplication *)application{
     [timer invalidate];
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
@@ -179,32 +168,26 @@
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
 }
 
-- (void)applicationDidBecomeActive:(UIApplication *)application{
+- (void)applicationDidBecomeActive:(UIApplication *)application {
     application.applicationIconBadgeNumber = 0;
 }
-
-
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 #pragma mark - end
 
 #pragma mark - Location update in background
--(void)locationUpdate {
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"userId"]!=nil)
-    {
-//                [NSString stringWithFormat:@"%2d,M",[[[UserDefaultManager getValue:@"switchStatusDict"] objectForKey:@"02"] intValue]];
+- (void)locationUpdate {
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"userId"]!=nil) {
         [[UserService sharedManager] locationUpdate:latitude longitude:longitude proximityRange:[[UserDefaultManager getValue:@"switchStatusDict"] objectForKey:@"02"] success:^(id responseObject)
          {
              NSLog(@"webservice did fire");
              [self startTrackingBg];
-             
          } failure:^(NSError *error) {
-             
          }] ;
     }
 }
-- (void) startTrackingBg{
+- (void) startTrackingBg {
     if ([isLocation isEqualToString:@"2"])
     {
         isLocation=@"0";
@@ -216,20 +199,9 @@
         NSLog(@"Timer did fire");
     }
 }
-
-//-(void)locationManager:(CLLocationManager *)manager
-//   didUpdateToLocation:(CLLocation *)newLocation
-//          fromLocation:(CLLocation *)oldLocation{
-//    NSLog(@"location updating1111");
-//    CLLocationCoordinate2D cordinates = newLocation.coordinate;
-//    NSLog(@"***************************My Loaction---->%f, %f*************************** ", cordinates.latitude, cordinates.longitude);
-//}
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations{
-    // NSLog(@"location updating2222");
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     CLLocation *newLocation = (CLLocation *)[locations lastObject];
     CLLocationCoordinate2D cordinates = newLocation.coordinate;
-    
     latitude=[NSString stringWithFormat:@"%f",cordinates.latitude];
     longitude=[NSString stringWithFormat:@"%f",cordinates.longitude];
     if ([isLocation isEqualToString:@"1"])
@@ -241,22 +213,17 @@
 #pragma mark - end
 
 #pragma mark - Push notification methods
--(void)registerDeviceForNotification{
-    
-    if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerUserNotificationSettings:)])
-    {
+- (void)registerDeviceForNotification {
+    if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerUserNotificationSettings:)]) {
         [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
         [[UIApplication sharedApplication] registerForRemoteNotifications];
     }
-    else
-    {
-        
+    else {
         [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
         [[UIApplication sharedApplication] registerForRemoteNotifications];
     }
 }
-
-- (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken1{
+- (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken1 {
     NSString *token = [[deviceToken1 description] stringByTrimmingCharactersInSet: [NSCharacterSet characterSetWithCharactersInString:@"<>"]];
     token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSLog(@"content---.......................%@", token);
@@ -265,22 +232,18 @@
     [[UserService sharedManager] registerDeviceForPushNotification:token deviceType:@"ios" success:^(id responseObject) {
         NSLog(@"push notification response is  --------------------->>>%@",responseObject);
     } failure:^(NSError *error) {
-        
     }] ;
 }
-
-- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     NSLog(@"push notification user info is active state --------------------->>>%@",userInfo);
     [UIApplication sharedApplication].applicationIconBadgeNumber=0;
     alertDict=[userInfo objectForKey:@"aps"];
     if (application.applicationState == UIApplicationStateActive)
     {
         if ([[alertDict objectForKey:@"type"] isEqualToString:@"1"]) {
-            
             alert = [[MyAlert alloc] initWithTitle:@"New Match Request" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"View" acceptBtnText:@"Accept" declineBtnText:@"Decline" isTextField:NO];
         }
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"2"]) {
-            
             alert = [[MyAlert alloc] initWithTitle:@"New Meeting Request" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Accept" acceptBtnText:@"" declineBtnText:@"Decline" isTextField:YES];
             if (![myDelegate.myView isEqualToString:@"PendingViewController"]) {
                 if ([[UserDefaultManager getValue:@"PendingMessage"] isEqualToString:@"0"]) {
@@ -310,7 +273,6 @@
             alert = [[MyAlert alloc] initWithTitle:@"Proximity Alerts" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel" isTextField:NO];
         }
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"9"]) {
-            
             if ([myDelegate.myView isEqualToString:@"PersonalMessageView"]) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"GetMessageHistory" object:nil];
             }
@@ -318,11 +280,9 @@
                 [self addBadgeIcon];
             }
         }
-        
     }
     else {
         if ([[alertDict objectForKey:@"type"] isEqualToString:@"1"]) {
-            
         }
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"2"]) {
             alertType=@"2";
@@ -331,21 +291,16 @@
             }
         }
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"8"]) {
-            
             alertType=@"8";
             UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
             MatchesViewController * objView=[storyboard instantiateViewControllerWithIdentifier:@"tabBar"];
             self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
             [self.window setRootViewController:objView];
             [self.window makeKeyAndVisible];
-            
         }
-        
     }
-    
 }
-
-- (void)myAlertDelegateAction:(CustomAlert *)myAlert option:(int)option reason:(NSString *)reason{
+- (void)myAlertDelegateAction:(CustomAlert *)myAlert option:(int)option reason:(NSString *)reason {
     
     if (option == 0) {
         if ([[alertDict objectForKey:@"type"] isEqualToString:@"1"]) {
@@ -357,7 +312,6 @@
             view1.otherUserId=[alertDict objectForKey:@"otherUserId"];
             [self.currentNavigationController pushViewController:view1 animated:YES];
         }
-        
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"2"]) {
             [self removeBadgeIconOnMoreTab];
             [[ConferenceService sharedManager] acceptCancelMeeting:[alertDict objectForKey:@"appointmentId"] meetingUserId:[alertDict objectForKey:@"meetinguserId"] flag:@"accept" type:@"requested" reasonForCancel:@"" success:^(id responseObject) {
@@ -369,7 +323,6 @@
             }
                                                            failure:^(NSError *error)
              {
-                 
              }] ;
         }
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"3"]) {
@@ -377,7 +330,6 @@
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"MatchesDetails" object:nil];
             }
         }
-        
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"4"]) {
             if ([myDelegate.myView isEqualToString:@"MatchesViewController"]) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"MatchesDetails" object:nil];
@@ -412,20 +364,17 @@
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"ProximityAlerts" object:nil];
             }
         }
-        //ConferenceViewController
         NSLog(@"view");
     }
     else if(option == 1) {
         if ([[alertDict objectForKey:@"type"] isEqualToString:@"1"]) {
             [[MatchesService sharedManager] acceptDeclineRequest:[alertDict objectForKey:@"otherUserId"] acceptRequest:@"T" success:^(id responseObject) {
-                
                 if ([myDelegate.myView isEqualToString:@"MatchesViewController"]) {
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"MatchesDetails" object:nil];
                 }
             }
                                                          failure:^(NSError *error)
              {
-                 
              }] ;
         }
         NSLog(@"accept");
@@ -437,71 +386,49 @@
                 if ([myDelegate.myView isEqualToString:@"MatchesViewController"]) {
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"MatchesDetails" object:nil];
                 }
-                
-                
             }
                                                          failure:^(NSError *error)
              {
-                 
              }] ;
-            
         }
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"2"]) {
             [[ConferenceService sharedManager] acceptCancelMeeting:[alertDict objectForKey:@"appointmentId"] meetingUserId:[alertDict objectForKey:@"meetinguserId"] flag:@"cancel" type:@"requested" reasonForCancel:reason success:^(id responseObject) {
-                
                 if ([myDelegate.myView isEqualToString:@"CalendarViewController"]) {
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"CalendarDetails" object:nil];
                 }
-                
             }
                                                            failure:^(NSError *error)
              {
-                 
              }] ;
-            
         }
-        
         NSLog(@"decline");
     }
     [alert dismissAlertView:self.window];
 }
-
-
-- (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err
-{
+- (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
     NSString *str = [NSString stringWithFormat: @"Error: %@", err];
     NSLog(@"did failtoRegister and testing : %@",str);
-    
 }
--(void)unregisterDeviceForNotification
-{
+- (void)unregisterDeviceForNotification {
     [[UIApplication sharedApplication]  unregisterForRemoteNotifications];
 }
 #pragma mark - end
+
 #pragma mark - Local notification
--(void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification
-{
-    
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
     if (application.applicationState == UIApplicationStateActive) {
-        
         //        [audioPlayer play];
         //        CustomLocalNotification *myLocalNotification = [[CustomLocalNotification alloc]initWithFrame:CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, 20) labelText:[notification.userInfo valueForKey:@"userInfo"]];
         //        [self.window addSubview:myLocalNotification.mainView];
-        
-        
     }
     else {
-        
         [[UIApplication sharedApplication] cancelLocalNotification:notification];
     }
 }
--(void)dismiss:(UIAlertView*)alertview
-{
+- (void)dismiss:(UIAlertView*)alertview {
     [alertview dismissWithClickedButtonIndex:0 animated:YES];
 }
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (alertView.tag==1 && buttonIndex==1)
     {
         //        UIStoryboard *sb=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -513,8 +440,7 @@
 #pragma mark - end
 
 #pragma mark - Add badge icon
--(void)addBadgeIcon
-{
+- (void)addBadgeIcon {
     for (UILabel *subview in myDelegate.tabBarView.tabBar.subviews)
     {
         if ([subview isKindOfClass:[UILabel class]])
@@ -537,10 +463,10 @@
 #pragma mark - end
 
 #pragma mark - Remove badge icon
--(void)removeBadgeIconLastTab
-{
+- (void)removeBadgeIconLastTab {
+    
     notificationBadge.hidden=YES;
-     notificationBadge.frame = CGRectMake((([UIScreen mainScreen].bounds.size.width/5))+45 , ([UIScreen mainScreen].bounds.size.height-40), 0, 0);
+    notificationBadge.frame = CGRectMake((([UIScreen mainScreen].bounds.size.width/5))+45 , ([UIScreen mainScreen].bounds.size.height-40), 0, 0);
     for (UILabel *subview in myDelegate.tabBarView.tabBar.subviews)
     {
         if ([subview isKindOfClass:[UILabel class]])
@@ -554,8 +480,8 @@
 #pragma mark - end
 
 #pragma mark - Add badge icon
--(void)addBadgeIconOnMoreTab
-{
+- (void)addBadgeIconOnMoreTab {
+    
     for (UILabel *subview in myDelegate.tabBarView.tabBar.subviews)
     {
         if ([subview isKindOfClass:[UILabel class]])
@@ -579,7 +505,7 @@
 #pragma mark - end
 
 #pragma mark - Remove badge icon
--(void)removeBadgeIconOnMoreTab
+- (void)removeBadgeIconOnMoreTab
 {
     notificationBadge.hidden=YES;
     notificationBadge.frame = CGRectMake((([UIScreen mainScreen].bounds.size.width/5) * 5) - (([UIScreen mainScreen].bounds.size.width/5)/2) + 13 , ([UIScreen mainScreen].bounds.size.height-44), 0, 0);
@@ -594,5 +520,4 @@
     }
 }
 #pragma mark - end
-
 @end

@@ -25,7 +25,7 @@
 #pragma mark - end
 
 #pragma mark - Display data in cell
--(void)displayConferenceListData :(ConferenceListDataModel *)conferenceList indexPath:(int)indexPath rectSize:(CGSize)rectSize{
+- (void)displayConferenceListData :(ConferenceListDataModel *)conferenceList indexPath:(int)indexPath rectSize:(CGSize)rectSize{
     conferenceNameLabel.text=conferenceList.conferenceName;
     NSArray *dateStrings = [conferenceList.conferenceDate componentsSeparatedByString:@" - "];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];

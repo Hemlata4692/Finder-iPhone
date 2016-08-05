@@ -72,11 +72,11 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
--(void)matchesDetails {
+- (void)matchesDetails {
     [myDelegate showIndicator];
     [self performSelector:@selector(getMatchesDetails) withObject:nil afterDelay:0.1];
 }
--(void)viewWillAppear:(BOOL)animated {
+- (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:YES];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
@@ -93,7 +93,7 @@
     [myDelegate showIndicator];
     [self performSelector:@selector(getMatchesDetails) withObject:nil afterDelay:.1];
 }
--(void)viewWillDisappear:(BOOL)animated
+- (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:YES];
     myDelegate.myView=@"other";
@@ -101,7 +101,7 @@
 
 #pragma mark - end
 #pragma mark - Set tabbar images
--(void)setTabBarImages{
+- (void)setTabBarImages{
     UITabBarController * myTab = (UITabBarController *)self.tabBarController;
     UITabBar *tabBar = myTab.tabBar;
     UITabBarItem *tabBarItem1 = [tabBar.items objectAtIndex:0];
@@ -208,7 +208,7 @@
         return newMatchesCell;
     }
 }
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (selectedSegment==0) {
         UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -232,7 +232,7 @@
 #pragma mark - end
 #pragma mark - Webservice
 //get matches details
--(void)getMatchesDetails
+- (void)getMatchesDetails
 {
     [[MatchesService sharedManager] getMatchesList:^(id dataArray) {
         [myDelegate stopIndicator];
@@ -255,7 +255,7 @@
      }] ;
 }
 //filter data for new , all and contacts segment
--(void)filterData {
+- (void)filterData {
     
     [latestMatchesArray removeAllObjects];
     [contactArray removeAllObjects];
@@ -303,7 +303,7 @@
     
 }
 //send/cancel match request
--(void)sendCancelMatchRequest {
+- (void)sendCancelMatchRequest {
     [[MatchesService sharedManager] sendCancelMatchRequest:otherUserId sendRequest:requestSent success:^(id responseObject) {
       //  [myDelegate stopIndicator];
         [self getMatchesDetails];
@@ -320,7 +320,7 @@
 }
 
 //accept/decline match request
--(void)acceptDeclineRequest {
+- (void)acceptDeclineRequest {
     if (selectedSegment==0) {
         [[MatchesService sharedManager] acceptDeclineRequest:otherUserId acceptRequest:accepted success:^(id responseObject) {
             [self getMatchesDetails];

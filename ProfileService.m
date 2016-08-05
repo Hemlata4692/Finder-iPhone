@@ -39,7 +39,7 @@
 #pragma mark - end
 
 #pragma mark - Interest list
--(void)getInterestList:(void (^)(id data))success failure:(void (^)(NSError *error))failure
+- (void)getInterestList:(void (^)(id data))success failure:(void (^)(NSError *error))failure
 {
     //[UserDefaultManager getValue:@"conferenceId"]
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"]};
@@ -62,7 +62,7 @@
 }
 #pragma mark - end
 #pragma mark - Interested In list
--(void)getInterestedInList:(void (^)(id data))success failure:(void (^)(NSError *error))failure
+- (void)getInterestedInList:(void (^)(id data))success failure:(void (^)(NSError *error))failure
 {
     //[UserDefaultManager getValue:@"conferenceId"]
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"]};
@@ -88,7 +88,7 @@
 #pragma mark - end
 //kUrlGetProffessionList
 #pragma mark - Profession list
--(void)getProfessionList:(void (^)(id data))success failure:(void (^)(NSError *error))failure
+- (void)getProfessionList:(void (^)(id data))success failure:(void (^)(NSError *error))failure
 {
     //[UserDefaultManager getValue:@"conferenceId"]
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"]};
@@ -114,7 +114,7 @@
 #pragma mark - end
 
 #pragma mark - Edit profile
--(void)editUserProfile:(NSString *)userName mobileNumber:(NSString *)mobileNumber companyName:(NSString *)companyName companyAddress:(NSString *)companyAddress designation:(NSString *)designation aboutCompany:(NSString *)aboutCompany linkedIn:(NSString *)linkedIn interests:(NSString *)interests interestedIn:(NSString *)interestedIn profession:(NSString *)profession image:(UIImage *)image success:(void (^)(id))success failure:(void (^)(NSError *))failure {
+- (void)editUserProfile:(NSString *)userName mobileNumber:(NSString *)mobileNumber companyName:(NSString *)companyName companyAddress:(NSString *)companyAddress designation:(NSString *)designation aboutCompany:(NSString *)aboutCompany linkedIn:(NSString *)linkedIn interests:(NSString *)interests interestedIn:(NSString *)interestedIn profession:(NSString *)profession image:(UIImage *)image success:(void (^)(id))success failure:(void (^)(NSError *))failure {
    
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"],@"userName":userName,@"mobileNumber":mobileNumber,@"companyName":companyName,@"companyAddress":companyAddress,@"designation":designation,@"aboutCompany":aboutCompany,@"linkedIn":linkedIn,@"interests":interests,@"interestInName":interestedIn,@"professionName":profession};
     NSLog(@"request edit user profile  %@",requestDict);
@@ -139,7 +139,7 @@
 }
 #pragma mark - end
 #pragma mark - Get user profile
--(void)getUserProfile:(void (^)(id data))success failure:(void (^)(NSError *error))failure
+- (void)getUserProfile:(void (^)(id data))success failure:(void (^)(NSError *error))failure
 {
     //[UserDefaultManager getValue:@"conferenceId"]
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"]};
@@ -180,7 +180,7 @@
 #pragma mark - end
 
 #pragma mark - Other user profile
--(void)getOtherUserProfile:(NSString *)otherUserId success:(void (^)(id))success failure:(void (^)(NSError *))failure
+- (void)getOtherUserProfile:(NSString *)otherUserId success:(void (^)(id))success failure:(void (^)(NSError *))failure
 {
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"],@"otheruserId":otherUserId};
     NSLog(@"request other user profile  %@",requestDict);

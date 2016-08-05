@@ -36,7 +36,7 @@
     return self;
 }
 
--(void)dealloc
+- (void)dealloc
 {
     self.entriesArray = nil;
     self.selectedEntriesArr= nil;
@@ -116,7 +116,7 @@
    [UIView commitAnimations];
 }
 
--(void)confirmPickView
+- (void)confirmPickView
 {
     for (NSString *row in [self.selectionStatesDic allKeys]) {
         if ([[self.selectionStatesDic objectForKey:row] boolValue]) {

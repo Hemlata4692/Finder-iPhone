@@ -12,20 +12,20 @@
 + (id)sharedManager;
 
 //Interest list
--(void)getInterestList:(void (^)(id data))success failure:(void (^)(NSError *error))failure;
+- (void)getInterestList:(void (^)(id data))success failure:(void (^)(NSError *error))failure;
 
 //Interested In list
--(void)getInterestedInList:(void (^)(id data))success failure:(void (^)(NSError *error))failure;
+- (void)getInterestedInList:(void (^)(id data))success failure:(void (^)(NSError *error))failure;
 
 //Profession list
--(void)getProfessionList:(void (^)(id data))success failure:(void (^)(NSError *error))failure;
+- (void)getProfessionList:(void (^)(id data))success failure:(void (^)(NSError *error))failure;
 
 //Edit profile
--(void)editUserProfile:(NSString *)userName mobileNumber:(NSString *)mobileNumber companyName:(NSString *)companyName companyAddress:(NSString *)companyAddress designation:(NSString *)designation aboutCompany:(NSString *)aboutCompany linkedIn:(NSString *)linkedIn interests:(NSString *)interests interestedIn:(NSString *)interestedIn profession:(NSString *)profession image:(UIImage *)image success:(void (^)(id))success failure:(void (^)(NSError *))failure;
+- (void)editUserProfile:(NSString *)userName mobileNumber:(NSString *)mobileNumber companyName:(NSString *)companyName companyAddress:(NSString *)companyAddress designation:(NSString *)designation aboutCompany:(NSString *)aboutCompany linkedIn:(NSString *)linkedIn interests:(NSString *)interests interestedIn:(NSString *)interestedIn profession:(NSString *)profession image:(UIImage *)image success:(void (^)(id))success failure:(void (^)(NSError *))failure;
 
 //User profile
--(void)getUserProfile:(void (^)(id data))success failure:(void (^)(NSError *error))failure;
+- (void)getUserProfile:(void (^)(id data))success failure:(void (^)(NSError *error))failure;
 
 //Other user profile
--(void)getOtherUserProfile:(NSString *)otherUserId success:(void (^)(id))success failure:(void (^)(NSError *))failure;
+- (void)getOtherUserProfile:(NSString *)otherUserId success:(void (^)(id))success failure:(void (^)(NSError *))failure;
 @end

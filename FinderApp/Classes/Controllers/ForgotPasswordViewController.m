@@ -29,14 +29,14 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
--(void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
     [[self navigationController] setNavigationBarHidden:NO animated:YES];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
 }
 #pragma mark - end
 #pragma mark - Corner radius and padding
--(void)addPadding{
+- (void)addPadding{
     [emailField addTextFieldPaddingWithoutImages:emailField];
     [textFieldContainerView setCornerRadius:2.0f];
 }
@@ -79,7 +79,7 @@
 }
 #pragma mark - end
 #pragma mark - Webservice
--(void)forgotPassword{
+- (void)forgotPassword{
     [[UserService sharedManager] forgotPassword:emailField.text success:^(id responseObject) {
          [myDelegate stopIndicator];
          SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];

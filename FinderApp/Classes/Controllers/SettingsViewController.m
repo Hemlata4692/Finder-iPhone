@@ -166,7 +166,7 @@
         return settingsCell;
     }
 }
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     //    if (indexPath.row == 4)
     //    {
     //        changePwdContainerView.hidden = NO;
@@ -334,7 +334,7 @@
 #pragma mark - end
 
 #pragma mark - Webservice
--(void)changeSettings:(NSString *)switchKey {
+- (void)changeSettings:(NSString *)switchKey {
     [[ConferenceService sharedManager] changeSettings:switchIdentifire switchStatus:switchStatus success:^(id responseObject) {
         if ([[responseObject objectForKey:@"isSuccess"] isEqualToString:@"1"]) {
             
@@ -348,7 +348,7 @@
          
      }] ;
 }
--(void)getUserSettings {
+- (void)getUserSettings {
     [[ConferenceService sharedManager] getUserSetting:^(id responseObject) {
         [myDelegate stopIndicator];
         if ([[responseObject objectForKey:@"isSuccess"] isEqualToString:@"1"]) {

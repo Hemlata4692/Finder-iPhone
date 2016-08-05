@@ -28,7 +28,7 @@
 #pragma mark - end
 
 #pragma mark - Display data
--(void)displayUserMessage:(MessageHistoryDataModel *)messageHistory indexPath:(int)indexPath rectSize:(CGSize)rectSize
+- (void)displayUserMessage:(MessageHistoryDataModel *)messageHistory indexPath:(int)indexPath rectSize:(CGSize)rectSize
 {
    
     meUserMessageLabel.translatesAutoresizingMaskIntoConstraints=YES;
@@ -79,7 +79,7 @@
 
 #pragma mark - end
 
--(void)displayOtherUserMessage:(MessageHistoryDataModel *)messageHistoryData indexPath:(int)indexPath rectSize:(CGSize)rectSize {
+- (void)displayOtherUserMessage:(MessageHistoryDataModel *)messageHistoryData indexPath:(int)indexPath rectSize:(CGSize)rectSize {
     otherUserMessageLabel.translatesAutoresizingMaskIntoConstraints=YES;
     outgoingBubbleImage.translatesAutoresizingMaskIntoConstraints=YES;
     CGSize size = CGSizeMake(rectSize.width-50,999);

@@ -25,7 +25,7 @@
     [alertView addSubview:customAlertObj.mainView];
     return self;
 }
-//-(void)TapGestureHideCallOptionalMethod{
+//- (void)TapGestureHideCallOptionalMethod{
 //    [UIView animateWithDuration:0.3f animations:^{
 //        customAlertObj.shadowView.alpha = 0;
 //        customAlertObj.backView.frame = CGRectMake(customAlertObj.shadowView.frame.size.width + 10, 0,  customAlertObj.shadowView.frame.size.width - 100,  customAlertObj.backView.frame.size.height);
@@ -42,7 +42,7 @@
 //                     }];
 //}
 //
--(void)dismissAlertView:(UIView*)myView{
+- (void)dismissAlertView:(UIView*)myView{
     
     customAlertObj.mainView.hidden = YES;
     [customAlertObj removeFromSuperview];

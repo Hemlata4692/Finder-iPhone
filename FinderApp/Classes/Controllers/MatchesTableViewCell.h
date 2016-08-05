@@ -33,7 +33,7 @@
 @property (weak, nonatomic) IBOutlet MyButton *scheduleMeetingBtn;
 @property (strong, nonatomic) IBOutlet UILabel *contactDesignation;
 
--(void)displayData :(MatchesDataModel *)allMatchesDetails indexPath:(int)indexPath rectSize:(CGSize)rectSize;
--(void)displayContacts :(MatchesDataModel *)contactData indexPath:(int)indexPath rectSize:(CGSize)rectSize;
--(void)displayNewMatchRequests :(MatchesDataModel *)newMatchesDetails indexPath:(int)indexPath rectSize:(CGSize)rectSize;
+- (void)displayData :(MatchesDataModel *)allMatchesDetails indexPath:(int)indexPath rectSize:(CGSize)rectSize;
+- (void)displayContacts :(MatchesDataModel *)contactData indexPath:(int)indexPath rectSize:(CGSize)rectSize;
+- (void)displayNewMatchRequests :(MatchesDataModel *)newMatchesDetails indexPath:(int)indexPath rectSize:(CGSize)rectSize;
 @end

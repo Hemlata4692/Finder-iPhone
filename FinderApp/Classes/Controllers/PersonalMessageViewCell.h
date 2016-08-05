@@ -16,7 +16,7 @@
 @property (weak, nonatomic) IBOutlet MyButton *retryButton;
 @property (weak, nonatomic) IBOutlet UILabel *meUserMessageLabel;
 @property (weak, nonatomic) IBOutlet UIImageView *incomingBubbleImage;
--(void)displayUserMessage:(MessageHistoryDataModel *)messageHistory indexPath:(int)indexPath rectSize:(CGSize)rectSize;
+- (void)displayUserMessage:(MessageHistoryDataModel *)messageHistory indexPath:(int)indexPath rectSize:(CGSize)rectSize;
 
 //otherCell
 @property (weak, nonatomic) IBOutlet UIView *otherUserMessageConatinerView;
@@ -24,5 +24,5 @@
 
 @property (weak, nonatomic) IBOutlet MyButton *retryOtherButton;
 @property (weak, nonatomic) IBOutlet UIImageView *outgoingBubbleImage;
--(void)displayOtherUserMessage:(MessageHistoryDataModel *)messageHistoryData indexPath:(int)indexPath rectSize:(CGSize)rectSize;
+- (void)displayOtherUserMessage:(MessageHistoryDataModel *)messageHistoryData indexPath:(int)indexPath rectSize:(CGSize)rectSize;
 @end

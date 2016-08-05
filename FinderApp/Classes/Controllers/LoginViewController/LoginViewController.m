@@ -48,13 +48,13 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
--(void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated{
     [[self navigationController] setNavigationBarHidden:YES animated:YES];
     [[UIApplication sharedApplication] setStatusBarHidden:YES];
 }
 #pragma mark - end
 #pragma mark - Corner radius and padding
--(void)addPadding{
+- (void)addPadding{
     [emailField addTextFieldPaddingWithoutImages:emailField];
     [passwordField addTextFieldPaddingWithoutImages:passwordField];
     [textFieldContainerView setCornerRadius:2.0f];
@@ -75,7 +75,7 @@
 
 #pragma mark - Textfield delegates
 
--(void)textFieldDidBeginEditing:(UITextField *)textField{
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
     [self.keyboardControls setActiveField:textField];
     if (textField==emailField) {
         if([[UIScreen mainScreen] bounds].size.height<568)  {
@@ -141,7 +141,7 @@
 }
 #pragma mark - end
 #pragma mark - Webservice
--(void)loginUser{
+- (void)loginUser{
     [[UserService sharedManager] userLogin:emailField.text password:passwordField.text success:^(id responseObject)
      {
          

@@ -24,7 +24,7 @@
 }
 #pragma mark - end
 #pragma mark - Display data
--(void)displayData:(ContactDataModel *)proximityDetails indexPath:(int)indexPath
+- (void)displayData:(ContactDataModel *)proximityDetails indexPath:(int)indexPath
 {
     nameLabel.text=proximityDetails.contactName;
     comapanyNameLabel.text=proximityDetails.companyName;

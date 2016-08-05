@@ -80,7 +80,7 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:YES];
     pickerView.translatesAutoresizingMaskIntoConstraints=YES;
     pickerToolbar.translatesAutoresizingMaskIntoConstraints=YES;
@@ -92,13 +92,13 @@
     selectedPicker=0;
 }
 //add padding, corner radius and border on text fields
--(void)addBorderCornerRadius{
+- (void)addBorderCornerRadius{
     [meetingAgendaTextField setTextViewBorder:meetingAgendaTextField color:[UIColor colorWithRed:220.0/255.0 green:220.0/255.0 blue:220.0/255.0 alpha:1.0]];
     [meetingAgendaTextField setCornerRadius:2.0f];
     [meetingAgendaTextField setPlaceholder:@"  Meeting Agenda"];
     [meetingAgendaTextField setFont:[UIFont fontWithName:@"Roboto-Regular" size:15.0]];
 }
--(void)viewDidDisappear:(BOOL)animated {
+- (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:YES];
    [self.presentingViewController dismissViewControllerAnimated:NO completion:nil];
 }
@@ -244,7 +244,7 @@
     [UIView commitAnimations];
 }
 //Hide picker
--(void)hidePickerWithAnimation{
+- (void)hidePickerWithAnimation{
     if (selectedPicker==1) {
         [UIView beginAnimations:nil context:NULL];
         [UIView setAnimationDuration:0.3];
@@ -315,7 +315,7 @@
 #pragma mark - end
 
 #pragma mark - Textfield delegates
--(void)textFieldDidBeginEditing:(UITextField *)textField{
+- (void)textFieldDidBeginEditing:(UITextField *)textField{
     [self hidePickerWithAnimation];
     [self.keyboardControls setActiveField:textField];
     if([[UIScreen mainScreen] bounds].size.height<568) {
@@ -327,7 +327,7 @@
         
     }
 }
--(void)textFieldDidEndEditing:(UITextField *)textField{
+- (void)textFieldDidEndEditing:(UITextField *)textField{
     if([[UIScreen mainScreen] bounds].size.height<568) {
         if (textField==venueTextField) {
             [UIView animateWithDuration:0.3 animations:^{
@@ -345,7 +345,7 @@
 #pragma mark - end
 
 #pragma mark - Textview delegates
--(void)textViewDidBeginEditing:(UITextView *)textView{
+- (void)textViewDidBeginEditing:(UITextView *)textView{
     [self hidePickerWithAnimation];
     [self.keyboardControls setActiveField:textView];
     if (textView==meetingAgendaTextField) {
@@ -361,7 +361,7 @@
         }
     }
 }
--(void)textViewDidEndEditing:(UITextView *)textView{
+- (void)textViewDidEndEditing:(UITextView *)textView{
      [scheduleMeetingScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
 }
 
@@ -405,7 +405,7 @@
     }
     
 }
--(void)scheduleMeeting {
+- (void)scheduleMeeting {
     
     [[ConferenceService sharedManager] scheduleMeeting:contactUserID venue:venueTextField.text meetingAgenda:meetingAgendaTextField.text date:dateTextField.text timeFrom:fromTimeTextField.text timeTo:toTimeTextField.text success:^(id responseObject) {
         [myDelegate stopIndicator];

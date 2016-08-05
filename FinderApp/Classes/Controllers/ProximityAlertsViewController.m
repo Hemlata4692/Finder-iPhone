@@ -38,12 +38,12 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(proximityAlerts) name:@"ProximityAlerts" object:nil];
 }
--(void)proximityAlerts{
+- (void)proximityAlerts{
     [myDelegate removeBadgeIconLastTab];
     [myDelegate showIndicator];
     [self performSelector:@selector(getProximityAlerts) withObject:nil afterDelay:0.1];
 }
--(void)viewWillAppear:(BOOL)animated{
+- (void)viewWillAppear:(BOOL)animated{
     
     [super viewWillAppear:YES];
     myDelegate.myView=@"ProximityAlertsViewController";
@@ -51,7 +51,7 @@
     [self performSelector:@selector(getProximityAlerts) withObject:nil afterDelay:.1];
     
 }
--(void)viewWillDisappear:(BOOL)animated
+- (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:YES];
     myDelegate.myView=@"other";
@@ -125,7 +125,7 @@
         return listCell;
     }
 }
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     //    if (indexPath.row == 4)
     //    {
     //        changePwdContainerView.hidden = NO;
@@ -171,7 +171,7 @@
 }
 #pragma mark - end
 #pragma mark - Webservice
--(void)getProximityAlerts{
+- (void)getProximityAlerts{
     
     [[ConferenceService sharedManager] getProximityAlerts:[[UserDefaultManager getValue:@"switchStatusDict"] objectForKey:@"02"]  success:^(id dataArray) {
         [myDelegate stopIndicator];

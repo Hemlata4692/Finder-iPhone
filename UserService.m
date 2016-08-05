@@ -66,7 +66,7 @@
 
 #pragma mark- Forgot password
 //Forgot Password
--(void)forgotPassword:(NSString *)email success:(void (^)(id))success failure:(void (^)(NSError *))failure
+- (void)forgotPassword:(NSString *)email success:(void (^)(id))success failure:(void (^)(NSError *))failure
 {
     NSDictionary *requestDict = @{@"email":email};
     NSLog(@"request forgotPassword %@",requestDict);
@@ -91,7 +91,7 @@
 }
 #pragma mark- end
 #pragma mark- Change password
--(void)changePassword:(NSString *)oldPassword newPassword:(NSString *)newPassword success:(void (^)(id))success failure:(void (^)(NSError *))failure
+- (void)changePassword:(NSString *)oldPassword newPassword:(NSString *)newPassword success:(void (^)(id))success failure:(void (^)(NSError *))failure
 {
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"oldPassword":oldPassword,@"newPassword":newPassword};
     NSLog(@"request changePassword %@",requestDict);
@@ -120,7 +120,7 @@
 #pragma mark- end
 
 #pragma mark- Location update
--(void)locationUpdate:(NSString *)latitude longitude:(NSString *)longitude proximityRange:(NSString *)proximityRange success:(void (^)(id))success failure:(void (^)(NSError *))failure
+- (void)locationUpdate:(NSString *)latitude longitude:(NSString *)longitude proximityRange:(NSString *)proximityRange success:(void (^)(id))success failure:(void (^)(NSError *))failure
 {
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"],@"latitude":latitude,@"longitude":longitude ,@"proximityRange":proximityRange};
      NSLog(@"location %@",requestDict);
@@ -148,7 +148,7 @@
 #pragma mark- end
 
 #pragma mark- Logout
--(void)logoutUser:(void (^)(id data))success failure:(void (^)(NSError *error))failure
+- (void)logoutUser:(void (^)(id data))success failure:(void (^)(NSError *error))failure
 {
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"]};
     [[Webservice sharedManager] post:kUrlLogout parameters:requestDict success:^(id responseObject)
@@ -173,7 +173,7 @@
 }
 #pragma mark- end
 #pragma mark- Register device
--(void)registerDeviceForPushNotification:(NSString *)deviceToken deviceType:(NSString *)deviceType success:(void (^)(id))success failure:(void (^)(NSError *))failure
+- (void)registerDeviceForPushNotification:(NSString *)deviceToken deviceType:(NSString *)deviceType success:(void (^)(id))success failure:(void (^)(NSError *))failure
 {
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"deviceToken":deviceToken,@"deviceType":deviceType};
     NSLog(@"request for push notification %@",requestDict);

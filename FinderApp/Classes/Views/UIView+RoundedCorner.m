@@ -39,7 +39,7 @@
     view.layer.borderWidth = 0.5f;
 }
 
--(void)setBottomBorder: (UIView *)view color:(UIColor *)color
+- (void)setBottomBorder: (UIView *)view color:(UIColor *)color
 {
     CALayer *bottomBorder = [CALayer layer];
     
@@ -49,7 +49,7 @@
     
     [view.layer addSublayer:bottomBorder];
 }
--(void)addShadow: (UIView *)view color:(UIColor *)color
+- (void)addShadow: (UIView *)view color:(UIColor *)color
 {
     view.layer.shadowColor =color.CGColor;
     view.layer.shadowOffset = CGSizeMake(0, 1);
@@ -57,7 +57,7 @@
     view.layer.shadowRadius = 1.0;
 
 }
--(void)addShadowWithCornerRadius: (UIView *)view color:(UIColor *)color
+- (void)addShadowWithCornerRadius: (UIView *)view color:(UIColor *)color
 {
     [view.layer setCornerRadius:view.frame.size.width/2];
     [view.layer setShadowOffset:CGSizeMake(0, 3)];
