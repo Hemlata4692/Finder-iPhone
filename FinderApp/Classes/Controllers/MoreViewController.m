@@ -47,6 +47,8 @@
     textFieldArray = @[oldPasswordTextField,passwordTextField,confirmPasswordTextField];
     [self setKeyboardControls:[[BSKeyboardControls alloc] initWithFields:textFieldArray]];
     [self.keyboardControls setDelegate:self];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadListing) name:@"ReloadMoreListing" object:nil];
     moreOptionsArray = [NSMutableArray arrayWithObjects:@"My Profile",@"Pending Appointments",@"Requested Appointments",@"Requested Matches",@"Conference",@"Settings",@"Change Password",@"Switch Conference",@"Logout", nil];
     moreImagesArray= [NSMutableArray arrayWithObjects:@"my_profile.png",@"pending_appointment.png",@"requested_appointment.png",@"request_match",@"conference_icon.png",@"setting.png",@"change_password.png",@"switch_conference.png",@"logout.png", nil];
 }
@@ -56,6 +58,16 @@
 }
 - (void)viewWillAppear:(BOOL)animated {
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    [_moreTableView reloadData];
+     myDelegate.myView=@"MoreViewController";
+}
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:YES];
+    myDelegate.myView=@"other";
+}
+
+- (void)reloadListing {
+
     [_moreTableView reloadData];
 }
 #pragma mark - end
