@@ -61,10 +61,15 @@
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
+    [myDelegate removeBadgeIconLastTab];
     myDelegate.myView=@"PersonalMessageView";
     offset=@"0";
     pageOffset=0;
-    [myDelegate removeBadgeIconLastTab];
+    
+}
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:YES];
+    myDelegate.myView=@"other";
 }
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
