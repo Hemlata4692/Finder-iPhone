@@ -41,6 +41,10 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:YES];
+    myDelegate.myView=@"other";
+}
 #pragma mark - end
 
 #pragma mark - Table view methods
