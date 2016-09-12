@@ -9,10 +9,10 @@
 #import <Foundation/Foundation.h>
 #import "AFNetworking.h"
 //client link
-//#define BASE_URL                                  @"http://ranosys.net/client/finder/api/"
+#define BASE_URL                                  @"http://ranosys.net/client/finder/api/"
 
 //testing link
-#define BASE_URL                                @"http://ranosys.net/client/finder/m3/api/"
+//#define BASE_URL                                @"http://ranosys.net/client/finder/m3/api/"
 
 @interface Webservice : NSObject
 @property(nonatomic,retain)AFHTTPRequestOperationManager *manager;

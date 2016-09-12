@@ -1554,7 +1554,7 @@
 				TargetAttributes = {
 					B7A8DD641CAE2BF2007F56B6 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = T7GN63HCDX;
+						DevelopmentTeam = 6S3AL87NGN;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1813,8 +1813,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Rameshwar Vyas (7K7JRCWTUM)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Rameshwar Vyas (7K7JRCWTUM)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Technopreneur's Resource Centre Private Limited";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Technopreneur's Resource Centre Private Limited";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1837,7 +1837,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "723402ee-c9ee-492b-877c-9cd3d299610b";
+				PROVISIONING_PROFILE = "9d9d674d-2424-446a-9e0a-9a2fd5b578c3";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1859,8 +1859,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Rameshwar Vyas (7K7JRCWTUM)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Rameshwar Vyas (7K7JRCWTUM)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Technopreneur's Resource Centre Private Limited";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Technopreneur's Resource Centre Private Limited";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1876,7 +1876,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "723402ee-c9ee-492b-877c-9cd3d299610b";
+				PROVISIONING_PROFILE = "9d9d674d-2424-446a-9e0a-9a2fd5b578c3";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1888,15 +1888,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Rameshwar Vyas (7K7JRCWTUM)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Rameshwar Vyas (7K7JRCWTUM)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Technopreneur's Resource Centre Private Limited";
 				GCC_PREFIX_HEADER = "FinderApp/Supporting Files/Finder-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/FinderApp/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ranosys.finderApp;
 				PRODUCT_NAME = Finder_iPhoneApp;
-				PROVISIONING_PROFILE = "723402ee-c9ee-492b-877c-9cd3d299610b";
+				PROVISIONING_PROFILE = "9d9d674d-2424-446a-9e0a-9a2fd5b578c3";
 			};
 			name = Debug;
 		};
@@ -1906,15 +1906,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
-				CODE_SIGN_IDENTITY = "iPhone Developer: Rameshwar Vyas (7K7JRCWTUM)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Rameshwar Vyas (7K7JRCWTUM)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Technopreneur's Resource Centre Private Limited";
 				GCC_PREFIX_HEADER = "FinderApp/Supporting Files/Finder-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/FinderApp/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ranosys.finderApp;
 				PRODUCT_NAME = Finder_iPhoneApp;
-				PROVISIONING_PROFILE = "723402ee-c9ee-492b-877c-9cd3d299610b";
+				PROVISIONING_PROFILE = "9d9d674d-2424-446a-9e0a-9a2fd5b578c3";
 			};
 			name = Release;
 		};

@@ -456,7 +456,6 @@
 
 #pragma mark - Remove badge icon
 - (void)removeBadgeIconLastTab {
-    
     notificationBadge.hidden=YES;
     notificationBadge.frame = CGRectMake((([UIScreen mainScreen].bounds.size.width/5))+45 , ([UIScreen mainScreen].bounds.size.height-40), 0, 0);
     for (UILabel *subview in myDelegate.tabBarView.tabBar.subviews)
@@ -473,7 +472,6 @@
 
 #pragma mark - Add badge icon
 - (void)addBadgeIconOnMoreTab {
-    
     for (UILabel *subview in myDelegate.tabBarView.tabBar.subviews)
     {
         if ([subview isKindOfClass:[UILabel class]])
