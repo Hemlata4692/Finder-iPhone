@@ -292,7 +292,7 @@
         if ([[responseObject objectForKey:@"isSuccess"] isEqualToString:@"1"]) {
             
             NSMutableDictionary *tempDict=[[UserDefaultManager getValue:@"switchStatusDict"] mutableCopy];
-            [tempDict setObject:switchStatus forKey:switchKey];
+            [tempDict setObject:[switchStatus lowercaseString] forKey:switchKey];
             [UserDefaultManager setValue:tempDict key:@"switchStatusDict"];
         }
     }

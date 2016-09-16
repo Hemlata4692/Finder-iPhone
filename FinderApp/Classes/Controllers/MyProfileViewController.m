@@ -455,7 +455,7 @@
         }
         interestedInLabel.text=[[userProfileDataArray objectAtIndex:0]userInterestedIn];
     }
-    if (![[[userProfileDataArray objectAtIndex:0]userInterests] isEqualToString:@""]) {
+//    if (![[[userProfileDataArray objectAtIndex:0]userInterests] isEqualToString:@""]) {
     interestsArray =[[[userProfileDataArray objectAtIndex:0]userInterests] componentsSeparatedByString:@", "];
     count=(int)interestsArray.count;
     //myDelegate.multiplePickerDic=[[NSMutableDictionary alloc]init];
@@ -471,10 +471,10 @@
         count=(count-1)*42;
         interestAreaCollectionView.frame=CGRectMake(4, interestAreaCollectionView.frame.origin.y, bottomView.frame.size.width-8, count);
     }
-    }
-    else {
-        interestsArray =[[[userProfileDataArray objectAtIndex:0]userInterests] componentsSeparatedByString:@", "];
-    }
+//    }
+//    else {
+//        interestsArray =[[[userProfileDataArray objectAtIndex:0]userInterests] componentsSeparatedByString:@", "];
+//    }
     [interestAreaCollectionView reloadData];
     float bottomHeight=professionView.frame.origin.y+professionView.frame.size.height+2+interestedInView.frame.size.height+22+count+30;
     bottomView.frame=CGRectMake(8, profileBackground.frame.origin.y+profileBackground.frame.size.height+15+mobileNumberHeading.frame.size.height+5+mobileNumberView.frame.size.height+8+aboutcompanyHeading.frame.size.height+5+aboutCompanyView.frame.size.height+8+addressHeadingLabel.frame.size.height+5+companyAddressView.frame.size.height+25, mainContainerView.frame.size.width-16,bottomHeight);
