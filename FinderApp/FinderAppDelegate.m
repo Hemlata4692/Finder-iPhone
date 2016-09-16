@@ -122,14 +122,14 @@
     }
     if ([UserDefaultManager getValue:@"switchStatusDict"]==NULL) {
         NSMutableDictionary *switchDict=[[NSMutableDictionary alloc]init];
-        [switchDict setObject:@"True" forKey:@"00"];
-        [switchDict setObject:@"True" forKey:@"01"];
+        [switchDict setObject:@"true" forKey:@"00"];
+        [switchDict setObject:@"true" forKey:@"01"];
         [switchDict setObject:@"25" forKey:@"02"];
-        [switchDict setObject:@"True" forKey:@"10"];
-        [switchDict setObject:@"True" forKey:@"11"];
-        [switchDict setObject:@"True" forKey:@"12"];
-        [switchDict setObject:@"True" forKey:@"13"];
-        [switchDict setObject:@"True" forKey:@"14"];
+        [switchDict setObject:@"true" forKey:@"10"];
+        [switchDict setObject:@"true" forKey:@"11"];
+        [switchDict setObject:@"true" forKey:@"12"];
+        [switchDict setObject:@"true" forKey:@"13"];
+        [switchDict setObject:@"true" forKey:@"14"];
         [UserDefaultManager setValue:switchDict key:@"switchStatusDict"];
     }
     //permission for local notification

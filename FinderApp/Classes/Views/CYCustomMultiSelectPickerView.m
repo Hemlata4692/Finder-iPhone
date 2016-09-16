@@ -48,8 +48,6 @@
 
 - (void)pickerShow
 {
-    //  entries = [[NSArray alloc] initWithObjects:@"Row 1", @"Row 2", @"Row 3", @"Row 4", @"Row 5", nil];
-    
     for (NSString *key in self.entriesArray){
         BOOL isSelected = NO;
         if ([[appDelegate.multiplePickerDic objectForKey:key] boolValue]) {
@@ -123,9 +121,6 @@
             [self.selectedEntriesArr addObject:row];
         }
     }
-    
-    //    CYLog(@"tempStr==%@",self.selectedEntriesArr);
-    
     if ([self.multiPickerDelegate respondsToSelector:@selector(returnChoosedPickerString:)]) {
         [self.multiPickerDelegate returnChoosedPickerString:self.selectedEntriesArr];
     }
@@ -134,8 +129,6 @@
 }
 
 #pragma mark -  ALPickerViewDelegate
-
-
 // Return the number of elements of your pickerview
 -(NSInteger)numberOfRowsForPickerView:(ALPickerView *)pickerView
 {
@@ -160,8 +153,8 @@
             [appDelegate.multiplePickerDic setObject:[NSNumber numberWithBool:YES] forKey:key];
         }
     else{
+         [self.selectionStatesDic setObject:[NSNumber numberWithBool:YES] forKey:[self.entriesArray objectAtIndex:row]];
         [appDelegate.multiplePickerDic setObject:[NSNumber numberWithBool:YES] forKey:[self.entriesArray objectAtIndex:row]];
-        [self.selectionStatesDic setObject:[NSNumber numberWithBool:YES] forKey:[self.entriesArray objectAtIndex:row]];
     }
 }
 
@@ -173,8 +166,8 @@
             [appDelegate.multiplePickerDic setObject:[NSNumber numberWithBool:NO] forKey:key];
         }
     else{
-        [appDelegate.multiplePickerDic setObject:[NSNumber numberWithBool:NO] forKey:[self.entriesArray objectAtIndex:row]];
         [self.selectionStatesDic setObject:[NSNumber numberWithBool:NO] forKey:[self.entriesArray objectAtIndex:row]];
+          [appDelegate.multiplePickerDic setObject:[NSNumber numberWithBool:NO] forKey:[self.entriesArray objectAtIndex:row]];
     }
 }
 @end
