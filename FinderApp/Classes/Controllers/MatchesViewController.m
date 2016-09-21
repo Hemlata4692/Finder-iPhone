@@ -255,7 +255,7 @@
         }
         if (latestMatchesArray.count==0) {
             noRecordLabel.hidden=NO;
-            noRecordLabel.text=@"No new match requests.";
+            noRecordLabel.text=@"There are no matches found related to your interest areas.";
         }
     }
     else {

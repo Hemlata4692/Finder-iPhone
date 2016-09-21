@@ -79,7 +79,7 @@
          else {
              SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
              [alert addButton:@"Ok" actionBlock:^(void) {
-                 [[Webservice sharedManager] logoutUser];
+                 [[Webservice sharedManager] logoutUser:responseObject[@"message"]];
              }];
              [alert showWarning:nil title:@"Alert" subTitle:responseObject[@"message"] closeButtonTitle:nil duration:0.0f];
          }
@@ -210,7 +210,7 @@
          else {
              SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
              [alert addButton:@"Ok" actionBlock:^(void) {
-                 [[Webservice sharedManager] logoutUser];
+                 [[Webservice sharedManager] logoutUser:responseObject[@"message"]];
              }];
              [alert showWarning:nil title:@"Alert" subTitle:responseObject[@"message"] closeButtonTitle:nil duration:0.0f];
          }
@@ -317,7 +317,7 @@
         else {
             SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
             [alert addButton:@"Ok" actionBlock:^(void) {
-                [[Webservice sharedManager] logoutUser];
+                [[Webservice sharedManager] logoutUser:responseObject[@"message"]];
             }];
             [alert showWarning:nil title:@"Alert" subTitle:responseObject[@"message"] closeButtonTitle:nil duration:0.0f];
         }
@@ -365,7 +365,7 @@
         else {
             SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
             [alert addButton:@"Ok" actionBlock:^(void) {
-                [[Webservice sharedManager] logoutUser];
+                [[Webservice sharedManager] logoutUser:responseObject[@"message"]];
             }];
             [alert showWarning:nil title:@"Alert" subTitle:responseObject[@"message"] closeButtonTitle:nil duration:0.0f];
         }
@@ -431,7 +431,7 @@
          else {
              SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
              [alert addButton:@"Ok" actionBlock:^(void) {
-                 [[Webservice sharedManager] logoutUser];
+                 [[Webservice sharedManager] logoutUser:responseObject[@"message"]];
              }];
              [alert showWarning:nil title:@"Alert" subTitle:responseObject[@"message"] closeButtonTitle:nil duration:0.0f];
          }

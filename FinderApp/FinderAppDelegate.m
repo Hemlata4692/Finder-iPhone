@@ -122,14 +122,14 @@
     }
     if ([UserDefaultManager getValue:@"switchStatusDict"]==NULL) {
         NSMutableDictionary *switchDict=[[NSMutableDictionary alloc]init];
-        [switchDict setObject:@"True" forKey:@"00"];
-        [switchDict setObject:@"True" forKey:@"01"];
+        [switchDict setObject:@"true" forKey:@"00"];
+        [switchDict setObject:@"true" forKey:@"01"];
         [switchDict setObject:@"25" forKey:@"02"];
-        [switchDict setObject:@"True" forKey:@"10"];
-        [switchDict setObject:@"True" forKey:@"11"];
-        [switchDict setObject:@"True" forKey:@"12"];
-        [switchDict setObject:@"True" forKey:@"13"];
-        [switchDict setObject:@"True" forKey:@"14"];
+        [switchDict setObject:@"true" forKey:@"10"];
+        [switchDict setObject:@"true" forKey:@"11"];
+        [switchDict setObject:@"true" forKey:@"12"];
+        [switchDict setObject:@"true" forKey:@"13"];
+        [switchDict setObject:@"true" forKey:@"14"];
         [UserDefaultManager setValue:switchDict key:@"switchStatusDict"];
     }
     //permission for local notification
@@ -456,7 +456,6 @@
 
 #pragma mark - Remove badge icon
 - (void)removeBadgeIconLastTab {
-    
     notificationBadge.hidden=YES;
     notificationBadge.frame = CGRectMake((([UIScreen mainScreen].bounds.size.width/5))+45 , ([UIScreen mainScreen].bounds.size.height-40), 0, 0);
     for (UILabel *subview in myDelegate.tabBarView.tabBar.subviews)
@@ -473,7 +472,6 @@
 
 #pragma mark - Add badge icon
 - (void)addBadgeIconOnMoreTab {
-    
     for (UILabel *subview in myDelegate.tabBarView.tabBar.subviews)
     {
         if ([subview isKindOfClass:[UILabel class]])

@@ -7,6 +7,7 @@
 //
 
 #import "Webservice.h"
+#import "ConferenceListViewController.h"
 
 @implementation Webservice
 //static int count=1;
@@ -93,7 +94,7 @@
             msg = responseObject[@"message"];
             SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
             [alert addButton:@"Ok" actionBlock:^(void) {
-                [self logoutUser];
+                [self logoutUser:msg];
             }];
             [alert showWarning:nil title:@"Alert" subTitle:msg closeButtonTitle:nil duration:0.0f];
         }
@@ -108,15 +109,22 @@
     }
 }
 //Logout
-- (void)logoutUser {
+- (void)logoutUser:(NSString *)msg {
+    if ([msg isEqualToString:@"You have been removed from a conference."]) {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        ConferenceListViewController * homeView = [storyboard instantiateViewControllerWithIdentifier:@"ConferenceListViewController"];
+        [UserDefaultManager setValue:@"0" key:@"PendingMessage"];
+        [myDelegate.window setRootViewController:homeView];
+        [myDelegate.window makeKeyAndVisible];
+    }
+    else {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    
     myDelegate.navigationController = [storyboard instantiateViewControllerWithIdentifier:@"mainNavController"];
-    
     myDelegate.window.rootViewController = myDelegate.navigationController;
     [UserDefaultManager removeValue:@"userId"];
     [UserDefaultManager removeValue:@"username"];
     [UserDefaultManager setValue:@"0" key:@"PendingMessage"];
+    }
 }
 
 #pragma mark - end

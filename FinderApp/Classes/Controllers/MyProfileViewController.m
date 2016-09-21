@@ -20,7 +20,7 @@
 @interface MyProfileViewController ()<UICollectionViewDelegate,UICollectionViewDataSource,MFMailComposeViewControllerDelegate>
 {
     NSMutableArray *userProfileDataArray;
-    NSArray *interestsArray;
+    NSArray *interestsArray, *interestedInArray;
     CGSize size;
     CGRect textRect;
     int count;
@@ -90,6 +90,7 @@
     [self addShadow];
     userProfileDataArray=[[NSMutableArray alloc]init];
     interestsArray=[[NSArray alloc]init];
+    interestedInArray=[[NSArray alloc]init];
     if ([viewName isEqualToString:@"My Profile"]) {
         self.navigationItem.title=@"My Profile";
         otherUserView.hidden=YES;
@@ -438,15 +439,26 @@
     else {
         professionLabel.text=[[userProfileDataArray objectAtIndex:0]userProfession];
     }
+     myDelegate.multiplePickerDic=[[NSMutableDictionary alloc]init];
+    interestedInArray=[[[userProfileDataArray objectAtIndex:0]userInterestedIn] componentsSeparatedByString:@", "];
     if ([[[userProfileDataArray objectAtIndex:0]userInterestedIn] isEqualToString:@""]) {
         interestedInLabel.text=@"NA";
     }
     else {
+//        for (int i=0; i<[[[[userProfileDataArray objectAtIndex:0]userInterestedIn] componentsSeparatedByString:@","] count]; i++) {
+//            [interestedInArray addObject:[NSString stringWithFormat:@"%@_1",[[[[userProfileDataArray objectAtIndex:0]userInterestedIn] componentsSeparatedByString:@","] objectAtIndex:i]]];
+//        }
+//
+        for (int k =0; k<interestedInArray.count; k++)
+        {
+            [myDelegate.multiplePickerDic setObject:[NSNumber numberWithBool:YES] forKey:[interestedInArray objectAtIndex:k]];
+        }
         interestedInLabel.text=[[userProfileDataArray objectAtIndex:0]userInterestedIn];
     }
-    interestsArray=[[[userProfileDataArray objectAtIndex:0]userInterests] componentsSeparatedByString:@","];
+//    if (![[[userProfileDataArray objectAtIndex:0]userInterests] isEqualToString:@""]) {
+    interestsArray =[[[userProfileDataArray objectAtIndex:0]userInterests] componentsSeparatedByString:@", "];
     count=(int)interestsArray.count;
-    myDelegate.multiplePickerDic=[[NSMutableDictionary alloc]init];
+    //myDelegate.multiplePickerDic=[[NSMutableDictionary alloc]init];
     for (int k =0; k<interestsArray.count; k++)
     {
         [myDelegate.multiplePickerDic setObject:[NSNumber numberWithBool:YES] forKey:[interestsArray objectAtIndex:k]];
@@ -459,6 +471,10 @@
         count=(count-1)*42;
         interestAreaCollectionView.frame=CGRectMake(4, interestAreaCollectionView.frame.origin.y, bottomView.frame.size.width-8, count);
     }
+//    }
+//    else {
+//        interestsArray =[[[userProfileDataArray objectAtIndex:0]userInterests] componentsSeparatedByString:@", "];
+//    }
     [interestAreaCollectionView reloadData];
     float bottomHeight=professionView.frame.origin.y+professionView.frame.size.height+2+interestedInView.frame.size.height+22+count+30;
     bottomView.frame=CGRectMake(8, profileBackground.frame.origin.y+profileBackground.frame.size.height+15+mobileNumberHeading.frame.size.height+5+mobileNumberView.frame.size.height+8+aboutcompanyHeading.frame.size.height+5+aboutCompanyView.frame.size.height+8+addressHeadingLabel.frame.size.height+5+companyAddressView.frame.size.height+25, mainContainerView.frame.size.width-16,bottomHeight);
