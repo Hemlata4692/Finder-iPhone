@@ -332,11 +332,13 @@
              {
              }] ;
         }
+        //accept match request
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"3"]) {
             if ([myDelegate.myView isEqualToString:@"MatchesViewController"]) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"MatchesDetails" object:nil];
             }
         }
+        //cancel match request
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"4"]) {
             if ([myDelegate.myView isEqualToString:@"MatchesViewController"]) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"MatchesDetails" object:nil];
@@ -348,7 +350,6 @@
             }
             else if ([myDelegate.myView isEqualToString:@"PendingViewController"]) {
                 alertType=@"5";
-                NSLog(@"accepted");
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"Requested" object:nil];
             }
         }
@@ -433,7 +434,7 @@
 
 #pragma mark - Add badge icon
 - (void)addBadgeIcon {
-    for (UILabel *subview in myDelegate.tabBarView.tabBar.subviews)
+    for (UILabel *subview in [UIApplication sharedApplication].keyWindow.subviews)
     {
         if ([subview isKindOfClass:[UILabel class]])
         {
@@ -458,7 +459,7 @@
 - (void)removeBadgeIconLastTab {
     notificationBadge.hidden=YES;
     notificationBadge.frame = CGRectMake((([UIScreen mainScreen].bounds.size.width/5))+45 , ([UIScreen mainScreen].bounds.size.height-40), 0, 0);
-    for (UILabel *subview in myDelegate.tabBarView.tabBar.subviews)
+    for (UILabel *subview in [UIApplication sharedApplication].keyWindow.subviews)
     {
         if ([subview isKindOfClass:[UILabel class]])
         {
@@ -472,7 +473,7 @@
 
 #pragma mark - Add badge icon
 - (void)addBadgeIconOnMoreTab {
-    for (UILabel *subview in myDelegate.tabBarView.tabBar.subviews)
+    for (UILabel *subview in [UIApplication sharedApplication].keyWindow.subviews)
     {
         if ([subview isKindOfClass:[UILabel class]])
         {
@@ -499,7 +500,7 @@
 {
     notificationBadge.hidden=YES;
     notificationBadge.frame = CGRectMake((([UIScreen mainScreen].bounds.size.width/5) * 5) - (([UIScreen mainScreen].bounds.size.width/5)/2) + 13 , ([UIScreen mainScreen].bounds.size.height-44), 0, 0);
-    for (UILabel *subview in myDelegate.tabBarView.tabBar.subviews)
+    for (UILabel *subview in [UIApplication sharedApplication].keyWindow.subviews)
     {
         if ([subview isKindOfClass:[UILabel class]])
         {

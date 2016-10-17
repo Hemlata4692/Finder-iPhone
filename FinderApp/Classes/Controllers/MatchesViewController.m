@@ -66,14 +66,17 @@
     contactArray=[[NSMutableArray alloc]init];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(matchesDetails) name:@"MatchesDetails" object:nil];
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 - (void)matchesDetails {
     [myDelegate showIndicator];
     [self performSelector:@selector(getMatchesDetails) withObject:nil afterDelay:0.1];
 }
+
 - (void)viewWillAppear:(BOOL)animated {
     
     [super viewWillAppear:YES];
@@ -91,6 +94,7 @@
     [myDelegate showIndicator];
     [self performSelector:@selector(getMatchesDetails) withObject:nil afterDelay:.1];
 }
+
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:YES];
     myDelegate.myView=@"other";
@@ -143,7 +147,7 @@
         return 80;
     }
     else {
-        return 110;
+        return 115;
     }
 }
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

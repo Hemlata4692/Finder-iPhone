@@ -12,8 +12,7 @@
 #import "MessageService.h"
 #import "MessagesDataModel.h"
 
-@interface MessagesViewController ()
-{
+@interface MessagesViewController () {
     NSMutableArray *messagesDataArray;
 }
 @property (weak, nonatomic) IBOutlet UITableView *messagesTableView;
@@ -40,7 +39,9 @@
 }
 - (void)viewWillAppear:(BOOL)animated {
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    [UserDefaultManager setValue:nil key:@"unReadMessegaes"];
     [myDelegate removeBadgeIconLastTab];
+    
     [myDelegate showIndicator];
     [self performSelector:@selector(getDifferentMessages) withObject:nil afterDelay:.1];
 }

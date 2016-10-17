@@ -42,14 +42,15 @@
 }
 //Get calendar details
 - (void)calendarDetails {
-    
     [myDelegate showIndicator];
     [self performSelector:@selector(getCalendarDetails) withObject:nil afterDelay:0.1];
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
@@ -58,6 +59,7 @@
     [myDelegate showIndicator];
     [self performSelector:@selector(getCalendarDetails) withObject:nil afterDelay:.1];
 }
+
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:YES];
     myDelegate.myView=@"other";
