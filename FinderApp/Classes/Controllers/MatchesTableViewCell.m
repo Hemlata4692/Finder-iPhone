@@ -154,6 +154,7 @@
     contactName.frame = textRect;
     contactName.frame =CGRectMake(78, 12, textRect.size.width, textRect.size.height);
     [contactName setLabelBorder:contactName color:[UIColor whiteColor]];
+    contactName.text=contactData.userName;
     
     contactDesignation.translatesAutoresizingMaskIntoConstraints=YES;
     CGRect designationtextRect = [contactData.userDesignation
@@ -165,8 +166,8 @@
     contactDesignation.frame = designationtextRect;
     contactDesignation.frame =CGRectMake(78, contactName.frame.origin.y + contactName.frame.size.height+2 , designationtextRect.size.width, designationtextRect.size.height);
     [contactDesignation setLabelBorder:contactDesignation color:[UIColor whiteColor]];
-    contactName.text=contactData.userName;
     contactDesignation.text=contactData.userDesignation;
+    
     contactCompanyName.text=contactData.userCompanyName;
   
     [contactIcon setCornerRadius:contactIcon.frame.size.width/2];

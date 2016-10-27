@@ -424,11 +424,12 @@
 
 #pragma mark - Local notification
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
-    if (application.applicationState == UIApplicationStateActive) {
-    }
-    else {
-        [[UIApplication sharedApplication] cancelLocalNotification:notification];
-    }
+    [[UIApplication sharedApplication] cancelLocalNotification:notification];
+//    if (application.applicationState == UIApplicationStateActive) {
+//    }
+//    else {
+//        [[UIApplication sharedApplication] cancelLocalNotification:notification];
+//    }
 }
 #pragma mark - end
 

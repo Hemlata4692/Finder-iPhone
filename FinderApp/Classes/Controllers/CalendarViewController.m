@@ -120,6 +120,15 @@
                         notification.applicationIconBadgeNumber = 0;
                         NSDictionary *infoDict = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%@ %@ %@ %@",@"You have a",data.eventName,@"at",startDate] forKey:@"Calender"];
                         notification.userInfo = infoDict;
+                        //check if notification is already set or not
+                        NSArray *arrayOfLocalNotifications = [[UIApplication sharedApplication] scheduledLocalNotifications];
+                        for (UILocalNotification *localNotification in arrayOfLocalNotifications) {
+                            if ([localNotification.userInfo isEqualToDictionary:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%@ %@ %@ %@",@"You have a",data.eventName,@"at",startDate] forKey:@"Calender"]]) {
+                                NSLog(@"the notification this is canceld is %@", localNotification.alertBody);
+                                [[UIApplication sharedApplication] cancelLocalNotification:localNotification] ; // delete the notification from the system
+                            }
+                        }
+                        //if notification exists cancel and set
                         NSMutableArray *notifications = [[NSMutableArray alloc] init];
                         [notifications addObject:notification];
                         [[UIApplication sharedApplication] scheduleLocalNotification:notification];
@@ -138,6 +147,15 @@
                         notification.applicationIconBadgeNumber = 0;
                         NSDictionary *infoDict = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%@ %@ %@ %@",@"You have a",data.eventName,@"at",startDate] forKey:@"Calender"];
                         notification.userInfo = infoDict;
+                        //check if notification is already set or not
+                        NSArray *arrayOfLocalNotifications = [[UIApplication sharedApplication] scheduledLocalNotifications];
+                        for (UILocalNotification *localNotification in arrayOfLocalNotifications) {
+                            if ([localNotification.userInfo isEqualToDictionary:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%@ %@ %@ %@",@"You have a",data.eventName,@"at",startDate] forKey:@"Calender"]]) {
+                                NSLog(@"the notification this is canceld is %@", localNotification.alertBody);
+                                [[UIApplication sharedApplication] cancelLocalNotification:localNotification] ; // delete the notification from the system
+                            }
+                        }
+                        //if notification exists cancel and set
                         NSMutableArray *notifications = [[NSMutableArray alloc] init];
                         [notifications addObject:notification];
                         [[UIApplication sharedApplication] scheduleLocalNotification:notification];
@@ -235,6 +253,7 @@
     profileView.otherUserID=data.userId;
     [self.navigationController pushViewController:profileView animated:YES];
 }
+
 - (IBAction)viewAgendaButonAction:(MyButton *)sender {
     int btnTag=[sender Tag];
     int sectionTag= [sender sectionTag];
@@ -247,6 +266,8 @@
     [descreptionView setModalPresentationStyle:UIModalPresentationOverCurrentContext];
     [self presentViewController:descreptionView animated: NO completion:nil];
 }
+
+
 - (IBAction)addButtonAction:(id)sender {
     UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     ScheduleMeetingViewController *scheduleMeeting =[storyboard instantiateViewControllerWithIdentifier:@"ScheduleMeetingViewController"];
