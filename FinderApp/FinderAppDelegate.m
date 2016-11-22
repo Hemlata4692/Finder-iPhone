@@ -447,7 +447,7 @@
     notificationBadge = [[UILabel alloc] init];
     notificationBadge.hidden=NO;
     notificationBadge.frame = CGRectMake((([UIScreen mainScreen].bounds.size.width/5))+45 , ([UIScreen mainScreen].bounds.size.height-40), 8, 8);
-    notificationBadge.backgroundColor = [UIColor redColor];
+    notificationBadge.backgroundColor = [UIColor colorWithRed:35.0/255.0 green:83.0/255.0 blue:113.0/255.0 alpha:1.0];
     notificationBadge.layer.cornerRadius = 5;
     notificationBadge.layer.masksToBounds = YES;
     notificationBadge.tag = 3365;
@@ -486,7 +486,7 @@
     notificationBadge = [[UILabel alloc] init];
     notificationBadge.hidden=NO;
     notificationBadge.frame = CGRectMake((([UIScreen mainScreen].bounds.size.width/5) * 5) - (([UIScreen mainScreen].bounds.size.width/5)/2) + 13 , ([UIScreen mainScreen].bounds.size.height-44), 8, 8);
-    notificationBadge.backgroundColor = [UIColor redColor];
+    notificationBadge.backgroundColor = [UIColor colorWithRed:35.0/255.0 green:83.0/255.0 blue:113.0/255.0 alpha:1.0];
     notificationBadge.layer.cornerRadius = 4;
     notificationBadge.layer.masksToBounds = YES;
     notificationBadge.tag = 3367;

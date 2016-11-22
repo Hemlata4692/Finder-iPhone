@@ -126,7 +126,7 @@
     userImageView.layer.cornerRadius=userImageView.frame.size.width/2;
     userImageView.clipsToBounds=YES;
     [userImageView setViewBorder:userImageView color:[UIColor whiteColor]];
-    [userImageView addShadowWithCornerRadius:userImageView color:[UIColor redColor]];
+    [userImageView addShadowWithCornerRadius:userImageView color:[UIColor clearColor]];
     [aboutCompanyView addShadow:aboutCompanyView color:[UIColor lightGrayColor]];
     [companyAddressView addShadow:companyAddressView color:[UIColor lightGrayColor]];
     [bottomView addShadow:bottomView color:[UIColor lightGrayColor]];
