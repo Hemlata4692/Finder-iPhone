@@ -101,7 +101,6 @@
     //conferenceId
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"userId"]!=nil && [[NSUserDefaults standardUserDefaults] objectForKey:@"conferenceId"]!=nil)
     {
-        isLocation=@"1";
         MatchesViewController * objView=[storyboard instantiateViewControllerWithIdentifier:@"tabBar"];
         self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
         [self.window setRootViewController:objView];
@@ -158,14 +157,17 @@
 }
 - (void)applicationDidEnterBackground:(UIApplication *)application{
     [timer invalidate];
+    timer=nil;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        NSTimer* t = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(startTrackingBg) userInfo:nil repeats:YES];
+        //chnage to 3 min
+        NSTimer* t = [NSTimer scheduledTimerWithTimeInterval:3*60 target:self selector:@selector(locationUpdate) userInfo:nil repeats:YES];
         [[NSRunLoop currentRunLoop] addTimer:t forMode:NSDefaultRunLoopMode];
         [[NSRunLoop currentRunLoop] run];
     });
 }
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    isLocation=@"2";
+     [self startTrackingBg];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -184,13 +186,14 @@
              NSLog(@"webservice did fire");
              [self startTrackingBg];
          } failure:^(NSError *error) {
+    
          }] ;
     }
 }
 - (void) startTrackingBg {
-    if ([isLocation isEqualToString:@"2"])
-    {
+    if ([isLocation isEqualToString:@"2"]) {
         isLocation=@"0";
+        //chnage to 3 min
         timer = [NSTimer scheduledTimerWithTimeInterval:3*60
                                                  target: self
                                                selector: @selector(locationUpdate)
@@ -199,15 +202,15 @@
         NSLog(@"Timer did fire");
     }
 }
+
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     CLLocation *newLocation = (CLLocation *)[locations lastObject];
     CLLocationCoordinate2D cordinates = newLocation.coordinate;
     latitude=[NSString stringWithFormat:@"%f",cordinates.latitude];
     longitude=[NSString stringWithFormat:@"%f",cordinates.longitude];
-    if ([isLocation isEqualToString:@"1"])
-    {
+    if ([isLocation isEqualToString:@"1"]) {
         isLocation=@"2";
-        [ self locationUpdate];
+        [self locationUpdate];
     }
 }
 #pragma mark - end

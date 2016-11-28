@@ -53,7 +53,9 @@
     // Do any additional setup after loading the view.
     self.navigationItem.title=@"Matches";
     [myDelegate.locationManager startUpdatingLocation];
-    myDelegate.isLocation=@"1";
+    if ([myDelegate.isLocation isEqualToString:@"0"]) {
+         myDelegate.isLocation=@"1";
+    }
     [self setTabBarImages];
     if ([[UserDefaultManager getValue:@"PendingMessage"] isEqualToString:@"1"]) {
         [myDelegate addBadgeIconOnMoreTab];
