@@ -43,6 +43,7 @@
 		B7414F921CCA4715009FE9CE /* MyAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = B7414F8E1CCA4715009FE9CE /* MyAlert.m */; };
 		B7414F931CCA4715009FE9CE /* CustomAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = B7414F901CCA4715009FE9CE /* CustomAlert.m */; };
 		B7414F941CCA4715009FE9CE /* CustomAlert.xib in Resources */ = {isa = PBXBuildFile; fileRef = B7414F911CCA4715009FE9CE /* CustomAlert.xib */; };
+		B749267B1DF7DCB8006ABB79 /* UserNotifications.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B749267A1DF7DCB8006ABB79 /* UserNotifications.framework */; };
 		B74B36D01D1B8EBA006CD64B /* UIView+Toast.m in Sources */ = {isa = PBXBuildFile; fileRef = B74B36CF1D1B8EBA006CD64B /* UIView+Toast.m */; };
 		B74B44551CFD60DD00275CC9 /* EventDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = B74B44541CFD60DD00275CC9 /* EventDataModel.m */; };
 		B74DF9FC1D0A7967002EC69E /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B74DF9FB1D0A7967002EC69E /* EditProfileViewController.m */; };
@@ -214,6 +215,8 @@
 		B7414F8F1CCA4715009FE9CE /* CustomAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAlert.h; sourceTree = "<group>"; };
 		B7414F901CCA4715009FE9CE /* CustomAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAlert.m; sourceTree = "<group>"; };
 		B7414F911CCA4715009FE9CE /* CustomAlert.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomAlert.xib; sourceTree = "<group>"; };
+		B749267A1DF7DCB8006ABB79 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		B749267C1DF801A0006ABB79 /* Finder_iPhoneApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Finder_iPhoneApp.entitlements; sourceTree = "<group>"; };
 		B74B36CE1D1B8EBA006CD64B /* UIView+Toast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Toast.h"; sourceTree = "<group>"; };
 		B74B36CF1D1B8EBA006CD64B /* UIView+Toast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Toast.m"; sourceTree = "<group>"; };
 		B74B44531CFD60DD00275CC9 /* EventDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDataModel.h; sourceTree = SOURCE_ROOT; };
@@ -394,6 +397,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B749267B1DF7DCB8006ABB79 /* UserNotifications.framework in Frameworks */,
 				B73616F71D12CE4400194588 /* MapKit.framework in Frameworks */,
 				B7E024C01CC4D5B100707552 /* CoreLocation.framework in Frameworks */,
 				4EA5F7D5D38B1DF63EF3322F /* libPods.a in Frameworks */,
@@ -406,6 +410,7 @@
 		28552D1F9668D4BE3E623A4F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B749267A1DF7DCB8006ABB79 /* UserNotifications.framework */,
 				B73616F61D12CE4400194588 /* MapKit.framework */,
 				B7E024BF1CC4D5B100707552 /* CoreLocation.framework */,
 				B3CDDBB308E1E7466EFB6FFC /* libPods.a */,
@@ -880,6 +885,7 @@
 		B7A8DD5C1CAE2BF2007F56B6 = {
 			isa = PBXGroup;
 			children = (
+				B749267C1DF801A0006ABB79 /* Finder_iPhoneApp.entitlements */,
 				B7A8DD671CAE2BF2007F56B6 /* FinderApp */,
 				B7A8DD661CAE2BF2007F56B6 /* Products */,
 				589A5FC10A15A4B4361E0559 /* Pods */,
@@ -1559,6 +1565,9 @@
 							com.apple.BackgroundModes = {
 								enabled = 1;
 							};
+							com.apple.Push = {
+								enabled = 1;
+							};
 						};
 					};
 				};
@@ -1888,6 +1897,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
+				CODE_SIGN_ENTITLEMENTS = Finder_iPhoneApp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Ranosys Technologies Pte Ltd";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ranosys Technologies Pte Ltd";
 				GCC_PREFIX_HEADER = "FinderApp/Supporting Files/Finder-Prefix.pch";
@@ -1906,6 +1916,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
+				CODE_SIGN_ENTITLEMENTS = Finder_iPhoneApp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Ranosys Technologies Pte Ltd";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ranosys Technologies Pte Ltd";
 				GCC_PREFIX_HEADER = "FinderApp/Supporting Files/Finder-Prefix.pch";

@@ -18,8 +18,11 @@
 #import "MatchesService.h"
 #import "ConferenceService.h"
 #import "OtherUserProfileViewController.h"
+#import <UserNotifications/UserNotifications.h>
 
-@interface FinderAppDelegate ()<CLLocationManagerDelegate,MyAlertDelegate>
+#define SYSTEM_VERSION_GRATERTHAN_OR_EQUALTO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+
+@interface FinderAppDelegate ()<CLLocationManagerDelegate,MyAlertDelegate,UNUserNotificationCenterDelegate>
 {
     UIView *loaderView;
     UIImageView *logoImage;
@@ -190,6 +193,7 @@
          }] ;
     }
 }
+
 - (void) startTrackingBg {
     if ([isLocation isEqualToString:@"2"]) {
         isLocation=@"0";
@@ -217,15 +221,22 @@
 
 #pragma mark - Push notification methods
 - (void)registerDeviceForNotification {
-    if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerUserNotificationSettings:)]) {
-        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
-        [[UIApplication sharedApplication] registerForRemoteNotifications];
+    //condition for iOS 10 and below
+    if(SYSTEM_VERSION_GRATERTHAN_OR_EQUALTO(@"10.0")) {
+        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+        center.delegate = self;
+        [center requestAuthorizationWithOptions:(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge) completionHandler:^(BOOL granted, NSError * _Nullable error){
+            if( !error ){
+                [[UIApplication sharedApplication] registerForRemoteNotifications];
+            }
+        }];
     }
     else {
         [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
         [[UIApplication sharedApplication] registerForRemoteNotifications];
     }
 }
+
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken1 {
     NSString *token = [[deviceToken1 description] stringByTrimmingCharactersInSet: [NSCharacterSet characterSetWithCharactersInString:@"<>"]];
     token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
@@ -237,6 +248,7 @@
     } failure:^(NSError *error) {
     }] ;
 }
+
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     NSLog(@"push notification user info is active state --------------------->>>%@",userInfo);
     [UIApplication sharedApplication].applicationIconBadgeNumber=0;
@@ -425,14 +437,15 @@
 }
 #pragma mark - end
 
+#pragma mark - UNUserNotificationCenter Delegate // >= iOS 10
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void(^)())completionHandler {
+    NSLog(@"User Info = %@",response.notification.request.content.userInfo);
+}
+#pragma mark - end
+
 #pragma mark - Local notification
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
     [[UIApplication sharedApplication] cancelLocalNotification:notification];
-//    if (application.applicationState == UIApplicationStateActive) {
-//    }
-//    else {
-//        [[UIApplication sharedApplication] cancelLocalNotification:notification];
-//    }
 }
 #pragma mark - end
 
