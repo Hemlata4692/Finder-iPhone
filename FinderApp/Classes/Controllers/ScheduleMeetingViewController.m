@@ -359,7 +359,7 @@
 
 #pragma mark - Webservice
 -(BOOL)performValidations {
-    if ([contactNameTextField isEmpty] || [venueTextField isEmpty] || [dateTextField isEmpty] || [fromTimeTextField isEmpty] || [toTimeTextField isEmpty] || [meetingAgendaTextField.text isEqualToString:@""]) {
+    if ([contactNameTextField isEmpty] || [venueTextField isEmpty] || [dateTextField isEmpty] || [fromTimeTextField isEmpty] || [toTimeTextField isEmpty]) {
         SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
         [alert showWarning:self title:@"Alert" subTitle:@"All the fields are mandatory." closeButtonTitle:@"Done" duration:0.0f];
         return NO;
@@ -391,7 +391,6 @@
     }
 }
 - (void)scheduleMeeting {
-    
     [[ConferenceService sharedManager] scheduleMeeting:contactUserID venue:venueTextField.text meetingAgenda:meetingAgendaTextField.text date:dateTextField.text timeFrom:fromTimeTextField.text timeTo:toTimeTextField.text success:^(id responseObject) {
         [myDelegate stopIndicator];
         [self.presentingViewController dismissViewControllerAnimated:NO completion:nil];
