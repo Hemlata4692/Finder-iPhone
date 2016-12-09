@@ -140,6 +140,9 @@
     if ([myDelegate.alertType isEqualToString:@"8"]) {
         myTab.selectedIndex = 2;
     }
+    if ([[UserDefaultManager getValue:@"firstTimeUser"] isEqualToString:@"firstTimeUser"]) {
+        myTab.selectedIndex=4;
+    }
 }
 #pragma mark - end
 

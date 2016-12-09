@@ -45,6 +45,7 @@
 @synthesize currentNavigationController;
 @synthesize myView;
 
+
 #pragma mark - Global indicator view
 - (void)showIndicator
 {
@@ -241,7 +242,6 @@
     NSString *token = [[deviceToken1 description] stringByTrimmingCharactersInSet: [NSCharacterSet characterSetWithCharactersInString:@"<>"]];
     token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSLog(@"content---.......................%@", token);
-    NSLog(@"didRegisterForRemoteNotificationsWithDeviceToken");
     self.deviceToken = token;
     [[UserService sharedManager] registerDeviceForPushNotification:token deviceType:@"ios" success:^(id responseObject) {
         NSLog(@"push notification response is  --------------------->>>%@",responseObject);

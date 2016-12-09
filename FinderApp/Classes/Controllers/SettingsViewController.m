@@ -36,6 +36,7 @@
     [myDelegate showIndicator];
     [self performSelector:@selector(getUserSettings) withObject:nil afterDelay:.1];
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -47,6 +48,7 @@
     // Return the number of sections.
     return 2;
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
 {
     if (section==0) {
@@ -56,6 +58,7 @@
         return 40;
     }
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     if (section==0) {
         return 0;
@@ -64,6 +67,7 @@
         return 0;
     }
 }
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIView * headerView;
     headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 40.0)];
@@ -78,6 +82,7 @@
     [headerView addSubview:notificationLabel];
     return headerView;
 }
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section==0) {
         return 3;
@@ -86,6 +91,7 @@
         return settingsSection2Array.count;
     }
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section==0) {
         if (indexPath.row==2) {
@@ -99,6 +105,7 @@
         return 60;
     }
 }
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section==0 && indexPath.row==2) {
         NSString *simpleTableIdentifier = @"proximityCell";

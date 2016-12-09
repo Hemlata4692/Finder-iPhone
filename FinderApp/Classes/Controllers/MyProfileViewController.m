@@ -112,6 +112,7 @@
 }
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
+    [UserDefaultManager setValue:nil key:@"firstTimeUser"];
     if ([viewName isEqualToString:@"My Profile"]) {
         [myDelegate showIndicator];
         [self performSelector:@selector(getUserProfile) withObject:nil afterDelay:.1];
