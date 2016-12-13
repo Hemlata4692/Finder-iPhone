@@ -77,6 +77,8 @@
 		B78405B01CDB72A700CD7D54 /* ASValueTrackingSlider.m in Sources */ = {isa = PBXBuildFile; fileRef = B78405AE1CDB72A700CD7D54 /* ASValueTrackingSlider.m */; };
 		B794D6061D52F88000ED8633 /* RequestedMatchesViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B794D6051D52F88000ED8633 /* RequestedMatchesViewController.m */; };
 		B794D60B1D52F91300ED8633 /* RequestedMatchesCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B794D60A1D52F91300ED8633 /* RequestedMatchesCell.m */; };
+		B79A85991DFFF98D0078F58D /* FXBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = B79A85981DFFF98D0078F58D /* FXBlurView.m */; };
+		B79A859C1DFFF9970078F58D /* ImageCropView.m in Sources */ = {isa = PBXBuildFile; fileRef = B79A859B1DFFF9970078F58D /* ImageCropView.m */; };
 		B79D815B1D1799BF00E8B829 /* ALPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B79D81561D1799BF00E8B829 /* ALPickerView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		B79D815C1D1799BF00E8B829 /* ALPickerViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B79D81581D1799BF00E8B829 /* ALPickerViewCell.m */; };
 		B79D815D1D1799BF00E8B829 /* CYCustomMultiSelectPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = B79D815A1D1799BF00E8B829 /* CYCustomMultiSelectPickerView.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -278,6 +280,10 @@
 		B794D6051D52F88000ED8633 /* RequestedMatchesViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestedMatchesViewController.m; sourceTree = "<group>"; };
 		B794D6091D52F91300ED8633 /* RequestedMatchesCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestedMatchesCell.h; sourceTree = "<group>"; };
 		B794D60A1D52F91300ED8633 /* RequestedMatchesCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestedMatchesCell.m; sourceTree = "<group>"; };
+		B79A85971DFFF98D0078F58D /* FXBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXBlurView.h; sourceTree = "<group>"; };
+		B79A85981DFFF98D0078F58D /* FXBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXBlurView.m; sourceTree = "<group>"; };
+		B79A859A1DFFF9970078F58D /* ImageCropView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImageCropView.h; sourceTree = "<group>"; };
+		B79A859B1DFFF9970078F58D /* ImageCropView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ImageCropView.m; sourceTree = "<group>"; };
 		B79D81551D1799BF00E8B829 /* ALPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALPickerView.h; sourceTree = "<group>"; };
 		B79D81561D1799BF00E8B829 /* ALPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ALPickerView.m; sourceTree = "<group>"; };
 		B79D81571D1799BF00E8B829 /* ALPickerViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ALPickerViewCell.h; sourceTree = "<group>"; };
@@ -869,6 +875,17 @@
 			name = RequestedMatchesCell;
 			sourceTree = "<group>";
 		};
+		B79A85901DFFDC8D0078F58D /* ImageCropper */ = {
+			isa = PBXGroup;
+			children = (
+				B79A85971DFFF98D0078F58D /* FXBlurView.h */,
+				B79A85981DFFF98D0078F58D /* FXBlurView.m */,
+				B79A859A1DFFF9970078F58D /* ImageCropView.h */,
+				B79A859B1DFFF9970078F58D /* ImageCropView.m */,
+			);
+			name = ImageCropper;
+			sourceTree = "<group>";
+		};
 		B79D81541D1799A300E8B829 /* ALPickerView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1068,6 +1085,7 @@
 		B7A8DDD91CAE5CBD007F56B6 /* SupportingClasses */ = {
 			isa = PBXGroup;
 			children = (
+				B79A85901DFFDC8D0078F58D /* ImageCropper */,
 				B73616DB1D12CE0600194588 /* Geocoder */,
 				B7A8DDC81CAE5BAB007F56B6 /* DefaultManager */,
 				B7A8DDBB1CAE5994007F56B6 /* NullHandler */,
@@ -1555,7 +1573,7 @@
 		B7A8DD5D1CAE2BF2007F56B6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0720;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = Ranosys;
 				TargetAttributes = {
 					B7A8DD641CAE2BF2007F56B6 = {
@@ -1711,10 +1729,12 @@
 				B736EBAA1CCF93E000CE7B6E /* MessagesViewCell.m in Sources */,
 				B75FCECD1D0E683B00B8CE4C /* OtherUserProfileViewController.m in Sources */,
 				B762DB6D1CCDFAEB002875A1 /* PendingAppointmentCell.m in Sources */,
+				B79A85991DFFF98D0078F58D /* FXBlurView.m in Sources */,
 				B70C5D771CE590B20063246A /* ConferenceListDataModel.m in Sources */,
 				B73616F31D12CE3100194588 /* SBJsonParser.m in Sources */,
 				5D32EC0E1CC4A31F00C50969 /* MessagesViewController.m in Sources */,
 				B7A8DDDC1CAE5FC8007F56B6 /* LoginViewController.m in Sources */,
+				B79A859C1DFFF9970078F58D /* ImageCropView.m in Sources */,
 				B77695C51CBFB4F300794005 /* UIImage+ImageEffects.m in Sources */,
 				B7A8DD6D1CAE2BF2007F56B6 /* FinderAppDelegate.m in Sources */,
 				5D32EC0D1CC4A31F00C50969 /* CalendarViewController.m in Sources */,
@@ -1818,8 +1838,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Ranosys Technologies Pte Ltd";
@@ -1830,7 +1852,7 @@
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_NO_COMMON_BLOCKS = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREFIX_HEADER = "FinderApp/Supporting Files/Finder-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1864,8 +1886,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Ranosys Technologies Pte Ltd";
@@ -1875,7 +1899,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_NO_COMMON_BLOCKS = NO;
 				GCC_PREFIX_HEADER = "FinderApp/Supporting Files/Finder-Prefix.pch";
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
@@ -1900,6 +1924,7 @@
 				CODE_SIGN_ENTITLEMENTS = Finder_iPhoneApp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Ranosys Technologies Pte Ltd";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ranosys Technologies Pte Ltd";
+				GCC_NO_COMMON_BLOCKS = NO;
 				GCC_PREFIX_HEADER = "FinderApp/Supporting Files/Finder-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/FinderApp/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1919,6 +1944,7 @@
 				CODE_SIGN_ENTITLEMENTS = Finder_iPhoneApp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Ranosys Technologies Pte Ltd";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ranosys Technologies Pte Ltd";
+				GCC_NO_COMMON_BLOCKS = NO;
 				GCC_PREFIX_HEADER = "FinderApp/Supporting Files/Finder-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/FinderApp/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

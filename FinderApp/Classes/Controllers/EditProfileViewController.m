@@ -574,7 +574,7 @@
         {
             UIImagePickerController *picker = [[UIImagePickerController alloc] init];
             picker.delegate = self;
-            picker.allowsEditing = YES;
+            picker.allowsEditing = NO;
             picker.sourceType = UIImagePickerControllerSourceTypeCamera;
             [self presentViewController:picker animated:YES completion:NULL];
         }
@@ -583,7 +583,7 @@
     {
         UIImagePickerController *picker = [[UIImagePickerController alloc] init];
         picker.delegate = self;
-        picker.allowsEditing = YES;
+        picker.allowsEditing = NO;
         picker.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
         
         [self presentViewController:picker animated:YES completion:NULL];
@@ -596,14 +596,33 @@
 {
     userImageView.layer.cornerRadius=userImageView.frame.size.width/2;
     userImageView.clipsToBounds=YES;
-    userImageView.image = image;
+  //  userImageView.image = image;
+    ImageCropViewController *controller = [[ImageCropViewController alloc] initWithImage:image];
+    controller.delegate = self;
+    controller.blurredBackground = YES;
+    // set the cropped area
+    // controller.cropArea = CGRectMake(0, 0, 100, 200);
+    [[self navigationController] pushViewController:controller animated:NO];
+
     [picker dismissViewControllerAnimated:YES completion:NULL];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
-    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:YES];
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:NO];
 }
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
     [picker dismissViewControllerAnimated:YES completion:NULL];
+}
+
+- (void)ImageCropViewControllerSuccess:(ImageCropViewController *)controller didFinishCroppingImage:(UIImage *)croppedImage{
+    image1 = croppedImage;
+    userImageView.image = croppedImage;
+//    CGRect cropArea = controller.cropArea;
+    [[self navigationController] popViewControllerAnimated:YES];
+}
+
+- (void)ImageCropViewControllerDidCancel:(ImageCropViewController *)controller{
+    userImageView.image = image1;
+    [[self navigationController] popViewControllerAnimated:YES];
 }
 #pragma mark - end
 
