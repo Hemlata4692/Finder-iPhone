@@ -613,15 +613,25 @@
     [picker dismissViewControllerAnimated:YES completion:NULL];
 }
 
-- (void)ImageCropViewControllerSuccess:(ImageCropViewController *)controller didFinishCroppingImage:(UIImage *)croppedImage{
+- (void)ImageCropViewControllerSuccess:(ImageCropViewController *)controller didFinishCroppingImage:(UIImage *)croppedImage {
     image1 = croppedImage;
-    userImageView.image = croppedImage;
+    if (image1==nil) {
+        userImageView.image=[UIImage imageNamed:@"user_thumbnail.png"];
+    }
+    else{
+        userImageView.image = croppedImage;
+    }
 //    CGRect cropArea = controller.cropArea;
     [[self navigationController] popViewControllerAnimated:YES];
 }
 
-- (void)ImageCropViewControllerDidCancel:(ImageCropViewController *)controller{
+- (void)ImageCropViewControllerDidCancel:(ImageCropViewController *)controller {
+    if (image1==nil) {
+        userImageView.image=[UIImage imageNamed:@"user_thumbnail.png"];
+    }
+    else{
     userImageView.image = image1;
+    }
     [[self navigationController] popViewControllerAnimated:YES];
 }
 #pragma mark - end

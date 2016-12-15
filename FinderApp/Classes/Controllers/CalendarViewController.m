@@ -233,8 +233,15 @@
     [calendarCell.containerView addShadow:calendarCell.containerView color:[UIColor lightGrayColor]];
     calendarCell.viewAgendaButton.Tag=(int)indexPath.row;
     calendarCell.viewAgendaButton.sectionTag=(int)indexPath.section;
+    calendarCell.editButton.Tag=(int)indexPath.row;
+    calendarCell.editButton.sectionTag=(int)indexPath.section;
+    calendarCell.deleteButton.Tag=(int)indexPath.row;
+    calendarCell.deleteButton.sectionTag=(int)indexPath.section;
+    
     [calendarCell.viewAgendaButton addTarget:self action:@selector(viewAgendaButonAction:) forControlEvents:UIControlEventTouchUpInside];
     [calendarCell.userImageClickAction addTarget:self action:@selector(userProfileAction:) forControlEvents:UIControlEventTouchUpInside];
+    [calendarCell.editButton addTarget:self action:@selector(editMeetingButtonAction:) forControlEvents:UIControlEventTouchUpInside];
+    [calendarCell.deleteButton addTarget:self action:@selector(deleteMeetingButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     calendarCell.userImageClickAction.Tag=(int)indexPath.row;
     calendarCell.userImageClickAction.sectionTag=(int)indexPath.section;
     EventDataModel *data=[[[sectionArray objectAtIndex:indexPath.section]eventArray] objectAtIndex:indexPath.row];
@@ -266,6 +273,35 @@
     [descreptionView setModalPresentationStyle:UIModalPresentationOverCurrentContext];
     [self presentViewController:descreptionView animated: NO completion:nil];
 }
+
+- (IBAction)editMeetingButtonAction:(MyButton *)sender {
+    int btnTag=[sender Tag];
+    int sectionTag= [sender sectionTag];
+   // EventDataModel *data=[[[sectionArray objectAtIndex:sectionTag]eventArray] objectAtIndex:btnTag];
+    UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    ScheduleMeetingViewController *scheduleMeeting =[storyboard instantiateViewControllerWithIdentifier:@"ScheduleMeetingViewController"];
+    scheduleMeeting.screenName=@"Edit Meeting";
+    scheduleMeeting.calenderObj=[[[sectionArray objectAtIndex:sectionTag]eventArray] objectAtIndex:btnTag];
+    scheduleMeeting.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.1f];
+    [scheduleMeeting setModalPresentationStyle:UIModalPresentationOverCurrentContext];
+    [self presentViewController:scheduleMeeting animated: NO completion:nil];
+
+
+}
+
+- (IBAction)deleteMeetingButtonAction:(MyButton *)sender {
+    int btnTag=[sender Tag];
+    int sectionTag= [sender sectionTag];
+//    EventDataModel *data=[[[sectionArray objectAtIndex:sectionTag]eventArray] objectAtIndex:btnTag];
+//    UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    MeetingDescriptionViewController *descreptionView =[storyboard instantiateViewControllerWithIdentifier:@"MeetingDescriptionViewController"];
+//    descreptionView.meetingDescription=data.eventDescription;
+//    descreptionView.meetingLocation=data.eventVenue;
+//    descreptionView.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.5f];
+//    [descreptionView setModalPresentationStyle:UIModalPresentationOverCurrentContext];
+//    [self presentViewController:descreptionView animated: NO completion:nil];
+}
+
 
 
 - (IBAction)addButtonAction:(id)sender {

@@ -36,6 +36,10 @@
 - (void)scheduleMeeting:(NSString *)contactUserId venue:(NSString *)venue meetingAgenda:(NSString *)meetingAgenda date:(NSString *)date timeFrom:(NSString *)timeFrom timeTo:(NSString *)timeTo success:(void (^)(id))success failure:(void (^)(NSError *))failure;
 //end
 
+//edit scheduled meeting
+- (void)editScheduledMeeting:(NSString *)contactUserId appointmentId:(NSString *)appointmentId venue:(NSString *)venue meetingAgenda:(NSString *)meetingAgenda date:(NSString *)date timeFrom:(NSString *)timeFrom timeTo:(NSString *)timeTo success:(void (^)(id))success failure:(void (^)(NSError *))failure;
+//end
+
 //Pending appointments
 - (void)pendingAppointment:(void (^)(id data))success failure:(void (^)(NSError *error))failure;
 //end

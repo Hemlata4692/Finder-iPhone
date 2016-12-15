@@ -334,7 +334,7 @@
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="J8i-Kg-ttW">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="J8i-Kg-ttW">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -465,19 +465,21 @@
                                                                 <color key="titleColor" red="0.30980392159999998" green="0.80784313730000001" blue="0.76470588240000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             </state>
                                                         </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="39z-Q6-yzF">
-                                                            <rect key="frame" x="247" y="32" width="27" height="27"/>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="39z-Q6-yzF" customClass="MyButton">
+                                                            <rect key="frame" x="240" y="32" width="27" height="27"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" secondItem="39z-Q6-yzF" secondAttribute="height" multiplier="1:1" id="JAT-Tm-Fg8"/>
+                                                                <constraint firstAttribute="height" constant="27" id="6y8-Ct-T1a"/>
+                                                                <constraint firstAttribute="width" constant="27" id="qBJ-ne-t5H"/>
                                                             </constraints>
                                                             <state key="normal" image="edit_profile"/>
                                                         </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fj7-bK-kYA">
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fj7-bK-kYA" customClass="MyButton">
                                                             <rect key="frame" x="275" y="32" width="27" height="27"/>
                                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="width" secondItem="Fj7-bK-kYA" secondAttribute="height" multiplier="1:1" id="EVg-t7-Ge1"/>
+                                                                <constraint firstAttribute="height" constant="27" id="k0u-JN-28q"/>
+                                                                <constraint firstAttribute="width" constant="27" id="pAo-bQ-bLf"/>
                                                             </constraints>
                                                             <state key="normal" image="delete_"/>
                                                         </button>
@@ -490,41 +492,43 @@
                                                         <constraint firstAttribute="width" secondItem="YdY-7M-Psn" secondAttribute="height" multiplier="155:37" constant="33.513513513513487" id="9y1-C9-ZF0"/>
                                                         <constraint firstAttribute="bottom" secondItem="Yyn-60-dLk" secondAttribute="bottom" constant="8" id="AeS-wN-G97"/>
                                                         <constraint firstAttribute="bottom" secondItem="5hC-yI-eTR" secondAttribute="bottom" constant="8" id="Diy-Hg-9xa"/>
+                                                        <constraint firstItem="Fj7-bK-kYA" firstAttribute="leading" secondItem="39z-Q6-yzF" secondAttribute="trailing" constant="8" id="FVU-2V-ep0"/>
                                                         <constraint firstItem="zaE-UF-y7U" firstAttribute="top" secondItem="03K-do-08L" secondAttribute="bottom" constant="3" id="Kuj-bW-APy"/>
                                                         <constraint firstItem="5hC-yI-eTR" firstAttribute="leading" secondItem="YdY-7M-Psn" secondAttribute="leading" constant="5" id="MYx-as-79d"/>
                                                         <constraint firstAttribute="trailing" secondItem="03K-do-08L" secondAttribute="trailing" constant="5" id="Mvx-Nf-zsF"/>
+                                                        <constraint firstItem="39z-Q6-yzF" firstAttribute="top" secondItem="03K-do-08L" secondAttribute="bottom" constant="-1" id="NnD-4i-8hn"/>
                                                         <constraint firstItem="5hC-yI-eTR" firstAttribute="top" secondItem="YdY-7M-Psn" secondAttribute="top" constant="8" id="PNp-Xq-y2N"/>
                                                         <constraint firstAttribute="bottom" secondItem="u9K-13-KJ6" secondAttribute="bottom" id="QLH-0P-2wM"/>
                                                         <constraint firstItem="Yyn-60-dLk" firstAttribute="top" secondItem="YdY-7M-Psn" secondAttribute="top" constant="8" id="R9A-fs-mCR"/>
                                                         <constraint firstItem="u9K-13-KJ6" firstAttribute="leading" secondItem="Yyn-60-dLk" secondAttribute="trailing" constant="8" id="VEj-VE-gSl"/>
-                                                        <constraint firstItem="Fj7-bK-kYA" firstAttribute="top" secondItem="03K-do-08L" secondAttribute="bottom" constant="-1" id="XvP-yc-euz"/>
                                                         <constraint firstItem="5hC-yI-eTR" firstAttribute="centerY" secondItem="YdY-7M-Psn" secondAttribute="centerY" id="ZEN-of-A5N"/>
+                                                        <constraint firstAttribute="bottom" secondItem="39z-Q6-yzF" secondAttribute="bottom" constant="7" id="ax5-iE-Etc"/>
                                                         <constraint firstItem="zaE-UF-y7U" firstAttribute="leading" secondItem="W7g-Yu-egS" secondAttribute="trailing" constant="7" id="bJ6-GA-LCv"/>
                                                         <constraint firstItem="W7g-Yu-egS" firstAttribute="leading" secondItem="5hC-yI-eTR" secondAttribute="trailing" constant="13" id="d6L-hc-Aud"/>
-                                                        <constraint firstItem="39z-Q6-yzF" firstAttribute="top" secondItem="03K-do-08L" secondAttribute="bottom" constant="-1" id="ecl-tt-U0G"/>
                                                         <constraint firstItem="Yyn-60-dLk" firstAttribute="leading" secondItem="YdY-7M-Psn" secondAttribute="leading" constant="5" id="iKi-gr-KTf"/>
                                                         <constraint firstItem="03K-do-08L" firstAttribute="leading" secondItem="Yyn-60-dLk" secondAttribute="trailing" constant="7" id="l2v-BH-xzp"/>
+                                                        <constraint firstItem="Fj7-bK-kYA" firstAttribute="top" secondItem="03K-do-08L" secondAttribute="bottom" constant="-1" id="lfO-HH-tOb"/>
                                                         <constraint firstItem="03K-do-08L" firstAttribute="leading" secondItem="5hC-yI-eTR" secondAttribute="trailing" constant="7" id="sH7-aB-yKm"/>
-                                                        <constraint firstAttribute="bottom" secondItem="39z-Q6-yzF" secondAttribute="bottom" constant="7" id="svW-3Y-bMO"/>
-                                                        <constraint firstItem="Fj7-bK-kYA" firstAttribute="leading" secondItem="39z-Q6-yzF" secondAttribute="trailing" constant="1" id="t8x-9D-2Xb"/>
                                                         <constraint firstAttribute="trailing" secondItem="u9K-13-KJ6" secondAttribute="trailing" id="txp-1s-CcY"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Fj7-bK-kYA" secondAttribute="trailing" constant="8" id="xVn-6Z-2Cc"/>
+                                                        <constraint firstAttribute="bottom" secondItem="Fj7-bK-kYA" secondAttribute="bottom" constant="7" id="z6S-FQ-ge3"/>
                                                         <constraint firstItem="03K-do-08L" firstAttribute="top" secondItem="YdY-7M-Psn" secondAttribute="top" constant="8" id="zjD-5b-FcE"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
                                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
-                                                <constraint firstAttribute="bottomMargin" secondItem="Fj7-bK-kYA" secondAttribute="bottom" constant="3" id="Inh-lu-yRb"/>
                                                 <constraint firstAttribute="bottom" secondItem="YdY-7M-Psn" secondAttribute="bottom" constant="4" id="SFO-2a-bzE"/>
                                                 <constraint firstItem="YdY-7M-Psn" firstAttribute="leading" secondItem="hzd-3h-fab" secondAttribute="leading" constant="5" id="h2z-CH-XC9"/>
                                                 <constraint firstAttribute="trailing" secondItem="YdY-7M-Psn" secondAttribute="trailing" constant="5" id="r2h-Tz-Vlx"/>
                                                 <constraint firstItem="YdY-7M-Psn" firstAttribute="top" secondItem="hzd-3h-fab" secondAttribute="top" id="rpZ-Du-Ezo"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="Fj7-bK-kYA" secondAttribute="trailing" constant="5" id="tFu-no-UvY"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <outlet property="containerView" destination="YdY-7M-Psn" id="RTz-7e-eh0"/>
+                                            <outlet property="deleteButton" destination="Fj7-bK-kYA" id="cdt-oX-naQ"/>
+                                            <outlet property="editButton" destination="39z-Q6-yzF" id="BaJ-t0-GPK"/>
                                             <outlet property="eventNameLabel" destination="03K-do-08L" id="agN-nI-X1p"/>
                                             <outlet property="eventTimeLabel" destination="zaE-UF-y7U" id="kGe-ik-kMA"/>
                                             <outlet property="userImage" destination="5hC-yI-eTR" id="lFs-Vb-rWa"/>
@@ -591,7 +595,7 @@
                     <toolbarItems/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics" translucent="NO"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="ayW-Ig-8bx">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="ayW-Ig-8bx">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

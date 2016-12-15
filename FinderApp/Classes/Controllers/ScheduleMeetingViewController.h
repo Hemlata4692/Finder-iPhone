@@ -7,12 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "CalendarViewController.h"
+#import "EventDataModel.h"
 
 @interface ScheduleMeetingViewController : UIViewController
 @property(nonatomic,strong) NSString *screenName;
 @property(nonatomic,strong) NSString *ContactName;
 @property(nonatomic,strong) NSMutableArray *contactDetailArray;
 @property(nonatomic,strong) NSString *contactUserID;
-@property(strong, nonatomic) CalendarViewController *calenderObj;
+@property(strong, nonatomic) EventDataModel *calenderObj;
 @end

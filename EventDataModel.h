@@ -15,4 +15,6 @@
 @property(nonatomic,retain)NSString * eventVenue;
 @property(nonatomic,retain)NSString * userImage;
 @property(nonatomic,retain)NSString * userId;
+@property(nonatomic,retain)NSString * eventId;
+@property(nonatomic,retain)NSString * eventDate;
 @end

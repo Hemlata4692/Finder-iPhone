@@ -11,6 +11,7 @@
 #import "ContactDataModel.h"
 #import "ConferenceService.h"
 
+
 @interface ScheduleMeetingViewController ()<UITextFieldDelegate,BSKeyboardControlsDelegate,UITextViewDelegate>
 {
     NSArray *textFieldArray;
@@ -52,7 +53,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    if (![screenName isEqualToString:@"Calendar"]) {
+    if ([screenName isEqualToString:@"Edit Meeting"]) {
+        contactButton.hidden=YES;
+        dropDownImage.hidden=YES;
+        userImage.hidden=NO;
+        contactNameTextField.text=calenderObj.eventName;
+        venueTextField.text=calenderObj.eventVenue;
+        meetingAgendaTextField.text=calenderObj.eventDescription;
+        NSArray *arrComp = [calenderObj.eventTime componentsSeparatedByString:@" - "];
+        fromTimeTextField.text=[arrComp objectAtIndex:0];
+        toTimeTextField.text=[arrComp objectAtIndex:1];
+        NSArray *dateArr = [calenderObj.eventDate componentsSeparatedByString:@" "];
+        dateTextField.text=[dateArr objectAtIndex:0];
+        textFieldArray = @[contactNameTextField,venueTextField,meetingAgendaTextField];
+    }
+
+   else if (![screenName isEqualToString:@"Calendar"]) {
         contactButton.hidden=YES;
         dropDownImage.hidden=YES;
         userImage.hidden=NO;
@@ -107,7 +123,12 @@
     [self hidePickerWithAnimation];
     if([self performValidations]) {
         [myDelegate showIndicator];
+        if([screenName isEqualToString:@"Edit Meeting"]) {
+            [self performSelector:@selector(editScheduledMeeting) withObject:nil afterDelay:.1];
+        }
+        else {
         [self performSelector:@selector(scheduleMeeting) withObject:nil afterDelay:.1];
+        }
     }
 }
 - (IBAction)cancelButtonAction:(id)sender {
@@ -390,8 +411,20 @@
         }
     }
 }
+
 - (void)scheduleMeeting {
     [[ConferenceService sharedManager] scheduleMeeting:contactUserID venue:venueTextField.text meetingAgenda:meetingAgendaTextField.text date:dateTextField.text timeFrom:fromTimeTextField.text timeTo:toTimeTextField.text success:^(id responseObject) {
+        [myDelegate stopIndicator];
+        [self.presentingViewController dismissViewControllerAnimated:NO completion:nil];
+    }
+                                               failure:^(NSError *error)
+     {
+         
+     }] ;
+}
+
+- (void)editScheduledMeeting {
+    [[ConferenceService sharedManager] editScheduledMeeting:@"" appointmentId:calenderObj.eventId venue:venueTextField.text meetingAgenda:meetingAgendaTextField.text date:dateTextField.text timeFrom:fromTimeTextField.text timeTo:toTimeTextField.text success:^(id responseObject) {
         [myDelegate stopIndicator];
         [self.presentingViewController dismissViewControllerAnimated:NO completion:nil];
     }
