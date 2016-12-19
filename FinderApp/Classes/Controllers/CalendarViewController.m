@@ -292,17 +292,16 @@
 - (IBAction)deleteMeetingButtonAction:(MyButton *)sender {
     int btnTag=[sender Tag];
     int sectionTag= [sender sectionTag];
-//    EventDataModel *data=[[[sectionArray objectAtIndex:sectionTag]eventArray] objectAtIndex:btnTag];
-//    UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    MeetingDescriptionViewController *descreptionView =[storyboard instantiateViewControllerWithIdentifier:@"MeetingDescriptionViewController"];
-//    descreptionView.meetingDescription=data.eventDescription;
-//    descreptionView.meetingLocation=data.eventVenue;
-//    descreptionView.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.5f];
-//    [descreptionView setModalPresentationStyle:UIModalPresentationOverCurrentContext];
-//    [self presentViewController:descreptionView animated: NO completion:nil];
+    EventDataModel *data=[[[sectionArray objectAtIndex:sectionTag]eventArray] objectAtIndex:btnTag];
+    [myDelegate showIndicator];
+    [[ConferenceService sharedManager] deleteScheduledMeeting:data.eventId success:^(id responseObject) {
+        [self getCalendarDetails];
+    }
+                                                      failure:^(NSError *error)
+     {
+         
+     }] ;
 }
-
-
 
 - (IBAction)addButtonAction:(id)sender {
     UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];

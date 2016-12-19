@@ -67,7 +67,6 @@
         dateTextField.text=[dateArr objectAtIndex:0];
         textFieldArray = @[contactNameTextField,venueTextField,meetingAgendaTextField];
     }
-
    else if (![screenName isEqualToString:@"Calendar"]) {
         contactButton.hidden=YES;
         dropDownImage.hidden=YES;
@@ -424,7 +423,7 @@
 }
 
 - (void)editScheduledMeeting {
-    [[ConferenceService sharedManager] editScheduledMeeting:@"" appointmentId:calenderObj.eventId venue:venueTextField.text meetingAgenda:meetingAgendaTextField.text date:dateTextField.text timeFrom:fromTimeTextField.text timeTo:toTimeTextField.text success:^(id responseObject) {
+    [[ConferenceService sharedManager] editScheduledMeeting:calenderObj.userId appointmentId:calenderObj.eventId venue:venueTextField.text meetingAgenda:meetingAgendaTextField.text date:dateTextField.text timeFrom:fromTimeTextField.text timeTo:toTimeTextField.text success:^(id responseObject) {
         [myDelegate stopIndicator];
         [self.presentingViewController dismissViewControllerAnimated:NO completion:nil];
     }
