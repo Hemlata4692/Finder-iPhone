@@ -293,8 +293,18 @@
     int btnTag=[sender Tag];
     int sectionTag= [sender sectionTag];
     EventDataModel *data=[[[sectionArray objectAtIndex:sectionTag]eventArray] objectAtIndex:btnTag];
-    [myDelegate showIndicator];
-    [[ConferenceService sharedManager] deleteScheduledMeeting:data.eventId success:^(id responseObject) {
+    SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
+    [alert addButton:@"Yes" actionBlock:^(void) {
+         [myDelegate showIndicator];
+        [self deleteScheduledMeeting:data.eventId];
+    }];
+    [alert showWarning:nil title:nil subTitle:@"Are you sure, you want to delete this appointment?" closeButtonTitle:@"No" duration:0.0f];
+   
+    
+}
+
+- (void)deleteScheduledMeeting:(NSString *)appointmentId {
+    [[ConferenceService sharedManager] deleteScheduledMeeting:appointmentId success:^(id responseObject) {
         [self getCalendarDetails];
     }
                                                       failure:^(NSError *error)
