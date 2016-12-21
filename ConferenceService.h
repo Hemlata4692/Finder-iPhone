@@ -37,7 +37,7 @@
 //end
 
 //edit scheduled meeting
-- (void)editScheduledMeeting:(NSString *)contactUserId appointmentId:(NSString *)appointmentId venue:(NSString *)venue meetingAgenda:(NSString *)meetingAgenda date:(NSString *)date timeFrom:(NSString *)timeFrom timeTo:(NSString *)timeTo success:(void (^)(id))success failure:(void (^)(NSError *))failure;
+- (void)editScheduledMeeting:(NSString *)contactUserId appointmentId:(NSString *)appointmentId venue:(NSString *)venue meetingAgenda:(NSString *)meetingAgenda date:(NSString *)date timeFrom:(NSString *)timeFrom timeTo:(NSString *)timeTo oldUserId:(NSString *)oldUserId success:(void (^)(id))success failure:(void (^)(NSError *))failure;
 //end
 
 //delete scheduled meeting

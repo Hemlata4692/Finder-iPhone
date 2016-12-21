@@ -286,8 +286,8 @@
 #pragma mark- end
 
 #pragma mark- Edit scheduled meeting
-- (void)editScheduledMeeting:(NSString *)contactUserId appointmentId:(NSString *)appointmentId venue:(NSString *)venue meetingAgenda:(NSString *)meetingAgenda date:(NSString *)date timeFrom:(NSString *)timeFrom timeTo:(NSString *)timeTo success:(void (^)(id))success failure:(void (^)(NSError *))failure {
-    NSDictionary *requestDict = @{@"appointmentId":appointmentId,@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"],@"contactUserId":contactUserId,@"venue":venue,@"meetingAgenda":meetingAgenda,@"date":date,@"timeFrom":timeFrom,@"timeTo":timeTo};
+- (void)editScheduledMeeting:(NSString *)contactUserId appointmentId:(NSString *)appointmentId venue:(NSString *)venue meetingAgenda:(NSString *)meetingAgenda date:(NSString *)date timeFrom:(NSString *)timeFrom timeTo:(NSString *)timeTo oldUserId:(NSString *)oldUserId success:(void (^)(id))success failure:(void (^)(NSError *))failure {
+    NSDictionary *requestDict = @{@"appointmentId":appointmentId,@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"],@"contactUserId":contactUserId,@"venue":venue,@"meetingAgenda":meetingAgenda,@"date":date,@"timeFrom":timeFrom,@"timeTo":timeTo,@"oldUserId":oldUserId};
     NSLog(@"edit schedule meeting request %@",requestDict);
     [[Webservice sharedManager] post:kUrlEditScheduleMeeting parameters:requestDict success:^(id responseObject)
      {
