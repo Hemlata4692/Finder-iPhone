@@ -16,11 +16,13 @@
 {
     NSArray *textFieldArray;
     CYCustomMultiSelectPickerView *multiPickerView;
-    NSArray *interestedAreaArray;
-    NSArray *interestedInArray;
-    NSArray *professionArray;
+    NSMutableArray *interestedAreaArray;
+    NSMutableArray *interestedInArray;
+    NSMutableArray *professionArray;
     NSArray *selectedPickerArray, *interestedInSelectcedArray;
     NSString* pickerType;
+    NSString *otherProffession, *otherIntrestedIn, *otherIntrestedArea;
+    BOOL isInterestedInOtherSelected, isInterestedAreaOtherSelected;
     
 }
 @property (weak, nonatomic) IBOutlet UIScrollView *editProfileScrollView;
@@ -50,12 +52,17 @@
 @property (weak, nonatomic) IBOutlet UIView *interestedInView;
 @property (weak, nonatomic) IBOutlet UITextField *interestedInTextField;
 @property (weak, nonatomic) IBOutlet UIView *interestedAreaView;
+@property (weak, nonatomic) IBOutlet UIView *interestedInOtherView;
+@property (weak, nonatomic) IBOutlet UIView *interestedAreaOtherView;
 @property (weak, nonatomic) IBOutlet UITextField *interestedAreaTextField;
 @property (weak, nonatomic) IBOutlet UIPickerView *userPickerView;
 @property (weak, nonatomic) IBOutlet UIToolbar *pickerToolBar;
 @property (weak, nonatomic) IBOutlet UIButton *professionButton;
 @property (weak, nonatomic) IBOutlet UIButton *interestesInButton;
 @property (weak, nonatomic) IBOutlet UIButton *interestAreaButton;
+@property (weak, nonatomic) IBOutlet UITextField *interestedInOtherTextField;
+@property (weak, nonatomic) IBOutlet UITextField *interestedAreaOtherTextField;
+@property (weak, nonatomic) IBOutlet UILabel *interestedAreaSeparator;
 @property (nonatomic, strong) BSKeyboardControls *keyboardControls;
 @end
 
@@ -108,16 +115,61 @@
     [self displayData];
     userEmailTextfield.userInteractionEnabled=NO;
     userEmailTextfield.textColor=[UIColor colorWithRed:180.0/255.0 green:180.0/255.0 blue:180.0/255.0 alpha:1.0];
-    interestedAreaArray=[[NSArray alloc]init];
-    interestedInArray=[[NSArray alloc]init];
-    professionArray=[[NSArray alloc]init];
+    interestedAreaArray=[[NSMutableArray alloc]init];
+    interestedInArray=[[NSMutableArray alloc]init];
+    professionArray=[[NSMutableArray alloc]init];
     selectedPickerArray=[[NSArray alloc]init];
     interestedInSelectcedArray=[[NSArray alloc]init];
     userPickerView.translatesAutoresizingMaskIntoConstraints = YES;
     pickerToolBar.translatesAutoresizingMaskIntoConstraints = YES;
+    
+    self.interestedInOtherView.translatesAutoresizingMaskIntoConstraints=YES;
+    self.interestedAreaOtherView.translatesAutoresizingMaskIntoConstraints=YES;
+    self.bottomView.translatesAutoresizingMaskIntoConstraints=YES;
+    
+    isInterestedInOtherSelected=NO;
+    isInterestedAreaOtherSelected=NO;
+    [self viewCustomization:NO isSecondOtherShow:NO];
     [myDelegate showIndicator];
     [self performSelector:@selector(getInterestListing) withObject:nil afterDelay:.1];
 }
+
+- (void)viewCustomization:(BOOL)isFirstOtherShow isSecondOtherShow:(BOOL)isSecondOtherShow {
+    
+    if (!isFirstOtherShow && !isSecondOtherShow) {
+        self.interestedInOtherView.frame=CGRectMake(0, 114, [[UIScreen mainScreen] bounds].size.width-10, 0);
+        self.interestedInOtherView.hidden=YES;
+        self.interestedAreaOtherView.frame=CGRectMake(0, 114+55, [[UIScreen mainScreen] bounds].size.width-10, 0);
+        self.interestedAreaOtherView.hidden=YES;
+        self.bottomView.frame=CGRectMake(5, 590, [[UIScreen mainScreen] bounds].size.width-10, (55*3));
+        self.interestedAreaSeparator.hidden=YES;
+    }
+    else if (!isFirstOtherShow && isSecondOtherShow) {
+        self.interestedInOtherView.frame=CGRectMake(0, 114, [[UIScreen mainScreen] bounds].size.width-10, 0);
+        self.interestedInOtherView.hidden=YES;
+        self.interestedAreaOtherView.frame=CGRectMake(0, 114+55, [[UIScreen mainScreen] bounds].size.width-10, 55);
+        self.interestedAreaOtherView.hidden=NO;
+        self.bottomView.frame=CGRectMake(5, 590, [[UIScreen mainScreen] bounds].size.width-10, (55*4));
+        self.interestedAreaSeparator.hidden=NO;
+    }
+    else if (isFirstOtherShow && !isSecondOtherShow) {
+        self.interestedInOtherView.frame=CGRectMake(0, 114, [[UIScreen mainScreen] bounds].size.width-10, 55);
+        self.interestedInOtherView.hidden=NO;
+        self.interestedAreaOtherView.frame=CGRectMake(0, 114+(55*2), [[UIScreen mainScreen] bounds].size.width-10, 0);
+        self.interestedAreaOtherView.hidden=YES;
+        self.bottomView.frame=CGRectMake(5, 590, [[UIScreen mainScreen] bounds].size.width-10, (55*4));
+        self.interestedAreaSeparator.hidden=YES;
+    }
+    else {
+        self.interestedInOtherView.frame=CGRectMake(0, 114, [[UIScreen mainScreen] bounds].size.width-10, 55);
+        self.interestedInOtherView.hidden=NO;
+        self.interestedAreaOtherView.frame=CGRectMake(0, 114+(55*2)+5, [[UIScreen mainScreen] bounds].size.width-10,55);
+        self.interestedAreaOtherView.hidden=NO;
+        self.bottomView.frame=CGRectMake(5, 590, [[UIScreen mainScreen] bounds].size.width-10, (55*5));
+        self.interestedAreaSeparator.hidden=NO;
+    }
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -130,15 +182,13 @@
     [aboutCompanyView addShadow:aboutCompanyView color:[UIColor lightGrayColor]];
     [companyAddressView addShadow:companyAddressView color:[UIColor lightGrayColor]];
     [bottomView addShadow:bottomView color:[UIColor lightGrayColor]];
-    [professionView addShadow:professionView color:[UIColor lightGrayColor]];
-    [interestedInView addShadow:interestedInView color:[UIColor lightGrayColor]];
     [mobileNumberView addShadow:mobileNumberView color:[UIColor lightGrayColor]];
     [designationView addShadow:designationView color:[UIColor lightGrayColor]];
     [companyNameView addShadow:companyNameView color:[UIColor lightGrayColor]];
     [linkedInView addShadow:linkedInView color:[UIColor lightGrayColor]];
-    [interestedAreaView addShadow:interestedAreaView color:[UIColor lightGrayColor]];
     [userInfoView addShadow:userInfoView color:[UIColor lightGrayColor]];
 }
+
 - (void)displayData {
     __weak UIImageView *weakRef = userImageView;
     NSURLRequest *imageRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:[[profileArray objectAtIndex:0]userImage]]
@@ -160,8 +210,8 @@
     professionTextField.text=[[profileArray objectAtIndex:0]userProfession];
     interestedInTextField.text=[[profileArray objectAtIndex:0]userInterestedIn];
     interestedAreaTextField.text=[[profileArray objectAtIndex:0]userInterests];
-    selectedPickerArray=[[[profileArray objectAtIndex:0]userInterests] componentsSeparatedByString:@", "];
-    interestedInSelectcedArray=[[[profileArray objectAtIndex:0]userInterestedIn] componentsSeparatedByString:@", "];
+    selectedPickerArray=[[[profileArray objectAtIndex:0]userInterests] componentsSeparatedByString:@","];
+    interestedInSelectcedArray=[[[profileArray objectAtIndex:0]userInterestedIn] componentsSeparatedByString:@","];
     designationTextField.text=[[profileArray objectAtIndex:0]userDesignation];
     linkedInTextField.text=[[profileArray objectAtIndex:0]userLinkedInLink];
     conferenceNameLabel.text=[[profileArray objectAtIndex:0]conferenceName];
@@ -269,8 +319,7 @@
 #pragma mark - end
 #pragma mark - Validation
 - (BOOL)performValidations {
-    // if ([userNameTextField isEmpty] || [mobileNumberTextField isEmpty] || [companyAddressTextField isEmpty] || [companyNameTextField isEmpty] || [interestedAreaTextField isEmpty]  || [linkedInTextField isEmpty] || [designationTextField isEmpty] || [aboutCompanyTextView.text isEqualToString:@""])
-    if ([userNameTextField isEmpty] || [mobileNumberTextField isEmpty]) {
+      if ([userNameTextField isEmpty] || [mobileNumberTextField isEmpty]) {
         SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
         [alert showWarning:self title:@"Alert" subTitle:@"Please fill in all mandatory fields." closeButtonTitle:@"Done" duration:0.0f];
         return NO;
@@ -290,29 +339,29 @@
             professionTextField.text=@"";
         }
         else {
-            professionTextField.text=[professionArray objectAtIndex:index];
+            if (![[professionArray objectAtIndex:index] isEqualToString:@"Other"]) {
+                professionButton.hidden=NO;
+                professionTextField.text=[professionArray objectAtIndex:index];
+            }
+            else {
+                professionButton.hidden=YES;
+                [professionTextField becomeFirstResponder];
+            }
         }
     }
     else if ([pickerType isEqualToString:@"2"]){
-//        NSInteger index = [userPickerView selectedRowInComponent:0];
-//        if(interestedInArray.count==0) {
-//            interestedInTextField.text=@"";
-//        }
-//        else {
-//            interestedInTextField.text=[interestedInArray objectAtIndex:index];
-//        }
         for (int k =0; k<interestedInSelectcedArray.count; k++) {
-            [myDelegate.multiplePickerDic setObject:[NSNumber numberWithBool:YES] forKey:[interestedInSelectcedArray objectAtIndex:k]];
+            [myDelegate.multiplePickerLookingFindDic setObject:[NSNumber numberWithBool:YES] forKey:[interestedInSelectcedArray objectAtIndex:k]];
         }
     }
     else {
-    for (int k =0; k<selectedPickerArray.count; k++) {
-        [myDelegate.multiplePickerDic setObject:[NSNumber numberWithBool:YES] forKey:[selectedPickerArray objectAtIndex:k]];
-    }
+        for (int k =0; k<selectedPickerArray.count; k++) {
+            [myDelegate.multiplePickerDic setObject:[NSNumber numberWithBool:YES] forKey:[selectedPickerArray objectAtIndex:k]];
+        }
     }
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];
-    [editProfileScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+    // [editProfileScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
     [UIView commitAnimations];
     
 }
@@ -325,10 +374,9 @@
 }
 //Hide picker
 - (void)hidePickerWithAnimation {
-    
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];
-    [editProfileScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+    // [editProfileScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
     userPickerView.frame = CGRectMake(userPickerView.frame.origin.x, 1000, self.view.frame.size.width, userPickerView.frame.size.height);
     pickerToolBar.frame = CGRectMake(pickerToolBar.frame.origin.x, 1000, self.view.frame.size.width, 44);
     [UIView commitAnimations];
@@ -345,23 +393,17 @@
     if ([pickerType isEqualToString:@"1"]) {
         pickerLabel.text=[professionArray objectAtIndex:row];
     }
-//    else {
-//        pickerLabel.text=[interestedInArray objectAtIndex:row];
-//    }
     return pickerLabel;
 }
+
 -(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
     return 1;
 }
+
 -(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-//    if ([pickerType isEqualToString:@"1"]) {
-//        return professionArray.count;
-//    }
-//    else {
-//        return [interestedInArray count];
-//    }
-    return professionArray.count;
+      return professionArray.count;
 }
+
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
     NSString *str=@"";
     if ([pickerType isEqualToString:@"1"]) {
@@ -369,61 +411,77 @@
             str=[professionArray objectAtIndex:row];
         }
     }
-//    else {
-//        if (interestedInArray.count>1) {
-//            str=[interestedInArray objectAtIndex:row];
-//        }
-//    }
     return str;
 }
+
 - (void)pickerView:(UIPickerView *)pickerView1 didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     if ([pickerType isEqualToString:@"1"]) {
         if (professionArray.count>1) {
-            professionTextField.text = [professionArray objectAtIndex:row];
+            if (![[professionArray objectAtIndex:row] isEqualToString:@"Other"]) {
+                professionTextField.text = [professionArray objectAtIndex:row];
+            }
+            else {
+                professionTextField.text=@"";
+            }
         }
         else {
             professionTextField.text=@"";
         }
     }
-//    else {
-//        if (interestedInArray.count>1) {
-//            interestedInTextField.text = [interestedInArray objectAtIndex:row];
-//        }
-//        else{
-//            interestedInTextField.text=@"";
-//        }
-//    }
 }
 #pragma mark - end
 
 #pragma mark - ALPicker Delegate
 - (void)returnChoosedPickerString:(NSMutableArray *)selectedEntriesArr {
-    NSString *dataStr = [selectedEntriesArr componentsJoinedByString:@", "];
     if ([pickerType isEqualToString:@"2"]) {
+        if ([selectedEntriesArr containsObject:@"Other"]) {
+            [selectedEntriesArr removeObject:@"Other"];
+            isInterestedInOtherSelected=YES;
+            [_interestedInOtherTextField becomeFirstResponder];
+        }
+        else {
+            isInterestedInOtherSelected=NO;
+        }
+        [self viewCustomization:isInterestedInOtherSelected isSecondOtherShow:isInterestedAreaOtherSelected];
+        NSString *dataStr = [selectedEntriesArr componentsJoinedByString:@", "];
         interestedInSelectcedArray=selectedEntriesArr;
         interestedInTextField.text=dataStr;
     }
-    else {
-    selectedPickerArray = selectedEntriesArr;
-    interestedAreaTextField.text = dataStr;
+    else if ([pickerType isEqualToString:@"3"]){
+        if ([selectedEntriesArr containsObject:@"Other"]) {
+            [selectedEntriesArr removeObject:@"Other"];
+            isInterestedAreaOtherSelected=YES;
+            [_interestedAreaOtherTextField becomeFirstResponder];
+        }
+        else {
+            isInterestedAreaOtherSelected=NO;
+        }
+        [self viewCustomization:isInterestedInOtherSelected isSecondOtherShow:isInterestedAreaOtherSelected];
+        NSString *dataStr = [selectedEntriesArr componentsJoinedByString:@", "];
+        selectedPickerArray = selectedEntriesArr;
+        interestedAreaTextField.text = dataStr;
     }
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];
-    [editProfileScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+    // [editProfileScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
     [UIView commitAnimations];
 }
+
 - (void)hidePicker {
+    pickerType=@"4";
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];
-    [editProfileScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
+    // [editProfileScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
     [UIView commitAnimations];
 }
 #pragma mark - end
+
 #pragma mark - Keyboard controls delegate
 - (void)keyboardControls:(BSKeyboardControls *)keyboardControls selectedField:(UIView *)field inDirection:(BSKeyboardControlsDirection)direction{
     UIView *view;
     view = field.superview.superview.superview;
 }
+
 - (void)keyboardControlsDonePressed:(BSKeyboardControls *)keyboardControls{
     [editProfileScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
     [keyboardControls.activeField resignFirstResponder];
@@ -469,16 +527,54 @@
             [editProfileScrollView setContentOffset:CGPointMake(0, 200) animated:YES];
         }
     }
+    else if (textField==professionTextField)
+    {
+        if([[UIScreen mainScreen] bounds].size.height<568){
+            [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height+180) animated:YES];
+        }
+        else if([[UIScreen mainScreen] bounds].size.height==568){
+            [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height+50) animated:YES];
+        }
+        else{
+            [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height-200) animated:YES];
+        }
+    }
+    else if (textField==_interestedInOtherTextField) {
+        if([[UIScreen mainScreen] bounds].size.height<568){
+            [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height+220) animated:YES];
+        }
+        else if([[UIScreen mainScreen] bounds].size.height==568){
+            [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height+100) animated:YES];
+        }
+        else{
+            [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height-100) animated:YES];
+        }
+
+    }
+    else if (textField==_interestedAreaOtherTextField) {
+        if([[UIScreen mainScreen] bounds].size.height<568){
+            [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height+270) animated:YES];
+        }
+        else if([[UIScreen mainScreen] bounds].size.height==568){
+            [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height+150) animated:YES];
+        }
+        else{
+            [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height-80) animated:YES];
+        }
+    }
 }
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [editProfileScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
     [textField resignFirstResponder];
     return YES;
 }
+
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     [editProfileScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
 }
 #pragma mark - end
+
 #pragma mark - Textview delegates
 - (void)textViewDidBeginEditing:(UITextView *)textView {
     [self.keyboardControls setActiveField:textView];
@@ -491,6 +587,7 @@
         }
     }
 }
+
 - (void)textViewDidEndEditing:(UITextView *)textView{
     [editProfileScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
 }
@@ -501,27 +598,26 @@
     [[ProfileService sharedManager] getInterestList:^(id responseObject) {
         [myDelegate stopIndicator];
         NSDictionary *tempDict=[responseObject objectForKey:@"details"];
-        interestedAreaArray=[[tempDict objectForKey:@"interestsList"] componentsSeparatedByString:@","];
-        professionArray=[[tempDict objectForKey:@"profession"] componentsSeparatedByString:@","];
-        interestedInArray=[[tempDict objectForKey:@"interestedInList"] componentsSeparatedByString:@","];
-        
         if ([[tempDict objectForKey:@"interestsList"] isEqualToString:@""]) {
-            interestAreaButton.userInteractionEnabled=NO;
-            interestedAreaTextField.userInteractionEnabled=NO;
-            interestedAreaTextField.text=@"NA";
-            interestedAreaTextField.textColor=[UIColor colorWithRed:180.0/255.0 green:180.0/255.0 blue:180.0/255.0 alpha:1.0];
+            [interestedAreaArray addObject:@"Other"];
+        }
+        else {
+            interestedAreaArray = [[[tempDict objectForKey:@"interestsList"] componentsSeparatedByString:@","] mutableCopy];
+            [interestedAreaArray addObject:@"Other"];
         }
         if ([[tempDict objectForKey:@"profession"] isEqualToString:@""]) {
-            professionButton.userInteractionEnabled=NO;
-            professionTextField.userInteractionEnabled=NO;
-            professionTextField.text=@"NA";
-            professionTextField.textColor=[UIColor colorWithRed:180.0/255.0 green:180.0/255.0 blue:180.0/255.0 alpha:1.0];
+            [professionArray addObject:@"Other"];
+        }
+        else {
+            professionArray=[[[tempDict objectForKey:@"profession"] componentsSeparatedByString:@","] mutableCopy];
+            [professionArray addObject:@"Other"];
         }
         if ([[tempDict objectForKey:@"interestedInList"] isEqualToString:@""]) {
-            interestesInButton.userInteractionEnabled=NO;
-            interestedInTextField.userInteractionEnabled=NO;
-            interestedInTextField.text=@"NA";
-            interestedInTextField.textColor=[UIColor colorWithRed:180.0/255.0 green:180.0/255.0 blue:180.0/255.0 alpha:1.0];
+            [interestedInArray addObject:@"Other"];
+        }
+        else {
+            interestedInArray=[[[tempDict objectForKey:@"interestedInList"] componentsSeparatedByString:@","] mutableCopy];
+            [interestedInArray addObject:@"Other"];
         }
     }
                                             failure:^(NSError *error)
@@ -540,7 +636,7 @@
     if ([interestedAreaTextField.text isEqualToString:@"NA"]) {
         interestedAreaTextField.text=@"";
     }
-    [[ProfileService sharedManager] editUserProfile:userNameTextField.text mobileNumber:mobileNumberTextField.text companyName:companyNameTextField.text companyAddress:companyAddressTextField.text designation:designationTextField.text aboutCompany:aboutCompanyTextView.text linkedIn:linkedInTextField.text interests:interestedAreaTextField.text interestedIn:interestedInTextField.text profession:professionTextField.text image:userImageView.image success:^(id responseObject) {
+    [[ProfileService sharedManager] editUserProfile:userNameTextField.text mobileNumber:mobileNumberTextField.text companyName:companyNameTextField.text companyAddress:companyAddressTextField.text designation:designationTextField.text aboutCompany:aboutCompanyTextView.text linkedIn:linkedInTextField.text interests:interestedAreaTextField.text interestedIn:interestedInTextField.text profession:professionTextField.text otherInterests:_interestedAreaOtherTextField.text otherInterestedIn:_interestedInOtherTextField.text otherProfession:professionTextField.text image:userImageView.image success:^(id responseObject) {
         [myDelegate stopIndicator];
         for (UIViewController *controller in self.navigationController.viewControllers)
         {
@@ -596,18 +692,19 @@
 {
     userImageView.layer.cornerRadius=userImageView.frame.size.width/2;
     userImageView.clipsToBounds=YES;
-  //  userImageView.image = image;
+    //  userImageView.image = image;
     ImageCropViewController *controller = [[ImageCropViewController alloc] initWithImage:image];
     controller.delegate = self;
     controller.blurredBackground = YES;
     // set the cropped area
     // controller.cropArea = CGRectMake(0, 0, 100, 200);
     [[self navigationController] pushViewController:controller animated:NO];
-
+    
     [picker dismissViewControllerAnimated:YES completion:NULL];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:NO];
 }
+
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker
 {
     [picker dismissViewControllerAnimated:YES completion:NULL];
@@ -621,7 +718,7 @@
     else{
         userImageView.image = croppedImage;
     }
-//    CGRect cropArea = controller.cropArea;
+    //    CGRect cropArea = controller.cropArea;
     [[self navigationController] popViewControllerAnimated:YES];
 }
 
@@ -630,7 +727,7 @@
         userImageView.image=[UIImage imageNamed:@"user_thumbnail.png"];
     }
     else{
-    userImageView.image = image1;
+        userImageView.image = image1;
     }
     [[self navigationController] popViewControllerAnimated:YES];
 }

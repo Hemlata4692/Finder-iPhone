@@ -38,6 +38,7 @@
 @implementation FinderAppDelegate
 @synthesize isLocation,locationManager;
 @synthesize multiplePickerDic;
+@synthesize multiplePickerLookingFindDic;
 @synthesize alertDict;
 @synthesize tabBarView;
 @synthesize alertType;
