@@ -21,7 +21,7 @@
     NSMutableArray *professionArray;
     NSArray *selectedPickerArray, *interestedInSelectcedArray;
     NSString* pickerType;
-    NSString *otherProffession, *otherIntrestedIn, *otherIntrestedArea;
+    NSMutableDictionary *interestedAreaDic, *lookingToFindDic;
     BOOL isInterestedInOtherSelected, isInterestedAreaOtherSelected;
     
 }
@@ -112,7 +112,6 @@
     [self setKeyboardControls:[[BSKeyboardControls alloc] initWithFields:textFieldArray]];
     [self.keyboardControls setDelegate:self];
     [self addShadow];
-    [self displayData];
     userEmailTextfield.userInteractionEnabled=NO;
     userEmailTextfield.textColor=[UIColor colorWithRed:180.0/255.0 green:180.0/255.0 blue:180.0/255.0 alpha:1.0];
     interestedAreaArray=[[NSMutableArray alloc]init];
@@ -120,9 +119,10 @@
     professionArray=[[NSMutableArray alloc]init];
     selectedPickerArray=[[NSArray alloc]init];
     interestedInSelectcedArray=[[NSArray alloc]init];
+    interestedAreaDic=[[NSMutableDictionary alloc]init];
+    lookingToFindDic=[[NSMutableDictionary alloc]init];
     userPickerView.translatesAutoresizingMaskIntoConstraints = YES;
     pickerToolBar.translatesAutoresizingMaskIntoConstraints = YES;
-    
     self.interestedInOtherView.translatesAutoresizingMaskIntoConstraints=YES;
     self.interestedAreaOtherView.translatesAutoresizingMaskIntoConstraints=YES;
     self.bottomView.translatesAutoresizingMaskIntoConstraints=YES;
@@ -130,6 +130,7 @@
     isInterestedInOtherSelected=NO;
     isInterestedAreaOtherSelected=NO;
     [self viewCustomization:NO isSecondOtherShow:NO];
+    [self displayData];
     [myDelegate showIndicator];
     [self performSelector:@selector(getInterestListing) withObject:nil afterDelay:.1];
 }
@@ -221,6 +222,7 @@
 #pragma mark - IBActions
 - (IBAction)professionPickerAction:(id)sender {
     [multiPickerView removeFromSuperview];
+    [self.view endEditing:YES];
     [_keyboardControls.activeField resignFirstResponder];
     [self hidePickerWithAnimation];
     pickerType=@"1";
@@ -244,6 +246,7 @@
 
 - (IBAction)interestedInPickerAction:(id)sender {
     [_keyboardControls.activeField resignFirstResponder];
+    [self.view endEditing:YES];
     [self hidePickerWithAnimation];
     for (UIView *view in self.view.subviews) {
         if ([view isKindOfClass:[CYCustomMultiSelectPickerView class]])
@@ -258,12 +261,21 @@
         [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height+50) animated:YES];
     }
     else {
-        [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height-150) animated:YES];
+        [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height-130) animated:YES];
     }
     pickerType=@"2";
     multiPickerView = [[CYCustomMultiSelectPickerView alloc] initWithFrame:CGRectMake(0,self.view.frame.size.height-265, self.view.frame.size.width, 182)];
     multiPickerView.entriesArray = interestedInArray;
     multiPickerView.entriesSelectedArray =interestedInSelectcedArray;
+    for (int k =0; k<interestedInArray.count; k++)
+    {
+        [lookingToFindDic setObject:[NSNumber numberWithBool:NO] forKey:[[interestedInArray objectAtIndex:k]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
+    }
+    for (int k =0; k<interestedInSelectcedArray.count; k++)
+    {
+        [lookingToFindDic setObject:[NSNumber numberWithBool:YES] forKey:[[interestedInSelectcedArray objectAtIndex:k]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
+    }
+    myDelegate.multiplePickerDic=[lookingToFindDic mutableCopy];
     multiPickerView.multiPickerDelegate = self;
     [self.view addSubview:multiPickerView];
     [multiPickerView pickerShow];
@@ -271,6 +283,7 @@
 
 - (IBAction)interestedAreaPickerAction:(id)sender {
     [_keyboardControls.activeField resignFirstResponder];
+    [self.view endEditing:YES];
     [self hidePickerWithAnimation];
     for (UIView *view in self.view.subviews) {
         if ([view isKindOfClass:[CYCustomMultiSelectPickerView class]])
@@ -278,19 +291,41 @@
             [view removeFromSuperview];
         }
     }
-    if([[UIScreen mainScreen] bounds].size.height<568) {
-        [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height+290) animated:YES];
-    }
-    else if([[UIScreen mainScreen] bounds].size.height==568){
-        [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height+110) animated:YES];
+    if (_interestedInOtherView.hidden==NO) {
+        if([[UIScreen mainScreen] bounds].size.height<568) {
+            [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height+350) animated:YES];
+        }
+        else if([[UIScreen mainScreen] bounds].size.height==568){
+            [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height+180) animated:YES];
+        }
+        else {
+            [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height-25) animated:YES];
+        }
     }
     else {
-        [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height-100) animated:YES];
+        if([[UIScreen mainScreen] bounds].size.height<568) {
+            [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height+300) animated:YES];
+        }
+        else if([[UIScreen mainScreen] bounds].size.height==568){
+            [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height+120) animated:YES];
+        }
+        else {
+            [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height-90) animated:YES];
+        }
     }
     pickerType=@"3";
     multiPickerView = [[CYCustomMultiSelectPickerView alloc] initWithFrame:CGRectMake(0,self.view.frame.size.height-265, self.view.frame.size.width, 182)];
     multiPickerView.entriesArray = interestedAreaArray;
     multiPickerView.entriesSelectedArray =selectedPickerArray;
+    for (int k =0; k<interestedAreaArray.count; k++)
+    {
+        [interestedAreaDic setObject:[NSNumber numberWithBool:NO] forKey:[[interestedAreaArray objectAtIndex:k]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
+    }
+    for (int k =0; k<selectedPickerArray.count; k++)
+    {
+        [interestedAreaDic setObject:[NSNumber numberWithBool:YES] forKey:[[selectedPickerArray objectAtIndex:k]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
+    }
+    myDelegate.multiplePickerDic=[interestedAreaDic mutableCopy];
     multiPickerView.multiPickerDelegate = self;
     [self.view addSubview:multiPickerView];
     [multiPickerView pickerShow];
@@ -309,6 +344,7 @@
 
 - (IBAction)saveButtonAction:(id)sender {
     [self.keyboardControls.activeField resignFirstResponder];
+    [self.view endEditing:YES];
     [self hidePickerWithAnimation];
     [self hidePicker];
     if([self performValidations]) {
@@ -319,7 +355,7 @@
 #pragma mark - end
 #pragma mark - Validation
 - (BOOL)performValidations {
-      if ([userNameTextField isEmpty] || [mobileNumberTextField isEmpty]) {
+    if ([userNameTextField isEmpty] || [mobileNumberTextField isEmpty]) {
         SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
         [alert showWarning:self title:@"Alert" subTitle:@"Please fill in all mandatory fields." closeButtonTitle:@"Done" duration:0.0f];
         return NO;
@@ -349,16 +385,6 @@
             }
         }
     }
-    else if ([pickerType isEqualToString:@"2"]){
-        for (int k =0; k<interestedInSelectcedArray.count; k++) {
-            [myDelegate.multiplePickerLookingFindDic setObject:[NSNumber numberWithBool:YES] forKey:[interestedInSelectcedArray objectAtIndex:k]];
-        }
-    }
-    else {
-        for (int k =0; k<selectedPickerArray.count; k++) {
-            [myDelegate.multiplePickerDic setObject:[NSNumber numberWithBool:YES] forKey:[selectedPickerArray objectAtIndex:k]];
-        }
-    }
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];
     // [editProfileScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
@@ -382,6 +408,7 @@
     [UIView commitAnimations];
 }
 #pragma mark - end
+
 #pragma mark - Picker view delegate methods
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
     UILabel* pickerLabel = (UILabel*)view;
@@ -401,7 +428,7 @@
 }
 
 -(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-      return professionArray.count;
+    return professionArray.count;
 }
 
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component{
@@ -549,7 +576,7 @@
         else{
             [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height-100) animated:YES];
         }
-
+        
     }
     else if (textField==_interestedAreaOtherTextField) {
         if([[UIScreen mainScreen] bounds].size.height<568){
@@ -559,7 +586,7 @@
             [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height+150) animated:YES];
         }
         else{
-            [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height-80) animated:YES];
+            [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height-60) animated:YES];
         }
     }
 }

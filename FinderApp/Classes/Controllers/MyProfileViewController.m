@@ -441,28 +441,24 @@
         professionLabel.text=[[userProfileDataArray objectAtIndex:0]userProfession];
     }
      myDelegate.multiplePickerDic=[[NSMutableDictionary alloc]init];
+   // myDelegate.multiplePickerLookingFindDic=[[NSMutableDictionary alloc]init];
     interestedInArray=[[[userProfileDataArray objectAtIndex:0]userInterestedIn] componentsSeparatedByString:@","];
     if ([[[userProfileDataArray objectAtIndex:0]userInterestedIn] isEqualToString:@""]) {
         interestedInLabel.text=@"NA";
     }
     else {
-//        for (int i=0; i<[[[[userProfileDataArray objectAtIndex:0]userInterestedIn] componentsSeparatedByString:@","] count]; i++) {
-//            [interestedInArray addObject:[NSString stringWithFormat:@"%@_1",[[[[userProfileDataArray objectAtIndex:0]userInterestedIn] componentsSeparatedByString:@","] objectAtIndex:i]]];
-//        }
-//
         for (int k =0; k<interestedInArray.count; k++)
         {
-            [myDelegate.multiplePickerLookingFindDic setObject:[NSNumber numberWithBool:YES] forKey:[interestedInArray objectAtIndex:k]];
+            [myDelegate.multiplePickerDic setObject:[NSNumber numberWithBool:YES] forKey:[[interestedInArray objectAtIndex:k]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
         }
         interestedInLabel.text=[[userProfileDataArray objectAtIndex:0]userInterestedIn];
     }
-//    if (![[[userProfileDataArray objectAtIndex:0]userInterests] isEqualToString:@""]) {
     interestsArray =[[[userProfileDataArray objectAtIndex:0]userInterests] componentsSeparatedByString:@","];
     count=(int)interestsArray.count;
-    //myDelegate.multiplePickerDic=[[NSMutableDictionary alloc]init];
+   // myDelegate.multiplePickerDic=[[NSMutableDictionary alloc]init];
     for (int k =0; k<interestsArray.count; k++)
     {
-        [myDelegate.multiplePickerDic setObject:[NSNumber numberWithBool:YES] forKey:[interestsArray objectAtIndex:k]];
+        [myDelegate.multiplePickerDic setObject:[NSNumber numberWithBool:YES] forKey:[[interestsArray objectAtIndex:k]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
     }
     if ((interestsArray.count%2)!=0) {
         count=count*42;

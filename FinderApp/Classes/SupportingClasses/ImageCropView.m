@@ -78,19 +78,17 @@ float IMAGE_MIN_WIDTH = 400;
 
 - (IBAction)done:(id)sender
 {
-    
     if ([self.delegate respondsToSelector:@selector(ImageCropViewControllerSuccess:didFinishCroppingImage:)])
     {
         UIImage *cropped;
         if (self.image != nil){
             CGRect CropRect = self.cropView.cropAreaInImage;
-            CGImageRef imageRef = CGImageCreateWithImageInRect([self.image CGImage], CropRect) ;
+            CGImageRef imageRef = CGImageCreateWithImageInRect([self.image CGImage], CropRect);
             cropped = [UIImage imageWithCGImage:imageRef];
             CGImageRelease(imageRef);
         }
         [self.delegate ImageCropViewControllerSuccess:self didFinishCroppingImage:cropped];
     }
-    
 }
 
 - (void)setCropArea:(CGRect)cropArea {
@@ -109,8 +107,6 @@ float IMAGE_MIN_WIDTH = 400;
 }
 
 @end
-
-
 #pragma mark ControlPointView implementation
 
 @implementation ControlPointView
