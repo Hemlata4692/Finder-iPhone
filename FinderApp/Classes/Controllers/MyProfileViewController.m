@@ -382,6 +382,7 @@
         
     }];
     userNameLabel.text=[[userProfileDataArray objectAtIndex:0]userName];
+   [UserDefaultManager setValue:[[userProfileDataArray objectAtIndex:0]userEmail] key:@"userEmail"];
     if ([[[userProfileDataArray objectAtIndex:0]userDesignation] isEqualToString:@""]) {
         userDesignationLabel.text=@"NA";
     }
