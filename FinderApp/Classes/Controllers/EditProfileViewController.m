@@ -149,6 +149,7 @@
 #pragma mark - View Customisation
 //other textfield added in multipicker dropdown
 - (void)viewCustomization:(BOOL)isFirstOtherShow isSecondOtherShow:(BOOL)isSecondOtherShow {
+    //both other textfields are hidden
     if (!isFirstOtherShow && !isSecondOtherShow) {
         self.interestedInOtherView.frame=CGRectMake(0, 114, [[UIScreen mainScreen] bounds].size.width-10, 0);
         self.interestedInOtherView.hidden=YES;
@@ -159,6 +160,7 @@
         self.bottomView.frame=CGRectMake(5, 590+55, [[UIScreen mainScreen] bounds].size.width-10, (55*3));
         self.interestedAreaSeparator.hidden=YES;
     }
+    //interested in other textfield hidden and interested area other textfield is shown
     else if (!isFirstOtherShow && isSecondOtherShow) {
         self.interestedInOtherView.frame=CGRectMake(0, 114, [[UIScreen mainScreen] bounds].size.width-10, 0);
         self.interestedInOtherView.hidden=YES;
@@ -169,6 +171,7 @@
         self.bottomView.frame=CGRectMake(5, 590+55, [[UIScreen mainScreen] bounds].size.width-10, (55*4));
         self.interestedAreaSeparator.hidden=NO;
     }
+     //interested in other textfield is shown and interested area other textfield is hidden
     else if (isFirstOtherShow && !isSecondOtherShow) {
         self.interestedInOtherView.frame=CGRectMake(0, 114, [[UIScreen mainScreen] bounds].size.width-10, 55);
         self.interestedInOtherView.hidden=NO;
@@ -179,6 +182,7 @@
         self.bottomView.frame=CGRectMake(5, 590+55, [[UIScreen mainScreen] bounds].size.width-10, (55*4));
         self.interestedAreaSeparator.hidden=YES;
     }
+     //both are shown
     else {
         self.interestedInOtherView.frame=CGRectMake(0, 114, [[UIScreen mainScreen] bounds].size.width-10, 55);
         self.interestedInOtherView.hidden=NO;
@@ -207,6 +211,7 @@
     [emailView addShadow:emailView color:[UIColor lightGrayColor]];
 }
 
+//display profile data
 - (void)displayData {
     __weak UIImageView *weakRef = userImageView;
     NSURLRequest *imageRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:[[profileArray objectAtIndex:0]userImage]]
