@@ -381,7 +381,7 @@
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
         
     }];
-    userNameLabel.text=[[userProfileDataArray objectAtIndex:0]userName];
+    userNameLabel.text=[NSString stringWithFormat:@"%@ %@",[[userProfileDataArray objectAtIndex:0]userName],[[userProfileDataArray objectAtIndex:0]userSurname]];
    [UserDefaultManager setValue:[[userProfileDataArray objectAtIndex:0]userEmail] key:@"userEmail"];
     if ([[[userProfileDataArray objectAtIndex:0]userDesignation] isEqualToString:@""]) {
         userDesignationLabel.text=@"NA";

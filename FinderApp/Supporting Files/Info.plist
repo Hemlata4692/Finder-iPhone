@@ -60,5 +60,7 @@
 	<string>Need to access photo library</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Need to access camera</string>
+	<key>NSContactsUsageDescription</key>
+	<string>Need to access contacts</string>
 </dict>
 </plist>

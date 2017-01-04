@@ -149,6 +149,7 @@
             profileData.userInterestedIn =[profileDataDict objectForKey:@"interestIn"];
             profileData.userLinkedInLink =[profileDataDict objectForKey:@"linkedIn"];
             profileData.conferenceName =[profileDataDict objectForKey:@"conferenceName"];
+            profileData.userSurname =[profileDataDict objectForKey:@"userSurname"];
             [profileDataArray addObject:profileData];
             success(profileDataArray);
         }
@@ -190,6 +191,7 @@
             profileData.userLinkedInLink =[profileDataDict objectForKey:@"linkedIn"];
             profileData.conferenceName =[profileDataDict objectForKey:@"conferenceName"];
             profileData.vCard=[profileDataDict objectForKey:@"vCardLink"];
+            profileData.userSurname =[profileDataDict objectForKey:@"userSurname"];
             [profileDataArray addObject:profileData];
             success(profileDataArray);
         }

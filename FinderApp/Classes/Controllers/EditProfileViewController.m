@@ -216,6 +216,7 @@
         
     }];
     userNameTextField.text=[[profileArray objectAtIndex:0]userName];
+    lastNameTextField.text=[[profileArray objectAtIndex:0]userSurname];
     userEmailTextfield.text=[[profileArray objectAtIndex:0]userEmail];
     mobileNumberTextField.text=[[profileArray objectAtIndex:0]userMobileNumber];
     companyNameTextField.text=[[profileArray objectAtIndex:0]userCompanyName];

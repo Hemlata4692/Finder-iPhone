@@ -23,4 +23,5 @@
 @synthesize  userInterestedIn;
 @synthesize  conferenceName;
 @synthesize  vCard;
+@synthesize userSurname;
 @end
