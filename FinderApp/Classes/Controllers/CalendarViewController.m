@@ -181,6 +181,17 @@
      {
      }] ;
 }
+
+- (void)deleteScheduledMeeting:(NSString *)appointmentId {
+    [[ConferenceService sharedManager] deleteScheduledMeeting:appointmentId success:^(id responseObject) {
+        [self getCalendarDetails];
+    }
+                                                      failure:^(NSError *error)
+     {
+         
+     }] ;
+}
+
 #pragma mark - end
 
 #pragma mark - Table view delegate methods
@@ -277,7 +288,6 @@
 - (IBAction)editMeetingButtonAction:(MyButton *)sender {
     int btnTag=[sender Tag];
     int sectionTag= [sender sectionTag];
-   // EventDataModel *data=[[[sectionArray objectAtIndex:sectionTag]eventArray] objectAtIndex:btnTag];
     UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     ScheduleMeetingViewController *scheduleMeeting =[storyboard instantiateViewControllerWithIdentifier:@"ScheduleMeetingViewController"];
     scheduleMeeting.screenName=@"Edit Meeting";
@@ -286,8 +296,6 @@
     scheduleMeeting.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.1f];
     [scheduleMeeting setModalPresentationStyle:UIModalPresentationOverCurrentContext];
     [self presentViewController:scheduleMeeting animated: NO completion:nil];
-
-
 }
 
 - (IBAction)deleteMeetingButtonAction:(MyButton *)sender {
@@ -300,18 +308,6 @@
         [self deleteScheduledMeeting:data.eventId];
     }];
     [alert showWarning:nil title:nil subTitle:@"Are you sure, you want to delete this appointment?" closeButtonTitle:@"No" duration:0.0f];
-   
-    
-}
-
-- (void)deleteScheduledMeeting:(NSString *)appointmentId {
-    [[ConferenceService sharedManager] deleteScheduledMeeting:appointmentId success:^(id responseObject) {
-        [self getCalendarDetails];
-    }
-                                                      failure:^(NSError *error)
-     {
-         
-     }] ;
 }
 
 - (IBAction)addButtonAction:(id)sender {

@@ -105,6 +105,8 @@
 @synthesize interestAreaButton;
 @synthesize lastNameTextField;
 @synthesize lastNameView;
+@synthesize interestedInOtherTextField;
+@synthesize interestedAreaOtherTextField;
 
 #pragma mark - View life cycle
 - (void)viewDidLoad {
@@ -116,8 +118,7 @@
     [self setKeyboardControls:[[BSKeyboardControls alloc] initWithFields:textFieldArray]];
     [self.keyboardControls setDelegate:self];
     [self addShadow];
-//    userEmailTextfield.userInteractionEnabled=NO;
-//    userEmailTextfield.textColor=[UIColor colorWithRed:180.0/255.0 green:180.0/255.0 blue:180.0/255.0 alpha:1.0];
+
     interestedAreaArray=[[NSMutableArray alloc]init];
     interestedInArray=[[NSMutableArray alloc]init];
     professionArray=[[NSMutableArray alloc]init];
@@ -139,13 +140,20 @@
     [self performSelector:@selector(getInterestListing) withObject:nil afterDelay:.1];
 }
 
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+#pragma mark - end
+
+#pragma mark - View Customisation
+//other textfield added in multipicker dropdown
 - (void)viewCustomization:(BOOL)isFirstOtherShow isSecondOtherShow:(BOOL)isSecondOtherShow {
-    
     if (!isFirstOtherShow && !isSecondOtherShow) {
         self.interestedInOtherView.frame=CGRectMake(0, 114, [[UIScreen mainScreen] bounds].size.width-10, 0);
         self.interestedInOtherView.hidden=YES;
-        _interestedInOtherTextField.hidden=YES;
-        _interestedAreaOtherTextField.hidden=YES;
+        self.interestedInOtherTextField.hidden=YES;
+        self.interestedAreaOtherTextField.hidden=YES;
         self.interestedAreaOtherView.frame=CGRectMake(0, 114+55, [[UIScreen mainScreen] bounds].size.width-10, 0);
         self.interestedAreaOtherView.hidden=YES;
         self.bottomView.frame=CGRectMake(5, 590+55, [[UIScreen mainScreen] bounds].size.width-10, (55*3));
@@ -154,8 +162,8 @@
     else if (!isFirstOtherShow && isSecondOtherShow) {
         self.interestedInOtherView.frame=CGRectMake(0, 114, [[UIScreen mainScreen] bounds].size.width-10, 0);
         self.interestedInOtherView.hidden=YES;
-        _interestedInOtherTextField.hidden=YES;
-        _interestedAreaOtherTextField.hidden=NO;
+        self.interestedInOtherTextField.hidden=YES;
+        self.interestedAreaOtherTextField.hidden=NO;
         self.interestedAreaOtherView.frame=CGRectMake(0, 114+55+5, [[UIScreen mainScreen] bounds].size.width-10, 55);
         self.interestedAreaOtherView.hidden=NO;
         self.bottomView.frame=CGRectMake(5, 590+55, [[UIScreen mainScreen] bounds].size.width-10, (55*4));
@@ -164,8 +172,8 @@
     else if (isFirstOtherShow && !isSecondOtherShow) {
         self.interestedInOtherView.frame=CGRectMake(0, 114, [[UIScreen mainScreen] bounds].size.width-10, 55);
         self.interestedInOtherView.hidden=NO;
-        _interestedInOtherTextField.hidden=NO;
-        _interestedAreaOtherTextField.hidden=YES;
+        self.interestedInOtherTextField.hidden=NO;
+        self.interestedAreaOtherTextField.hidden=YES;
         self.interestedAreaOtherView.frame=CGRectMake(0, 114+(55*2), [[UIScreen mainScreen] bounds].size.width-10, 0);
         self.interestedAreaOtherView.hidden=YES;
         self.bottomView.frame=CGRectMake(5, 590+55, [[UIScreen mainScreen] bounds].size.width-10, (55*4));
@@ -174,8 +182,8 @@
     else {
         self.interestedInOtherView.frame=CGRectMake(0, 114, [[UIScreen mainScreen] bounds].size.width-10, 55);
         self.interestedInOtherView.hidden=NO;
-        _interestedInOtherTextField.hidden=NO;
-        _interestedAreaOtherTextField.hidden=NO;
+        self.interestedInOtherTextField.hidden=NO;
+        self.interestedAreaOtherTextField.hidden=NO;
         self.interestedAreaOtherView.frame=CGRectMake(0, 114+(55*2)+5, [[UIScreen mainScreen] bounds].size.width-10,55);
         self.interestedAreaOtherView.hidden=NO;
         self.bottomView.frame=CGRectMake(5, 590+55, [[UIScreen mainScreen] bounds].size.width-10, (55*5));
@@ -183,10 +191,6 @@
     }
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 - (void)addShadow {
     userImageView.layer.cornerRadius=userImageView.frame.size.width/2;
     userImageView.clipsToBounds=YES;
@@ -377,7 +381,7 @@
         [alert showWarning:self title:@"Alert" subTitle:@"Please fill in all mandatory fields." closeButtonTitle:@"Done" duration:0.0f];
         return NO;
     }
-    else if ((_interestedAreaOtherTextField.hidden==NO && [_interestedAreaOtherTextField isEmpty]) || (_interestedInOtherTextField.hidden==NO && [_interestedInOtherTextField isEmpty]) || (professionButton.hidden==YES)){
+    else if ((self.interestedAreaOtherTextField.hidden==NO && [self.interestedAreaOtherTextField isEmpty]) || (self.interestedInOtherTextField.hidden==NO && [self.interestedInOtherTextField isEmpty]) || (professionButton.hidden==YES)){
         SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
         [alert showWarning:self title:@"Alert" subTitle:@"Please enter other value." closeButtonTitle:@"Done" duration:0.0f];
         return NO;
@@ -413,6 +417,7 @@
     [UIView commitAnimations];
     
 }
+
 - (IBAction)cancelToolBarAction:(id)sender {
     [self hidePickerWithAnimation];
     [UIView beginAnimations:nil context:NULL];
@@ -420,11 +425,11 @@
     [editProfileScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
     [UIView commitAnimations];
 }
+
 //Hide picker
 - (void)hidePickerWithAnimation {
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];
-    // [editProfileScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
     userPickerView.frame = CGRectMake(userPickerView.frame.origin.x, 1000, self.view.frame.size.width, userPickerView.frame.size.height);
     pickerToolBar.frame = CGRectMake(pickerToolBar.frame.origin.x, 1000, self.view.frame.size.width, 44);
     [UIView commitAnimations];
@@ -482,13 +487,12 @@
 
 #pragma mark - ALPicker Delegate
 - (void)returnChoosedPickerString:(NSMutableArray *)selectedEntriesArr {
-    
     if ([pickerType isEqualToString:@"2"]) {
         interestedInSelectcedArray=[selectedEntriesArr copy];
         if ([selectedEntriesArr containsObject:@"Other"]) {
             [selectedEntriesArr removeObject:@"Other"];
             isInterestedInOtherSelected=YES;
-            [_interestedInOtherTextField becomeFirstResponder];
+            [interestedInOtherTextField becomeFirstResponder];
         }
         else {
             isInterestedInOtherSelected=NO;
@@ -502,7 +506,7 @@
         if ([selectedEntriesArr containsObject:@"Other"]) {
             [selectedEntriesArr removeObject:@"Other"];
             isInterestedAreaOtherSelected=YES;
-            [_interestedAreaOtherTextField becomeFirstResponder];
+            [interestedAreaOtherTextField becomeFirstResponder];
         }
         else {
             isInterestedAreaOtherSelected=NO;
@@ -513,7 +517,6 @@
     }
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];
-    // [editProfileScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
     [UIView commitAnimations];
 }
 
@@ -521,7 +524,6 @@
     pickerType=@"4";
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];
-    // [editProfileScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
     [UIView commitAnimations];
 }
 #pragma mark - end
@@ -589,7 +591,7 @@
             [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height-180) animated:YES];
         }
     }
-    else if (textField==_interestedInOtherTextField) {
+    else if (textField==interestedInOtherTextField) {
         if([[UIScreen mainScreen] bounds].size.height<568){
             [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height+220) animated:YES];
         }
@@ -601,7 +603,7 @@
         }
         
     }
-    else if (textField==_interestedAreaOtherTextField) {
+    else if (textField==interestedAreaOtherTextField) {
         if([[UIScreen mainScreen] bounds].size.height<568){
             [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height+325) animated:YES];
         }
@@ -686,7 +688,7 @@
     if ([interestedAreaTextField.text isEqualToString:@"NA"]) {
         interestedAreaTextField.text=@"";
     }
-    [[ProfileService sharedManager] editUserProfile:userNameTextField.text userSurname:lastNameTextField.text userEmail:userEmailTextfield.text mobileNumber:mobileNumberTextField.text companyName:companyNameTextField.text companyAddress:companyAddressTextField.text designation:designationTextField.text aboutCompany:aboutCompanyTextView.text linkedIn:linkedInTextField.text interests:interestedAreaTextField.text interestedIn:interestedInTextField.text profession:professionTextField.text otherInterests:_interestedAreaOtherTextField.text otherInterestedIn:_interestedInOtherTextField.text otherProfession:professionTextField.text image:userImageView.image success:^(id responseObject) {
+    [[ProfileService sharedManager] editUserProfile:userNameTextField.text userSurname:lastNameTextField.text userEmail:userEmailTextfield.text mobileNumber:mobileNumberTextField.text companyName:companyNameTextField.text companyAddress:companyAddressTextField.text designation:designationTextField.text aboutCompany:aboutCompanyTextView.text linkedIn:linkedInTextField.text interests:interestedAreaTextField.text interestedIn:interestedInTextField.text profession:professionTextField.text otherInterests:interestedAreaOtherTextField.text otherInterestedIn:interestedInOtherTextField.text otherProfession:professionTextField.text image:userImageView.image success:^(id responseObject) {
         [myDelegate stopIndicator];
         for (UIViewController *controller in self.navigationController.viewControllers)
         {
@@ -702,6 +704,7 @@
      }] ;
 }
 #pragma mark - end
+
 #pragma mark - Action sheet delegate
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -742,14 +745,13 @@
 {
     userImageView.layer.cornerRadius=userImageView.frame.size.width/2;
     userImageView.clipsToBounds=YES;
-    //  userImageView.image = image;
+    //image cropper added
     ImageCropViewController *controller = [[ImageCropViewController alloc] initWithImage:image];
     controller.delegate = self;
     controller.blurredBackground = YES;
     // set the cropped area
     // controller.cropArea = CGRectMake(0, 0, 100, 200);
     [[self navigationController] pushViewController:controller animated:NO];
-    
     [picker dismissViewControllerAnimated:YES completion:NULL];
     [[UIApplication sharedApplication] setNetworkActivityIndicatorVisible:YES];
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:NO];
@@ -768,7 +770,6 @@
     else{
         userImageView.image = croppedImage;
     }
-    //    CGRect cropArea = controller.cropArea;
     [[self navigationController] popViewControllerAnimated:YES];
 }
 

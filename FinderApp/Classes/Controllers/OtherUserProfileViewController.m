@@ -218,7 +218,6 @@
      }] ;
 }
 - (void)displayUserProfileData {
-    
     companyDescriptionLabel.translatesAutoresizingMaskIntoConstraints = YES;
     aboutCompanyView.translatesAutoresizingMaskIntoConstraints = YES;
     mainContainerView.translatesAutoresizingMaskIntoConstraints=YES;
