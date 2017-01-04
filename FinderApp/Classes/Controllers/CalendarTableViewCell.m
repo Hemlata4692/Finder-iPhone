@@ -10,6 +10,8 @@
 
 @implementation CalendarTableViewCell
 @synthesize eventNameLabel,eventTimeLabel,viewAgendaButton,userImage,userImageClickAction;
+@synthesize editButton,deleteButton;
+
 #pragma mark - Load nib
 - (void)awakeFromNib {
     [super awakeFromNib];
@@ -35,9 +37,13 @@
     if ([eventDetails.userImage isEqualToString:@""]) {
         userImage.image=[UIImage imageNamed:@"meeting_iconCalendar.png"];
         userImageClickAction.hidden=YES;
+        editButton.hidden=YES;
+        deleteButton.hidden=YES;
     }
     else {
         userImageClickAction.hidden=NO;
+        editButton.hidden=NO;
+        deleteButton.hidden=NO;
         __weak UIImageView *weakRef = userImage;
         NSURLRequest *imageRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:eventDetails.userImage]
                                                       cachePolicy:NSURLRequestReturnCacheDataElseLoad

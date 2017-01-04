@@ -15,7 +15,7 @@
 
 @interface PersonalMessageViewController ()
 {
-    NSString *offset;
+    NSString *offset, *messageString;
     NSMutableArray *messageDateArray;
     CGFloat messageHeight, messageYValue;
     int totalRecords, firstTime;
@@ -50,7 +50,9 @@
     [refreshControl addTarget:self action:@selector(refreshTable) forControlEvents:UIControlEventValueChanged];
     personalMessageTableView.alwaysBounceVertical = YES;
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getHistory) name:@"GetMessageHistory" object:nil];
+    sendMessageTextView.keyboardType=UIKeyboardTypeASCIICapable;
 }
+
 - (void)getHistory {
     [myDelegate removeBadgeIconLastTab];
     offset=@"0";
@@ -58,6 +60,7 @@
     [myDelegate showIndicator];
     [self performSelector:@selector(getMessageHistory) withObject:nil afterDelay:0.1];
 }
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
     [myDelegate removeBadgeIconLastTab];
@@ -163,9 +166,9 @@
      }] ;
 }
 - (void)sendMessage {
-    [[MessageService sharedManager] sendMessage:otherUserId message:sendMessageTextView.text success:^(id responseObject) {
+   
+    [[MessageService sharedManager] sendMessage:otherUserId message:messageString success:^(id responseObject) {
         [myDelegate stopIndicator];
-        sendMessageTextView.text=@"";
         NSInteger lastSectionIndex = [personalMessageTableView numberOfSections] - 1;
         NSInteger lastRowIndex = [personalMessageTableView numberOfRowsInSection:lastSectionIndex] - 1;
         MessageHistoryDataModel *tempModel = [[[messageDateArray objectAtIndex:lastSectionIndex]messagesHistoryArray ]objectAtIndex:lastRowIndex];
@@ -189,6 +192,7 @@
 
 #pragma mark - IBActions
 - (IBAction)sendMessageBtnAction:(id)sender {
+     messageString=sendMessageTextView.text;
     [self sendMessage];
     MessagesDataModel *messageDetails = [[MessagesDataModel alloc]init];
     messageDetails.messagesHistoryArray=[[NSMutableArray alloc]init];

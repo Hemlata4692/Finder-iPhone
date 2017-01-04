@@ -40,6 +40,9 @@
     if ([conferenceList.isExpired integerValue]==1) {
         conferenceNameLabel.textColor=[UIColor colorWithRed:180.0/255.0 green:180.0/255.0 blue:180.0/255.0 alpha:1.0];
     }
+    else {
+        conferenceNameLabel.textColor=[UIColor colorWithRed:20.0/255.0 green:20.0/255.0 blue:20.0/255.0 alpha:1.0];
+    }
 }
 #pragma mark - end
 @end

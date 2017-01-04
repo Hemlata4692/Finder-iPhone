@@ -144,7 +144,7 @@
 //contact segement
 - (void)displayContacts :(MatchesDataModel *)contactData indexPath:(int)indexPath rectSize:(CGSize)rectSize{
     contactName.translatesAutoresizingMaskIntoConstraints=YES;
-    CGSize size = CGSizeMake(rectSize.width-157,100);
+    CGSize size = CGSizeMake(rectSize.width-157,50);
     CGRect textRect = [contactData.userName
                        boundingRectWithSize:size
                        options:NSStringDrawingUsesLineFragmentOrigin
@@ -152,8 +152,10 @@
                        context:nil];
     contactName.numberOfLines = 0;
     contactName.frame = textRect;
-    contactName.frame =CGRectMake(78, 13, textRect.size.width, textRect.size.height);
+    contactName.frame =CGRectMake(78, 12, textRect.size.width, textRect.size.height);
     [contactName setLabelBorder:contactName color:[UIColor whiteColor]];
+    contactName.text=contactData.userName;
+    
     contactDesignation.translatesAutoresizingMaskIntoConstraints=YES;
     CGRect designationtextRect = [contactData.userDesignation
                                   boundingRectWithSize:size
@@ -163,10 +165,11 @@
     contactDesignation.numberOfLines = 0;
     contactDesignation.frame = designationtextRect;
     contactDesignation.frame =CGRectMake(78, contactName.frame.origin.y + contactName.frame.size.height+2 , designationtextRect.size.width, designationtextRect.size.height);
-    [contactDesignation setLabelBorder:contactName color:[UIColor whiteColor]];
-    contactName.text=contactData.userName;
+    [contactDesignation setLabelBorder:contactDesignation color:[UIColor whiteColor]];
     contactDesignation.text=contactData.userDesignation;
+    
     contactCompanyName.text=contactData.userCompanyName;
+  
     [contactIcon setCornerRadius:contactIcon.frame.size.width/2];
     __weak UIImageView *weakRef = contactIcon;
     NSURLRequest *imageRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:contactData.userImage]

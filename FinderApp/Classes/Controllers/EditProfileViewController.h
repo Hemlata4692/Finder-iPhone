@@ -7,7 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ImageCropView.h"
 
-@interface EditProfileViewController : GlobalBackViewController
+@interface EditProfileViewController : GlobalBackViewController<ImageCropViewControllerDelegate>{
+    ImageCropView* imageCropView;
+    UIImage* image1;
+}
 @property(nonatomic,strong) NSMutableArray* profileArray;
 @end

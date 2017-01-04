@@ -52,15 +52,24 @@
     moreOptionsArray = [NSMutableArray arrayWithObjects:@"My Profile",@"Pending Appointments",@"Requested Appointments",@"Requested Matches",@"Conference",@"Settings",@"Change Password",@"Switch Conference",@"Logout", nil];
     moreImagesArray= [NSMutableArray arrayWithObjects:@"my_profile.png",@"pending_appointment.png",@"requested_appointment.png",@"request_match",@"conference_icon.png",@"setting.png",@"change_password.png",@"switch_conference.png",@"logout.png", nil];
 }
+
 - (void)didReceiveMemoryWarningn {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 - (void)viewWillAppear:(BOOL)animated {
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     [_moreTableView reloadData];
      myDelegate.myView=@"MoreViewController";
+    if ([[UserDefaultManager getValue:@"firstTimeUser"] isEqualToString:@"firstTimeUser"]) {
+        UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        MyProfileViewController *profileView =[storyboard instantiateViewControllerWithIdentifier:@"MyProfileViewController"];
+        profileView.viewName=@"My Profile";
+        [self.navigationController pushViewController:profileView animated:YES];
+    }
 }
+
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:YES];
     myDelegate.myView=@"other";
@@ -76,12 +85,15 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return moreOptionsArray.count;
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section {
     return 0;
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 60;
 }
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *simpleTableIdentifier = @"moreCell";
     MoreTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];

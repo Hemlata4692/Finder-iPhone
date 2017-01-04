@@ -18,8 +18,11 @@
 #import "MatchesService.h"
 #import "ConferenceService.h"
 #import "OtherUserProfileViewController.h"
+#import <UserNotifications/UserNotifications.h>
 
-@interface FinderAppDelegate ()<CLLocationManagerDelegate,MyAlertDelegate>
+#define SYSTEM_VERSION_GRATERTHAN_OR_EQUALTO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+
+@interface FinderAppDelegate ()<CLLocationManagerDelegate,MyAlertDelegate,UNUserNotificationCenterDelegate>
 {
     UIView *loaderView;
     UIImageView *logoImage;
@@ -41,6 +44,7 @@
 @synthesize requestArrived;
 @synthesize currentNavigationController;
 @synthesize myView;
+
 
 #pragma mark - Global indicator view
 - (void)showIndicator
@@ -101,7 +105,6 @@
     //conferenceId
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"userId"]!=nil && [[NSUserDefaults standardUserDefaults] objectForKey:@"conferenceId"]!=nil)
     {
-        isLocation=@"1";
         MatchesViewController * objView=[storyboard instantiateViewControllerWithIdentifier:@"tabBar"];
         self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
         [self.window setRootViewController:objView];
@@ -158,14 +161,17 @@
 }
 - (void)applicationDidEnterBackground:(UIApplication *)application{
     [timer invalidate];
+    timer=nil;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        NSTimer* t = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(startTrackingBg) userInfo:nil repeats:YES];
+        //chnage to 3 min
+        NSTimer* t = [NSTimer scheduledTimerWithTimeInterval:3*60 target:self selector:@selector(locationUpdate) userInfo:nil repeats:YES];
         [[NSRunLoop currentRunLoop] addTimer:t forMode:NSDefaultRunLoopMode];
         [[NSRunLoop currentRunLoop] run];
     });
 }
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    isLocation=@"2";
+     [self startTrackingBg];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -184,13 +190,15 @@
              NSLog(@"webservice did fire");
              [self startTrackingBg];
          } failure:^(NSError *error) {
+    
          }] ;
     }
 }
+
 - (void) startTrackingBg {
-    if ([isLocation isEqualToString:@"2"])
-    {
+    if ([isLocation isEqualToString:@"2"]) {
         isLocation=@"0";
+        //chnage to 3 min
         timer = [NSTimer scheduledTimerWithTimeInterval:3*60
                                                  target: self
                                                selector: @selector(locationUpdate)
@@ -199,41 +207,48 @@
         NSLog(@"Timer did fire");
     }
 }
+
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations {
     CLLocation *newLocation = (CLLocation *)[locations lastObject];
     CLLocationCoordinate2D cordinates = newLocation.coordinate;
     latitude=[NSString stringWithFormat:@"%f",cordinates.latitude];
     longitude=[NSString stringWithFormat:@"%f",cordinates.longitude];
-    if ([isLocation isEqualToString:@"1"])
-    {
+    if ([isLocation isEqualToString:@"1"]) {
         isLocation=@"2";
-        [ self locationUpdate];
+        [self locationUpdate];
     }
 }
 #pragma mark - end
 
 #pragma mark - Push notification methods
 - (void)registerDeviceForNotification {
-    if ([[UIApplication sharedApplication] respondsToSelector:@selector(registerUserNotificationSettings:)]) {
-        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
-        [[UIApplication sharedApplication] registerForRemoteNotifications];
+    //condition for iOS 10 and below
+    if(SYSTEM_VERSION_GRATERTHAN_OR_EQUALTO(@"10.0")) {
+        UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+        center.delegate = self;
+        [center requestAuthorizationWithOptions:(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge) completionHandler:^(BOOL granted, NSError * _Nullable error){
+            if( !error ){
+                [[UIApplication sharedApplication] registerForRemoteNotifications];
+            }
+        }];
     }
     else {
         [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
         [[UIApplication sharedApplication] registerForRemoteNotifications];
     }
 }
+
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken1 {
     NSString *token = [[deviceToken1 description] stringByTrimmingCharactersInSet: [NSCharacterSet characterSetWithCharactersInString:@"<>"]];
     token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
     NSLog(@"content---.......................%@", token);
-    NSLog(@"didRegisterForRemoteNotificationsWithDeviceToken");
     self.deviceToken = token;
     [[UserService sharedManager] registerDeviceForPushNotification:token deviceType:@"ios" success:^(id responseObject) {
         NSLog(@"push notification response is  --------------------->>>%@",responseObject);
     } failure:^(NSError *error) {
     }] ;
 }
+
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     NSLog(@"push notification user info is active state --------------------->>>%@",userInfo);
     [UIApplication sharedApplication].applicationIconBadgeNumber=0;
@@ -332,11 +347,13 @@
              {
              }] ;
         }
+        //accept match request
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"3"]) {
             if ([myDelegate.myView isEqualToString:@"MatchesViewController"]) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"MatchesDetails" object:nil];
             }
         }
+        //cancel match request
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"4"]) {
             if ([myDelegate.myView isEqualToString:@"MatchesViewController"]) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"MatchesDetails" object:nil];
@@ -348,7 +365,6 @@
             }
             else if ([myDelegate.myView isEqualToString:@"PendingViewController"]) {
                 alertType=@"5";
-                NSLog(@"accepted");
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"Requested" object:nil];
             }
         }
@@ -421,19 +437,21 @@
 }
 #pragma mark - end
 
+#pragma mark - UNUserNotificationCenter Delegate // >= iOS 10
+- (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void(^)())completionHandler {
+    NSLog(@"User Info = %@",response.notification.request.content.userInfo);
+}
+#pragma mark - end
+
 #pragma mark - Local notification
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
-    if (application.applicationState == UIApplicationStateActive) {
-    }
-    else {
-        [[UIApplication sharedApplication] cancelLocalNotification:notification];
-    }
+    [[UIApplication sharedApplication] cancelLocalNotification:notification];
 }
 #pragma mark - end
 
 #pragma mark - Add badge icon
 - (void)addBadgeIcon {
-    for (UILabel *subview in myDelegate.tabBarView.tabBar.subviews)
+    for (UILabel *subview in [UIApplication sharedApplication].keyWindow.subviews)
     {
         if ([subview isKindOfClass:[UILabel class]])
         {
@@ -445,7 +463,7 @@
     notificationBadge = [[UILabel alloc] init];
     notificationBadge.hidden=NO;
     notificationBadge.frame = CGRectMake((([UIScreen mainScreen].bounds.size.width/5))+45 , ([UIScreen mainScreen].bounds.size.height-40), 8, 8);
-    notificationBadge.backgroundColor = [UIColor redColor];
+    notificationBadge.backgroundColor = [UIColor colorWithRed:35.0/255.0 green:83.0/255.0 blue:113.0/255.0 alpha:1.0];
     notificationBadge.layer.cornerRadius = 5;
     notificationBadge.layer.masksToBounds = YES;
     notificationBadge.tag = 3365;
@@ -458,7 +476,7 @@
 - (void)removeBadgeIconLastTab {
     notificationBadge.hidden=YES;
     notificationBadge.frame = CGRectMake((([UIScreen mainScreen].bounds.size.width/5))+45 , ([UIScreen mainScreen].bounds.size.height-40), 0, 0);
-    for (UILabel *subview in myDelegate.tabBarView.tabBar.subviews)
+    for (UILabel *subview in [UIApplication sharedApplication].keyWindow.subviews)
     {
         if ([subview isKindOfClass:[UILabel class]])
         {
@@ -472,7 +490,7 @@
 
 #pragma mark - Add badge icon
 - (void)addBadgeIconOnMoreTab {
-    for (UILabel *subview in myDelegate.tabBarView.tabBar.subviews)
+    for (UILabel *subview in [UIApplication sharedApplication].keyWindow.subviews)
     {
         if ([subview isKindOfClass:[UILabel class]])
         {
@@ -484,7 +502,7 @@
     notificationBadge = [[UILabel alloc] init];
     notificationBadge.hidden=NO;
     notificationBadge.frame = CGRectMake((([UIScreen mainScreen].bounds.size.width/5) * 5) - (([UIScreen mainScreen].bounds.size.width/5)/2) + 13 , ([UIScreen mainScreen].bounds.size.height-44), 8, 8);
-    notificationBadge.backgroundColor = [UIColor redColor];
+    notificationBadge.backgroundColor = [UIColor colorWithRed:35.0/255.0 green:83.0/255.0 blue:113.0/255.0 alpha:1.0];
     notificationBadge.layer.cornerRadius = 4;
     notificationBadge.layer.masksToBounds = YES;
     notificationBadge.tag = 3367;
@@ -499,7 +517,7 @@
 {
     notificationBadge.hidden=YES;
     notificationBadge.frame = CGRectMake((([UIScreen mainScreen].bounds.size.width/5) * 5) - (([UIScreen mainScreen].bounds.size.width/5)/2) + 13 , ([UIScreen mainScreen].bounds.size.height-44), 0, 0);
-    for (UILabel *subview in myDelegate.tabBarView.tabBar.subviews)
+    for (UILabel *subview in [UIApplication sharedApplication].keyWindow.subviews)
     {
         if ([subview isKindOfClass:[UILabel class]])
         {

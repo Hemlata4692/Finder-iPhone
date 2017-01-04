@@ -104,10 +104,12 @@
     [conferenceCell displayConferenceListData:data indexPath:(int)indexPath.row rectSize:conferenceListTableView.frame.size];
     return conferenceCell;
 }
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     MatchesViewController * homeView = [storyboard instantiateViewControllerWithIdentifier:@"tabBar"];
     [UserDefaultManager setValue:[[conferenceListingArray objectAtIndex:indexPath.row] conferenceId] key:@"conferenceId"];
+    [UserDefaultManager setValue:@"firstTimeUser" key:@"firstTimeUser"];
     NSArray *dateStrings = [[[conferenceListingArray objectAtIndex:indexPath.row] conferenceDate] componentsSeparatedByString:@" - "];
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     [dateFormatter setDateFormat:@"yyyy-MM-dd"];

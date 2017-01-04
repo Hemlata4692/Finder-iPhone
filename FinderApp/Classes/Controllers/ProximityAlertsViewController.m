@@ -38,7 +38,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(proximityAlerts) name:@"ProximityAlerts" object:nil];
 }
 - (void)proximityAlerts {
-    [myDelegate removeBadgeIconLastTab];
     [myDelegate showIndicator];
     [self performSelector:@selector(getProximityAlerts) withObject:nil afterDelay:0.1];
 }

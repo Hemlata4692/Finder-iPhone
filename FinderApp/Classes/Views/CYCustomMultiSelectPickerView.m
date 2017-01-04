@@ -50,7 +50,7 @@
 {
     for (NSString *key in self.entriesArray){
         BOOL isSelected = NO;
-        if ([[appDelegate.multiplePickerDic objectForKey:key] boolValue]) {
+        if ([[appDelegate.multiplePickerDic objectForKey:[key stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]] boolValue]) {
             isSelected = YES;
         }
         else{
@@ -58,7 +58,7 @@
         }
 
         [self.selectionStatesDic setObject:[NSNumber numberWithBool:isSelected] forKey:key];
-        [appDelegate.multiplePickerDic setObject:[NSNumber numberWithBool:isSelected] forKey:key];
+        [appDelegate.multiplePickerDic setObject:[NSNumber numberWithBool:isSelected] forKey:[key stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
     }
     
     // Init picker and add it to view
@@ -150,11 +150,11 @@
     if (row == -1)
         for (id key in [self.selectionStatesDic allKeys]){
             [self.selectionStatesDic setObject:[NSNumber numberWithBool:YES] forKey:key];
-            [appDelegate.multiplePickerDic setObject:[NSNumber numberWithBool:YES] forKey:key];
+            [appDelegate.multiplePickerDic setObject:[NSNumber numberWithBool:YES] forKey:[key stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
         }
     else{
          [self.selectionStatesDic setObject:[NSNumber numberWithBool:YES] forKey:[self.entriesArray objectAtIndex:row]];
-        [appDelegate.multiplePickerDic setObject:[NSNumber numberWithBool:YES] forKey:[self.entriesArray objectAtIndex:row]];
+        [appDelegate.multiplePickerDic setObject:[NSNumber numberWithBool:YES] forKey:[[self.entriesArray objectAtIndex:row] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
     }
 }
 
@@ -163,11 +163,11 @@
     if (row == -1)
         for (id key in [self.selectionStatesDic allKeys]){
             [self.selectionStatesDic setObject:[NSNumber numberWithBool:NO] forKey:key];
-            [appDelegate.multiplePickerDic setObject:[NSNumber numberWithBool:NO] forKey:key];
+            [appDelegate.multiplePickerDic setObject:[NSNumber numberWithBool:NO] forKey:[key stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
         }
     else{
         [self.selectionStatesDic setObject:[NSNumber numberWithBool:NO] forKey:[self.entriesArray objectAtIndex:row]];
-          [appDelegate.multiplePickerDic setObject:[NSNumber numberWithBool:NO] forKey:[self.entriesArray objectAtIndex:row]];
+          [appDelegate.multiplePickerDic setObject:[NSNumber numberWithBool:NO] forKey:[[self.entriesArray objectAtIndex:row]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
     }
 }
 @end

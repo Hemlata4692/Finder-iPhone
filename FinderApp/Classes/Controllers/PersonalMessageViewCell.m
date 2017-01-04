@@ -51,7 +51,7 @@
                                  stretchableImageWithLeftCapWidth:15 topCapHeight:15];
     bubble_width = textRect.size.width+20;
     incomingBubbleImage.frame = CGRectMake(bubble_x, bubble_y, bubble_width, bubble_height+20);
-    meUserMessageLabel.frame=CGRectMake(bubble_x+5, bubble_y+5, bubble_width-10, textRect.size.height);
+    meUserMessageLabel.frame=CGRectMake(bubble_x+5, bubble_y+5, bubble_width-15, textRect.size.height);
     retryButton.frame=CGRectMake(meUserMessageLabel.frame.origin.x-35,bubble_y+5, 30, 30);
     incomingBubbleImage.autoresizingMask = meUserMessageLabel.autoresizingMask;
 }
@@ -84,7 +84,7 @@
                                  stretchableImageWithLeftCapWidth:15 topCapHeight:15];
     bubble_width = textRect.size.width+20;
     outgoingBubbleImage.frame = CGRectMake(bubble_x, bubble_y, bubble_width, bubble_height+20);
-    otherUserMessageLabel.frame=CGRectMake(bubble_x+13, bubble_y+5, bubble_width-10, textRect.size.height);
+    otherUserMessageLabel.frame=CGRectMake(bubble_x+13, bubble_y+5, bubble_width-15, textRect.size.height);
     incomingBubbleImage.autoresizingMask = otherUserMessageLabel.autoresizingMask;
 }
 #pragma mark - end

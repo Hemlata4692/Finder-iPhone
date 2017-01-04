@@ -11,6 +11,7 @@
 #import "ContactDataModel.h"
 #import "ConferenceService.h"
 
+
 @interface ScheduleMeetingViewController ()<UITextFieldDelegate,BSKeyboardControlsDelegate,UITextViewDelegate>
 {
     NSArray *textFieldArray;
@@ -52,7 +53,22 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    if (![screenName isEqualToString:@"Calendar"]) {
+    if ([screenName isEqualToString:@"Edit Meeting"]) {
+        contactButton.hidden=NO;
+        dropDownImage.hidden=NO;
+        userImage.hidden=YES;
+        NSArray *nameArry = [calenderObj.eventName componentsSeparatedByString:@" "];
+        contactNameTextField.text=[nameArry objectAtIndex:2];
+        venueTextField.text=calenderObj.eventVenue;
+        meetingAgendaTextField.text=calenderObj.eventDescription;
+        NSArray *arrComp = [calenderObj.eventTime componentsSeparatedByString:@" - "];
+        fromTimeTextField.text=[arrComp objectAtIndex:0];
+        toTimeTextField.text=[arrComp objectAtIndex:1];
+        NSArray *dateArr = [calenderObj.eventDate componentsSeparatedByString:@" "];
+        dateTextField.text=[dateArr objectAtIndex:0];
+        textFieldArray = @[venueTextField,meetingAgendaTextField];
+    }
+   else if (![screenName isEqualToString:@"Calendar"]) {
         contactButton.hidden=YES;
         dropDownImage.hidden=YES;
         userImage.hidden=NO;
@@ -107,7 +123,12 @@
     [self hidePickerWithAnimation];
     if([self performValidations]) {
         [myDelegate showIndicator];
+        if([screenName isEqualToString:@"Edit Meeting"]) {
+            [self performSelector:@selector(editScheduledMeeting) withObject:nil afterDelay:.1];
+        }
+        else {
         [self performSelector:@selector(scheduleMeeting) withObject:nil afterDelay:.1];
+        }
     }
 }
 - (IBAction)cancelButtonAction:(id)sender {
@@ -135,6 +156,7 @@
         [UIView commitAnimations];
     }
 }
+
 //Load date picker
 - (IBAction)dateTimePickerButtonAction:(id)sender {
     [keyboardControls.activeField resignFirstResponder];
@@ -165,6 +187,7 @@
     pickerToolbar.frame = CGRectMake(pickerToolbar.frame.origin.x, datePicker.frame.origin.y-44, self.view.frame.size.width, 44);
     [UIView commitAnimations];
 }
+
 //Load time picker
 - (IBAction)timePickerButtonAction:(id)sender {
     if ([sender tag]==20) {
@@ -180,6 +203,7 @@
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];
     timePicker.datePickerMode = UIDatePickerModeTime;
+    [timePicker setMinimumDate:[NSDate date]];
     if([[UIScreen mainScreen] bounds].size.height<568) {
         [scheduleMeetingScrollView setContentOffset:CGPointMake(0, scheduleMeetingScrollView.frame.origin.y+80) animated:YES];
     }
@@ -269,12 +293,15 @@
     pickerLabel.text=[[contactDetailArray objectAtIndex:row]contactName];
     return pickerLabel;
 }
+
 -(NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
     return 1;
 }
+
 -(NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
     return contactDetailArray.count;
 }
+
 -(NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     NSString *str=@"";
     if (contactDetailArray.count>1) {
@@ -282,6 +309,7 @@
     }
     return str;
 }
+
 - (void)pickerView:(UIPickerView *)pickerView1 didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     if(pickerView1 == pickerView) {
         if (contactDetailArray.count==0) {
@@ -300,6 +328,7 @@
     UIView *view;
     view = field.superview.superview.superview;
 }
+
 - (void)keyboardControlsDonePressed:(BSKeyboardControls *)keyboard {
     [keyboard.activeField resignFirstResponder];
     [scheduleMeetingScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
@@ -318,6 +347,7 @@
         }
     }
 }
+
 - (void)textFieldDidEndEditing:(UITextField *)textField {
     if([[UIScreen mainScreen] bounds].size.height<568) {
         if (textField==venueTextField) {
@@ -328,6 +358,7 @@
     }
     [textField resignFirstResponder];
 }
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     [scheduleMeetingScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
@@ -359,7 +390,7 @@
 
 #pragma mark - Webservice
 -(BOOL)performValidations {
-    if ([contactNameTextField isEmpty] || [venueTextField isEmpty] || [dateTextField isEmpty] || [fromTimeTextField isEmpty] || [toTimeTextField isEmpty] || [meetingAgendaTextField.text isEqualToString:@""]) {
+    if ([contactNameTextField isEmpty] || [venueTextField isEmpty] || [dateTextField isEmpty] || [fromTimeTextField isEmpty] || [toTimeTextField isEmpty]) {
         SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
         [alert showWarning:self title:@"Alert" subTitle:@"All the fields are mandatory." closeButtonTitle:@"Done" duration:0.0f];
         return NO;
@@ -375,7 +406,7 @@
         if(result == NSOrderedDescending) {
             NSLog(@"date1 is later than date2");
             SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
-            [alert showWarning:self title:@"Alert" subTitle:@"Please enter valid time" closeButtonTitle:@"Done" duration:0.0f];
+            [alert showWarning:self title:@"Alert" subTitle:@"Please enter valid time." closeButtonTitle:@"Done" duration:0.0f];
             return NO;
         }
         else if(result == NSOrderedAscending) {
@@ -385,15 +416,27 @@
         else {
             NSLog(@"date1 is equal to date2");
             SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
-            [alert showWarning:self title:@"Alert" subTitle:@"Please enter valid time" closeButtonTitle:@"Done" duration:0.0f];
+            [alert showWarning:self title:@"Alert" subTitle:@"Please enter valid time." closeButtonTitle:@"Done" duration:0.0f];
             return NO;
         }
     }
 }
+
 - (void)scheduleMeeting {
-    
     [[ConferenceService sharedManager] scheduleMeeting:contactUserID venue:venueTextField.text meetingAgenda:meetingAgendaTextField.text date:dateTextField.text timeFrom:fromTimeTextField.text timeTo:toTimeTextField.text success:^(id responseObject) {
         [myDelegate stopIndicator];
+        [self.presentingViewController dismissViewControllerAnimated:NO completion:nil];
+    }
+                                               failure:^(NSError *error)
+     {
+         
+     }] ;
+}
+
+- (void)editScheduledMeeting {
+    [[ConferenceService sharedManager] editScheduledMeeting:contactUserID appointmentId:calenderObj.eventId venue:venueTextField.text meetingAgenda:meetingAgendaTextField.text date:dateTextField.text timeFrom:fromTimeTextField.text timeTo:toTimeTextField.text oldUserId:calenderObj.userId success:^(id responseObject) {
+        [myDelegate stopIndicator];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"CalendarDetails" object:nil];
         [self.presentingViewController dismissViewControllerAnimated:NO completion:nil];
     }
                                                failure:^(NSError *error)

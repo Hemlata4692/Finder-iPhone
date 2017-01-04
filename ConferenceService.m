@@ -21,6 +21,8 @@
 #define kUrlCalendarDetails             @"getcalenderdetails"
 #define kUrlContactDetails              @"getcontactlist"
 #define kUrlScheduleMeeting             @"schedulemeetingrequest"
+#define kUrlEditScheduleMeeting         @"editscheduledmeeting"
+#define kUrlDeleteScheduleMeeting       @"deletescheduledmeeting"
 #define kUrlPendingAppointment          @"pendingappointments"
 #define kUrlRequestedAppointment        @"requestedappointments"
 #define kUrlAcceptCancelAppointment     @"accpetcancelscheduledmeeting"
@@ -196,6 +198,8 @@
                          eventDetails.userImage =[eventArrayDict objectForKey:@"userImage"];
                          eventDetails.userId =[eventArrayDict objectForKey:@"userId"];
                          eventDetails.eventVenue = [eventArrayDict objectForKey:@"eventVenue"];
+                         eventDetails.eventId = [eventArrayDict objectForKey:@"appointmentId"];
+                         eventDetails.eventDate = [eventArrayDict objectForKey:@"appointmentDate"];
                          [calendarDetails.eventArray addObject:eventDetails];
                      }
                      [dataArray addObject:calendarDetails];
@@ -280,6 +284,51 @@
      }];
 }
 #pragma mark- end
+
+#pragma mark- Edit scheduled meeting
+- (void)editScheduledMeeting:(NSString *)contactUserId appointmentId:(NSString *)appointmentId venue:(NSString *)venue meetingAgenda:(NSString *)meetingAgenda date:(NSString *)date timeFrom:(NSString *)timeFrom timeTo:(NSString *)timeTo oldUserId:(NSString *)oldUserId success:(void (^)(id))success failure:(void (^)(NSError *))failure {
+    NSDictionary *requestDict = @{@"appointmentId":appointmentId,@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"],@"contactUserId":contactUserId,@"venue":venue,@"meetingAgenda":meetingAgenda,@"date":date,@"timeFrom":timeFrom,@"timeTo":timeTo,@"oldUserId":oldUserId};
+    NSLog(@"edit schedule meeting request %@",requestDict);
+    [[Webservice sharedManager] post:kUrlEditScheduleMeeting parameters:requestDict success:^(id responseObject)
+     {
+         responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
+         NSLog(@"edit schedule meeting response %@",responseObject);
+         if([[Webservice sharedManager] isStatusOK:responseObject]) {
+             success(responseObject);
+         }
+         else {
+             [myDelegate stopIndicator];
+             failure(nil);
+         }
+     } failure:^(NSError *error) {
+         [myDelegate stopIndicator];
+         failure(error);
+     }];
+}
+#pragma mark- end
+
+#pragma mark- Delete scheduled meeting
+- (void)deleteScheduledMeeting:(NSString *)appointmentId success:(void (^)(id))success failure:(void (^)(NSError *))failure {
+    NSDictionary *requestDict = @{@"appointmentId":appointmentId,@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"]};
+    NSLog(@"delete schedule meeting request %@",requestDict);
+    [[Webservice sharedManager] post:kUrlDeleteScheduleMeeting parameters:requestDict success:^(id responseObject)
+     {
+         responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
+         NSLog(@"delete schedule meeting response %@",responseObject);
+         if([[Webservice sharedManager] isStatusOK:responseObject]) {
+             success(responseObject);
+         }
+         else {
+             [myDelegate stopIndicator];
+             failure(nil);
+         }
+     } failure:^(NSError *error) {
+         [myDelegate stopIndicator];
+         failure(error);
+     }];
+}
+#pragma mark- end
+
 
 #pragma mark - Pending appointment
 - (void)pendingAppointment:(void (^)(id data))success failure:(void (^)(NSError *error))failure {

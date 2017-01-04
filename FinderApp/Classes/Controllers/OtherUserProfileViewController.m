@@ -218,7 +218,6 @@
      }] ;
 }
 - (void)displayUserProfileData {
-    
     companyDescriptionLabel.translatesAutoresizingMaskIntoConstraints = YES;
     aboutCompanyView.translatesAutoresizingMaskIntoConstraints = YES;
     mainContainerView.translatesAutoresizingMaskIntoConstraints=YES;
@@ -237,7 +236,8 @@
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
         
     }];
-    otherUserNameLabel.text=[[otherUserProfileDataArray objectAtIndex:0]userName];
+    //otherUserNameLabel.text=[[otherUserProfileDataArray objectAtIndex:0]userName];
+    otherUserNameLabel.text=[NSString stringWithFormat:@"%@ %@",[[otherUserProfileDataArray objectAtIndex:0]userName],[[otherUserProfileDataArray objectAtIndex:0]userSurname]];
     if ([[[otherUserProfileDataArray objectAtIndex:0]userDesignation] isEqualToString:@""]) {
         otherUserDesignation.text=@"NA";
     }

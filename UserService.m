@@ -116,20 +116,47 @@
     [[Webservice sharedManager] post:kUrlLocationUpdate parameters:requestDict success:^(id responseObject) {
         responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
         NSLog(@"location response%@",responseObject);
-        
+       // [self callCrashWebservice:[NSString stringWithFormat:@"Success: %@",requestDict]];
         if ([[responseObject objectForKey:@"isSuccess"] isEqualToString:@"1"]) {
             success(responseObject);
         }
         else {
             [myDelegate stopIndicator];
+           // [self callCrashWebservice:[NSString stringWithFormat:@"Faliure: %@",requestDict]];
             failure(nil);
         }
     } failure:^(NSError *error) {
+       // [self callCrashWebservice:[NSString stringWithFormat:@"Faliure: %@",requestDict]];
         [myDelegate stopIndicator];
         failure(error);
     }];
 }
 #pragma mark- end
+
+//-(void)callCrashWebservice :(NSString *)crashString {
+//    
+//    NSDictionary *requestDict = @{@"content":crashString,@"to":@"hemlata@ranosys.com,rohit@ranosys.com",@"subject":@"Finder location webservice"};
+//    NSError *error;
+//    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+//    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
+//    NSURL *url=[NSURL URLWithString:[NSString stringWithFormat:@"http://ranosys.net/client/starrez/crash.php"]];
+//    NSData *postData = [NSJSONSerialization dataWithJSONObject:requestDict options:0 error:&error];
+//    NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
+//    
+//    NSMutableURLRequest *request = [[NSMutableURLRequest alloc] init];
+//    [request setURL:url];
+//    [request setHTTPMethod:@"POST"];
+//    [request setValue:postLength forHTTPHeaderField:@"Content-Length"];
+//    [request setValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
+//    [request setHTTPBody:postData];
+//    
+//    NSURLSessionDataTask *postDataTask = [session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+//        //DLog(@"data is %@",[[NSString alloc]initWithData:data encoding:NSUTF8StringEncoding]);
+//        
+//    }];
+//    [postDataTask resume];
+//}
+//
 
 #pragma mark- Logout
 - (void)logoutUser:(void (^)(id data))success failure:(void (^)(NSError *error))failure {
