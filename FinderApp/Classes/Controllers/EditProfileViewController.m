@@ -22,7 +22,7 @@
     NSArray *selectedPickerArray, *interestedInSelectcedArray;
     NSString* pickerType;
     NSMutableDictionary *interestedAreaDic, *lookingToFindDic;
-    BOOL isInterestedInOtherSelected, isInterestedAreaOtherSelected;
+    BOOL isInterestedInOtherSelected, isInterestedAreaOtherSelected , isProffessionOtherSelected;
     
 }
 @property (weak, nonatomic) IBOutlet UIView *lastNameView;
@@ -131,7 +131,7 @@
     self.interestedInOtherView.translatesAutoresizingMaskIntoConstraints=YES;
     self.interestedAreaOtherView.translatesAutoresizingMaskIntoConstraints=YES;
     self.bottomView.translatesAutoresizingMaskIntoConstraints=YES;
-    
+    isProffessionOtherSelected=NO;
     isInterestedInOtherSelected=NO;
     isInterestedAreaOtherSelected=NO;
     [self viewCustomization:NO isSecondOtherShow:NO];
@@ -250,7 +250,7 @@
     [self hidePickerWithAnimation];
     pickerType=@"1";
     if([[UIScreen mainScreen] bounds].size.height<568){
-        [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height+190) animated:YES];
+        [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height+240) animated:YES];
     }
     else if([[UIScreen mainScreen] bounds].size.height==568){
         [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height+70) animated:YES];
@@ -386,7 +386,12 @@
         [alert showWarning:self title:@"Alert" subTitle:@"Please fill in all mandatory fields." closeButtonTitle:@"Done" duration:0.0f];
         return NO;
     }
-    else if ((self.interestedAreaOtherTextField.hidden==NO && [self.interestedAreaOtherTextField isEmpty]) || (self.interestedInOtherTextField.hidden==NO && [self.interestedInOtherTextField isEmpty]) || (professionButton.hidden==YES)){
+    else if ((self.interestedAreaOtherTextField.hidden==NO && [self.interestedAreaOtherTextField isEmpty]) || (self.interestedInOtherTextField.hidden==NO && [self.interestedInOtherTextField isEmpty])){
+        SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
+        [alert showWarning:self title:@"Alert" subTitle:@"Please enter other value." closeButtonTitle:@"Done" duration:0.0f];
+        return NO;
+    }
+    else if ((isProffessionOtherSelected==YES && [professionTextField isEmpty] )) {
         SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
         [alert showWarning:self title:@"Alert" subTitle:@"Please enter other value." closeButtonTitle:@"Done" duration:0.0f];
         return NO;
@@ -408,9 +413,11 @@
         else {
             if (![[professionArray objectAtIndex:index] isEqualToString:@"Other"]) {
                 professionButton.hidden=NO;
+                isProffessionOtherSelected=NO;
                 professionTextField.text=[professionArray objectAtIndex:index];
             }
             else {
+                isProffessionOtherSelected=YES;
                 professionButton.hidden=YES;
                 [professionTextField becomeFirstResponder];
             }
@@ -587,7 +594,7 @@
     else if (textField==professionTextField)
     {
         if([[UIScreen mainScreen] bounds].size.height<568){
-            [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height+180) animated:YES];
+            [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height+240) animated:YES];
         }
         else if([[UIScreen mainScreen] bounds].size.height==568){
             [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height+50) animated:YES];
@@ -598,7 +605,7 @@
     }
     else if (textField==interestedInOtherTextField) {
         if([[UIScreen mainScreen] bounds].size.height<568){
-            [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height+220) animated:YES];
+            [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height+280) animated:YES];
         }
         else if([[UIScreen mainScreen] bounds].size.height==568){
             [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height+100) animated:YES];
@@ -610,7 +617,7 @@
     }
     else if (textField==interestedAreaOtherTextField) {
         if([[UIScreen mainScreen] bounds].size.height<568){
-            [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height+325) animated:YES];
+            [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height+370) animated:YES];
         }
         else if([[UIScreen mainScreen] bounds].size.height==568){
             [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height+210) animated:YES];

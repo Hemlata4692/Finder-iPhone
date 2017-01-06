@@ -1926,6 +1926,7 @@
 				CODE_SIGN_ENTITLEMENTS = Finder_iPhoneApp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Ranosys Technologies Pte Ltd";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ranosys Technologies Pte Ltd";
+				DEVELOPMENT_TEAM = M8A7BYS443;
 				ENABLE_BITCODE = NO;
 				GCC_NO_COMMON_BLOCKS = NO;
 				GCC_PREFIX_HEADER = "FinderApp/Supporting Files/Finder-Prefix.pch";
@@ -1935,6 +1936,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ranosys.finder;
 				PRODUCT_NAME = Finder_iPhoneApp;
 				PROVISIONING_PROFILE = "028193af-f43c-49b1-95f9-b51972145e61";
+				PROVISIONING_PROFILE_SPECIFIER = Finder_iPhone_distribution_profile_18Oct2016;
 			};
 			name = Debug;
 		};
@@ -1947,6 +1949,7 @@
 				CODE_SIGN_ENTITLEMENTS = Finder_iPhoneApp.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Ranosys Technologies Pte Ltd";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ranosys Technologies Pte Ltd";
+				DEVELOPMENT_TEAM = M8A7BYS443;
 				ENABLE_BITCODE = NO;
 				GCC_NO_COMMON_BLOCKS = NO;
 				GCC_PREFIX_HEADER = "FinderApp/Supporting Files/Finder-Prefix.pch";
@@ -1956,6 +1959,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ranosys.finder;
 				PRODUCT_NAME = Finder_iPhoneApp;
 				PROVISIONING_PROFILE = "028193af-f43c-49b1-95f9-b51972145e61";
+				PROVISIONING_PROFILE_SPECIFIER = Finder_iPhone_distribution_profile_18Oct2016;
 			};
 			name = Release;
 		};
