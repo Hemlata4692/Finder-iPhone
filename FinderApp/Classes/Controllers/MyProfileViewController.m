@@ -463,6 +463,8 @@
         {
             [myDelegate.multiplePickerDic setObject:[NSNumber numberWithBool:YES] forKey:[[interestedInArray objectAtIndex:k]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
         }
+        //interestedInLabel.text=[interestedInArray componentsJoinedByString:@", "];
+
         interestedInLabel.text=[[userProfileDataArray objectAtIndex:0]userInterestedIn];
     }
     interestsArray =[[[userProfileDataArray objectAtIndex:0]userInterests] componentsSeparatedByString:@","];

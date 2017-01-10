@@ -59,6 +59,7 @@
         userImage.hidden=YES;
         NSArray *nameArry = [calenderObj.eventName componentsSeparatedByString:@" "];
         contactNameTextField.text=[nameArry objectAtIndex:2];
+        contactUserID=calenderObj.userId;
         venueTextField.text=calenderObj.eventVenue;
         meetingAgendaTextField.text=calenderObj.eventDescription;
         NSArray *arrComp = [calenderObj.eventTime componentsSeparatedByString:@" - "];
@@ -392,7 +393,7 @@
 -(BOOL)performValidations {
     if ([contactNameTextField isEmpty] || [venueTextField isEmpty] || [dateTextField isEmpty] || [fromTimeTextField isEmpty] || [toTimeTextField isEmpty]) {
         SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
-        [alert showWarning:self title:@"Alert" subTitle:@"All the fields are mandatory." closeButtonTitle:@"Done" duration:0.0f];
+        [alert showWarning:self title:@"Alert" subTitle:@"Please enter in all the fields except Agenda." closeButtonTitle:@"Done" duration:0.0f];
         return NO;
     }
     else {
