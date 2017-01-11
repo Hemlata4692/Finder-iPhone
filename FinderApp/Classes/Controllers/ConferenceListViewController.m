@@ -32,15 +32,18 @@
     conferenceListingArray=[[NSMutableArray alloc]init];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(conferenceList) name:@"Conference" object:nil];
 }
+
 - (void)conferenceList {
     [myDelegate removeBadgeIconLastTab];
     [myDelegate showIndicator];
     [self performSelector:@selector(getConferenceListing) withObject:nil afterDelay:0.1];
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
@@ -48,6 +51,7 @@
     [myDelegate showIndicator];
     [self performSelector:@selector(getConferenceListing) withObject:nil afterDelay:.1];
 }
+
 - (void)viewWillDisappear:(BOOL)animated
 {
     [super viewWillDisappear:YES];

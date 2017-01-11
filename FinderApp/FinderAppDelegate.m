@@ -298,6 +298,10 @@
                 [self addBadgeIcon];
             }
         }
+        else if ([[alertDict objectForKey:@"type"] isEqualToString:@"10"]) {
+            [UserDefaultManager setValue:[alertDict objectForKey:@"newemail"] key:@"userEmail"];
+            alert = [[MyAlert alloc] initWithTitle:@"Email Updated" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel" isTextField:NO];
+        }
     }
     else {
         if ([[alertDict objectForKey:@"type"] isEqualToString:@"1"]) {
@@ -316,8 +320,12 @@
             [self.window setRootViewController:objView];
             [self.window makeKeyAndVisible];
         }
+        else if ([[alertDict objectForKey:@"type"] isEqualToString:@"10"]) {
+            [UserDefaultManager setValue:[alertDict objectForKey:@"newemail"] key:@"userEmail"];
+        }
     }
 }
+
 - (void)myAlertDelegateAction:(CustomAlert *)myAlert option:(int)option reason:(NSString *)reason {
     
     if (option == 0) {

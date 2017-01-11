@@ -11,6 +11,7 @@
 @interface ProfileDataModel : NSObject
 @property(nonatomic,retain)NSString * userImage;
 @property(nonatomic,retain)NSString * userName;
+@property(nonatomic,retain)NSString * userSurname;
 @property(nonatomic,retain)NSString * userEmail;
 @property(nonatomic,retain)NSString * userMobileNumber;
 @property(nonatomic,retain)NSString * userDesignation;

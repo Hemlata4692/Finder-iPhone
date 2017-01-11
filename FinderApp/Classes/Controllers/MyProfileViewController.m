@@ -106,10 +106,12 @@
         [self performSelector:@selector(getOtherUserProfile) withObject:nil afterDelay:.1];
     }
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
     [UserDefaultManager setValue:nil key:@"firstTimeUser"];
@@ -121,6 +123,7 @@
         [self addLeftBarButtonWithImage1:[UIImage imageNamed:@"back"]];
     }
 }
+
 //Add view shadow
 - (void)addShadow {
     [userProfileImage setCornerRadius:userProfileImage.frame.size.width/2];
@@ -136,6 +139,7 @@
     interestsArray=nil;
 }
 #pragma mark - end
+
 #pragma mark - Add back button
 - (void)addLeftBarButtonWithImage1:(UIImage *)backButton{
     CGRect framing = CGRectMake(0, 0, backButton.size.width, backButton.size.height);
@@ -167,6 +171,7 @@
     editProfile.profileArray=[userProfileDataArray mutableCopy];
     [self.navigationController pushViewController:editProfile animated:YES];
 }
+
 - (IBAction)linkedInButtonAction:(id)sender {
     
     UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -175,6 +180,7 @@
     loadWebPage.navigationTitle=@"LinkedIn";
     [self.navigationController pushViewController:loadWebPage animated:YES];
 }
+
 - (IBAction)otherUserLinkedInButtonAction:(id)sender {
     UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     WebViewController *loadWebPage =[storyboard instantiateViewControllerWithIdentifier:@"WebViewController"];
@@ -182,6 +188,7 @@
     loadWebPage.navigationTitle=@"LinkedIn";
     [self.navigationController pushViewController:loadWebPage animated:YES];
 }
+
 - (IBAction)otherUserEmailButtonAction:(id)sender {
     if ([MFMailComposeViewController canSendMail])
     {
@@ -208,6 +215,7 @@
         [alertView show];
     }
 }
+
 - (IBAction)addUserContactButtonAction:(id)sender {
     
     ABAddressBookRef addressBookRef = ABAddressBookCreateWithOptions(NULL, NULL);
@@ -237,6 +245,7 @@
         [self.view makeToast:@"Contact cannot be added access denied previously."];
     }
 }
+
 - (void)addVcfFile {
     //from vcf file
     CFErrorRef error = NULL;
@@ -277,6 +286,7 @@
         CFRelease(errorDesc);
     }
 }
+
 - (void)addContactToAddressBook {
     CFErrorRef error = NULL;
     ABAddressBookRef iPhoneAddressBook = ABAddressBookCreate();
@@ -340,6 +350,7 @@
      {
      }] ;
 }
+
 - (void)getOtherUserProfile {
     [[ProfileService sharedManager] getOtherUserProfile:otherUserID success:^(id profileDataArray) {
         [myDelegate stopIndicator];
@@ -353,6 +364,7 @@
      {
      }] ;
 }
+
 - (void)updateReviewStatus {
     [[MatchesService sharedManager] updateReviewStatus:otherUserID reviewStatus:@"T" success:^(id responseObject) {
         [myDelegate stopIndicator];
@@ -361,8 +373,8 @@
      {
      }] ;
 }
+
 - (void)displayUserProfileData {
-    
     companyDescriptionLabel.translatesAutoresizingMaskIntoConstraints = YES;
     aboutCompanyView.translatesAutoresizingMaskIntoConstraints = YES;
     mainContainerView.translatesAutoresizingMaskIntoConstraints=YES;
@@ -381,7 +393,8 @@
     } failure:^(NSURLRequest *request, NSHTTPURLResponse *response, NSError *error) {
         
     }];
-    userNameLabel.text=[[userProfileDataArray objectAtIndex:0]userName];
+    userNameLabel.text=[NSString stringWithFormat:@"%@ %@",[[userProfileDataArray objectAtIndex:0]userName],[[userProfileDataArray objectAtIndex:0]userSurname]];
+   [UserDefaultManager setValue:[[userProfileDataArray objectAtIndex:0]userEmail] key:@"userEmail"];
     if ([[[userProfileDataArray objectAtIndex:0]userDesignation] isEqualToString:@""]) {
         userDesignationLabel.text=@"NA";
     }
@@ -441,28 +454,24 @@
         professionLabel.text=[[userProfileDataArray objectAtIndex:0]userProfession];
     }
      myDelegate.multiplePickerDic=[[NSMutableDictionary alloc]init];
-    interestedInArray=[[[userProfileDataArray objectAtIndex:0]userInterestedIn] componentsSeparatedByString:@", "];
+    interestedInArray=[[[userProfileDataArray objectAtIndex:0]userInterestedIn] componentsSeparatedByString:@","];
     if ([[[userProfileDataArray objectAtIndex:0]userInterestedIn] isEqualToString:@""]) {
         interestedInLabel.text=@"NA";
     }
     else {
-//        for (int i=0; i<[[[[userProfileDataArray objectAtIndex:0]userInterestedIn] componentsSeparatedByString:@","] count]; i++) {
-//            [interestedInArray addObject:[NSString stringWithFormat:@"%@_1",[[[[userProfileDataArray objectAtIndex:0]userInterestedIn] componentsSeparatedByString:@","] objectAtIndex:i]]];
-//        }
-//
         for (int k =0; k<interestedInArray.count; k++)
         {
-            [myDelegate.multiplePickerDic setObject:[NSNumber numberWithBool:YES] forKey:[interestedInArray objectAtIndex:k]];
+            [myDelegate.multiplePickerDic setObject:[NSNumber numberWithBool:YES] forKey:[[interestedInArray objectAtIndex:k]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
         }
+        //interestedInLabel.text=[interestedInArray componentsJoinedByString:@", "];
+
         interestedInLabel.text=[[userProfileDataArray objectAtIndex:0]userInterestedIn];
     }
-//    if (![[[userProfileDataArray objectAtIndex:0]userInterests] isEqualToString:@""]) {
-    interestsArray =[[[userProfileDataArray objectAtIndex:0]userInterests] componentsSeparatedByString:@", "];
+    interestsArray =[[[userProfileDataArray objectAtIndex:0]userInterests] componentsSeparatedByString:@","];
     count=(int)interestsArray.count;
-    //myDelegate.multiplePickerDic=[[NSMutableDictionary alloc]init];
     for (int k =0; k<interestsArray.count; k++)
     {
-        [myDelegate.multiplePickerDic setObject:[NSNumber numberWithBool:YES] forKey:[interestsArray objectAtIndex:k]];
+        [myDelegate.multiplePickerDic setObject:[NSNumber numberWithBool:YES] forKey:[[interestsArray objectAtIndex:k]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
     }
     if ((interestsArray.count%2)!=0) {
         count=count*42;
@@ -472,10 +481,6 @@
         count=(count-1)*42;
         interestAreaCollectionView.frame=CGRectMake(4, interestAreaCollectionView.frame.origin.y, bottomView.frame.size.width-8, count);
     }
-//    }
-//    else {
-//        interestsArray =[[[userProfileDataArray objectAtIndex:0]userInterests] componentsSeparatedByString:@", "];
-//    }
     [interestAreaCollectionView reloadData];
     float bottomHeight=professionView.frame.origin.y+professionView.frame.size.height+2+interestedInView.frame.size.height+22+count+30;
     bottomView.frame=CGRectMake(8, profileBackground.frame.origin.y+profileBackground.frame.size.height+15+mobileNumberHeading.frame.size.height+5+mobileNumberView.frame.size.height+8+aboutcompanyHeading.frame.size.height+5+aboutCompanyView.frame.size.height+8+addressHeadingLabel.frame.size.height+5+companyAddressView.frame.size.height+25, mainContainerView.frame.size.width-16,bottomHeight);
@@ -484,6 +489,7 @@
     mainContainerView.frame = CGRectMake(mainContainerView.frame.origin.x, mainContainerView.frame.origin.y, mainContainerView.frame.size.width, dynamicHeight);
     myProfileScrollView.contentSize = CGSizeMake(0,mainContainerView.frame.size.height+64);
 }
+
 -(CGRect)setDynamicHeight:(CGSize)rectSize textString:(NSString *)textString fontSize:(UIFont *)fontSize{
     CGRect textHeight = [textString
                          boundingRectWithSize:rectSize
@@ -494,6 +500,7 @@
 }
 
 #pragma mark - end
+
 #pragma mark - Collection view delegate methods
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
@@ -521,6 +528,7 @@
     return interestCell;
 }
 #pragma mark - end
+
 #pragma mark - MFMailcomposeviewcontroller delegate
 - (void)mailComposeController:(MFMailComposeViewController*)controller didFinishWithResult:(MFMailComposeResult)result error:(NSError*)error {
     switch (result)

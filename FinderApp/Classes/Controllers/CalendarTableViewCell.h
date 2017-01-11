@@ -17,5 +17,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *userImage;
 @property (weak, nonatomic) IBOutlet MyButton *userImageClickAction;
 @property (weak, nonatomic) IBOutlet UILabel *eventNameLabel;
+@property (weak, nonatomic) IBOutlet MyButton *editButton;
+@property (weak, nonatomic) IBOutlet MyButton *deleteButton;
 - (void)displayData :(EventDataModel *)eventDetails indexPath:(int)indexPath;
 @end
