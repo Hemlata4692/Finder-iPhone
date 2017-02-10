@@ -32,5 +32,9 @@
 - (void)addBadgeIcon;
 - (void)removeBadgeIconOnMoreTab;
 - (void)addBadgeIconOnMoreTab;
+- (void)addBadgeIconOnProximityTab;
+- (void)addBadgeIconOnMatchesTab;
+- (void)removeBadgeIconOnMatchesTab;
+- (void)removeBadgeIconOnProximityTab;
 @end
 

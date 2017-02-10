@@ -44,6 +44,7 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
     myDelegate.myView=@"ProximityAlertsViewController";
+    [myDelegate removeBadgeIconOnProximityTab];
     [myDelegate showIndicator];
     [self performSelector:@selector(getProximityAlerts) withObject:nil afterDelay:.1];
 }
