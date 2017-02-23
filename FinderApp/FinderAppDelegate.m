@@ -19,6 +19,7 @@
 #import "ConferenceService.h"
 #import "OtherUserProfileViewController.h"
 #import <UserNotifications/UserNotifications.h>
+#import "UncaughtExceptionHandler.h"
 
 #define SYSTEM_VERSION_GRATERTHAN_OR_EQUALTO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
@@ -37,7 +38,6 @@
 
 @implementation FinderAppDelegate
 @synthesize isLocation,locationManager;
-@synthesize multiplePickerDic;
 @synthesize alertDict;
 @synthesize tabBarView;
 @synthesize alertType;
@@ -73,13 +73,17 @@
 }
 #pragma mark - end
 
+- (void)installUncaughtExceptionHandler {
+    
+    InstallUncaughtExceptionHandler();
+}
+
 #pragma mark - Appdelegate methods
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:237.0/255.0 green:120.0/255.0 blue:0.0/255.0 alpha:1.0]];
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, [UIFont fontWithName:@"Roboto-Regular" size:19.0], NSFontAttributeName, nil]];
-    multiplePickerDic=[[NSMutableDictionary alloc]init];
     alertDict=[NSDictionary new];
     locationManager = [[CLLocationManager alloc] init];
     locationManager.delegate = self;
@@ -94,6 +98,11 @@
     self.deviceToken = @"";
     //google analytics tracking id
     //UA-80202935-1
+    
+    //Call crashlytics method
+    [self performSelector:@selector(installUncaughtExceptionHandler) withObject:nil afterDelay:0];
+
+    
     NSLog(@"%@",[UserDefaultManager getValue:@"PendingMessage"]);
     if(NULL==[UserDefaultManager getValue:@"PendingMessage"] || nil==[UserDefaultManager getValue:@"PendingMessage"])
     {

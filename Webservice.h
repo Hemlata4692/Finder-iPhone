@@ -8,11 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import "AFNetworking.h"
+//new AWS link
+#define BASE_URL                                  @"http://ec2-52-76-18-92.ap-southeast-1.compute.amazonaws.com/api"
 //client link
 //#define BASE_URL                                  @"http://ranosys.net/client/finder/api/"
 
 //testing link
-#define BASE_URL                                @"http://ranosys.net/client/finder/m3/api/"
+//#define BASE_URL                                @"http://ranosys.net/client/finder/m3/api/"
 
 @interface Webservice : NSObject
 @property(nonatomic,retain)AFHTTPRequestOperationManager *manager;
