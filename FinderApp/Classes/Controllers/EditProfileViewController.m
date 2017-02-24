@@ -8,18 +8,18 @@
 
 #import "EditProfileViewController.h"
 #import "ProfileService.h"
-#import "CYCustomMultiSelectPickerView.h"
 #import "ProfileDataModel.h"
 #import "MyProfileViewController.h"
+#import "CustomMultiPickerViewController.h"
 
-@interface EditProfileViewController ()<UITextFieldDelegate,BSKeyboardControlsDelegate,CYCustomMultiSelectPickerViewDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate>
+@interface EditProfileViewController ()<UITextFieldDelegate,BSKeyboardControlsDelegate,UIActionSheetDelegate,UIImagePickerControllerDelegate,UINavigationControllerDelegate,CustomMultiPickerViewControllerDelegate>
 {
     NSArray *textFieldArray;
-    CYCustomMultiSelectPickerView *multiPickerView;
+    CustomMultiPickerViewController *multiplePickerView;
     NSMutableArray *interestedAreaArray;
     NSMutableArray *interestedInArray;
     NSMutableArray *professionArray;
-    NSArray *selectedPickerArray, *interestedInSelectcedArray;
+    NSMutableArray *selectedPickerArray, *interestedInSelectcedArray;
     NSString* pickerType;
     NSMutableDictionary *interestedAreaDic, *lookingToFindDic;
     BOOL isInterestedInOtherSelected, isInterestedAreaOtherSelected , isProffessionOtherSelected;
@@ -118,12 +118,12 @@
     [self setKeyboardControls:[[BSKeyboardControls alloc] initWithFields:textFieldArray]];
     [self.keyboardControls setDelegate:self];
     [self addShadow];
-
+    
     interestedAreaArray=[[NSMutableArray alloc]init];
     interestedInArray=[[NSMutableArray alloc]init];
     professionArray=[[NSMutableArray alloc]init];
-    selectedPickerArray=[[NSArray alloc]init];
-    interestedInSelectcedArray=[[NSArray alloc]init];
+    selectedPickerArray=[[NSMutableArray alloc]init];
+    interestedInSelectcedArray=[[NSMutableArray alloc]init];
     interestedAreaDic=[[NSMutableDictionary alloc]init];
     lookingToFindDic=[[NSMutableDictionary alloc]init];
     userPickerView.translatesAutoresizingMaskIntoConstraints = YES;
@@ -171,7 +171,7 @@
         self.bottomView.frame=CGRectMake(5, 590+55, [[UIScreen mainScreen] bounds].size.width-10, (55*4));
         self.interestedAreaSeparator.hidden=NO;
     }
-     //interested in other textfield is shown and interested area other textfield is hidden
+    //interested in other textfield is shown and interested area other textfield is hidden
     else if (isFirstOtherShow && !isSecondOtherShow) {
         self.interestedInOtherView.frame=CGRectMake(0, 114, [[UIScreen mainScreen] bounds].size.width-10, 55);
         self.interestedInOtherView.hidden=NO;
@@ -182,7 +182,7 @@
         self.bottomView.frame=CGRectMake(5, 590+55, [[UIScreen mainScreen] bounds].size.width-10, (55*4));
         self.interestedAreaSeparator.hidden=YES;
     }
-     //both are shown
+    //both are shown
     else {
         self.interestedInOtherView.frame=CGRectMake(0, 114, [[UIScreen mainScreen] bounds].size.width-10, 55);
         self.interestedInOtherView.hidden=NO;
@@ -234,8 +234,13 @@
     professionTextField.text=[[profileArray objectAtIndex:0]userProfession];
     interestedInTextField.text=[[profileArray objectAtIndex:0]userInterestedIn];
     interestedAreaTextField.text=[[profileArray objectAtIndex:0]userInterests];
-    selectedPickerArray=[[[profileArray objectAtIndex:0]userInterests] componentsSeparatedByString:@","];
-    interestedInSelectcedArray=[[[profileArray objectAtIndex:0]userInterestedIn] componentsSeparatedByString:@","];
+    for (int i=0; i<[[[[profileArray objectAtIndex:0]userInterests] componentsSeparatedByString:@","] count]; i++) {
+        [selectedPickerArray addObject:[[[[[profileArray objectAtIndex:0]userInterests] componentsSeparatedByString:@","] objectAtIndex:i] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
+    }
+    
+    for (int i=0; i<[[[[profileArray objectAtIndex:0]userInterestedIn] componentsSeparatedByString:@","] count]; i++) {
+        [interestedInSelectcedArray addObject:[[[[[profileArray objectAtIndex:0]userInterestedIn] componentsSeparatedByString:@","] objectAtIndex:i] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
+    }
     designationTextField.text=[[profileArray objectAtIndex:0]userDesignation];
     linkedInTextField.text=[[profileArray objectAtIndex:0]userLinkedInLink];
     conferenceNameLabel.text=[[profileArray objectAtIndex:0]conferenceName];
@@ -244,7 +249,7 @@
 
 #pragma mark - IBActions
 - (IBAction)professionPickerAction:(id)sender {
-    [multiPickerView removeFromSuperview];
+    [self removeChildView:NO];
     [self.view endEditing:YES];
     [_keyboardControls.activeField resignFirstResponder];
     [self hidePickerWithAnimation];
@@ -262,6 +267,11 @@
     [UIView setAnimationDuration:0.3];
     [userPickerView setNeedsLayout];
     [userPickerView reloadAllComponents];
+    for (int i=0; i<professionArray.count; i++) {
+        if ([[professionArray objectAtIndex:i] isEqualToString:[[profileArray objectAtIndex:0]userProfession]]) {
+            [userPickerView selectRow:i inComponent:0 animated:YES];
+        }
+    }
     userPickerView.frame = CGRectMake(userPickerView.frame.origin.x, self.view.frame.size.height-(userPickerView.frame.size.height+44), self.view.frame.size.width, userPickerView.frame.size.height);
     pickerToolBar.frame = CGRectMake(pickerToolBar.frame.origin.x, userPickerView.frame.origin.y-44, self.view.frame.size.width, 44);
     [UIView commitAnimations];
@@ -271,12 +281,10 @@
     [_keyboardControls.activeField resignFirstResponder];
     professionButton.hidden=NO;
     [self.view endEditing:YES];
-    [self hidePickerWithAnimation];
-    for (UIView *view in self.view.subviews) {
-        if ([view isKindOfClass:[CYCustomMultiSelectPickerView class]])
-        {
-            [view removeFromSuperview];
-        }
+    bool flag=NO;
+    if (multiplePickerView) {
+        flag=YES;
+        [self removeChildView:NO];
     }
     if([[UIScreen mainScreen] bounds].size.height<568) {
         [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height+305) animated:YES];
@@ -287,34 +295,36 @@
     else {
         [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height-80) animated:YES];
     }
-    pickerType=@"2";
-    multiPickerView = [[CYCustomMultiSelectPickerView alloc] initWithFrame:CGRectMake(0,self.view.frame.size.height-265, self.view.frame.size.width, 182)];
-    multiPickerView.entriesArray = interestedInArray;
-    multiPickerView.entriesSelectedArray =interestedInSelectcedArray;
-    for (int k =0; k<interestedInArray.count; k++)
-    {
-        [lookingToFindDic setObject:[NSNumber numberWithBool:NO] forKey:[[interestedInArray objectAtIndex:k]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
+    
+    UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    multiplePickerView =[storyboard instantiateViewControllerWithIdentifier:@"CustomMultiPickerViewController"];
+    multiplePickerView.view.translatesAutoresizingMaskIntoConstraints=YES;
+    multiplePickerView.delegate=self;
+    multiplePickerView.viewHeight=270-44;
+    multiplePickerView.view.frame=CGRectMake(0, [[UIScreen mainScreen] bounds].size.height+64, [[UIScreen mainScreen] bounds].size.width, multiplePickerView.viewHeight);
+    multiplePickerView.view.backgroundColor = [UIColor clearColor];
+    multiplePickerView.pickertag=2;
+    multiplePickerView.pickerArrayData=[interestedInArray mutableCopy];
+    multiplePickerView.pickerDicData=[lookingToFindDic mutableCopy];
+    [self addChildViewController:multiplePickerView];
+    [self.view addSubview:multiplePickerView.view];
+    [multiplePickerView didMoveToParentViewController:self];
+    if (flag) {
+        [self addChildView:NO];
     }
-    for (int k =0; k<interestedInSelectcedArray.count; k++)
-    {
-        [lookingToFindDic setObject:[NSNumber numberWithBool:YES] forKey:[[interestedInSelectcedArray objectAtIndex:k]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
+    else {
+        [self addChildView:YES];
     }
-    myDelegate.multiplePickerDic=[lookingToFindDic mutableCopy];
-    multiPickerView.multiPickerDelegate = self;
-    [self.view addSubview:multiPickerView];
-    [multiPickerView pickerShow];
 }
 
 - (IBAction)interestedAreaPickerAction:(id)sender {
     [_keyboardControls.activeField resignFirstResponder];
     [self.view endEditing:YES];
     professionButton.hidden=NO;
-    [self hidePickerWithAnimation];
-    for (UIView *view in self.view.subviews) {
-        if ([view isKindOfClass:[CYCustomMultiSelectPickerView class]])
-        {
-            [view removeFromSuperview];
-        }
+    bool flag=NO;
+    if (multiplePickerView) {
+        flag=YES;
+        [self removeChildView:NO];
     }
     if (_interestedInOtherView.hidden==NO) {
         if([[UIScreen mainScreen] bounds].size.height<568) {
@@ -338,22 +348,25 @@
             [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height-10) animated:YES];
         }
     }
-    pickerType=@"3";
-    multiPickerView = [[CYCustomMultiSelectPickerView alloc] initWithFrame:CGRectMake(0,self.view.frame.size.height-265, self.view.frame.size.width, 182)];
-    multiPickerView.entriesArray = interestedAreaArray;
-    multiPickerView.entriesSelectedArray =selectedPickerArray;
-    for (int k =0; k<interestedAreaArray.count; k++)
-    {
-        [interestedAreaDic setObject:[NSNumber numberWithBool:NO] forKey:[[interestedAreaArray objectAtIndex:k]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
+    UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    multiplePickerView =[storyboard instantiateViewControllerWithIdentifier:@"CustomMultiPickerViewController"];
+    multiplePickerView.view.translatesAutoresizingMaskIntoConstraints=YES;
+    multiplePickerView.delegate=self;
+    multiplePickerView.viewHeight=270-44;
+    multiplePickerView.view.frame=CGRectMake(0, [[UIScreen mainScreen] bounds].size.height+64, [[UIScreen mainScreen] bounds].size.width, multiplePickerView.viewHeight);
+    multiplePickerView.view.backgroundColor = [UIColor clearColor];
+    multiplePickerView.pickertag=3;
+    multiplePickerView.pickerArrayData=[interestedAreaArray mutableCopy];
+    multiplePickerView.pickerDicData=[interestedAreaDic mutableCopy];
+    [self addChildViewController:multiplePickerView];
+    [self.view addSubview:multiplePickerView.view];
+    [multiplePickerView didMoveToParentViewController:self];
+    if (flag) {
+        [self addChildView:NO];
     }
-    for (int k =0; k<selectedPickerArray.count; k++)
-    {
-        [interestedAreaDic setObject:[NSNumber numberWithBool:YES] forKey:[[selectedPickerArray objectAtIndex:k]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
+    else {
+        [self addChildView:YES];
     }
-    myDelegate.multiplePickerDic=[interestedAreaDic mutableCopy];
-    multiPickerView.multiPickerDelegate = self;
-    [self.view addSubview:multiPickerView];
-    [multiPickerView pickerShow];
 }
 
 - (IBAction)selectImageButtonAction:(id)sender {
@@ -371,7 +384,7 @@
     [self.keyboardControls.activeField resignFirstResponder];
     [self.view endEditing:YES];
     [self hidePickerWithAnimation];
-    [self hidePicker];
+    [self removeChildView:YES];
     if([self performValidations]) {
         [myDelegate showIndicator];
         [self performSelector:@selector(editUserProfile) withObject:nil afterDelay:.1];
@@ -384,6 +397,11 @@
     if ([userNameTextField isEmpty] || [mobileNumberTextField isEmpty] || [lastNameTextField isEmpty] || [userEmailTextfield isEmpty]) {
         SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
         [alert showWarning:self title:@"Alert" subTitle:@"Please fill in all mandatory fields." closeButtonTitle:@"Done" duration:0.0f];
+        return NO;
+    }
+    else if (![userEmailTextfield isValidEmail]) {
+        SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
+        [alert showWarning:self title:@"Alert" subTitle:@"Please enter a valid email address." closeButtonTitle:@"Done" duration:0.0f];
         return NO;
     }
     else if ((self.interestedAreaOtherTextField.hidden==NO && [self.interestedAreaOtherTextField isEmpty]) || (self.interestedInOtherTextField.hidden==NO && [self.interestedInOtherTextField isEmpty])){
@@ -497,49 +515,6 @@
 }
 #pragma mark - end
 
-#pragma mark - ALPicker Delegate
-- (void)returnChoosedPickerString:(NSMutableArray *)selectedEntriesArr {
-    if ([pickerType isEqualToString:@"2"]) {
-        interestedInSelectcedArray=[selectedEntriesArr copy];
-        if ([selectedEntriesArr containsObject:@"Other"]) {
-            [selectedEntriesArr removeObject:@"Other"];
-            isInterestedInOtherSelected=YES;
-            [interestedInOtherTextField becomeFirstResponder];
-        }
-        else {
-            isInterestedInOtherSelected=NO;
-        }
-        [self viewCustomization:isInterestedInOtherSelected isSecondOtherShow:isInterestedAreaOtherSelected];
-        NSString *dataStr = [selectedEntriesArr componentsJoinedByString:@", "];
-        interestedInTextField.text=dataStr;
-    }
-    else if ([pickerType isEqualToString:@"3"]){
-         selectedPickerArray = [selectedEntriesArr copy];
-        if ([selectedEntriesArr containsObject:@"Other"]) {
-            [selectedEntriesArr removeObject:@"Other"];
-            isInterestedAreaOtherSelected=YES;
-            [interestedAreaOtherTextField becomeFirstResponder];
-        }
-        else {
-            isInterestedAreaOtherSelected=NO;
-        }
-        [self viewCustomization:isInterestedInOtherSelected isSecondOtherShow:isInterestedAreaOtherSelected];
-        NSString *dataStr = [selectedEntriesArr componentsJoinedByString:@", "];
-        interestedAreaTextField.text = dataStr;
-    }
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.3];
-    [UIView commitAnimations];
-}
-
-- (void)hidePicker {
-    pickerType=@"4";
-    [UIView beginAnimations:nil context:NULL];
-    [UIView setAnimationDuration:0.3];
-    [UIView commitAnimations];
-}
-#pragma mark - end
-
 #pragma mark - Keyboard controls delegate
 - (void)keyboardControls:(BSKeyboardControls *)keyboardControls selectedField:(UIView *)field inDirection:(BSKeyboardControlsDirection)direction{
     UIView *view;
@@ -631,6 +606,7 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [editProfileScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
     [textField resignFirstResponder];
+     professionButton.hidden=NO;
     return YES;
 }
 
@@ -664,10 +640,19 @@
         NSDictionary *tempDict=[responseObject objectForKey:@"details"];
         if ([[tempDict objectForKey:@"interestsList"] isEqualToString:@""]) {
             [interestedAreaArray addObject:@"Other"];
+            [interestedAreaDic setObject:[NSNumber numberWithBool:NO] forKey:[interestedInArray objectAtIndex:0]];
         }
         else {
             interestedAreaArray = [[[tempDict objectForKey:@"interestsList"] componentsSeparatedByString:@","] mutableCopy];
             [interestedAreaArray addObject:@"Other"];
+            for(int i=0; i<interestedAreaArray.count; i++) {
+                if ([selectedPickerArray containsObject:[interestedAreaArray objectAtIndex:i]]) {
+                    [interestedAreaDic setObject:[NSNumber numberWithBool:YES] forKey:[interestedAreaArray objectAtIndex:i]];
+                }
+                else {
+                    [interestedAreaDic setObject:[NSNumber numberWithBool:NO] forKey:[interestedAreaArray objectAtIndex:i]];
+                }
+            }
         }
         if ([[tempDict objectForKey:@"profession"] isEqualToString:@""]) {
             [professionArray addObject:@"Other"];
@@ -678,10 +663,19 @@
         }
         if ([[tempDict objectForKey:@"interestedInList"] isEqualToString:@""]) {
             [interestedInArray addObject:@"Other"];
+            [lookingToFindDic setObject:[NSNumber numberWithBool:NO] forKey:[interestedInArray objectAtIndex:0]];
         }
         else {
             interestedInArray=[[[tempDict objectForKey:@"interestedInList"] componentsSeparatedByString:@","] mutableCopy];
             [interestedInArray addObject:@"Other"];
+            for(int i=0; i<interestedInArray.count; i++) {
+                if ([interestedInSelectcedArray containsObject:[interestedInArray objectAtIndex:i]]) {
+                    [lookingToFindDic setObject:[NSNumber numberWithBool:YES] forKey:[interestedInArray objectAtIndex:i]];
+                }
+                else {
+                    [lookingToFindDic setObject:[NSNumber numberWithBool:NO] forKey:[interestedInArray objectAtIndex:i]];
+                }
+            }
         }
     }
                                             failure:^(NSError *error)
@@ -796,4 +790,99 @@
 }
 #pragma mark - end
 
+
+- (void)addChildView:(BOOL)isAnimated {
+    
+    if (isAnimated) {
+        [UIView animateWithDuration:0.2f animations:^{
+            multiplePickerView.view.frame=CGRectMake(0, [[UIScreen mainScreen] bounds].size.height-multiplePickerView.viewHeight-64-48, [[UIScreen mainScreen] bounds].size.width, multiplePickerView.viewHeight);
+        } completion:^(BOOL completed) {
+            
+            
+        }];
+    }
+    else {
+    multiplePickerView.view.frame=CGRectMake(0, [[UIScreen mainScreen] bounds].size.height-multiplePickerView.viewHeight-64-48, [[UIScreen mainScreen] bounds].size.width, multiplePickerView.viewHeight);
+    }
+}
+
+//- (void)showAnimationChildView {
+//    [UIView animateWithDuration:0.2f animations:^{
+//        multiplePickerView.view.frame=CGRectMake(0, [[UIScreen mainScreen] bounds].size.height-multiplePickerView.viewHeight-64-48, [[UIScreen mainScreen] bounds].size.width, multiplePickerView.viewHeight);
+//    } completion:^(BOOL completed) {
+//        
+//        
+//    }];
+//}
+
+- (void)removeChildView:(BOOL)isAnimated {
+    if (isAnimated) {
+        [UIView animateWithDuration:0.2f animations:^{
+            //To Frame
+            multiplePickerView.view.frame=CGRectMake(0, [[UIScreen mainScreen] bounds].size.height+64, [[UIScreen mainScreen] bounds].size.width, multiplePickerView.viewHeight);
+        } completion:^(BOOL completed) {
+            
+            [multiplePickerView.view removeFromSuperview]; // 2
+            [multiplePickerView removeFromParentViewController]; // 3
+            multiplePickerView=nil;
+        }];
+    }
+    else {
+    [multiplePickerView.view removeFromSuperview]; // 2
+    [multiplePickerView removeFromParentViewController]; // 3
+    multiplePickerView=nil;
+    }
+}
+
+//- (void)removeAnimationChildView {
+//    
+//    [UIView animateWithDuration:0.2f animations:^{
+//        //To Frame
+//        multiplePickerView.view.frame=CGRectMake(0, [[UIScreen mainScreen] bounds].size.height+64, [[UIScreen mainScreen] bounds].size.width, multiplePickerView.viewHeight);
+//    } completion:^(BOOL completed) {
+//        
+//        [self removeChildView];
+//    }];
+//}
+
+#pragma mark - end
+
+#pragma mark - Multiple picker delegate
+- (void)selectionDelegateAction:(NSMutableDictionary *)pickerDictData isOtherTrue:(BOOL)isOtherTrue selectedData:(NSMutableArray *)selectedData tag:(int)tag {
+    if (tag==2) {
+        interestedInSelectcedArray=[selectedData mutableCopy];
+        lookingToFindDic=[pickerDictData mutableCopy];
+        if (isOtherTrue) {
+            isInterestedInOtherSelected=YES;
+            [interestedInOtherTextField becomeFirstResponder];
+        }
+        else {
+            isInterestedInOtherSelected=NO;
+        }
+        [self viewCustomization:isInterestedInOtherSelected isSecondOtherShow:isInterestedAreaOtherSelected];
+        NSString *dataStr = [interestedInSelectcedArray componentsJoinedByString:@", "];
+        interestedInTextField.text=dataStr;
+    }
+    else if (tag==3){
+        selectedPickerArray=[selectedData mutableCopy];
+        interestedAreaDic=[pickerDictData mutableCopy];
+        if (isOtherTrue) {
+            isInterestedAreaOtherSelected=YES;
+            [interestedAreaOtherTextField becomeFirstResponder];
+        }
+        else {
+            isInterestedAreaOtherSelected=NO;
+        }
+        [self viewCustomization:isInterestedInOtherSelected isSecondOtherShow:isInterestedAreaOtherSelected];
+        NSString *dataStr = [selectedPickerArray componentsJoinedByString:@", "];
+        interestedAreaTextField.text=dataStr;
+    }
+    [self removeChildView:YES];
+}
+
+- (void)cancelDelegateMethod {
+    
+    [self removeChildView:YES];
+}
+#pragma mark - end
 @end
