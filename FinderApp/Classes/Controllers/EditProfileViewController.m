@@ -249,7 +249,7 @@
 
 #pragma mark - IBActions
 - (IBAction)professionPickerAction:(id)sender {
-    [self removeChildView];
+    [self removeChildView:NO];
     [self.view endEditing:YES];
     [_keyboardControls.activeField resignFirstResponder];
     [self hidePickerWithAnimation];
@@ -267,6 +267,11 @@
     [UIView setAnimationDuration:0.3];
     [userPickerView setNeedsLayout];
     [userPickerView reloadAllComponents];
+    for (int i=0; i<professionArray.count; i++) {
+        if ([[professionArray objectAtIndex:i] isEqualToString:[[profileArray objectAtIndex:0]userProfession]]) {
+            [userPickerView selectRow:i inComponent:0 animated:YES];
+        }
+    }
     userPickerView.frame = CGRectMake(userPickerView.frame.origin.x, self.view.frame.size.height-(userPickerView.frame.size.height+44), self.view.frame.size.width, userPickerView.frame.size.height);
     pickerToolBar.frame = CGRectMake(pickerToolBar.frame.origin.x, userPickerView.frame.origin.y-44, self.view.frame.size.width, 44);
     [UIView commitAnimations];
@@ -279,7 +284,7 @@
     bool flag=NO;
     if (multiplePickerView) {
         flag=YES;
-        [self removeChildView];
+        [self removeChildView:NO];
     }
     if([[UIScreen mainScreen] bounds].size.height<568) {
         [editProfileScrollView setContentOffset:CGPointMake(0, self.view.frame.size.height+305) animated:YES];
@@ -305,10 +310,10 @@
     [self.view addSubview:multiplePickerView.view];
     [multiplePickerView didMoveToParentViewController:self];
     if (flag) {
-        [self addChildView];
+        [self addChildView:NO];
     }
     else {
-        [self showAnimationChildView];
+        [self addChildView:YES];
     }
 }
 
@@ -319,7 +324,7 @@
     bool flag=NO;
     if (multiplePickerView) {
         flag=YES;
-        [self removeChildView];
+        [self removeChildView:NO];
     }
     if (_interestedInOtherView.hidden==NO) {
         if([[UIScreen mainScreen] bounds].size.height<568) {
@@ -357,10 +362,10 @@
     [self.view addSubview:multiplePickerView.view];
     [multiplePickerView didMoveToParentViewController:self];
     if (flag) {
-        [self addChildView];
+        [self addChildView:NO];
     }
     else {
-        [self showAnimationChildView];
+        [self addChildView:YES];
     }
 }
 
@@ -379,7 +384,7 @@
     [self.keyboardControls.activeField resignFirstResponder];
     [self.view endEditing:YES];
     [self hidePickerWithAnimation];
-    [self removeAnimationChildView];
+    [self removeChildView:YES];
     if([self performValidations]) {
         [myDelegate showIndicator];
         [self performSelector:@selector(editUserProfile) withObject:nil afterDelay:.1];
@@ -392,6 +397,11 @@
     if ([userNameTextField isEmpty] || [mobileNumberTextField isEmpty] || [lastNameTextField isEmpty] || [userEmailTextfield isEmpty]) {
         SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
         [alert showWarning:self title:@"Alert" subTitle:@"Please fill in all mandatory fields." closeButtonTitle:@"Done" duration:0.0f];
+        return NO;
+    }
+    else if (![userEmailTextfield isValidEmail]) {
+        SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
+        [alert showWarning:self title:@"Alert" subTitle:@"Please enter a valid email address." closeButtonTitle:@"Done" duration:0.0f];
         return NO;
     }
     else if ((self.interestedAreaOtherTextField.hidden==NO && [self.interestedAreaOtherTextField isEmpty]) || (self.interestedInOtherTextField.hidden==NO && [self.interestedInOtherTextField isEmpty])){
@@ -596,6 +606,7 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [editProfileScrollView setContentOffset:CGPointMake(0, 0) animated:YES];
     [textField resignFirstResponder];
+     professionButton.hidden=NO;
     return YES;
 }
 
@@ -780,39 +791,63 @@
 #pragma mark - end
 
 
-- (void)addChildView {
+- (void)addChildView:(BOOL)isAnimated {
     
+    if (isAnimated) {
+        [UIView animateWithDuration:0.2f animations:^{
+            multiplePickerView.view.frame=CGRectMake(0, [[UIScreen mainScreen] bounds].size.height-multiplePickerView.viewHeight-64-48, [[UIScreen mainScreen] bounds].size.width, multiplePickerView.viewHeight);
+        } completion:^(BOOL completed) {
+            
+            
+        }];
+    }
+    else {
     multiplePickerView.view.frame=CGRectMake(0, [[UIScreen mainScreen] bounds].size.height-multiplePickerView.viewHeight-64-48, [[UIScreen mainScreen] bounds].size.width, multiplePickerView.viewHeight);
+    }
 }
 
-- (void)showAnimationChildView {
-    [UIView animateWithDuration:0.2f animations:^{
-        multiplePickerView.view.frame=CGRectMake(0, [[UIScreen mainScreen] bounds].size.height-multiplePickerView.viewHeight-64-48, [[UIScreen mainScreen] bounds].size.width, multiplePickerView.viewHeight);
-    } completion:^(BOOL completed) {
-        
-        
-    }];
-}
+//- (void)showAnimationChildView {
+//    [UIView animateWithDuration:0.2f animations:^{
+//        multiplePickerView.view.frame=CGRectMake(0, [[UIScreen mainScreen] bounds].size.height-multiplePickerView.viewHeight-64-48, [[UIScreen mainScreen] bounds].size.width, multiplePickerView.viewHeight);
+//    } completion:^(BOOL completed) {
+//        
+//        
+//    }];
+//}
 
-- (void)removeChildView {
+- (void)removeChildView:(BOOL)isAnimated {
+    if (isAnimated) {
+        [UIView animateWithDuration:0.2f animations:^{
+            //To Frame
+            multiplePickerView.view.frame=CGRectMake(0, [[UIScreen mainScreen] bounds].size.height+64, [[UIScreen mainScreen] bounds].size.width, multiplePickerView.viewHeight);
+        } completion:^(BOOL completed) {
+            
+            [multiplePickerView.view removeFromSuperview]; // 2
+            [multiplePickerView removeFromParentViewController]; // 3
+            multiplePickerView=nil;
+        }];
+    }
+    else {
     [multiplePickerView.view removeFromSuperview]; // 2
     [multiplePickerView removeFromParentViewController]; // 3
     multiplePickerView=nil;
+    }
 }
 
-- (void)removeAnimationChildView {
-    
-    [UIView animateWithDuration:0.2f animations:^{
-        //To Frame
-        multiplePickerView.view.frame=CGRectMake(0, [[UIScreen mainScreen] bounds].size.height+64, [[UIScreen mainScreen] bounds].size.width, multiplePickerView.viewHeight);
-    } completion:^(BOOL completed) {
-        
-        [self removeChildView];
-    }];
-}
+//- (void)removeAnimationChildView {
+//    
+//    [UIView animateWithDuration:0.2f animations:^{
+//        //To Frame
+//        multiplePickerView.view.frame=CGRectMake(0, [[UIScreen mainScreen] bounds].size.height+64, [[UIScreen mainScreen] bounds].size.width, multiplePickerView.viewHeight);
+//    } completion:^(BOOL completed) {
+//        
+//        [self removeChildView];
+//    }];
+//}
 
 #pragma mark - end
 
+#pragma mark - Multiple picker delegate
 - (void)selectionDelegateAction:(NSMutableDictionary *)pickerDictData isOtherTrue:(BOOL)isOtherTrue selectedData:(NSMutableArray *)selectedData tag:(int)tag {
     if (tag==2) {
         interestedInSelectcedArray=[selectedData mutableCopy];
@@ -842,12 +877,12 @@
         NSString *dataStr = [selectedPickerArray componentsJoinedByString:@", "];
         interestedAreaTextField.text=dataStr;
     }
-    [self removeAnimationChildView];
+    [self removeChildView:YES];
 }
 
 - (void)cancelDelegateMethod {
     
-    [self removeAnimationChildView];
+    [self removeChildView:YES];
 }
-
+#pragma mark - end
 @end
