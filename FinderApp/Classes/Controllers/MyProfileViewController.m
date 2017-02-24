@@ -453,26 +453,15 @@
     else {
         professionLabel.text=[[userProfileDataArray objectAtIndex:0]userProfession];
     }
-     myDelegate.multiplePickerDic=[[NSMutableDictionary alloc]init];
     interestedInArray=[[[userProfileDataArray objectAtIndex:0]userInterestedIn] componentsSeparatedByString:@","];
     if ([[[userProfileDataArray objectAtIndex:0]userInterestedIn] isEqualToString:@""]) {
         interestedInLabel.text=@"NA";
     }
     else {
-        for (int k =0; k<interestedInArray.count; k++)
-        {
-            [myDelegate.multiplePickerDic setObject:[NSNumber numberWithBool:YES] forKey:[[interestedInArray objectAtIndex:k]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
-        }
-        //interestedInLabel.text=[interestedInArray componentsJoinedByString:@", "];
-
         interestedInLabel.text=[[userProfileDataArray objectAtIndex:0]userInterestedIn];
     }
     interestsArray =[[[userProfileDataArray objectAtIndex:0]userInterests] componentsSeparatedByString:@","];
     count=(int)interestsArray.count;
-    for (int k =0; k<interestsArray.count; k++)
-    {
-        [myDelegate.multiplePickerDic setObject:[NSNumber numberWithBool:YES] forKey:[[interestsArray objectAtIndex:k]stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
-    }
     if ((interestsArray.count%2)!=0) {
         count=count*42;
         interestAreaCollectionView.frame=CGRectMake(4, interestAreaCollectionView.frame.origin.y, bottomView.frame.size.width-8, count);

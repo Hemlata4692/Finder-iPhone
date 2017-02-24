@@ -17,7 +17,6 @@
 @property(nonatomic,retain)NSString * deviceToken;
 @property (nonatomic, strong)  CLLocationManager *locationManager;
 @property (nonatomic,retain) UITabBarController *tabBarView;
-@property (nonatomic, retain) NSMutableDictionary *multiplePickerDic;
 @property (nonatomic, strong) NSString *alertType;
 @property (nonatomic, strong) NSString *requestArrived;
 @property(nonatomic,retain) UINavigationController *currentNavigationController;
@@ -32,5 +31,9 @@
 - (void)addBadgeIcon;
 - (void)removeBadgeIconOnMoreTab;
 - (void)addBadgeIconOnMoreTab;
+- (void)addBadgeIconOnProximityTab;
+- (void)addBadgeIconOnMatchesTab;
+- (void)removeBadgeIconOnMatchesTab;
+- (void)removeBadgeIconOnProximityTab;
 @end
 

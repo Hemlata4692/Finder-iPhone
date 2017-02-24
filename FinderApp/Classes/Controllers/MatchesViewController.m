@@ -80,13 +80,13 @@
 }
 
 - (void)viewWillAppear:(BOOL)animated {
-    
     [super viewWillAppear:YES];
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     myDelegate.currentNavigationController=self.navigationController;
     matchesSegmentControl.selectedSegmentIndex=0;
     selectedSegment=0;
     myDelegate.myView=@"MatchesViewController";
+    [myDelegate removeBadgeIconOnMatchesTab];
     if ([myDelegate.alertType isEqualToString:@"2"]) {
         UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         PendingAppointmentViewController *profileView =[storyboard instantiateViewControllerWithIdentifier:@"PendingAppointmentViewController"];

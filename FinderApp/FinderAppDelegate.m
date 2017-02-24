@@ -19,6 +19,7 @@
 #import "ConferenceService.h"
 #import "OtherUserProfileViewController.h"
 #import <UserNotifications/UserNotifications.h>
+#import "UncaughtExceptionHandler.h"
 
 #define SYSTEM_VERSION_GRATERTHAN_OR_EQUALTO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
@@ -37,7 +38,6 @@
 
 @implementation FinderAppDelegate
 @synthesize isLocation,locationManager;
-@synthesize multiplePickerDic;
 @synthesize alertDict;
 @synthesize tabBarView;
 @synthesize alertType;
@@ -73,13 +73,17 @@
 }
 #pragma mark - end
 
+- (void)installUncaughtExceptionHandler {
+    
+    InstallUncaughtExceptionHandler();
+}
+
 #pragma mark - Appdelegate methods
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:237.0/255.0 green:120.0/255.0 blue:0.0/255.0 alpha:1.0]];
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, [UIFont fontWithName:@"Roboto-Regular" size:19.0], NSFontAttributeName, nil]];
-    multiplePickerDic=[[NSMutableDictionary alloc]init];
     alertDict=[NSDictionary new];
     locationManager = [[CLLocationManager alloc] init];
     locationManager.delegate = self;
@@ -94,6 +98,11 @@
     self.deviceToken = @"";
     //google analytics tracking id
     //UA-80202935-1
+    
+    //Call crashlytics method
+    [self performSelector:@selector(installUncaughtExceptionHandler) withObject:nil afterDelay:0];
+
+    
     NSLog(@"%@",[UserDefaultManager getValue:@"PendingMessage"]);
     if(NULL==[UserDefaultManager getValue:@"PendingMessage"] || nil==[UserDefaultManager getValue:@"PendingMessage"])
     {
@@ -257,6 +266,12 @@
     {
         if ([[alertDict objectForKey:@"type"] isEqualToString:@"1"]) {
             alert = [[MyAlert alloc] initWithTitle:@"New Match Request" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"View" acceptBtnText:@"Accept" declineBtnText:@"Decline" isTextField:NO];
+            if (![myDelegate.myView isEqualToString:@"MatchesViewController"]) {
+                [self addBadgeIconOnMatchesTab];
+            }
+            else {
+                [self removeBadgeIconOnMatchesTab];
+            }
         }
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"2"]) {
             alert = [[MyAlert alloc] initWithTitle:@"New Meeting Request" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Accept" acceptBtnText:@"" declineBtnText:@"Decline" isTextField:YES];
@@ -289,6 +304,12 @@
         }
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"8"]) {
             alert = [[MyAlert alloc] initWithTitle:@"Proximity Alerts" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel" isTextField:NO];
+            if (![myDelegate.myView isEqualToString:@"ProximityAlertsViewController"]) {
+                [self addBadgeIconOnProximityTab];
+            }
+            else {
+                [self removeBadgeIconOnProximityTab];
+            }
         }
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"9"]) {
             if ([myDelegate.myView isEqualToString:@"PersonalMessageView"]) {
@@ -305,6 +326,7 @@
     }
     else {
         if ([[alertDict objectForKey:@"type"] isEqualToString:@"1"]) {
+            [self addBadgeIconOnMatchesTab];
         }
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"2"]) {
             alertType=@"2";
@@ -314,6 +336,7 @@
         }
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"8"]) {
             alertType=@"8";
+            [self addBadgeIconOnProximityTab];
             UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
             MatchesViewController * objView=[storyboard instantiateViewControllerWithIdentifier:@"tabBar"];
             self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -478,25 +501,7 @@
     [myDelegate.tabBarView.tabBar addSubview:notificationBadge];
     [[UIApplication sharedApplication].keyWindow addSubview:notificationBadge];
 }
-#pragma mark - end
 
-#pragma mark - Remove badge icon
-- (void)removeBadgeIconLastTab {
-    notificationBadge.hidden=YES;
-    notificationBadge.frame = CGRectMake((([UIScreen mainScreen].bounds.size.width/5))+45 , ([UIScreen mainScreen].bounds.size.height-40), 0, 0);
-    for (UILabel *subview in [UIApplication sharedApplication].keyWindow.subviews)
-    {
-        if ([subview isKindOfClass:[UILabel class]])
-        {
-            if (subview.tag == 3365) {
-                [subview removeFromSuperview];
-            }
-        }
-    }
-}
-#pragma mark - end
-
-#pragma mark - Add badge icon
 - (void)addBadgeIconOnMoreTab {
     for (UILabel *subview in [UIApplication sharedApplication].keyWindow.subviews)
     {
@@ -518,9 +523,76 @@
     [UserDefaultManager setValue:@"1" key:@"PendingMessage"];
     [[UIApplication sharedApplication].keyWindow addSubview:notificationBadge];
 }
+
+- (void)addBadgeIconOnMatchesTab {
+    for (UILabel *subview in [UIApplication sharedApplication].keyWindow.subviews)
+    {
+        if ([subview isKindOfClass:[UILabel class]])
+        {
+            if (subview.tag == 3366) {
+                [subview removeFromSuperview];
+            }
+        }
+    }
+    notificationBadge = [[UILabel alloc] init];
+    notificationBadge.hidden=NO;
+    if ([[UIScreen mainScreen] bounds].size.height>667) {
+        notificationBadge.frame = CGRectMake((([UIScreen mainScreen].bounds.size.width/5)-30) , ([UIScreen mainScreen].bounds.size.height-40), 8, 8);
+    }
+    else {
+        notificationBadge.frame = CGRectMake((([UIScreen mainScreen].bounds.size.width/5)-25) , ([UIScreen mainScreen].bounds.size.height-40), 8, 8);
+    }
+    notificationBadge.backgroundColor = [UIColor colorWithRed:35.0/255.0 green:83.0/255.0 blue:113.0/255.0 alpha:1.0];
+    notificationBadge.layer.cornerRadius = 5;
+    notificationBadge.layer.masksToBounds = YES;
+    notificationBadge.tag = 3366;
+    [myDelegate.tabBarView.tabBar addSubview:notificationBadge];
+    [[UIApplication sharedApplication].keyWindow addSubview:notificationBadge];
+}
+
+- (void)addBadgeIconOnProximityTab {
+    for (UILabel *subview in [UIApplication sharedApplication].keyWindow.subviews)
+    {
+        if ([subview isKindOfClass:[UILabel class]])
+        {
+            if (subview.tag == 3368) {
+                [subview removeFromSuperview];
+            }
+        }
+    }
+    notificationBadge = [[UILabel alloc] init];
+    notificationBadge.hidden=NO;
+    if ([[UIScreen mainScreen] bounds].size.height>667) {
+       notificationBadge.frame = CGRectMake((([UIScreen mainScreen].bounds.size.width/5)*3-30) , ([UIScreen mainScreen].bounds.size.height-40), 8, 8);
+    }
+    else {
+        notificationBadge.frame = CGRectMake((([UIScreen mainScreen].bounds.size.width/5)*3-25) , ([UIScreen mainScreen].bounds.size.height-40), 8, 8);
+    }
+    notificationBadge.backgroundColor = [UIColor colorWithRed:35.0/255.0 green:83.0/255.0 blue:113.0/255.0 alpha:1.0];
+    notificationBadge.layer.cornerRadius = 5;
+    notificationBadge.layer.masksToBounds = YES;
+    notificationBadge.tag = 3368;
+    [myDelegate.tabBarView.tabBar addSubview:notificationBadge];
+    [[UIApplication sharedApplication].keyWindow addSubview:notificationBadge];
+}
+
 #pragma mark - end
 
 #pragma mark - Remove badge icon
+- (void)removeBadgeIconLastTab {
+    notificationBadge.hidden=YES;
+    notificationBadge.frame = CGRectMake((([UIScreen mainScreen].bounds.size.width/5))+45 , ([UIScreen mainScreen].bounds.size.height-40), 0, 0);
+    for (UILabel *subview in [UIApplication sharedApplication].keyWindow.subviews)
+    {
+        if ([subview isKindOfClass:[UILabel class]])
+        {
+            if (subview.tag == 3365) {
+                [subview removeFromSuperview];
+            }
+        }
+    }
+}
+
 - (void)removeBadgeIconOnMoreTab
 {
     notificationBadge.hidden=YES;
@@ -535,6 +607,45 @@
         }
     }
     [UserDefaultManager setValue:@"0" key:@"PendingMessage"];
+}
+
+- (void)removeBadgeIconOnMatchesTab {
+    notificationBadge.hidden=YES;
+    if ([[UIScreen mainScreen] bounds].size.height>667) {
+        notificationBadge.frame = CGRectMake((([UIScreen mainScreen].bounds.size.width/5)-30) , ([UIScreen mainScreen].bounds.size.height-40), 0, 0);
+    }
+    else {
+        notificationBadge.frame = CGRectMake((([UIScreen mainScreen].bounds.size.width/5)-25) , ([UIScreen mainScreen].bounds.size.height-40), 0, 0);
+    }
+
+    for (UILabel *subview in [UIApplication sharedApplication].keyWindow.subviews)
+    {
+        if ([subview isKindOfClass:[UILabel class]])
+        {
+            if (subview.tag == 3366) {
+                [subview removeFromSuperview];
+            }
+        }
+    }
+}
+
+- (void)removeBadgeIconOnProximityTab {
+    notificationBadge.hidden=YES;
+    if ([[UIScreen mainScreen] bounds].size.height>667) {
+        notificationBadge.frame = CGRectMake((([UIScreen mainScreen].bounds.size.width/5)*3-30) , ([UIScreen mainScreen].bounds.size.height-40), 0, 0);
+    }
+    else {
+        notificationBadge.frame = CGRectMake((([UIScreen mainScreen].bounds.size.width/5)*3-25) , ([UIScreen mainScreen].bounds.size.height-40), 0, 0);
+    }
+    for (UILabel *subview in [UIApplication sharedApplication].keyWindow.subviews)
+    {
+        if ([subview isKindOfClass:[UILabel class]])
+        {
+            if (subview.tag == 3368) {
+                [subview removeFromSuperview];
+            }
+        }
+    }
 }
 #pragma mark - end
 @end
