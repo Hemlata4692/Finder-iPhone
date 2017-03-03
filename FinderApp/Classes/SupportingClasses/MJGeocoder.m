@@ -80,7 +80,6 @@
     [receivedData setLength:0];
 }
 
-
 /*
  *  Append received data
  */

@@ -118,12 +118,12 @@
                         notification.timeZone = [NSTimeZone defaultTimeZone];
                         notification.soundName = UILocalNotificationDefaultSoundName;
                         notification.applicationIconBadgeNumber = 0;
-                        NSDictionary *infoDict = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%@ %@ %@ %@",@"You have a",data.eventName,@"at",startDate] forKey:@"Calender"];
+                        NSDictionary *infoDict = [NSDictionary dictionaryWithObject:data.eventId forKey:@"appointmentID"];
                         notification.userInfo = infoDict;
                         //check if notification is already set or not
                         NSArray *arrayOfLocalNotifications = [[UIApplication sharedApplication] scheduledLocalNotifications];
                         for (UILocalNotification *localNotification in arrayOfLocalNotifications) {
-                            if ([localNotification.userInfo isEqualToDictionary:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%@ %@ %@ %@",@"You have a",data.eventName,@"at",startDate] forKey:@"Calender"]]) {
+                            if ([localNotification.userInfo isEqualToDictionary:[NSDictionary dictionaryWithObject:data.eventId forKey:@"appointmentID"]]) {
                                 NSLog(@"the notification this is canceld is %@", localNotification.alertBody);
                                 [[UIApplication sharedApplication] cancelLocalNotification:localNotification] ; // delete the notification from the system
                             }
@@ -145,13 +145,13 @@
                         notification.timeZone = [NSTimeZone defaultTimeZone];
                         notification.soundName = UILocalNotificationDefaultSoundName;
                         notification.applicationIconBadgeNumber = 0;
-                        NSDictionary *infoDict = [NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%@ %@ %@ %@",@"You have a",data.eventName,@"at",startDate] forKey:@"Calender"];
+                        NSDictionary *infoDict = [NSDictionary dictionaryWithObject:data.eventId forKey:@"appointmentID"];
                         notification.userInfo = infoDict;
                         //check if notification is already set or not
                         NSArray *arrayOfLocalNotifications = [[UIApplication sharedApplication] scheduledLocalNotifications];
                         for (UILocalNotification *localNotification in arrayOfLocalNotifications) {
-                            if ([localNotification.userInfo isEqualToDictionary:[NSDictionary dictionaryWithObject:[NSString stringWithFormat:@"%@ %@ %@ %@",@"You have a",data.eventName,@"at",startDate] forKey:@"Calender"]]) {
-                                NSLog(@"the notification this is canceld is %@", localNotification.alertBody);
+                            if ([localNotification.userInfo isEqualToDictionary:[NSDictionary dictionaryWithObject:data.eventId forKey:@"appointmentID"]]) {
+                                NSLog(@"the notification this is cancel is %@", localNotification.alertBody);
                                 [[UIApplication sharedApplication] cancelLocalNotification:localNotification] ; // delete the notification from the system
                             }
                         }
@@ -184,6 +184,14 @@
 
 - (void)deleteScheduledMeeting:(NSString *)appointmentId {
     [[ConferenceService sharedManager] deleteScheduledMeeting:appointmentId success:^(id responseObject) {
+        //check if notification is already set or not
+        NSArray *arrayOfLocalNotifications = [[UIApplication sharedApplication] scheduledLocalNotifications];
+        for (UILocalNotification *localNotification in arrayOfLocalNotifications) {
+            if ([localNotification.userInfo isEqualToDictionary:[NSDictionary dictionaryWithObject:appointmentId forKey:@"appointmentID"]]) {
+                NSLog(@"the notification this is canceld is %@", localNotification.alertBody);
+                [[UIApplication sharedApplication] cancelLocalNotification:localNotification] ; // delete the notification from the system
+            }
+        }
         [self getCalendarDetails];
     }
                                                       failure:^(NSError *error)

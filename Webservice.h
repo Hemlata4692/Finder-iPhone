@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "AFNetworking.h"
 //new AWS link
-#define BASE_URL                                  @"http://ec2-52-76-18-92.ap-southeast-1.compute.amazonaws.com/api"
+#define BASE_URL                                  @"http://finderapp.com.sg/backend/api/"
 //client link
 //#define BASE_URL                                  @"http://ranosys.net/client/finder/api/"
 

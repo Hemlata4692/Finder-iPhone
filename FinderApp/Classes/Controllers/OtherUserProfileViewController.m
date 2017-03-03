@@ -140,7 +140,6 @@
     [self performSelector:@selector(sendCancelMatchesRequest) withObject:nil afterDelay:.1];
 }
 - (IBAction)acceptrequestButtonAction:(id)sender {
-    
     acceptRequest=@"T";
     [myDelegate showIndicator];
     [self performSelector:@selector(acceptDeclineRequest) withObject:nil afterDelay:.1];
@@ -180,10 +179,12 @@
     [[MatchesService sharedManager] sendCancelMatchRequest:otherUserId sendRequest:isRequestSent success:^(id responseObject) {
         [myDelegate stopIndicator];
         if ([isRequestSent isEqualToString:@"T"]) {
+            sendRequestButton.enabled=false;
             [sendRequestButton setTitle:@"Request Sent" forState:UIControlStateNormal];
             
         }
-        else{
+        else {
+            sendRequestButton.enabled=true;
             [sendRequestButton setTitle:@"Send Request" forState:UIControlStateNormal];
             isRequestSent=@"T";
         }
