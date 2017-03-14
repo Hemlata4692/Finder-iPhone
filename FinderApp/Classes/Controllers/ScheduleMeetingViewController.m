@@ -204,6 +204,7 @@
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];
     timePicker.datePickerMode = UIDatePickerModeTime;
+    [timePicker setDate:datePicker.date];
     [timePicker setMinimumDate:[NSDate date]];
     if([[UIScreen mainScreen] bounds].size.height<568) {
         [scheduleMeetingScrollView setContentOffset:CGPointMake(0, scheduleMeetingScrollView.frame.origin.y+80) animated:YES];
