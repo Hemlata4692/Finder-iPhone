@@ -141,6 +141,7 @@
     mapView.longitude=longitude;
     [self.navigationController pushViewController:mapView animated:YES];
 }
+
 - (void)geocoder:(MJGeocoder *)geocoder didFailWithError:(NSError *)error {
     if([error code] == 1) {
         UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Error" message:@"You have entered an invalid location." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];

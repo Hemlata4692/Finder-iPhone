@@ -640,7 +640,7 @@
         NSDictionary *tempDict=[responseObject objectForKey:@"details"];
         if ([[tempDict objectForKey:@"interestsList"] isEqualToString:@""]) {
             [interestedAreaArray addObject:@"Other"];
-            [interestedAreaDic setObject:[NSNumber numberWithBool:NO] forKey:[interestedInArray objectAtIndex:0]];
+            [interestedAreaDic setObject:[NSNumber numberWithBool:NO] forKey:[interestedAreaArray objectAtIndex:0]];
         }
         else {
             interestedAreaArray = [[[tempDict objectForKey:@"interestsList"] componentsSeparatedByString:@","] mutableCopy];

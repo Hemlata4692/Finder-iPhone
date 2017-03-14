@@ -193,15 +193,18 @@
 
 #pragma mark - Location update in background
 - (void)locationUpdate {
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"userId"]!=nil) {
-        [[UserService sharedManager] locationUpdate:latitude longitude:longitude proximityRange:[[UserDefaultManager getValue:@"switchStatusDict"] objectForKey:@"02"] success:^(id responseObject)
-         {
-             NSLog(@"webservice did fire");
-             [self startTrackingBg];
-         } failure:^(NSError *error) {
-    
-         }] ;
+    if (longitude!=nil && latitude!=nil && [[UserDefaultManager getValue:@"switchStatusDict"] objectForKey:@"02"]!=nil) {
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"userId"]!=nil) {
+            [[UserService sharedManager] locationUpdate:latitude longitude:longitude proximityRange:[[UserDefaultManager getValue:@"switchStatusDict"] objectForKey:@"02"] success:^(id responseObject)
+             {
+                 NSLog(@"webservice did fire");
+                 [self startTrackingBg];
+             } failure:^(NSError *error) {
+                 
+             }] ;
+        }
     }
+   
 }
 
 - (void) startTrackingBg {
