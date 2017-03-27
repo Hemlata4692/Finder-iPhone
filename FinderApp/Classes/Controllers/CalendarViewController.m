@@ -110,7 +110,6 @@
                     NSComparisonResult result;
                     result = [[NSDate date] compare:startDate]; // comparing two dates
                     if(result==NSOrderedAscending){
-                        NSLog(@"date1 is less than date2");
                         NSTimeInterval notiInterval =[startDate timeIntervalSinceDate:[NSDate date]] -15*60;
                         UILocalNotification *notification = [[UILocalNotification alloc] init];
                         notification.fireDate = [NSDate dateWithTimeIntervalSinceNow:notiInterval];
@@ -124,7 +123,6 @@
                         NSArray *arrayOfLocalNotifications = [[UIApplication sharedApplication] scheduledLocalNotifications];
                         for (UILocalNotification *localNotification in arrayOfLocalNotifications) {
                             if ([localNotification.userInfo isEqualToDictionary:[NSDictionary dictionaryWithObject:data.eventId forKey:@"appointmentID"]]) {
-                                NSLog(@"the notification this is canceld is %@", localNotification.alertBody);
                                 [[UIApplication sharedApplication] cancelLocalNotification:localNotification] ; // delete the notification from the system
                             }
                         }
@@ -134,7 +132,6 @@
                         [[UIApplication sharedApplication] scheduleLocalNotification:notification];
                     }
                     else if(result==NSOrderedDescending) {
-                        NSLog(@"date1 is greater than date2");
                     }
                     else {
                         //  equal
@@ -151,7 +148,6 @@
                         NSArray *arrayOfLocalNotifications = [[UIApplication sharedApplication] scheduledLocalNotifications];
                         for (UILocalNotification *localNotification in arrayOfLocalNotifications) {
                             if ([localNotification.userInfo isEqualToDictionary:[NSDictionary dictionaryWithObject:data.eventId forKey:@"appointmentID"]]) {
-                                NSLog(@"the notification this is cancel is %@", localNotification.alertBody);
                                 [[UIApplication sharedApplication] cancelLocalNotification:localNotification] ; // delete the notification from the system
                             }
                         }
@@ -188,7 +184,6 @@
         NSArray *arrayOfLocalNotifications = [[UIApplication sharedApplication] scheduledLocalNotifications];
         for (UILocalNotification *localNotification in arrayOfLocalNotifications) {
             if ([localNotification.userInfo isEqualToDictionary:[NSDictionary dictionaryWithObject:appointmentId forKey:@"appointmentID"]]) {
-                NSLog(@"the notification this is canceld is %@", localNotification.alertBody);
                 [[UIApplication sharedApplication] cancelLocalNotification:localNotification] ; // delete the notification from the system
             }
         }

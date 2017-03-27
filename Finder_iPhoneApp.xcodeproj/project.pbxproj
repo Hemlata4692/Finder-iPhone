@@ -217,7 +217,6 @@
 		B7414F901CCA4715009FE9CE /* CustomAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAlert.m; sourceTree = "<group>"; };
 		B7414F911CCA4715009FE9CE /* CustomAlert.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomAlert.xib; sourceTree = "<group>"; };
 		B749267A1DF7DCB8006ABB79 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
-		B749267C1DF801A0006ABB79 /* Finder_iPhoneApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Finder_iPhoneApp.entitlements; sourceTree = "<group>"; };
 		B74B36CE1D1B8EBA006CD64B /* UIView+Toast.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+Toast.h"; sourceTree = "<group>"; };
 		B74B36CF1D1B8EBA006CD64B /* UIView+Toast.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+Toast.m"; sourceTree = "<group>"; };
 		B74B44531CFD60DD00275CC9 /* EventDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EventDataModel.h; sourceTree = SOURCE_ROOT; };
@@ -323,6 +322,7 @@
 		B7C018CC1CD0B7E0006773CB /* NewMessageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewMessageViewController.m; sourceTree = "<group>"; };
 		B7C018CF1CD0C7A4006773CB /* ScheduleMeetingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ScheduleMeetingViewController.h; sourceTree = "<group>"; };
 		B7C018D01CD0C7A4006773CB /* ScheduleMeetingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ScheduleMeetingViewController.m; sourceTree = "<group>"; };
+		B7D7DBDF1E88ECDC0011A9A8 /* Finder_iPhoneApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Finder_iPhoneApp.entitlements; sourceTree = "<group>"; };
 		B7DCE4511CBB9E5D0063FF72 /* Webservice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Webservice.h; sourceTree = SOURCE_ROOT; };
 		B7DCE4521CBB9E5D0063FF72 /* Webservice.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Webservice.m; sourceTree = SOURCE_ROOT; };
 		B7DDCF551D2FB12300FD9D0F /* MessagesDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessagesDataModel.h; sourceTree = SOURCE_ROOT; };
@@ -885,7 +885,7 @@
 		B7A8DD5C1CAE2BF2007F56B6 = {
 			isa = PBXGroup;
 			children = (
-				B749267C1DF801A0006ABB79 /* Finder_iPhoneApp.entitlements */,
+				B7D7DBDF1E88ECDC0011A9A8 /* Finder_iPhoneApp.entitlements */,
 				B7A8DD671CAE2BF2007F56B6 /* FinderApp */,
 				B7A8DD661CAE2BF2007F56B6 /* Products */,
 				589A5FC10A15A4B4361E0559 /* Pods */,
@@ -1553,10 +1553,13 @@
 				TargetAttributes = {
 					B7A8DD641CAE2BF2007F56B6 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = M8A7BYS443;
+						DevelopmentTeam = XL3XP5B936;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
+							};
+							com.apple.Maps.iOS = {
+								enabled = 0;
 							};
 							com.apple.Push = {
 								enabled = 1;
@@ -1818,11 +1821,11 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Ranosys Technologies Pte Ltd";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ranosys Technologies Pte Ltd";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Finderapp Pte Limited (XL3XP5B936)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Finderapp Pte Limited (XL3XP5B936)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
-				DEVELOPMENT_TEAM = M8A7BYS443;
+				DEVELOPMENT_TEAM = XL3XP5B936;
 				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -1844,7 +1847,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "028193af-f43c-49b1-95f9-b51972145e61";
+				PROVISIONING_PROFILE = "a609c4b8-7b5d-4586-ac15-f4713406cab6";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1868,11 +1871,11 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Ranosys Technologies Pte Ltd";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ranosys Technologies Pte Ltd";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Finderapp Pte Limited (XL3XP5B936)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Finderapp Pte Limited (XL3XP5B936)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				DEVELOPMENT_TEAM = M8A7BYS443;
+				DEVELOPMENT_TEAM = XL3XP5B936;
 				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1887,7 +1890,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "028193af-f43c-49b1-95f9-b51972145e61";
+				PROVISIONING_PROFILE = "a609c4b8-7b5d-4586-ac15-f4713406cab6";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1900,19 +1903,19 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_ENTITLEMENTS = Finder_iPhoneApp.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Ranosys Technologies Pte Ltd";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ranosys Technologies Pte Ltd";
-				DEVELOPMENT_TEAM = M8A7BYS443;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Finderapp Pte Limited (XL3XP5B936)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Finderapp Pte Limited (XL3XP5B936)";
+				DEVELOPMENT_TEAM = XL3XP5B936;
 				ENABLE_BITCODE = NO;
 				GCC_NO_COMMON_BLOCKS = NO;
 				GCC_PREFIX_HEADER = "FinderApp/Supporting Files/Finder-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/FinderApp/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ranosys.finder;
+				PRODUCT_BUNDLE_IDENTIFIER = com.finder.finderapp;
 				PRODUCT_NAME = Finder_iPhoneApp;
-				PROVISIONING_PROFILE = "028193af-f43c-49b1-95f9-b51972145e61";
-				PROVISIONING_PROFILE_SPECIFIER = Finder_iPhone_distribution_profile_18Oct2016;
+				PROVISIONING_PROFILE = "a609c4b8-7b5d-4586-ac15-f4713406cab6";
+				PROVISIONING_PROFILE_SPECIFIER = Finder_iPhone_ap_appstore_27March_2017;
 			};
 			name = Debug;
 		};
@@ -1923,19 +1926,19 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = "Brand Assets";
 				CODE_SIGN_ENTITLEMENTS = Finder_iPhoneApp.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Ranosys Technologies Pte Ltd";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ranosys Technologies Pte Ltd";
-				DEVELOPMENT_TEAM = M8A7BYS443;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Finderapp Pte Limited (XL3XP5B936)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Finderapp Pte Limited (XL3XP5B936)";
+				DEVELOPMENT_TEAM = XL3XP5B936;
 				ENABLE_BITCODE = NO;
 				GCC_NO_COMMON_BLOCKS = NO;
 				GCC_PREFIX_HEADER = "FinderApp/Supporting Files/Finder-Prefix.pch";
 				INFOPLIST_FILE = "$(SRCROOT)/FinderApp/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.ranosys.finder;
+				PRODUCT_BUNDLE_IDENTIFIER = com.finder.finderapp;
 				PRODUCT_NAME = Finder_iPhoneApp;
-				PROVISIONING_PROFILE = "028193af-f43c-49b1-95f9-b51972145e61";
-				PROVISIONING_PROFILE_SPECIFIER = Finder_iPhone_distribution_profile_18Oct2016;
+				PROVISIONING_PROFILE = "a609c4b8-7b5d-4586-ac15-f4713406cab6";
+				PROVISIONING_PROFILE_SPECIFIER = Finder_iPhone_ap_appstore_27March_2017;
 			};
 			name = Release;
 		};

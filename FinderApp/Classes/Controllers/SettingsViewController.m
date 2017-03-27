@@ -169,7 +169,6 @@
 - (IBAction)switchViewChanged:(MyButton *)switchView {
     if (switchView.sectionTag==0) {
         if ( switchView.Tag==0) {
-            NSLog(@"Value 0: %i", switchView.on);
             if (switchView.on==1) {
                 switchView.on=0;
                 switchStatus=@"False";
@@ -186,7 +185,6 @@
             }
         }
         else if (switchView.Tag==1) {
-            NSLog(@"Value 1: %i", switchView.on);
             if (switchView.on==1) {
                 switchView.on=0;
                 switchStatus=@"False";
@@ -205,7 +203,6 @@
     }
     else {
         if (switchView.Tag==0) {
-            NSLog(@"Value 1: %i", switchView.on);
             if (switchView.on==1) {
                 switchView.on=0;
                 switchStatus=@"False";
@@ -222,7 +219,6 @@
             }
         }
         if (switchView.Tag==1) {
-            NSLog(@"Value 1: %i", switchView.on);
             if (switchView.on==1) {
                 switchView.on=0;
                 switchStatus=@"False";
@@ -239,7 +235,6 @@
             }
         }
         if (switchView.Tag==2) {
-            NSLog(@"Value 1: %i", switchView.on);
             if (switchView.on==1) {
                 switchView.on=0;
                 switchStatus=@"False";
@@ -256,7 +251,6 @@
             }
         }
         if (switchView.Tag==3) {
-            NSLog(@"Value 1: %i", switchView.on);
             if (switchView.on==1) {
                 switchView.on=0;
                 switchStatus=@"False";
@@ -273,7 +267,6 @@
             }
         }
         if (switchView.Tag==4) {
-            NSLog(@"Value 1: %i", switchView.on);
             if (switchView.on==1) {
                 switchView.on=0;
                 switchStatus=@"False";
