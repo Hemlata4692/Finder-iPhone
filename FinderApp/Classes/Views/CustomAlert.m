@@ -24,8 +24,6 @@
         
         [[NSBundle mainBundle] loadNibNamed:@"CustomAlert" owner:self options:nil];
         mainView.frame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, [[UIScreen mainScreen] bounds].size.height);
-        NSLog(@"%f",self.mainView.frame.size.height);
-        
         backView.translatesAutoresizingMaskIntoConstraints = YES;
         myAlertBackView.translatesAutoresizingMaskIntoConstraints = YES;
         title.translatesAutoresizingMaskIntoConstraints = YES;

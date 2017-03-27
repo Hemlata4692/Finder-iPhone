@@ -39,10 +39,8 @@
 - (void)getInterestList:(void (^)(id data))success failure:(void (^)(NSError *error))failure
 {
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"]};
-    NSLog(@"request interest arear %@",requestDict);
     [[Webservice sharedManager] post:kUrlGetInterestList parameters:requestDict success:^(id responseObject) {
         responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
-        NSLog(@"interest area response %@",responseObject);
         if([[Webservice sharedManager] isStatusOK:responseObject]) {
             success(responseObject);
         }
@@ -61,10 +59,8 @@
 - (void)getInterestedInList:(void (^)(id data))success failure:(void (^)(NSError *error))failure
 {
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"]};
-    NSLog(@"request Interested in %@",requestDict);
     [[Webservice sharedManager] post:kUrlGetInterestInList parameters:requestDict success:^(id responseObject) {
         responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
-        NSLog(@"Interested in response %@",responseObject);
         if([[Webservice sharedManager] isStatusOK:responseObject]) {
             success(responseObject);
         }
@@ -84,10 +80,8 @@
 - (void)getProfessionList:(void (^)(id data))success failure:(void (^)(NSError *error))failure
 {
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"]};
-    NSLog(@"request Profession  %@",requestDict);
     [[Webservice sharedManager] post:kUrlGetProffessionList parameters:requestDict success:^(id responseObject) {
         responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
-        NSLog(@"Profession response %@",responseObject);
         if([[Webservice sharedManager] isStatusOK:responseObject]) {
             success(responseObject);
         }
@@ -106,10 +100,8 @@
 #pragma mark - Edit profile
 - (void)editUserProfile:(NSString *)userName userSurname:(NSString *)userSurname userEmail:(NSString *)userEmail mobileNumber:(NSString *)mobileNumber companyName:(NSString *)companyName companyAddress:(NSString *)companyAddress designation:(NSString *)designation aboutCompany:(NSString *)aboutCompany linkedIn:(NSString *)linkedIn interests:(NSString *)interests interestedIn:(NSString *)interestedIn profession:(NSString *)profession otherInterests:(NSString *)otherInterests otherInterestedIn:(NSString *)otherInterestedIn otherProfession:(NSString *)otherProfession image:(UIImage *)image success:(void (^)(id))success failure:(void (^)(NSError *))failure {
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"],@"userName":userName,@"userSurname":userSurname,@"userEmail":userEmail,@"mobileNumber":mobileNumber,@"companyName":companyName,@"companyAddress":companyAddress,@"designation":designation,@"aboutCompany":aboutCompany,@"linkedIn":linkedIn,@"interests":interests,@"interestInName":interestedIn,@"professionName":profession,@"otherInterests":otherInterests,@"otherInterestedIn":otherInterestedIn,@"otherProfession":otherProfession};
-    NSLog(@"request edit user profile  %@",requestDict);
     [[Webservice sharedManager] postImage:kUrlEditUserProfile parameters:requestDict image:image success:^(id responseObject) {
         responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
-        NSLog(@"edit user profile response %@",responseObject);
         if([[Webservice sharedManager] isStatusOK:responseObject]) {
             success(responseObject);
         }
@@ -128,10 +120,8 @@
 - (void)getUserProfile:(void (^)(id data))success failure:(void (^)(NSError *error))failure
 {
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"]};
-    NSLog(@"request user profile  %@",requestDict);
     [[Webservice sharedManager] post:kUrlGetUserProfile parameters:requestDict success:^(id responseObject) {
         responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
-        NSLog(@"user profile response %@",responseObject);
         if([[Webservice sharedManager] isStatusOK:responseObject]) {
             NSMutableArray *profileDataArray = [NSMutableArray new];
             ProfileDataModel *profileData = [[ProfileDataModel alloc]init];
@@ -169,10 +159,8 @@
 - (void)getOtherUserProfile:(NSString *)otherUserId success:(void (^)(id))success failure:(void (^)(NSError *))failure
 {
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"],@"otheruserId":otherUserId};
-    NSLog(@"request other user profile  %@",requestDict);
     [[Webservice sharedManager] post:kUrlGetOtherUserProfile parameters:requestDict success:^(id responseObject) {
         responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
-        NSLog(@"other user profile response %@",responseObject);
         if([[Webservice sharedManager] isStatusOK:responseObject]) {
             NSMutableArray *profileDataArray = [NSMutableArray new];
             ProfileDataModel *profileData = [[ProfileDataModel alloc]init];
