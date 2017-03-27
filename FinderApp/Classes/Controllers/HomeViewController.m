@@ -134,7 +134,6 @@
     Address *address = [displayedResults objectAtIndex:0];
     latitude=address.latitude;
     longitude=address.longitude ;
-    NSLog(@"lat lon are %f %f,",[latitude floatValue],[longitude floatValue]);
     UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     MapViewController *mapView =[storyboard instantiateViewControllerWithIdentifier:@"MapViewController"];
     mapView.latitude=latitude;

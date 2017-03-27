@@ -35,10 +35,8 @@
 //Send message
 - (void)sendMessage:(NSString *)otherUserId message:(NSString *)message success:(void (^)(id))success failure:(void (^)(NSError *))failure {
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"],@"otherUserId":otherUserId,@"message":message};
-    NSLog(@"send message %@",requestDict);
     [[Webservice sharedManager] post:kUrlSendMessage parameters:requestDict success:^(id responseObject) {
         responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
-        NSLog(@"send message response %@",responseObject);
         NSNumber *number = responseObject[@"isSuccess"];
         if (number.integerValue==1) {
             success(responseObject);
@@ -67,10 +65,8 @@
 //Send message
 - (void)getDifferentMessage:(void (^)(id data))success failure:(void (^)(NSError *error))failure {
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"]};
-    NSLog(@"get message %@",requestDict);
     [[Webservice sharedManager] post:kUrlMessages parameters:requestDict success:^(id responseObject) {
         responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
-        NSLog(@"get message response %@",responseObject);
         NSNumber *number = responseObject[@"isSuccess"];
         if (number.integerValue==1) {
             id array =[responseObject objectForKey:@"userChatList"];
@@ -115,10 +111,8 @@
 #pragma mark - Message History
 - (void)getMessageHistory:(NSString *)otherUserId readStatus:(NSString *)readStatus pageOffSet:(NSString *)pageOffSet success:(void (^)(id))success failure:(void (^)(NSError *))failure {
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"],@"otherUserId":otherUserId,@"readStatus":readStatus,@"pageOffSet":pageOffSet};
-    NSLog(@"get message history %@",requestDict);
     [[Webservice sharedManager] post:kUrlMessageHistory parameters:requestDict success:^(id responseObject) {
         responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
-        NSLog(@"get message response history %@",responseObject);
         NSNumber *number = responseObject[@"isSuccess"];
         if (number.integerValue==1) {
             id array =[responseObject objectForKey:@"chatDetails"];

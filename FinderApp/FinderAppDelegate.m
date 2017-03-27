@@ -101,15 +101,11 @@
     
     //Call crashlytics method
     [self performSelector:@selector(installUncaughtExceptionHandler) withObject:nil afterDelay:0];
-
     
-    NSLog(@"%@",[UserDefaultManager getValue:@"PendingMessage"]);
     if(NULL==[UserDefaultManager getValue:@"PendingMessage"] || nil==[UserDefaultManager getValue:@"PendingMessage"])
     {
         [UserDefaultManager setValue:@"0" key:@"PendingMessage"];
     }
-    NSLog(@"userId %@",[[NSUserDefaults standardUserDefaults] objectForKey:@"userId"]);
-    NSLog(@"conferenceId %@",[[NSUserDefaults standardUserDefaults] objectForKey:@"conferenceId"]);
     UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     //conferenceId
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"userId"]!=nil && [[NSUserDefaults standardUserDefaults] objectForKey:@"conferenceId"]!=nil)
@@ -186,6 +182,7 @@
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     application.applicationIconBadgeNumber = 0;
 }
+
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
@@ -194,17 +191,15 @@
 #pragma mark - Location update in background
 - (void)locationUpdate {
     if (longitude!=nil && latitude!=nil && [[UserDefaultManager getValue:@"switchStatusDict"] objectForKey:@"02"]!=nil) {
-        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"userId"]!=nil) {
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"userId"]!=nil && [UserDefaultManager getValue:@"conferenceId"]!=nil) {
             [[UserService sharedManager] locationUpdate:latitude longitude:longitude proximityRange:[[UserDefaultManager getValue:@"switchStatusDict"] objectForKey:@"02"] success:^(id responseObject)
              {
-                 NSLog(@"webservice did fire");
                  [self startTrackingBg];
              } failure:^(NSError *error) {
                  
              }] ;
         }
     }
-   
 }
 
 - (void) startTrackingBg {
@@ -216,7 +211,6 @@
                                                selector: @selector(locationUpdate)
                                                userInfo: nil
                                                 repeats: YES];
-        NSLog(@"Timer did fire");
     }
 }
 
@@ -253,16 +247,13 @@
 - (void)application:(UIApplication *)app didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken1 {
     NSString *token = [[deviceToken1 description] stringByTrimmingCharactersInSet: [NSCharacterSet characterSetWithCharactersInString:@"<>"]];
     token = [token stringByReplacingOccurrencesOfString:@" " withString:@""];
-    NSLog(@"content---.......................%@", token);
     self.deviceToken = token;
     [[UserService sharedManager] registerDeviceForPushNotification:token deviceType:@"ios" success:^(id responseObject) {
-        NSLog(@"push notification response is  --------------------->>>%@",responseObject);
     } failure:^(NSError *error) {
     }] ;
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
-    NSLog(@"push notification user info is active state --------------------->>>%@",userInfo);
     [UIApplication sharedApplication].applicationIconBadgeNumber=0;
     alertDict=[userInfo objectForKey:@"aps"];
     if (application.applicationState == UIApplicationStateActive)
@@ -356,7 +347,6 @@
     
     if (option == 0) {
         if ([[alertDict objectForKey:@"type"] isEqualToString:@"1"]) {
-            NSLog(@"alert 1");
             UIStoryboard *sb=[UIStoryboard storyboardWithName:@"Main" bundle:nil];
             OtherUserProfileViewController *view1=[sb instantiateViewControllerWithIdentifier:@"OtherUserProfileViewController"];
             view1.viewType=@"Matches";
@@ -371,10 +361,8 @@
             }
 
             [[ConferenceService sharedManager] acceptCancelMeeting:[alertDict objectForKey:@"appointmentId"] meetingUserId:[alertDict objectForKey:@"meetinguserId"] flag:@"accept" type:@"requested" reasonForCancel:@"" success:^(id responseObject) {
-                NSLog(@"calendar type 2");
                 if ([myDelegate.myView isEqualToString:@"CalendarViewController"]) {
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"CalendarDetails" object:nil];
-                    NSLog(@"calendar type 2 after success");
                 }
             }
                                                            failure:^(NSError *error)
@@ -421,7 +409,6 @@
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"ProximityAlerts" object:nil];
             }
         }
-        NSLog(@"view");
     }
     else if(option == 1) {
         if ([[alertDict objectForKey:@"type"] isEqualToString:@"1"]) {
@@ -434,7 +421,6 @@
              {
              }] ;
         }
-        NSLog(@"accept");
     }
     else
     {
@@ -458,7 +444,6 @@
              {
              }] ;
         }
-        NSLog(@"decline");
     }
     [alert dismissAlertView:self.window];
 }

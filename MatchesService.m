@@ -37,10 +37,8 @@
 #pragma mark - Matches List
 - (void)getMatchesList:(void (^)(id data))success failure:(void (^)(NSError *error))failure {
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"]};
-    NSLog(@"request matches %@",requestDict);
     [[Webservice sharedManager] post:kUrlMatchesList parameters:requestDict success:^(id responseObject) {
         responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
-        NSLog(@"matches response %@",responseObject);
         NSNumber *number = responseObject[@"isSuccess"];
         if (number.integerValue==1) {
             id array =[responseObject objectForKey:@"userContactList"];
@@ -88,10 +86,8 @@
 #pragma mark - Update review status
 - (void)updateReviewStatus:(NSString *)otherUserId reviewStatus:(NSString *)reviewStatus success:(void (^)(id))success failure:(void (^)(NSError *))failure {
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"],@"otherUserId":otherUserId,@"reviewStatus":reviewStatus};
-    NSLog(@"request matches %@",requestDict);
     [[Webservice sharedManager] post:kUrlUpdateReviewStatus parameters:requestDict success:^(id responseObject) {
         responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
-        NSLog(@"matches response %@",responseObject);
         if([[Webservice sharedManager] isStatusOK:responseObject]) {
             success(responseObject);
         }
@@ -111,10 +107,8 @@
 - (void)sendCancelMatchRequest:(NSString *)otherUserId sendRequest:(NSString *)sendRequest success:(void (^)(id))success failure:(void (^)(NSError *))failure {
     
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"],@"otherUserId":otherUserId,@"send":sendRequest};
-    NSLog(@"request matches %@",requestDict);
     [[Webservice sharedManager] post:kUrlSendCancelMatchRequest parameters:requestDict success:^(id responseObject) {
         responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
-        NSLog(@"request sent matches response %@",responseObject);
         if([[Webservice sharedManager] isStatusOK:responseObject]) {
             success(responseObject);
         }
@@ -134,10 +128,8 @@
 - (void)acceptDeclineRequest:(NSString *)otherUserId acceptRequest:(NSString *)acceptRequest success:(void (^)(id))success failure:(void (^)(NSError *))failure {
     
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"],@"otherUserId":otherUserId,@"accept":acceptRequest};
-    NSLog(@"accept decline matches %@",requestDict);
     [[Webservice sharedManager] post:kUrlAcceptDeclineRequest parameters:requestDict success:^(id responseObject) {
         responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
-        NSLog(@"accept decline sent matches response %@",responseObject);
         if([[Webservice sharedManager] isStatusOK:responseObject]) {
             success(responseObject);
         }

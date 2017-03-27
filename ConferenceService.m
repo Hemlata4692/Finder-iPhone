@@ -49,11 +49,9 @@
 #pragma mark- Conference listing
 - (void)getConferenceListing:(void (^)(id data))success failure:(void (^)(NSError *error))failure {
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"]};
-    NSLog(@"request conference list %@",requestDict);
     [[Webservice sharedManager] post:kUrlConferenceList parameters:requestDict success:^(id responseObject)
      {
          responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
-         NSLog(@"conference list response %@",responseObject);
          NSNumber *number = responseObject[@"isSuccess"];
          if (number.integerValue==1) {
              [myDelegate stopIndicator];
@@ -95,10 +93,8 @@
 #pragma mark- Conference detail
 - (void)getConferenceDetail:(NSString *)conferenceId success:(void (^)(id))success failure:(void (^)(NSError *error))failure {
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":conferenceId};
-    NSLog(@"request home %@",requestDict);
     [[Webservice sharedManager] post:kUrlConferenceDetail parameters:requestDict success:^(id responseObject) {
         responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
-        NSLog(@"home response %@",responseObject);
         if([[Webservice sharedManager] isStatusOK:responseObject]) {
             NSMutableArray *conferenceArray = [NSMutableArray new];
             ConferenceDataModel *conferenceDetail = [[ConferenceDataModel alloc]init];
@@ -128,10 +124,8 @@
 #pragma mark- Settings
 - (void)changeSettings:(NSString *)switchIdentifire switchStatus:(NSString *)switchStatus success:(void (^)(id))success failure:(void (^)(NSError *))failure {
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"switchIdentifire":switchIdentifire,@"switchStatus":switchStatus};
-    NSLog(@"settings request %@",requestDict);
     [[Webservice sharedManager] post:kUrlChangeSettings parameters:requestDict success:^(id responseObject) {
         responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
-        NSLog(@"settings response %@",responseObject);
         NSNumber *number = responseObject[@"isSuccess"];
         if (number.integerValue!=0) {
             success(responseObject);
@@ -149,11 +143,9 @@
 //getUserSetting
 - (void)getUserSetting:(void (^)(id data))success failure:(void (^)(NSError *error))failure {
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"]};
-    NSLog(@"user setting request %@",requestDict);
     [[Webservice sharedManager] post:kUrlUserSettings parameters:requestDict success:^(id responseObject)
      {
          responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
-         NSLog(@"user setting response %@",responseObject);
          if([[Webservice sharedManager] isStatusOK:responseObject]) {
              success(responseObject);
          }
@@ -171,11 +163,9 @@
 #pragma mark- Calendar Details
 - (void)getCalendarDetails:(NSString *)conferenceId success:(void (^)(id))success failure:(void (^)(NSError *error))failure {
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":conferenceId};
-    NSLog(@"request calendar details %@",requestDict);
     [[Webservice sharedManager] post:kUrlCalendarDetails parameters:requestDict success:^(id responseObject)
      {
          responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
-         NSLog(@"calendar details response %@",responseObject);
          NSNumber *number = responseObject[@"isSuccess"];
          if (number.integerValue==1) {
              id array =[responseObject objectForKey:@"calenderDetails"];
@@ -230,11 +220,9 @@
 #pragma mark- Contact list
 - (void)getContactDetails:(void (^)(id data))success failure:(void (^)(NSError *error))failure {
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"]};
-    NSLog(@"user contact request %@",requestDict);
     [[Webservice sharedManager] post:kUrlContactDetails parameters:requestDict success:^(id responseObject)
      {
          responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
-         NSLog(@"user contact response %@",responseObject);
          if([[Webservice sharedManager] isStatusOK:responseObject]) {
              id array =[responseObject objectForKey:@"userContactList"];
              if (([array isKindOfClass:[NSArray class]])) {
@@ -266,11 +254,9 @@
 #pragma mark- Schedule meeting
 - (void)scheduleMeeting:(NSString *)contactUserId venue:(NSString *)venue meetingAgenda:(NSString *)meetingAgenda date:(NSString *)date timeFrom:(NSString *)timeFrom timeTo:(NSString *)timeTo success:(void (^)(id))success failure:(void (^)(NSError *))failure {
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"],@"contactUserId":contactUserId,@"venue":venue,@"meetingAgenda":meetingAgenda,@"date":date,@"timeFrom":timeFrom,@"timeTo":timeTo};
-    NSLog(@"schedule meeting request %@",requestDict);
     [[Webservice sharedManager] post:kUrlScheduleMeeting parameters:requestDict success:^(id responseObject)
      {
          responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
-         NSLog(@"schedule meeting response %@",responseObject);
          if([[Webservice sharedManager] isStatusOK:responseObject]) {
              success(responseObject);
          }
@@ -288,11 +274,9 @@
 #pragma mark- Edit scheduled meeting
 - (void)editScheduledMeeting:(NSString *)contactUserId appointmentId:(NSString *)appointmentId venue:(NSString *)venue meetingAgenda:(NSString *)meetingAgenda date:(NSString *)date timeFrom:(NSString *)timeFrom timeTo:(NSString *)timeTo oldUserId:(NSString *)oldUserId success:(void (^)(id))success failure:(void (^)(NSError *))failure {
     NSDictionary *requestDict = @{@"appointmentId":appointmentId,@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"],@"contactUserId":contactUserId,@"venue":venue,@"meetingAgenda":meetingAgenda,@"date":date,@"timeFrom":timeFrom,@"timeTo":timeTo,@"oldUserId":oldUserId};
-    NSLog(@"edit schedule meeting request %@",requestDict);
     [[Webservice sharedManager] post:kUrlEditScheduleMeeting parameters:requestDict success:^(id responseObject)
      {
          responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
-         NSLog(@"edit schedule meeting response %@",responseObject);
          if([[Webservice sharedManager] isStatusOK:responseObject]) {
              success(responseObject);
          }
@@ -310,11 +294,9 @@
 #pragma mark- Delete scheduled meeting
 - (void)deleteScheduledMeeting:(NSString *)appointmentId success:(void (^)(id))success failure:(void (^)(NSError *))failure {
     NSDictionary *requestDict = @{@"appointmentId":appointmentId,@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"]};
-    NSLog(@"delete schedule meeting request %@",requestDict);
     [[Webservice sharedManager] post:kUrlDeleteScheduleMeeting parameters:requestDict success:^(id responseObject)
      {
          responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
-         NSLog(@"delete schedule meeting response %@",responseObject);
          if([[Webservice sharedManager] isStatusOK:responseObject]) {
              success(responseObject);
          }
@@ -333,10 +315,8 @@
 #pragma mark - Pending appointment
 - (void)pendingAppointment:(void (^)(id data))success failure:(void (^)(NSError *error))failure {
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"]};
-    NSLog(@"request pending appointment  %@",requestDict);
     [[Webservice sharedManager] post:kUrlPendingAppointment parameters:requestDict success:^(id responseObject) {
         responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
-        NSLog(@"pending appointment response %@",responseObject);
         NSNumber *number = responseObject[@"isSuccess"];
         if (number.integerValue==1) {
             id array =[responseObject objectForKey:@"pendingAppointments"];
@@ -382,10 +362,8 @@
 #pragma mark - Requested appointment
 - (void)requestedAppointment:(void (^)(id data))success failure:(void (^)(NSError *error))failure {
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"]};
-    NSLog(@"request request appointment  %@",requestDict);
     [[Webservice sharedManager] post:kUrlRequestedAppointment parameters:requestDict success:^(id responseObject) {
         responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
-        NSLog(@"request appointment response %@",responseObject);
         NSNumber *number = responseObject[@"isSuccess"];
         if (number.integerValue==1) {
             id array =[responseObject objectForKey:@"pendingAppointments"];
@@ -429,10 +407,8 @@
 #pragma mark - Accept cancel meeting
 - (void)acceptCancelMeeting:(NSString *)appointmentId meetingUserId:(NSString *)meetingUserId flag:(NSString *)flag type:(NSString *)type reasonForCancel:(NSString *)reasonForCancel success:(void (^)(id))success failure:(void (^)(NSError *))failure {
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"],@"appointmentId":appointmentId,@"meetingUserId":meetingUserId,@"flag":flag,@"type":type, @"reasonForCancel":reasonForCancel};
-    NSLog(@"accept decline appointment %@",requestDict);
     [[Webservice sharedManager] post:kUrlAcceptCancelAppointment parameters:requestDict success:^(id responseObject) {
         responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
-        NSLog(@"accept decline appointment response %@",responseObject);
         if([[Webservice sharedManager] isStatusOK:responseObject]) {
             success(responseObject);
         }
@@ -450,11 +426,9 @@
 #pragma mark - Proximity alerts
 - (void)getProximityAlerts:(NSString *)proximityRadius success:(void (^)(id))success failure:(void (^)(NSError *))failure {
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"],@"proximityRadius":proximityRadius};
-    NSLog(@"proximity radius request %@",requestDict);
     [[Webservice sharedManager] post:kUrlgetproximityalerts parameters:requestDict success:^(id responseObject)
      {
          responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
-         NSLog(@"proximity radius response %@",responseObject);
          NSNumber *number = responseObject[@"isSuccess"];
          if (number.integerValue==1) {
              id array =[responseObject objectForKey:@"proximityAlertList"];

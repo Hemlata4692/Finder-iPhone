@@ -90,8 +90,6 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    NSLog(@"cell selected");
     if (indexPath.row==0) {
         if (![[pickerDicData objectForKey:[pickerArrayData objectAtIndex:0]] boolValue]) {
         for (int i=0; i<[pickerArrayData count]-1; i++) {
@@ -146,7 +144,6 @@
 
 
 - (IBAction)cancelAction:(UIBarButtonItem *)sender {
-    NSLog(@"cancel");
     [_delegate cancelDelegateMethod];
 }
 
