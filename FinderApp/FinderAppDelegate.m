@@ -259,6 +259,7 @@
     if (application.applicationState == UIApplicationStateActive)
     {
         if ([[alertDict objectForKey:@"type"] isEqualToString:@"1"]) {
+            [alert dismissAlertView:self.window];
             alert = [[MyAlert alloc] initWithTitle:@"New Match Request" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"View" acceptBtnText:@"Accept" declineBtnText:@"Decline" isTextField:NO];
             if (![myDelegate.myView isEqualToString:@"MatchesViewController"]) {
                 [self addBadgeIconOnMatchesTab];
@@ -268,6 +269,7 @@
             }
         }
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"2"]) {
+            [alert dismissAlertView:self.window];
             alert = [[MyAlert alloc] initWithTitle:@"New Meeting Request" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Accept" acceptBtnText:@"" declineBtnText:@"Decline" isTextField:YES];
             if (![myDelegate.myView isEqualToString:@"PendingViewController"]) {
                 if ([[UserDefaultManager getValue:@"PendingMessage"] isEqualToString:@"0"]) {
@@ -282,21 +284,27 @@
             }
         }
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"3"]) {
+            [alert dismissAlertView:self.window];
             alert = [[MyAlert alloc] initWithTitle:@"Request Accepted" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel" isTextField:NO];
         }
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"4"]) {
+            [alert dismissAlertView:self.window];
             alert = [[MyAlert alloc] initWithTitle:@"Match Request Rejected" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel" isTextField:NO];
         }
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"5"]) {
+            [alert dismissAlertView:self.window];
             alert = [[MyAlert alloc] initWithTitle:@"Meeting Request Accepted" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel" isTextField:NO];
         }
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"6"]) {
+            [alert dismissAlertView:self.window];
             alert = [[MyAlert alloc] initWithTitle:@"Meeting Request Rejected" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel" isTextField:NO];
         }
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"7"]) {
+            [alert dismissAlertView:self.window];
             alert = [[MyAlert alloc] initWithTitle:@"New Conference Assigned" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel" isTextField:NO];
         }
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"8"]) {
+            [alert dismissAlertView:self.window];
             alert = [[MyAlert alloc] initWithTitle:@"Proximity Alerts" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel" isTextField:NO];
             if (![myDelegate.myView isEqualToString:@"ProximityAlertsViewController"]) {
                 [self addBadgeIconOnProximityTab];
@@ -315,6 +323,7 @@
         }
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"10"]) {
             [UserDefaultManager setValue:[alertDict objectForKey:@"newemail"] key:@"userEmail"];
+            [alert dismissAlertView:self.window];
             alert = [[MyAlert alloc] initWithTitle:@"Email Updated" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel" isTextField:NO];
         }
     }
@@ -447,10 +456,12 @@
     }
     [alert dismissAlertView:self.window];
 }
+
 - (void)application:(UIApplication *)app didFailToRegisterForRemoteNotificationsWithError:(NSError *)err {
     NSString *str = [NSString stringWithFormat: @"Error: %@", err];
     NSLog(@"did failtoRegister and testing : %@",str);
 }
+
 - (void)unregisterDeviceForNotification {
     [[UIApplication sharedApplication]  unregisterForRemoteNotifications];
 }

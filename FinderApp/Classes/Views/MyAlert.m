@@ -12,7 +12,6 @@
 @synthesize alertView;
 
 - (instancetype)initWithTitle:(NSString*)titleText myView:(UIView*)myView delegate:(id)delegate message:(NSString*)messageText viewBtnText:(NSString*)viewBtnText acceptBtnText:(NSString*)acceptBtnText declineBtnText:(NSString*)declineBtnText isTextField:(BOOL)isTextField{
-    
     isTextViewCheck = isTextField;
     _delegate = delegate;
     customAlertObj=[[CustomAlert alloc] initWithFrame:myView.frame title:titleText message:messageText viewBtnText:viewBtnText acceptBtnText:acceptBtnText declineBtnText:declineBtnText isTextField:isTextField];
@@ -21,12 +20,11 @@
     [customAlertObj.acceptBtnAction addTarget:self action:@selector(acceptButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     [customAlertObj.declineBtnAction addTarget:self action:@selector(declineButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     alertView = myView;
-    
     [alertView addSubview:customAlertObj.mainView];
     return self;
 }
+
 - (void)dismissAlertView:(UIView*)myView{
-    
     customAlertObj.mainView.hidden = YES;
     [customAlertObj removeFromSuperview];
 }
