@@ -258,6 +258,7 @@
     alertDict=[userInfo objectForKey:@"aps"];
     if (application.applicationState == UIApplicationStateActive)
     {
+        //new match request notification
         if ([[alertDict objectForKey:@"type"] isEqualToString:@"1"]) {
             [alert dismissAlertView:self.window];
             alert = [[MyAlert alloc] initWithTitle:@"New Match Request" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"View" acceptBtnText:@"Accept" declineBtnText:@"Decline" isTextField:NO];
@@ -268,6 +269,7 @@
                 [self removeBadgeIconOnMatchesTab];
             }
         }
+        //new meeting requestion notiifcation
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"2"]) {
             [alert dismissAlertView:self.window];
             alert = [[MyAlert alloc] initWithTitle:@"New Meeting Request" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Accept" acceptBtnText:@"" declineBtnText:@"Decline" isTextField:YES];
@@ -283,26 +285,32 @@
                 [self removeBadgeIconOnMoreTab];
             }
         }
+        //when match request is accepted
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"3"]) {
             [alert dismissAlertView:self.window];
-            alert = [[MyAlert alloc] initWithTitle:@"Request Accepted" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel" isTextField:NO];
+            alert = [[MyAlert alloc] initWithTitle:@"Match Request Accepted" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel" isTextField:NO];
         }
+        //when Match request is rejected
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"4"]) {
             [alert dismissAlertView:self.window];
             alert = [[MyAlert alloc] initWithTitle:@"Match Request Rejected" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel" isTextField:NO];
         }
+        //meeting request ccepted
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"5"]) {
             [alert dismissAlertView:self.window];
             alert = [[MyAlert alloc] initWithTitle:@"Meeting Request Accepted" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel" isTextField:NO];
         }
+        //meeting request rejected
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"6"]) {
             [alert dismissAlertView:self.window];
             alert = [[MyAlert alloc] initWithTitle:@"Meeting Request Rejected" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel" isTextField:NO];
         }
+        //when new conference is assigned
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"7"]) {
             [alert dismissAlertView:self.window];
             alert = [[MyAlert alloc] initWithTitle:@"New Conference Assigned" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel" isTextField:NO];
         }
+        //when near by notiifcation
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"8"]) {
             [alert dismissAlertView:self.window];
             alert = [[MyAlert alloc] initWithTitle:@"Proximity Alerts" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel" isTextField:NO];
@@ -313,14 +321,20 @@
                 [self removeBadgeIconOnProximityTab];
             }
         }
+        //when new message arrives
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"9"]) {
             if ([myDelegate.myView isEqualToString:@"PersonalMessageView"]) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"GetMessageHistory" object:nil];
+            }
+            else if ([myDelegate.myView isEqualToString:@"MessagesViewController"]) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"GetMessageDetails" object:nil];
+                [self addBadgeIcon];
             }
             else {
                 [self addBadgeIcon];
             }
         }
+        //when user email is changed
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"10"]) {
             [UserDefaultManager setValue:[alertDict objectForKey:@"newemail"] key:@"userEmail"];
             [alert dismissAlertView:self.window];
@@ -579,8 +593,8 @@
 
 #pragma mark - Remove badge icon
 - (void)removeBadgeIconLastTab {
-    notificationBadge.hidden=YES;
-    notificationBadge.frame = CGRectMake((([UIScreen mainScreen].bounds.size.width/5))+45 , ([UIScreen mainScreen].bounds.size.height-40), 0, 0);
+    //notificationBadge.hidden=YES;
+  //  notificationBadge.frame = CGRectMake((([UIScreen mainScreen].bounds.size.width/5))+45 , ([UIScreen mainScreen].bounds.size.height-40), 0, 0);
     for (UILabel *subview in [UIApplication sharedApplication].keyWindow.subviews)
     {
         if ([subview isKindOfClass:[UILabel class]])
@@ -594,8 +608,8 @@
 
 - (void)removeBadgeIconOnMoreTab
 {
-    notificationBadge.hidden=YES;
-    notificationBadge.frame = CGRectMake((([UIScreen mainScreen].bounds.size.width/5) * 5) - (([UIScreen mainScreen].bounds.size.width/5)/2) + 13 , ([UIScreen mainScreen].bounds.size.height-44), 0, 0);
+   // notificationBadge.hidden=YES;
+    //notificationBadge.frame = CGRectMake((([UIScreen mainScreen].bounds.size.width/5) * 5) - (([UIScreen mainScreen].bounds.size.width/5)/2) + 13 , ([UIScreen mainScreen].bounds.size.height-44), 0, 0);
     for (UILabel *subview in [UIApplication sharedApplication].keyWindow.subviews)
     {
         if ([subview isKindOfClass:[UILabel class]])
@@ -609,13 +623,13 @@
 }
 
 - (void)removeBadgeIconOnMatchesTab {
-    notificationBadge.hidden=YES;
-    if ([[UIScreen mainScreen] bounds].size.height>667) {
-        notificationBadge.frame = CGRectMake((([UIScreen mainScreen].bounds.size.width/5)-30) , ([UIScreen mainScreen].bounds.size.height-40), 0, 0);
-    }
-    else {
-        notificationBadge.frame = CGRectMake((([UIScreen mainScreen].bounds.size.width/5)-25) , ([UIScreen mainScreen].bounds.size.height-40), 0, 0);
-    }
+    //notificationBadge.hidden=YES;
+//    if ([[UIScreen mainScreen] bounds].size.height>667) {
+//        notificationBadge.frame = CGRectMake((([UIScreen mainScreen].bounds.size.width/5)-30) , ([UIScreen mainScreen].bounds.size.height-40), 0, 0);
+//    }
+//    else {
+//        notificationBadge.frame = CGRectMake((([UIScreen mainScreen].bounds.size.width/5)-25) , ([UIScreen mainScreen].bounds.size.height-40), 0, 0);
+//    }
 
     for (UILabel *subview in [UIApplication sharedApplication].keyWindow.subviews)
     {
@@ -629,13 +643,13 @@
 }
 
 - (void)removeBadgeIconOnProximityTab {
-    notificationBadge.hidden=YES;
-    if ([[UIScreen mainScreen] bounds].size.height>667) {
-        notificationBadge.frame = CGRectMake((([UIScreen mainScreen].bounds.size.width/5)*3-30) , ([UIScreen mainScreen].bounds.size.height-40), 0, 0);
-    }
-    else {
-        notificationBadge.frame = CGRectMake((([UIScreen mainScreen].bounds.size.width/5)*3-25) , ([UIScreen mainScreen].bounds.size.height-40), 0, 0);
-    }
+    //notificationBadge.hidden=YES;
+//    if ([[UIScreen mainScreen] bounds].size.height>667) {
+//        notificationBadge.frame = CGRectMake((([UIScreen mainScreen].bounds.size.width/5)*3-30) , ([UIScreen mainScreen].bounds.size.height-40), 0, 0);
+//    }
+//    else {
+//        notificationBadge.frame = CGRectMake((([UIScreen mainScreen].bounds.size.width/5)*3-25) , ([UIScreen mainScreen].bounds.size.height-40), 0, 0);
+//    }
     for (UILabel *subview in [UIApplication sharedApplication].keyWindow.subviews)
     {
         if ([subview isKindOfClass:[UILabel class]])

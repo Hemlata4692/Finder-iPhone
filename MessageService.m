@@ -61,6 +61,7 @@
     
 }
 #pragma mark - end
+
 #pragma mark - Send message
 //Send message
 - (void)getDifferentMessage:(void (^)(id data))success failure:(void (^)(NSError *error))failure {

@@ -34,7 +34,6 @@
 }
 
 - (void)conferenceList {
-    [myDelegate removeBadgeIconLastTab];
     [myDelegate showIndicator];
     [self performSelector:@selector(getConferenceListing) withObject:nil afterDelay:0.1];
 }

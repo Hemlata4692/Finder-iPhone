@@ -54,29 +54,31 @@
 }
 
 - (void)getHistory {
-    [myDelegate removeBadgeIconLastTab];
     offset=@"0";
     [messageDateArray removeAllObjects];
+    [myDelegate removeBadgeIconLastTab];
     [myDelegate showIndicator];
     [self performSelector:@selector(getMessageHistory) withObject:nil afterDelay:0.1];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
-    [myDelegate removeBadgeIconLastTab];
+     [myDelegate removeBadgeIconLastTab];
     myDelegate.myView=@"PersonalMessageView";
     offset=@"0";
     pageOffset=0;
-    
 }
+
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:YES];
     myDelegate.myView=@"other";
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 - (void)setTextView {
     sendMessageTextView.text = @"";
     [sendMessageTextView setPlaceholder:@"Type a message here..."];

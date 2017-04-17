@@ -37,3 +37,4 @@
 - (void)removeBadgeIconOnProximityTab;
 @end
 
+//com.finder.finderapp app store id

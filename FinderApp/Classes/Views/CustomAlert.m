@@ -41,13 +41,12 @@
         [self.keyboardControls setDelegate:self];
         
         if ([messageText isEqualToString:@""]) {
-            
-             messageLabel.frame = CGRectMake(10, title.frame.origin.y + title.frame.size.height + 8, myAlertBackView.frame.size.width - 20, 0);
+            messageLabel.frame = CGRectMake(10, title.frame.origin.y + title.frame.size.height + 8, myAlertBackView.frame.size.width - 20, 0);
             messageLabel.text = messageText;
             messageLabel.hidden = YES;
         }
         else{
-        
+            
             CGSize size = CGSizeMake(myAlertBackView.frame.size.width - 20,165);
             CGRect textRect = [messageText
                                boundingRectWithSize:size
@@ -64,14 +63,14 @@
             messageLabel.hidden = NO;
         }
         
-        messageTextView.placeholder = @"Message for cancel";
+        messageTextView.placeholder = @"Enter optional message here";
         messageTextView.placeholderTextColor = [UIColor colorWithRed:(237.0/255.0) green:(238.0/255.0) blue:(240.0/255.0) alpha:1.0f];
         
         if (isTextField) {
-             messageTextView.frame = CGRectMake(10, messageLabel.frame.origin.y + messageLabel.frame.size.height + 8, myAlertBackView.frame.size.width - 20, 50);
+            messageTextView.frame = CGRectMake(10, messageLabel.frame.origin.y + messageLabel.frame.size.height + 8, myAlertBackView.frame.size.width - 20, 50);
         }
         else {
-             messageTextView.frame = CGRectMake(10, messageLabel.frame.origin.y + messageLabel.frame.size.height + 8, myAlertBackView.frame.size.width - 20, 0);
+            messageTextView.frame = CGRectMake(10, messageLabel.frame.origin.y + messageLabel.frame.size.height + 8, myAlertBackView.frame.size.width - 20, 0);
         }
         if ([acceptBtnText isEqualToString:@""] ) {
             
@@ -81,11 +80,11 @@
             acceptBtnAction.hidden = YES;
         }
         else{
-        
+            
             viewBtnAction.frame = CGRectMake(10, messageTextView.frame.origin.y + messageTextView.frame.size.height + 14,(myAlertBackView.frame.size.width-20)/3-10, 40);
             acceptBtnAction.frame = CGRectMake(viewBtnAction.frame.origin.x+viewBtnAction.frame.size.width + 15, messageTextView.frame.origin.y + messageTextView.frame.size.height + 14, (myAlertBackView.frame.size.width-20)/3-10, 40);
             declineBtnAction.frame = CGRectMake(acceptBtnAction.frame.origin.x+acceptBtnAction.frame.size.width + 15, messageTextView.frame.origin.y + messageTextView.frame.size.height + 14, (myAlertBackView.frame.size.width-20)/3-10, 40);
-           // acceptBtnAction.hidden = NO;
+            // acceptBtnAction.hidden = NO;
         }
         
         if ([acceptBtnText isEqualToString:@""]) {
@@ -93,14 +92,14 @@
             [declineBtnAction setTitle:declineBtnText forState:UIControlStateNormal];
         }
         else{
-        
+            
             [viewBtnAction setTitle:viewBtnText forState:UIControlStateNormal];
             [acceptBtnAction setTitle:acceptBtnText forState:UIControlStateNormal];
             [declineBtnAction setTitle:declineBtnText forState:UIControlStateNormal];
         }
         
         float alertViewHeight = viewBtnAction.frame.origin.y + viewBtnAction.frame.size.height + 20;
-         myAlertBackView.frame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, alertViewHeight);
+        myAlertBackView.frame = CGRectMake(0, 0, [[UIScreen mainScreen] bounds].size.width, alertViewHeight);
         viewBtnAction.layer.cornerRadius =  acceptBtnAction.layer.cornerRadius = declineBtnAction.layer.cornerRadius = 2.0f;
         viewBtnAction.layer.masksToBounds =  acceptBtnAction.layer.masksToBounds =declineBtnAction.layer.masksToBounds = YES;
         

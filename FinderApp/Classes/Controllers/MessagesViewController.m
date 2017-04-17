@@ -32,19 +32,32 @@
     messagesDataArray=[[NSMutableArray alloc]init];
     noRecordLabel.hidden=YES;
     // Do any additional setup after loading the view.
+    
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 - (void)viewWillAppear:(BOOL)animated {
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     [UserDefaultManager setValue:nil key:@"unReadMessegaes"];
-    [myDelegate removeBadgeIconLastTab];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getDifferentMessages) name:@"GetMessageDetails" object:nil];
     [myDelegate showIndicator];
     [self performSelector:@selector(getDifferentMessages) withObject:nil afterDelay:.1];
 }
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:YES];
+    myDelegate.myView=@"MessagesViewController";
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:YES];
+    myDelegate.myView=@"other";
+}
+//GetMessageDetails
 #pragma mark - end
 
 #pragma mark - Webservice
@@ -75,6 +88,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return messagesDataArray.count;
 }
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *simpleTableIdentifier = @"messagesCell";
     MessagesViewCell *messagesCell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
@@ -86,6 +100,7 @@
     [messagesCell displayMessageData:data indexPath:(int)indexPath.row rectSize:messagesCell.frame.size];
     return messagesCell;
 }
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     PersonalMessageViewController *msgView =[storyboard instantiateViewControllerWithIdentifier:@"PersonalMessageViewController"];
