@@ -360,6 +360,14 @@
             [self.window setRootViewController:objView];
             [self.window makeKeyAndVisible];
         }
+        else if ([[alertDict objectForKey:@"type"] isEqualToString:@"9"]) {
+            alertType=@"9";
+            UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            MatchesViewController * objView=[storyboard instantiateViewControllerWithIdentifier:@"tabBar"];
+            self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+            [self.window setRootViewController:objView];
+            [self.window makeKeyAndVisible];
+        }
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"10"]) {
             [UserDefaultManager setValue:[alertDict objectForKey:@"newemail"] key:@"userEmail"];
         }

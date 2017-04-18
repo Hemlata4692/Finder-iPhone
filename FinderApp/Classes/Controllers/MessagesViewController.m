@@ -11,6 +11,7 @@
 #import "MessagesViewCell.h"
 #import "MessageService.h"
 #import "MessagesDataModel.h"
+#import "MyAlert.h"
 
 @interface MessagesViewController () {
     NSMutableArray *messagesDataArray;
@@ -42,6 +43,16 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
+    
+    if ([myDelegate.alertType isEqualToString:@"9"]) {
+        UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        PersonalMessageViewController *msgView =[storyboard instantiateViewControllerWithIdentifier:@"PersonalMessageViewController"];
+        // add parameters in notiifcation ws
+//        msgView.otherUserId=[[messagesDataArray objectAtIndex:indexPath.row] otherUserId];
+//        msgView.otherUserName=[[messagesDataArray objectAtIndex:indexPath.row] userName];
+        [self.navigationController pushViewController:msgView animated:YES];
+    }
+    
     [UserDefaultManager setValue:nil key:@"unReadMessegaes"];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getDifferentMessages) name:@"GetMessageDetails" object:nil];
     [myDelegate showIndicator];
@@ -102,6 +113,18 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    BOOL flag=false;
+    
+    for (int i=0; i<messagesDataArray.count; i++) {
+        if (i!=indexPath.row && [[[messagesDataArray objectAtIndex:i] messageCount] intValue]!=0) {
+            flag=true;
+            break;
+        }
+    }
+    if (!flag) {
+        [myDelegate removeBadgeIconLastTab];
+    }
+    
     UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     PersonalMessageViewController *msgView =[storyboard instantiateViewControllerWithIdentifier:@"PersonalMessageViewController"];
     msgView.otherUserId=[[messagesDataArray objectAtIndex:indexPath.row] otherUserId];

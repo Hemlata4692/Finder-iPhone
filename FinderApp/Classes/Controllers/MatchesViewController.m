@@ -137,12 +137,18 @@
     tempImg =[UIImage imageNamed:@"more_selected"];
     [tabBarItem5 setSelectedImage:[[UIImage imageNamed:[tempImg imageForDeviceWithNameForOtherImages:@"more_selected"]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     tabBarItem5.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
-    if ([myDelegate.alertType isEqualToString:@"8"]) {
-        myTab.selectedIndex = 2;
-    }
+    
     if ([[UserDefaultManager getValue:@"firstTimeUser"] isEqualToString:@"firstTimeUser"]) {
         myTab.selectedIndex=4;
     }
+    
+    if ([myDelegate.alertType isEqualToString:@"8"]) {
+        myTab.selectedIndex = 2;
+    }
+    else if ([myDelegate.alertType isEqualToString:@"9"]) {
+        myTab.selectedIndex = 1;
+    }
+    
 }
 #pragma mark - end
 

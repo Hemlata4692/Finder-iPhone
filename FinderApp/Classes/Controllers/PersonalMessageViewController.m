@@ -56,14 +56,14 @@
 - (void)getHistory {
     offset=@"0";
     [messageDateArray removeAllObjects];
-    [myDelegate removeBadgeIconLastTab];
+   // [myDelegate removeBadgeIconLastTab];
     [myDelegate showIndicator];
     [self performSelector:@selector(getMessageHistory) withObject:nil afterDelay:0.1];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
-     [myDelegate removeBadgeIconLastTab];
+    // [myDelegate removeBadgeIconLastTab];
     myDelegate.myView=@"PersonalMessageView";
     offset=@"0";
     pageOffset=0;
