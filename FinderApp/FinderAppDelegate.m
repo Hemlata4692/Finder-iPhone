@@ -44,7 +44,8 @@
 @synthesize requestArrived;
 @synthesize currentNavigationController;
 @synthesize myView;
-
+@synthesize otherUserID;
+@synthesize otherUserName;
 
 #pragma mark - Global indicator view
 - (void)showIndicator
@@ -362,6 +363,8 @@
         }
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"9"]) {
             alertType=@"9";
+            otherUserName=[alertDict objectForKey:@"otherUserName"];
+            otherUserID=[alertDict objectForKey:@"otherUserId"];
             UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
             MatchesViewController * objView=[storyboard instantiateViewControllerWithIdentifier:@"tabBar"];
             self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
@@ -375,7 +378,6 @@
 }
 
 - (void)myAlertDelegateAction:(CustomAlert *)myAlert option:(int)option reason:(NSString *)reason {
-    
     if (option == 0) {
         if ([[alertDict objectForKey:@"type"] isEqualToString:@"1"]) {
             UIStoryboard *sb=[UIStoryboard storyboardWithName:@"Main" bundle:nil];

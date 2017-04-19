@@ -88,11 +88,13 @@
     myDelegate.myView=@"MatchesViewController";
     [myDelegate removeBadgeIconOnMatchesTab];
     if ([myDelegate.alertType isEqualToString:@"2"]) {
+        myDelegate.alertType=@"";
         UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         PendingAppointmentViewController *profileView =[storyboard instantiateViewControllerWithIdentifier:@"PendingAppointmentViewController"];
         profileView.screenName=@"Pending Appointments";
         [self.navigationController pushViewController:profileView animated:YES];
     }
+    
     [myDelegate showIndicator];
     [self performSelector:@selector(getMatchesDetails) withObject:nil afterDelay:.1];
 }
@@ -102,6 +104,7 @@
     myDelegate.myView=@"other";
 }
 #pragma mark - end
+
 #pragma mark - Set tabbar images
 - (void)setTabBarImages {
     UITabBarController * myTab = (UITabBarController *)self.tabBarController;
@@ -138,21 +141,19 @@
     [tabBarItem5 setSelectedImage:[[UIImage imageNamed:[tempImg imageForDeviceWithNameForOtherImages:@"more_selected"]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     tabBarItem5.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
     
-    if ([[UserDefaultManager getValue:@"firstTimeUser"] isEqualToString:@"firstTimeUser"]) {
-        myTab.selectedIndex=4;
-    }
-    
     if ([myDelegate.alertType isEqualToString:@"8"]) {
         myTab.selectedIndex = 2;
     }
     else if ([myDelegate.alertType isEqualToString:@"9"]) {
         myTab.selectedIndex = 1;
     }
-    
+    if ([[UserDefaultManager getValue:@"firstTimeUser"] isEqualToString:@"firstTimeUser"]) {
+        myTab.selectedIndex=4;
+    }
 }
 #pragma mark - end
 
-#pragma mark - Table view methods
+#pragma mark - Table view delegate and datasource methods
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (selectedSegment==0) {
         return 80;
@@ -161,6 +162,7 @@
         return 115;
     }
 }
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (selectedSegment==0) {
         return latestMatchesArray.count;
@@ -169,6 +171,7 @@
         return contactArray.count;
     }
 }
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (selectedSegment == 1)  {
@@ -205,6 +208,7 @@
         return newMatchesCell;
     }
 }
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (selectedSegment==0) {
@@ -250,6 +254,7 @@
          matchesTableView.hidden=YES;
      }] ;
 }
+
 //filter data for new , all and contacts segment
 - (void)filterData {
     

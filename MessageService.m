@@ -144,7 +144,7 @@
             }
         }
         else if(number.integerValue==0) {
-            [myDelegate stopIndicator];
+//            [myDelegate stopIndicator];
             success(nil);
         }
         else {

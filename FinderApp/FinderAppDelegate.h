@@ -21,6 +21,8 @@
 @property (nonatomic, strong) NSString *requestArrived;
 @property(nonatomic,retain) UINavigationController *currentNavigationController;
 @property (strong, nonatomic)NSString *myView;
+@property (nonatomic, strong) NSString *otherUserID;
+@property (nonatomic, strong) NSString *otherUserName;
 - (void)showIndicator;
 - (void)stopIndicator;
 - (void)startTrackingBg;
