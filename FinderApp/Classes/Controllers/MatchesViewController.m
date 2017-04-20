@@ -86,7 +86,7 @@
     matchesSegmentControl.selectedSegmentIndex=0;
     selectedSegment=0;
     myDelegate.myView=@"MatchesViewController";
-    [myDelegate removeBadgeIconOnMatchesTab];
+   
     if ([myDelegate.alertType isEqualToString:@"2"]) {
         myDelegate.alertType=@"";
         UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -143,6 +143,10 @@
     
     if ([myDelegate.alertType isEqualToString:@"8"]) {
         myTab.selectedIndex = 2;
+    }
+    else if ([myDelegate.alertType isEqualToString:@"11"]) {
+        myDelegate.alertType=@"";
+        myTab.selectedIndex = 0;
     }
     else if ([myDelegate.alertType isEqualToString:@"9"]) {
         myTab.selectedIndex = 1;
@@ -210,7 +214,6 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     if (selectedSegment==0) {
         UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         OtherUserProfileViewController *userProfile =[storyboard instantiateViewControllerWithIdentifier:@"OtherUserProfileViewController"];
@@ -249,15 +252,15 @@
     }
                                            failure:^(NSError *error)
      {
+         [myDelegate removeBadgeIconOnMatchesTab];
          noRecordLabel.hidden=NO;
          noRecordLabel.text=@"There are no matches found related to your interest areas.";
          matchesTableView.hidden=YES;
      }] ;
 }
 
-//filter data for new , all and contacts segment
+//filter data for new and contacts segment
 - (void)filterData {
-    
     [latestMatchesArray removeAllObjects];
     [contactArray removeAllObjects];
     if (selectedSegment==0) {
@@ -274,8 +277,13 @@
             }
         }
         if (latestMatchesArray.count==0) {
+            [myDelegate removeBadgeIconOnMatchesTab];
             noRecordLabel.hidden=NO;
             noRecordLabel.text=@"There are no matches found related to your interest areas.";
+        }
+        else {
+            [myDelegate removeBadgeIconOnMatchesTab];
+            [myDelegate addBadgeIconOnMatchesTab];
         }
     }
     else {

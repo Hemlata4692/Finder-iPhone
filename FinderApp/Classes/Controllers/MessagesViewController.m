@@ -77,6 +77,7 @@
         [myDelegate stopIndicator];
         messagesDataArray=[dataArray mutableCopy];
         if (messagesDataArray==nil) {
+            [myDelegate removeBadgeIconLastTab];
             noRecordLabel.hidden=NO;
             noRecordLabel.text=@"No new message.";
             messagesTableView.hidden=YES;
@@ -84,7 +85,6 @@
         else {
             messagesTableView.hidden=NO;
             noRecordLabel.hidden=YES;
-            [messagesTableView reloadData];
         }
         [messagesTableView reloadData];
     }
