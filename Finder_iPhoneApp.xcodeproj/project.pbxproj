@@ -1847,7 +1847,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "5c989cba-e2bd-4b3d-93e0-85796f54072d";
+				PROVISIONING_PROFILE = "bc253e21-1488-4df3-879e-ae8e9626939c";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1890,7 +1890,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "5c989cba-e2bd-4b3d-93e0-85796f54072d";
+				PROVISIONING_PROFILE = "bc253e21-1488-4df3-879e-ae8e9626939c";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1914,8 +1914,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.finder.finderapp;
 				PRODUCT_NAME = Finder_iPhoneApp;
-				PROVISIONING_PROFILE = "5c989cba-e2bd-4b3d-93e0-85796f54072d";
-				PROVISIONING_PROFILE_SPECIFIER = Finder_iPhone_app_Adhoc_2017;
+				PROVISIONING_PROFILE = "bc253e21-1488-4df3-879e-ae8e9626939c";
+				PROVISIONING_PROFILE_SPECIFIER = FinderApp_Adhoc25Apr2017;
 			};
 			name = Debug;
 		};
@@ -1937,8 +1937,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.finder.finderapp;
 				PRODUCT_NAME = Finder_iPhoneApp;
-				PROVISIONING_PROFILE = "5c989cba-e2bd-4b3d-93e0-85796f54072d";
-				PROVISIONING_PROFILE_SPECIFIER = Finder_iPhone_app_Adhoc_2017;
+				PROVISIONING_PROFILE = "bc253e21-1488-4df3-879e-ae8e9626939c";
+				PROVISIONING_PROFILE_SPECIFIER = FinderApp_Adhoc25Apr2017;
 			};
 			name = Release;
 		};

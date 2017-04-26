@@ -255,6 +255,7 @@
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    
     [UIApplication sharedApplication].applicationIconBadgeNumber=0;
     alertDict=[userInfo objectForKey:@"aps"];
     if (application.applicationState == UIApplicationStateActive)
@@ -291,7 +292,7 @@
             [alert dismissAlertView:self.window];
             alert = [[MyAlert alloc] initWithTitle:@"Match Request Rejected" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel" isTextField:NO];
         }
-        //meeting request ccepted
+        //meeting request accepted
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"5"]) {
             [alert dismissAlertView:self.window];
             alert = [[MyAlert alloc] initWithTitle:@"Meeting Request Accepted" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel" isTextField:NO];
@@ -306,7 +307,7 @@
             [alert dismissAlertView:self.window];
             alert = [[MyAlert alloc] initWithTitle:@"New Conference Assigned" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel" isTextField:NO];
         }
-        //when near by notiifcation
+        //when near by notiifcation/proximity
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"8"]) {
             [alert dismissAlertView:self.window];
             alert = [[MyAlert alloc] initWithTitle:@"Proximity Alerts" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel" isTextField:NO];
@@ -346,6 +347,8 @@
     else {
         if ([[alertDict objectForKey:@"type"] isEqualToString:@"1"]) {
             [self addBadgeIconOnMatchesTab];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"MatchesDetails" object:nil];
             alertType=@"11";
             UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
             MatchesViewController * objView=[storyboard instantiateViewControllerWithIdentifier:@"tabBar"];
@@ -381,6 +384,7 @@
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"10"]) {
             [UserDefaultManager setValue:[alertDict objectForKey:@"newemail"] key:@"userEmail"];
         }
+        //match found
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"11"]) {
             [self addBadgeIconOnMatchesTab];
             alertType=@"11";
@@ -511,6 +515,147 @@
 #pragma mark - UNUserNotificationCenter Delegate // >= iOS 10
 - (void)userNotificationCenter:(UNUserNotificationCenter *)center didReceiveNotificationResponse:(UNNotificationResponse *)response withCompletionHandler:(void(^)())completionHandler {
     NSLog(@"User Info = %@",response.notification.request.content.userInfo);
+    
+    [UIApplication sharedApplication].applicationIconBadgeNumber=0;
+    alertDict=[response.notification.request.content.userInfo objectForKey:@"aps"];
+    if ([UIApplication sharedApplication].applicationState == UIApplicationStateActive)
+    {
+        //new match request notification
+        if ([[alertDict objectForKey:@"type"] isEqualToString:@"1"]) {
+            [alert dismissAlertView:self.window];
+            alert = [[MyAlert alloc] initWithTitle:@"New Match Request" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"View" acceptBtnText:@"Accept" declineBtnText:@"Decline" isTextField:NO];
+            [self addBadgeIconOnMatchesTab];
+        }
+        //new meeting request notifcation
+        else if ([[alertDict objectForKey:@"type"] isEqualToString:@"2"]) {
+            [alert dismissAlertView:self.window];
+            alert = [[MyAlert alloc] initWithTitle:@"New Meeting Request" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Accept" acceptBtnText:@"" declineBtnText:@"Decline" isTextField:YES];
+            if (![myDelegate.myView isEqualToString:@"PendingViewController"]) {
+                if ([[UserDefaultManager getValue:@"PendingMessage"] isEqualToString:@"0"]) {
+                    [self addBadgeIconOnMoreTab];
+                }
+                if ([myDelegate.myView isEqualToString:@"MoreViewController"]) {
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"ReloadMoreListing" object:nil];
+                }
+            }
+            else {
+                [self removeBadgeIconOnMoreTab];
+            }
+        }
+        //when match request is accepted
+        else if ([[alertDict objectForKey:@"type"] isEqualToString:@"3"]) {
+            [alert dismissAlertView:self.window];
+            alert = [[MyAlert alloc] initWithTitle:@"Match Request Accepted" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel" isTextField:NO];
+        }
+        //when Match request is rejected
+        else if ([[alertDict objectForKey:@"type"] isEqualToString:@"4"]) {
+            [alert dismissAlertView:self.window];
+            alert = [[MyAlert alloc] initWithTitle:@"Match Request Rejected" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel" isTextField:NO];
+        }
+        //meeting request accepted
+        else if ([[alertDict objectForKey:@"type"] isEqualToString:@"5"]) {
+            [alert dismissAlertView:self.window];
+            alert = [[MyAlert alloc] initWithTitle:@"Meeting Request Accepted" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel" isTextField:NO];
+        }
+        //meeting request rejected
+        else if ([[alertDict objectForKey:@"type"] isEqualToString:@"6"]) {
+            [alert dismissAlertView:self.window];
+            alert = [[MyAlert alloc] initWithTitle:@"Meeting Request Rejected" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel" isTextField:NO];
+        }
+        //when new conference is assigned
+        else if ([[alertDict objectForKey:@"type"] isEqualToString:@"7"]) {
+            [alert dismissAlertView:self.window];
+            alert = [[MyAlert alloc] initWithTitle:@"New Conference Assigned" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel" isTextField:NO];
+        }
+        //when near by notiifcation/proximity
+        else if ([[alertDict objectForKey:@"type"] isEqualToString:@"8"]) {
+            [alert dismissAlertView:self.window];
+            alert = [[MyAlert alloc] initWithTitle:@"Proximity Alerts" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel" isTextField:NO];
+            if (![myDelegate.myView isEqualToString:@"ProximityAlertsViewController"]) {
+                [self addBadgeIconOnProximityTab];
+            }
+            else {
+                [self removeBadgeIconOnProximityTab];
+            }
+        }
+        //when new message arrives
+        else if ([[alertDict objectForKey:@"type"] isEqualToString:@"9"]) {
+            if ([myDelegate.myView isEqualToString:@"PersonalMessageView"]) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"GetMessageHistory" object:nil];
+            }
+            else if ([myDelegate.myView isEqualToString:@"MessagesViewController"]) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"GetMessageDetails" object:nil];
+                [self addBadgeIcon];
+            }
+            else {
+                [self addBadgeIcon];
+            }
+        }
+        //when user email is changed
+        else if ([[alertDict objectForKey:@"type"] isEqualToString:@"10"]) {
+            [UserDefaultManager setValue:[alertDict objectForKey:@"newemail"] key:@"userEmail"];
+            [alert dismissAlertView:self.window];
+            alert = [[MyAlert alloc] initWithTitle:@"Email Updated" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel" isTextField:NO];
+        }
+        //when user new matches are found
+        else if ([[alertDict objectForKey:@"type"] isEqualToString:@"11"]) {
+            [self addBadgeIconOnMatchesTab];
+            [alert dismissAlertView:self.window];
+            alert = [[MyAlert alloc] initWithTitle:@"New Match Found" myView:self.window delegate:self message:[alertDict objectForKey:@"alert"] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel" isTextField:NO];
+        }
+    }
+    else {
+        if ([[alertDict objectForKey:@"type"] isEqualToString:@"1"]) {
+            [self addBadgeIconOnMatchesTab];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"MatchesDetails" object:nil];
+            alertType=@"11";
+            UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            MatchesViewController * objView=[storyboard instantiateViewControllerWithIdentifier:@"tabBar"];
+            self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+            [self.window setRootViewController:objView];
+            [self.window makeKeyAndVisible];
+        }
+        else if ([[alertDict objectForKey:@"type"] isEqualToString:@"2"]) {
+            alertType=@"2";
+            if ([[UserDefaultManager getValue:@"PendingMessage"] isEqualToString:@"0"]) {
+                [self addBadgeIconOnMoreTab];
+            }
+        }
+        else if ([[alertDict objectForKey:@"type"] isEqualToString:@"8"]) {
+            alertType=@"8";
+            [self addBadgeIconOnProximityTab];
+            UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            MatchesViewController * objView=[storyboard instantiateViewControllerWithIdentifier:@"tabBar"];
+            self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+            [self.window setRootViewController:objView];
+            [self.window makeKeyAndVisible];
+        }
+        else if ([[alertDict objectForKey:@"type"] isEqualToString:@"9"]) {
+            alertType=@"9";
+            otherUserName=[alertDict objectForKey:@"otherUserName"];
+            otherUserID=[alertDict objectForKey:@"otherUserId"];
+            UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            MatchesViewController * objView=[storyboard instantiateViewControllerWithIdentifier:@"tabBar"];
+            self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+            [self.window setRootViewController:objView];
+            [self.window makeKeyAndVisible];
+        }
+        else if ([[alertDict objectForKey:@"type"] isEqualToString:@"10"]) {
+            [UserDefaultManager setValue:[alertDict objectForKey:@"newemail"] key:@"userEmail"];
+        }
+        //match found
+        else if ([[alertDict objectForKey:@"type"] isEqualToString:@"11"]) {
+            [self addBadgeIconOnMatchesTab];
+            alertType=@"11";
+            UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            MatchesViewController * objView=[storyboard instantiateViewControllerWithIdentifier:@"tabBar"];
+            self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+            [self.window setRootViewController:objView];
+            [self.window makeKeyAndVisible];
+        }
+        
+    }
 }
 #pragma mark - end
 
