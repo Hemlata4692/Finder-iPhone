@@ -41,6 +41,14 @@
     [super viewDidLoad];
     self.navigationItem.title=otherUserName;
     firstTime=1;
+    
+    if (myDelegate.isNotificationArrived && ![[UserDefaultManager getValue:@"conferenceId"] isEqualToString:myDelegate.notificationConferenceId]) {
+        
+        [myDelegate navigateToConferenceScreen];
+        return;
+        //Navigate to Switch conference screen
+    }
+    
     [self setTextView];
     // Pull To Refresh
     refreshControl = [[UIRefreshControl alloc] initWithFrame:CGRectMake(personalMessageTableView.frame.size.width/2, 50, 30, 30)];

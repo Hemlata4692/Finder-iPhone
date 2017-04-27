@@ -28,6 +28,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     self.navigationItem.title=@"Select Conference";
+
     noRecordFoundLabel.hidden=YES;
     conferenceListingArray=[[NSMutableArray alloc]init];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(conferenceList) name:@"Conference" object:nil];
@@ -45,6 +46,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
+    
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     myDelegate.myView=@"ConferenceViewController";
     [myDelegate showIndicator];
@@ -75,6 +77,25 @@
         else {
             noRecordFoundLabel.hidden=YES;
             conferenceListTableView.hidden=NO;
+            
+            //Added by Rohit Modi
+            if (myDelegate.isNotificationArrived && ![[UserDefaultManager getValue:@"conferenceId"] isEqualToString:myDelegate.notificationConferenceId]) {
+                
+                NSString *conferenceNameValue=@"";
+                for (ConferenceListDataModel *tempModel in conferenceListingArray) {
+                    
+                    if ([tempModel.conferenceId isEqualToString:myDelegate.notificationConferenceId]) {
+                        conferenceNameValue=tempModel.conferenceName;
+                        break;
+                    }
+                }
+                
+                SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
+                [alert showWarning:self title:@"Alert" subTitle:[NSString stringWithFormat:@"You have to switch on %@ to view.",conferenceNameValue] closeButtonTitle:@"Ok" duration:0.0f];
+            }
+            myDelegate.isNotificationArrived=false;
+            myDelegate.notificationConferenceId=@"";
+            //end
         }
         [conferenceListTableView reloadData];
     }
@@ -83,6 +104,13 @@
      }] ;
 }
 - (void)logoutUser {
+    
+    //Remove all blue dots and badge icon at conference switch by Rohit Modi
+    [myDelegate removeBadgeIconLastTab];
+    [myDelegate removeBadgeIconOnMoreTab];
+    [myDelegate removeBadgeIconOnMatchesTab];
+    [myDelegate removeBadgeIconOnProximityTab];
+    //end
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     myDelegate.navigationController = [storyboard instantiateViewControllerWithIdentifier:@"mainNavController"];
     myDelegate.window.rootViewController = myDelegate.navigationController;
@@ -109,8 +137,17 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     MatchesViewController * homeView = [storyboard instantiateViewControllerWithIdentifier:@"tabBar"];
+    
+    //Remove all blue dots and badge icon at conference switch by Rohit Modi
+    [myDelegate removeBadgeIconLastTab];
+    [myDelegate removeBadgeIconOnMoreTab];
+    [myDelegate removeBadgeIconOnMatchesTab];
+    [myDelegate removeBadgeIconOnProximityTab];
+    //end
+    
     [UserDefaultManager setValue:[[conferenceListingArray objectAtIndex:indexPath.row] conferenceId] key:@"conferenceId"];
     [UserDefaultManager setValue:@"firstTimeUser" key:@"firstTimeUser"];
     NSArray *dateStrings = [[[conferenceListingArray objectAtIndex:indexPath.row] conferenceDate] componentsSeparatedByString:@" - "];

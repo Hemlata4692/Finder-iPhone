@@ -93,6 +93,13 @@
         PendingAppointmentViewController *profileView =[storyboard instantiateViewControllerWithIdentifier:@"PendingAppointmentViewController"];
         profileView.screenName=@"Pending Appointments";
         [self.navigationController pushViewController:profileView animated:YES];
+        return;
+    }
+    else if (myDelegate.isNotificationArrived && ![[UserDefaultManager getValue:@"conferenceId"] isEqualToString:myDelegate.notificationConferenceId]) {
+        
+        [myDelegate navigateToConferenceScreen];
+        return;
+        //Navigate to Switch conference screen
     }
     
     [myDelegate showIndicator];

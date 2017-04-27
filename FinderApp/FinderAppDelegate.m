@@ -47,6 +47,11 @@
 @synthesize otherUserID;
 @synthesize otherUserName;
 
+//Added by Rohit Modi
+@synthesize isNotificationArrived;
+@synthesize notificationConferenceId;
+//end
+
 #pragma mark - Global indicator view
 - (void)showIndicator
 {
@@ -81,6 +86,12 @@
 
 #pragma mark - Appdelegate methods
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    
+    //Added by Rohit Modi
+    isNotificationArrived=false;
+    notificationConferenceId=@"";
+    //end
+    
     // Override point for customization after application launch.
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:237.0/255.0 green:120.0/255.0 blue:0.0/255.0 alpha:1.0]];
@@ -320,6 +331,8 @@
         }
         //when new message arrives
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"9"]) {
+            
+            alert = [[MyAlert alloc] initWithTitle:@"Proximity Alerts" myView:self.window delegate:self message:[NSString stringWithFormat:@"%@",alertDict] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel" isTextField:NO];
             if ([myDelegate.myView isEqualToString:@"PersonalMessageView"]) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"GetMessageHistory" object:nil];
             }
@@ -345,6 +358,12 @@
         }
     }
     else {
+        
+        //Added by Rohit Modi
+        isNotificationArrived=true;
+        notificationConferenceId=[alertDict objectForKey:@"conferenceId"];
+        //end
+        
         if ([[alertDict objectForKey:@"type"] isEqualToString:@"1"]) {
             [self addBadgeIconOnMatchesTab];
             
@@ -357,6 +376,12 @@
             [self.window makeKeyAndVisible];
         }
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"2"]) {
+            
+            //Added by Rohit Modi
+            isNotificationArrived=false;
+            notificationConferenceId=@"";
+            //end
+            
             alertType=@"2";
             if ([[UserDefaultManager getValue:@"PendingMessage"] isEqualToString:@"0"]) {
                 [self addBadgeIconOnMoreTab];
@@ -382,6 +407,11 @@
             [self.window makeKeyAndVisible];
         }
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"10"]) {
+            
+            //Added by Rohit Modi
+            isNotificationArrived=false;
+            notificationConferenceId=@"";
+            //end
             [UserDefaultManager setValue:[alertDict objectForKey:@"newemail"] key:@"userEmail"];
         }
         //match found
@@ -393,6 +423,13 @@
             self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
             [self.window setRootViewController:objView];
             [self.window makeKeyAndVisible];
+        }
+        else {
+        
+            //Added by Rohit Modi
+            isNotificationArrived=false;
+            notificationConferenceId=@"";
+            //end
         }
 
     }
@@ -580,6 +617,9 @@
         }
         //when new message arrives
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"9"]) {
+            
+             alert = [[MyAlert alloc] initWithTitle:@"Proximity Alerts" myView:self.window delegate:self message:[NSString stringWithFormat:@"%@",alertDict] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel" isTextField:NO];
+            
             if ([myDelegate.myView isEqualToString:@"PersonalMessageView"]) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"GetMessageHistory" object:nil];
             }
@@ -605,6 +645,11 @@
         }
     }
     else {
+        
+        //Added by Rohit Modi
+        isNotificationArrived=false;
+        notificationConferenceId=@"";
+        //end
         if ([[alertDict objectForKey:@"type"] isEqualToString:@"1"]) {
             [self addBadgeIconOnMatchesTab];
             
@@ -617,6 +662,11 @@
             [self.window makeKeyAndVisible];
         }
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"2"]) {
+            
+            //Added by Rohit Modi
+            isNotificationArrived=false;
+            notificationConferenceId=@"";
+            //end
             alertType=@"2";
             if ([[UserDefaultManager getValue:@"PendingMessage"] isEqualToString:@"0"]) {
                 [self addBadgeIconOnMoreTab];
@@ -642,6 +692,11 @@
             [self.window makeKeyAndVisible];
         }
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"10"]) {
+            
+            //Added by Rohit Modi
+            isNotificationArrived=false;
+            notificationConferenceId=@"";
+            //end
             [UserDefaultManager setValue:[alertDict objectForKey:@"newemail"] key:@"userEmail"];
         }
         //match found
@@ -654,7 +709,13 @@
             [self.window setRootViewController:objView];
             [self.window makeKeyAndVisible];
         }
-        
+        else {
+            
+            //Added by Rohit Modi
+            isNotificationArrived=false;
+            notificationConferenceId=@"";
+            //end
+        }
     }
 }
 #pragma mark - end
@@ -812,6 +873,16 @@
             }
         }
     }
+}
+#pragma mark - end
+
+#pragma mark - Global navigate to switch conference screen
+- (void)navigateToConferenceScreen {
+
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    ConferenceListViewController * homeView = [storyboard instantiateViewControllerWithIdentifier:@"ConferenceListViewController"];
+    [myDelegate.window setRootViewController:homeView];
+    [myDelegate.window makeKeyAndVisible];
 }
 #pragma mark - end
 @end
