@@ -332,7 +332,6 @@
         //when new message arrives
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"9"]) {
             
-            alert = [[MyAlert alloc] initWithTitle:@"Proximity Alerts" myView:self.window delegate:self message:[NSString stringWithFormat:@"%@",alertDict] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel" isTextField:NO];
             if ([myDelegate.myView isEqualToString:@"PersonalMessageView"]) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"GetMessageHistory" object:nil];
             }
@@ -618,8 +617,6 @@
         //when new message arrives
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"9"]) {
             
-             alert = [[MyAlert alloc] initWithTitle:@"Proximity Alerts" myView:self.window delegate:self message:[NSString stringWithFormat:@"%@",alertDict] viewBtnText:@"Ok" acceptBtnText:@"" declineBtnText:@"Cancel" isTextField:NO];
-            
             if ([myDelegate.myView isEqualToString:@"PersonalMessageView"]) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"GetMessageHistory" object:nil];
             }
@@ -647,9 +644,10 @@
     else {
         
         //Added by Rohit Modi
-        isNotificationArrived=false;
-        notificationConferenceId=@"";
+        isNotificationArrived=true;
+        notificationConferenceId=[alertDict objectForKey:@"conferenceId"];
         //end
+        
         if ([[alertDict objectForKey:@"type"] isEqualToString:@"1"]) {
             [self addBadgeIconOnMatchesTab];
             

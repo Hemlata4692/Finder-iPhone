@@ -150,6 +150,7 @@
     
     if ([myDelegate.alertType isEqualToString:@"8"]) {
         myTab.selectedIndex = 2;
+        return;
     }
     else if ([myDelegate.alertType isEqualToString:@"11"]) {
         myDelegate.alertType=@"";
@@ -157,6 +158,7 @@
     }
     else if ([myDelegate.alertType isEqualToString:@"9"]) {
         myTab.selectedIndex = 1;
+        return;
     }
     if ([[UserDefaultManager getValue:@"firstTimeUser"] isEqualToString:@"firstTimeUser"]) {
         myTab.selectedIndex=4;
