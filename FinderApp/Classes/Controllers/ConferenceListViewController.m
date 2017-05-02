@@ -79,7 +79,7 @@
             conferenceListTableView.hidden=NO;
             
             //Added by Rohit Modi
-            if (myDelegate.isNotificationArrived && ![[UserDefaultManager getValue:@"conferenceId"] isEqualToString:myDelegate.notificationConferenceId]) {
+            if (myDelegate.isNotificationArrived && ![[UserDefaultManager getValue:@"conferenceId"] isEqualToString:myDelegate.notificationConferenceId] && [UserDefaultManager getValue:@"conferenceId"]!=nil) {
                 
                 NSString *conferenceNameValue=@"";
                 for (ConferenceListDataModel *tempModel in conferenceListingArray) {

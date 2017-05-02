@@ -38,7 +38,6 @@
 - (void)getMatchesList:(void (^)(id data))success failure:(void (^)(NSError *error))failure {
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"]};
     [[Webservice sharedManager] post:kUrlMatchesList parameters:requestDict success:^(id responseObject) {
-        
         responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
         NSNumber *number = responseObject[@"isSuccess"];
         if (number.integerValue==1) {

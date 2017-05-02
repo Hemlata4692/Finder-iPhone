@@ -690,7 +690,6 @@
             [self.window makeKeyAndVisible];
         }
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"10"]) {
-            
             //Added by Rohit Modi
             isNotificationArrived=false;
             notificationConferenceId=@"";
