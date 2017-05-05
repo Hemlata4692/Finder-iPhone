@@ -181,7 +181,7 @@
     timer=nil;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         //chnage to 3 min
-        NSTimer* t = [NSTimer scheduledTimerWithTimeInterval:3*60 target:self selector:@selector(locationUpdate) userInfo:nil repeats:YES];
+        NSTimer* t = [NSTimer scheduledTimerWithTimeInterval:1*60 target:self selector:@selector(locationUpdate) userInfo:nil repeats:YES];
         [[NSRunLoop currentRunLoop] addTimer:t forMode:NSDefaultRunLoopMode];
         [[NSRunLoop currentRunLoop] run];
     });
@@ -218,7 +218,7 @@
     if ([isLocation isEqualToString:@"2"]) {
         isLocation=@"0";
         //chnage to 3 min
-        timer = [NSTimer scheduledTimerWithTimeInterval:3*60
+        timer = [NSTimer scheduledTimerWithTimeInterval:1*60
                                                  target: self
                                                selector: @selector(locationUpdate)
                                                userInfo: nil
@@ -365,7 +365,6 @@
         
         if ([[alertDict objectForKey:@"type"] isEqualToString:@"1"]) {
             [self addBadgeIconOnMatchesTab];
-            
             [[NSNotificationCenter defaultCenter] postNotificationName:@"MatchesDetails" object:nil];
             alertType=@"11";
             UIStoryboard * storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -375,7 +374,6 @@
             [self.window makeKeyAndVisible];
         }
         else if ([[alertDict objectForKey:@"type"] isEqualToString:@"2"]) {
-            
             //Added by Rohit Modi
             isNotificationArrived=false;
             notificationConferenceId=@"";
