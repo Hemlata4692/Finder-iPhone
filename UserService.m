@@ -108,6 +108,7 @@
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"conferenceId":[UserDefaultManager getValue:@"conferenceId"],@"latitude":latitude,@"longitude":longitude ,@"proximityRange":proximityRange};
     [[Webservice sharedManager] post:kUrlLocationUpdate parameters:requestDict success:^(id responseObject) {
         responseObject=(NSMutableDictionary *)[NullValueChecker checkDictionaryForNullValue:[responseObject mutableCopy]];
+        NSLog(@"location update %@",requestDict);
        // [self callCrashWebservice:[NSString stringWithFormat:@"Success: %@",requestDict]];
         if ([[responseObject objectForKey:@"isSuccess"] isEqualToString:@"1"]) {
             success(responseObject);
@@ -145,6 +146,7 @@
      }];
 }
 #pragma mark- end
+
 #pragma mark- Register device
 - (void)registerDeviceForPushNotification:(NSString *)deviceToken deviceType:(NSString *)deviceType success:(void (^)(id))success failure:(void (^)(NSError *))failure {
     NSDictionary *requestDict = @{@"userId":[UserDefaultManager getValue:@"userId"],@"deviceToken":deviceToken,@"deviceType":deviceType};

@@ -1554,6 +1554,7 @@
 					B7A8DD641CAE2BF2007F56B6 = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = XL3XP5B936;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1847,7 +1848,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "a609c4b8-7b5d-4586-ac15-f4713406cab6";
+				PROVISIONING_PROFILE = "9c62ba16-b62f-4419-b543-e2393a56323e";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1890,7 +1891,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "a609c4b8-7b5d-4586-ac15-f4713406cab6";
+				PROVISIONING_PROFILE = "9c62ba16-b62f-4419-b543-e2393a56323e";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -1914,8 +1915,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.finder.finderapp;
 				PRODUCT_NAME = Finder_iPhoneApp;
-				PROVISIONING_PROFILE = "a609c4b8-7b5d-4586-ac15-f4713406cab6";
-				PROVISIONING_PROFILE_SPECIFIER = Finder_iPhone_ap_appstore_27March_2017;
+				PROVISIONING_PROFILE = "9c62ba16-b62f-4419-b543-e2393a56323e";
+				PROVISIONING_PROFILE_SPECIFIER = FinderApp_Adhoc_10thMay_2017;
 			};
 			name = Debug;
 		};
@@ -1937,8 +1938,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.finder.finderapp;
 				PRODUCT_NAME = Finder_iPhoneApp;
-				PROVISIONING_PROFILE = "a609c4b8-7b5d-4586-ac15-f4713406cab6";
-				PROVISIONING_PROFILE_SPECIFIER = Finder_iPhone_ap_appstore_27March_2017;
+				PROVISIONING_PROFILE = "9c62ba16-b62f-4419-b543-e2393a56323e";
+				PROVISIONING_PROFILE_SPECIFIER = FinderApp_Adhoc_10thMay_2017;
 			};
 			name = Release;
 		};

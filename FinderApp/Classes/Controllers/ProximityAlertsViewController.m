@@ -45,6 +45,14 @@
     [super viewWillAppear:YES];
     myDelegate.myView=@"ProximityAlertsViewController";
     [myDelegate removeBadgeIconOnProximityTab];
+    
+    if (myDelegate.isNotificationArrived && ![[UserDefaultManager getValue:@"conferenceId"] isEqualToString:myDelegate.notificationConferenceId]) {
+        
+        [myDelegate navigateToConferenceScreen];
+        return;
+        //Navigate to Switch conference screen
+    }
+    
     [myDelegate showIndicator];
     [self performSelector:@selector(getProximityAlerts) withObject:nil afterDelay:.1];
 }

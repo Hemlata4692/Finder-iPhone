@@ -86,13 +86,22 @@
     matchesSegmentControl.selectedSegmentIndex=0;
     selectedSegment=0;
     myDelegate.myView=@"MatchesViewController";
-    [myDelegate removeBadgeIconOnMatchesTab];
+   
     if ([myDelegate.alertType isEqualToString:@"2"]) {
+        myDelegate.alertType=@"";
         UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         PendingAppointmentViewController *profileView =[storyboard instantiateViewControllerWithIdentifier:@"PendingAppointmentViewController"];
         profileView.screenName=@"Pending Appointments";
         [self.navigationController pushViewController:profileView animated:YES];
+        return;
     }
+    else if (myDelegate.isNotificationArrived && ![[UserDefaultManager getValue:@"conferenceId"] isEqualToString:myDelegate.notificationConferenceId]) {
+        
+        [myDelegate navigateToConferenceScreen];
+        return;
+        //Navigate to Switch conference screen
+    }
+    
     [myDelegate showIndicator];
     [self performSelector:@selector(getMatchesDetails) withObject:nil afterDelay:.1];
 }
@@ -102,6 +111,7 @@
     myDelegate.myView=@"other";
 }
 #pragma mark - end
+
 #pragma mark - Set tabbar images
 - (void)setTabBarImages {
     UITabBarController * myTab = (UITabBarController *)self.tabBarController;
@@ -137,8 +147,18 @@
     tempImg =[UIImage imageNamed:@"more_selected"];
     [tabBarItem5 setSelectedImage:[[UIImage imageNamed:[tempImg imageForDeviceWithNameForOtherImages:@"more_selected"]] imageWithRenderingMode:UIImageRenderingModeAlwaysOriginal]];
     tabBarItem5.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
+    
     if ([myDelegate.alertType isEqualToString:@"8"]) {
         myTab.selectedIndex = 2;
+        return;
+    }
+    else if ([myDelegate.alertType isEqualToString:@"11"]) {
+        myDelegate.alertType=@"";
+        myTab.selectedIndex = 0;
+    }
+    else if ([myDelegate.alertType isEqualToString:@"9"]) {
+        myTab.selectedIndex = 1;
+        return;
     }
     if ([[UserDefaultManager getValue:@"firstTimeUser"] isEqualToString:@"firstTimeUser"]) {
         myTab.selectedIndex=4;
@@ -146,7 +166,7 @@
 }
 #pragma mark - end
 
-#pragma mark - Table view methods
+#pragma mark - Table view delegate and datasource methods
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (selectedSegment==0) {
         return 80;
@@ -155,6 +175,7 @@
         return 115;
     }
 }
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (selectedSegment==0) {
         return latestMatchesArray.count;
@@ -163,6 +184,7 @@
         return contactArray.count;
     }
 }
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     if (selectedSegment == 1)  {
@@ -199,8 +221,8 @@
         return newMatchesCell;
     }
 }
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     if (selectedSegment==0) {
         UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         OtherUserProfileViewController *userProfile =[storyboard instantiateViewControllerWithIdentifier:@"OtherUserProfileViewController"];
@@ -239,14 +261,15 @@
     }
                                            failure:^(NSError *error)
      {
+         [myDelegate removeBadgeIconOnMatchesTab];
          noRecordLabel.hidden=NO;
          noRecordLabel.text=@"There are no matches found related to your interest areas.";
          matchesTableView.hidden=YES;
      }] ;
 }
-//filter data for new , all and contacts segment
+
+//filter data for new and contacts segment
 - (void)filterData {
-    
     [latestMatchesArray removeAllObjects];
     [contactArray removeAllObjects];
     if (selectedSegment==0) {
@@ -263,8 +286,13 @@
             }
         }
         if (latestMatchesArray.count==0) {
+            [myDelegate removeBadgeIconOnMatchesTab];
             noRecordLabel.hidden=NO;
             noRecordLabel.text=@"There are no matches found related to your interest areas.";
+        }
+        else {
+            [myDelegate removeBadgeIconOnMatchesTab];
+            [myDelegate addBadgeIconOnMatchesTab];
         }
     }
     else {

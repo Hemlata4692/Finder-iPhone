@@ -15,7 +15,7 @@
 
 @interface PersonalMessageViewController ()
 {
-    NSString *offset, *messageString;
+    NSString *offset,*messageString;
     NSMutableArray *messageDateArray;
     CGFloat messageHeight, messageYValue;
     int totalRecords, firstTime;
@@ -35,11 +35,20 @@
 @synthesize otherUserId;
 @synthesize otherUserName;
 
+
 #pragma mark- View life cycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.navigationItem.title=otherUserName;
     firstTime=1;
+    
+    if (myDelegate.isNotificationArrived && ![[UserDefaultManager getValue:@"conferenceId"] isEqualToString:myDelegate.notificationConferenceId]) {
+        
+        [myDelegate navigateToConferenceScreen];
+        return;
+        //Navigate to Switch conference screen
+    }
+    
     [self setTextView];
     // Pull To Refresh
     refreshControl = [[UIRefreshControl alloc] initWithFrame:CGRectMake(personalMessageTableView.frame.size.width/2, 50, 30, 30)];
@@ -54,29 +63,30 @@
 }
 
 - (void)getHistory {
-    [myDelegate removeBadgeIconLastTab];
     offset=@"0";
     [messageDateArray removeAllObjects];
     [myDelegate showIndicator];
     [self performSelector:@selector(getMessageHistory) withObject:nil afterDelay:0.1];
+  
 }
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:YES];
-    [myDelegate removeBadgeIconLastTab];
     myDelegate.myView=@"PersonalMessageView";
     offset=@"0";
     pageOffset=0;
-    
 }
+
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:YES];
     myDelegate.myView=@"other";
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 - (void)setTextView {
     sendMessageTextView.text = @"";
     [sendMessageTextView setPlaceholder:@"Type a message here..."];
@@ -102,11 +112,14 @@
     personalMessageTableView.translatesAutoresizingMaskIntoConstraints = YES;
     personalMessageTableView.frame = CGRectMake(0, 0, [UIScreen mainScreen].bounds.size.width, [UIScreen mainScreen].bounds.size.height - (messageHeight +64 +49 + 14));
     offset=@"0";
+    
+    [myDelegate stopIndicator];
     [myDelegate showIndicator];
     [self performSelector:@selector(getMessageHistory) withObject:nil afterDelay:.1];
     messageDateArray=[[NSMutableArray alloc]init];
 }
 #pragma mark - end
+
 #pragma mark - Refresh table
 //Pull to refresh implementation on my submission data
 - (void)refreshTable {
@@ -125,6 +138,7 @@
     }
 }
 #pragma mark - end
+
 #pragma mark - Webservice
 - (void)getMessageHistory {
     [[MessageService sharedManager] getMessageHistory:otherUserId readStatus:@"True" pageOffSet:offset success:^(id dataArray) {
@@ -162,11 +176,11 @@
     }
                                               failure:^(NSError *error)
      {
-         
      }] ;
 }
+
+
 - (void)sendMessage {
-   
     [[MessageService sharedManager] sendMessage:otherUserId message:messageString success:^(id responseObject) {
         [myDelegate stopIndicator];
         NSInteger lastSectionIndex = [personalMessageTableView numberOfSections] - 1;
@@ -244,14 +258,15 @@
     NSIndexPath* ip = [NSIndexPath indexPathForRow:[[[messageDateArray objectAtIndex:messageDateArray.count-1] messagesHistoryArray] count]-1 inSection:messageDateArray.count-1 ];
     [personalMessageTableView scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionBottom animated:NO];
 }
+
 - (IBAction)retryButtonAction:(MyButton *)sender {
-    
     SCLAlertView *alert = [[SCLAlertView alloc] initWithNewWindow];
     [alert addButton:@"Yes" actionBlock:^(void) {
         [self sendMessage];
     }];
     [alert showWarning:nil title:@"Alert" subTitle:@"Do you want to resend message?" closeButtonTitle:@"No" duration:0.0f];
 }
+
 - (IBAction)tapGestureOnView:(UITapGestureRecognizer *)sender {
     [sendMessageTextView resignFirstResponder];
 }
@@ -261,9 +276,11 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return messageDateArray.count;
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section{
     return 40;
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForFooterInSection:(NSInteger)section{
     if (section==0) {
         return 0;
@@ -272,6 +289,7 @@
         return 0;
     }
 }
+
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     UIView * headerView;
     headerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.bounds.size.width, 40.0)];
@@ -297,6 +315,7 @@
     [headerView addSubview:dateLabel];
     return headerView;
 }
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     MessageHistoryDataModel *data=[[[messageDateArray objectAtIndex:indexPath.section]messagesHistoryArray] objectAtIndex:indexPath.row];
@@ -309,9 +328,11 @@
     
     return 60+textRect.size.height;
 }
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [[messageDateArray objectAtIndex:section]messagesHistoryArray].count;
 }
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     MessageHistoryDataModel *data=[[[messageDateArray objectAtIndex:indexPath.section]messagesHistoryArray] objectAtIndex:indexPath.row];
@@ -348,6 +369,7 @@
                                              selector:@selector(keyboardWillHide:)
                                                  name:UIKeyboardWillHideNotification object:nil];
 }
+
 - (void)keyboardWillShow:(NSNotification *)notification {
     NSDictionary* info = [notification userInfo];
     NSValue *aValue = [info objectForKey:UIKeyboardFrameEndUserInfoKey];
@@ -359,6 +381,7 @@
         [personalMessageTableView scrollToRowAtIndexPath:ip atScrollPosition:UITableViewScrollPositionBottom animated:NO];
     }
 }
+
 - (void)keyboardWillHide:(NSNotification *)notification {
     messageView.frame = CGRectMake(0, [UIScreen mainScreen].bounds.size.height- messageHeight -64 -49 -10, self.view.bounds.size.width, messageHeight+ 10);
     messageYValue = [UIScreen mainScreen].bounds.size.height -64 -49 -10;
@@ -420,6 +443,7 @@
     }
     return YES;
 }
+
 - (void)textViewDidChange:(UITextView *)textView {
     if (([sendMessageTextView sizeThatFits:sendMessageTextView.frame.size].height < 126) && ([sendMessageTextView sizeThatFits:sendMessageTextView.frame.size].height > 50)) {
         
