@@ -83,7 +83,6 @@
                 
                 NSString *conferenceNameValue=@"";
                 for (ConferenceListDataModel *tempModel in conferenceListingArray) {
-                    
                     if ([tempModel.conferenceId isEqualToString:myDelegate.notificationConferenceId]) {
                         conferenceNameValue=tempModel.conferenceName;
                         break;

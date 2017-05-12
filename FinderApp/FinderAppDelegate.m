@@ -97,6 +97,7 @@
     [[UINavigationBar appearance] setBarTintColor:[UIColor colorWithRed:237.0/255.0 green:120.0/255.0 blue:0.0/255.0 alpha:1.0]];
     [[UINavigationBar appearance] setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor], NSForegroundColorAttributeName, [UIFont fontWithName:@"Roboto-Regular" size:19.0], NSFontAttributeName, nil]];
     alertDict=[NSDictionary new];
+   
     locationManager = [[CLLocationManager alloc] init];
     locationManager.delegate = self;
     [locationManager requestAlwaysAuthorization];
@@ -181,7 +182,7 @@
     timer=nil;
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
         //chnage to 3 min
-        NSTimer* t = [NSTimer scheduledTimerWithTimeInterval:1*60 target:self selector:@selector(locationUpdate) userInfo:nil repeats:YES];
+        NSTimer* t = [NSTimer scheduledTimerWithTimeInterval:3*60 target:self selector:@selector(locationUpdate) userInfo:nil repeats:YES];
         [[NSRunLoop currentRunLoop] addTimer:t forMode:NSDefaultRunLoopMode];
         [[NSRunLoop currentRunLoop] run];
     });
@@ -218,7 +219,7 @@
     if ([isLocation isEqualToString:@"2"]) {
         isLocation=@"0";
         //chnage to 3 min
-        timer = [NSTimer scheduledTimerWithTimeInterval:1*60
+        timer = [NSTimer scheduledTimerWithTimeInterval:3*60
                                                  target: self
                                                selector: @selector(locationUpdate)
                                                userInfo: nil
