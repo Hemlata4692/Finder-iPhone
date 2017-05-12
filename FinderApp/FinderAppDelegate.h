@@ -21,6 +21,14 @@
 @property (nonatomic, strong) NSString *requestArrived;
 @property(nonatomic,retain) UINavigationController *currentNavigationController;
 @property (strong, nonatomic)NSString *myView;
+@property (nonatomic, strong) NSString *otherUserID;
+@property (nonatomic, strong) NSString *otherUserName;
+
+//Added by Rohit modi
+@property (nonatomic, strong) NSString *notificationConferenceId;
+@property (nonatomic, assign) bool isNotificationArrived;
+//end
+
 - (void)showIndicator;
 - (void)stopIndicator;
 - (void)startTrackingBg;
@@ -35,5 +43,7 @@
 - (void)addBadgeIconOnMatchesTab;
 - (void)removeBadgeIconOnMatchesTab;
 - (void)removeBadgeIconOnProximityTab;
+- (void)navigateToConferenceScreen;
 @end
 
+//com.finder.finderapp app store id

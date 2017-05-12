@@ -12,6 +12,7 @@
 #import "MessageService.h"
 #import "MessagesDataModel.h"
 
+
 @interface MessagesViewController () {
     NSMutableArray *messagesDataArray;
 }
@@ -32,18 +33,41 @@
     messagesDataArray=[[NSMutableArray alloc]init];
     noRecordLabel.hidden=YES;
     // Do any additional setup after loading the view.
+    
 }
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 - (void)viewWillAppear:(BOOL)animated {
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
-    [UserDefaultManager setValue:nil key:@"unReadMessegaes"];
-    [myDelegate removeBadgeIconLastTab];
     
+    if ([myDelegate.alertType isEqualToString:@"9"]) {
+        myDelegate.alertType=@"";
+        UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        PersonalMessageViewController *msgView =[storyboard instantiateViewControllerWithIdentifier:@"PersonalMessageViewController"];
+        msgView.otherUserId=myDelegate.otherUserID;
+        msgView.otherUserName=myDelegate.otherUserName;
+        [self.navigationController pushViewController:msgView animated:YES];
+        return;
+    }
+
+    [UserDefaultManager setValue:nil key:@"unReadMessegaes"];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getDifferentMessages) name:@"GetMessageDetails" object:nil];
     [myDelegate showIndicator];
     [self performSelector:@selector(getDifferentMessages) withObject:nil afterDelay:.1];
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:YES];
+    myDelegate.myView=@"MessagesViewController";
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:YES];
+    myDelegate.myView=@"other";
 }
 #pragma mark - end
 
@@ -53,6 +77,7 @@
         [myDelegate stopIndicator];
         messagesDataArray=[dataArray mutableCopy];
         if (messagesDataArray==nil) {
+            [myDelegate removeBadgeIconLastTab];
             noRecordLabel.hidden=NO;
             noRecordLabel.text=@"No new message.";
             messagesTableView.hidden=YES;
@@ -60,7 +85,6 @@
         else {
             messagesTableView.hidden=NO;
             noRecordLabel.hidden=YES;
-            [messagesTableView reloadData];
         }
         [messagesTableView reloadData];
     }
@@ -75,6 +99,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return messagesDataArray.count;
 }
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     NSString *simpleTableIdentifier = @"messagesCell";
     MessagesViewCell *messagesCell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
@@ -86,7 +111,18 @@
     [messagesCell displayMessageData:data indexPath:(int)indexPath.row rectSize:messagesCell.frame.size];
     return messagesCell;
 }
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    BOOL flag=false;
+    for (int i=0; i<messagesDataArray.count; i++) {
+        if (i!=indexPath.row && [[[messagesDataArray objectAtIndex:i] messageCount] intValue]!=0) {
+            flag=true;
+            break;
+        }
+    }
+    if (!flag) {
+        [myDelegate removeBadgeIconLastTab];
+    }
     UIStoryboard * storyboard=storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     PersonalMessageViewController *msgView =[storyboard instantiateViewControllerWithIdentifier:@"PersonalMessageViewController"];
     msgView.otherUserId=[[messagesDataArray objectAtIndex:indexPath.row] otherUserId];

@@ -90,7 +90,6 @@
 - (void)viewWillAppear:(BOOL)animated {
     [[UIApplication sharedApplication] setStatusBarHidden:NO];
     if ([screenName isEqualToString:@"Pending Appointments"]) {
-        
         myDelegate.myView=@"PendingViewController";
         [UserDefaultManager setValue:@"0" key:@"PendingMessage"];
         [myDelegate removeBadgeIconOnMoreTab];

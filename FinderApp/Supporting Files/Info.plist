@@ -17,11 +17,11 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>1.01</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>1.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -34,11 +34,11 @@
 	<key>NSContactsUsageDescription</key>
 	<string>Need to access contacts</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Need location for this app</string>
+	<string>Your location is used to fetch near by matches with in your range.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Need location for this app</string>
+	<string>Your location is used to fetch near by matches with in your range.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Need to access photo library</string>
+	<string>You can change your profile picture usinh your photo library.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>FontAwesome.ttf</string>
