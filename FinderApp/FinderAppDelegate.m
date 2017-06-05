@@ -358,7 +358,6 @@
         }
     }
     else {
-        
         //Added by Rohit Modi
         isNotificationArrived=true;
         notificationConferenceId=[alertDict objectForKey:@"conferenceId"];

@@ -68,7 +68,6 @@
 
 #pragma mark - Webservice
 - (void)getCalendarDetails {
-    
     [[ConferenceService sharedManager] getCalendarDetails:[UserDefaultManager getValue:@"conferenceId"] success:^(id dataArray) {
         [self contactDetails];
         sectionArray=[dataArray mutableCopy];
@@ -117,14 +116,17 @@
                         notification.timeZone = [NSTimeZone defaultTimeZone];
                         notification.soundName = UILocalNotificationDefaultSoundName;
                         notification.applicationIconBadgeNumber = 0;
-                        NSDictionary *infoDict = [NSDictionary dictionaryWithObject:data.eventId forKey:@"appointmentID"];
-                        notification.userInfo = infoDict;
+                        NSDictionary *infoDict;
+                        if (![data.eventId isEqualToString:@""] && data.eventId!=nil) {
+                            infoDict = [NSDictionary dictionaryWithObject:data.eventId forKey:@"appointmentID"];
+                            notification.userInfo = infoDict;
                         //check if notification is already set or not
                         NSArray *arrayOfLocalNotifications = [[UIApplication sharedApplication] scheduledLocalNotifications];
                         for (UILocalNotification *localNotification in arrayOfLocalNotifications) {
                             if ([localNotification.userInfo isEqualToDictionary:[NSDictionary dictionaryWithObject:data.eventId forKey:@"appointmentID"]]) {
                                 [[UIApplication sharedApplication] cancelLocalNotification:localNotification] ; // delete the notification from the system
                             }
+                        }
                         }
                         //if notification exists cancel and set
                         NSMutableArray *notifications = [[NSMutableArray alloc] init];
@@ -142,14 +144,17 @@
                         notification.timeZone = [NSTimeZone defaultTimeZone];
                         notification.soundName = UILocalNotificationDefaultSoundName;
                         notification.applicationIconBadgeNumber = 0;
-                        NSDictionary *infoDict = [NSDictionary dictionaryWithObject:data.eventId forKey:@"appointmentID"];
-                        notification.userInfo = infoDict;
+                        NSDictionary *infoDict;
+                        if (![data.eventId isEqualToString:@""] && data.eventId!=nil) {
+                            infoDict = [NSDictionary dictionaryWithObject:data.eventId forKey:@"appointmentID"];
+                            notification.userInfo = infoDict;
                         //check if notification is already set or not
                         NSArray *arrayOfLocalNotifications = [[UIApplication sharedApplication] scheduledLocalNotifications];
                         for (UILocalNotification *localNotification in arrayOfLocalNotifications) {
                             if ([localNotification.userInfo isEqualToDictionary:[NSDictionary dictionaryWithObject:data.eventId forKey:@"appointmentID"]]) {
                                 [[UIApplication sharedApplication] cancelLocalNotification:localNotification] ; // delete the notification from the system
                             }
+                        }
                         }
                         //if notification exists cancel and set
                         NSMutableArray *notifications = [[NSMutableArray alloc] init];
