@@ -68,7 +68,7 @@
     }
     else {
         self.navigationItem.title=screenName;
-        noResulFoundLabel.text=@"No requested appointement(s).";
+        noResulFoundLabel.text=@"No requested appointment(s).";
         [myDelegate showIndicator];
         [self performSelector:@selector(getRequestedAppointmentList) withObject:nil afterDelay:.1];
     }
@@ -111,7 +111,7 @@
         appointmentDataArray=[dataArray mutableCopy];
         if (appointmentDataArray==nil) {
             noResulFoundLabel.hidden=NO;
-            noResulFoundLabel.text=@"No requested appointement(s).";
+            noResulFoundLabel.text=@"No requested appointment(s).";
             pendingAppointmentTable.hidden=YES;
         }
         else {
@@ -123,7 +123,7 @@
                                                     failure:^(NSError *error)
      {
          noResulFoundLabel.hidden=NO;
-         noResulFoundLabel.text=@"No requested appointement(s).";
+         noResulFoundLabel.text=@"No requested appointment(s).";
          pendingAppointmentTable.hidden=YES;
      }] ;
 }
@@ -133,7 +133,7 @@
         appointmentDataArray=[dataArray mutableCopy];
         if (appointmentDataArray==nil) {
             noResulFoundLabel.hidden=NO;
-            noResulFoundLabel.text=@"No pending appointement(s).";
+            noResulFoundLabel.text=@"No pending appointment(s).";
             pendingAppointmentTable.hidden=YES;
         }
         else {
@@ -145,7 +145,7 @@
                                                   failure:^(NSError *error)
      {
          noResulFoundLabel.hidden=NO;
-         noResulFoundLabel.text=@"No pending appointement(s).";
+         noResulFoundLabel.text=@"No pending appointment(s).";
          pendingAppointmentTable.hidden=YES;
      }] ;
 }

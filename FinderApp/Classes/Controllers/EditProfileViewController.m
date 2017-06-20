@@ -135,7 +135,9 @@
     isInterestedInOtherSelected=NO;
     isInterestedAreaOtherSelected=NO;
     [self viewCustomization:NO isSecondOtherShow:NO];
-    [self displayData];
+    if (profileArray.count!=0) {
+        [self displayData];
+    }
     [myDelegate showIndicator];
     [self performSelector:@selector(getInterestListing) withObject:nil afterDelay:.1];
 }
