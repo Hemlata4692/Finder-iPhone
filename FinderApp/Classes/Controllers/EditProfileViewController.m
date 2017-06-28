@@ -229,13 +229,64 @@
     userNameTextField.text=[[profileArray objectAtIndex:0]userName];
     lastNameTextField.text=[[profileArray objectAtIndex:0]userSurname];
     userEmailTextfield.text=[[profileArray objectAtIndex:0]userEmail];
-    mobileNumberTextField.text=[[profileArray objectAtIndex:0]userMobileNumber];
-    companyNameTextField.text=[[profileArray objectAtIndex:0]userCompanyName];
-    aboutCompanyTextView.text=[[profileArray objectAtIndex:0]aboutUserCompany];
-    companyAddressTextField.text=[[profileArray objectAtIndex:0]userComapnyAddress];
-    professionTextField.text=[[profileArray objectAtIndex:0]userProfession];
-    interestedInTextField.text=[[profileArray objectAtIndex:0]userInterestedIn];
-    interestedAreaTextField.text=[[profileArray objectAtIndex:0]userInterests];
+    conferenceNameLabel.text=[[profileArray objectAtIndex:0]conferenceName];
+    
+    if ([[[profileArray objectAtIndex:0]userDesignation] isEqualToString:@""]) {
+        designationTextField.text=@"NA";
+    }
+    else {
+        designationTextField.text=[[profileArray objectAtIndex:0]userDesignation];
+
+    }
+    if ([[[profileArray objectAtIndex:0]userLinkedInLink] isEqualToString:@""]) {
+        linkedInTextField.text=@"NA";
+    }
+    else {
+        linkedInTextField.text=[[profileArray objectAtIndex:0]userLinkedInLink];
+    }
+    if ([[[profileArray objectAtIndex:0]userMobileNumber] isEqualToString:@""]) {
+        mobileNumberTextField.text=@"NA";
+    }
+    else {
+        mobileNumberTextField.text=[[profileArray objectAtIndex:0]userMobileNumber];
+    }
+    if ([[[profileArray objectAtIndex:0]userCompanyName] isEqualToString:@""]) {
+        companyNameTextField.text=@"NA";
+    }
+    else {
+        companyNameTextField.text=[[profileArray objectAtIndex:0]userCompanyName];
+    }
+    if ([[[profileArray objectAtIndex:0]aboutUserCompany] isEqualToString:@""]) {
+        aboutCompanyTextView.text=@"NA";
+    }
+    else {
+        aboutCompanyTextView.text=[[profileArray objectAtIndex:0]aboutUserCompany];
+    }
+    if ([[[profileArray objectAtIndex:0]userComapnyAddress] isEqualToString:@""]) {
+        companyAddressTextField.text=@"NA";
+    }
+    else {
+        companyAddressTextField.text=[[profileArray objectAtIndex:0]userComapnyAddress];
+    }
+    
+    if ([[[profileArray objectAtIndex:0]userProfession] isEqualToString:@""]) {
+        professionTextField.text=@"NA";
+    }
+    else {
+        professionTextField.text=[[profileArray objectAtIndex:0]userProfession];
+    }
+    if ([[[profileArray objectAtIndex:0]userInterestedIn] isEqualToString:@""]) {
+        interestedInTextField.text=@"NA";
+    }
+    else {
+        interestedInTextField.text=[[profileArray objectAtIndex:0]userInterestedIn];
+    }
+    if ([[[profileArray objectAtIndex:0]userInterests] isEqualToString:@""]) {
+        interestedAreaTextField.text=@"NA";
+    }
+    else {
+        interestedAreaTextField.text=[[profileArray objectAtIndex:0]userInterests];
+    }
     for (int i=0; i<[[[[profileArray objectAtIndex:0]userInterests] componentsSeparatedByString:@","] count]; i++) {
         [selectedPickerArray addObject:[[[[[profileArray objectAtIndex:0]userInterests] componentsSeparatedByString:@","] objectAtIndex:i] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
     }
@@ -243,9 +294,7 @@
     for (int i=0; i<[[[[profileArray objectAtIndex:0]userInterestedIn] componentsSeparatedByString:@","] count]; i++) {
         [interestedInSelectcedArray addObject:[[[[[profileArray objectAtIndex:0]userInterestedIn] componentsSeparatedByString:@","] objectAtIndex:i] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]]];
     }
-    designationTextField.text=[[profileArray objectAtIndex:0]userDesignation];
-    linkedInTextField.text=[[profileArray objectAtIndex:0]userLinkedInLink];
-    conferenceNameLabel.text=[[profileArray objectAtIndex:0]conferenceName];
+   
 }
 #pragma mark - end
 

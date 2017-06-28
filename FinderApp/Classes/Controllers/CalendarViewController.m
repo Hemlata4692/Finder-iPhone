@@ -323,7 +323,7 @@
     ScheduleMeetingViewController *scheduleMeeting =[storyboard instantiateViewControllerWithIdentifier:@"ScheduleMeetingViewController"];
     scheduleMeeting.screenName=@"Calendar";
     scheduleMeeting.contactDetailArray=[contactArray mutableCopy];
-    scheduleMeeting.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.1f];
+//    scheduleMeeting.view.backgroundColor = [UIColor colorWithWhite:0 alpha:0.1f];
     [scheduleMeeting setModalPresentationStyle:UIModalPresentationOverCurrentContext];
     [self presentViewController:scheduleMeeting animated: NO completion:nil];
 }

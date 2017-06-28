@@ -1849,7 +1849,7 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="26" id="oKh-Ve-hKI"/>
                                                         </constraints>
-                                                        <color key="textColor" red="0.42352941179999998" green="0.42352941179999998" blue="0.42352941179999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="textColor" red="0.42352941176470588" green="0.42352941176470588" blue="0.42352941176470588" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
                                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                                                         <connections>
@@ -5666,7 +5666,7 @@
                                 </date>
                             </datePicker>
                         </subviews>
-                        <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.043463908450704226" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="NJM-WL-gL7" firstAttribute="top" secondItem="Ep8-bh-3Yh" secondAttribute="bottom" id="7Yz-3E-kTg"/>
                             <constraint firstItem="Ep8-bh-3Yh" firstAttribute="leading" secondItem="1JC-aV-lQ6" secondAttribute="leading" id="ZkR-Y5-GGC"/>

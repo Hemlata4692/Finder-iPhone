@@ -34,7 +34,7 @@
     }
     eventNameLabel.text=[eventDetails.eventName uppercaseString];
     eventTimeLabel.text=eventDetails.eventTime;
-    if ([eventDetails.userImage isEqualToString:@""]) {
+    if ([eventDetails.eventVenue isEqualToString:@""]) {
         userImage.image=[UIImage imageNamed:@"meeting_iconCalendar.png"];
         userImageClickAction.hidden=YES;
         editButton.hidden=YES;

@@ -10,6 +10,7 @@
 #import "AFNetworking.h"
 //new AWS link
 #define BASE_URL                                  @"http://finderapp.com.sg/backend/api/"
+
 //client link
 //#define BASE_URL                                  @"http://ranosys.net/client/finder/api/"
 
