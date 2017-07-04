@@ -152,7 +152,7 @@
         [UserDefaultManager setValue:[responseObject objectForKey:@"userEmail"] key:@"userEmail"];
         [UserDefaultManager setValue:[responseObject objectForKey:@"userImage"] key:@"userImage"];
         [UserDefaultManager setValue:[responseObject objectForKey:@"userName"] key:@"userName"];
-        [UserDefaultManager setValue:[responseObject objectForKey:@"unReadMessegaes"] key:@"unReadMessegaes"];
+//        [UserDefaultManager setValue:[responseObject objectForKey:@"unReadMessegaes"] key:@"unReadMessegaes"];
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         ConferenceListViewController * homeView = [storyboard instantiateViewControllerWithIdentifier:@"ConferenceListViewController"];
         [myDelegate.window setRootViewController:homeView];

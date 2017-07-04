@@ -60,9 +60,9 @@
     if ([[UserDefaultManager getValue:@"PendingMessage"] isEqualToString:@"1"]) {
         [myDelegate addBadgeIconOnMoreTab];
     }
-    if ([[UserDefaultManager getValue:@"unReadMessegaes"] isEqualToString:@"true"]) {
-        [myDelegate addBadgeIcon];
-    }
+//    if ([[UserDefaultManager getValue:@"unReadMessegaes"] isEqualToString:@"true"]) {
+//        [myDelegate addBadgeIcon];
+//    }
     allMatchesDataArray=[[NSMutableArray alloc]init];
     latestMatchesArray=[[NSMutableArray alloc]init];
     contactArray=[[NSMutableArray alloc]init];

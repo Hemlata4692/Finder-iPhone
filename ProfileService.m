@@ -140,6 +140,7 @@
             profileData.userLinkedInLink =[profileDataDict objectForKey:@"linkedIn"];
             profileData.conferenceName =[profileDataDict objectForKey:@"conferenceName"];
             profileData.userSurname =[profileDataDict objectForKey:@"userSurname"];
+            [UserDefaultManager setValue:[profileDataDict objectForKey:@"unReadMessegaes"] key:@"unReadMessegaes"];
             [profileDataArray addObject:profileData];
             success(profileDataArray);
         }

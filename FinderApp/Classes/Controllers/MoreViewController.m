@@ -157,6 +157,7 @@
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         ConferenceListViewController * homeView = [storyboard instantiateViewControllerWithIdentifier:@"ConferenceListViewController"];
         [UserDefaultManager removeValue:@"conferenceId"];
+         [UserDefaultManager removeValue:@"unReadMessegaes"];
         [myDelegate.window setRootViewController:homeView];
         [myDelegate.window makeKeyAndVisible];
     }

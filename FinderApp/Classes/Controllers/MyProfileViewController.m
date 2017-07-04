@@ -344,6 +344,9 @@
     [[ProfileService sharedManager] getUserProfile:^(id profileDataArray) {
         [myDelegate stopIndicator];
         userProfileDataArray=[profileDataArray mutableCopy];
+        if ([[UserDefaultManager getValue:@"unReadMessegaes"] isEqualToString:@"true"]) {
+            [myDelegate addBadgeIcon];
+        }
         [self displayUserProfileData];
     }
                                            failure:^(NSError *error)

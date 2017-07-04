@@ -153,6 +153,9 @@
         [switchDict setObject:@"true" forKey:@"14"];
         [UserDefaultManager setValue:switchDict key:@"switchStatusDict"];
     }
+    if ([[UserDefaultManager getValue:@"unReadMessegaes"] isEqualToString:@"true"]) {
+        [myDelegate addBadgeIcon];
+    }
     //permission for local notification
     if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
         [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert|UIUserNotificationTypeBadge|UIUserNotificationTypeSound categories:nil]];
