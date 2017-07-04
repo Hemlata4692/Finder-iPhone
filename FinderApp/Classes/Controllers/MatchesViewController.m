@@ -263,7 +263,10 @@
      {
          [myDelegate removeBadgeIconOnMatchesTab];
          noRecordLabel.hidden=NO;
-         noRecordLabel.text=@"There are no matches found related to your interest areas.";
+         NSString *str1 = @"There are no new matches found based on your “Looking to Find” and “Interest Areas” selected in your profile.";
+         NSString *str2 = @"To edit your profile, select More, My Profile and tap on the pencil icon in the top right of the screen. Remember to save your changes.";
+         NSString *str3 = @" To see your existing matches, tap on the My Contacts tab above.";
+         noRecordLabel.text = [NSString stringWithFormat:@"%@\n\n%@\n\n%@", str1, str2, str3];
          matchesTableView.hidden=YES;
      }] ;
 }
@@ -288,7 +291,10 @@
         if (latestMatchesArray.count==0) {
             [myDelegate removeBadgeIconOnMatchesTab];
             noRecordLabel.hidden=NO;
-            noRecordLabel.text=@"There are no matches found related to your interest areas.";
+            NSString *str1 = @"There are no new matches found based on your “Looking to Find” and “Interest Areas” selected in your profile.";
+            NSString *str2 = @"To edit your profile, select More, My Profile and tap on the pencil icon in the top right of the screen. Remember to save your changes.";
+            NSString *str3 = @" To see your existing matches, tap on the My Contacts tab above.";
+            noRecordLabel.text = [NSString stringWithFormat:@"%@\n\n%@\n\n%@", str1, str2, str3];
         }
         else {
             [myDelegate removeBadgeIconOnMatchesTab];

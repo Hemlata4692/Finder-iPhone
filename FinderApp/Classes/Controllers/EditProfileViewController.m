@@ -316,8 +316,8 @@
     }
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3];
-    [userPickerView setNeedsLayout];
-    [userPickerView reloadAllComponents];
+   
+    
     for (int i=0; i<professionArray.count; i++) {
         if ([[professionArray objectAtIndex:i] isEqualToString:[[profileArray objectAtIndex:0]userProfession]]) {
             [userPickerView selectRow:i inComponent:0 animated:YES];

@@ -3625,12 +3625,17 @@
                                     <outlet property="delegate" destination="SzO-FT-SIx" id="2Df-A4-Val"/>
                                 </connections>
                             </tableView>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Under Development." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="edf-Ac-9LT">
-                                <rect key="frame" x="0.0" y="173" width="320" height="46"/>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="edf-Ac-9LT">
+                                <rect key="frame" x="10" y="95" width="300" height="211"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="46" id="4mH-3q-Ka0"/>
+                                    <constraint firstAttribute="height" constant="211" id="F7Y-54-OVj"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="17"/>
+                                <string key="text">There are no new matches found based on your “Looking to Find” and “Interest Areas” selected in your profile.  
+
+To edit your profile, select More, My Profile and tap on the pencil icon in the top right of the screen. Remember to save your changes.
+
+To see your existing matches, tap on the My Contacts tab above.</string>
+                                <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="15"/>
                                 <color key="textColor" red="0.23921568630000001" green="0.23921568630000001" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -3638,16 +3643,16 @@
                         <color key="backgroundColor" red="0.97647058819999999" green="0.97647058819999999" blue="0.97647058819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="2XL-CO-dqY" firstAttribute="top" secondItem="T8v-zt-Lzw" secondAttribute="bottom" constant="43" id="0Wh-PQ-yxU"/>
-                            <constraint firstItem="edf-Ac-9LT" firstAttribute="top" secondItem="N54-MS-1pJ" secondAttribute="bottom" constant="138" id="4ji-py-2iF"/>
                             <constraint firstItem="2XL-CO-dqY" firstAttribute="leading" secondItem="Qer-HR-O66" secondAttribute="leading" id="A4m-Vh-MlE"/>
+                            <constraint firstItem="HwX-lM-mlc" firstAttribute="top" secondItem="edf-Ac-9LT" secondAttribute="bottom" constant="61" id="B90-iH-NzU"/>
                             <constraint firstAttribute="trailing" secondItem="N54-MS-1pJ" secondAttribute="trailing" constant="10" id="DuN-hh-N5r"/>
                             <constraint firstAttribute="trailing" secondItem="2XL-CO-dqY" secondAttribute="trailing" id="KPo-Tq-eqE"/>
-                            <constraint firstItem="HwX-lM-mlc" firstAttribute="top" secondItem="edf-Ac-9LT" secondAttribute="bottom" constant="148" id="Z0z-rt-fdV"/>
-                            <constraint firstItem="edf-Ac-9LT" firstAttribute="leading" secondItem="Qer-HR-O66" secondAttribute="leading" id="a1e-ow-maG"/>
+                            <constraint firstItem="edf-Ac-9LT" firstAttribute="leading" secondItem="Qer-HR-O66" secondAttribute="leading" constant="10" id="MIK-Xk-5B7"/>
+                            <constraint firstItem="edf-Ac-9LT" firstAttribute="top" secondItem="N54-MS-1pJ" secondAttribute="bottom" constant="60" id="b4L-7M-ZCG"/>
+                            <constraint firstAttribute="trailing" secondItem="edf-Ac-9LT" secondAttribute="trailing" constant="10" id="cui-Ag-8NF"/>
                             <constraint firstItem="2XL-CO-dqY" firstAttribute="top" secondItem="N54-MS-1pJ" secondAttribute="bottom" constant="8" id="hMq-Jk-mfk"/>
                             <constraint firstItem="N54-MS-1pJ" firstAttribute="leading" secondItem="Qer-HR-O66" secondAttribute="leading" constant="10" id="ig0-eu-glH"/>
                             <constraint firstItem="HwX-lM-mlc" firstAttribute="top" secondItem="2XL-CO-dqY" secondAttribute="bottom" constant="9" id="tHn-hc-93h"/>
-                            <constraint firstAttribute="trailing" secondItem="edf-Ac-9LT" secondAttribute="trailing" id="tRH-a8-ZCM"/>
                             <constraint firstItem="N54-MS-1pJ" firstAttribute="top" secondItem="T8v-zt-Lzw" secondAttribute="bottom" constant="7" id="yWn-jN-5ZP"/>
                         </constraints>
                     </view>
@@ -3661,7 +3666,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4VL-US-42a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1346" y="689"/>
+            <point key="canvasLocation" x="1344.375" y="688.75"/>
         </scene>
         <!--Requested Matches View Controller-->
         <scene sceneID="Sb7-ec-F7y">
